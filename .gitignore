@@ -1,0 +1,29 @@
+# Anti-gravity custom installers
+install.cmd
+
+# Python bytecode and caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.tox/
+.coverage
+htmlcov/
+
+# Local configuration and environment files
+.env
+.venv
+env/
+venv/
+ENV/
+
+# System / IDE files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Antigravity CLI and Gemini local cache
+.gemini/
+*.log
