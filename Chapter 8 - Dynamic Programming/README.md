@@ -7,15 +7,26 @@ Welcome to the sessional guide on **Dynamic Programming** for the [CSE 2201 Algo
 ## Table of Contents
 
 1. [Introduction to Dynamic Programming](#introduction-to-dynamic-programming)
+   - [Principle of Optimality](#principle-of-optimality)
+   - [Memoization (Top-Down) vs. Tabulation (Bottom-Up)](#memoization-vs-tabulation)
+   - [Greedy (Radio) vs. Dynamic Programming](#greedy-vs-dynamic-programming)
+     - [Worked Example: Precious Metals Fractional Knapsack](#worked-example-precious-metals-fractional-knapsack-greedy)
 2. [Fibonacci (Recursion and DP)](#1-fibonacci-recursion-and-dp)
 3. [Coin-Row Problem](#2-coin-row-problem)
 4. [Change-Making Problem (DP)](#3-change-making-problem-dp)
 5. [Coin-Collecting Problem](#4-coin-collecting-problem)
 6. [0/1 Knapsack Problem](#5-01-knapsack-problem)
+   - [Classroom Problem A: Multiples of 10 Weights](#problem-a-multiples-of-10-weights)
+   - [Classroom Problem B: Small Integer Weights](#problem-b-small-integer-weights)
 7. [Longest Common Subsequence (LCS)](#6-longest-common-subsequence-lcs)
-8. [Floyd-Warshall Algorithm](#7-floyd-warshall-algorithm)
-9. [Traveling Salesperson Problem (TSP) using DP](#8-traveling-salesperson-problem-tsp-using-dp)
-10. [Summary and Quick Reference](#summary-and-quick-reference)
+   - [Substring vs. Subsequence](#substring-vs-subsequence)
+   - [Classroom Problem: LCS of two strings](#classroom-problem-lcs-of-two-strings)
+8. [Multi-Stage Graph Problem](#7-multi-stage-graph-problem)
+9. [Floyd-Warshall Algorithm](#8-floyd-warshall-algorithm)
+10. [Traveling Salesperson Problem (TSP) using DP](#9-traveling-salesperson-problem-tsp-using-dp)
+11. [Rod Cutting Problem](#10-rod-cutting-problem)
+12. [Climbing Stairs Problem](#11-climbing-stairs-problem)
+13. [Summary and Quick Reference](#summary-and-quick-reference)
 
 ---
 
@@ -29,6 +40,96 @@ Imagine you are walking up a flight of stairs and counting the steps. If someone
 ### ⚔️ Divide-and-Conquer vs. Dynamic Programming
 *   **Divide-and-Conquer** partitions a problem into **disjoint** (completely separate and independent) subproblems, solves them recursively, and then combines their solutions (e.g., [Merge Sort](file:///workspaces/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/Chapter%205%20-%20Sorting%20Algorithms/README.md)).
 *   **Dynamic Programming** is used when the subproblems **overlap**—that is, when subproblems share smaller sub-subproblems. In these cases, Divide-and-Conquer does redundant work, solving the same sub-subproblem repeatedly. DP avoids this by solving each subproblem exactly once and referencing its cached result in a table.
+
+---
+
+### 🌟 Principle of Optimality
+The **Principle of Optimality** (originally formulated by Richard Bellman) states that:
+> *"An optimal policy has the property that whatever the initial state and initial decision are, the remaining decisions must constitute an optimal policy with regard to the state resulting from the first decision."*
+
+In simpler words: **An optimal solution to a larger problem always contains optimal solutions to its smaller subproblems.**
+
+#### Why is this important?
+If a problem does not satisfy the Principle of Optimality, we **cannot** use Dynamic Programming to solve it.
+
+#### 💡 Real-Life Analogy (Shortest Path vs. Longest Path)
+*   **Shortest Path (Satisfies the Principle of Optimality):**
+    Imagine the shortest path from **City A** to **City C** goes through **City B** ($A \to B \to C$). If so, the portion $B \to C$ must also be the absolute shortest path from $B$ to $C$. 
+    *Why?* If there was a shorter path from $B$ to $C$ (let's say via a detour $B \to X \to C$), we could substitute it to get a shorter path $A \to B \to X \to C$, which contradicts our starting assumption that $A \to B \to C$ was the shortest path.
+*   **Longest Simple Path (Does NOT satisfy the Principle of Optimality):**
+    Consider a graph with vertices $q, r, s, t$ and edges $(q, r), (r, s), (s, t), (t, q), (q, s)$. The longest simple path (no cycles) from $q$ to $t$ is $q \to r \to s \to t$. 
+    However, the subpath from $q$ to $s$ in this path is $q \to r \to s$. But is $q \to r \to s$ the longest simple path from $q$ to $s$? No! The longest simple path from $q$ to $s$ is $q \to t \to s$. Since the subpath of the optimal path is not itself optimal, the Principle of Optimality does not hold, and we cannot use standard DP or greedy algorithms to find longest simple paths.
+
+---
+
+### 📊 Memoization (Top-Down) vs. Tabulation (Bottom-Up)
+When implementing Dynamic Programming, we can solve and store subproblems in two ways: **Memoization** (Top-Down recursion) or **Tabulation** (Bottom-Up iteration).
+
+| Feature | Memoization (Top-Down) | Tabulation (Bottom-Up) |
+| :--- | :--- | :--- |
+| **Approach** | Starts with the main problem and recursively breaks it down into smaller subproblems. | Starts with the smallest possible subproblems (base cases) and iteratively builds up to the main problem. |
+| **Implementation** | Recursive (with a cache/lookup table). | Iterative (using standard for-loops and filling a table/matrix). |
+| **Overhead** | High overhead due to repeated recursive function calls and call stack maintenance. | Very low overhead as it uses simple array access in loops. |
+| **Subproblem Ordering**| Solves subproblems on-demand (only the ones needed to solve the main problem). | Solves all subproblems in a pre-determined order, filling the entire table. |
+| **Memory Usage** | Can cause a **Stack Overflow** error if the recursion tree is too deep. | Safe from stack overflow, uses pre-allocated memory for the table. |
+
+---
+
+### ⚔️ Greedy Algorithm vs. Dynamic Programming
+
+| Feature | Greedy (Radio) Algorithm | Dynamic Programming (DP) |
+| :--- | :--- | :--- |
+| **Decision Strategy** | Makes the locally optimal choice at each step (the "best" immediate choice) without looking back. | Evaluates all possible paths/subproblems and builds a globally optimal solution. |
+| **Backtracking** | Never backtracks or changes previous choices once made. | Re-evaluates choices through table lookups, choosing the best option among all computed subproblems. |
+| **Optimality** | Does not guarantee a globally optimal solution for all problems (works only on problems with the Greedy Choice Property). | Guaranteed to find the globally optimal solution (if the Principle of Optimality holds). |
+| **Complexity** | Usually much faster (often $O(n \log n)$ due to sorting, or $O(n)$) and uses $O(1)$ auxiliary space. | More computationally expensive ($O(n \cdot W)$, $O(n^2)$, etc.) and requires auxiliary table space. |
+| **Key Examples** | Fractional Knapsack, Kruskal's/Prim's MST, Huffman Coding, Dijkstra's Shortest Path. | 0/1 Knapsack, Longest Common Subsequence (LCS), Floyd-Warshall, Matrix Chain Multiplication. |
+
+#### 💎 Worked Example: Precious Metals Fractional Knapsack (Greedy)
+*   **The Problem:** You have a knapsack. You are offered the following precious metals with their total quantities and total prices:
+    *   **Gold (G):** Quantity = $2\text{ kg}$, Price = $20$ (Density = $10/\text{kg}$)
+    *   **Diamond (D):** Quantity = $0.5\text{ kg}$, Price = $40$ (Density = $80/\text{kg}$)
+    *   **Platinum (P):** Quantity = $1\text{ kg}$, Price = $30$ (Density = $30/\text{kg}$)
+    *   **Silver (S):** Quantity = $4\text{ kg}$, Price = $5$ (Density = $1.25/\text{kg}$)
+*   **Bag Capacity ($W$):** $3\text{ kg}$
+*   **Appropriate Algorithm:** Since these are bulk materials (metals/gems) where we can take **fractional parts** of any item, the **Greedy Algorithm** is the mathematically optimal and most efficient algorithm.
+
+##### Step-by-Step Greedy Solution:
+1.  **Calculate Value Density (Price per kg) for each item:**
+    $$\text{Density} = \frac{\text{Price}}{\text{Quantity}}$$
+    *   $\text{Diamond (D)}: 40 / 0.5 = 80/\text{kg}$
+    *   $\text{Platinum (P)}: 30 / 1.0 = 30/\text{kg}$
+    *   $\text{Gold (G)}: 20 / 2.0 = 10/\text{kg}$
+    *   $\text{Silver (S)}: 5 / 4.0 = 1.25/\text{kg}$
+2.  **Sort the items in descending order of Density:**
+    1.  Diamond ($80/\text{kg}$)
+    2.  Platinum ($30/\text{kg}$)
+    3.  Gold ($10/\text{kg}$)
+    4.  Silver ($1.25/\text{kg}$)
+3.  **Fill the bag greedily starting with the highest density:**
+    *   **Take Diamond:** Total available is $0.5\text{ kg}$. Take all of it.
+        *   Remaining capacity: $3.0 - 0.5 = 2.5\text{ kg}$
+        *   Total Value: $40$
+    *   **Take Platinum:** Total available is $1.0\text{ kg}$. Take all of it.
+        *   Remaining capacity: $2.5 - 1.0 = 1.5\text{ kg}$
+        *   Total Value: $40 + 30 = 70$
+    *   **Take Gold:** Total available is $2.0\text{ kg}$. We only have $1.5\text{ kg}$ capacity left. So we take a fraction of the Gold: $\frac{1.5}{2.0}$ of the Gold.
+        *   Weight taken: $1.5\text{ kg}$
+        *   Remaining capacity: $1.5 - 1.5 = 0\text{ kg}$ (Bag is full!)
+        *   Value added: $1.5\text{ kg} \times 10/\text{kg} = 15$
+        *   Total Value: $70 + 15 = 85$
+4.  **Final Output:**
+    *   **Items taken:** $0.5\text{ kg}$ Diamond, $1.0\text{ kg}$ Platinum, $1.5\text{ kg}$ Gold.
+    *   **Max Price (Profit):** **$85$**
+
+```mermaid
+graph TD
+    subgraph "Greedy Selection Flow"
+        D["Diamond (0.5kg, $40)"] -->|Take All| P["Platinum (1.0kg, $30)"]
+        P -->|Take All| G["Gold (1.5kg, $15)"]
+        G -->|Bag Full| S["Silver (0kg, $0)"]
+    end
+```
 
 ---
 
@@ -555,6 +656,78 @@ graph TD
 *   **Time Complexity:** $\Theta(n \cdot W)$ — Fills a table of size $(n+1) \times (W+1)$.
 *   **Space Complexity:** $\Theta(n \cdot W)$ — Uses a 2D array of size $(n+1) \times (W+1)$.
 
+### 10. Classroom Problems Solved in Matrix Tabular Format
+
+These are specific 0/1 Knapsack problems solved using the **Matrix Tabular Format** standard in university examinations.
+
+#### 📝 Problem A (Multiples of 10 Weights)
+*   **Given:**
+    *   Weights ($w$): $10\text{ kg}, 20\text{ kg}, 30\text{ kg}$
+    *   Prices ($v$): $60, 100, 120$
+    *   Capacity ($W$): $50\text{ kg}$
+*   **Goal:** Solve using a 2D DP matrix.
+
+##### Complete DP Matrix:
+| Item ($i$) | Weight ($w_i$) | Price ($v_i$) | $W=0$ | $W=10$ | $W=20$ | $W=30$ | $W=40$ | $W=50$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **0** | - | - | 0 | 0 | 0 | 0 | 0 | 0 |
+| **1** | 10 | 60 | 0 | 60 | 60 | 60 | 60 | 60 |
+| **2** | 20 | 100 | 0 | 60 | 100 | 160 | 160 | 160 |
+| **3** | 30 | 120 | 0 | 60 | 100 | 160 | 180 | **220** |
+
+##### Detailed Calculations for Key Cells:
+*   **Cell $V[2, 30]$:** Item 2 has weight $20$, price $100$.
+    $$V[2, 30] = \max(V[1, 30], 100 + V[1, 30-20]) = \max(60, 100 + 60) = 160$$
+*   **Cell $V[3, 50]$:** Item 3 has weight $30$, price $120$.
+    $$V[3, 50] = \max(V[2, 50], 120 + V[2, 50-30]) = \max(160, 120 + 100) = 220$$
+
+##### Traceback Path for Problem A:
+1.  Start at $V[3, 50] = 220$. Since $V[3, 50] \ne V[2, 50]$ ($220 \ne 160$), **Item 3 is selected**.
+2.  Subtract weight of Item 3: remaining capacity = $50 - 30 = 20$.
+3.  Go to $V[2, 20] = 100$. Since $V[2, 20] \ne V[1, 20]$ ($100 \ne 60$), **Item 2 is selected**.
+4.  Subtract weight of Item 2: remaining capacity = $20 - 20 = 0$.
+5.  Go to $V[1, 0] = 0$. Since $V[1, 0] == V[0, 0]$ ($0 == 0$), Item 1 is **skipped**.
+*   **Optimal Subset:** {Item 2, Item 3}
+*   **Total Weight:** $20 + 30 = 50\text{ kg}$
+*   **Maximum Value:** **220**
+
+---
+
+#### 📝 Problem B (Small Integer Weights)
+*   **Given:**
+    *   Weights ($w$): $1, 3, 5, 7$
+    *   Prices ($v$): $2, 4, 7, 10$
+    *   Capacity ($W$): $8$
+*   **Goal:** Solve using a 2D DP matrix.
+
+##### Complete DP Matrix:
+| Item ($i$) | Weight ($w_i$) | Price ($v_i$) | $W=0$ | $W=1$ | $W=2$ | $W=3$ | $W=4$ | $W=5$ | $W=6$ | $W=7$ | $W=8$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **0** | - | - | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| **1** | 1 | 2 | 0 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 |
+| **2** | 3 | 4 | 0 | 2 | 2 | 4 | 6 | 6 | 6 | 6 | 6 |
+| **3** | 5 | 7 | 0 | 2 | 2 | 4 | 6 | 7 | 9 | 9 | 11 |
+| **4** | 7 | 10 | 0 | 2 | 2 | 4 | 6 | 7 | 9 | 10 | **12** |
+
+##### Detailed Calculations for Key Cells:
+*   **Cell $V[2, 4]$:** Item 2 has weight $3$, price $4$.
+    $$V[2, 4] = \max(V[1, 4], 4 + V[1, 4-3]) = \max(2, 4 + 2) = 6$$
+*   **Cell $V[3, 8]$:** Item 3 has weight $5$, price $7$.
+    $$V[3, 8] = \max(V[2, 8], 7 + V[2, 8-5]) = \max(6, 7 + 4) = 11$$
+*   **Cell $V[4, 8]$:** Item 4 has weight $7$, price $10$.
+    $$V[4, 8] = \max(V[3, 8], 10 + V[3, 8-7]) = \max(11, 10 + 2) = 12$$
+
+##### Traceback Path for Problem B:
+1.  Start at $V[4, 8] = 12$. Since $V[4, 8] \ne V[3, 8]$ ($12 \ne 11$), **Item 4 is selected**.
+2.  Subtract weight of Item 4: remaining capacity = $8 - 7 = 1$.
+3.  Go to $V[3, 1] = 2$. Since $V[3, 1] == V[2, 1]$ ($2 == 2$), Item 3 is **skipped**.
+4.  Go to $V[2, 1] = 2$. Since $V[2, 1] == V[1, 1]$ ($2 == 2$), Item 2 is **skipped**.
+5.  Go to $V[1, 1] = 2$. Since $V[1, 1] \ne V[0, 1]$ ($2 \ne 0$), **Item 1 is selected**.
+6.  Subtract weight of Item 1: remaining capacity = $1 - 1 = 0$.
+*   **Optimal Subset:** {Item 1, Item 4}
+*   **Total Weight:** $1 + 7 = 8$
+*   **Maximum Value:** **12**
+
 ---
 
 ## 6. Longest Common Subsequence (LCS)
@@ -681,9 +854,264 @@ graph TD
 *   **Time Complexity:** $\Theta(m \cdot n)$ — Fills a table of size $m \times n$ iteratively.
 *   **Space Complexity:** $O(m \cdot n)$ — Storing direction and cost tables.
 
+### 10. Substring vs. Subsequence
+
+It is very common in exams to be asked about the difference between a **Substring** and a **Subsequence**.
+
+| Feature | Substring | Subsequence |
+| :--- | :--- | :--- |
+| **Contiguity** | Must consist of **contiguous** (continuous) characters from the original string. | Can consist of characters that are **non-contiguous** (scattered), but their relative order must be preserved. |
+| **Formula** | A string of length $n$ has $\frac{n(n+1)}{2}$ non-empty substrings. | A string of length $n$ has $2^n - 1$ non-empty subsequences. |
+| **Example for `"abc"`**| `"a", "b", "c", "ab", "bc", "abc"` (and `""`) | `"a", "b", "c", "ab", "ac", "bc", "abc"` (and `""`) |
+| **Is `"ac"` valid?** | **No** (it is not contiguous in `"abc"`). | **Yes** (it preserves the relative order: `a` comes before `c`). |
+
 ---
 
-## 7. Floyd-Warshall Algorithm
+### 11. Classroom Problem: LCS of two strings
+*   **String 1 ($X$):** `"ab ac deb"`
+*   **String 2 ($Y$):** `"a ab db"`
+
+Depending on how your teacher defines characters, they might either include or exclude the space character (` `). Below, both scenarios are fully computed so you can ace either version in the exam!
+
+#### 📍 Scenario 1: Spaces are counted as characters (With Spaces)
+*   $X = \langle \text{'a'}, \text{'b'}, \text{' '}, \text{'a'}, \text{'c'}, \text{' '}, \text{'d'}, \text{'e'}, \text{'b'} \rangle$ (Length = 9)
+*   $Y = \langle \text{'a'}, \text{' '}, \text{'a'}, \text{'b'}, \text{' '}, \text{'d'}, \text{'b'} \rangle$ (Length = 7)
+
+##### Rule of Matrix Tabular Format:
+1.  **Initialize** Row 0 and Col 0 to 0.
+2.  If characters **match** ($X[i] == Y[j]$):
+    *   Take the **diagonal value plus 1**: $c[i, j] = c[i-1, j-1] + 1$.
+    *   Place a diagonal arrow pointing up-left: $\nwarrow$.
+3.  If characters **do not match** ($X[i] \neq Y[j]$):
+    *   Take the **maximum** of the upper cell and the left cell: $c[i, j] = \max(c[i-1, j], c[i, j-1])$.
+    *   Place an arrow pointing to the cell from which the maximum was taken (either $\uparrow$ or $\leftarrow$). If they are equal, standard convention is to point up ($\uparrow$).
+
+##### Complete LCS Matrix (With Spaces):
+| $i \setminus j$ | - (0) | **`a`** (1) | **` `** (2) | **`a`** (3) | **`b`** (4) | **` `** (5) | **`d`** (6) | **`b`** (7) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **- (0)** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| **`a` (1)** | 0 | 1 ($\nwarrow$) | 1 ($\leftarrow$) | 1 ($\nwarrow$) | 1 ($\leftarrow$) | 1 ($\leftarrow$) | 1 ($\leftarrow$) | 1 ($\leftarrow$) |
+| **`b` (2)** | 0 | 1 ($\uparrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) | 2 ($\nwarrow$) | 2 ($\leftarrow$) | 2 ($\leftarrow$) | 2 ($\nwarrow$) |
+| **` ` (3)** | 0 | 1 ($\uparrow$) | 2 ($\nwarrow$) | 2 ($\leftarrow$) | 2 ($\uparrow$) | 3 ($\nwarrow$) | 3 ($\leftarrow$) | 3 ($\leftarrow$) |
+| **`a` (4)** | 0 | 1 ($\nwarrow$) | 2 ($\uparrow$) | 3 ($\nwarrow$) | 3 ($\leftarrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) |
+| **`c` (5)** | 0 | 1 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) |
+| **` ` (6)** | 0 | 1 ($\uparrow$) | 2 ($\nwarrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) | 4 ($\nwarrow$) | 4 ($\leftarrow$) | 4 ($\leftarrow$) |
+| **`d` (7)** | 0 | 1 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) | 4 ($\uparrow$) | 5 ($\nwarrow$) | 5 ($\leftarrow$) |
+| **`e` (8)** | 0 | 1 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) | 4 ($\uparrow$) | 5 ($\uparrow$) | 5 ($\uparrow$) |
+| **`b` (9)** | 0 | 1 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\uparrow$) | 4 ($\nwarrow$) | 4 ($\uparrow$) | 5 ($\uparrow$) | **6** ($\nwarrow$) |
+
+*   **LCS Length:** **6**
+*   **Traceback Path (Starting at bottom-right cell $(9,7)$):**
+    *   $c[9,7] = 6$ ($\nwarrow$ Match! Character: **`b`**). Go to $c[8,6]$.
+    *   $c[8,6] = 5$ ($\uparrow$ Mismatch). Go to $c[7,6]$.
+    *   $c[7,6] = 5$ ($\nwarrow$ Match! Character: **`d`**). Go to $c[6,5]$.
+    *   $c[6,5] = 4$ ($\nwarrow$ Match! Character: **` `** space). Go to $c[5,4]$.
+    *   $c[5,4] = 3$ ($\uparrow$ Mismatch). Go to $c[4,4]$.
+    *   $c[4,4] = 3$ ($\leftarrow$ Mismatch). Go to $c[4,3]$.
+    *   $c[4,3] = 3$ ($\nwarrow$ Match! Character: **`a`**). Go to $c[3,2]$.
+    *   $c[3,2] = 2$ ($\nwarrow$ Match! Character: **` `** space). Go to $c[2,1]$.
+    *   $c[2,1] = 1$ ($\uparrow$ Mismatch). Go to $c[1,1]$.
+    *   $c[1,1] = 1$ ($\nwarrow$ Match! Character: **`a`**). Go to $c[0,0]$.
+*   **LCS Subsequence:** **`"a adb"`** (length 6)
+
+---
+
+#### 📍 Scenario 2: Spaces are ignored/stripped (Without Spaces)
+*   $X = \langle \text{'a'}, \text{'b'}, \text{'a'}, \text{'c'}, \text{'d'}, \text{'e'}, \text{'b'} \rangle$ (Length = 7)
+*   $Y = \langle \text{'a'}, \text{'a'}, \text{'b'}, \text{'d'}, \text{'b'} \rangle$ (Length = 5)
+
+##### Complete LCS Matrix (Without Spaces):
+| $i \setminus j$ | - (0) | **`a`** (1) | **`a`** (2) | **`b`** (3) | **`d`** (4) | **`b`** (5) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **- (0)** | 0 | 0 | 0 | 0 | 0 | 0 |
+| **`a` (1)** | 0 | 1 ($\nwarrow$) | 1 ($\nwarrow$) | 1 ($\leftarrow$) | 1 ($\leftarrow$) | 1 ($\leftarrow$) |
+| **`b` (2)** | 0 | 1 ($\uparrow$) | 1 ($\uparrow$) | 2 ($\nwarrow$) | 2 ($\leftarrow$) | 2 ($\nwarrow$) |
+| **`a` (3)** | 0 | 1 ($\nwarrow$) | 2 ($\nwarrow$) | 2 ($\uparrow$) | 2 ($\uparrow$) | 2 ($\uparrow$) |
+| **`c` (4)** | 0 | 1 ($\uparrow$) | 2 ($\uparrow$) | 2 ($\uparrow$) | 2 ($\uparrow$) | 2 ($\uparrow$) |
+| **`d` (5)** | 0 | 1 ($\uparrow$) | 2 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\nwarrow$) | 3 ($\leftarrow$) |
+| **`e` (6)** | 0 | 1 ($\uparrow$) | 2 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) |
+| **`b` (7)** | 0 | 1 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\nwarrow$) | 3 ($\uparrow$) | **4** ($\nwarrow$) |
+
+*   **LCS Length:** **4**
+*   **Traceback Path (Starting at bottom-right cell $(7,5)$):**
+    *   $c[7,5] = 4$ ($\nwarrow$ Match! Character: **`b`**). Go to $c[6,4]$.
+    *   $c[6,4] = 3$ ($\uparrow$ Mismatch). Go to $c[5,4]$.
+    *   $c[5,4] = 3$ ($\nwarrow$ Match! Character: **`d`**). Go to $c[4,3]$.
+    *   $c[4,3] = 2$ ($\uparrow$ Mismatch). Go to $c[3,3]$.
+    *   $c[3,3] = 2$ ($\leftarrow$ Mismatch). Go to $c[3,2]$.
+    *   $c[3,2] = 2$ ($\nwarrow$ Match! Character: **`a`**). Go to $c[2,1]$.
+    *   $c[2,1] = 1$ ($\uparrow$ Mismatch). Go to $c[1,1]$.
+    *   $c[1,1] = 1$ ($\nwarrow$ Match! Character: **`a`**). Go to $c[0,0]$.
+*   **LCS Subsequence:** **`"aadb"`** (length 4)
+
+---
+
+## 7. Multi-Stage Graph Problem
+
+### 1. The Real-Life Analogy
+Imagine you are planning a road trip from the East Coast (**City A**) to the West Coast (**City K**). The country is divided into vertical regions (stages) from East to West. You can only travel from one region directly to the next adjacent region. Each highway connecting two cities has a toll cost (weight). How do you choose your route to minimize the total toll cost?
+
+### 2. Inputs and Outputs
+*   **Input:** 
+    *   A directed acyclic graph (DAG) where nodes are partitioned into $k$ disjoint stages.
+    *   A unique source node $A$ in stage 1, and a unique destination node $K$ in stage $k$.
+    *   Edges with weights, which only point from a node in stage $i$ to a node in stage $i+1$.
+*   **Output:** The shortest (minimum cost) path from $A$ to $K$ and its total cost.
+
+### 3. The Core Struggle
+A greedy strategy of always taking the cheapest immediate road does not work because a cheap road at the beginning might lead to extremely expensive roads later. To find the optimal path, we must evaluate the options systematically. Dynamic programming is highly efficient here because paths share overlapping sub-paths.
+
+### 4. Graph Structure (5 Stages, Nodes A to K)
+Let's define a standard 5-stage graph with 11 nodes ($A$ through $K$):
+
+```mermaid
+graph LR
+    subgraph Stage 1
+        A((A))
+    end
+    subgraph Stage 2
+        B((B))
+        C((C))
+        D((D))
+    end
+    subgraph Stage 3
+        E((E))
+        F((F))
+        G((G))
+    end
+    subgraph Stage 4
+        H((H))
+        I((I))
+        J((J))
+    end
+    subgraph Stage 5
+        K((K))
+    end
+
+    A -->|9| B
+    A -->|7| C
+    A -->|3| D
+
+    B -->|4| E
+    B -->|2| F
+    B -->|1| G
+    C -->|2| E
+    C -->|7| F
+    C -->|11| G
+    D -->|5| E
+    D -->|11| F
+    D -->|8| G
+
+    E -->|11| H
+    E -->|8| I
+    E -->|5| J
+    F -->|4| H
+    F -->|3| I
+    F -->|7| J
+    G -->|5| H
+    G -->|6| I
+    G -->|2| J
+
+    H -->|4| K
+    I -->|2| K
+    J -->|5| K
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style K fill:#9f9,stroke:#333,stroke-width:2px
+```
+
+---
+
+### 5. Solving via Dynamic Programming
+We can solve this using either the **Backward Approach** (starting at the destination and working back to the source) or the **Forward Approach** (starting at the source and working toward the destination). Both are presented below step-by-step.
+
+#### 📍 Approach A: Backward Method (Recommended for Exams)
+Let $Cost(X)$ be the minimum cost of a path from node $X$ to the destination $K$.
+We compute these values starting from Stage 5 and moving backward to Stage 1.
+
+*   **Stage 5 (Destination):**
+    $$Cost(K) = 0$$
+
+*   **Stage 4:**
+    *   $Cost(H) = weight(H, K) + Cost(K) = 4 + 0 = 4$
+    *   $Cost(I) = weight(I, K) + Cost(K) = 2 + 0 = 2$
+    *   $Cost(J) = weight(J, K) + Cost(K) = 5 + 0 = 5$
+
+*   **Stage 3:**
+    For each node in Stage 3, check all outgoing edges to Stage 4 and choose the minimum:
+    *   **Node E:**
+        $$\begin{aligned} Cost(E) &= \min\Big( c(E, H) + Cost(H),\; c(E, I) + Cost(I),\; c(E, J) + Cost(J) \Big) \\ &= \min(11 + 4,\; 8 + 2,\; 5 + 5) \\ &= \min(15,\; 10,\; 10) = 10 \quad \text{[via I or J]} \end{aligned}$$
+    *   **Node F:**
+        $$\begin{aligned} Cost(F) &= \min\Big( c(F, H) + Cost(H),\; c(F, I) + Cost(I),\; c(F, J) + Cost(J) \Big) \\ &= \min(4 + 4,\; 3 + 2,\; 7 + 5) \\ &= \min(8,\; 5,\; 12) = 5 \quad \text{[via I]} \end{aligned}$$
+    *   **Node G:**
+        $$\begin{aligned} Cost(G) &= \min\Big( c(G, H) + Cost(H),\; c(G, I) + Cost(I),\; c(G, J) + Cost(J) \Big) \\ &= \min(5 + 4,\; 6 + 2,\; 2 + 5) \\ &= \min(9,\; 8,\; 7) = 7 \quad \text{[via J]} \end{aligned}$$
+
+*   **Stage 2:**
+    For each node in Stage 2, check all outgoing edges to Stage 3 and choose the minimum:
+    *   **Node B:**
+        $$\begin{aligned} Cost(B) &= \min\Big( c(B, E) + Cost(E),\; c(B, F) + Cost(F),\; c(B, G) + Cost(G) \Big) \\ &= \min(4 + 10,\; 2 + 5,\; 1 + 7) \\ &= \min(14,\; 7,\; 8) = 7 \quad \text{[via F]} \end{aligned}$$
+    *   **Node C:**
+        $$\begin{aligned} Cost(C) &= \min\Big( c(C, E) + Cost(E),\; c(C, F) + Cost(F),\; c(C, G) + Cost(G) \Big) \\ &= \min(2 + 10,\; 7 + 5,\; 11 + 7) \\ &= \min(12,\; 12,\; 18) = 12 \quad \text{[via E or F]} \end{aligned}$$
+    *   **Node D:**
+        $$\begin{aligned} Cost(D) &= \min\Big( c(D, E) + Cost(E),\; c(D, F) + Cost(F),\; c(D, G) + Cost(G) \Big) \\ &= \min(5 + 10,\; 11 + 5,\; 8 + 7) \\ &= \min(15,\; 16,\; 15) = 15 \quad \text{[via E or G]} \end{aligned}$$
+
+*   **Stage 1 (Source):**
+    $$\begin{aligned} Cost(A) &= \min\Big( c(A, B) + Cost(B),\; c(A, C) + Cost(C),\; c(A, D) + Cost(D) \Big) \\ &= \min(9 + 7,\; 7 + 12,\; 3 + 15) \\ &= \min(16,\; 19,\; 18) = 16 \quad \text{[via B]} \end{aligned}$$
+
+*   **Shortest Path Reconstruction:**
+    *   From $A$, the minimum cost was achieved by moving to **$B$**.
+    *   From $B$, the minimum cost was achieved by moving to **$F$**.
+    *   From $F$, the minimum cost was achieved by moving to **$I$**.
+    *   From $I$, the minimum cost was achieved by moving to **$K$**.
+    *   **Optimal Path:** **$A \to B \to F \to I \to K$**
+    *   **Total Minimum Cost:** **16**
+
+---
+
+#### 📍 Approach B: Forward Method
+Let $Dist(X)$ be the minimum cost of a path from the source $A$ to node $X$. We compute these values starting from Stage 1 and moving forward to Stage 5.
+
+*   **Stage 1 (Source):**
+    $$Dist(A) = 0$$
+
+*   **Stage 2:**
+    *   $Dist(B) = Dist(A) + c(A, B) = 0 + 9 = 9$
+    *   $Dist(C) = Dist(A) + c(A, C) = 0 + 7 = 7$
+    *   $Dist(D) = Dist(A) + c(A, D) = 0 + 3 = 3$
+
+*   **Stage 3:**
+    For each node in Stage 3, check all incoming edges from Stage 2 and choose the minimum:
+    *   **Node E:**
+        $$\begin{aligned} Dist(E) &= \min\Big( Dist(B) + c(B, E),\; Dist(C) + c(C, E),\; Dist(D) + c(D, E) \Big) \\ &= \min(9 + 4,\; 7 + 2,\; 3 + 5) \\ &= \min(13,\; 9,\; 8) = 8 \quad \text{[from D]} \end{aligned}$$
+    *   **Node F:**
+        $$\begin{aligned} Dist(F) &= \min\Big( Dist(B) + c(B, F),\; Dist(C) + c(C, F),\; Dist(D) + c(D, F) \Big) \\ &= \min(9 + 2,\; 7 + 7,\; 3 + 11) \\ &= \min(11,\; 14,\; 14) = 11 \quad \text{[from B]} \end{aligned}$$
+    *   **Node G:**
+        $$\begin{aligned} Dist(G) &= \min\Big( Dist(B) + c(B, G),\; Dist(C) + c(C, G),\; Dist(D) + c(D, G) \Big) \\ &= \min(9 + 1,\; 7 + 11,\; 3 + 8) \\ &= \min(10,\; 18,\; 11) = 10 \quad \text{[from B]} \end{aligned}$$
+
+*   **Stage 4:**
+    For each node in Stage 4, check all incoming edges from Stage 3 and choose the minimum:
+    *   **Node H:**
+        $$\begin{aligned} Dist(H) &= \min\Big( Dist(E) + c(E, H),\; Dist(F) + c(F, H),\; Dist(G) + c(G, H) \Big) \\ &= \min(8 + 11,\; 11 + 4,\; 10 + 5) \\ &= \min(19,\; 15,\; 15) = 15 \quad \text{[from F or G]} \end{aligned}$$
+    *   **Node I:**
+        $$\begin{aligned} Dist(I) &= \min\Big( Dist(E) + c(E, I),\; Dist(F) + c(F, I),\; Dist(G) + c(G, I) \Big) \\ &= \min(8 + 8,\; 11 + 3,\; 10 + 6) \\ &= \min(16,\; 14,\; 16) = 14 \quad \text{[from F]} \end{aligned}$$
+    *   **Node J:**
+        $$\begin{aligned} Dist(J) &= \min\Big( Dist(E) + c(E, J),\; Dist(F) + c(F, J),\; Dist(G) + c(G, J) \Big) \\ &= \min(8 + 5,\; 11 + 7,\; 10 + 2) \\ &= \min(13,\; 18,\; 12) = 12 \quad \text{[from G]} \end{aligned}$$
+
+*   **Stage 5 (Destination):**
+    $$\begin{aligned} Dist(K) &= \min\Big( Dist(H) + c(H, K),\; Dist(I) + c(I, K),\; Dist(J) + c(J, K) \Big) \\ &= \min(15 + 4,\; 14 + 2,\; 12 + 5) \\ &= \min(19,\; 16,\; 17) = 16 \quad \text{[from I]} \end{aligned}$$
+
+*   **Shortest Path Reconstruction:**
+    *   From $K$, the minimum distance came from **$I$**.
+    *   From $I$, the minimum distance came from **$F$**.
+    *   From $F$, the minimum distance came from **$B$**.
+    *   From $B$, the minimum distance came from **$A$**.
+    *   **Optimal Path:** **$A \to B \to F \to I \to K$**
+    *   **Total Minimum Cost:** **16**
+
+---
+
+## 8. Floyd-Warshall Algorithm
+
 
 ### 1. The Real-Life Analogy
 Imagine you want to build a flight search engine. You want to show users the cheapest ticket between **every single pair of airports**. Instead of running a separate search for every pair of airports, the Floyd-Warshall algorithm updates the entire flight database step-by-step. It asks: "Is it cheaper to fly from Airport A to Airport B directly, or by taking a detour through Airport C?" We repeat this query for every airport, letting each one take a turn as a detour hub.
@@ -727,12 +1155,12 @@ The shortest path from $1 \to 3$ is updated to **4** by detouring through vertex
 
 ### 7. Core Algorithms
 
-#### 📘 Algorithm 8.8: Floyd-Warshall
+#### 📘 Algorithm 8.9: Floyd-Warshall
 
 > **Purpose:** Calculate all-pairs shortest path weights in a graph with no negative-weight cycles.
 
 ```
-Algorithm 8.8: FLOYD-WARSHALL(W, n)
+Algorithm 8.9: FLOYD-WARSHALL(W, n)
 ────────────────────────────────────────────
 W = Adjacency weight matrix of size n x n
 D = Distance matrix of shortest path weights
@@ -751,12 +1179,12 @@ D = Distance matrix of shortest path weights
 
 ---
 
-#### 📘 Algorithm 8.9: Transitive Closure
+#### 📘 Algorithm 8.10: Transitive Closure
 
 > **Purpose:** Find if there is a path from vertex $i$ to vertex $j$ for all pairs of vertices.
 
 ```
-Algorithm 8.9: TRANSITIVE-CLOSURE(G, n)
+Algorithm 8.10: TRANSITIVE-CLOSURE(G, n)
 ────────────────────────────────────────────
 1. Let T^(0) be a new n x n matrix
 2. Repeat Steps 3 through 6 for i = 1 to n:
@@ -803,7 +1231,8 @@ graph LR
 
 ---
 
-## 8. Traveling Salesperson Problem (Standard DP)
+## 9. Traveling Salesperson Problem (Standard DP)
+
 
 ### 1. The Real-Life Analogy
 Imagine you are a delivery driver who needs to start at your depot (City 1), visit a set of customers in other cities, and return back to City 1. You want to find the route that minimizes your total driving distance. Instead of randomly guessing routes, you can build paths subset-by-subset: "What is the shortest path to City 4, visiting City 2 and City 3 along the way?" Once you have these optimal sub-routes, finding the final tour is just a simple lookup.
@@ -856,12 +1285,12 @@ $$C = \begin{pmatrix} 0 & 2 & 9 & 10 \\ 1 & 0 & 6 & 4 \\ 15 & 7 & 0 & 8 \\ 6 & 3
 
 ### 7. Core Algorithm
 
-#### 📘 Algorithm 8.10: TSP (Held-Karp)
+#### 📘 Algorithm 8.11: TSP (Held-Karp)
 
 > **Purpose:** Calculate the optimal traveling salesperson tour using dynamic programming.
 
 ```
-Algorithm 8.10: TSP-HELD-KARP(C, n)
+Algorithm 8.11: TSP-HELD-KARP(C, n)
 ────────────────────────────────────────────
 C = Distance matrix of size n x n
 n = Number of cities
@@ -914,6 +1343,81 @@ graph TD
 
 ---
 
+## 10. Rod Cutting Problem
+
+### 1. The Real-Life Analogy
+Imagine you own a steel mill. Customers want to buy steel rods of various lengths (e.g., 1 meter, 2 meters, etc.). You have a long rod of length $n$ meters. Different cut lengths sell for different prices. How do you cut the rod into smaller pieces to maximize your total selling price?
+
+### 2. Inputs and Outputs
+*   **Input:** 
+    *   A rod of length $n$.
+    *   An array of prices $P = [p_1, p_2, \dots, p_n]$ where $p_i$ is the price of a rod of length $i$.
+*   **Output:** The maximum revenue obtainable by cutting up the rod.
+
+### 3. Subproblem Decomposition
+To find the maximum revenue $R(n)$ for a rod of length $n$:
+*   We can make a cut of length $i$ ($1 \le i \le n$) and get price $p_i$.
+*   The remaining rod has length $n-i$, which we solve optimally as $R(n-i)$.
+*   We try all possible initial cuts $i$ and take the maximum:
+    $$R(n) = \max_{1 \le i \le n} \big( p_i + R(n-i) \big)$$
+    With base case $R(0) = 0$.
+
+### 4. Walkthrough with Small Numbers
+Let's solve for $n = 4$ with prices:
+*   Length 1: $p_1 = 1$
+*   Length 2: $p_2 = 5$
+*   Length 3: $p_3 = 8$
+*   Length 4: $p_4 = 9$
+
+*   $R(0) = 0$
+*   **For $n = 1$:** $\max(p_1 + R(0)) = 1 + 0 = 1 \implies R(1) = 1$
+*   **For $n = 2$:**
+    *   Cut $i = 1$: $p_1 + R(1) = 1 + 1 = 2$
+    *   Cut $i = 2$: $p_2 + R(0) = 5 + 0 = 5$
+    *   $R(2) = \max(2, 5) = 5$
+*   **For $n = 3$:**
+    *   Cut $i = 1$: $p_1 + R(2) = 1 + 5 = 6$
+    *   Cut $i = 2$: $p_2 + R(1) = 5 + 1 = 6$
+    *   Cut $i = 3$: $p_3 + R(0) = 8 + 0 = 8$
+    *   $R(3) = \max(6, 6, 8) = 8$
+*   **For $n = 4$:**
+    *   Cut $i = 1$: $p_1 + R(3) = 1 + 8 = 9$
+    *   Cut $i = 2$: $p_2 + R(2) = 5 + 5 = 10$
+    *   Cut $i = 3$: $p_3 + R(1) = 8 + 1 = 9$
+    *   Cut $i = 4$: $p_4 + R(0) = 9 + 0 = 9$
+    *   $R(4) = \max(9, 10, 9, 9) = 10$
+*   **Max Revenue:** **10** (Cut into two pieces of length 2: $5 + 5 = 10$).
+
+---
+
+## 11. Climbing Stairs Problem
+
+### 1. The Real-Life Analogy
+Imagine you are climbing a staircase with $n$ steps. You can take either **1 step** or **2 steps** at a time. In how many distinct ways can you climb to the top?
+
+### 2. Inputs and Outputs
+*   **Input:** An integer $n$ representing the number of stairs.
+*   **Output:** The number of unique ways to reach the $n$-th step.
+
+### 3. Subproblem Decomposition
+To reach the $n$-th step, you can only arrive from:
+1.  The $(n-1)$-th step (by taking a 1-step hop).
+2.  The $(n-2)$-th step (by taking a 2-step hop).
+Therefore, the number of ways to reach step $n$ is the sum of the ways to reach step $n-1$ and step $n-2$:
+$$Ways(n) = Ways(n-1) + Ways(n-2) \quad \text{for } n \ge 3$$
+With base cases $Ways(1) = 1$, $Ways(2) = 2$.
+*(Notice that this is identical to the Fibonacci sequence, shifted by one!)*
+
+### 4. Walkthrough with Small Numbers
+Let's find the ways to climb $n = 4$ steps:
+*   $Ways(1) = 1$
+*   $Ways(2) = 2$
+*   $Ways(3) = Ways(2) + Ways(1) = 2 + 1 = 3$
+*   $Ways(4) = Ways(3) + Ways(2) = 3 + 2 = 5$
+*   **Answer:** **5** distinct ways.
+
+---
+
 ## Summary and Quick Reference
 
 ### 📊 Algorithm Quick Reference
@@ -927,9 +1431,12 @@ graph TD
 | **8.5** | 0/1 Knapsack | $\Theta(n \cdot W)$ | $\Theta(n \cdot W)$ |
 | **8.6** | LCS Length | $\Theta(m \cdot n)$ | $O(m \cdot n)$ |
 | **8.7** | Print LCS | $O(m+n)$ | $O(m+n)$ |
-| **8.8** | Floyd-Warshall | $\Theta(n^3)$ | $\Theta(n^2)$ |
-| **8.9** | Transitive Closure | $\Theta(n^3)$ | $\Theta(n^2)$ |
-| **8.10** | TSP (Held-Karp) | $\Theta(n^2 \cdot 2^n)$ | $\Theta(n \cdot 2^n)$ |
+| **8.8** | Multi-Stage Graph | $O(|V| + |E|)$ | $O(|V|)$ |
+| **8.9** | Floyd-Warshall | $\Theta(n^3)$ | $\Theta(n^2)$ |
+| **8.10** | Transitive Closure | $\Theta(n^3)$ | $\Theta(n^2)$ |
+| **8.11** | TSP (Held-Karp) | $\Theta(n^2 \cdot 2^n)$ | $\Theta(n \cdot 2^n)$ |
+| **8.12** | Rod Cutting | $\Theta(n^2)$ | $\Theta(n)$ |
+| **8.13** | Climbing Stairs | $\Theta(n)$ | $\Theta(n)$ |
 
 ---
 
