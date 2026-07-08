@@ -1506,75 +1506,206 @@ Imagine you own a steel mill. Customers want to buy steel rods of various length
 
 ### 2. Inputs and Outputs
 *   **Input:** 
-    *   A rod of length $n$.
-    *   An array of prices $P = [p_1, p_2, \dots, p_n]$ where $p_i$ is the price of a rod of length $i$.
+    *   A total rod of length $n = 5$.
+    *   An array of segment lengths with their corresponding prices:
+        *   Length 1: $p_1 = 1$
+        *   Length 2: $p_2 = 5$
+        *   Length 3: $p_3 = 8$
+        *   Length 4: $p_4 = 9$
+        *   Length 5: $p_5 = 10$
 *   **Output:** The maximum revenue obtainable by cutting up the rod.
 
 ### 3. Subproblem Decomposition
-To find the maximum revenue $R(n)$ for a rod of length $n$:
-*   We can make a cut of length $i$ ($1 \le i \le n$) and get price $p_i$.
-*   The remaining rod has length $n-i$, which we solve optimally as $R(n-i)$.
-*   We try all possible initial cuts $i$ and take the maximum:
+To solve the problem step-by-step using a 2D dynamic programming grid (similar to the Unbounded Knapsack problem), let $T[i, j]$ be the maximum profit obtained using pieces of length up to $i$ for a total rod length $j$:
+*   **Exclude the piece of length $i$:** The maximum profit is the same as the previous row: $T[i-1, j]$.
+*   **Include the piece of length $i$:** We gain its price $p_i$ plus the optimal profit from the remaining length $j - i$ (which can still use piece $i$): $p_i + T[i, j - i]$.
+*   **Recurrence Relation:**
     $$
-    R(n) = \max_{1 \le i \le n} \big( p_i + R(n-i) \big)
+    T[i, j] = \max\Big( T[i-1, j],\; p_i + T[i, j - i] \Big) \quad \text{for } j \ge i
     $$
-    With base case $R(0) = 0$.
+    With base cases $T[i, 0] = 0$ for all $i$, and $T[0, j] = 0$ for all $j$.
 
-### 4. Walkthrough with Small Numbers
-Let's solve for $n = 4$ with prices:
-*   Length 1: $p_1 = 1$
-*   Length 2: $p_2 = 5$
-*   Length 3: $p_3 = 8$
-*   Length 4: $p_4 = 9$
+### 4. The 2D Dynamic Programming Table
+By evaluating each cell row-by-row, we fill the following grid:
 
-*   $R(0) = 0$
-*   **For $n = 1$:** $\max(p_1 + R(0)) = 1 + 0 = 1 \implies R(1) = 1$
-*   **For $n = 2$:**
-    *   Cut $i = 1$: $p_1 + R(1) = 1 + 1 = 2$
-    *   Cut $i = 2$: $p_2 + R(0) = 5 + 0 = 5$
-    *   $R(2) = \max(2, 5) = 5$
-*   **For $n = 3$:**
-    *   Cut $i = 1$: $p_1 + R(2) = 1 + 5 = 6$
-    *   Cut $i = 2$: $p_2 + R(1) = 5 + 1 = 6$
-    *   Cut $i = 3$: $p_3 + R(0) = 8 + 0 = 8$
-    *   $R(3) = \max(6, 6, 8) = 8$
-*   **For $n = 4$:**
-    *   Cut $i = 1$: $p_1 + R(3) = 1 + 8 = 9$
-    *   Cut $i = 2$: $p_2 + R(2) = 5 + 5 = 10$
-    *   Cut $i = 3$: $p_3 + R(1) = 8 + 1 = 9$
-    *   Cut $i = 4$: $p_4 + R(0) = 9 + 0 = 9$
-    *   $R(4) = \max(9, 10, 9, 9) = 10$
-*   **Max Revenue:** **10** (Cut into two pieces of length 2: $5 + 5 = 10$).
+| Allowed Pieces \ Rod Length ($j$) | 0 | 1 | 2 | 3 | 4 | 5 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **None** (0) | 0 | 0 | 0 | 0 | 0 | 0 |
+| **{1}** ($p_1=1$) | 0 | 1 | 2 | 3 | 4 | 5 |
+| **{1, 2}** ($p_2=5$) | 0 | 1 | 5 | 6 | 10 | 11 |
+| **{1, 2, 3}** ($p_3=8$) | 0 | 1 | 5 | 8 | 10 | **13** |
+| **{1, 2, 3, 4}** ($p_4=9$) | 0 | 1 | 5 | 8 | 10 | 13 |
+| **{1, 2, 3, 4, 5}** ($p_5=10$) | 0 | 1 | 5 | 8 | 10 | 13 |
+
+#### Step-by-Step Row Calculations
+1.  **Row 1 (Piece of length 1, price = 1):**
+    *   We can only make cuts of length 1. Thus, the profit is equal to the length of the rod: $T[1, j] = j$.
+2.  **Row 2 (Pieces of length 1, 2 allowed; $p_2 = 5$):**
+    *   $j=1$: Since $j < 2$, we cannot use piece 2 $\implies T[2, 1] = T[1, 1] = 1$.
+    *   $j=2$: $\max(T[1, 2], p_2 + T[2, 0]) = \max(2, 5 + 0) = 5$.
+    *   $j=3$: $\max(T[1, 3], p_2 + T[2, 1]) = \max(3, 5 + 1) = 6$.
+    *   $j=4$: $\max(T[1, 4], p_2 + T[2, 2]) = \max(4, 5 + 5) = 10$.
+    *   $j=5$: $\max(T[1, 5], p_2 + T[2, 3]) = \max(5, 5 + 6) = 11$.
+3.  **Row 3 (Pieces of length 1, 2, 3 allowed; $p_3 = 8$):**
+    *   $j < 3$: Segment of length 3 cannot fit $\implies T[3, j] = T[2, j]$.
+    *   $j=3$: $\max(T[2, 3], p_3 + T[3, 0]) = \max(6, 8 + 0) = 8$.
+    *   $j=4$: $\max(T[2, 4], p_3 + T[3, 1]) = \max(10, 8 + 1) = 10$.
+    *   $j=5$: $\max(T[2, 5], p_3 + T[3, 2]) = \max(11, 8 + 5) = 13$.
+4.  **Row 4 (Pieces of length 1, 2, 3, 4 allowed; $p_4 = 9$):**
+    *   $j < 4$: Segment of length 4 cannot fit $\implies T[4, j] = T[3, j]$.
+    *   $j=4$: $\max(T[3, 4], p_4 + T[4, 0]) = \max(10, 9 + 0) = 10$.
+    *   $j=5$: $\max(T[3, 5], p_4 + T[4, 1]) = \max(13, 9 + 1) = 13$.
+5.  **Row 5 (Pieces of length 1, 2, 3, 4, 5 allowed; $p_5 = 10$):**
+    *   $j < 5$: Segment of length 5 cannot fit $\implies T[5, j] = T[4, j]$.
+    *   $j=5$: $\max(T[4, 5], p_5 + T[5, 0]) = \max(13, 10 + 0) = 13$.
+
+### 5. Reconstructing the Optimal Cuts (Backtracking)
+To find the actual cut lengths that yield the maximum profit of **13**:
+1.  Start at the bottom-right cell $T[5, 5] = 13$.
+2.  Compare it with the cell directly above it, $T[4, 5] = 13$. Since they are equal, the piece of length 5 was **not used**. Move up to $T[4, 5]$.
+3.  Compare $T[4, 5]$ with $T[3, 5] = 13$. Since they are equal, the piece of length 4 was **not used**. Move up to $T[3, 5]$.
+4.  Compare $T[3, 5]$ with $T[2, 5] = 11$. Since they are different ($13 \ne 11$), the piece of length **3** **was used**.
+    *   Record cut length: **3**.
+    *   Subtract length 3 from remaining rod length: $5 - 3 = 2$.
+    *   Move to column 2 in row 3: $T[3, 2] = 5$.
+5.  At $T[3, 2]$, compare with cell directly above, $T[2, 2] = 5$. Since they are equal, piece 3 was not used for this sub-length. Move up to $T[2, 2]$.
+6.  At $T[2, 2]$, compare with cell directly above, $T[1, 2] = 2$. Since they are different ($5 \ne 2$), the piece of length **2** **was used**.
+    *   Record cut length: **2**.
+    *   Subtract length 2 from remaining rod length: $2 - 2 = 0$.
+7.  Since remaining rod length is $0$, we stop.
+*   **Max Revenue:** **13** (Cut into two pieces of length **2** and **3**: $5 + 8 = 13$).
 
 ---
 
 ## 11. Climbing Stairs Problem
 
 ### 1. The Real-Life Analogy
-Imagine you are climbing a staircase with $n$ steps. You can take either **1 step** or **2 steps** at a time. In how many distinct ways can you climb to the top?
+Imagine you are climbing a staircase with $n$ steps. You can take either **1 step**, **2 steps**, or **3 steps** at a time. In how many distinct ways can you climb to the top?
 
 ### 2. Inputs and Outputs
 *   **Input:** An integer $n$ representing the number of stairs.
 *   **Output:** The number of unique ways to reach the $n$-th step.
 
-### 3. Subproblem Decomposition
-To reach the $n$-th step, you can only arrive from:
-1.  The $(n-1)$-th step (by taking a 1-step hop).
-2.  The $(n-2)$-th step (by taking a 2-step hop).
-Therefore, the number of ways to reach step $n$ is the sum of the ways to reach step $n-1$ and step $n-2$:
-$$
-Ways(n) = Ways(n-1) + Ways(n-2) \quad \text{for } n \ge 3
-$$
-With base cases $Ways(1) = 1$, $Ways(2) = 2$.
-*(Notice that this is identical to the Fibonacci sequence, shifted by one!)*
+### 3. The Core Struggle
+For a staircase of size $n$, exploring all path combinations recursively creates a branching factor of 3 at each level. This results in an exponential time complexity of $O(3^n)$ because we repeatedly solve the same subproblems (e.g., computing the ways to reach step $n-3$ multiple times).
 
-### 4. Walkthrough with Small Numbers
-Let's find the ways to climb $n = 4$ steps:
+### 4. Subproblem Decomposition
+To reach the $n$-th step, you can only arrive from:
+1.  The $(n-1)$-th step (by taking a 1-step jump).
+2.  The $(n-2)$-th step (by taking a 2-step jump).
+3.  The $(n-3)$-th step (by taking a 3-step jump).
+
+Therefore, the number of ways to reach step $n$ is the sum of the ways to reach steps $n-1$, $n-2$, and $n-3$:
+$$
+Ways(n) = Ways(n-1) + Ways(n-2) + Ways(n-3) \quad \text{for } n \ge 3
+$$
+
+#### Base Cases
+*   $Ways(0) = 1$: There is exactly 1 way to stay at the ground level (by doing nothing).
+*   $Ways(1) = 1$: Only 1 way to reach the first step (taking 1 step).
+*   $Ways(2) = 2$: Two ways to reach the second step (taking $1+1$ steps or a single $2$-step jump).
+
+*(Note: Therefore, $Ways(3) = Ways(2) + Ways(1) + Ways(0) = 2 + 1 + 1 = 4$ distinct ways: $1+1+1$, $1+2$, $2+1$, $3$.)*
+
+### 5. Walkthrough with Small Numbers
+Let's find the number of ways to climb $n = 5$ steps:
+*   $Ways(0) = 1$
 *   $Ways(1) = 1$
 *   $Ways(2) = 2$
-*   $Ways(3) = Ways(2) + Ways(1) = 2 + 1 = 3$
-*   $Ways(4) = Ways(3) + Ways(2) = 3 + 2 = 5$
-*   **Answer:** **5** distinct ways.
+*   $Ways(3) = Ways(2) + Ways(1) + Ways(0) = 2 + 1 + 1 = 4$
+*   $Ways(4) = Ways(3) + Ways(2) + Ways(1) = 4 + 2 + 1 = 7$
+*   $Ways(5) = Ways(4) + Ways(3) + Ways(2) = 7 + 4 + 2 = 13$
+*   **Answer:** **13** distinct ways.
+
+### 6. The Memory Table
+*   We use a 1D array `dp[0...n]`.
+*   `dp[i]` stores the number of ways to reach the $i$-th step.
+*   We initialize `dp[0] = 1`, `dp[1] = 1`, `dp[2] = 2`, and fill the array from index 3 to $n$ using the recurrence relation.
+
+### 7. Implementation Approaches
+
+The video explains four progressive approaches to solve this problem:
+
+#### Approach A: Recursion (Brute Force)
+Instead of using stored values, the direct recursive logic is executed as follows:
+1.  **Base Case Check (Negative Step):** If the target stair $n < 0$, return `0` (it is impossible to land on a negative step).
+2.  **Success Case Check (Ground Step):** If the target stair $n = 0$, return `1` (we successfully reached the top/destination, representing 1 valid combination of steps).
+3.  **Recursive Step:** For any step $n$, calculate the sum of recursively calling the function for:
+    *   $n - 1$ (taking a 1-step jump)
+    *   $n - 2$ (taking a 2-step jump)
+    *   $n - 3$ (taking a 3-step jump)
+4.  **Complexity:** Since each state spawns 3 recursive branches, the execution time grows exponentially to $O(3^n)$, and the system call stack grows to $O(n)$ depth.
+
+#### Approach B: Memoization (Top-Down DP)
+To optimize recursion and avoid redundant calculations, we use a lookup table (cache):
+1.  **Initialization:** Create a memory table (array) of size $n+1$ filled with `-1` (representing uncalculated states).
+2.  **Base Cases:** When the function is called with $n$:
+    *   If $n < 0$, return `0`.
+    *   If $n = 0$, return `1`.
+3.  **Cache Lookup:** Before calculating, check if `dp[n]` is not `-1`. If it has a value, immediately return that cached result.
+4.  **Recursive Calculation & Storage:** If not cached:
+    *   Calculate $Ways(n) = Ways(n-1) + Ways(n-2) + Ways(n-3)$ recursively.
+    *   Store the result in `dp[n]`.
+    *   Return `dp[n]`.
+5.  **Complexity:** Reduces the time complexity to $\Theta(n)$ as each step is calculated once, using $\Theta(n)$ space for the table and stack.
+
+#### Approach C: Tabulation (Bottom-Up DP)
+To avoid the memory overhead of the recursive call stack, we build the solution from the ground up:
+1.  **Array Allocation:** Define an array `dp` of size $n+1$.
+2.  **Base Cases Initialization:**
+    *   Set `dp[0] = 1` (1 way to stay at step 0)
+    *   Set `dp[1] = 1` (1 way to reach step 1)
+    *   Set `dp[2] = 2` (2 ways to reach step 2: $\{1+1, 2\}$)
+3.  **Iterative Step:** Run a loop from $i = 3$ to $n$. At each step:
+    *   Compute `dp[i] = dp[i-1] + dp[i-2] + dp[i-3]`.
+4.  **Final Return:** Return `dp[n]`.
+5.  **Complexity:** $\Theta(n)$ time complexity using a single loop, and $\Theta(n)$ space complexity for the array.
+
+#### Approach D: Space-Optimized Tabulation
+Since calculating `dp[i]` only requires the values of the last three steps (`dp[i-1]`, `dp[i-2]`, `dp[i-3]`), we can discard the rest of the array:
+1.  **State Variable Initialization:**
+    *   Let `a = 1` (representing $Ways(i-3)$, initially step 0)
+    *   Let `b = 1` (representing $Ways(i-2)$, initially step 1)
+    *   Let `c = 2` (representing $Ways(i-1)$, initially step 2)
+2.  **Iterative Step:** Run a loop from $i = 3$ to $n$. At each iteration:
+    *   Calculate the current value: `current = a + b + c`.
+    *   Shift the state window forward:
+        *   Set `a = b`
+        *   Set `b = c`
+        *   Set `c = current`
+3.  **Final Return:** The answer for step $n$ is stored in `c`. Return `c`.
+4.  **Complexity:** $\Theta(n)$ time complexity, but uses constant space $\Theta(1)$ since only three integer variables are maintained.
+
+### 8. Visual State Transition (Mermaid)
+
+The diagram below represents the top-down decision path and lookup dependencies for calculating the ways to reach step $i$:
+
+```mermaid
+graph TD
+    subgraph "Decision Path for Stair i"
+        StairI{"Calculate dp[i]"} -->|1-Step Jump| Jump1["Look up: dp[i-1]"]
+        StairI -->|2-Step Jump| Jump2["Look up: dp[i-2]"]
+        StairI -->|3-Step Jump| Jump3["Look up: dp[i-3]"]
+        
+        Jump1 --> SumVal["Sum the Ways"]
+        Jump2 --> SumVal
+        Jump3 --> SumVal
+        
+        SumVal --> Store["Store in dp[i]"]
+        
+        style StairI fill:#3498db,stroke:#2980b9,color:#fff
+        style Store fill:#2ecc71,stroke:#27ae60,color:#fff
+    end
+```
+
+### 9. Complexity Analysis
+
+| Approach | Time Complexity | Space Complexity | Notes |
+| :--- | :--- | :--- | :--- |
+| **Recursion** | $O(3^n)$ | $O(n)$ | High overhead due to overlapping subproblems. |
+| **Memoization** | $\Theta(n)$ | $\Theta(n)$ | Top-down with auxiliary cache table and recursion overhead. |
+| **Tabulation** | $\Theta(n)$ | $\Theta(n)$ | Bottom-up, iterative, no recursion overhead. |
+| **Space-Optimized** | $\Theta(n)$ | $\Theta(1)$ | Optimal space complexity by keeping only the last 3 states. |
 
 ---
 
@@ -1591,7 +1722,7 @@ Let's find the ways to climb $n = 4$ steps:
 | **8.5** | 0/1 Knapsack | $\Theta(n \cdot W)$ | $\Theta(n \cdot W)$ |
 | **8.6** | LCS Length | $\Theta(m \cdot n)$ | $O(m \cdot n)$ |
 | **8.7** | Print LCS | $O(m+n)$ | $O(m+n)$ |
-| **8.8** | Multi-Stage Graph | $O(|V| + |E|)$ | $O(|V|)$ |
+| **8.8** | Multi-Stage Graph | $O(\vert V \vert + \vert E \vert)$ | $O(\vert V \vert)$ |
 | **8.9** | Floyd-Warshall | $\Theta(n^3)$ | $\Theta(n^2)$ |
 | **8.10** | Transitive Closure | $\Theta(n^3)$ | $\Theta(n^2)$ |
 | **8.11** | TSP (Held-Karp) | $\Theta(n^2 \cdot 2^n)$ | $\Theta(n \cdot 2^n)$ |
