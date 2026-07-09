@@ -96,9 +96,9 @@ When implementing Dynamic Programming, we can solve and store subproblems in two
 
 ##### Step-by-Step Greedy Solution:
 1.  **Calculate Value Density (Price per kg) for each item:**
-    $$
+    ```math
     \text{Density} = \frac{\text{Price}}{\text{Quantity}}
-    $$
+    ```
     *   $\text{Diamond (D)}: 40 / 0.5 = 80/\text{kg}$
     *   $\text{Platinum (P)}: 30 / 1.0 = 30/\text{kg}$
     *   $\text{Gold (G)}: 20 / 2.0 = 10/\text{kg}$
@@ -152,9 +152,9 @@ The naive recursive relation is $F_n = F_{n-1} + F_{n-2}$. If we compute $F_5$ r
 
 ### 4. The Subproblem Decomposition
 The $n$-th term is computed by summing the two immediately preceding terms:
-$$
+```math
 F_n = F_{n-1} + F_{n-2} \quad \text{for } n \ge 2, \text{ with } F_0 = 0, F_1 = 1
-$$
+```
 
 ### 5. The Memory Table
 *   We use a 1D array $F[0 \dots n]$.
@@ -250,17 +250,17 @@ For $n$ coins, each coin can either be picked or skipped. This means there are $
 ### 4. The Subproblem Decomposition
 When considering the $i$-th coin in the row, we have two choices:
 *   **Option A (Pick coin $i$):** We get the coin's value $C_i$, plus the optimal value we could get from the first $i-2$ coins (since we must skip coin $i-1$):
-    $$
+    ```math
     \text{Value} = C_i + F[i-2]
-    $$
+    ```
 *   **Option B (Skip coin $i$):** The maximum value we can get is simply the optimal value from the first $i-1$ coins:
-    $$
+    ```math
     \text{Value} = F[i-1]
-    $$
+    ```
 *   We choose the option that gives the maximum value:
-    $$
+    ```math
     F[i] = \max(C_i + F[i-2], F[i-1]) \quad \text{for } i \ge 2
-    $$
+    ```
     With base cases $F[0] = 0$ and $F[1] = C_1$.
 
 ### 5. The Memory Table
@@ -349,9 +349,9 @@ To make change for amount $j$, we try using each coin denomination $d_i$ as the 
 *   If we use coin $d_i$, the problem reduces to finding the minimum coins needed for the remaining amount $j - d_i$.
 *   The cost is 1 (for coin $d_i$) plus $F[j - d_i]$.
 *   We try all denominations $d_i \le j$ and choose the minimum:
-    $$
+    ```math
     F[j] = \min_{d_i \le j} (1 + F[j - d_i]) \quad \text{for } j > 0, \text{ with } F[0] = 0
-    $$
+    ```
 
 ### 5. The Memory Table
 *   We use a 1D array $F[0 \dots n]$.
@@ -454,17 +454,17 @@ Imagine you are playing a grid-based board game. Some cells on the board contain
 
 ### 3. The Core Struggle
 The number of possible paths from top-left to bottom-right in an $m \times n$ grid is:
-$$
+```math
 \text{Paths} = \binom{m+n-2}{m-1}
-$$
+```
 For a $10 \times 10$ board, there are 48,620 paths. For larger boards, checking all paths is too slow.
 
 ### 4. The Subproblem Decomposition
 To reach cell $(i, j)$, you can only arrive from the cell immediately to its left $(i, j-1)$ or the cell immediately above it $(i-1, j)$.
 *   The max coins collected to $(i, j)$ is the coin at $(i, j)$ plus the maximum of the coins collected along the paths to those two neighbors:
-    $$
+    ```math
     F[i, j] = \max(F[i-1, j], F[i, j-1]) + A[i, j] \quad \text{for } i > 1, j > 1
-    $$
+    ```
 *   **Boundary Cases:**
     *   $F[1, 1] = A[1, 1]$
     *   $F[1, j] = F[1, j-1] + A[1, j]$ (first row can only be reached from the left)
@@ -477,9 +477,9 @@ To reach cell $(i, j)$, you can only arrive from the cell immediately to its lef
 
 ### 6. Walkthrough with Small Numbers
 Let's find the max coins for a $3 \times 3$ grid $A$, where coins (1) are at $(1, 2)$, $(2, 2)$, $(3, 1)$, and $(3, 3)$:
-$$
+```math
 A = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 1 & 0 \\ 1 & 0 & 1 \end{pmatrix}
-$$
+```
 
 *   **Initialize Row 1 and Col 1:**
     *   $F[1, 1] = A[1, 1] = 0$.
@@ -565,17 +565,17 @@ For $n$ items, there are $2^n$ possible subsets. Checking all of them to see if 
 ### 4. The Subproblem Decomposition
 When deciding on the $i$-th item with remaining capacity $j$:
 *   **Option A (Skip item $i$):** The value remains the same as using the first $i-1$ items with capacity $j$:
-    $$
+    ```math
     \text{Value} = V[i-1, j]
-    $$
+    ```
 *   **Option B (Take item $i$):** If the item's weight $w_i \le j$, we can take it. The value is the item's value $v_i$ plus the optimal value using the first $i-1$ items with the remaining capacity $j - w_i$:
-    $$
+    ```math
     \text{Value} = v_i + V[i-1, j - w_i]
-    $$
+    ```
 *   We choose the option that gives the maximum value:
-    $$
+    ```math
     V[i, j] = \begin{cases} \max(V[i-1, j], v_i + V[i-1, j - w_i]) & \text{if } w_i \le j \\ V[i-1, j] & \text{if } w_i > j \end{cases}
-    $$
+    ```
     With base cases $V[0, j] = 0$ and $V[i, 0] = 0$.
 
 ### 5. The Memory Table
@@ -701,13 +701,13 @@ These are specific 0/1 Knapsack problems solved using the **Matrix Tabular Forma
 
 ##### Detailed Calculations for Key Cells:
 *   **Cell $V[2, 30]$:** Item 2 has weight $20$, price $100$.
-    $$
+    ```math
     V[2, 30] = \max(V[1, 30], 100 + V[1, 30-20]) = \max(60, 100 + 60) = 160
-    $$
+    ```
 *   **Cell $V[3, 50]$:** Item 3 has weight $30$, price $120$.
-    $$
+    ```math
     V[3, 50] = \max(V[2, 50], 120 + V[2, 50-30]) = \max(160, 120 + 100) = 220
-    $$
+    ```
 
 ##### Traceback Path for Problem A:
 1.  Start at $V[3, 50] = 220$. Since $V[3, 50] \ne V[2, 50]$ ($220 \ne 160$), **Item 3 is selected**.
@@ -739,17 +739,17 @@ These are specific 0/1 Knapsack problems solved using the **Matrix Tabular Forma
 
 ##### Detailed Calculations for Key Cells:
 *   **Cell $V[2, 4]$:** Item 2 has weight $3$, price $4$.
-    $$
+    ```math
     V[2, 4] = \max(V[1, 4], 4 + V[1, 4-3]) = \max(2, 4 + 2) = 6
-    $$
+    ```
 *   **Cell $V[3, 8]$:** Item 3 has weight $5$, price $7$.
-    $$
+    ```math
     V[3, 8] = \max(V[2, 8], 7 + V[2, 8-5]) = \max(6, 7 + 4) = 11
-    $$
+    ```
 *   **Cell $V[4, 8]$:** Item 4 has weight $7$, price $10$.
-    $$
+    ```math
     V[4, 8] = \max(V[3, 8], 10 + V[3, 8-7]) = \max(11, 10 + 2) = 12
-    $$
+    ```
 
 ##### Traceback Path for Problem B:
 1.  Start at $V[4, 8] = 12$. Since $V[4, 8] \ne V[3, 8]$ ($12 \ne 11$), **Item 4 is selected**.
@@ -781,13 +781,13 @@ To find the longest common subsequence of two strings of length $m$ and $n$, we 
 ### 4. The Subproblem Decomposition
 Let's look at the final characters $x_m$ and $y_n$ of both strings:
 *   **If $x_m == y_n$:** The final characters match. They must be part of the LCS. We solve the smaller problem of finding the LCS of $X_{m-1}$ and $Y_{n-1}$, then append this character:
-    $$
+    ```math
     c[i, j] = c[i-1, j-1] + 1
-    $$
+    ```
 *   **If $x_m \neq y_n$:** The final characters do not match. The LCS could end with $x_m$ (excluding $y_n$) or end with $y_n$ (excluding $x_m$). We solve both cases and take the maximum:
-    $$
+    ```math
     c[i, j] = \max(c[i-1, j], c[i, j-1])
-    $$
+    ```
 
 ### 5. The Memory Table
 *   We use a 2D grid $c[0 \dots m, 0 \dots n]$ to store lengths, where $c[i, j]$ is the LCS length of prefixes $X_i$ and $Y_j$.
@@ -1068,9 +1068,9 @@ Let $Cost(X)$ be the minimum cost of a path from node $X$ to the destination $K$
 We compute these values starting from Stage 5 and moving backward to Stage 1.
 
 ##### Stage 5 (Destination)
-$$
+```math
 Cost(K) = 0
-$$
+```
 
 ##### Stage 4
 *   $Cost(H) = weight(H, K) + Cost(K) = 4 + 0 = 4$
@@ -1081,70 +1081,70 @@ $$
 For each node in Stage 3, check all outgoing edges to Stage 4 and choose the minimum:
 
 *   **Node E:**
-    $$
+    ```math
     \begin{aligned}
     Cost(E) &= \min\Big( c(E, H) + Cost(H),\; c(E, I) + Cost(I),\; c(E, J) + Cost(J) \Big) \\
     &= \min(11 + 4,\; 8 + 2,\; 5 + 5) \\
     &= \min(15,\; 10,\; 10) = 10 \quad \text{[via I or J]}
     \end{aligned}
-    $$
+    ```
 
 *   **Node F:**
-    $$
+    ```math
     \begin{aligned}
     Cost(F) &= \min\Big( c(F, H) + Cost(H),\; c(F, I) + Cost(I),\; c(F, J) + Cost(J) \Big) \\
     &= \min(4 + 4,\; 3 + 2,\; 7 + 5) \\
     &= \min(8,\; 5,\; 12) = 5 \quad \text{[via I]}
     \end{aligned}
-    $$
+    ```
 
 *   **Node G:**
-    $$
+    ```math
     \begin{aligned}
     Cost(G) &= \min\Big( c(G, H) + Cost(H),\; c(G, I) + Cost(I),\; c(G, J) + Cost(J) \Big) \\
     &= \min(5 + 4,\; 6 + 2,\; 2 + 5) \\
     &= \min(9,\; 8,\; 7) = 7 \quad \text{[via J]}
     \end{aligned}
-    $$
+    ```
 
 ##### Stage 2
 For each node in Stage 2, check all outgoing edges to Stage 3 and choose the minimum:
 
 *   **Node B:**
-    $$
+    ```math
     \begin{aligned}
     Cost(B) &= \min\Big( c(B, E) + Cost(E),\; c(B, F) + Cost(F),\; c(B, G) + Cost(G) \Big) \\
     &= \min(4 + 10,\; 2 + 5,\; 1 + 7) \\
     &= \min(14,\; 7,\; 8) = 7 \quad \text{[via F]}
     \end{aligned}
-    $$
+    ```
 
 *   **Node C:**
-    $$
+    ```math
     \begin{aligned}
     Cost(C) &= \min\Big( c(C, E) + Cost(E),\; c(C, F) + Cost(F),\; c(C, G) + Cost(G) \Big) \\
     &= \min(2 + 10,\; 7 + 5,\; 11 + 7) \\
     &= \min(12,\; 12,\; 18) = 12 \quad \text{[via E or F]}
     \end{aligned}
-    $$
+    ```
 
 *   **Node D:**
-    $$
+    ```math
     \begin{aligned}
     Cost(D) &= \min\Big( c(D, E) + Cost(E),\; c(D, F) + Cost(F),\; c(D, G) + Cost(G) \Big) \\
     &= \min(5 + 10,\; 11 + 5,\; 8 + 7) \\
     &= \min(15,\; 16,\; 15) = 15 \quad \text{[via E or G]}
     \end{aligned}
-    $$
+    ```
 
 ##### Stage 1 (Source)
-$$
+```math
 \begin{aligned}
 Cost(A) &= \min\Big( c(A, B) + Cost(B),\; c(A, C) + Cost(C),\; c(A, D) + Cost(D) \Big) \\
 &= \min(9 + 7,\; 7 + 12,\; 3 + 15) \\
 &= \min(16,\; 19,\; 18) = 16 \quad \text{[via B]}
 \end{aligned}
-$$
+```
 
 *   **Shortest Path Reconstruction:**
     *   From $A$, the minimum cost was achieved by moving to **$B$**.
@@ -1160,9 +1160,9 @@ $$
 Let $Dist(X)$ be the minimum cost of a path from the source $A$ to node $X$. We compute these values starting from Stage 1 and moving forward to Stage 5.
 
 ##### Stage 1 (Source)
-$$
+```math
 Dist(A) = 0
-$$
+```
 
 ##### Stage 2
 *   $Dist(B) = Dist(A) + c(A, B) = 0 + 9 = 9$
@@ -1173,70 +1173,70 @@ $$
 For each node in Stage 3, check all incoming edges from Stage 2 and choose the minimum:
 
 *   **Node E:**
-    $$
+    ```math
     \begin{aligned}
     Dist(E) &= \min\Big( Dist(B) + c(B, E),\; Dist(C) + c(C, E),\; Dist(D) + c(D, E) \Big) \\
     &= \min(9 + 4,\; 7 + 2,\; 3 + 5) \\
     &= \min(13,\; 9,\; 8) = 8 \quad \text{[from D]}
     \end{aligned}
-    $$
+    ```
 
 *   **Node F:**
-    $$
+    ```math
     \begin{aligned}
     Dist(F) &= \min\Big( Dist(B) + c(B, F),\; Dist(C) + c(C, F),\; Dist(D) + c(D, F) \Big) \\
     &= \min(9 + 2,\; 7 + 7,\; 3 + 11) \\
     &= \min(11,\; 14,\; 14) = 11 \quad \text{[from B]}
     \end{aligned}
-    $$
+    ```
 
 *   **Node G:**
-    $$
+    ```math
     \begin{aligned}
     Dist(G) &= \min\Big( Dist(B) + c(B, G),\; Dist(C) + c(C, G),\; Dist(D) + c(D, G) \Big) \\
     &= \min(9 + 1,\; 7 + 11,\; 3 + 8) \\
     &= \min(10,\; 18,\; 11) = 10 \quad \text{[from B]}
     \end{aligned}
-    $$
+    ```
 
 ##### Stage 4
 For each node in Stage 4, check all incoming edges from Stage 3 and choose the minimum:
 
 *   **Node H:**
-    $$
+    ```math
     \begin{aligned}
     Dist(H) &= \min\Big( Dist(E) + c(E, H),\; Dist(F) + c(F, H),\; Dist(G) + c(G, H) \Big) \\
     &= \min(8 + 11,\; 11 + 4,\; 10 + 5) \\
     &= \min(19,\; 15,\; 15) = 15 \quad \text{[from F or G]}
     \end{aligned}
-    $$
+    ```
 
 *   **Node I:**
-    $$
+    ```math
     \begin{aligned}
     Dist(I) &= \min\Big( Dist(E) + c(E, I),\; Dist(F) + c(F, I),\; Dist(G) + c(G, I) \Big) \\
     &= \min(8 + 8,\; 11 + 3,\; 10 + 6) \\
     &= \min(16,\; 14,\; 16) = 14 \quad \text{[from F]}
     \end{aligned}
-    $$
+    ```
 
 *   **Node J:**
-    $$
+    ```math
     \begin{aligned}
     Dist(J) &= \min\Big( Dist(E) + c(E, J),\; Dist(F) + c(F, J),\; Dist(G) + c(G, J) \Big) \\
     &= \min(8 + 5,\; 11 + 7,\; 10 + 2) \\
     &= \min(13,\; 18,\; 12) = 12 \quad \text{[from G]}
     \end{aligned}
-    $$
+    ```
 
 ##### Stage 5 (Destination)
-$$
+```math
 \begin{aligned}
 Dist(K) &= \min\Big( Dist(H) + c(H, K),\; Dist(I) + c(I, K),\; Dist(J) + c(J, K) \Big) \\
 &= \min(15 + 4,\; 14 + 2,\; 12 + 5) \\
 &= \min(19,\; 16,\; 17) = 16 \quad \text{[from I]}
 \end{aligned}
-$$
+```
 
 *   **Shortest Path Reconstruction:**
     *   From $K$, the minimum distance came from **$I$**.
@@ -1267,9 +1267,9 @@ When we allow vertex $k$ to be used as a detour:
 *   **Case 1 (Skip $k$):** The path does not go through $k$. The shortest path remains $d_{ij}^{(k-1)}$.
 *   **Case 2 (Detour through $k$):** The path goes through $k$. It splits into a path from $i \to k$ and a path from $k \to j$. The cost is $d_{ik}^{(k-1)} + d_{kj}^{(k-1)}$.
 *   We choose the minimum of these two cases:
-    $$
+    ```math
     d_{ij}^{(k)} = \min \left( d_{ij}^{(k-1)}, d_{ik}^{(k-1)} + d_{kj}^{(k-1)} \right)
-    $$
+    ```
 
 ### 5. The Memory Table
 *   A 3D grid of size $n \times n \times (n+1)$ is used, where index $k$ represents the maximum intermediate vertex allowed.
@@ -1282,18 +1282,18 @@ Let's solve for a 3-vertex graph:
 *   Edge $1 \to 3$ has weight 6 (direct)
 
 Initially ($k=0$):
-$$
+```math
 D^{(0)} = \begin{pmatrix} 0 & 3 & 6 \\ \infty & 0 & 1 \\ \infty & \infty & 0 \end{pmatrix}
-$$
+```
 
 Detour through vertex 1 ($k=1$):
 *   No paths are shortened by detouring through vertex 1. $D^{(1)} = D^{(0)}$.
 
 Detour through vertex 2 ($k=2$):
 *   Check path $1 \to 3$: $\min(d_{13}^{(1)}, d_{12}^{(1)} + d_{23}^{(1)}) = \min(6, 3 + 1) = 4$.
-$$
+```math
 D^{(2)} = \begin{pmatrix} 0 & 3 & 4 \\ \infty & 0 & 1 \\ \infty & \infty & 0 \end{pmatrix}
-$$
+```
 
 The shortest path from $1 \to 3$ is updated to **4** by detouring through vertex 2.
 
@@ -1359,9 +1359,9 @@ The diagram below shows the routing detour comparison through hub $k$:
 graph LR
     subgraph "Floyd-Warshall Detour Decision"
         direction LR
-        i((i)) -->|Direct: d^(k-1)[i,j]| j((j))
-        i -->|Subpath 1: d^(k-1)[i,k]| k((k))
-        k -->|Subpath 2: d^(k-1)[k,j]| j
+        i((i)) -->|"Direct cost: d_ij"| j((j))
+        i -->|"Subpath 1: d_ik"| k((k))
+        k -->|"Subpath 2: d_kj"| j
         
         style i fill:#f39c12,stroke:#e67e22,color:#fff
         style j fill:#3498db,stroke:#2980b9,color:#fff
@@ -1392,17 +1392,17 @@ To find the optimal route for $n$ cities, we could evaluate all permutations of 
 Let $V = \{1, 2, \dots, n\}$ be the set of all cities.
 *   Let $g(i, S)$ be the length of the shortest path starting at city $i$, visiting all cities in subset $S$ exactly once, and ending at City 1.
 *   **Base Case (S is empty):** We must go directly from $i$ to 1:
-    $$
+    ```math
     g(i, \emptyset) = C_{i1}
-    $$
+    ```
 *   **Recursive Step (S is not empty):** We choose a next city $j \in S$ that minimizes the distance from $i \to j$ plus the shortest path from $j$ visiting the remaining cities in $S$:
-    $$
+    ```math
     g(i, S) = \min_{j \in S} \left( C_{ij} + g(j, S - \{j\}) \right)
-    $$
+    ```
 *   The final optimal tour cost starting at City 1 is:
-    $$
+    ```math
     \text{Optimal Tour} = \min_{2 \le j \le n} \left( C_{1j} + g(j, V - \{1, j\}) \right)
-    $$
+    ```
 
 ### 5. The Memory Table
 *   We use a table $g[i, S]$ where the row $i$ is the current city and column $S$ represents the subset of remaining cities.
@@ -1411,9 +1411,9 @@ Let $V = \{1, 2, \dots, n\}$ be the set of all cities.
 
 ### 6. Walkthrough with Small Numbers
 Let's find the optimal tour for 4 cities ($V = \{1, 2, 3, 4\}$) with distance matrix:
-$$
+```math
 C = \begin{pmatrix} 0 & 2 & 9 & 10 \\ 1 & 0 & 6 & 4 \\ 15 & 7 & 0 & 8 \\ 6 & 3 & 12 & 0 \end{pmatrix}
-$$
+```
 
 *   **Subsets of size 0 ($S = \emptyset$):**
     *   $g(2, \emptyset) = C_{21} = 1$.
@@ -1431,12 +1431,12 @@ $$
     *   $g(3, \{2, 4\}) = \min\left( C_{32} + g(2, \{4\}), C_{34} + g(4, \{2\}) \right) = \min(7 + 10, 8 + 4) = \min(17, 12) = 12$.
     *   $g(4, \{2, 3\}) = \min\left( C_{42} + g(2, \{3\}), C_{43} + g(3, \{2\}) \right) = \min(3 + 21, 12 + 8) = \min(24, 20) = 20$.
 *   **Final Tour Calculation:**
-    $$
+    ```math
     \text{Optimal} = \min\left( C_{12} + g(2, \{3, 4\}), C_{13} + g(3, \{2, 4\}), C_{14} + g(4, \{2, 3\}) \right)
-    $$
-    $$
+    ```
+    ```math
     \text{Optimal} = \min(2 + 20, 9 + 12, 10 + 20) = \min(22, 21, 30) = 21
-    $$
+    ```
 *   The minimum tour cost is **21**. (Optimal path: $1 \to 3 \to 4 \to 2 \to 1$).
 
 ### 7. Core Algorithm
@@ -1520,9 +1520,9 @@ To solve the problem step-by-step using a 2D dynamic programming grid (similar t
 *   **Exclude the piece of length $i$:** The maximum profit is the same as the previous row: $T[i-1, j]$.
 *   **Include the piece of length $i$:** We gain its price $p_i$ plus the optimal profit from the remaining length $j - i$ (which can still use piece $i$): $p_i + T[i, j - i]$.
 *   **Recurrence Relation:**
-    $$
+    ```math
     T[i, j] = \max\Big( T[i-1, j],\; p_i + T[i, j - i] \Big) \quad \text{for } j \ge i
-    $$
+    ```
     With base cases $T[i, 0] = 0$ for all $i$, and $T[0, j] = 0$ for all $j$.
 
 ### 4. The 2D Dynamic Programming Table
@@ -1596,9 +1596,9 @@ To reach the $n$-th step, you can only arrive from:
 3.  The $(n-3)$-th step (by taking a 3-step jump).
 
 Therefore, the number of ways to reach step $n$ is the sum of the ways to reach steps $n-1$, $n-2$, and $n-3$:
-$$
+```math
 Ways(n) = Ways(n-1) + Ways(n-2) + Ways(n-3) \quad \text{for } n \ge 3
-$$
+```
 
 #### Base Cases
 *   $Ways(0) = 1$: There is exactly 1 way to stay at the ground level (by doing nothing).
