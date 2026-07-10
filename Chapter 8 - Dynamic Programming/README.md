@@ -96,9 +96,9 @@ When implementing Dynamic Programming, we can solve and store subproblems in two
 
 ##### Step-by-Step Greedy Solution:
 1.  **Calculate Value Density (Price per kg) for each item:**
-    ```math
-    \text{Density} = \frac{\text{Price}}{\text{Quantity}}
-    ```
+    $$
+   \text{Density} = \frac{\text{Price}}{\text{Quantity}}
+    $$
     *   $\text{Diamond (D)}: 40 / 0.5 = 80/\text{kg}$
     *   $\text{Platinum (P)}: 30 / 1.0 = 30/\text{kg}$
     *   $\text{Gold (G)}: 20 / 2.0 = 10/\text{kg}$
