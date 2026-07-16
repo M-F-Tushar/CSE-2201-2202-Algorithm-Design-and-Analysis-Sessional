@@ -1,16 +1,16 @@
 # Chapter 8: Dynamic Programming
 
-Welcome to the sessional guide on **Dynamic Programming** for the [CSE 2201 Algorithm Design and Analysis](file:///workspaces/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/SYLLABUS.md) sessional course. This chapter covers the core concepts, mathematical recurrences, and step-by-step table updates for the required syllabus topics.
+Welcome to the sessional guide on **Dynamic Programming** for the [CSE 2201 Algorithm Design and Analysis](../SYLLABUS.md) sessional course. This chapter covers the core concepts, mathematical recurrences, and step-by-step table updates for the required syllabus topics.
 
 ---
 
 ## Table of Contents
 
 1. [Introduction to Dynamic Programming](#introduction-to-dynamic-programming)
-   - [Principle of Optimality](#principle-of-optimality)
-   - [Memoization (Top-Down) vs. Tabulation (Bottom-Up)](#memoization-vs-tabulation)
-   - [Greedy (Radio) vs. Dynamic Programming](#greedy-vs-dynamic-programming)
-     - [Worked Example: Precious Metals Fractional Knapsack](#worked-example-precious-metals-fractional-knapsack-greedy)
+   - [Principle of Optimality](#-principle-of-optimality)
+   - [Memoization (Top-Down) vs. Tabulation (Bottom-Up)](#-memoization-top-down-vs-tabulation-bottom-up)
+   - [Greedy Algorithm vs. Dynamic Programming](#%EF%B8%8F-greedy-algorithm-vs-dynamic-programming)
+    - [Worked Example: Precious Metals Fractional Knapsack (Greedy)](#-worked-example-precious-metals-fractional-knapsack-greedy)
 2. [Fibonacci (Recursion and DP)](#1-fibonacci-recursion-and-dp)
 3. [Coin-Row Problem](#2-coin-row-problem)
 4. [Change-Making Problem (DP)](#3-change-making-problem-dp)
@@ -38,7 +38,7 @@ Imagine you are walking up a flight of stairs and counting the steps. If someone
 **Dynamic Programming (DP)** is exactly that: it is the art of **remembering answers to smaller overlapping questions** so that when you face a larger question, you can build on top of your saved answers instead of starting from scratch. In this context, "Programming" does not mean writing computer code; it refers to a **tabular method** (solving problems by filling in a table of values).
 
 ### ⚔️ Divide-and-Conquer vs. Dynamic Programming
-*   **Divide-and-Conquer** partitions a problem into **disjoint** (completely separate and independent) subproblems, solves them recursively, and then combines their solutions (e.g., [Merge Sort](file:///workspaces/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/Chapter%205%20-%20Sorting%20Algorithms/README.md)).
+*   **Divide-and-Conquer** partitions a problem into **disjoint** (completely separate and independent) subproblems, solves them recursively, and then combines their solutions (e.g., [Merge Sort](../Chapter%205%20-%20Sorting%20Algorithms/README.md)).
 *   **Dynamic Programming** is used when the subproblems **overlap**—that is, when subproblems share smaller sub-subproblems. In these cases, Divide-and-Conquer does redundant work, solving the same sub-subproblem repeatedly. DP avoids this by solving each subproblem exactly once and referencing its cached result in a table.
 
 ---
@@ -1756,4 +1756,4 @@ graph TD
 
 **End of Chapter 8**
 
-*Continue to [Chapter 9: Backtracking](file:///workspaces/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/Chapter%209%20-%20Backtracking/README.md)*
+*Continue to [Chapter 9: Backtracking](../Chapter%209%20-%20Backtracking/README.md)*
