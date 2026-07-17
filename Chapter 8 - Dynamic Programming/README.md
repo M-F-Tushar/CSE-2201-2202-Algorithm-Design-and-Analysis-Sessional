@@ -82,7 +82,7 @@ When implementing Dynamic Programming, we can solve and store subproblems in two
 | **Decision Strategy** | Makes the locally optimal choice at each step (the "best" immediate choice) without looking back. | Evaluates all possible paths/subproblems and builds a globally optimal solution. |
 | **Backtracking** | Never backtracks or changes previous choices once made. | Re-evaluates choices through table lookups, choosing the best option among all computed subproblems. |
 | **Optimality** | Does not guarantee a globally optimal solution for all problems (works only on problems with the Greedy Choice Property). | Guaranteed to find the globally optimal solution (if the Principle of Optimality holds). |
-| **Complexity** | Usually much faster (often $O(n \log n)$ due to sorting, or $O(n)$) and uses $O(1)$ auxiliary space. | More computationally expensive ($O(n \cdot W)$, $O(n^2)$, etc.) and requires auxiliary table space. |
+| **Complexity** | Usually much faster (often $O(n \log n)$ due to sorting, or $O(n)$ ) and uses $O(1)$ auxiliary space. | More computationally expensive ($O(n \cdot W)$, $O(n^2)$, etc.) and requires auxiliary table space. |
 | **Key Examples** | Fractional Knapsack, Kruskal's/Prim's MST, Huffman Coding, Dijkstra's Shortest Path. | 0/1 Knapsack, Longest Common Subsequence (LCS), Floyd-Warshall, Matrix Chain Multiplication. |
 
 #### 💎 Worked Example: Precious Metals Fractional Knapsack (Greedy)
