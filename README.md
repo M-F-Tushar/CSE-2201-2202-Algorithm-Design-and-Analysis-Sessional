@@ -151,6 +151,30 @@ CSE 2201, 2202: Algorithm Design and Analysis, Sessional/
 
 ---
 
+## Chapter Navigation
+
+| Current Section | Previous | Next |
+| --- | --- | --- |
+| [Chapter 0 - Previous Year Questions](Chapter%200%20-%20Previous%20Year%20Questions/README.md) | [Root README](README.md) | [Chapter 1 - Introduction and Algorithm Foundations](Chapter%201%20-%20Introduction%20and%20Algorithm%20Foundations/README.md) |
+| [Chapter 1 - Introduction and Algorithm Foundations](Chapter%201%20-%20Introduction%20and%20Algorithm%20Foundations/README.md) | [Chapter 0 - Previous Year Questions](Chapter%200%20-%20Previous%20Year%20Questions/README.md) | [Chapter 2 - Complexity Analysis and Asymptotic Notation](Chapter%202%20-%20Complexity%20Analysis%20and%20Asymptotic%20Notation/README.md) |
+| [Chapter 2 - Complexity Analysis and Asymptotic Notation](Chapter%202%20-%20Complexity%20Analysis%20and%20Asymptotic%20Notation/README.md) | [Chapter 1 - Introduction and Algorithm Foundations](Chapter%201%20-%20Introduction%20and%20Algorithm%20Foundations/README.md) | [Chapter 3 - Recurrences Correctness and Loop Invariants](Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md) |
+| [Chapter 3 - Recurrences Correctness and Loop Invariants](Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md) | [Chapter 2 - Complexity Analysis and Asymptotic Notation](Chapter%202%20-%20Complexity%20Analysis%20and%20Asymptotic%20Notation/README.md) | [Chapter 4 - Searching and Basic Traversal](Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md) |
+| [Chapter 4 - Searching and Basic Traversal](Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md) | [Chapter 3 - Recurrences Correctness and Loop Invariants](Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md) | [Chapter 5 - Sorting Algorithms](Chapter%205%20-%20Sorting%20Algorithms/README.md) |
+| [Chapter 5 - Sorting Algorithms](Chapter%205%20-%20Sorting%20Algorithms/README.md) | [Chapter 4 - Searching and Basic Traversal](Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md) | [Chapter 6 - Divide and Conquer](Chapter%206%20-%20Divide%20and%20Conquer/README.md) |
+| [Chapter 6 - Divide and Conquer](Chapter%206%20-%20Divide%20and%20Conquer/README.md) | [Chapter 5 - Sorting Algorithms](Chapter%205%20-%20Sorting%20Algorithms/README.md) | [Chapter 7 - Greedy Algorithms](Chapter%207%20-%20Greedy%20Algorithms/README.md) |
+| [Chapter 7 - Greedy Algorithms](Chapter%207%20-%20Greedy%20Algorithms/README.md) | [Chapter 6 - Divide and Conquer](Chapter%206%20-%20Divide%20and%20Conquer/README.md) | [Chapter 8 - Dynamic Programming](Chapter%208%20-%20Dynamic%20Programming/README.md) |
+| [Chapter 8 - Dynamic Programming](Chapter%208%20-%20Dynamic%20Programming/README.md) | [Chapter 7 - Greedy Algorithms](Chapter%207%20-%20Greedy%20Algorithms/README.md) | [Chapter 9 - Backtracking](Chapter%209%20-%20Backtracking/README.md) |
+| [Chapter 9 - Backtracking](Chapter%209%20-%20Backtracking/README.md) | [Chapter 8 - Dynamic Programming](Chapter%208%20-%20Dynamic%20Programming/README.md) | [Chapter 10 - Branch and Bound](Chapter%2010%20-%20Branch%20and%20Bound/README.md) |
+| [Chapter 10 - Branch and Bound](Chapter%2010%20-%20Branch%20and%20Bound/README.md) | [Chapter 9 - Backtracking](Chapter%209%20-%20Backtracking/README.md) | [Chapter 11 - Graph Algorithms](Chapter%2011%20-%20Graph%20Algorithms/README.md) |
+| [Chapter 11 - Graph Algorithms](Chapter%2011%20-%20Graph%20Algorithms/README.md) | [Chapter 10 - Branch and Bound](Chapter%2010%20-%20Branch%20and%20Bound/README.md) | [Chapter 12 - Flow Algorithms](Chapter%2012%20-%20Flow%20Algorithms/README.md) |
+| [Chapter 12 - Flow Algorithms](Chapter%2012%20-%20Flow%20Algorithms/README.md) | [Chapter 11 - Graph Algorithms](Chapter%2011%20-%20Graph%20Algorithms/README.md) | [Chapter 13 - Approximation Algorithms](Chapter%2013%20-%20Approximation%20Algorithms/README.md) |
+| [Chapter 13 - Approximation Algorithms](Chapter%2013%20-%20Approximation%20Algorithms/README.md) | [Chapter 12 - Flow Algorithms](Chapter%2012%20-%20Flow%20Algorithms/README.md) | [Chapter 14 - Randomized and Parallel Algorithms](Chapter%2014%20-%20Randomized%20and%20Parallel%20Algorithms/README.md) |
+| [Chapter 14 - Randomized and Parallel Algorithms](Chapter%2014%20-%20Randomized%20and%20Parallel%20Algorithms/README.md) | [Chapter 13 - Approximation Algorithms](Chapter%2013%20-%20Approximation%20Algorithms/README.md) | [Chapter 15 - Lower Bound Theory and NP Completeness](Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md) |
+| [Chapter 15 - Lower Bound Theory and NP Completeness](Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md) | [Chapter 14 - Randomized and Parallel Algorithms](Chapter%2014%20-%20Randomized%20and%20Parallel%20Algorithms/README.md) | [References](References/README.md) |
+| [References](References/README.md) | [Chapter 15 - Lower Bound Theory and NP Completeness](Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md) | [Root README](README.md) |
+
+---
+
 ## Chapter Overview
 
 ### Chapter 0 - Previous Year Questions
@@ -171,7 +195,7 @@ Covers recurrence relations, substitution method, recursion-tree method, master 
 
 ### Chapter 4 - Searching and Basic Traversal
 
-Covers linear search, binary search, comparison analysis, and basic traversal concepts.
+Covers searching vs traversal, basic traversal patterns, introductory graph traversal, BFS, DFS, queue and stack behavior, applications, and complexity analysis.
 
 ### Chapter 5 - Sorting Algorithms
 
@@ -183,11 +207,11 @@ Covers divide-and-conquer strategy, merge sort, quick sort, binary search, Stras
 
 ### Chapter 7 - Greedy Algorithms
 
-Covers greedy method, greedy-choice property, optimal substructure, activity selection, fractional knapsack, change-making, Huffman coding, Prim, and Kruskal.
+Covers greedy method, greedy-choice property, optimal substructure, candidate selection, feasibility testing, MST with Prim and Kruskal, Dijkstra's algorithm, fractional knapsack, coin change, Huffman coding, Fibonacci sequence, and activity selection.
 
 ### Chapter 8 - Dynamic Programming
 
-Covers memoization, tabulation, Fibonacci, coin-row, change-making, coin-collecting, 0/1 knapsack, LCS, Floyd-Warshall, and TSP using DP.
+Covers memoization, tabulation, greedy vs DP comparison, principle of optimality, climbing stairs, 0/1 knapsack, rod cutting, LCS, matrix chain multiplication, optimal BST, multistage graph, TSP, Floyd-Warshall, Bellman-Ford, and reliability design.
 
 ### Chapter 9 - Backtracking
 
@@ -199,7 +223,7 @@ Covers branch and bound concept, bounding function, LC search, 0/1 knapsack usin
 
 ### Chapter 11 - Graph Algorithms
 
-Covers graph representation, BFS, DFS, topological sort, connected components, MST, Dijkstra, Bellman-Ford, and Floyd-Warshall.
+Covers tree vs graph comparison, graph categories, adjacency matrix and list representations, unweighted shortest path with BFS, Bellman-Ford, topological sorting, connected components, strongly connected components, and Union-Find / DSU support for Kruskal.
 
 ### Chapter 12 - Flow Algorithms
 

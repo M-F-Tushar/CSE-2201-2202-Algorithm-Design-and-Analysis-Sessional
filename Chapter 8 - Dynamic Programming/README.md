@@ -1,5 +1,9 @@
 # Chapter 8: Dynamic Programming
 
+[Previous: Chapter 7 - Greedy Algorithms](../Chapter%207%20-%20Greedy%20Algorithms/README.md) | [Home](../README.md) | [Next: Chapter 9 - Backtracking](../Chapter%209%20-%20Backtracking/README.md)
+
+---
+
 Dynamic Programming (DP) is an algorithm design technique for solving problems by breaking them into smaller related subproblems, storing their answers, and using those stored answers to build the final solution.
 
 This chapter keeps only the requested Dynamic Programming topics and the requested problem list. Each problem includes a descriptive statement, subproblem design, tabulation method, worked example, algorithm sketch, and complexity analysis.
@@ -2147,3 +2151,7 @@ Important notes:
 - $W$ and $B$ are numeric limits, so 0/1 Knapsack and Reliability Design are pseudo-polynomial in those values.
 - TSP remains exponential even with DP because it stores subset states.
 - Floyd-Warshall solves all-pairs shortest paths, while Bellman-Ford solves single-source shortest paths and detects reachable negative-weight cycles.
+
+---
+
+[Previous: Chapter 7 - Greedy Algorithms](../Chapter%207%20-%20Greedy%20Algorithms/README.md) | [Home](../README.md) | [Next: Chapter 9 - Backtracking](../Chapter%209%20-%20Backtracking/README.md)

@@ -1,5 +1,9 @@
 # Chapter 7: Greedy Algorithms
 
+[Previous: Chapter 6 - Divide and Conquer](../Chapter%206%20-%20Divide%20and%20Conquer/README.md) | [Home](../README.md) | [Next: Chapter 8 - Dynamic Programming](../Chapter%208%20-%20Dynamic%20Programming/README.md)
+
+---
+
 Greedy algorithms solve a problem step by step by always taking the best available choice according to a simple rule. A greedy solution is correct only when each local choice is safe and can still lead to a globally optimal answer.
 
 This chapter keeps only the requested Greedy topics and the requested problem list. Each major topic includes a simple explanation, a visual map, a worked example or selection table, an algorithm sketch, and complexity analysis.
@@ -1301,3 +1305,7 @@ Important notes:
 - Coin Change is greedy only for suitable coin systems; arbitrary coin systems can break the greedy rule.
 - Fibonacci sequence generation is included as requested, but it is not a greedy optimization problem.
 - Dijkstra's Algorithm is greedy only under nonnegative edge weights.
+
+---
+
+[Previous: Chapter 6 - Divide and Conquer](../Chapter%206%20-%20Divide%20and%20Conquer/README.md) | [Home](../README.md) | [Next: Chapter 8 - Dynamic Programming](../Chapter%208%20-%20Dynamic%20Programming/README.md)
