@@ -1,5 +1,9 @@
 # Chapter 11: Graph Algorithms
 
+[Previous: Chapter 10 - Branch and Bound](../Chapter%2010%20-%20Branch%20and%20Bound/README.md) | [Home](../README.md) | [Next: Chapter 12 - Flow Algorithms](../Chapter%2012%20-%20Flow%20Algorithms/README.md)
+
+---
+
 Graph Algorithms study how to model relationships and solve problems on connected objects. A graph can represent cities connected by roads, courses connected by prerequisites, computers connected in a network, or tasks connected by dependencies.
 
 This chapter keeps only the requested graph theory and graph algorithm topics. Each topic is explained in a simple sequence with definitions, diagrams, walkthrough tables, algorithm sketches, and complexity analysis.
@@ -1381,3 +1385,7 @@ Before moving to the next chapter, make sure you can explain:
 - How connected components are found in an undirected graph.
 - How Kosaraju's Algorithm finds SCCs using two DFS passes.
 - How DSU helps Kruskal reject cycle-forming edges.
+
+---
+
+[Previous: Chapter 10 - Branch and Bound](../Chapter%2010%20-%20Branch%20and%20Bound/README.md) | [Home](../README.md) | [Next: Chapter 12 - Flow Algorithms](../Chapter%2012%20-%20Flow%20Algorithms/README.md)

@@ -1,5 +1,9 @@
 # Chapter 4: Searching and Basic Traversal
 
+[Previous: Chapter 3 - Recurrences Correctness and Loop Invariants](../Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md) | [Home](../README.md) | [Next: Chapter 5 - Sorting Algorithms](../Chapter%205%20-%20Sorting%20Algorithms/README.md)
+
+---
+
 Searching and traversal are basic techniques for moving through data. Searching tries to find a required item or answer. Traversal visits elements in a planned order so that each reachable element is processed.
 
 This chapter keeps only the requested Searching and Basic Traversal topics. The main focus is introductory graph traversal using Breadth-First Search (BFS) and Depth-First Search (DFS), with simple explanations, algorithms, queue and stack behavior, examples, applications, and time complexity.
@@ -671,3 +675,7 @@ BFS and DFS are the foundation of many graph algorithms. For this chapter, the m
 - Both BFS and DFS run in `O(V + E)` time with an adjacency list.
 - BFS is better for nearest or shortest unweighted paths.
 - DFS is better for deep exploration and backtracking-based structure.
+
+---
+
+[Previous: Chapter 3 - Recurrences Correctness and Loop Invariants](../Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md) | [Home](../README.md) | [Next: Chapter 5 - Sorting Algorithms](../Chapter%205%20-%20Sorting%20Algorithms/README.md)
