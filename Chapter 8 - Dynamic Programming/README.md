@@ -118,11 +118,11 @@ flowchart TD
     SolveD --> Reuse
     Reuse --> Fast["Smaller running time"]
 
-    classDef call fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
+    classDef callNode fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
     classDef duplicate fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
     classDef store fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
     classDef result fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    class Root,A1,B1 call;
+    class Root,A1,B1 callNode;
     class C1,C2,D1,D2,Waste duplicate;
     class Memo,SolveC,SolveD,Reuse store;
     class Fast result;
@@ -607,7 +607,7 @@ Traceback gives item 4 and item 1. Maximum value: **12**.
 ```mermaid
 flowchart TB
     subgraph CellRule[Cell update rule]
-        State["Cell V[i,j]<br/>first i items, capacity j"] --> Fit{"w_i <= j?"}
+        State["Cell V[i,j]<br/>first i items, capacity j"] --> Fit{"w_i &lt;= j?"}
         Fit -->|No| SkipOnly["Item cannot fit<br/>copy V[i-1,j]"]
         Fit -->|Yes| Choice{"Better of two choices"}
         Choice --> Skip["Skip item<br/>V[i-1,j]"]
@@ -617,7 +617,7 @@ flowchart TB
         SkipOnly --> Max
     end
 
-    subgraph Traceback[Traceback from V[n,W]]
+    subgraph Traceback["Traceback from V[n,W]"]
         End["Start at final cell"] --> Same{"Same as upper cell?"}
         Same -->|Yes| MoveUp["Skip item i<br/>move up"]
         Same -->|No| Select["Select item i<br/>move up-left by w_i"]
@@ -1520,7 +1520,7 @@ flowchart RL
     E --> C
     G --> D
     B --> A
-    A --> Path["Optimal path<br/>A -> B -> F -> I -> K"]
+    A --> Path["Optimal path<br/>A -&gt; B -&gt; F -&gt; I -&gt; K"]
 
     classDef target fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
     classDef chosen fill:#dcfce7,stroke:#16a34a,stroke-width:3px,color:#052e16;
@@ -1663,7 +1663,7 @@ flowchart TB
     Cost2 --> Min["Take minimum tour cost"]
     Cost3 --> Min
     Cost4 --> Min
-    Min --> Tour["Tour: 1 -> 3 -> 4 -> 2 -> 1<br/>Cost 21"]
+    Min --> Tour["Tour: 1 -&gt; 3 -&gt; 4 -&gt; 2 -&gt; 1<br/>Cost 21"]
 
     classDef start fill:#fef3c7,stroke:#d97706,stroke-width:3px,color:#111827;
     classDef branch fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
@@ -1785,12 +1785,12 @@ The shortest path from 1 to 3 is updated from **6** to **4** through vertex 2.
 ```mermaid
 flowchart LR
     subgraph DirectPath[Current known path]
-        I1((i)) -->|D[i,j]| J1((j))
+        I1((i)) -->|"D[i,j]"| J1((j))
     end
 
     subgraph DetourPath[Candidate detour through k]
-        I2((i)) -->|D[i,k]| K((k))
-        K -->|D[k,j]| J2((j))
+        I2((i)) -->|"D[i,k]"| K((k))
+        K -->|"D[k,j]"| J2((j))
     end
 
     J1 --> Compare{"Which is shorter?"}
@@ -1921,7 +1921,7 @@ flowchart TD
     R2 --> RLast["Round |V|-1<br/>last required relaxation"]
     RLast --> Check{"Extra pass improves any edge?"}
 
-    Edge["Relax edge (u,v)<br/>if dist[u]+w(u,v) < dist[v]<br/>then update dist[v]"] -. repeated in every round .-> R1
+    Edge["Relax edge (u,v)<br/>if dist[u]+w(u,v) &lt; dist[v]<br/>then update dist[v]"] -. repeated in every round .-> R1
     Edge -. repeated in every round .-> R2
     Edge -. repeated in every round .-> RLast
 
@@ -2081,7 +2081,7 @@ flowchart TB
 
     S3A --> Product["Series reliability<br/>multiply chosen stages"]
     S3B --> Product
-    Product --> Feasible{"Cost <= budget?"}
+    Product --> Feasible{"Cost &lt;= budget?"}
     Feasible -->|Yes| Best["Keep highest reliability"]
     Feasible -->|No| Reject["Reject design"]
     Best --> Answer["Best: 0.4704<br/>copies 1,1,2"]
