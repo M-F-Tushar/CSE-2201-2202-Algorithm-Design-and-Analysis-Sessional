@@ -235,7 +235,7 @@ To identify optimal substructure:
 Generic recurrence form:
 
 $$
-DP[state] = \operatorname{best}_{choice}\{\text{value of choice} + DP[next\ state]\}
+DP[state] = \mathrm{best}_{choice}\{\text{value of choice} + DP[\text{next state}]\}
 $$
 
 Here, **best** may mean minimum cost, maximum profit, number of ways, or shortest distance depending on the problem.
@@ -2068,37 +2068,25 @@ Maximum reliability: **0.4704**.
 #### Mermaid Diagram: Reliability Design Budget Choices
 
 ```mermaid
-flowchart TB
-    Budget["Budget B=5"] --> S1{"Stage 1 copies"}
-    S1 --> S1A["1 copy<br/>cost 1, R=0.80"]
-    S1 --> S1B["2 copies<br/>cost 2, R=0.96"]
+flowchart LR
+    Budget["Budget B = 5"] --> C111["1,1,1 copies<br/>cost 4<br/>R = 0.3360"]
+    Budget --> C112["1,1,2 copies<br/>cost 5<br/>R = 0.4704"]
+    Budget --> C211["2,1,1 copies<br/>cost 5<br/>R = 0.4032"]
+    Budget --> Reject["Other choices<br/>cost over budget"]
 
-    S1A --> S2{"Stage 2 copies"}
-    S1B --> S2
-    S2 --> S2A["1 copy<br/>cost 2, R=0.70"]
-    S2 --> S2B["2 copies<br/>cost 4, R=0.91"]
-
-    S2A --> S3{"Stage 3 copies"}
-    S2B --> S3
-    S3 --> S3A["1 copy<br/>cost 1, R=0.60"]
-    S3 --> S3B["2 copies<br/>cost 2, R=0.84"]
-
-    S3A --> Product["Series reliability<br/>multiply chosen stages"]
-    S3B --> Product
-    Product --> Feasible{"Cost &lt;= budget?"}
-    Feasible -->|Yes| Best["Keep highest reliability"]
-    Feasible -->|No| Reject["Reject design"]
-    Best --> Answer["Best: 0.4704<br/>copies 1,1,2"]
+    C111 --> Best["Keep highest feasible reliability"]
+    C112 --> Best
+    C211 --> Best
+    Reject -.-> Best
+    Best --> Answer["Best design<br/>copies 1, 1, 2<br/>R = 0.4704"]
 
     classDef budget fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef choice fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    classDef option fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
+    classDef feasible fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
     classDef good fill:#dcfce7,stroke:#16a34a,stroke-width:3px,color:#052e16;
     classDef bad fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
     classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
     class Budget budget;
-    class S1,S2,S3,Feasible choice;
-    class S1A,S1B,S2A,S2B,S3A,S3B,Product option;
+    class C111,C112,C211 feasible;
     class Best good;
     class Reject bad;
     class Answer answer;
