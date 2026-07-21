@@ -50,6 +50,16 @@ A DP solution normally has five parts:
 
 DP is commonly used for optimization, counting, and decision problems where many choices must be compared systematically.
 
+### Simple Example: Fibonacci Numbers
+
+Find the fifth Fibonacci number, where $F(0)=0$, $F(1)=1$, and $F(n)=F(n-1)+F(n-2)$.
+
+| $n$ | 0 | 1 | 2 | 3 | 4 | 5 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $F(n)$ | 0 | 1 | 1 | 2 | 3 | **5** |
+
+Here, the state is $F(n)$, the base cases are $F(0)$ and $F(1)$, and each later value is stored after being computed from the two previous values. The final answer is $F(5)=5$.
+
 ### Visual Map: DP Design Flow
 
 ```mermaid
@@ -98,6 +108,20 @@ The main idea is simple: compute once, store once, reuse whenever needed.
 | Brute force | Try every possible solution | Often exponential |
 | Plain recursion | Break the problem down but recompute states | Often exponential |
 | Dynamic Programming | Store each distinct state | Usually polynomial for suitable problems |
+
+### Simple Example: Repeated Fibonacci Calls
+
+To calculate $F(5)$ with plain recursion, the program needs $F(4)$ and $F(3)$. While calculating $F(4)$, it also needs $F(3)$, so $F(3)$ is calculated twice.
+
+```text
+F(5)
+|- F(4)
+|  |- F(3)
+|  `- F(2)
+`- F(3)  <- repeated calculation
+```
+
+With DP, store $F(3)=2$ the first time it is found. The second request reuses 2 instead of expanding another recursion tree.
 
 ### Visual Map: Repeated Work Removed by DP
 
@@ -149,6 +173,15 @@ Both Greedy Method and Dynamic Programming are used to solve optimization proble
 
 Greedy is usually faster, but DP is more appropriate when taking one choice can block a better combination of later choices. For example, 0/1 Knapsack needs DP because an item cannot be partially taken and every selected item changes the remaining capacity.
 
+### Simple Example: Coin Change
+
+Make amount 6 using coin values $1$, $3$, and $4$ while using as few coins as possible.
+
+- **Greedy:** choose the largest coin first: $4+1+1$. This uses 3 coins.
+- **Dynamic Programming:** compare every valid previous amount and find $3+3$. This uses **2 coins**.
+
+Greedy makes a locally attractive choice (4), but it misses the globally optimal solution. DP is appropriate because the best choice for one remaining amount can depend on choices made earlier.
+
 ### Visual Map: Greedy Choice vs DP Choice
 
 ```mermaid
@@ -194,6 +227,12 @@ For a shortest path problem, if the shortest path from $A$ to $D$ passes through
 
 DP relies on this principle because it builds large optimal answers from smaller optimal answers.
 
+### Simple Example: Shortest Path
+
+Suppose the shortest route from $A$ to $D$ is $A \rightarrow B \rightarrow D$, with edge costs $A \rightarrow B=2$ and $B \rightarrow D=3$. Its total cost is $5$.
+
+The subpath $B \rightarrow D$ must itself be shortest. If another route from $B$ to $D$ cost 2, then $A \rightarrow B$ followed by that route would cost $2+2=4$, contradicting the claim that the original route of cost 5 was shortest.
+
 ### Visual Map: Optimal Path Contains Optimal Subpaths
 
 ```mermaid
@@ -222,6 +261,18 @@ flowchart LR
 
 ## 4. Elements of Dynamic Programming
 
+### Simple Example: Minimum Coin Change
+
+For coin values $1$, $3$, and $4$, find the minimum number of coins needed to make amount 6.
+
+| DP part | Choice for this example |
+| :--- | :--- |
+| State | $dp[x]$: minimum coins needed to make amount $x$ |
+| Base case | $dp[0]=0$ |
+| Recurrence | $dp[x]=1+\min(dp[x-1],dp[x-3],dp[x-4])$ for valid previous amounts |
+| Table order | Fill amounts from 1 through 6 |
+| Final answer | $dp[6]=2$, using $3+3$ |
+
 ### Optimal Substructure
 
 A problem has **optimal substructure** if an optimal answer can be constructed from optimal answers to smaller subproblems.
@@ -240,11 +291,21 @@ $$
 
 Here, **best** may mean minimum cost, maximum profit, number of ways, or shortest distance depending on the problem.
 
+#### Simple Example: Best Coin Choice Uses a Best Remainder
+
+For amount 6 with coins $1$, $3$, and $4$, try using coin 3 first. The remaining amount is 3, whose optimal answer is one more coin 3. Therefore, the candidate solution is $1+dp[3]=2$ coins.
+
+If $dp[3]$ were not optimal, replacing it with a better solution would improve the answer for 6. This is optimal substructure: an optimal solution to the larger problem contains an optimal solution to its remainder.
+
 ### Overlapping Subproblems
 
 A problem has **overlapping subproblems** if the same smaller states are needed multiple times.
 
 DP is useful when the number of distinct states is much smaller than the number of recursive calls made by a naive solution. Instead of expanding a repeated recursion tree, DP stores every distinct state in a table.
+
+#### Simple Example: Fibonacci Overlap
+
+Both $F(5)=F(4)+F(3)$ and $F(4)=F(3)+F(2)$ require $F(3)$. The subproblem $F(3)$ overlaps, so calculate and store it once rather than calculating it separately for each branch.
 
 ### Visual Map: DP Elements Working Together
 
@@ -317,6 +378,18 @@ For each state in dependency order:
     compute table[state] from already-filled states
 Return the required final state
 ```
+
+### Simple Example: Two Ways to Find $F(5)$
+
+For $F(5)$, memoization starts with $F(5)$ and recursively requests smaller values. Once it computes $F(3)=2$, later requests for $F(3)$ return the cached value.
+
+Tabulation starts from the base cases and fills upward:
+
+| $n$ | 0 | 1 | 2 | 3 | 4 | 5 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $F(n)$ | 0 | 1 | 1 | 2 | 3 | **5** |
+
+Both methods compute the same answer. Memoization follows the needed calls from the top, while tabulation fills known small answers from the bottom.
 
 ### Visual Map: Top-Down vs Bottom-Up
 
