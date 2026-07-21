@@ -473,6 +473,63 @@ CLIMBING-STAIRS(n)
 
 ---
 
+#### Classroom Problem: Climbing Stairs (1 or 2 Steps)
+
+**Problem.** A staircase has $n$ steps. On each move, a person may climb either 1 step or 2 steps. Find the number of distinct ways to reach exactly step $n$.
+
+##### Theoretical Solution
+
+Let $C(n)$ be the number of ways to reach step $n$.
+
+Every valid way to reach step $n$ ends in exactly one of two disjoint cases:
+
+1. A 1-step move from step $n-1$, giving $C(n-1)$ ways.
+2. A 2-step move from step $n-2$, giving $C(n-2)$ ways.
+
+Therefore,
+
+$$
+C(n) = C(n-1) + C(n-2), \qquad n \ge 2
+$$
+
+with base cases:
+
+$$
+C(0)=1, \qquad C(1)=1
+$$
+
+The two cases cover every possible final move and cannot overlap, so the recurrence counts every valid climbing sequence exactly once. It has overlapping subproblems because, for example, both $C(n-1)$ and $C(n-2)$ eventually need $C(n-3)$.
+
+For $n=5$:
+
+| Step $i$ | $C(i)$ | Calculation |
+| :---: | :---: | :--- |
+| 0 | 1 | Base case |
+| 1 | 1 | Base case |
+| 2 | 2 | $1+1$ |
+| 3 | 3 | $2+1$ |
+| 4 | 5 | $3+2$ |
+| 5 | **8** | $5+3$ |
+
+Thus, there are **8** ways to climb 5 steps when only 1-step and 2-step moves are allowed.
+
+```text
+CLIMBING-STAIRS-ONE-OR-TWO(n)
+1. if n <= 1: return 1
+2. previous = 1
+3. current = 1
+4. for step = 2 to n:
+5.     next = previous + current
+6.     previous = current
+7.     current = next
+8. return current
+```
+
+- Time Complexity: $\Theta(n)$
+- Space Complexity: $\Theta(1)$
+
+---
+
 ### 0/1 Knapsack
 
 #### Problem Statement
@@ -793,6 +850,57 @@ ROD-CUTTING(price, n)
 - Time Complexity: $\Theta(n^2)$
 - Space Complexity: $\Theta(n^2)$ for the 2D table
 - One-dimensional version: $\Theta(n)$ space
+
+---
+
+#### Classroom Problem: Maximum Revenue from a Rod
+
+**Problem.** A rod of length 8 can be cut into integer lengths. Its selling prices are shown below. Find the maximum obtainable revenue and one optimal set of cuts.
+
+| Length $i$ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Price $p_i$ | 1 | 5 | 8 | 9 | 10 | 17 | 17 | 20 |
+
+##### Theoretical Solution
+
+Let $R(j)$ be the maximum revenue obtainable from a rod of length $j$. Consider the first piece cut from the rod. If that piece has length $i$, it earns $p_i$ and leaves a rod of length $j-i$. The best revenue for the remainder is $R(j-i)$, so:
+
+$$
+R(0)=0
+$$
+
+$$
+R(j) = \max_{1 \le i \le j}\{p_i + R(j-i)\}, \qquad 1 \le j \le 8
+$$
+
+This considers every possible first-cut length. By optimal substructure, the remaining rod must be cut for maximum revenue; otherwise replacing its cuts with a better solution would improve the whole solution.
+
+| Rod length $j$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Best revenue $R(j)$ | 0 | 1 | 5 | 8 | 10 | 13 | 17 | 18 | **22** |
+| One first cut | - | 1 | 2 | 3 | 2 | 2 | 6 | 1 | 2 |
+
+For the final entry:
+
+$$
+R(8) = \max(1+R(7),\ 5+R(6),\ 8+R(5),\ldots,\ 20+R(0)) = \max(19,22,21,\ldots,20)=22
+$$
+
+The first cut is length 2, leaving length 6. Since $R(6)=17$ is obtained by selling the length-6 piece, one optimal cutting is **2 and 6**, with maximum revenue **22**.
+
+```text
+ROD-CUTTING-REVENUE(price, n)
+1. create array revenue[0...n]
+2. revenue[0] = 0
+3. for length = 1 to n:
+4.     revenue[length] = 0
+5.     for firstCut = 1 to length:
+6.         revenue[length] = max(revenue[length], price[firstCut] + revenue[length - firstCut])
+7. return revenue[n]
+```
+
+- Time Complexity: $\Theta(n^2)$
+- Space Complexity: $\Theta(n)$
 
 ---
 
