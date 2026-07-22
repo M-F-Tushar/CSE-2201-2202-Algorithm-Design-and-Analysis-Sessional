@@ -222,6 +222,9 @@ flowchart TB
 
 The **Principle of Optimality** states that an optimal solution to a problem must contain optimal solutions to its subproblems.
 
+In simple words:
+If the final answer is the best possible, then every smaller decision used to build that answer must also be the best possible.
+
 If a chosen first decision leaves a smaller remaining problem, then the remaining part must also be solved optimally. Otherwise, replacing it with a better remaining solution would improve the full solution, contradicting the claim that the full solution was optimal.
 
 For a shortest path problem, if the shortest path from $A$ to $D$ passes through $B$, then the portion from $B$ to $D$ must also be a shortest path from $B$ to $D$.
