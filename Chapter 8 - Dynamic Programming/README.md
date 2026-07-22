@@ -162,14 +162,15 @@ flowchart TD
 
 Both Greedy Method and Dynamic Programming are used to solve optimization problems, but their decision-making styles are different.
 
-| Feature | Greedy Method | Dynamic Programming |
-| :--- | :--- | :--- |
-| Decision style | Makes the best immediate choice | Compares choices through stored subproblems |
-| View | Local decision first | Global optimum through recurrence |
-| Reconsiders choices? | No | Yes, through table values |
-| Required property | Greedy-choice property | Principle of optimality and overlapping subproblems |
-| Space use | Usually small | Usually needs a table |
-| Guarantee | Works only when the local choice is always globally safe | Works when the recurrence correctly represents all choices |
+| Feature               | Greedy Method                             | Dynamic Programming                            |
+| --------------------- | ----------------------------------------- | ---------------------------------------------- |
+| **Idea**              | Make the best choice **right now**        | Solve all smaller subproblems and combine them |
+| **Decision**          | Never changes previous decisions          | Can compare many possible decisions            |
+| **Optimal Solution?** | Only if the greedy-choice property exists | Yes, if optimal substructure exists            |
+| **Speed**             | Usually faster                            | Usually slower                                 |
+| **Memory**            | Very little                               | More memory (stores results)                   |
+| **Implementation**    | Simpler                                   | More complex                                   |
+
 
 Greedy is usually faster, but DP is more appropriate when taking one choice can block a better combination of later choices. For example, 0/1 Knapsack needs DP because an item cannot be partially taken and every selected item changes the remaining capacity.
 
