@@ -351,14 +351,16 @@ flowchart TB
 
 Dynamic Programming can be implemented using memoization or tabulation.
 
-| Feature | Memoization (Top-Down) | Tabulation (Bottom-Up) |
-| :--- | :--- | :--- |
-| Starting point | Original problem | Base cases |
-| Control style | Recursive | Iterative |
-| Storage | Cache filled on demand | Table filled in planned order |
-| Work done | Only states reached by recursion | Usually all table states |
-| Risk | Deep recursion may overflow the call stack | Needs correct table order |
-| Best use | Recurrence is naturally recursive | Dependencies have a clear loop order |
+| Feature             | Memoization (Top-Down)     | Tabulation (Bottom-Up)          |
+| ------------------- | -------------------------- | ------------------------------- |
+| Approach            | Start from the big problem | Start from the smallest problem |
+| Technique           | Recursion + cache          | Iteration + table               |
+| Solves              | Only needed subproblems    | All subproblems                 |
+| Uses recursion      | ✅ Yes                      | ❌ No                            |
+| Stack overflow risk | Yes                        | No                              |
+| Easier to write     | Usually                    | Sometimes harder                |
+| Faster in practice  | Sometimes                  | Usually slightly faster         |
+
 
 **Memoization pattern:**
 
