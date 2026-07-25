@@ -16,6 +16,7 @@ This chapter keeps only the requested Searching and Basic Traversal topics. The 
 2. [Basic Search and Traversal Techniques](#1-basic-search-and-traversal-techniques)
 3. [Searching vs Traversal](#2-searching-vs-traversal)
 4. [Introductory Graph Traversal](#3-introductory-graph-traversal)
+   - [Classroom Representation Sequence](#classroom-representation-sequence)
 5. [Breadth-First Search (BFS)](#4-breadth-first-search-bfs)
    - [BFS Idea](#bfs-idea)
    - [BFS Algorithm](#bfs-algorithm)
@@ -225,6 +226,42 @@ For a graph traversal, we normally maintain:
 | `distance[v]` | In BFS, stores the number of edges from the source |
 | frontier | Queue for BFS or stack for DFS |
 
+### Classroom Representation Sequence
+
+For a graph-representation question, use the same order as the class notes:
+
+1. Identify whether the graph is **directed or undirected** and **weighted or unweighted**.
+2. List each vertex's neighbors as an adjacency list.
+3. Fix one vertex order for the rows and columns.
+4. Fill the adjacency matrix from that order. Use `1` for an unweighted edge and `0` when no edge exists.
+5. For an undirected graph, check that the matrix is symmetric.
+
+For the graph above, use the vertex order `A, B, C, D, E, F, G`.
+
+```text
+A: B, C
+B: A, D, E
+C: A, F
+D: B
+E: B, G
+F: C, G
+G: E, F
+```
+
+The adjacency matrix is then built one row at a time:
+
+| From / To | A | B | C | D | E | F | G |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| A | 0 | 1 | 1 | 0 | 0 | 0 | 0 |
+| B | 1 | 0 | 0 | 1 | 1 | 0 | 0 |
+| C | 1 | 0 | 0 | 0 | 0 | 1 | 0 |
+| D | 0 | 1 | 0 | 0 | 0 | 0 | 0 |
+| E | 0 | 1 | 0 | 0 | 0 | 0 | 1 |
+| F | 0 | 0 | 1 | 0 | 0 | 0 | 1 |
+| G | 0 | 0 | 0 | 0 | 1 | 1 | 0 |
+
+This representation is the starting point for the BFS and DFS traces below; always keep the neighbor order fixed while tracing.
+
 ### Traversing a Disconnected Graph
 
 If a graph is disconnected, starting from one vertex may not visit every vertex. To traverse the whole graph, run BFS or DFS from every unvisited vertex.
@@ -340,6 +377,8 @@ while Q is not empty:
 ### BFS Traversal Walkthrough
 
 Use the example graph from the introductory section and start BFS from vertex $A$. Neighbors are considered in alphabetical order.
+
+Follow the classroom queue-trace sequence: write the initial queue, dequeue exactly one vertex, enqueue only its newly discovered neighbors, then write the resulting queue and traversal order. A vertex is marked visited as soon as it is enqueued, so it never appears in the queue twice.
 
 | Step | Queue before dequeue | Dequeued vertex | Newly enqueued vertices | Queue after step | Traversal order |
 | :---: | :--- | :---: | :--- | :--- | :--- |
@@ -524,6 +563,8 @@ The reverse order is used only to make the stack version produce a similar visit
 ### DFS Traversal Walkthrough
 
 Use the same example graph and start DFS from vertex $A$. Neighbors are considered in alphabetical order.
+
+Follow the classroom DFS sequence: visit the current vertex, choose the first unvisited neighbor, continue until no choice remains, then explicitly backtrack to the most recent vertex with an unvisited neighbor.
 
 Recursive DFS movement:
 

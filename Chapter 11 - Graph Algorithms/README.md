@@ -13,6 +13,7 @@ This chapter keeps only the requested graph theory and graph algorithm topics. E
 ## Table of Contents
 
 1. [Graph Algorithms](#graph-algorithms)
+   - [Classroom Problem-Solving Sequence](#classroom-problem-solving-sequence)
 2. [Tree vs Graph](#1-tree-vs-graph)
 3. [Graph Categories](#2-graph-categories)
    - [Weighted vs Unweighted](#weighted-vs-unweighted)
@@ -68,6 +69,18 @@ Graph algorithms usually answer questions like:
 - In what order should dependent tasks be completed?
 - Which vertices belong to the same connected group?
 - Can adding an edge create a cycle?
+
+### Classroom Problem-Solving Sequence
+
+For the worked graph questions in class, the answer is written as a trace rather than only giving the final result. Use this order for the matching topics in this chapter:
+
+1. **Read the graph:** state whether it is directed or undirected, weighted or unweighted, and list the relevant source or starting vertex.
+2. **Write the representation:** record the adjacency list first; construct an adjacency matrix only when the question asks for it or when matrix updates are required.
+3. **Initialize the working record:** use a queue and `visited`/`dist` values for BFS, a DFS stack or finish order for DFS-based problems, component labels for components, or disjoint sets for Kruskal support.
+4. **Trace one decision at a time:** after each dequeue, DFS finish, edge relaxation, or accepted/rejected edge, write the updated queue, stack, table, component, or set.
+5. **State the final answer:** give the traversal/order, distances, components, or selected edges, then give the applicable time complexity.
+
+This sequence is intentional: it mirrors the board and notebook method used for the examples, makes each decision checkable, and avoids skipping directly to an answer.
 
 ### Recommended Study Sequence
 
@@ -285,6 +298,8 @@ graph LR
 
 ### Adjacency Matrix
 
+For a classroom matrix question, first fix the row/column order and then fill one source vertex per row. For an unweighted graph, put `1` exactly where the corresponding adjacency-list edge exists; for an undirected graph, the matching entry on the other side of the diagonal must be the same.
+
 An **adjacency matrix** uses a $|V| \times |V|$ table.
 
 For an unweighted graph:
@@ -483,7 +498,7 @@ graph LR
 	class A,B,C,D,T node;
 ```
 
-Assume neighbors are processed alphabetically.
+Assume neighbors are processed alphabetically. Trace the queue after every single dequeue; mark a vertex when it is enqueued so that it is not added a second time.
 
 | Step | Queue before pop | Popped vertex | Newly discovered vertices | Distance updates |
 | :---: | :--- | :---: | :--- | :--- |
@@ -642,6 +657,8 @@ Initial distances:
 | Vertex | S | A | B | C |
 | :---: | :---: | :---: | :---: | :---: |
 | Initial distance | 0 | $\infty$ | $\infty$ | $\infty$ |
+
+Trace the table round by round. Within a round, process the edges in the stated order and carry each successful relaxation into the next edge check.
 
 Relax all edges $|V|-1 = 3$ times.
 
@@ -813,7 +830,7 @@ At the end, reverse the stack or pop from the stack to get the topological order
 
 #### DFS Walkthrough
 
-Use the same graph and visit vertices alphabetically.
+Use the same graph and visit vertices alphabetically. In the class-note sequence, append a vertex to the finish stack only after all of its outgoing neighbors have been handled; finally read the stack in reverse finish order.
 
 | Step | DFS action | Stack after finishing |
 | :---: | :--- | :--- |
@@ -982,6 +999,8 @@ Main idea:
 
 ### Walkthrough Table
 
+Scan the vertices in order. Each time an unvisited vertex is encountered, run one complete BFS or DFS before returning to the scan; the vertices reached in that one run are exactly one component.
+
 | Step | Start vertex | Search reaches | New component found |
 | :---: | :---: | :--- | :--- |
 | 1 | A | A, B, C | Component 1 |
@@ -1115,7 +1134,7 @@ The finish-time order helps start the second DFS from a source-like component in
 
 ### Kosaraju Walkthrough
 
-Use the visual example above.
+Use the visual example above. Keep the two passes separate in the written solution: first record the finish sequence on the original graph, then reverse every edge, then start each second-pass DFS from the next unused vertex in decreasing finish order.
 
 If DFS starts at $A$, one possible finish order is:
 
@@ -1260,6 +1279,8 @@ If no, adding the edge is safe for connecting two different components, so Krusk
 | Union by rank/size | Attach the smaller or shallower tree under the larger or deeper tree | Keeps the tree height small |
 
 ### Worked Example for Kruskal Support
+
+Use the class-note sequence: sort the edges, inspect one edge at a time, compare the representatives of its endpoints, and immediately write whether the edge is accepted or rejected and how the component sets change.
 
 Suppose Kruskal considers these undirected weighted edges in sorted order:
 
