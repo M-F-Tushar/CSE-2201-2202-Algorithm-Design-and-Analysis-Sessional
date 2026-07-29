@@ -607,6 +607,41 @@ CLIMBING-STAIRS-ONE-OR-TWO(n)
 - Time Complexity: $\Theta(n)$
 - Space Complexity: $\Theta(1)$
 
+##### Why the Naive Recursion Is Exponential
+
+Directly translating the recurrence $C(n) = C(n-1) + C(n-2)$ into recursive calls, without memoization or tabulation, recomputes the same smaller subproblems many times:
+
+```mermaid
+flowchart TD
+    C4["C(4)"] --> C3["C(3)"]
+    C4 --> C2a["C(2)"]
+    C3 --> C2b["C(2)"]
+    C3 --> C1a["C(1) = 1"]
+    C2a --> C1b["C(1) = 1"]
+    C2a --> C0a["C(0) = 1"]
+    C2b --> C1c["C(1) = 1"]
+    C2b --> C0b["C(0) = 1"]
+
+    classDef call fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
+    classDef base fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
+    class C4,C3,C2a,C2b call;
+    class C1a,C1b,C0a,C1c,C0b base;
+```
+
+Notice $C(2)$ is computed twice and $C(1)$ three times — the same overlapping-subproblems pattern seen in Fibonacci. Each call spawns two more calls until a base case is hit, so the call tree has roughly $2^n$ nodes in the worst case:
+
+$$
+T_{\text{naive}}(n) = O(2^n)
+$$
+
+Tabulation removes the repeated work by solving each subproblem exactly once, bringing the time down to $\Theta(n)$ as shown above.
+
+For $n=4$, the $C(4) = 5$ valid climbing sequences (using only 1-step and 2-step moves) are:
+
+$$
+1{+}1{+}1{+}1, \quad 1{+}1{+}2, \quad 1{+}2{+}1, \quad 2{+}1{+}1, \quad 2{+}2
+$$
+
 ---
 
 ### 0/1 Knapsack
@@ -980,6 +1015,43 @@ ROD-CUTTING-REVENUE(price, n)
 
 - Time Complexity: $\Theta(n^2)$
 - Space Complexity: $\Theta(n)$
+
+#### Classroom Problem: Matrix Tabular Format (Unbounded Pieces)
+
+**Problem.** Using the tabular $T[i][j]$ form (row $i$ = pieces of length $1$ through $i$ allowed, column $j$ = target rod length), find the maximum revenue for rod lengths $0$ through $5$ with prices:
+
+| Length $i$ | 1 | 2 | 3 | 4 |
+| :---: | :---: | :---: | :---: | :---: |
+| Price $p_i$ | 2 | 3 | 5 | 9 |
+
+Since a piece length may be reused any number of times, the recurrence differs from 0/1 Knapsack by reusing the *same* row when a piece is taken (matching the `ROD-CUTTING` algorithm above):
+
+$$
+T[i][j] = \max(T[i-1][j],\ p_i + T[i][j-i]), \qquad j \ge i
+$$
+
+| $i \backslash j$ | 0 | 1 | 2 | 3 | 4 | 5 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 1 ($p_1=2$) | 0 | 2 | 4 | 6 | 8 | 10 |
+| 2 ($p_2=3$) | 0 | 2 | 4 | 6 | 8 | 10 |
+| 3 ($p_3=5$) | 0 | 2 | 4 | 6 | 8 | 10 |
+| 4 ($p_4=9$) | 0 | 2 | 4 | 6 | **9** | **11** |
+
+Rows 1 through 3 stay identical to row 1: pieces of length 2 (value-per-length $1.5$) and length 3 (value-per-length $\approx 1.67$) are both worse than reusing length-1 pieces (value-per-length $2.0$), so they are never chosen. Only length 4 (value-per-length $2.25$) beats length 1, and it only has room to help once $j \ge 4$:
+
+$$
+T[4,4] = \max(T[3,4],\ 9+T[4,0]) = \max(8,\ 9) = 9
+$$
+
+$$
+T[4,5] = \max(T[3,5],\ 9+T[4,1]) = \max(10,\ 9+2) = 11
+$$
+
+**Traceback for $j=5$:** $T[4,5] \ne T[3,5]$, so one piece of length $4$ is used (value $9$), leaving length $5-4=1$. Then $T[4,1]=T[3,1]=2$ comes from one piece of length $1$ (value $2$). Optimal cut: **one length-4 piece + one length-1 piece**, total revenue **11**.
+
+- Time Complexity: $\Theta(n \cdot L)$ where $n$ is the number of allowed piece lengths and $L$ is the target length
+- Space Complexity: $\Theta(n \cdot L)$ for the full matrix, or $\Theta(L)$ if only the previous row is kept
 
 ---
 
@@ -2019,6 +2091,111 @@ FLOYD-WARSHALL(W, n)
 - Time Complexity: $\Theta(n^3)$
 - Space Complexity: $\Theta(n^2)$
 
+#### Classroom Problem: Four-Vertex Graph
+
+**Problem.** Find all-pairs shortest paths for a 4-vertex directed graph with edges:
+
+| Edge | Weight |
+| :---: | :---: |
+| $1 \to 2$ | 2 |
+| $1 \to 4$ | 5 |
+| $2 \to 1$ | 3 |
+| $2 \to 4$ | 4 |
+| $3 \to 2$ | 6 |
+| $4 \to 3$ | 2 |
+
+All other pairs have no direct edge ($\infty$).
+
+##### Initial Matrix $D^{(0)}$
+
+$$
+D^{(0)} =
+\begin{pmatrix}
+0 & 2 & \infty & 5 \\
+3 & 0 & \infty & 4 \\
+\infty & 6 & 0 & \infty \\
+\infty & \infty & 2 & 0
+\end{pmatrix}
+$$
+
+##### $D^{(1)}$: Allow Vertex 1 as Intermediate
+
+No path improves by routing through vertex 1 (nothing points into 1 except vertex 2, and vertex 2's direct distances are already at least as good), so:
+
+$$
+D^{(1)} = D^{(0)}
+$$
+
+##### $D^{(2)}$: Allow Vertices 1 and 2 as Intermediate
+
+Row 3 improves by detouring through vertex 2:
+
+$$
+D[3,1] = \min(\infty,\ D[3,2]+D[2,1]) = \min(\infty,\ 6+3) = 9
+$$
+
+$$
+D[3,4] = \min(\infty,\ D[3,2]+D[2,4]) = \min(\infty,\ 6+4) = 10
+$$
+
+$$
+D^{(2)} =
+\begin{pmatrix}
+0 & 2 & \infty & 5 \\
+3 & 0 & \infty & 4 \\
+9 & 6 & 0 & 10 \\
+\infty & \infty & 2 & 0
+\end{pmatrix}
+$$
+
+##### $D^{(3)}$: Allow Vertices 1, 2, and 3 as Intermediate
+
+Only row 4 has a finite entry in column 3 ($D[4,3]=2$), so row 4 improves by detouring through vertex 3, using the updated row 3 from $D^{(2)}$:
+
+$$
+D[4,1] = \min(\infty,\ D[4,3]+D[3,1]) = \min(\infty,\ 2+9) = 11
+$$
+
+$$
+D[4,2] = \min(\infty,\ D[4,3]+D[3,2]) = \min(\infty,\ 2+6) = 8
+$$
+
+$$
+D^{(3)} =
+\begin{pmatrix}
+0 & 2 & \infty & 5 \\
+3 & 0 & \infty & 4 \\
+9 & 6 & 0 & 10 \\
+11 & 8 & 2 & 0
+\end{pmatrix}
+$$
+
+##### $D^{(4)}$: Allow All Vertices as Intermediate (Final Matrix)
+
+Column 4 now has finite entries in every row, so every row can detour through vertex 4 into row 4's values $[11,8,2,0]$:
+
+$$
+D[1,3] = \min(\infty,\ D[1,4]+D[4,3]) = \min(\infty,\ 5+2) = 7
+$$
+
+$$
+D[2,3] = \min(\infty,\ D[2,4]+D[4,3]) = \min(\infty,\ 4+2) = 6
+$$
+
+No other cell improves, giving the final shortest-path matrix:
+
+$$
+D^{(4)} =
+\begin{pmatrix}
+0 & 2 & 7 & 5 \\
+3 & 0 & 6 & 4 \\
+9 & 6 & 0 & 10 \\
+11 & 8 & 2 & 0
+\end{pmatrix}
+$$
+
+**Note on edge $2 \to 4$:** this worked example uses weight 4 for edge $2 \to 4$. That value is confirmed correct because expanding all four matrices $D^{(0)}$ through $D^{(4)}$ with weight 4 reproduces every intermediate and final value exactly (including $D[3,4]=10$, $D[4,1]=11$, $D[4,2]=8$, $D[1,3]=7$, and $D[2,3]=6$). If a different source lists this edge as weight 9 instead, every matrix from $D^{(2)}$ onward would need to be recomputed.
+
 ---
 
 ### Shortest Path (Single Source) - Bellman-Ford Algorithm
@@ -2155,6 +2332,63 @@ BELLMAN-FORD(G, source)
 - Time Complexity: $\Theta(VE)$
 - Space Complexity: $\Theta(V)$ for the standard implementation
 - Full DP table version: $\Theta(V^2)$ space if every round is stored
+
+#### Classroom Problem: Six-Vertex Graph (Topological-Order Relaxation)
+
+**Problem.** For the DAG below with source $A$, find the shortest distance from $A$ to every other vertex.
+
+| Edge | Weight |
+| :---: | :---: |
+| $A \to B$ | 6 |
+| $A \to C$ | 9 |
+| $A \to D$ | 5 |
+| $B \to E$ | -1 |
+| $C \to B$ | -7 |
+| $D \to C$ | -2 |
+| $D \to F$ | 1 |
+| $E \to F$ | 3 |
+
+Because this graph has **no cycles**, it can be solved with a single relaxation pass in topological order ($A,B,C,D,E,F$) instead of the usual $|V|-1$ Bellman-Ford rounds over *all* edges: each vertex's own outgoing edges are relaxed exactly once, right after that vertex's shortest distance is finalized. This uses the same relaxation rule as Bellman-Ford, applied in the more efficient order made possible by acyclicity.
+
+##### Relaxation Trace
+
+| After processing | $A$ | $B$ | $C$ | $D$ | $E$ | $F$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| (initial) | 0 | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+| $A$ | 0 | 6 | 9 | 5 | $\infty$ | $\infty$ |
+| $B$ | 0 | 6 | 9 | 5 | 5 | $\infty$ |
+| $C$ | 0 | **2** | 9 | 5 | 5 | $\infty$ |
+| $D$ | 0 | 2 | **3** | 5 | 5 | **6** |
+| $E$ | 0 | 2 | 3 | 5 | 5 | 6 |
+
+Key relaxations:
+
+$$
+\text{after } B: \quad dist(E) = \min(\infty,\ dist(B)+w(B,E)) = \min(\infty,\ 6-1) = 5
+$$
+
+$$
+\text{after } C: \quad dist(B) = \min(6,\ dist(C)+w(C,B)) = \min(6,\ 9-7) = 2
+$$
+
+$$
+\text{after } D: \quad dist(C) = \min(9,\ dist(D)+w(D,C)) = \min(9,\ 5-2) = 3, \qquad dist(F) = \min(\infty,\ dist(D)+w(D,F)) = \min(\infty,\ 5+1) = 6
+$$
+
+$$
+\text{after } E: \quad dist(F) = \min(6,\ dist(E)+w(E,F)) = \min(6,\ 5+3) = 6 \ \text{(no improvement)}
+$$
+
+The table stops changing after processing $E$, confirming the final shortest distances:
+
+$$
+dist(A)=0,\ dist(B)=2,\ dist(C)=3,\ dist(D)=5,\ dist(E)=5,\ dist(F)=6
+$$
+
+**Note on reconstruction:** the edges $C \to B$, $D \to C$, and $D \to F$ were back-derived from the relaxation trace (solving for the weight that makes each recorded distance change match exactly), since they were the hardest edges to read from the original handwritten graph. Every entry in the table above reproduces the classroom trace exactly with this edge set, which is strong evidence it is correct — but double-check these three weights against your lecture slide if you still have it, since $C \to B = -7$ in particular is easy to misread by hand.
+
+- Time Complexity: $\Theta(V+E)$ for the topological-order pass (versus $\Theta(VE)$ for general Bellman-Ford on a graph that may contain cycles)
+- Space Complexity: $\Theta(V)$
 
 ---
 

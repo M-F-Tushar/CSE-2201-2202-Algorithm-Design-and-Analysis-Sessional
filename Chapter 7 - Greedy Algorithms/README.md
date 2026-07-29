@@ -1189,6 +1189,78 @@ HUFFMAN-CODES(characters, frequencies)
 - Total Time Complexity: $\Theta(n\log n)$
 - Space Complexity: $\Theta(n)$
 
+#### Classroom Problem: Five-Symbol Frequency Table
+
+**Problem.** Build a Huffman code for the symbols $A, G, B, C, D$ with frequencies:
+
+| Character | A | G | B | C | D |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| Frequency | 9 | 2 | 2 | 1 | 1 |
+
+Total frequency $= 9+2+2+1+1 = 15$.
+
+##### Merge Steps (Min-Priority Queue / Min-Heap)
+
+Sort ascending: $C{=}1,\ D{=}1,\ B{=}2,\ G{=}2,\ A{=}9$, then repeatedly extract the two smallest nodes and re-insert their sum:
+
+| Step | Two smallest nodes | New merged node | Queue after merge |
+| :---: | :--- | :---: | :--- |
+| 1 | $C{:}1$, $D{:}1$ | 2 | $B{=}2,\ G{=}2,\ CD{=}2,\ A{=}9$ |
+| 2 | $G{:}2$, $B{:}2$ | 4 | $CD{=}2,\ GB{=}4,\ A{=}9$ |
+| 3 | $CD{:}2$, $GB{:}4$ | 6 | $A{=}9,\ \text{Node6}{=}6$ |
+| 4 | $\text{Node6}{:}6$, $A{:}9$ | 15 | Root $=15$ |
+
+##### Resulting Huffman Tree and Codes
+
+```mermaid
+flowchart TD
+	Root["15"] --> A["A:9<br/>code 0"]
+	Root --> N6["6"]
+	N6 --> N10["4"]
+	N6 --> N11["2"]
+	N10 --> G["G:2<br/>code 100"]
+	N10 --> B["B:2<br/>code 101"]
+	N11 --> C["C:1<br/>code 110"]
+	N11 --> D["D:1<br/>code 111"]
+
+	classDef internal fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
+	classDef leaf fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
+	classDef root fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
+	class Root root;
+	class N6,N10,N11 internal;
+	class A,G,B,C,D leaf;
+```
+
+| Character | Huffman Code | Code Length |
+| :---: | :---: | :---: |
+| A | 0 | 1 |
+| G | 100 | 3 |
+| B | 101 | 3 |
+| C | 110 | 3 |
+| D | 111 | 3 |
+
+Because $A$ is merged in only at the very last step (paired directly with the root), it keeps the shortest possible code (1 bit), while the four rarer symbols share the remaining 3-bit codes.
+
+##### Average Bit Rate
+
+$$
+\text{Average Bit Rate} = \frac{\sum (\text{frequency} \times \text{code length})}{\sum (\text{frequency})}
+$$
+
+$$
+= \frac{(9\times1)+(2\times3)+(2\times3)+(1\times3)+(1\times3)}{15} = \frac{9+6+6+3+3}{15} = \frac{27}{15} = 1.8 \text{ bits/character}
+$$
+
+##### Fixed-Length Code Comparison
+
+There are 5 distinct characters, so a fixed-length binary code needs:
+
+$$
+\lceil \log_2 5 \rceil = 3 \text{ bits per character}
+$$
+
+Huffman coding needs only **1.8 bits/character** on average, so it is noticeably more efficient than fixed-length coding for this skewed frequency distribution (one very common symbol, four rare ones).
+
 ---
 
 ### Activity Selection Problem
