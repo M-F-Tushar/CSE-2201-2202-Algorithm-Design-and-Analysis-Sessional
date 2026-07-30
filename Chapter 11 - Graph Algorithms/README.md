@@ -24,20 +24,24 @@ This chapter keeps only the requested graph theory and graph algorithm topics. E
    - [Adjacency List](#adjacency-list)
 5. [Shortest Path Problem Overview](#4-shortest-path-problem-overview)
 6. [BFS for Unweighted Shortest Path](#5-bfs-for-unweighted-shortest-path)
-7. [Single Source Shortest Path - Bellman-Ford Algorithm](#6-single-source-shortest-path---bellman-ford-algorithm)
-8. [Topological Sorting](#7-topological-sorting)
+7. [Single Source Shortest Path - Dijkstra's Algorithm](#6-single-source-shortest-path---dijkstras-algorithm)
+   - [Relaxation Condition](#relaxation-condition)
+   - [Worked Example 1: Undirected Graph](#worked-example-1-undirected-graph)
+   - [Worked Example 2: Directed Graph](#worked-example-2-directed-graph)
+8. [Single Source Shortest Path - Bellman-Ford Algorithm](#7-single-source-shortest-path---bellman-ford-algorithm)
+9. [Topological Sorting](#8-topological-sorting)
    - [Definition](#definition)
    - [DAG](#dag)
    - [DFS-Based Topological Sort](#dfs-based-topological-sort)
    - [Kahn's Algorithm - Optional/Self-Study](#kahns-algorithm---optionalself-study)
    - [Time Complexity](#time-complexity)
    - [Applications](#applications)
-9. [Connected Components](#8-connected-components)
-10. [Strongly Connected Components](#9-strongly-connected-components)
+10. [Connected Components](#9-connected-components)
+11. [Strongly Connected Components](#10-strongly-connected-components)
 	- [Kosaraju's Algorithm](#kosarajus-algorithm)
 	- [Tarjan's Algorithm - Optional/Self-Study](#tarjans-algorithm---optionalself-study)
-11. [Union-Find / Disjoint Set Union for Kruskal Support](#10-union-find--disjoint-set-union-for-kruskal-support)
-12. [Analyze Time Complexity of Above Topics](#analyze-time-complexity-of-above-topics)
+12. [Union-Find / Disjoint Set Union for Kruskal Support](#11-union-find--disjoint-set-union-for-kruskal-support)
+13. [Analyze Time Complexity of Above Topics](#analyze-time-complexity-of-above-topics)
 
 ---
 
@@ -90,11 +94,12 @@ Study this chapter in the following order:
 2. Learn graph categories: weighted, unweighted, directed, undirected, cyclic, and acyclic.
 3. Learn how to store graphs using adjacency matrix and adjacency list.
 4. Use BFS to solve shortest path in an unweighted graph.
-5. Learn the general shortest path idea and Bellman-Ford for weighted graphs.
-6. Learn topological sorting for dependency ordering in a DAG.
-7. Learn connected components in undirected graphs.
-8. Learn strongly connected components in directed graphs.
-9. Learn Union-Find / DSU as support for Kruskal's algorithm.
+5. Learn the general shortest path idea, then Dijkstra's Algorithm for weighted graphs with nonnegative edges.
+6. Learn Bellman-Ford for weighted graphs that may contain negative edges.
+7. Learn topological sorting for dependency ordering in a DAG.
+8. Learn connected components in undirected graphs.
+9. Learn strongly connected components in directed graphs.
+10. Learn Union-Find / DSU as support for Kruskal's algorithm.
 
 ### Visual Map: Graph Algorithm Roadmap
 
@@ -118,7 +123,8 @@ flowchart TB
 	Traverse --> CC["Connected components<br/>undirected graph"]
 	Traverse --> SCC["Strongly connected components<br/>directed graph"]
 
-	Weighted --> BF["Bellman-Ford<br/>single source shortest path"]
+	Weighted --> Dijkstra["Dijkstra's Algorithm<br/>nonnegative edge weights"]
+	Weighted --> BF["Bellman-Ford<br/>handles negative edges"]
 	Sets --> DSU["Union-Find / DSU<br/>cycle support for Kruskal"]
 
 	classDef root fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
@@ -127,7 +133,7 @@ flowchart TB
 	classDef detail fill:#f1f5f9,stroke:#64748b,stroke-dasharray: 5 5,color:#0f172a;
 	class Graph root;
 	class Types,Store,Traverse,Weighted,Sets group;
-	class BFS,Topo,CC,SCC,BF,DSU algo;
+	class BFS,Topo,CC,SCC,Dijkstra,BF,DSU algo;
 	class T1,T2,T3,Matrix,List detail;
 ```
 
@@ -418,7 +424,8 @@ The meaning of "minimum cost" depends on the graph:
 | Problem type | Question | Algorithm in this chapter |
 | :--- | :--- | :--- |
 | Single pair shortest path | What is the shortest path from $s$ to $t$? | BFS for unweighted graph |
-| Single source shortest path | What are the shortest paths from $s$ to all vertices? | BFS or Bellman-Ford |
+| Single source shortest path | What are the shortest paths from $s$ to all vertices? | BFS, Dijkstra's Algorithm, or Bellman-Ford |
+| Weighted graph with only nonnegative edges | Which algorithm is fastest? | Dijkstra's Algorithm |
 | Weighted graph with negative edges | Can shortest paths still be found? | Bellman-Ford |
 
 ### Algorithm Selection in This Chapter
@@ -426,7 +433,7 @@ The meaning of "minimum cost" depends on the graph:
 | Graph condition | Suitable algorithm here | Reason |
 | :--- | :--- | :--- |
 | Unweighted graph | BFS | BFS explores by distance layers |
-| Weighted graph | Bellman-Ford | Relaxes weighted edges repeatedly |
+| Weighted graph with only nonnegative edges | Dijkstra's Algorithm | Greedily finalizes the nearest unvisited vertex first |
 | Weighted graph with negative edges | Bellman-Ford | Handles negative edges if there is no reachable negative cycle |
 | Graph with reachable negative cycle | No finite shortest path | Distance can keep decreasing forever |
 
@@ -436,8 +443,9 @@ The meaning of "minimum cost" depends on the graph:
 flowchart TD
 	Start["Shortest path problem"] --> Unweighted{"All edges equal cost?"}
 	Unweighted -->|Yes| BFS["Use BFS<br/>distance = number of edges"]
-	Unweighted -->|No| Weighted{"Weighted edges?"}
-	Weighted -->|Yes| BF["Use Bellman-Ford<br/>relax edges V - 1 times"]
+	Unweighted -->|No| Negative{"Any negative edge weight?"}
+	Negative -->|No| Dijkstra["Use Dijkstra's Algorithm<br/>finalize nearest vertex greedily"]
+	Negative -->|Yes| BF["Use Bellman-Ford<br/>relax edges V - 1 times"]
 	BF --> Cycle{"Negative cycle reachable?"}
 	Cycle -->|Yes| Bad["No finite shortest path"]
 	Cycle -->|No| Dist["Shortest distances found"]
@@ -447,8 +455,8 @@ flowchart TD
 	classDef warn fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
 	classDef result fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
 	class Start,Dist result;
-	class Unweighted,Weighted,Cycle decision;
-	class BFS,BF algo;
+	class Unweighted,Negative,Cycle decision;
+	class BFS,Dijkstra,BF algo;
 	class Bad warn;
 ```
 
@@ -588,7 +596,243 @@ BFS-SHORTEST-PATH(G, s)
 
 ---
 
-## 6. Single Source Shortest Path - Bellman-Ford Algorithm
+## 6. Single Source Shortest Path - Dijkstra's Algorithm
+
+### Problem Statement
+
+Given a weighted graph (directed or undirected) with **nonnegative** edge weights and a source vertex $s$, find the shortest distance from $s$ to every other reachable vertex.
+
+**Dijkstra's Algorithm** is a greedy single-source shortest path algorithm: at every step it finalizes the unvisited vertex with the smallest tentative distance, and that distance is never revisited or improved later.
+
+### Inputs and Output
+
+- **Input:** weighted graph $G=(V,E)$ with edge cost function $c(u,v) \ge 0$, and source vertex $s$.
+- **Output:** shortest distance $d(v)$ for every vertex $v$, plus a parent array to reconstruct the shortest paths.
+
+### Greedy Rule
+
+```text
+Always finalize the unvisited vertex with the smallest tentative distance.
+```
+
+The algorithm is correct because with nonnegative edge weights, no later path can make a finalized vertex cheaper.
+
+### Relaxation Condition
+
+Every time a vertex $u$ is finalized, every edge $(u, v)$ leaving $u$ is **relaxed** using this test:
+
+$$
+\text{if } \big(d(u) + c(u,v) < d(v)\big) \implies d(v) = d(u) + c(u,v)
+$$
+
+In words: if going through $u$ gives a cheaper way to reach $v$ than the current best known distance $d(v)$, replace $d(v)$ with that cheaper value (and remember $u$ as the new parent of $v$). If the new total is **not** smaller, $d(v)$ is left unchanged.
+
+For example, relaxing the source's own first edge $A \to B$ with weight $14$ when $d(A)=0$ and $d(B)=\infty$ gives:
+
+$$
+0 + 14 = 14 \quad < \infty \quad \Rightarrow \quad d(B) = 14
+$$
+
+### Important Condition
+
+Dijkstra's Algorithm requires all edge weights to be nonnegative.
+
+If negative edges exist, the greedy choice may be wrong because a vertex finalized early could later receive a cheaper path through a negative edge. Bellman-Ford (next section) removes this restriction.
+
+### Worked Example 1: Undirected Graph
+
+Source vertex: $A$. This example finalizes one vertex per step, always picking the **unvisited vertex with the smallest tentative distance**, then relaxing all of its edges.
+
+```mermaid
+flowchart LR
+	A((A)) ---|14| B((B))
+	A ---|9| C((C))
+	A ---|7| F((F))
+	B ---|2| C
+	B ---|8| D((D))
+	C ---|11| E((E))
+	C ---|10| F
+	D ---|6| E
+	F ---|15| E
+
+	classDef src fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
+	class A src;
+```
+
+**Step 0 - Initialize.** $d(A) = 0$, every other vertex starts at $\infty$.
+
+**Step 1 - Finalize $A$ (distance 0).** Relax all edges out of $A$:
+
+- $0 + 14 = 14 < \infty \Rightarrow d(B) = 14$
+- $0 + 9 = 9 < \infty \Rightarrow d(C) = 9$
+- $0 + 7 = 7 < \infty \Rightarrow d(F) = 7$
+
+**Step 2 - Smallest tentative distance is $F = 7$, so finalize $F$.** Relax edges out of $F$ (to $C$ and $E$):
+
+- $7 + 10 = 17$, compare with $d(C) = 9$. Since $17 \not< 9$, $C$ stays $9$.
+- $7 + 15 = 22 < \infty \Rightarrow d(E) = 22$
+
+**Step 3 - Smallest remaining is $C = 9$, so finalize $C$.** Relax edges out of $C$ (to $B$ and $E$):
+
+- $9 + 2 = 11 < 14 \Rightarrow d(B) = 11$
+- $9 + 11 = 20 < 22 \Rightarrow d(E) = 20$
+
+**Step 4 - Smallest remaining is $B = 11$, so finalize $B$.** Relax edges out of $B$ (to $D$):
+
+- $11 + 8 = 19 < \infty \Rightarrow d(D) = 19$
+
+**Step 5 - Smallest remaining is $D = 19$, so finalize $D$.** Relax edges out of $D$ (to $E$):
+
+- $19 + 6 = 25$, compare with $d(E) = 20$. Since $25 \not< 20$, $E$ stays $20$.
+
+**Step 6 - Only $E = 20$ remains, so finalize $E$.** All vertices are now visited.
+
+Distance table, one row per finalized (visited) vertex, in the exact order they were finalized:
+
+| Visited $\downarrow$ | A | B | C | D | E | F |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **A** | **0** | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+| **F** | | 14 | 9 | $\infty$ | $\infty$ | **7** |
+| **C** | | 14 | **9** | $\infty$ | 22 | - |
+| **B** | | **11** | - | $\infty$ | 20 | |
+| **D** | | - | | **19** | 20 | |
+| **E** | | | | - | **20** | |
+
+Bold values are the distances finalized (boxed) in that step; a dash `-` marks a vertex already finalized in an earlier step (its column is closed off, matching the vertical line drawn through it on the board).
+
+Final shortest distances from $A$: $A=0$, $F=7$, $C=9$, $B=11$, $D=19$, $E=20$.
+
+Reconstructing paths by walking parent pointers backward from the destination:
+
+- **Path to $E$:** $E$ was last updated by $C$ ($9+11=20$), and $C$ was reached from $A$. Reading backward: $E, C, A$, so forward the path is $A \to C \to E$ with total cost $9 + 11 = 20$.
+- **Path to $D$:** $D$ was last updated by $B$ ($11+8=19$), $B$ was updated by $C$ ($9+2=11$), and $C$ was reached from $A$. Reading backward: $D, B, C, A$, so forward the path is $A \to C \to B \to D$ with total cost $9 + 2 + 8 = 19$.
+
+### Worked Example 2: Directed Graph
+
+The same relaxation rule applies to a **directed** graph; a vertex can only relax edges that point *out* of it.
+
+Source vertex: $A$.
+
+```mermaid
+flowchart LR
+	A((A)) -->|11| F((F))
+	A -->|2| B((B))
+	A -->|5| C((C))
+	F -->|17| D((D))
+	B -->|5| D
+	B -->|13| E((E))
+	C -->|8| B
+	C -->|12| E
+	E -->|1| D
+
+	classDef src fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
+	class A src;
+```
+
+**Step 0 - Initialize.** $d(A) = 0$, every other vertex starts at $\infty$.
+
+**Step 1 - Finalize $A$ (distance 0).** Relax all edges out of $A$:
+
+- $0 + 11 = 11 < \infty \Rightarrow d(F) = 11$
+- $0 + 2 = 2 < \infty \Rightarrow d(B) = 2$
+- $0 + 5 = 5 < \infty \Rightarrow d(C) = 5$
+
+**Step 2 - Smallest tentative distance is $B = 2$, so finalize $B$.** Relax edges out of $B$ (to $D$, $E$, and $C$):
+
+- $2 + 5 = 7 < \infty \Rightarrow d(D) = 7$
+- $2 + 13 = 15 < \infty \Rightarrow d(E) = 15$
+- $B$ has no outgoing edge to $C$ in this graph, so $C$ is untouched here.
+
+**Step 3 - Smallest remaining is $C = 5$, so finalize $C$.** Relax edges out of $C$ (to $B$ and $E$):
+
+- $C \to B$: $B$ is already finalized, so this edge is not used again.
+- $5 + 12 = 17$, compare with $d(E) = 15$. Since $17 \not< 15$, $E$ stays $15$.
+
+**Step 4 - Smallest remaining is $D = 7$, so finalize $D$.** $D$ has no outgoing edges in this graph, so nothing is relaxed.
+
+**Step 5 - Smallest remaining is $F = 11$, so finalize $F$.** Relax edges out of $F$ (to $D$):
+
+- $11 + 17 = 28$, compare with $d(D) = 7$. Since $28 \not< 7$, $D$ stays $7$ (it is also already finalized).
+
+**Step 6 - Only $E = 15$ remains, so finalize $E$.** Relax edges out of $E$ (to $D$):
+
+- $15 + 1 = 16$, compare with $d(D) = 7$. Since $16 \not< 7$, $D$ stays $7$.
+
+Distance table, one row per finalized (visited) vertex, in the exact order they were finalized:
+
+| Visited $\downarrow$ | A | B | C | D | E | F |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **A** | **0** | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+| **B** | | **2** | 5 | $\infty$ | $\infty$ | 11 |
+| **C** | | - | **5** | 7 | 15 | 11 |
+| **D** | | | - | **7** | 15 | 11 |
+| **F** | | | | - | 15 | **11** |
+| **E** | | | | | **15** | - |
+
+Bold values are the distances finalized (boxed) in that step; a dash `-` marks a vertex already finalized in an earlier step.
+
+Final shortest distances from $A$: $A=0$, $B=2$, $C=5$, $D=7$, $F=11$, $E=15$.
+
+Reconstructing the path to $E$: $E$ was last updated by $B$ ($2+13=15$), and $B$ was reached directly from $A$. Reading backward: $E, B, A$, so forward the path is $A \to B \to E$ with total cost $2 + 13 = 15$.
+
+### Mermaid Diagram: Dijkstra's Greedy Finalization
+
+The diagram below visualizes the finalization order from **Worked Example 1**: $A \to F \to C \to B \to D \to E$.
+
+```mermaid
+flowchart LR
+	Init["Initialize source A = 0<br/>others = infinity"] --> PickA["Finalize A<br/>distance 0"]
+	PickA --> PickF["Finalize F<br/>distance 7"]
+	PickF --> PickC["Finalize C<br/>distance 9"]
+	PickC --> PickB["Finalize B<br/>distance 11"]
+	PickB --> PickD["Finalize D<br/>distance 19"]
+	PickD --> PickE["Finalize E<br/>distance 20"]
+	PickE --> Done["All reachable vertices finalized"]
+
+	Relax["Relax outgoing edges<br/>d(v) = min(d(v), d(u) + c(u,v))"] -. after each pick .-> PickA
+	Relax -. after each pick .-> PickF
+	Relax -. after each pick .-> PickC
+	Relax -. after each pick .-> PickB
+	Relax -. after each pick .-> PickD
+
+	classDef init fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
+	classDef step fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
+	classDef helper fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
+	classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
+	class Init init;
+	class PickA,PickF,PickC,PickB,PickD,PickE step;
+	class Relax helper;
+	class Done answer;
+```
+
+### Algorithm
+
+```text
+DIJKSTRA(G, source)
+1. for each vertex v in G:
+2.     dist[v] = infinity
+3.     parent[v] = NIL
+4. dist[source] = 0
+5. put all vertices in a min-priority queue by dist value
+6. while the queue is not empty:
+7.     u = extract vertex with minimum dist
+8.     for each edge (u, v):
+9.         if dist[u] + weight(u, v) < dist[v]:
+10.            dist[v] = dist[u] + weight(u, v)
+11.            parent[v] = u
+12.            update v in the priority queue
+13. return dist and parent
+```
+
+### Complexity Analysis
+
+- Using adjacency matrix: $\Theta(V^2)$
+- Using adjacency list and binary heap: $\Theta((V+E)\log V)$
+- Space Complexity: $\Theta(V+E)$
+
+---
+
+## 7. Single Source Shortest Path - Bellman-Ford Algorithm
 
 ### Problem Statement
 
@@ -626,66 +870,156 @@ Why $|V|-1$ times?
 
 After those rounds, one more relaxation pass is used to detect a negative cycle.
 
-### Worked Example
+### Worked Example: Six-Vertex Graph (Selected-Vertex Relaxation Table)
 
-Find shortest paths from $S$.
+This walkthrough traces Bellman-Ford the way it is often done by hand: edges are grouped by their source vertex, and vertices are relaxed in a fixed order — $A, B, C, D, E, F$ — instead of scanning a flat edge list. This still relaxes every edge exactly once per round; only the bookkeeping changes. One table is built per round. Inside a table, each row is labeled by the vertex whose *outgoing* edges were just relaxed, and the row shows the whole distance array immediately afterward. The **bold** cell simply marks which vertex was just processed, as a visual anchor — it is not necessarily that vertex's final answer.
+
+Graph and source vertex $A$:
 
 ```mermaid
 flowchart LR
-	S((S)) -->|5| B((B))
-	S -->|4| A((A))
-	A -->|-2| B
-	B -->|3| C((C))
-	A -->|6| C
+	A((A)) -->|6| B((B))
+	A -->|4| C((C))
+	A -->|5| D((D))
+	B -->|-1| E((E))
+	C -->|-2| B
+	D -->|-2| C
+	D -->|-1| F((F))
+	E -->|3| F((F))
 
 	classDef source fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
 	classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	class S source;
-	class A,B,C node;
+	class A source;
+	class B,C,D,E,F node;
 ```
 
-Use this edge order in every round:
+With $|V| = 6$, Bellman-Ford needs $|V|-1 = 5$ relaxation rounds.
 
-1. $(B,C,3)$
-2. $(A,B,-2)$
-3. $(S,B,5)$
-4. $(S,A,4)$
-5. $(A,C,6)$
+**Round 1** — start from $dist[A]=0$, all other vertices at $\infty$:
 
-Initial distances:
+| Selected vertex | A | B | C | D | E | F |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| A | **0** | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+| B | 0 | **6** | 4 | 5 | $\infty$ | $\infty$ |
+| C | 0 | 6 | **4** | 5 | 5 | $\infty$ |
+| D | 0 | 2 | 4 | **5** | 5 | $\infty$ |
+| E | 0 | 2 | 3 | 5 | **5** | 4 |
+| F | 0 | 2 | 3 | 5 | 5 | **4** |
 
-| Vertex | S | A | B | C |
+- Row B: relax $A \to B$ ($0+6=6$), $A \to C$ ($0+4=4$), $A \to D$ ($0+5=5$).
+- Row C: relax $B \to E$ ($6-1=5$).
+- Row D: relax $C \to B$ ($4-2=2$, improves $B$ from 6 to 2).
+- Row E: relax $D \to C$ ($5-2=3$, improves $C$) and $D \to F$ ($5-1=4$).
+- Row F: relax $E \to F$ ($5+3=8$), which does **not** improve $F=4$.
+
+**Round 2** — carried over from $[0,2,3,5,5,4]$:
+
+| Selected vertex | A | B | C | D | E | F |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| A | **0** | 2 | 3 | 5 | 5 | 4 |
+| B | 0 | **2** | 3 | 5 | 5 | 4 |
+| C | 0 | 2 | **3** | 5 | 1 | 4 |
+| D | 0 | 1 | 3 | **5** | 1 | 4 |
+| E | 0 | 1 | 3 | 5 | **1** | 4 |
+| F | 0 | 1 | 3 | 5 | 1 | **4** |
+
+$B \to E$ improves $E$ to 1 ($2-1$), then $C \to B$ improves $B$ to 1 ($3-2$).
+
+**Round 3** — carried over from $[0,1,3,5,1,4]$:
+
+| Selected vertex | A | B | C | D | E | F |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| A | **0** | 1 | 3 | 5 | 1 | 4 |
+| B | 0 | **1** | 3 | 5 | 1 | 4 |
+| C | 0 | 1 | **3** | 5 | 0 | 4 |
+| D | 0 | 1 | 3 | **5** | 0 | 4 |
+| E | 0 | 1 | 3 | 5 | **0** | 4 |
+| F | 0 | 1 | 3 | 5 | 0 | **3** |
+
+$B \to E$ improves $E$ to 0 ($1-1$); later $E \to F$ improves $F$ to 3 ($0+3$).
+
+**Round 4** — carried over from $[0,1,3,5,0,3]$:
+
+| Selected vertex | A | B | C | D | E | F |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| A | **0** | 1 | 3 | 5 | 0 | 3 |
+| B | 0 | **1** | 3 | 5 | 0 | 3 |
+| C | 0 | 1 | **3** | 5 | 0 | 3 |
+| D | 0 | 1 | 3 | **5** | 0 | 3 |
+| E | 0 | 1 | 3 | 5 | **0** | 3 |
+| F | 0 | 1 | 3 | 5 | 0 | **3** |
+
+Nothing changed in Round 4, so the values have already converged. Round 5 (still required by the $|V|-1$ bound) and the negative-cycle check pass both leave the table unchanged, confirming there is no reachable negative cycle.
+
+Final shortest distances from $A$:
+
+| Vertex | A | B | C | D | E | F |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Distance | 0 | 1 | 3 | 5 | 0 | 3 |
+
+---
+
+### Drawback: A Negative Cycle Prevents Convergence
+
+The extra check pass in Bellman-Ford exists because a **reachable negative cycle** stops the distances from ever settling. Every trip around the cycle keeps lowering the distance, so no finite shortest path exists. This example uses the same selected-vertex table to see it happen directly.
+
+```mermaid
+flowchart LR
+	A((A)) -->|1| B((B))
+	A -->|2| C((C))
+	B -->|2| C
+	C -->|2| D((D))
+	D -->|-5| B
+
+	classDef source fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
+	classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
+	class A source;
+	class B,C,D node;
+```
+
+The cycle $B \to C \to D \to B$ has total weight $2 + 2 + (-5) = -1$. With $|V|=4$, only $|V|-1 = 3$ rounds are theoretically required — watch what the 4th round (the check pass) still does.
+
+**Round 1** — start from $dist[A]=0$, all others $\infty$. A row is added for the wraparound edge $D \to B$, since it belongs to the same relaxation order and closes the cycle:
+
+| Selected vertex | A | B | C | D |
 | :---: | :---: | :---: | :---: | :---: |
-| Initial distance | 0 | $\infty$ | $\infty$ | $\infty$ |
+| A | **0** | $\infty$ | $\infty$ | $\infty$ |
+| B | 0 | **1** | 2 | $\infty$ |
+| C | 0 | 1 | **2** | $\infty$ |
+| D | 0 | 1 | 2 | **4** |
+| D → B (wrap) | 0 | **-1** | 2 | 4 |
 
-Trace the table round by round. Within a round, process the edges in the stated order and carry each successful relaxation into the next edge check.
+**Round 2:**
 
-Relax all edges $|V|-1 = 3$ times.
-
-| Round | dist[S] | dist[A] | dist[B] | dist[C] | Important changes |
-| :---: | :---: | :---: | :---: | :---: | :--- |
-| 0 | 0 | $\infty$ | $\infty$ | $\infty$ | Initialization |
-| 1 | 0 | 4 | 5 | 10 | $S \to B$, $S \to A$, $A \to C$ |
-| 2 | 0 | 4 | 2 | 8 | $B \to C$, then $A \to B$ improves B |
-| 3 | 0 | 4 | 2 | 5 | $B \to C$ improves C using new B |
-
-Final shortest distances:
-
-| Vertex | S | A | B | C |
+| Selected vertex | A | B | C | D |
 | :---: | :---: | :---: | :---: | :---: |
-| Distance from S | 0 | 4 | 2 | 5 |
+| A | **0** | -1 | 2 | 4 |
+| B | 0 | **-1** | 2 | 4 |
+| C | 0 | -1 | **1** | 4 |
+| D | 0 | -1 | 1 | **3** |
+| D → B (wrap) | 0 | **-2** | 1 | 3 |
 
-The shortest path to $C$ is:
+**Round 3** (the last round the $|V|-1$ bound calls for):
 
-$$
-S \to A \to B \to C
-$$
+| Selected vertex | A | B | C | D |
+| :---: | :---: | :---: | :---: | :---: |
+| A | **0** | -2 | 1 | 3 |
+| B | 0 | **-2** | 1 | 3 |
+| C | 0 | -2 | **0** | 3 |
+| D | 0 | -2 | 0 | **2** |
+| D → B (wrap) | 0 | **-3** | 0 | 2 |
 
-Total cost:
+**Round 4** (this plays the role of the negative-cycle check pass):
 
-$$
-4 + (-2) + 3 = 5
-$$
+| Selected vertex | A | B | C | D |
+| :---: | :---: | :---: | :---: | :---: |
+| A | **0** | -3 | 0 | 2 |
+| B | 0 | **-3** | 0 | 2 |
+| C | 0 | -3 | **-1** | 2 |
+| D | 0 | -3 | -1 | **1** |
+| D → B (wrap) | 0 | **-4** | -1 | 1 |
+
+$dist(B)$ keeps falling by exactly 1 every round ($1 \to -1 \to -2 \to -3 \to -4 \to \dots$), matching the cycle weight of $-1$. Because an edge relaxation still succeeds after the required $|V|-1=3$ rounds, Bellman-Ford's check pass (algorithm lines 10–12) reports **a negative cycle is reachable from the source** instead of returning finite distances.
 
 ### Mermaid Diagram: Bellman-Ford Relaxation Flow
 
@@ -747,7 +1081,7 @@ BELLMAN-FORD(G, w, s)
 
 ---
 
-## 7. Topological Sorting
+## 8. Topological Sorting
 
 Topological sorting is used when some tasks must happen before other tasks.
 
@@ -940,7 +1274,7 @@ Topological sorting is useful when order matters because of dependencies.
 
 ---
 
-## 8. Connected Components
+## 9. Connected Components
 
 Connected components are used for undirected graphs.
 
@@ -1074,7 +1408,7 @@ flowchart TB
 
 ---
 
-## 9. Strongly Connected Components
+## 10. Strongly Connected Components
 
 Strongly connected components are used for directed graphs.
 
@@ -1249,7 +1583,7 @@ High-level idea:
 
 ---
 
-## 10. Union-Find / Disjoint Set Union for Kruskal Support
+## 11. Union-Find / Disjoint Set Union for Kruskal Support
 
 Union-Find, also called **Disjoint Set Union** or **DSU**, is a data structure for maintaining groups of elements.
 
@@ -1382,6 +1716,7 @@ The following table summarizes the major complexity results from this chapter.
 | Adjacency matrix | Any graph | Build: $\Theta(V^2)$ | $\Theta(V^2)$ | Stores every possible vertex pair |
 | Adjacency list | Any graph | Build: $\Theta(V+E)$ | $\Theta(V+E)$ | Stores actual vertices and edges |
 | BFS shortest path | Unweighted graph | $\Theta(V+E)$ | $\Theta(V)$ | Visits each vertex and edge once |
+| Dijkstra's Algorithm | Weighted graph, nonnegative edges | $\Theta(V^2)$ with matrix, $\Theta((V+E)\log V)$ with binary heap | $\Theta(V+E)$ | Greedily finalizes the nearest unvisited vertex |
 | Bellman-Ford | Weighted directed graph | $\Theta(VE)$ | $\Theta(V)$ | Relaxes all edges for $V-1$ rounds |
 | DFS topological sort | DAG | $\Theta(V+E)$ | $\Theta(V)$ | DFS visits each vertex and edge once |
 | Kahn's Algorithm | DAG | $\Theta(V+E)$ | $\Theta(V)$ | Processes each vertex and edge once |
@@ -1400,8 +1735,11 @@ Before moving to the next chapter, make sure you can explain:
 - Why a DAG is needed for topological sorting.
 - How adjacency matrix and adjacency list store the same graph differently.
 - Why BFS gives shortest paths only for unweighted graphs.
+- How Dijkstra's Algorithm relaxes edges and finalizes vertices greedily.
+- Why Dijkstra's Algorithm requires nonnegative edge weights.
 - How Bellman-Ford uses edge relaxation.
 - Why Bellman-Ford needs $|V|-1$ relaxation rounds.
+- Why Bellman-Ford is still needed even though Dijkstra's Algorithm exists.
 - How DFS-based topological sort uses finish time.
 - How connected components are found in an undirected graph.
 - How Kosaraju's Algorithm finds SCCs using two DFS passes.

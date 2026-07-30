@@ -2335,34 +2335,37 @@ BELLMAN-FORD(G, source)
 
 #### Classroom Problem: Six-Vertex Graph (Full 5-Round Relaxation)
 
-**Problem.** For a 6-vertex graph ($A,B,C,D,E,F$) with source $A$, run standard Bellman-Ford: relax **every** edge, once per round, for $|V|-1 = 5$ rounds, then do one extra pass to check for a negative-weight cycle. This produces 6 tables in total (Round 0 through Round 5), the same way the graph earlier in this section uses a `Round` column for its 4-vertex example.
+**Problem.** For a 6-vertex graph ($A,B,C,D,E,F$) with source $A$, run standard Bellman-Ford: relax **every** edge, once per round, for $|V|-1 = 5$ rounds, then do one extra pass to check for a negative-weight cycle.
 
-Confirmed edges from the source vertex:
+Confirmed edges:
 
 | Edge | Weight |
 | :---: | :---: |
 | $A \to B$ | 6 |
-| $A \to C$ | 9 |
+| $A \to C$ | 4 |
 | $A \to D$ | 5 |
 | $B \to E$ | -1 |
+| $C \to B$ | -2 |
+| $D \to C$ | -2 |
+| $D \to F$ | -1 |
 | $E \to F$ | 3 |
 
-> **The edges out of $C$ and $D$ are not filled in yet.** My first attempt at reading them from the handwritten graph (guessing $C \to B = -7$ and $D \to C = -2$) failed a consistency check: running those two edges through a full 5-round Bellman-Ford (relaxing all edges every round, not just once) produces cascading changes all the way through Round 4 and ends at $dist(B)=-4,\ dist(E)=-5,\ dist(F)=-2$ — not the stable $dist(B)=2,\ dist(E)=5,\ dist(F)=6$ shown in the notes. That contradiction means those two weights were misread, so they have been removed rather than left in an unverified state.
->
-> To complete this table correctly, please confirm the remaining edges out of $C$ and $D$ (source, destination, and weight for each) from your lecture slide or board photo. Once confirmed, this section can be filled in with the full Round 0 -> Round 5 table, mirroring the `Round | A | B | C | D` format already used above for the 4-vertex example.
-
-##### Round Table Template
+Distance from $A$ at the end of each full round:
 
 | Round | $A$ | $B$ | $C$ | $D$ | $E$ | $F$ |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | 0 (initial) | 0 | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
-| 1 | 0 | 6 | 9 | 5 | 5 | $\ge 8$* |
-| 2 | 0 | ? | ? | ? | ? | ? |
-| 3 | 0 | ? | ? | ? | ? | ? |
-| 4 | 0 | ? | ? | ? | ? | ? |
-| 5 | 0 | ? | ? | ? | ? | ? |
+| 1 | 0 | 2 | 3 | 5 | 5 | 4 |
+| 2 | 0 | 1 | 3 | 5 | 1 | 4 |
+| 3 | 0 | 1 | 3 | 5 | 0 | 3 |
+| 4 | 0 | 1 | 3 | 5 | 0 | 3 |
+| 5 | 0 | 1 | 3 | 5 | 0 | 3 |
 
-\* Row 1 already reflects $A \to B$, $A \to C$, $A \to D$, and, because Bellman-Ford relaxes every edge in the same round, also $B \to E$ and $E \to F$ using the freshly updated values from earlier in that same round ($dist(E)=6-1=5$, so $dist(F) \le 5+3=8$ candidate before $C$'s and $D$'s edges are even considered). The remaining rounds and the $C$/$D$ columns depend on the two unconfirmed edges above.
+Values stop changing after Round 3. Rounds 4 and 5, plus the negative-cycle check pass, all confirm the table is stable, so no negative cycle is reachable from $A$.
+
+Final shortest distances: $dist(A)=0,\ dist(B)=1,\ dist(C)=3,\ dist(D)=5,\ dist(E)=0,\ dist(F)=3$.
+
+> See [Chapter 11 - Graph Algorithms, Section 7](<../Chapter%2011%20-%20Graph%20Algorithms/README.md#7-single-source-shortest-path---bellman-ford-algorithm>) for the full vertex-by-vertex relaxation trace of this exact graph (round by round, one row per vertex processed), plus a companion example showing what happens when a negative cycle *is* reachable.
 
 - Time Complexity: $\Theta(VE)$, the same as the general Bellman-Ford algorithm above
 - Space Complexity: $\Theta(V)$, or $\Theta(V \cdot \text{rounds})$ if every round's table is kept for a classroom walkthrough

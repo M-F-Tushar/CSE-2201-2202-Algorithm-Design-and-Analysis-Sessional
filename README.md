@@ -207,7 +207,7 @@ Covers divide-and-conquer strategy, merge sort, quick sort, binary search, Stras
 
 ### Chapter 7 - Greedy Algorithms
 
-Covers greedy method, greedy-choice property, optimal substructure, candidate selection, feasibility testing, MST with Prim and Kruskal, Dijkstra's algorithm, fractional knapsack, coin change, Huffman coding, Fibonacci sequence, and activity selection.
+Covers greedy method, greedy-choice property, optimal substructure, candidate selection, feasibility testing, MST with Prim and Kruskal, fractional knapsack, coin change, Huffman coding, Fibonacci sequence, and activity selection.
 
 ### Chapter 8 - Dynamic Programming
 
@@ -223,7 +223,7 @@ Covers branch and bound concept, bounding function, LC search, 0/1 knapsack usin
 
 ### Chapter 11 - Graph Algorithms
 
-Covers tree vs graph comparison, graph categories, adjacency matrix and list representations, unweighted shortest path with BFS, Bellman-Ford, topological sorting, connected components, strongly connected components, and Union-Find / DSU support for Kruskal.
+Covers tree vs graph comparison, graph categories, adjacency matrix and list representations, unweighted shortest path with BFS, single-source shortest path with Dijkstra's Algorithm and Bellman-Ford, topological sorting, connected components, strongly connected components, and Union-Find / DSU support for Kruskal.
 
 ### Chapter 12 - Flow Algorithms
 
