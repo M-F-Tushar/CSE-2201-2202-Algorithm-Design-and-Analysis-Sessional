@@ -2333,9 +2333,11 @@ BELLMAN-FORD(G, source)
 - Space Complexity: $\Theta(V)$ for the standard implementation
 - Full DP table version: $\Theta(V^2)$ space if every round is stored
 
-#### Classroom Problem: Six-Vertex Graph (Topological-Order Relaxation)
+#### Classroom Problem: Six-Vertex Graph (Full 5-Round Relaxation)
 
-**Problem.** For the DAG below with source $A$, find the shortest distance from $A$ to every other vertex.
+**Problem.** For a 6-vertex graph ($A,B,C,D,E,F$) with source $A$, run standard Bellman-Ford: relax **every** edge, once per round, for $|V|-1 = 5$ rounds, then do one extra pass to check for a negative-weight cycle. This produces 6 tables in total (Round 0 through Round 5), the same way the graph earlier in this section uses a `Round` column for its 4-vertex example.
+
+Confirmed edges from the source vertex:
 
 | Edge | Weight |
 | :---: | :---: |
@@ -2343,52 +2345,27 @@ BELLMAN-FORD(G, source)
 | $A \to C$ | 9 |
 | $A \to D$ | 5 |
 | $B \to E$ | -1 |
-| $C \to B$ | -7 |
-| $D \to C$ | -2 |
-| $D \to F$ | 1 |
 | $E \to F$ | 3 |
 
-Because this graph has **no cycles**, it can be solved with a single relaxation pass in topological order ($A,B,C,D,E,F$) instead of the usual $|V|-1$ Bellman-Ford rounds over *all* edges: each vertex's own outgoing edges are relaxed exactly once, right after that vertex's shortest distance is finalized. This uses the same relaxation rule as Bellman-Ford, applied in the more efficient order made possible by acyclicity.
+> **The edges out of $C$ and $D$ are not filled in yet.** My first attempt at reading them from the handwritten graph (guessing $C \to B = -7$ and $D \to C = -2$) failed a consistency check: running those two edges through a full 5-round Bellman-Ford (relaxing all edges every round, not just once) produces cascading changes all the way through Round 4 and ends at $dist(B)=-4,\ dist(E)=-5,\ dist(F)=-2$ — not the stable $dist(B)=2,\ dist(E)=5,\ dist(F)=6$ shown in the notes. That contradiction means those two weights were misread, so they have been removed rather than left in an unverified state.
+>
+> To complete this table correctly, please confirm the remaining edges out of $C$ and $D$ (source, destination, and weight for each) from your lecture slide or board photo. Once confirmed, this section can be filled in with the full Round 0 -> Round 5 table, mirroring the `Round | A | B | C | D` format already used above for the 4-vertex example.
 
-##### Relaxation Trace
+##### Round Table Template
 
-| After processing | $A$ | $B$ | $C$ | $D$ | $E$ | $F$ |
+| Round | $A$ | $B$ | $C$ | $D$ | $E$ | $F$ |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| (initial) | 0 | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
-| $A$ | 0 | 6 | 9 | 5 | $\infty$ | $\infty$ |
-| $B$ | 0 | 6 | 9 | 5 | 5 | $\infty$ |
-| $C$ | 0 | **2** | 9 | 5 | 5 | $\infty$ |
-| $D$ | 0 | 2 | **3** | 5 | 5 | **6** |
-| $E$ | 0 | 2 | 3 | 5 | 5 | 6 |
+| 0 (initial) | 0 | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+| 1 | 0 | 6 | 9 | 5 | 5 | $\ge 8$* |
+| 2 | 0 | ? | ? | ? | ? | ? |
+| 3 | 0 | ? | ? | ? | ? | ? |
+| 4 | 0 | ? | ? | ? | ? | ? |
+| 5 | 0 | ? | ? | ? | ? | ? |
 
-Key relaxations:
+\* Row 1 already reflects $A \to B$, $A \to C$, $A \to D$, and, because Bellman-Ford relaxes every edge in the same round, also $B \to E$ and $E \to F$ using the freshly updated values from earlier in that same round ($dist(E)=6-1=5$, so $dist(F) \le 5+3=8$ candidate before $C$'s and $D$'s edges are even considered). The remaining rounds and the $C$/$D$ columns depend on the two unconfirmed edges above.
 
-$$
-\text{after } B: \quad dist(E) = \min(\infty,\ dist(B)+w(B,E)) = \min(\infty,\ 6-1) = 5
-$$
-
-$$
-\text{after } C: \quad dist(B) = \min(6,\ dist(C)+w(C,B)) = \min(6,\ 9-7) = 2
-$$
-
-$$
-\text{after } D: \quad dist(C) = \min(9,\ dist(D)+w(D,C)) = \min(9,\ 5-2) = 3, \qquad dist(F) = \min(\infty,\ dist(D)+w(D,F)) = \min(\infty,\ 5+1) = 6
-$$
-
-$$
-\text{after } E: \quad dist(F) = \min(6,\ dist(E)+w(E,F)) = \min(6,\ 5+3) = 6 \ \text{(no improvement)}
-$$
-
-The table stops changing after processing $E$, confirming the final shortest distances:
-
-$$
-dist(A)=0,\ dist(B)=2,\ dist(C)=3,\ dist(D)=5,\ dist(E)=5,\ dist(F)=6
-$$
-
-**Note on reconstruction:** the edges $C \to B$, $D \to C$, and $D \to F$ were back-derived from the relaxation trace (solving for the weight that makes each recorded distance change match exactly), since they were the hardest edges to read from the original handwritten graph. Every entry in the table above reproduces the classroom trace exactly with this edge set, which is strong evidence it is correct — but double-check these three weights against your lecture slide if you still have it, since $C \to B = -7$ in particular is easy to misread by hand.
-
-- Time Complexity: $\Theta(V+E)$ for the topological-order pass (versus $\Theta(VE)$ for general Bellman-Ford on a graph that may contain cycles)
-- Space Complexity: $\Theta(V)$
+- Time Complexity: $\Theta(VE)$, the same as the general Bellman-Ford algorithm above
+- Space Complexity: $\Theta(V)$, or $\Theta(V \cdot \text{rounds})$ if every round's table is kept for a classroom walkthrough
 
 ---
 

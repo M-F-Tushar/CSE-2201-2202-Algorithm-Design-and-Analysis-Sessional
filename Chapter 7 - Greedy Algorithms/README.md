@@ -30,6 +30,9 @@ This chapter keeps only the requested Greedy topics and the requested problem li
    - [MST Time Complexity](#mst-time-complexity)
    - [MST Applications](#mst-applications)
    - [Dijkstra's Algorithm](#dijkstras-algorithm)
+     - [Relaxation Condition](#relaxation-condition)
+     - [Worked Example 1: Undirected Graph](#worked-example-1-undirected-graph)
+     - [Worked Example 2: Directed Graph](#worked-example-2-directed-graph)
 5. [Problems](#problems)
    - [Fractional Knapsack](#fractional-knapsack)
    - [Coin Change](#coin-change)
@@ -634,60 +637,180 @@ Always finalize the unvisited vertex with the smallest tentative distance.
 
 The algorithm is correct because with nonnegative edge weights, no later path can make a finalized vertex cheaper.
 
+#### Relaxation Condition
+
+Every time a vertex $u$ is finalized, every edge $(u, v)$ leaving $u$ is **relaxed** using this test:
+
+$$
+\text{if } \big(d(u) + c(u,v) < d(v)\big) \implies d(v) = d(u) + c(u,v)
+$$
+
+In words: if going through $u$ gives a cheaper way to reach $v$ than the current best known distance $d(v)$, replace $d(v)$ with that cheaper value (and remember $u$ as the new parent of $v$). If the new total is **not** smaller, $d(v)$ is left unchanged.
+
+For example, relaxing the source's own first edge $A \to B$ with weight $14$ when $d(A)=0$ and $d(B)=\infty$ gives:
+
+$$
+0 + 14 = 14 < \infty \quad \Rightarrow \quad d(B) = 14
+$$
+
 #### Important Condition
 
 Dijkstra's Algorithm requires all edge weights to be nonnegative.
 
 If negative edges exist, the greedy choice may be wrong because a vertex finalized early could later receive a cheaper path through a negative edge.
 
-#### Worked Example
+#### Worked Example 1: Undirected Graph
 
-Source vertex: $A$
-
-Edges:
-
-| Edge | Weight |
-| :---: | :---: |
-| $A \to B$ | 4 |
-| $A \to C$ | 1 |
-| $C \to B$ | 2 |
-| $C \to D$ | 4 |
-| $B \to E$ | 4 |
-| $D \to E$ | 1 |
-
-Selection table:
-
-| Step | Finalized vertex | Current shortest distance | Relaxation result |
-| :---: | :---: | :---: | :--- |
-| 0 | - | $dist(A)=0$ | All others are infinity |
-| 1 | $A$ | 0 | $B=4$, $C=1$ |
-| 2 | $C$ | 1 | $B=\min(4,1+2)=3$, $D=5$ |
-| 3 | $B$ | 3 | $E=\min(\infty,3+4)=7$ |
-| 4 | $D$ | 5 | $E=\min(7,5+1)=6$ |
-| 5 | $E$ | 6 | Done |
-
-Final shortest distances from $A$:
-
-| Vertex | Distance | One shortest path |
-| :---: | :---: | :--- |
-| $A$ | 0 | $A$ |
-| $B$ | 3 | $A \to C \to B$ |
-| $C$ | 1 | $A \to C$ |
-| $D$ | 5 | $A \to C \to D$ |
-| $E$ | 6 | $A \to C \to D \to E$ |
-
-#### Mermaid Diagram: Dijkstra's Greedy Finalization
+Source vertex: $A$. This example finalizes one vertex per step, always picking the **unvisited vertex with the smallest tentative distance**, then relaxing all of its edges.
 
 ```mermaid
 flowchart LR
-	Init["Initialize source A = 0<br/>others = infinity"] --> PickA["Pick A<br/>distance 0"]
-	PickA --> PickC["Pick C<br/>distance 1"]
-	PickC --> PickB["Pick B<br/>distance 3"]
-	PickB --> PickD["Pick D<br/>distance 5"]
-	PickD --> PickE["Pick E<br/>distance 6"]
+	A((A)) ---|14| B((B))
+	A ---|9| C((C))
+	A ---|7| F((F))
+	B ---|2| C
+	B ---|8| D((D))
+	C ---|11| E((E))
+	C ---|10| F
+	D ---|6| E
+	F ---|15| E
+
+	classDef src fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
+	class A src;
+```
+
+**Step 0 - Initialize.** $d(A) = 0$, every other vertex starts at $\infty$.
+
+**Step 1 - Finalize $A$ (distance 0).** Relax all edges out of $A$:
+
+- $0 + 14 = 14 < \infty \Rightarrow d(B) = 14$
+- $0 + 9 = 9 < \infty \Rightarrow d(C) = 9$
+- $0 + 7 = 7 < \infty \Rightarrow d(F) = 7$
+
+**Step 2 - Smallest tentative distance is $F = 7$, so finalize $F$.** Relax edges out of $F$ (to $C$ and $E$):
+
+- $7 + 10 = 17$, compare with $d(C) = 9$. Since $17 \not< 9$, $C$ stays $9$.
+- $7 + 15 = 22 < \infty \Rightarrow d(E) = 22$
+
+**Step 3 - Smallest remaining is $C = 9$, so finalize $C$.** Relax edges out of $C$ (to $B$ and $E$):
+
+- $9 + 2 = 11 < 14 \Rightarrow d(B) = 11$
+- $9 + 11 = 20 < 22 \Rightarrow d(E) = 20$
+
+**Step 4 - Smallest remaining is $B = 11$, so finalize $B$.** Relax edges out of $B$ (to $D$):
+
+- $11 + 8 = 19 < \infty \Rightarrow d(D) = 19$
+
+**Step 5 - Smallest remaining is $D = 19$, so finalize $D$.** Relax edges out of $D$ (to $E$):
+
+- $19 + 6 = 25$, compare with $d(E) = 20$. Since $25 \not< 20$, $E$ stays $20$.
+
+**Step 6 - Only $E = 20$ remains, so finalize $E$.** All vertices are now visited.
+
+Distance table, one row per finalized (visited) vertex, in the exact order they were finalized:
+
+| Visited $\downarrow$ | A | B | C | D | E | F |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **A** | **0** | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+| **F** | | 14 | 9 | $\infty$ | $\infty$ | **7** |
+| **C** | | 14 | **9** | $\infty$ | 22 | - |
+| **B** | | **11** | - | $\infty$ | 20 | |
+| **D** | | - | | **19** | 20 | |
+| **E** | | | | - | **20** | |
+
+Bold values are the distances finalized (boxed) in that step; a dash `-` marks a vertex already finalized in an earlier step (its column is closed off, matching the vertical line drawn through it on the board).
+
+Final shortest distances from $A$: $A=0$, $F=7$, $C=9$, $B=11$, $D=19$, $E=20$.
+
+Reconstructing paths by walking parent pointers backward from the destination:
+
+- **Path to $E$:** $E$ was last updated by $C$ ($9+11=20$), and $C$ was reached from $A$. Reading backward: $E, C, A$, so forward the path is $A \to C \to E$ with total cost $9 + 11 = 20$.
+- **Path to $D$:** $D$ was last updated by $B$ ($11+8=19$), $B$ was updated by $C$ ($9+2=11$), and $C$ was reached from $A$. Reading backward: $D, B, C, A$, so forward the path is $A \to C \to B \to D$ with total cost $9 + 2 + 8 = 19$.
+
+#### Worked Example 2: Directed Graph
+
+The same relaxation rule applies to a **directed** graph; a vertex can only relax edges that point *out* of it.
+
+Source vertex: $A$.
+
+```mermaid
+flowchart LR
+	A((A)) -->|11| F((F))
+	A -->|2| B((B))
+	A -->|5| C((C))
+	F -->|17| D((D))
+	B -->|5| D
+	B -->|13| E((E))
+	C -->|8| B
+	C -->|12| E
+	E -->|1| D
+
+	classDef src fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
+	class A src;
+```
+
+**Step 0 - Initialize.** $d(A) = 0$, every other vertex starts at $\infty$.
+
+**Step 1 - Finalize $A$ (distance 0).** Relax all edges out of $A$:
+
+- $0 + 11 = 11 < \infty \Rightarrow d(F) = 11$
+- $0 + 2 = 2 < \infty \Rightarrow d(B) = 2$
+- $0 + 5 = 5 < \infty \Rightarrow d(C) = 5$
+
+**Step 2 - Smallest tentative distance is $B = 2$, so finalize $B$.** Relax edges out of $B$ (to $D$, $E$, and $C$):
+
+- $2 + 5 = 7 < \infty \Rightarrow d(D) = 7$
+- $2 + 13 = 15 < \infty \Rightarrow d(E) = 15$
+- $B$ has no outgoing edge to $C$ in this graph, so $C$ is untouched here.
+
+**Step 3 - Smallest remaining is $C = 5$, so finalize $C$.** Relax edges out of $C$ (to $B$ and $E$):
+
+- $C \to B$: $B$ is already finalized, so this edge is not used again.
+- $5 + 12 = 17$, compare with $d(E) = 15$. Since $17 \not< 15$, $E$ stays $15$.
+
+**Step 4 - Smallest remaining is $D = 7$, so finalize $D$.** $D$ has no outgoing edges in this graph, so nothing is relaxed.
+
+**Step 5 - Smallest remaining is $F = 11$, so finalize $F$.** Relax edges out of $F$ (to $D$):
+
+- $11 + 17 = 28$, compare with $d(D) = 7$. Since $28 \not< 7$, $D$ stays $7$ (it is also already finalized).
+
+**Step 6 - Only $E = 15$ remains, so finalize $E$.** Relax edges out of $E$ (to $D$):
+
+- $15 + 1 = 16$, compare with $d(D) = 7$. Since $16 \not< 7$, $D$ stays $7$.
+
+Distance table, one row per finalized (visited) vertex, in the exact order they were finalized:
+
+| Visited $\downarrow$ | A | B | C | D | E | F |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **A** | **0** | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+| **B** | | **2** | 5 | $\infty$ | $\infty$ | 11 |
+| **C** | | - | **5** | 7 | 15 | 11 |
+| **D** | | | - | **7** | 15 | 11 |
+| **F** | | | | - | 15 | **11** |
+| **E** | | | | | **15** | - |
+
+Bold values are the distances finalized (boxed) in that step; a dash `-` marks a vertex already finalized in an earlier step.
+
+Final shortest distances from $A$: $A=0$, $B=2$, $C=5$, $D=7$, $F=11$, $E=15$.
+
+Reconstructing the path to $E$: $E$ was last updated by $B$ ($2+13=15$), and $B$ was reached directly from $A$. Reading backward: $E, B, A$, so forward the path is $A \to B \to E$ with total cost $2 + 13 = 15$.
+
+#### Mermaid Diagram: Dijkstra's Greedy Finalization
+
+The diagram below visualizes the finalization order from **Worked Example 1**: $A \to F \to C \to B \to D \to E$.
+
+```mermaid
+flowchart LR
+	Init["Initialize source A = 0<br/>others = infinity"] --> PickA["Finalize A<br/>distance 0"]
+	PickA --> PickF["Finalize F<br/>distance 7"]
+	PickF --> PickC["Finalize C<br/>distance 9"]
+	PickC --> PickB["Finalize B<br/>distance 11"]
+	PickB --> PickD["Finalize D<br/>distance 19"]
+	PickD --> PickE["Finalize E<br/>distance 20"]
 	PickE --> Done["All reachable vertices finalized"]
 
-	Relax["Relax outgoing edges<br/>update tentative distances"] -. after each pick .-> PickA
+	Relax["Relax outgoing edges<br/>d(v) = min(d(v), d(u) + c(u,v))"] -. after each pick .-> PickA
+	Relax -. after each pick .-> PickF
 	Relax -. after each pick .-> PickC
 	Relax -. after each pick .-> PickB
 	Relax -. after each pick .-> PickD
@@ -697,7 +820,7 @@ flowchart LR
 	classDef helper fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
 	classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
 	class Init init;
-	class PickA,PickC,PickB,PickD,PickE step;
+	class PickA,PickF,PickC,PickB,PickD,PickE step;
 	class Relax helper;
 	class Done answer;
 ```
