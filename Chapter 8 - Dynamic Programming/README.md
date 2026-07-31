@@ -1973,6 +1973,25 @@ Given a weighted directed graph, find the shortest path distance between every p
 
 Floyd-Warshall allows each vertex to become an intermediate point one by one and updates the distance matrix accordingly.
 
+#### Working with Negative Edge Weights
+
+Floyd-Warshall works correctly with a mix of negative and positive edge weights, **provided the graph has no negative-weight cycle**.
+
+A negative cycle is a directed cycle whose total weight is negative. For example, if $A \to B$ has weight $-2$ and $B \to A$ also has weight $-2$, the cycle $A \to B \to A$ costs $-4$:
+
+```mermaid
+flowchart LR
+    A((A)) -->|"-2"| B((B))
+    B -->|"-2"| A
+
+    classDef node fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827;
+    class A,B node;
+```
+
+If such a cycle exists, walking around it repeatedly keeps lowering the total cost with no lower bound, so no finite shortest path exists between the vertices on that cycle. This is why the recurrence is only valid under the assumption of no negative cycles.
+
+**Detecting a negative cycle after the fact:** once $D^{(n)}$ is fully computed, check the diagonal. Normally $D[i,i] = 0$ for every vertex $i$ (the shortest path from a vertex to itself). If any $D[i,i] < 0$, vertex $i$ lies on a negative cycle, and the computed distances can no longer be trusted as shortest paths.
+
 #### Inputs and Output
 
 - **Input:** adjacency weight matrix $W$ of size $n \times n$.
@@ -2091,110 +2110,207 @@ FLOYD-WARSHALL(W, n)
 - Time Complexity: $\Theta(n^3)$
 - Space Complexity: $\Theta(n^2)$
 
-#### Classroom Problem: Four-Vertex Graph
+#### Classroom Problem: Four-Vertex Graph with Negative Edges
 
-**Problem.** Find all-pairs shortest paths for a 4-vertex directed graph with edges:
+**Problem.** Find all-pairs shortest paths for the following 4-vertex directed graph, which mixes positive and negative edge weights but contains **no negative cycle**:
 
 | Edge | Weight |
 | :---: | :---: |
-| $1 \to 2$ | 2 |
-| $1 \to 4$ | 5 |
-| $2 \to 1$ | 3 |
-| $2 \to 4$ | 4 |
-| $3 \to 2$ | 6 |
-| $4 \to 3$ | 2 |
+| $1 \to 2$ | 1 |
+| $1 \to 3$ | -2 |
+| $2 \to 1$ | 4 |
+| $2 \to 3$ | 3 |
+| $3 \to 4$ | 2 |
+| $4 \to 1$ | 5 |
 
 All other pairs have no direct edge ($\infty$).
+
+```mermaid
+flowchart LR
+    V1((1)) -->|"1"| V2((2))
+    V2 -->|"4"| V1
+    V1 -->|"-2"| V3((3))
+    V2 -->|"3"| V3
+    V3 -->|"2"| V4((4))
+    V4 -->|"5"| V1
+
+    classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
+    class V1,V2,V3,V4 node;
+```
 
 ##### Initial Matrix $D^{(0)}$
 
 $$
 D^{(0)} =
 \begin{pmatrix}
-0 & 2 & \infty & 5 \\
-3 & 0 & \infty & 4 \\
-\infty & 6 & 0 & \infty \\
-\infty & \infty & 2 & 0
+0 & 1 & -2 & \infty \\
+4 & 0 & 3 & \infty \\
+\infty & \infty & 0 & 2 \\
+5 & \infty & \infty & 0
 \end{pmatrix}
 $$
 
 ##### $D^{(1)}$: Allow Vertex 1 as Intermediate
 
-No path improves by routing through vertex 1 (nothing points into 1 except vertex 2, and vertex 2's direct distances are already at least as good), so:
+Row 1 and column 1 never change at $k=1$, since a path cannot get shorter by detouring through its own endpoint. Every other cell is checked against a detour through vertex 1:
 
 $$
-D^{(1)} = D^{(0)}
+D[2,3] = \min(3,\ D[2,1]+D[1,3]) = \min(3,\ 4+(-2)) = \min(3,\ 2) = 2
+$$
+
+$$
+D[2,4] = \min(\infty,\ D[2,1]+D[1,4]) = \min(\infty,\ 4+\infty) = \infty
+$$
+
+$$
+D[3,2] = \min(\infty,\ D[3,1]+D[1,2]) = \min(\infty,\ \infty+1) = \infty
+$$
+
+$$
+D[3,4] = \min(2,\ D[3,1]+D[1,4]) = \min(2,\ \infty) = 2
+$$
+
+$$
+D[4,2] = \min(\infty,\ D[4,1]+D[1,2]) = \min(\infty,\ 5+1) = 6
+$$
+
+$$
+D[4,3] = \min(\infty,\ D[4,1]+D[1,3]) = \min(\infty,\ 5+(-2)) = 3
+$$
+
+The negative edge already pays off here: the direct edge $2 \to 3$ costs 3, but detouring $2 \to 1 \to 3$ costs $4+(-2)=2$, so $D[2,3]$ drops to **2**.
+
+$$
+D^{(1)} =
+\begin{pmatrix}
+0 & 1 & -2 & \infty \\
+4 & 0 & 2 & \infty \\
+\infty & \infty & 0 & 2 \\
+5 & 6 & 3 & 0
+\end{pmatrix}
 $$
 
 ##### $D^{(2)}$: Allow Vertices 1 and 2 as Intermediate
 
-Row 3 improves by detouring through vertex 2:
+Row 2 and column 2 stay fixed at $k=2$. Checking the remaining cells against a detour through vertex 2:
 
 $$
-D[3,1] = \min(\infty,\ D[3,2]+D[2,1]) = \min(\infty,\ 6+3) = 9
-$$
-
-$$
-D[3,4] = \min(\infty,\ D[3,2]+D[2,4]) = \min(\infty,\ 6+4) = 10
+D[1,3] = \min(-2,\ D[1,2]+D[2,3]) = \min(-2,\ 1+2) = -2
 $$
 
 $$
-D^{(2)} =
+D[1,4] = \min(\infty,\ D[1,2]+D[2,4]) = \min(\infty,\ 1+\infty) = \infty
+$$
+
+$$
+D[3,1] = \min(\infty,\ D[3,2]+D[2,1]) = \min(\infty,\ \infty+4) = \infty
+$$
+
+$$
+D[3,4] = \min(2,\ D[3,2]+D[2,4]) = \min(2,\ \infty) = 2
+$$
+
+$$
+D[4,1] = \min(5,\ D[4,2]+D[2,1]) = \min(5,\ 6+4) = 5
+$$
+
+$$
+D[4,3] = \min(3,\ D[4,2]+D[2,3]) = \min(3,\ 6+2) = 3
+$$
+
+No cell improves, so:
+
+$$
+D^{(2)} = D^{(1)} =
 \begin{pmatrix}
-0 & 2 & \infty & 5 \\
-3 & 0 & \infty & 4 \\
-9 & 6 & 0 & 10 \\
-\infty & \infty & 2 & 0
+0 & 1 & -2 & \infty \\
+4 & 0 & 2 & \infty \\
+\infty & \infty & 0 & 2 \\
+5 & 6 & 3 & 0
 \end{pmatrix}
 $$
 
 ##### $D^{(3)}$: Allow Vertices 1, 2, and 3 as Intermediate
 
-Only row 4 has a finite entry in column 3 ($D[4,3]=2$), so row 4 improves by detouring through vertex 3, using the updated row 3 from $D^{(2)}$:
+Row 3 and column 3 stay fixed at $k=3$. Checking the remaining cells against a detour through vertex 3:
 
 $$
-D[4,1] = \min(\infty,\ D[4,3]+D[3,1]) = \min(\infty,\ 2+9) = 11
+D[1,2] = \min(1,\ D[1,3]+D[3,2]) = \min(1,\ -2+\infty) = 1
 $$
 
 $$
-D[4,2] = \min(\infty,\ D[4,3]+D[3,2]) = \min(\infty,\ 2+6) = 8
+D[1,4] = \min(\infty,\ D[1,3]+D[3,4]) = \min(\infty,\ -2+2) = 0
 $$
+
+$$
+D[2,1] = \min(4,\ D[2,3]+D[3,1]) = \min(4,\ 2+\infty) = 4
+$$
+
+$$
+D[2,4] = \min(\infty,\ D[2,3]+D[3,4]) = \min(\infty,\ 2+2) = 4
+$$
+
+$$
+D[4,1] = \min(5,\ D[4,3]+D[3,1]) = \min(5,\ 3+\infty) = 5
+$$
+
+$$
+D[4,2] = \min(6,\ D[4,3]+D[3,2]) = \min(6,\ 3+\infty) = 6
+$$
+
+Two cells improve here: $D[1,4]$ drops from $\infty$ to **0** via $1 \to 3 \to 4$ (cost $-2+2$), and $D[2,4]$ drops from $\infty$ to **4** via $2 \to 3 \to 4$.
 
 $$
 D^{(3)} =
 \begin{pmatrix}
-0 & 2 & \infty & 5 \\
-3 & 0 & \infty & 4 \\
-9 & 6 & 0 & 10 \\
-11 & 8 & 2 & 0
+0 & 1 & -2 & 0 \\
+4 & 0 & 2 & 4 \\
+\infty & \infty & 0 & 2 \\
+5 & 6 & 3 & 0
 \end{pmatrix}
 $$
 
 ##### $D^{(4)}$: Allow All Vertices as Intermediate (Final Matrix)
 
-Column 4 now has finite entries in every row, so every row can detour through vertex 4 into row 4's values $[11,8,2,0]$:
+Row 4 and column 4 stay fixed at $k=4$. Checking the remaining cells against a detour through vertex 4:
 
 $$
-D[1,3] = \min(\infty,\ D[1,4]+D[4,3]) = \min(\infty,\ 5+2) = 7
+D[1,2] = \min(1,\ D[1,4]+D[4,2]) = \min(1,\ 0+6) = 1
 $$
 
 $$
-D[2,3] = \min(\infty,\ D[2,4]+D[4,3]) = \min(\infty,\ 4+2) = 6
+D[1,3] = \min(-2,\ D[1,4]+D[4,3]) = \min(-2,\ 0+3) = -2
 $$
 
-No other cell improves, giving the final shortest-path matrix:
+$$
+D[2,1] = \min(4,\ D[2,4]+D[4,1]) = \min(4,\ 4+5) = 4
+$$
+
+$$
+D[2,3] = \min(2,\ D[2,4]+D[4,3]) = \min(2,\ 4+3) = 2
+$$
+
+$$
+D[3,1] = \min(\infty,\ D[3,4]+D[4,1]) = \min(\infty,\ 2+5) = 7
+$$
+
+$$
+D[3,2] = \min(\infty,\ D[3,4]+D[4,2]) = \min(\infty,\ 2+6) = 8
+$$
+
+Vertex 3 finally reaches vertices 1 and 2 by routing through vertex 4: $3 \to 4 \to 1$ costs $2+5=7$, and $3 \to 4 \to 2$ costs $2+6=8$.
 
 $$
 D^{(4)} =
 \begin{pmatrix}
-0 & 2 & 7 & 5 \\
-3 & 0 & 6 & 4 \\
-9 & 6 & 0 & 10 \\
-11 & 8 & 2 & 0
+0 & 1 & -2 & 0 \\
+4 & 0 & 2 & 4 \\
+7 & 8 & 0 & 2 \\
+5 & 6 & 3 & 0
 \end{pmatrix}
 $$
 
-**Note on edge $2 \to 4$:** this worked example uses weight 4 for edge $2 \to 4$. That value is confirmed correct because expanding all four matrices $D^{(0)}$ through $D^{(4)}$ with weight 4 reproduces every intermediate and final value exactly (including $D[3,4]=10$, $D[4,1]=11$, $D[4,2]=8$, $D[1,3]=7$, and $D[2,3]=6$). If a different source lists this edge as weight 9 instead, every matrix from $D^{(2)}$ onward would need to be recomputed.
+**Negative-cycle check:** every diagonal entry of $D^{(4)}$ is still $0$, confirming there is no negative cycle in this graph and all shortest distances above are valid.
 
 ---
 
