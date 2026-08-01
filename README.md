@@ -211,7 +211,7 @@ Covers greedy method, greedy-choice property, optimal substructure, candidate se
 
 ### Chapter 8 - Dynamic Programming
 
-Covers memoization, tabulation, greedy vs DP comparison, principle of optimality, climbing stairs, 0/1 knapsack, rod cutting, LCS, matrix chain multiplication, optimal BST, multistage graph, TSP, Floyd-Warshall, Bellman-Ford, and reliability design.
+Covers memoization, tabulation, greedy vs DP comparison, principle of optimality, climbing stairs, 0/1 knapsack, rod cutting, LCS, matrix chain multiplication, optimal BST, multistage graph, TSP, and reliability design.
 
 ### Chapter 9 - Backtracking
 
@@ -223,7 +223,7 @@ Covers branch and bound concept, bounding function, LC search, 0/1 knapsack usin
 
 ### Chapter 11 - Graph Algorithms
 
-Covers tree vs graph comparison, graph categories, adjacency matrix and list representations, unweighted shortest path with BFS, single-source shortest path with Dijkstra's Algorithm and Bellman-Ford, topological sorting, connected components, strongly connected components, and Union-Find / DSU support for Kruskal.
+Covers tree vs graph comparison, graph categories, adjacency matrix and list representations, unweighted shortest path with BFS, single-source shortest path with Dijkstra's Algorithm and Bellman-Ford, all-pairs shortest path with Floyd-Warshall, topological sorting, connected components, strongly connected components, and Union-Find / DSU support for Kruskal.
 
 ### Chapter 12 - Flow Algorithms
 

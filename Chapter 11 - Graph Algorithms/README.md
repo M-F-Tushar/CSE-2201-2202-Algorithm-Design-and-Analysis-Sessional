@@ -29,19 +29,22 @@ This chapter keeps only the requested graph theory and graph algorithm topics. E
    - [Worked Example 1: Undirected Graph](#worked-example-1-undirected-graph)
    - [Worked Example 2: Directed Graph](#worked-example-2-directed-graph)
 8. [Single Source Shortest Path - Bellman-Ford Algorithm](#7-single-source-shortest-path---bellman-ford-algorithm)
-9. [Topological Sorting](#8-topological-sorting)
+9. [Shortest Path (All Pairs) - Floyd-Warshall Algorithm](#8-shortest-path-all-pairs---floyd-warshall-algorithm)
+   - [Working with Negative Edge Weights](#working-with-negative-edge-weights)
+   - [Classroom Problem: Four-Vertex Graph with Negative Edges](#classroom-problem-four-vertex-graph-with-negative-edges)
+10. [Topological Sorting](#9-topological-sorting)
    - [Definition](#definition)
    - [DAG](#dag)
    - [DFS-Based Topological Sort](#dfs-based-topological-sort)
    - [Kahn's Algorithm - Optional/Self-Study](#kahns-algorithm---optionalself-study)
    - [Time Complexity](#time-complexity)
    - [Applications](#applications)
-10. [Connected Components](#9-connected-components)
-11. [Strongly Connected Components](#10-strongly-connected-components)
+11. [Connected Components](#10-connected-components)
+12. [Strongly Connected Components](#11-strongly-connected-components)
 	- [Kosaraju's Algorithm](#kosarajus-algorithm)
 	- [Tarjan's Algorithm - Optional/Self-Study](#tarjans-algorithm---optionalself-study)
-12. [Union-Find / Disjoint Set Union for Kruskal Support](#11-union-find--disjoint-set-union-for-kruskal-support)
-13. [Analyze Time Complexity of Above Topics](#analyze-time-complexity-of-above-topics)
+13. [Union-Find / Disjoint Set Union for Kruskal Support](#12-union-find--disjoint-set-union-for-kruskal-support)
+14. [Analyze Time Complexity of Above Topics](#analyze-time-complexity-of-above-topics)
 
 ---
 
@@ -96,10 +99,11 @@ Study this chapter in the following order:
 4. Use BFS to solve shortest path in an unweighted graph.
 5. Learn the general shortest path idea, then Dijkstra's Algorithm for weighted graphs with nonnegative edges.
 6. Learn Bellman-Ford for weighted graphs that may contain negative edges.
-7. Learn topological sorting for dependency ordering in a DAG.
-8. Learn connected components in undirected graphs.
-9. Learn strongly connected components in directed graphs.
-10. Learn Union-Find / DSU as support for Kruskal's algorithm.
+7. Learn Floyd-Warshall to find shortest paths between all pairs of vertices at once.
+8. Learn topological sorting for dependency ordering in a DAG.
+9. Learn connected components in undirected graphs.
+10. Learn strongly connected components in directed graphs.
+11. Learn Union-Find / DSU as support for Kruskal's algorithm.
 
 ### Visual Map: Graph Algorithm Roadmap
 
@@ -125,6 +129,7 @@ flowchart TB
 
 	Weighted --> Dijkstra["Dijkstra's Algorithm<br/>nonnegative edge weights"]
 	Weighted --> BF["Bellman-Ford<br/>handles negative edges"]
+	Weighted --> FW["Floyd-Warshall<br/>all-pairs shortest paths"]
 	Sets --> DSU["Union-Find / DSU<br/>cycle support for Kruskal"]
 
 	classDef root fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
@@ -133,7 +138,7 @@ flowchart TB
 	classDef detail fill:#f1f5f9,stroke:#64748b,stroke-dasharray: 5 5,color:#0f172a;
 	class Graph root;
 	class Types,Store,Traverse,Weighted,Sets group;
-	class BFS,Topo,CC,SCC,Dijkstra,BF,DSU algo;
+	class BFS,Topo,CC,SCC,Dijkstra,BF,FW,DSU algo;
 	class T1,T2,T3,Matrix,List detail;
 ```
 
@@ -425,8 +430,9 @@ The meaning of "minimum cost" depends on the graph:
 | :--- | :--- | :--- |
 | Single pair shortest path | What is the shortest path from $s$ to $t$? | BFS for unweighted graph |
 | Single source shortest path | What are the shortest paths from $s$ to all vertices? | BFS, Dijkstra's Algorithm, or Bellman-Ford |
+| All-pairs shortest path | What are the shortest paths between every pair of vertices? | Floyd-Warshall |
 | Weighted graph with only nonnegative edges | Which algorithm is fastest? | Dijkstra's Algorithm |
-| Weighted graph with negative edges | Can shortest paths still be found? | Bellman-Ford |
+| Weighted graph with negative edges | Can shortest paths still be found? | Bellman-Ford (single source) or Floyd-Warshall (all pairs) |
 
 ### Algorithm Selection in This Chapter
 
@@ -434,7 +440,8 @@ The meaning of "minimum cost" depends on the graph:
 | :--- | :--- | :--- |
 | Unweighted graph | BFS | BFS explores by distance layers |
 | Weighted graph with only nonnegative edges | Dijkstra's Algorithm | Greedily finalizes the nearest unvisited vertex first |
-| Weighted graph with negative edges | Bellman-Ford | Handles negative edges if there is no reachable negative cycle |
+| Weighted graph with negative edges, single source | Bellman-Ford | Handles negative edges if there is no reachable negative cycle |
+| Weighted graph with negative edges, all pairs needed | Floyd-Warshall | Computes every pair's shortest path in one $\Theta(n^3)$ pass |
 | Graph with reachable negative cycle | No finite shortest path | Distance can keep decreasing forever |
 
 ### Visual Map: Shortest Path Choice
@@ -445,8 +452,11 @@ flowchart TD
 	Unweighted -->|Yes| BFS["Use BFS<br/>distance = number of edges"]
 	Unweighted -->|No| Negative{"Any negative edge weight?"}
 	Negative -->|No| Dijkstra["Use Dijkstra's Algorithm<br/>finalize nearest vertex greedily"]
-	Negative -->|Yes| BF["Use Bellman-Ford<br/>relax edges V - 1 times"]
+	Negative -->|Yes| AllPairs{"Need all-pairs distances?"}
+	AllPairs -->|Yes| FW["Use Floyd-Warshall<br/>relax through every vertex k"]
+	AllPairs -->|No| BF["Use Bellman-Ford<br/>relax edges V - 1 times"]
 	BF --> Cycle{"Negative cycle reachable?"}
+	FW --> Cycle
 	Cycle -->|Yes| Bad["No finite shortest path"]
 	Cycle -->|No| Dist["Shortest distances found"]
 
@@ -455,8 +465,8 @@ flowchart TD
 	classDef warn fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
 	classDef result fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
 	class Start,Dist result;
-	class Unweighted,Negative,Cycle decision;
-	class BFS,Dijkstra,BF algo;
+	class Unweighted,Negative,Cycle,AllPairs decision;
+	class BFS,Dijkstra,BF,FW algo;
 	class Bad warn;
 ```
 
@@ -1081,7 +1091,343 @@ BELLMAN-FORD(G, w, s)
 
 ---
 
-## 8. Topological Sorting
+## 8. Shortest Path (All Pairs) - Floyd-Warshall Algorithm
+
+### Problem Statement
+
+Given a weighted directed graph, find the shortest path distance between **every pair** of vertices. Bellman-Ford (Section 7) answers this from a single source; Floyd-Warshall answers it for all sources at once.
+
+Floyd-Warshall allows each vertex to become an intermediate point one by one and updates the distance matrix accordingly.
+
+### Working with Negative Edge Weights
+
+Floyd-Warshall works correctly with a mix of negative and positive edge weights, **provided the graph has no negative-weight cycle** — the same restriction Bellman-Ford has (see [Section 7](#7-single-source-shortest-path---bellman-ford-algorithm)).
+
+**Detecting a negative cycle after the fact:** once the final matrix $D^{(n)}$ is computed, check its diagonal. Normally $D[i,i] = 0$ for every vertex $i$ (the shortest path from a vertex to itself). If any $D[i,i] < 0$, vertex $i$ lies on a negative cycle, and the computed distances can no longer be trusted as shortest paths.
+
+### Inputs and Output
+
+- **Input:** adjacency weight matrix $W$ of size $n \times n$.
+- **Output:** matrix $D$ where $D[i,j]$ is the shortest distance from vertex $i$ to vertex $j$.
+
+### Subproblem Decomposition
+
+Let $D^{(k)}[i,j]$ be the shortest distance from $i$ to $j$ using only vertices $1$ through $k$ as intermediate vertices.
+
+When vertex $k$ is allowed:
+
+- Do not use $k$: distance remains $D^{(k-1)}[i,j]$.
+- Use $k$: distance becomes $D^{(k-1)}[i,k] + D^{(k-1)}[k,j]$.
+
+$$
+D^{(k)}[i,j] = \min(D^{(k-1)}[i,j],\ D^{(k-1)}[i,k] + D^{(k-1)}[k,j])
+$$
+
+### Tabulation Walkthrough
+
+For a 3-vertex graph:
+
+- Edge $1 \to 2$ has weight 3.
+- Edge $2 \to 3$ has weight 1.
+- Edge $1 \to 3$ has weight 6.
+
+Initial matrix:
+
+$$
+D^{(0)} =
+\begin{pmatrix}
+0 & 3 & 6 \\
+\infty & 0 & 1 \\
+\infty & \infty & 0
+\end{pmatrix}
+$$
+
+Allow vertex 1 as intermediate:
+
+$$
+D^{(1)} = D^{(0)}
+$$
+
+Allow vertex 2 as intermediate:
+
+$$
+D[1,3] = \min(6, D[1,2] + D[2,3]) = \min(6,3+1)=4
+$$
+
+Updated matrix:
+
+$$
+D^{(2)} =
+\begin{pmatrix}
+0 & 3 & 4 \\
+\infty & 0 & 1 \\
+\infty & \infty & 0
+\end{pmatrix}
+$$
+
+Arrow-guided update for intermediate vertex $k=2$:
+
+| Cell | Keep direct path | Try detour through $2$ | Chosen arrow | Stored value |
+| :---: | :---: | :---: | :---: | :---: |
+| $D[1,2]$ | 3 | $D[1,2]+D[2,2]=3+0=3$ | $\uparrow$ keep | 3 |
+| $D[1,3]$ | 6 | $D[1,2]+D[2,3]=3+1=4$ | $1 \rightarrow 2 \rightarrow 3$ | **4** |
+| $D[2,3]$ | 1 | $D[2,2]+D[2,3]=0+1=1$ | $\uparrow$ keep | 1 |
+
+The shortest path from 1 to 3 is updated from **6** to **4** through vertex 2.
+
+### Mermaid Diagram: Floyd-Warshall Detour Update
+
+```mermaid
+flowchart LR
+	subgraph DirectPath[Current known path]
+		I1((i)) -->|"D[i,j]"| J1((j))
+	end
+
+	subgraph DetourPath[Candidate detour through k]
+		I2((i)) -->|"D[i,k]"| K((k))
+		K -->|"D[k,j]"| J2((j))
+	end
+
+	J1 --> Compare{"Which is shorter?"}
+	J2 --> Compare
+	Compare --> Keep["Keep direct distance"]
+	Compare --> Update["Update through k"]
+	Update --> Cell["New D[i,j]"]
+	Keep --> Cell
+
+	classDef direct fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
+	classDef detour fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
+	classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
+	classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
+	class I1,J1,Keep direct;
+	class I2,K,J2,Update detour;
+	class Compare decision;
+	class Cell answer;
+```
+
+### Algorithm
+
+```text
+FLOYD-WARSHALL(W, n)
+1. D = W
+2. for k = 1 to n:
+3.     for i = 1 to n:
+4.         for j = 1 to n:
+5.             if D[i][k] + D[k][j] < D[i][j]:
+6.                 D[i][j] = D[i][k] + D[k][j]
+7. return D
+```
+
+### Complexity Analysis
+
+- Time Complexity: $\Theta(n^3)$
+- Space Complexity: $\Theta(n^2)$
+
+### Classroom Problem: Four-Vertex Graph with Negative Edges
+
+**Problem.** Find all-pairs shortest paths for the following 4-vertex directed graph, which mixes positive and negative edge weights but contains **no negative cycle**:
+
+| Edge | Weight |
+| :---: | :---: |
+| $1 \to 2$ | 1 |
+| $1 \to 3$ | -2 |
+| $2 \to 1$ | 4 |
+| $2 \to 3$ | 3 |
+| $3 \to 4$ | 2 |
+| $4 \to 1$ | 5 |
+
+All other pairs have no direct edge ($\infty$).
+
+```mermaid
+flowchart LR
+	V1((1)) -->|"1"| V2((2))
+	V2 -->|"4"| V1
+	V1 -->|"-2"| V3((3))
+	V2 -->|"3"| V3
+	V3 -->|"2"| V4((4))
+	V4 -->|"5"| V1
+
+	classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
+	class V1,V2,V3,V4 node;
+```
+
+#### Initial Matrix $D^{(0)}$
+
+$$
+D^{(0)} =
+\begin{pmatrix}
+0 & 1 & -2 & \infty \\
+4 & 0 & 3 & \infty \\
+\infty & \infty & 0 & 2 \\
+5 & \infty & \infty & 0
+\end{pmatrix}
+$$
+
+#### $D^{(1)}$: Allow Vertex 1 as Intermediate
+
+Row 1 and column 1 never change at $k=1$, since a path cannot get shorter by detouring through its own endpoint. Every other cell is checked against a detour through vertex 1:
+
+$$
+D[2,3] = \min(3,\ D[2,1]+D[1,3]) = \min(3,\ 4+(-2)) = \min(3,\ 2) = 2
+$$
+
+$$
+D[2,4] = \min(\infty,\ D[2,1]+D[1,4]) = \min(\infty,\ 4+\infty) = \infty
+$$
+
+$$
+D[3,2] = \min(\infty,\ D[3,1]+D[1,2]) = \min(\infty,\ \infty+1) = \infty
+$$
+
+$$
+D[3,4] = \min(2,\ D[3,1]+D[1,4]) = \min(2,\ \infty) = 2
+$$
+
+$$
+D[4,2] = \min(\infty,\ D[4,1]+D[1,2]) = \min(\infty,\ 5+1) = 6
+$$
+
+$$
+D[4,3] = \min(\infty,\ D[4,1]+D[1,3]) = \min(\infty,\ 5+(-2)) = 3
+$$
+
+The negative edge already pays off here: the direct edge $2 \to 3$ costs 3, but detouring $2 \to 1 \to 3$ costs $4+(-2)=2$, so $D[2,3]$ drops to **2**.
+
+$$
+D^{(1)} =
+\begin{pmatrix}
+0 & 1 & -2 & \infty \\
+4 & 0 & 2 & \infty \\
+\infty & \infty & 0 & 2 \\
+5 & 6 & 3 & 0
+\end{pmatrix}
+$$
+
+#### $D^{(2)}$: Allow Vertices 1 and 2 as Intermediate
+
+Row 2 and column 2 stay fixed at $k=2$. Checking the remaining cells against a detour through vertex 2:
+
+$$
+D[1,3] = \min(-2,\ D[1,2]+D[2,3]) = \min(-2,\ 1+2) = -2
+$$
+
+$$
+D[1,4] = \min(\infty,\ D[1,2]+D[2,4]) = \min(\infty,\ 1+\infty) = \infty
+$$
+
+$$
+D[3,1] = \min(\infty,\ D[3,2]+D[2,1]) = \min(\infty,\ \infty+4) = \infty
+$$
+
+$$
+D[3,4] = \min(2,\ D[3,2]+D[2,4]) = \min(2,\ \infty) = 2
+$$
+
+$$
+D[4,1] = \min(5,\ D[4,2]+D[2,1]) = \min(5,\ 6+4) = 5
+$$
+
+$$
+D[4,3] = \min(3,\ D[4,2]+D[2,3]) = \min(3,\ 6+2) = 3
+$$
+
+No cell improves, so:
+
+$$
+D^{(2)} = D^{(1)} =
+\begin{pmatrix}
+0 & 1 & -2 & \infty \\
+4 & 0 & 2 & \infty \\
+\infty & \infty & 0 & 2 \\
+5 & 6 & 3 & 0
+\end{pmatrix}
+$$
+
+#### $D^{(3)}$: Allow Vertices 1, 2, and 3 as Intermediate
+
+Row 3 and column 3 stay fixed at $k=3$. Checking the remaining cells against a detour through vertex 3:
+
+$$
+D[1,2] = \min(1,\ D[1,3]+D[3,2]) = \min(1,\ -2+\infty) = 1
+$$
+
+$$
+D[1,4] = \min(\infty,\ D[1,3]+D[3,4]) = \min(\infty,\ -2+2) = 0
+$$
+
+$$
+D[2,1] = \min(4,\ D[2,3]+D[3,1]) = \min(4,\ 2+\infty) = 4
+$$
+
+$$
+D[2,4] = \min(\infty,\ D[2,3]+D[3,4]) = \min(\infty,\ 2+2) = 4
+$$
+
+$$
+D[4,1] = \min(5,\ D[4,3]+D[3,1]) = \min(5,\ 3+\infty) = 5
+$$
+
+$$
+D[4,2] = \min(6,\ D[4,3]+D[3,2]) = \min(6,\ 3+\infty) = 6
+$$
+
+Two cells improve here: $D[1,4]$ drops from $\infty$ to **0** via $1 \to 3 \to 4$ (cost $-2+2$), and $D[2,4]$ drops from $\infty$ to **4** via $2 \to 3 \to 4$.
+
+$$
+D^{(3)} =
+\begin{pmatrix}
+0 & 1 & -2 & 0 \\
+4 & 0 & 2 & 4 \\
+\infty & \infty & 0 & 2 \\
+5 & 6 & 3 & 0
+\end{pmatrix}
+$$
+
+#### $D^{(4)}$: Allow All Vertices as Intermediate (Final Matrix)
+
+Row 4 and column 4 stay fixed at $k=4$. Checking the remaining cells against a detour through vertex 4:
+
+$$
+D[1,2] = \min(1,\ D[1,4]+D[4,2]) = \min(1,\ 0+6) = 1
+$$
+
+$$
+D[1,3] = \min(-2,\ D[1,4]+D[4,3]) = \min(-2,\ 0+3) = -2
+$$
+
+$$
+D[2,1] = \min(4,\ D[2,4]+D[4,1]) = \min(4,\ 4+5) = 4
+$$
+
+$$
+D[2,3] = \min(2,\ D[2,4]+D[4,3]) = \min(2,\ 4+3) = 2
+$$
+
+$$
+D[3,1] = \min(\infty,\ D[3,4]+D[4,1]) = \min(\infty,\ 2+5) = 7
+$$
+
+$$
+D[3,2] = \min(\infty,\ D[3,4]+D[4,2]) = \min(\infty,\ 2+6) = 8
+$$
+
+Vertex 3 finally reaches vertices 1 and 2 by routing through vertex 4: $3 \to 4 \to 1$ costs $2+5=7$, and $3 \to 4 \to 2$ costs $2+6=8$.
+
+$$
+D^{(4)} =
+\begin{pmatrix}
+0 & 1 & -2 & 0 \\
+4 & 0 & 2 & 4 \\
+7 & 8 & 0 & 2 \\
+5 & 6 & 3 & 0
+\end{pmatrix}
+$$
+
+**Negative-cycle check:** every diagonal entry of $D^{(4)}$ is still $0$, confirming there is no negative cycle in this graph and all shortest distances above are valid.
+
+---
+
+## 9. Topological Sorting
 
 Topological sorting is used when some tasks must happen before other tasks.
 
@@ -1274,7 +1620,7 @@ Topological sorting is useful when order matters because of dependencies.
 
 ---
 
-## 9. Connected Components
+## 10. Connected Components
 
 Connected components are used for undirected graphs.
 
@@ -1408,7 +1754,7 @@ flowchart TB
 
 ---
 
-## 10. Strongly Connected Components
+## 11. Strongly Connected Components
 
 Strongly connected components are used for directed graphs.
 
@@ -1583,7 +1929,7 @@ High-level idea:
 
 ---
 
-## 11. Union-Find / Disjoint Set Union for Kruskal Support
+## 12. Union-Find / Disjoint Set Union for Kruskal Support
 
 Union-Find, also called **Disjoint Set Union** or **DSU**, is a data structure for maintaining groups of elements.
 
@@ -1718,6 +2064,7 @@ The following table summarizes the major complexity results from this chapter.
 | BFS shortest path | Unweighted graph | $\Theta(V+E)$ | $\Theta(V)$ | Visits each vertex and edge once |
 | Dijkstra's Algorithm | Weighted graph, nonnegative edges | $\Theta(V^2)$ with matrix, $\Theta((V+E)\log V)$ with binary heap | $\Theta(V+E)$ | Greedily finalizes the nearest unvisited vertex |
 | Bellman-Ford | Weighted directed graph | $\Theta(VE)$ | $\Theta(V)$ | Relaxes all edges for $V-1$ rounds |
+| Floyd-Warshall | Weighted directed graph, all pairs | $\Theta(V^3)$ | $\Theta(V^2)$ | Tries every vertex as an intermediate point for every pair |
 | DFS topological sort | DAG | $\Theta(V+E)$ | $\Theta(V)$ | DFS visits each vertex and edge once |
 | Kahn's Algorithm | DAG | $\Theta(V+E)$ | $\Theta(V)$ | Processes each vertex and edge once |
 | Connected components | Undirected graph | $\Theta(V+E)$ | $\Theta(V)$ | Repeated DFS/BFS still visits each edge once |
@@ -1740,6 +2087,8 @@ Before moving to the next chapter, make sure you can explain:
 - How Bellman-Ford uses edge relaxation.
 - Why Bellman-Ford needs $|V|-1$ relaxation rounds.
 - Why Bellman-Ford is still needed even though Dijkstra's Algorithm exists.
+- How Floyd-Warshall's $D^{(k)}[i,j] = \min(D^{(k-1)}[i,j],\ D^{(k-1)}[i,k]+D^{(k-1)}[k,j])$ recurrence checks every vertex as an intermediate point.
+- Why Floyd-Warshall and Bellman-Ford share the same no-negative-cycle requirement, and how to spot a negative cycle from Floyd-Warshall's final diagonal.
 - How DFS-based topological sort uses finish time.
 - How connected components are found in an undirected graph.
 - How Kosaraju's Algorithm finds SCCs using two DFS passes.
