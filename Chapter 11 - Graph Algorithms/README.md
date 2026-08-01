@@ -1791,97 +1791,125 @@ In a directed graph, vertices $u$ and $v$ are **strongly connected** if:
 
 A **strongly connected component** or **SCC** is a maximal group of vertices where every vertex can reach every other vertex in the same group.
 
-### Visual Example
+### Video Walkthrough Example
+
+The following graph and DFS order reproduce the worked example from the supplied video. Its edges are:
+
+$$
+\begin{aligned}
+&0 \to 1,\quad 1 \to 2,\quad 2 \to 0,\quad 2 \to 3,\quad 3 \to 4,\\
+&4 \to 5,\quad 5 \to 6,\quad 6 \to 4,\quad 4 \to 7,\quad 6 \to 7.
+\end{aligned}
+$$
 
 ```mermaid
 flowchart LR
-	A((A)) --> B((B))
-	B --> C((C))
-	C --> A
-	C --> D((D))
-	D --> E((E))
-	E --> D
-	E --> F((F))
-
-	classDef scc1 fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef scc2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef scc3 fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	class A,B,C scc1;
-	class D,E scc2;
-	class F scc3;
+    zero((0)) --> one((1))
+    one --> two((2))
+    two --> zero
+    two --> three((3))
+    three --> four((4))
+    four --> five((5))
+    five --> six((6))
+    six --> four
+    four --> seven((7))
+    six --> seven
 ```
 
-The SCCs are:
-
-| SCC | Vertices | Reason |
-| :---: | :--- | :--- |
-| 1 | A, B, C | They can reach each other through the cycle $A \to B \to C \to A$ |
-| 2 | D, E | $D \to E$ and $E \to D$ |
-| 3 | F | No path from F back to other vertices |
+The SCCs in this graph are $\{0, 1, 2\}$, $\{3\}$, $\{4, 5, 6\}$, and $\{7\}$. Kosaraju's Algorithm obtains these groups in three steps.
 
 ### Kosaraju's Algorithm
 
-Kosaraju's Algorithm finds SCCs using two DFS passes.
-
-Main idea:
-
-1. Run DFS on the original graph and push vertices by finish time.
-2. Reverse every edge to create the transpose graph $G^T$.
-3. Process vertices in decreasing finish time order.
-4. Each DFS in the transpose graph gives one SCC.
+1. Run DFS on the original graph. **Push a vertex onto a stack only when its DFS finishes.**
+2. Reverse every edge to form the transpose graph $G^T$.
+3. Reset `visited`. Pop vertices from the stack; whenever the popped vertex is unvisited, run DFS from it in $G^T$. The vertices reached by that DFS form one SCC.
 
 ### Why Reversing Edges Works
 
-Inside one SCC, every vertex can reach every other vertex. Reversing all edges does not break this property inside the SCC.
+Reversing all edges preserves reachability inside an SCC: if every vertex can reach every other vertex in the original graph, the same is true in its transpose.
 
-The finish-time order helps start the second DFS from a source-like component in the transpose graph, so each second-pass DFS stays inside one SCC.
+The first DFS stack puts a component with the latest finishing time on top. Starting the second DFS from that vertex in $G^T$ isolates exactly one SCC; continue popping until the stack is empty.
 
 ### Kosaraju Walkthrough
 
-Use the visual example above. Keep the two passes separate in the written solution: first record the finish sequence on the original graph, then reverse every edge, then start each second-pass DFS from the next unused vertex in decreasing finish order.
+#### Step 1: DFS on the original graph and fill the stack
 
-If DFS starts at $A$, one possible finish order is:
-
-| Finish sequence | Vertex |
-| :---: | :---: |
-| 1 | F |
-| 2 | E |
-| 3 | D |
-| 4 | C |
-| 5 | B |
-| 6 | A |
-
-So the decreasing finish order is:
+Start at vertex `0` and visit adjacent vertices in the order shown in the diagram. The DFS path is:
 
 $$
-A, B, C, D, E, F
+0 \to 1 \to 2 \to 3 \to 4 \to 5 \to 6 \to 7
 $$
 
-Now run DFS on the transpose graph in that order.
+A vertex is pushed after all of its outgoing neighbours have been processed. Therefore the **finish/push sequence** is:
 
-| Second-pass start | Vertices reached in transpose graph | SCC found |
-| :---: | :--- | :--- |
-| A | A, C, B | A, B, C |
-| D | D, E | D, E |
-| F | F | F |
+$$
+7, 6, 5, 4, 3, 2, 1, 0
+$$
 
-### Mermaid Diagram: Kosaraju Two-Pass Flow
+The final stack, displayed as in the video with the top first, is:
+
+| Stack position | Vertex |
+| :--- | :---: |
+| Top | 0 |
+|  | 1 |
+|  | 2 |
+|  | 3 |
+|  | 4 |
+|  | 5 |
+|  | 6 |
+| Bottom | 7 |
+
+Equivalently, popping the stack produces `0, 1, 2, 3, 4, 5, 6, 7`; vertices already visited during the second DFS are skipped.
+
+#### Step 2: Reverse the original graph
+
+Construct $G^T$ by reversing every arrow of the original graph, then reset every `visited` value to `false`.
+
+```mermaid
+flowchart LR
+    zero((0)) --> two((2))
+    two --> one((1))
+    one --> zero
+    three((3)) --> two
+    four((4)) --> three
+    five((5)) --> four
+    six((6)) --> five
+    four --> six
+    seven((7)) --> four
+    seven --> six
+```
+
+For example, the original edge $2 \to 3$ becomes $3 \to 2$, and the original edge $6 \to 4$ becomes $4 \to 6$.
+
+#### Step 3: DFS on $G^T$ in stack-pop order
+
+Pop the stack and start a new DFS only at an unvisited vertex:
+
+| Stack action | DFS reached in $G^T$ | SCC produced |
+| :--- | :--- | :--- |
+| Pop `0`; unvisited, so start DFS | `0, 2, 1` | $\{0, 2, 1\}$ |
+| Pop `1`, `2`; already visited, so skip | — | — |
+| Pop `3`; unvisited, so start DFS | `3` | $\{3\}$ |
+| Pop `4`; unvisited, so start DFS | `4, 6, 5` | $\{4, 6, 5\}$ |
+| Pop `5`, `6`; already visited, so skip | — | — |
+| Pop `7`; unvisited, so start DFS | `7` | $\{7\}$ |
+
+Thus the strongly connected components, in the order found by this walkthrough, are:
+
+$$
+\boxed{\{0, 2, 1\},\ \{3\},\ \{4, 6, 5\},\ \{7\}}
+$$
+
+### Mermaid Diagram: Kosaraju Three-Step Flow
 
 ```mermaid
 flowchart TB
-	G["Original directed graph G"] --> DFS1["1st DFS<br/>record finish order"]
-	DFS1 --> Stack["Vertices ordered by decreasing finish time"]
-	G --> Transpose["Build transpose graph G^T<br/>reverse every edge"]
-	Stack --> DFS2["2nd DFS on G^T<br/>use finish-time order"]
-	Transpose --> DFS2
-	DFS2 --> SCC["Each DFS tree is one SCC"]
-
-	classDef graphNode fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-	classDef process fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef result fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	class G,Transpose graphNode;
-	class DFS1,Stack,DFS2 process;
-	class SCC result;
+    G["Original directed graph G"] --> DFS1["Step 1: DFS and push on finish"]
+    DFS1 --> Stack["Stack: top 0, 1, 2, 3, 4, 5, 6, 7 bottom"]
+    G --> Transpose["Step 2: create G^T by reversing edges"]
+    Stack --> DFS2["Step 3: pop and DFS in G^T"]
+    Transpose --> DFS2
+    DFS2 --> SCC["One DFS tree = one SCC"]
 ```
 
 ### Algorithm
