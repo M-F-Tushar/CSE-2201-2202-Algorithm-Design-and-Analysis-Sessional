@@ -1433,15 +1433,15 @@ Topological sorting is used when some tasks must happen before other tasks.
 
 ### Definition
 
-A **topological ordering** of a directed graph is a linear ordering of vertices such that for every directed edge:
+A **topological ordering** of a directed graph is a linear ordering of vertices such that, for every directed edge:
 
 $$
 u \to v
 $$
 
-Vertex $u$ appears before vertex $v$ in the ordering.
+vertex $u$ appears **before** vertex $v$ in the ordering. In dependency language, $u$ must be completed before $v$ can begin.
 
-Topological sorting is possible only for a DAG.
+Topological sorting is possible only for a DAG. The order need not be unique: whenever two vertices have no dependency path forcing one before the other, either may appear first.
 
 ### DAG
 
@@ -1459,6 +1459,8 @@ A \to B, \quad B \to C, \quad C \to A
 $$
 
 This says $A$ before $B$, $B$ before $C$, and $C$ before $A$, which cannot all be true.
+
+For the DFS method, a DAG has one especially useful property: when DFS finishes a vertex $u$, every vertex reachable from $u$ has already finished. Therefore, putting $u$ **after** its neighbours in a finish stack and then reading that stack backwards puts $u$ before every dependent vertex in the final order.
 
 ### Worked Example
 
@@ -1502,50 +1504,72 @@ Topological order is not always unique.
 
 ### DFS-Based Topological Sort
 
-DFS-based topological sort uses one simple rule:
+DFS-based topological sort follows the recursive, **postorder** process demonstrated in the provided video, [*Topological Sorting with examples | Topological Sorting using DFS*](https://youtu.be/3tkcfvCNtM8?si=iY2xpQd3mwXs-3xs):
 
-After finishing all outgoing neighbors of a vertex, push that vertex onto a stack.
+1. Start DFS from an unvisited vertex.
+2. Visit each unvisited outgoing neighbour recursively.
+3. Do **not** output the current vertex when it is first visited.
+4. Push the current vertex onto a stack only when all of its outgoing neighbours have been completely processed.
+5. Repeat from every still-unvisited vertex; this matters when the DAG is disconnected.
+6. Pop the stack to obtain the topological order.
 
-At the end, reverse the stack or pop from the stack to get the topological order.
+The stack records **finish order**. Because a prerequisite finishes after the DFS exploration of its dependents, it is pushed later and is popped earlier. Thus, popping the stack reverses finish order into a prerequisite-before-dependent order.
 
 #### DFS Walkthrough
 
-Use the same graph and visit vertices alphabetically. In the class-note sequence, append a vertex to the finish stack only after all of its outgoing neighbors have been handled; finally read the stack in reverse finish order.
+Use the same graph, scan start vertices alphabetically ($A,B,C,D,E,F$), and scan each adjacency list alphabetically:
 
-| Step | DFS action | Stack after finishing |
-| :---: | :--- | :--- |
-| 1 | Start DFS at A, go to C, then D, then F | F, D |
-| 2 | Backtrack to C, visit E | F, D, E |
-| 3 | Finish C | F, D, E, C |
-| 4 | Finish A | F, D, E, C, A |
-| 5 | Start DFS at B, C already visited | F, D, E, C, A, B |
+| Vertex | Outgoing neighbours |
+| :---: | :--- |
+| A | C |
+| B | C |
+| C | D, E |
+| D | F |
+| E | F |
+| F | — |
 
-Pop stack from right to left:
+The left-to-right stack below is the **push/finish order**; its rightmost item is the next item popped.
+
+| Step | DFS call / return action | Why it happens | Finish stack |
+| :---: | :--- | :--- | :--- |
+| 1 | `DFS(A) → DFS(C) → DFS(D) → DFS(F)` | Follow the first unvisited outgoing neighbour at each vertex. | empty |
+| 2 | Finish `F`; push `F` | $F$ has no outgoing neighbour. | F |
+| 3 | Return to and finish `D`; push `D` | $D$'s only neighbour, $F$, is complete. | F, D |
+| 4 | Return to `C`; call `DFS(E)` | $C$ still has unvisited neighbour $E$. | F, D |
+| 5 | Finish `E`; push `E` | $E \to F$, but $F$ is already visited and finished. | F, D, E |
+| 6 | Finish `C`; push `C` | Both $D$ and $E$ are complete. | F, D, E, C |
+| 7 | Finish `A`; push `A` | $A$'s only neighbour, $C$, is complete. | F, D, E, C, A |
+| 8 | Start and finish `DFS(B)`; push `B` | $B \to C$, and $C$ is already visited. | F, D, E, C, A, B |
+
+Now pop from the right of the stack:
 
 $$
 B, A, C, E, D, F
 $$
 
-This is a valid topological order.
+Every edge points left-to-right in this result: $A$ and $B$ occur before $C$; $C$ occurs before $D$ and $E$; and both $D$ and $E$ occur before $F$. Since $D$ and $E$ are independent after $C$, exchanging them gives another valid order, such as $B,A,C,D,E,F$.
 
 ### Mermaid Diagram: DFS Finish-Time Idea
 
 ```mermaid
 flowchart TB
-	Start["Start DFS"] --> Visit["Visit vertex u"]
-	Visit --> Neigh{"Unvisited outgoing neighbor?"}
-	Neigh -->|Yes| Recurse["DFS on neighbor"]
+	Start["Scan every vertex"] --> Root{"Unvisited start vertex?"}
+	Root -->|Yes| Visit["DFS: mark vertex u visited"]
+	Root -->|No| Reverse["Pop finish stack"]
+	Visit --> Neigh{"Unvisited outgoing neighbour?"}
+	Neigh -->|Yes| Recurse["DFS on that neighbour"]
 	Recurse --> Neigh
-	Neigh -->|No| Finish["All dependencies after u are done"]
-	Finish --> Push["Push u to stack"]
-	Push --> Reverse["Reverse stack / pop stack"]
+	Neigh -->|No| Finish["All outgoing neighbours are finished"]
+	Finish --> Push["Push u onto finish stack"]
+	Push --> Return["Return from DFS call / continue scan"]
+	Return --> Root
 	Reverse --> Order["Topological order"]
 
 	classDef process fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
 	classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
 	classDef result fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	class Start,Visit,Recurse,Finish,Push,Reverse process;
-	class Neigh decision;
+	class Start,Visit,Recurse,Finish,Push,Return,Reverse process;
+	class Root,Neigh decision;
 	class Order result;
 ```
 
@@ -1565,7 +1589,7 @@ DFS-VISIT(u)
 2. for each vertex v in Adj[u]:
 3.     if v is unvisited:
 4.         DFS-VISIT(v)
-5. push u onto S
+5. push u onto S     // push only after all neighbours finish
 ```
 
 ### Kahn's Algorithm - Optional/Self-Study
