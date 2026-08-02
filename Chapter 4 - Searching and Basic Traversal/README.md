@@ -397,17 +397,17 @@ Use the traversal graph above and start BFS from vertex $A$. Neighbors are consi
 
 For an exam-friendly queue trace, write the initial queue, dequeue one vertex, enqueue only newly discovered neighbors, and record the resulting queue. Write the final traversal order separately. A vertex is marked visited as soon as it is enqueued, so it never appears in the queue twice.
 
-Start with `Q = [A]`. In each row, remove the front vertex, add only its newly discovered neighbors, and record the resulting queue.
+Start with `Q = [A]`. The table follows the classroom format: list all discovered vertices, show the queue after the current vertex is processed (front first), and record the completed traversal.
 
-| Remove | Add | Queue after step |
-| :---: | :--- | :--- |
-| A | B, C | `B, C` |
-| B | D, E | `C, D, E` |
-| C | F | `D, E, F` |
-| D | — | `E, F` |
-| E | G | `F, G` |
-| F | — | `G` |
-| G | — | empty |
+| Vertices visited | Vertices in queue (front first) | Vertex traversal done |
+| :--- | :--- | :---: |
+| A, B, C | **B**, C | A |
+| A, B, C, D, E | **C**, D, E | B |
+| A, B, C, D, E, F | **D**, E, F | C |
+| — | **E**, F | D |
+| A, B, C, D, E, F, G | **F**, G | E |
+| — | **G** | F |
+| — | empty | G |
 
 BFS traversal order from $A$:
 
@@ -575,20 +575,19 @@ DFS-STACK(G, s)
 2.     visited[u] = false
 3.     parent[u] = NIL
 4. create an empty stack S
-5. PUSH(S, s)
-6. while S is not empty:
-7.     u = POP(S)
-8.     if visited[u] == true:
-9.         continue
-10.    visited[u] = true
-11.    process u
-12.    for each vertex v in Adj[u] in reverse order:
-13.        if visited[v] == false:
-14.            parent[v] = u
-15.            PUSH(S, v)
+5. visited[s] = true
+6. PUSH(S, s)
+7. while S is not empty:
+8.     u = POP(S)
+9.     process u
+10.    for each vertex v in Adj[u] in reverse order:
+11.        if visited[v] == false:
+12.            visited[v] = true
+13.            parent[v] = u
+14.            PUSH(S, v)
 ```
 
-The reverse order is used only to make the stack version produce a similar visiting order to the recursive version when neighbors are listed alphabetically. Different valid DFS orders are possible if neighbors are considered in a different order.
+Mark a vertex as visited when it is pushed, so it cannot be placed on the stack twice. The reverse order is used only to make the stack version produce a similar visiting order to the recursive version when neighbors are listed alphabetically. Different valid DFS orders are possible if neighbors are considered in a different order.
 
 ### DFS Traversal Walkthrough
 
@@ -596,13 +595,17 @@ Use the traversal graph above and start DFS from vertex $A$. Neighbors are consi
 
 Follow the classroom DFS sequence: visit the current vertex, choose the first unvisited neighbor, continue until no choice remains, then explicitly backtrack to the most recent vertex with an unvisited neighbor.
 
-Compact recursive DFS trace (`↩` means backtrack):
+Use the stack-based DFS trace below. Vertices are marked visited when pushed; the stack is shown with its top first.
 
-| DFS movement | What happens |
-| :--- | :--- |
-| `A → B → D` | `D` has no unvisited neighbor, so backtrack to `B`. |
-| `B → E → G → F → C` | Continue to the first unvisited neighbor until `C` has none left. |
-| `C ↩ F ↩ G ↩ E ↩ B ↩ A` | All remaining adjacent vertices are already visited; DFS finishes. |
+| Vertices visited | Vertices in stack (top first) | Vertex traversal done |
+| :--- | :--- | :---: |
+| A, B, C | **B**, C | A |
+| A, B, C, D, E | **D**, E, C | B |
+| — | **E**, C | D |
+| A, B, C, D, E, G | **G**, C | E |
+| A, B, C, D, E, F, G | **F**, C | G |
+| — | **C** | F |
+| — | empty | C |
 
 DFS traversal order from $A$:
 
