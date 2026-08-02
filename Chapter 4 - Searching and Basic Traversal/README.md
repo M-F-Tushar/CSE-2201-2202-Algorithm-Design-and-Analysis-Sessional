@@ -20,7 +20,7 @@ This chapter keeps only the requested Searching and Basic Traversal topics. The 
 5. [Breadth-First Search (BFS)](#4-breadth-first-search-bfs)
    - [BFS Traversal Graph](#bfs-traversal-graph)
    - [BFS Idea](#bfs-idea)
-   - [BFS English Instructions](#bfs-english-instructions)
+   - [BFS Instruction Algorithm](#bfs-instruction-algorithm)
    - [BFS Algorithm](#bfs-algorithm)
    - [Queue Implementation](#queue-implementation)
    - [BFS Traversal Walkthrough](#bfs-traversal-walkthrough)
@@ -29,7 +29,7 @@ This chapter keeps only the requested Searching and Basic Traversal topics. The 
 6. [Depth-First Search (DFS)](#5-depth-first-search-dfs)
    - [DFS Traversal Graph](#dfs-traversal-graph)
    - [DFS Idea](#dfs-idea)
-   - [DFS English Instructions](#dfs-english-instructions)
+   - [DFS Instruction Algorithm](#dfs-instruction-algorithm)
    - [Recursive Version](#recursive-version)
    - [Stack-Based Version](#stack-based-version)
    - [DFS Traversal Walkthrough](#dfs-traversal-walkthrough)
@@ -343,7 +343,7 @@ flowchart TB
 	class L0,L1,L2,L3 note;
 ```
 
-### BFS English Instructions
+### BFS Instruction Algorithm
 
 1. Mark every vertex as unvisited. Mark the starting vertex as visited and put it into an empty queue.
 2. Remove the vertex at the **front** of the queue and process it.
@@ -528,7 +528,7 @@ flowchart TB
 	class Note note;
 ```
 
-### DFS English Instructions
+### DFS Instruction Algorithm
 
 1. Mark every vertex as unvisited. Mark the starting vertex as visited and put it onto an empty stack.
 2. Remove the vertex from the **top** of the stack and process it.
