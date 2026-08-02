@@ -18,6 +18,7 @@ This chapter keeps only the requested Searching and Basic Traversal topics. The 
 4. [Introductory Graph Traversal](#3-introductory-graph-traversal)
    - [Classroom Representation Sequence](#classroom-representation-sequence)
 5. [Breadth-First Search (BFS)](#4-breadth-first-search-bfs)
+   - [BFS Traversal Graph](#bfs-traversal-graph)
    - [BFS Idea](#bfs-idea)
    - [BFS Algorithm](#bfs-algorithm)
    - [Queue Implementation](#queue-implementation)
@@ -25,6 +26,7 @@ This chapter keeps only the requested Searching and Basic Traversal topics. The 
    - [BFS Complexity Analysis](#bfs-complexity-analysis)
    - [Basic Applications of BFS](#basic-applications-of-bfs)
 6. [Depth-First Search (DFS)](#5-depth-first-search-dfs)
+   - [DFS Traversal Graph](#dfs-traversal-graph)
    - [DFS Idea](#dfs-idea)
    - [Recursive Version](#recursive-version)
    - [Stack-Based Version](#stack-based-version)
@@ -285,6 +287,21 @@ This outer loop makes sure every connected part of the graph is covered.
 
 BFS uses a **queue**, so the first discovered vertex is processed first.
 
+### BFS Traversal Graph
+
+Use this undirected graph for the BFS trace below. Process every adjacency list in alphabetical order.
+
+```mermaid
+flowchart LR
+    A((A)) --- B((B))
+    A --- C((C))
+    B --- D((D))
+    B --- E((E))
+    C --- F((F))
+    E --- G((G))
+    F --- G
+```
+
 ### BFS Idea
 
 The main idea of BFS is simple:
@@ -376,20 +393,21 @@ while Q is not empty:
 
 ### BFS Traversal Walkthrough
 
-Use the example graph from the introductory section and start BFS from vertex $A$. Neighbors are considered in alphabetical order.
+Use the traversal graph above and start BFS from vertex $A$. Neighbors are considered in alphabetical order.
 
-Follow the classroom queue-trace sequence: write the initial queue, dequeue exactly one vertex, enqueue only its newly discovered neighbors, then write the resulting queue and traversal order. A vertex is marked visited as soon as it is enqueued, so it never appears in the queue twice.
+For an exam-friendly queue trace, write the initial queue, dequeue one vertex, enqueue only newly discovered neighbors, and record the resulting queue. Write the final traversal order separately. A vertex is marked visited as soon as it is enqueued, so it never appears in the queue twice.
 
-| Step | Queue before dequeue | Dequeued vertex | Newly enqueued vertices | Queue after step | Traversal order |
-| :---: | :--- | :---: | :--- | :--- | :--- |
-| 0 | `A` | - | - | `A` | - |
-| 1 | `A` | A | B, C | `B, C` | A |
-| 2 | `B, C` | B | D, E | `C, D, E` | A, B |
-| 3 | `C, D, E` | C | F | `D, E, F` | A, B, C |
-| 4 | `D, E, F` | D | - | `E, F` | A, B, C, D |
-| 5 | `E, F` | E | G | `F, G` | A, B, C, D, E |
-| 6 | `F, G` | F | - | `G` | A, B, C, D, E, F |
-| 7 | `G` | G | - | empty | A, B, C, D, E, F, G |
+Start with `Q = [A]`. In each row, remove the front vertex, add only its newly discovered neighbors, and record the resulting queue.
+
+| Remove | Add | Queue after step |
+| :---: | :--- | :--- |
+| A | B, C | `B, C` |
+| B | D, E | `C, D, E` |
+| C | F | `D, E, F` |
+| D | — | `E, F` |
+| E | G | `F, G` |
+| F | — | `G` |
+| G | — | empty |
 
 BFS traversal order from $A$:
 
@@ -397,17 +415,14 @@ BFS traversal order from $A$:
 A, B, C, D, E, F, G
 ```
 
-BFS distance values:
+BFS distance values, grouped by level:
 
-| Vertex | Distance from A | Meaning |
-| :---: | :---: | :--- |
-| A | 0 | Source vertex |
-| B | 1 | One edge away from A |
-| C | 1 | One edge away from A |
-| D | 2 | A -> B -> D |
-| E | 2 | A -> B -> E |
-| F | 2 | A -> C -> F |
-| G | 3 | A -> B -> E -> G |
+| Distance from A | Vertices |
+| :---: | :--- |
+| 0 | A |
+| 1 | B, C |
+| 2 | D, E, F |
+| 3 | G |
 
 ### BFS Complexity Analysis
 
@@ -447,6 +462,21 @@ DFS can be implemented in two common ways:
 
 - **Recursive DFS:** uses the function call stack.
 - **Stack-based DFS:** uses an explicit stack data structure.
+
+### DFS Traversal Graph
+
+Use this same undirected graph for the DFS trace below. Process every adjacency list in alphabetical order.
+
+```mermaid
+flowchart LR
+    A((A)) --- B((B))
+    A --- C((C))
+    B --- D((D))
+    B --- E((E))
+    C --- F((F))
+    E --- G((G))
+    F --- G
+```
 
 ### DFS Idea
 
@@ -562,22 +592,17 @@ The reverse order is used only to make the stack version produce a similar visit
 
 ### DFS Traversal Walkthrough
 
-Use the same example graph and start DFS from vertex $A$. Neighbors are considered in alphabetical order.
+Use the traversal graph above and start DFS from vertex $A$. Neighbors are considered in alphabetical order.
 
 Follow the classroom DFS sequence: visit the current vertex, choose the first unvisited neighbor, continue until no choice remains, then explicitly backtrack to the most recent vertex with an unvisited neighbor.
 
-Recursive DFS movement:
+Compact recursive DFS trace (`↩` means backtrack):
 
-| Step | Current vertex | Action | Traversal order so far |
-| :---: | :---: | :--- | :--- |
-| 1 | A | Visit A, go to B | A |
-| 2 | B | Visit B, go to D | A, B |
-| 3 | D | Visit D, no new neighbor, backtrack | A, B, D |
-| 4 | B | Go to E | A, B, D |
-| 5 | E | Visit E, go to G | A, B, D, E |
-| 6 | G | Visit G, go to F | A, B, D, E, G |
-| 7 | F | Visit F, go to C | A, B, D, E, G, F |
-| 8 | C | Visit C, no new neighbor, backtrack | A, B, D, E, G, F, C |
+| DFS movement | What happens |
+| :--- | :--- |
+| `A → B → D` | `D` has no unvisited neighbor, so backtrack to `B`. |
+| `B → E → G → F → C` | Continue to the first unvisited neighbor until `C` has none left. |
+| `C ↩ F ↩ G ↩ E ↩ B ↩ A` | All remaining adjacent vertices are already visited; DFS finishes. |
 
 DFS traversal order from $A$:
 
