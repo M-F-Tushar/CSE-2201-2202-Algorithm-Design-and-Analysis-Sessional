@@ -516,16 +516,18 @@ graph LR
 	class A,B,C,D,T node;
 ```
 
-Assume neighbors are processed alphabetically. Trace the queue after every single dequeue; mark a vertex when it is enqueued so that it is not added a second time.
+Assume neighbors are processed alphabetically. Mark a vertex when it is enqueued so that it is not added a second time. The table uses the same queue-trace format as the BFS traversal section: the queue is shown after the current vertex is processed, with the front in bold.
 
-| Step | Queue before pop | Popped vertex | Newly discovered vertices | Distance updates |
-| :---: | :--- | :---: | :--- | :--- |
-| 1 | S | S | A, B | $dist[A]=1$, $dist[B]=1$ |
-| 2 | A, B | A | C | $dist[C]=2$ |
-| 3 | B, C | B | D | $dist[D]=2$ |
-| 4 | C, D | C | T | $dist[T]=3$ |
-| 5 | D, T | D | None | No change |
-| 6 | T | T | None | No change |
+| Vertices visited | Vertices in queue (front first) | Vertex traversal done |
+| :--- | :--- | :---: |
+| S, A, B | **A**, B | S |
+| S, A, B, C | **B**, C | A |
+| S, A, B, C, D | **C**, D | B |
+| S, A, B, C, D, T | **D**, T | C |
+| — | **T** | D |
+| — | empty | T |
+
+The distance is assigned when a vertex first enters the queue: $dist[A]=dist[B]=1$, $dist[C]=dist[D]=2$, and $dist[T]=3$.
 
 Final distances from $S$:
 
