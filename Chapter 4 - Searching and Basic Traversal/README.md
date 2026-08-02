@@ -559,6 +559,27 @@ for each vertex u in G:
 DFS-RECURSIVE(G, s)
 ```
 
+#### Recursive Call-Stack Trace
+
+For the traversal graph above, start at `A` and consider neighbors in alphabetical order. The most recent recursive call is shown first.
+
+| Visited vertices | Recursive call stack (top first) | Current vertex |
+| :--- | :--- | :--- |
+| A | `DFS(A)` | A |
+| A, B | `DFS(B)`, `DFS(A)` | B |
+| A, B, D | `DFS(D)`, `DFS(B)`, `DFS(A)` | D |
+| A, B, D | `DFS(B)`, `DFS(A)` | return from D |
+| A, B, D, E | `DFS(E)`, `DFS(B)`, `DFS(A)` | E |
+| A, B, D, E, G | `DFS(G)`, `DFS(E)`, `DFS(B)`, `DFS(A)` | G |
+| A, B, D, E, G, F | `DFS(F)`, `DFS(G)`, `DFS(E)`, `DFS(B)`, `DFS(A)` | F |
+| A, B, D, E, G, F | `DFS(G)`, `DFS(E)`, `DFS(B)`, `DFS(A)` | return from F |
+| A, B, D, E, G, F | `DFS(E)`, `DFS(B)`, `DFS(A)` | return from G |
+| A, B, D, E, G, F | `DFS(B)`, `DFS(A)` | return from E |
+| A, B, D, E, G, F | `DFS(A)` | return from B |
+| A, B, D, E, G, F, C | `DFS(C)`, `DFS(A)` | C |
+| A, B, D, E, G, F, C | `DFS(A)` | return from C |
+| A, B, D, E, G, F, C | empty | DFS finished |
+
 For a disconnected graph, call `DFS-RECURSIVE` for every unvisited vertex.
 
 ```text
