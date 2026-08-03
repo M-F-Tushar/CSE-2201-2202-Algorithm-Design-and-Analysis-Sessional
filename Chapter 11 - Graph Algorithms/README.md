@@ -43,7 +43,16 @@ This chapter keeps only the requested graph theory and graph algorithm topics. E
 12. [Strongly Connected Components](#11-strongly-connected-components)
 	- [Kosaraju's Algorithm](#kosarajus-algorithm)
 	- [Tarjan's Algorithm - Optional/Self-Study](#tarjans-algorithm---optionalself-study)
-13. [Union-Find / Disjoint Set Union for Kruskal Support](#12-union-find--disjoint-set-union-for-kruskal-support)
+13. [Spanning Trees](#12-spanning-trees)
+	- [Definition](#definition-2)
+	- [Properties](#properties)
+	- [Tree vs Graph](#tree-vs-graph-1)
+	- [Minimum Spanning Tree (MST)](#minimum-spanning-tree-mst)
+	- [Prim's Algorithm](#1-prims-algorithm)
+	- [Kruskal's Algorithm](#2-kruskals-algorithm)
+	- [Union-Find / Disjoint Set Union for Kruskal](#3-union-find--disjoint-set-union-for-kruskal)
+	- [Time Complexity](#4-time-complexity)
+	- [Applications](#applications-1)
 14. [Analyze Time Complexity of Above Topics](#analyze-time-complexity-of-above-topics)
 
 ---
@@ -103,7 +112,9 @@ Study this chapter in the following order:
 8. Learn topological sorting for dependency ordering in a DAG.
 9. Learn connected components in undirected graphs.
 10. Learn strongly connected components in directed graphs.
-11. Learn Union-Find / DSU as support for Kruskal's algorithm.
+11. Learn spanning trees and minimum spanning trees.
+12. Compare Prim's and Kruskal's greedy MST strategies.
+13. Learn Union-Find / DSU as cycle-detection support for Kruskal's algorithm.
 
 ### Visual Map: Graph Algorithm Roadmap
 
@@ -130,7 +141,8 @@ flowchart TB
 	Weighted --> Dijkstra["Dijkstra's Algorithm<br/>nonnegative edge weights"]
 	Weighted --> BF["Bellman-Ford<br/>handles negative edges"]
 	Weighted --> FW["Floyd-Warshall<br/>all-pairs shortest paths"]
-	Sets --> DSU["Union-Find / DSU<br/>cycle support for Kruskal"]
+	Weighted --> MST["Minimum spanning tree<br/>Prim and Kruskal"]
+	MST --> DSU["Union-Find / DSU<br/>cycle support for Kruskal"]
 
 	classDef root fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
 	classDef group fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
@@ -138,7 +150,7 @@ flowchart TB
 	classDef detail fill:#f1f5f9,stroke:#64748b,stroke-dasharray: 5 5,color:#0f172a;
 	class Graph root;
 	class Types,Store,Traverse,Weighted,Sets group;
-	class BFS,Topo,CC,SCC,Dijkstra,BF,FW,DSU algo;
+	class BFS,Topo,CC,SCC,Dijkstra,BF,FW,MST,DSU algo;
 	class T1,T2,T3,Matrix,List detail;
 ```
 
@@ -1983,7 +1995,237 @@ High-level idea:
 
 ---
 
-## 12. Union-Find / Disjoint Set Union for Kruskal Support
+## 12. Spanning Trees
+
+Spanning trees and minimum spanning trees belong primarily to graph algorithms because they describe how to connect every vertex of an undirected graph without cycles. Prim's and Kruskal's algorithms are also greedy algorithms: each repeatedly makes a locally cheapest safe choice. See [Chapter 7: Greedy Algorithms](../Chapter%207%20-%20Greedy%20Algorithms/README.md#3-greedy-graph-optimization) for the general greedy-choice, feasibility, and cut-property viewpoint.
+
+### Definition
+
+A **spanning tree** of a connected undirected graph $G=(V,E)$ is a subgraph $T=(V,E_T)$ that:
+
+- contains every vertex of $G$;
+- is connected; and
+- contains no cycle.
+
+A spanning tree removes redundant edges while preserving a path between every pair of vertices.
+
+### Properties
+
+For a connected graph with $V$ vertices, every spanning tree:
+
+1. contains exactly $V-1$ edges;
+2. has exactly one simple path between every pair of vertices;
+3. becomes disconnected if any tree edge is removed;
+4. forms exactly one cycle if any non-tree edge is added; and
+5. may not be unique, because the original graph can contain several valid spanning trees.
+
+```mermaid
+flowchart LR
+    subgraph G["Original connected graph"]
+        A1((A)) --- B1((B))
+        A1 --- C1((C))
+        B1 --- C1
+        B1 --- D1((D))
+        C1 --- D1
+    end
+
+    subgraph T["One spanning tree"]
+        A2((A)) --- B2((B))
+        B2 --- C2((C))
+        C2 --- D2((D))
+    end
+
+    G -->|"remove cycle-forming edges"| T
+```
+
+### Tree vs Graph
+
+| Feature | Tree | General graph |
+| :--- | :--- | :--- |
+| Connectivity | Always connected | May be connected or disconnected |
+| Cycles | Never contains a cycle | May contain cycles |
+| Edges for $V$ vertices | Exactly $V-1$ | Any valid number |
+| Path between two vertices | Exactly one simple path | Zero, one, or many paths |
+| Role in this section | Final spanning structure | Original structure from which the tree is selected |
+
+A tree is a special graph. A spanning tree is therefore not a separate copy of the vertices; it is a carefully selected subset of the original graph's edges.
+
+### Minimum Spanning Tree (MST)
+
+For a connected, weighted, undirected graph, a **Minimum Spanning Tree** is a spanning tree whose total edge weight is as small as possible:
+
+$$
+w(T)=\sum_{e\in T}w(e)
+$$
+
+An MST has $V-1$ edges, contains no cycle, and may have more than one valid solution when edge weights tie.
+
+#### Safe-Edge Properties
+
+- **Cut property:** a lightest edge crossing a cut is safe for some MST.
+- **Cycle property:** a heaviest edge in a cycle does not need to belong to an MST.
+- **Prim's connection:** choose the lightest edge crossing from the current tree to an outside vertex.
+- **Kruskal's connection:** choose the globally lightest remaining edge whose addition does not create a cycle.
+
+### Shared Worked Graph
+
+Both algorithms below use the supplied weighted graph:
+
+```mermaid
+flowchart LR
+    V1((V1)) ---|3| V2((V2))
+    V2 ---|7| V3((V3))
+    V1 ---|5| V4((V4))
+    V1 ---|2| V5((V5))
+    V2 ---|6| V5
+    V3 ---|10| V5
+    V3 ---|2| V6((V6))
+    V4 ---|3| V5
+    V5 ---|7| V6
+    V4 ---|2| V7((V7))
+    V5 ---|5| V7
+    V5 ---|5| V8((V8))
+    V7 ---|4| V8
+    V8 ---|6| V6
+```
+
+### Algorithms
+
+#### 1. Prim's Algorithm
+
+Prim's Algorithm grows one connected tree. Start at any vertex and repeatedly select the cheapest edge with exactly one endpoint in the current tree.
+
+```text
+PRIM(G, start)
+1. for each vertex v in G:
+2.     key[v] = infinity
+3.     parent[v] = NIL
+4. key[start] = 0
+5. put all vertices in a min-priority queue using key values
+6. while the queue is not empty:
+7.     u = extract vertex with minimum key
+8.     for each edge (u, v):
+9.         if v is still in the queue and weight(u, v) < key[v]:
+10.            key[v] = weight(u, v)
+11.            parent[v] = u
+12. return parent edges as the MST
+```
+
+Start from $V_1$. At each step, only crossing edges from the current tree to an outside vertex are eligible.
+
+| Step | Tree vertices before selection | Minimum crossing choice | Edge added | Running weight |
+| :---: | :--- | :--- | :---: | :---: |
+| 1 | $\{V_1\}$ | $V_1V_5(2)$ | $V_1V_5$ | 2 |
+| 2 | $\{V_1,V_5\}$ | Tie: $V_1V_2(3)$ or $V_5V_4(3)$ | $V_5V_4$ | 5 |
+| 3 | $\{V_1,V_4,V_5\}$ | $V_4V_7(2)$ | $V_4V_7$ | 7 |
+| 4 | $\{V_1,V_4,V_5,V_7\}$ | $V_1V_2(3)$ | $V_1V_2$ | 10 |
+| 5 | $\{V_1,V_2,V_4,V_5,V_7\}$ | $V_7V_8(4)$ | $V_7V_8$ | 14 |
+| 6 | $\{V_1,V_2,V_4,V_5,V_7,V_8\}$ | $V_8V_6(6)$ | $V_8V_6$ | 20 |
+| 7 | $\{V_1,V_2,V_4,V_5,V_6,V_7,V_8\}$ | $V_6V_3(2)$ | $V_6V_3$ | **22** |
+
+The selected weights do not have to increase: $V_6V_3(2)$ becomes eligible only after $V_6$ joins the tree.
+
+> **Correction to the supplied slide order:** after $V_4V_7$, Prim must select the available crossing edge $V_1V_2(3)$ before $V_7V_8(4)$. The corrected sequence preserves the slide's final MST and follows Prim's greedy rule.
+
+Each label below gives `selection step: edge weight`. Edges numbered $1$ through $k$ show the tree after step $k$.
+
+```mermaid
+flowchart LR
+    V1((V1)) ---|"1: weight 2"| V5((V5))
+    V5 ---|"2: weight 3"| V4((V4))
+    V4 ---|"3: weight 2"| V7((V7))
+    V1 ---|"4: weight 3"| V2((V2))
+    V7 ---|"5: weight 4"| V8((V8))
+    V8 ---|"6: weight 6"| V6((V6))
+    V6 ---|"7: weight 2"| V3((V3))
+```
+
+```mermaid
+flowchart TB
+    Start["Start with V1"] --> P1["1. Add V1-V5 (2)"]
+    P1 --> P2["2. Add V5-V4 (3)"]
+    P2 --> P3["3. Add V4-V7 (2)"]
+    P3 --> P4["4. Add V1-V2 (3)"]
+    P4 --> P5["5. Add V7-V8 (4)"]
+    P5 --> P6["6. Add V8-V6 (6)"]
+    P6 --> P7["7. Add V6-V3 (2)"]
+    P7 --> Done["MST complete: 7 edges, weight 22"]
+```
+
+#### 2. Kruskal's Algorithm
+
+Kruskal's Algorithm begins with a forest of one-vertex trees. Sort every edge by nondecreasing weight and accept an edge only when it joins two different components.
+
+```text
+KRUSKAL(G)
+1. MST = empty set
+2. sort all edges by nondecreasing weight
+3. create one disjoint set for every vertex
+4. for each edge (u, v) in sorted order:
+5.     if FIND(u) != FIND(v):
+6.         add (u, v) to MST
+7.         UNION(u, v)
+8.     if MST has V - 1 edges:
+9.         break
+10. return MST
+```
+
+Equal-weight edges may be processed in any order. This table follows the supplied visual sequence.
+
+| Scan | Edge | Weight | Decision | Selected forest after decision |
+| :---: | :---: | :---: | :---: | :--- |
+| 1 | $V_1V_5$ | 2 | Take | $\{V_1V_5\}$ |
+| 2 | $V_4V_7$ | 2 | Take | Add $V_4V_7$ |
+| 3 | $V_3V_6$ | 2 | Take | Add $V_3V_6$ |
+| 4 | $V_1V_2$ | 3 | Take | Add $V_1V_2$ |
+| 5 | $V_4V_5$ | 3 | Take | Join the $V_4,V_7$ and $V_1,V_2,V_5$ components |
+| 6 | $V_7V_8$ | 4 | Take | Add $V_7V_8$ |
+| 7 | $V_1V_4$ | 5 | Skip | Same component; cycle |
+| 8 | $V_5V_7$ | 5 | Skip | Same component; cycle |
+| 9 | $V_5V_8$ | 5 | Skip | Same component; cycle |
+| 10 | $V_2V_5$ | 6 | Skip | Same component; cycle |
+| 11 | $V_8V_6$ | 6 | Take | Join the main forest to $\{V_3,V_6\}$; MST complete |
+
+Stop after scan 11 because $V-1=7$ edges have been accepted. The remaining edges $V_2V_3(7)$, $V_5V_6(7)$, and $V_3V_5(10)$ would create cycles.
+
+Each edge label below gives its accepted-edge number. Accepted edges $1$ through $k$ show Kruskal's forest after acceptance step $k$.
+
+```mermaid
+flowchart LR
+    V1((V1)) ---|"accepted 1: weight 2"| V5((V5))
+    V4((V4)) ---|"accepted 2: weight 2"| V7((V7))
+    V3((V3)) ---|"accepted 3: weight 2"| V6((V6))
+    V1 ---|"accepted 4: weight 3"| V2((V2))
+    V4 ---|"accepted 5: weight 3"| V5
+    V7 ---|"accepted 6: weight 4"| V8((V8))
+    V8 ---|"accepted 7: weight 6"| V6
+```
+
+```mermaid
+flowchart TB
+    Sort["Sort edges by nondecreasing weight"] --> K1["Take V1-V5 (2)"]
+    K1 --> K2["Take V4-V7 (2)"]
+    K2 --> K3["Take V3-V6 (2)"]
+    K3 --> K4["Take V1-V2 (3)"]
+    K4 --> K5["Take V4-V5 (3)"]
+    K5 --> K6["Take V7-V8 (4)"]
+    K6 --> R1["Skip V1-V4, V5-V7, V5-V8 (5): cycles"]
+    R1 --> R2["Skip V2-V5 (6): cycle"]
+    R2 --> K7["Take V8-V6 (6)"]
+    K7 --> Done["MST complete: 7 edges, weight 22"]
+```
+
+Both algorithms produce the same MST edge set (possibly in a different order):
+
+$$
+T=\{V_1V_5,V_4V_7,V_3V_6,V_1V_2,V_4V_5,V_7V_8,V_8V_6\}
+$$
+
+$$
+w(T)=2+2+2+3+3+4+6=\boxed{22}
+$$
+
+### 3. Union-Find / Disjoint Set Union for Kruskal
 
 Union-Find, also called **Disjoint Set Union** or **DSU**, is a data structure for maintaining groups of elements.
 
@@ -1997,7 +2239,7 @@ If yes, adding the edge creates a cycle, so Kruskal skips it.
 
 If no, adding the edge is safe for connecting two different components, so Kruskal accepts it and unions the two sets.
 
-### DSU Operations
+#### DSU Operations
 
 | Operation | Meaning |
 | :--- | :--- |
@@ -2005,14 +2247,14 @@ If no, adding the edge is safe for connecting two different components, so Krusk
 | `FIND(x)` | Return the representative/root of the set containing $x$ |
 | `UNION(x, y)` | Merge the sets containing $x$ and $y$ |
 
-### Two Important Optimizations
+#### Two Important Optimizations
 
 | Optimization | Idea | Benefit |
 | :--- | :--- | :--- |
 | Path compression | During `FIND`, make each visited node point directly to the root | Makes future finds faster |
 | Union by rank/size | Attach the smaller or shallower tree under the larger or deeper tree | Keeps the tree height small |
 
-### Worked Example for Kruskal Support
+#### Worked Example for Kruskal Support
 
 Use the class-note sequence: sort the edges, inspect one edge at a time, compare the representatives of its endpoints, and immediately write whether the edge is accepted or rejected and how the component sets change.
 
@@ -2037,7 +2279,7 @@ Set changes:
 | 4 | A-C rejected | {A,B,C,D}, {E} |
 | 5 | D-E | {A,B,C,D,E} |
 
-### Mermaid Diagram: DSU Cycle Check
+#### Mermaid Diagram: DSU Cycle Check
 
 ```mermaid
 flowchart TB
@@ -2059,7 +2301,7 @@ flowchart TB
 	class Reject reject;
 ```
 
-### Algorithm
+#### DSU Algorithm
 
 ```text
 MAKE-SET(x)
@@ -2085,7 +2327,7 @@ UNION(x, y)
 11.    rank[rootX] = rank[rootX] + 1
 ```
 
-### Complexity Analysis
+#### DSU Complexity Analysis
 
 With path compression and union by rank/size:
 
@@ -2104,6 +2346,28 @@ For Kruskal support:
 | Sorting edges | $\Theta(E \log E)$ |
 | DSU operations | $O(E\alpha(V))$ |
 | Overall Kruskal support cost | $\Theta(E \log E)$ dominated by sorting |
+
+### 4. Time Complexity
+
+| Algorithm / structure | Implementation | Time Complexity | Space Complexity | Best suited for |
+| :--- | :--- | :---: | :---: | :--- |
+| Prim | Adjacency matrix | $\Theta(V^2)$ | $\Theta(V^2)$ | Dense graphs |
+| Prim | Adjacency list + binary heap | $\Theta((V+E)\log V)$ | $\Theta(V+E)$ | Sparse graphs |
+| Kruskal | Sorted edge list + optimized DSU | $\Theta(E\log E)$ | $\Theta(V+E)$ | Sparse graphs and edge-list input |
+| Optimized DSU operation | Path compression + union by rank/size | $O(\alpha(V))$ amortized | $\Theta(V)$ total DSU storage | Fast Kruskal cycle checks |
+
+The sorting phase dominates Kruskal. With optimized DSU, all `FIND` and `UNION` operations together cost $O(E\alpha(V))$, which is smaller than $\Theta(E\log E)$ for ordinary graph sizes.
+
+### Applications
+
+Minimum spanning trees are used when every required point must be connected with minimum total construction or connection cost:
+
+- low-cost computer, telephone, and electrical networks;
+- road, railway, cable, pipeline, and water-supply design;
+- communication backbones with redundant links removed;
+- data clustering by deleting selected large MST edges;
+- image segmentation and pattern recognition; and
+- approximation methods for harder network-design problems.
 
 ---
 
@@ -2124,6 +2388,8 @@ The following table summarizes the major complexity results from this chapter.
 | Connected components | Undirected graph | $\Theta(V+E)$ | $\Theta(V)$ | Repeated DFS/BFS still visits each edge once |
 | Kosaraju SCC | Directed graph | $\Theta(V+E)$ | $\Theta(V+E)$ | Two DFS passes plus transpose graph |
 | Tarjan SCC | Directed graph | $\Theta(V+E)$ | $\Theta(V)$ | One DFS pass with stack and low-link values |
+| Prim | Weighted connected undirected graph | $\Theta(V^2)$ with matrix, $\Theta((V+E)\log V)$ with binary heap | $\Theta(V+E)$ with adjacency list | Repeatedly chooses the cheapest crossing edge |
+| Kruskal | Weighted connected undirected graph | $\Theta(E\log E)$ | $\Theta(V+E)$ | Sorts edges and rejects cycle-forming choices |
 | Union-Find / DSU | Disjoint sets | $O(\alpha(V))$ per operation | $\Theta(V)$ | Path compression and union by rank/size |
 
 ### Final Revision Checklist
@@ -2146,6 +2412,9 @@ Before moving to the next chapter, make sure you can explain:
 - How DFS-based topological sort uses finish time.
 - How connected components are found in an undirected graph.
 - How Kosaraju's Algorithm finds SCCs using two DFS passes.
+- The definition and properties of a spanning tree and an MST.
+- How Prim grows one tree using the cheapest crossing edge.
+- How Kruskal grows a forest using globally sorted safe edges.
 - How DSU helps Kruskal reject cycle-forming edges.
 
 ---
