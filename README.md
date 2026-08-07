@@ -2,7 +2,7 @@
 
 A comprehensive repository for the university course **CSE 2201, 2202: Algorithm Design and Analysis, Sessional** with Python implementations, theory notes, algorithm explanations, previous-year questions, solved problems, dry runs, complexity analysis, and exam-oriented resources.
 
-This repository is designed to help students learn Algorithm Design and Analysis in a structured, practical, and exam-focused way. 
+This repository is designed to help students learn Algorithm Design and Analysis in a structured, practical, and exam-focused way.  
 
 ---
 
