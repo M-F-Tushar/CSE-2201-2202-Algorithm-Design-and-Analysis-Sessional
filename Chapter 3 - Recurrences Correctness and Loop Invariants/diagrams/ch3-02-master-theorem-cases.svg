@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="Master Theorem Decision Flow - T(n) = aT(n/b) + f(n)">
+<rect width="1200" height="560" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="600.0" y="34.0">Master Theorem Decision Flow - T(n) = aT(n/b) + f(n)</tspan></text>
+<path d="M599.9 121.5 Q600.0 138.6 600.6 155.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M595.9 144.8 L600.0 155.0 L604.1 144.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M599.8 208.5 Q601.3 228.3 601.0 245.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M595.9 234.8 L600.0 245.0 L604.1 234.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M599.4 328.7 Q599.7 345.8 600.1 361.7 M599.7 362.1 Q407.8 360.6 214.7 361.8 M215.1 361.7 Q213.6 379.0 214.8 395.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M210.9 384.8 L215.0 395.0 L219.1 384.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="352.5" y="350.0" width="110" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="407.5" y="362.0">f(n) smaller</tspan></text>
+<path d="M600.3 328.2 Q600.9 360.5 600.0 395.6" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M595.9 384.8 L600.0 395.0 L604.1 384.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="553.0" y="350.0" width="94" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="600.0" y="362.0">same order</tspan></text>
+<path d="M600.8 328.6 Q600.3 345.5 599.7 362.2 M599.6 361.7 Q792.5 361.2 985.2 362.2 M984.7 362.2 Q984.2 380.1 985.2 395.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M980.9 384.8 L985.0 395.0 L989.1 384.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="741.5" y="350.0" width="102" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="792.5" y="362.0">f(n) larger</tspan></text>
+<rect x="430.0" y="70.0" width="340.0" height="52.0" rx="10" fill="#ffec99"/>
+<path d="M428.9 70.2 Q599.4 70.2 769.5 68.5 M770.2 69.1 Q767.3 96.9 770.1 121.5 M771.2 120.5 Q599.5 123.4 429.0 122.1 M428.5 121.9 Q429.1 93.5 430.8 70.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M428.9 71.3 Q601.1 70.2 771.0 70.9 M770.4 70.6 Q772.2 98.1 768.8 122.4 M768.9 121.0 Q599.4 122.1 429.8 123.4 M431.3 123.1 Q428.9 97.2 430.6 71.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="600.0" y="96.0">Recurrence: T(n) = aT(n/b) + f(n)</tspan></text>
+<rect x="430.0" y="155.0" width="340.0" height="54.0" rx="10" fill="#ffec99"/>
+<path d="M430.1 154.7 Q597.4 154.8 770.8 156.1 M770.1 154.5 Q769.9 179.9 768.6 207.5 M769.9 209.5 Q598.4 207.5 428.4 208.8 M429.2 210.2 Q430.5 182.6 429.2 154.3" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M431.4 154.7 Q602.3 157.0 770.1 156.2 M771.1 154.4 Q771.1 179.2 770.7 207.9 M771.3 210.2 Q601.6 206.4 431.1 209.5 M430.4 208.2 Q428.7 184.8 429.5 155.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="600.0" y="171.4">Compute watershed function:</tspan><tspan x="600.0" y="192.6">n^(log_b a)</tspan></text>
+<polygon points="600.0,245 790,287.0 600.0,329 410,287.0" fill="#a5d8ff"/>
+<path d="M599.8 244.1 Q693.5 268.1 789.1 286.9 M789.3 285.8 Q693.2 306.5 598.9 329.2 M601.3 330.0 Q505.2 307.1 410.9 287.6 M411.2 287.4 Q504.6 268.5 598.9 244.0" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M600.5 245.9 Q695.7 264.5 788.6 287.5 M789.8 288.0 Q693.0 307.3 599.7 328.4 M600.8 327.5 Q504.9 306.4 408.7 287.8 M410.8 287.6 Q506.1 265.7 599.3 243.6" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="600.0" y="287.0">Compare f(n) with n^(log_b a)</tspan></text>
+<rect x="40.0" y="395.0" width="350.0" height="90.0" rx="10" fill="#b2f2bb"/>
+<path d="M40.9 396.0 Q213.0 397.3 390.7 393.5 M390.9 395.6 Q390.8 441.0 390.1 484.5 M390.4 486.2 Q213.1 483.2 41.2 485.4 M41.4 484.7 Q42.3 442.0 40.1 396.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M39.9 393.5 Q217.0 396.5 389.1 395.2 M388.7 395.8 Q387.7 437.5 389.9 484.1 M390.3 483.9 Q213.7 482.5 40.8 485.6 M39.8 483.4 Q42.1 439.2 38.9 394.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="215.0" y="421.5">Case 1: Leaves Dominate</tspan><tspan x="215.0" y="440.0">f(n) polynomially smaller</tspan><tspan x="215.0" y="458.5">T(n) = Theta(n^(log_b a))</tspan></text>
+<rect x="425.0" y="395.0" width="350.0" height="90.0" rx="10" fill="#b2f2bb"/>
+<path d="M425.4 393.9 Q602.5 394.4 774.0 394.8 M776.2 396.3 Q777.0 438.9 776.1 485.6 M773.9 485.6 Q602.3 487.2 423.4 485.0 M425.5 485.9 Q425.7 438.5 423.6 395.5" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M425.6 394.3 Q599.7 392.2 773.6 395.6 M774.6 396.2 Q772.7 442.4 774.6 484.2 M775.6 486.3 Q601.8 486.4 423.9 484.4 M424.7 484.2 Q427.7 437.9 423.6 395.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="600.0" y="422.8">Case 2: Balanced Work</tspan><tspan x="600.0" y="440.0">same order (+ log^k n factor)</tspan><tspan x="600.0" y="457.2">T(n) = Theta(n^(log_b a) * log^(k+1) n)</tspan></text>
+<rect x="810.0" y="395.0" width="350.0" height="90.0" rx="10" fill="#b2f2bb"/>
+<path d="M810.0 396.3 Q985.8 396.6 1161.2 396.1 M1160.5 395.4 Q1160.4 438.7 1159.2 484.5 M1158.7 484.8 Q983.9 483.0 811.0 484.7 M809.9 483.5 Q812.0 441.5 809.1 395.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M809.4 396.0 Q984.4 393.5 1160.8 394.6 M1160.2 396.5 Q1162.6 439.5 1158.8 485.0 M1158.8 486.3 Q983.9 485.5 810.5 484.9 M811.1 486.1 Q812.7 439.2 809.3 395.3" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="985.0" y="421.5">Case 3: Root Dominates</tspan><tspan x="985.0" y="440.0">f(n) polynomially larger + regularity</tspan><tspan x="985.0" y="458.5">T(n) = Theta(f(n))</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="600.0" y="538.0">Compare the work at the leaves against the work done at the root</tspan></text>
+</svg>

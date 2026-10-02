@@ -86,19 +86,7 @@ So **binary search runs in $O(\log n)$ time**, matching the iterative analysis i
 
 ### Visual Map: Recursion Tree for T(n) = T(n/2) + c
 
-```mermaid
-flowchart TD
-    N["n , cost c"] --> N2["n/2 , cost c"]
-    N2 --> N4["n/4 , cost c"]
-    N4 --> N8["n/8 , cost c"]
-    N8 --> Dots["... log2(n) levels total"]
-    Dots --> Base["n / 2^k = 1 , base case reached"]
-
-    classDef level fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-    classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class N,N2,N4,N8,Dots level;
-    class Base answer;
-```
+![Recursion Tree for T(n) = T(n/2) + c](diagrams/ch3-01-recursion-tree.svg)
 
 ---
 
@@ -130,21 +118,7 @@ The Master Theorem gives the asymptotic solution to $T(n) = aT(n/b) + f(n)$ dire
 
 ### Visual Map: Choosing the Right Case
 
-```mermaid
-flowchart TD
-    Start["T(n) = aT(n/b) + f(n)"] --> Compute["Compute n^(log_b a)"]
-    Compute --> Compare{"Compare f(n) with n^(log_b a)"}
-    Compare -->|"f(n) polynomially smaller"| Case1["Case 1 <br/> T(n) = Theta(n^log_b a)"]
-    Compare -->|"same order, extra log^k n factor"| Case2["Case 2 <br/> T(n) = Theta(n^log_b a . log^(k+1) n)"]
-    Compare -->|"f(n) polynomially larger + regularity"| Case3["Case 3 <br/> T(n) = Theta(f(n))"]
-
-    classDef step fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    classDef decision fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-    classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class Start,Compute step;
-    class Compare decision;
-    class Case1,Case2,Case3 answer;
-```
+![Master Theorem Decision Flow - T(n) = aT(n/b) + f(n)](diagrams/ch3-02-master-theorem-cases.svg)
 
 ---
 

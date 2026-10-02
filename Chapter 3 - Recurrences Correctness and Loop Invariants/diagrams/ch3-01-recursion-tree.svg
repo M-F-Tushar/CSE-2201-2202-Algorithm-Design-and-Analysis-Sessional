@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="600" viewBox="0 0 760 600" role="img" aria-label="Recursion Tree for T(n) = T(n/2) + c">
+<rect width="760" height="600" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="380.0" y="34.0">Recursion Tree for T(n) = T(n/2) + c</tspan></text>
+<path d="M379.9 121.5 Q380.0 138.6 380.6 155.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M375.9 144.8 L380.0 155.0 L384.1 144.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M379.8 206.5 Q381.3 224.8 381.0 240.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M375.9 229.8 L380.0 240.0 L384.1 229.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M379.4 291.7 Q379.7 308.8 380.1 324.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M375.9 314.8 L380.0 325.0 L384.1 314.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M380.3 376.2 Q380.9 392.0 380.0 410.6" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M375.9 399.8 L380.0 410.0 L384.1 399.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M380.8 461.6 Q380.3 478.5 379.7 495.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M375.9 484.8 L380.0 495.0 L384.1 484.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="240.0" y="70.0" width="280.0" height="52.0" rx="10" fill="#a5d8ff"/>
+<path d="M238.9 70.2 Q379.4 70.2 519.5 68.5 M520.2 69.1 Q517.3 96.9 520.1 121.5 M521.2 120.5 Q379.5 123.4 239.0 122.1 M238.5 121.9 Q239.1 93.5 240.8 70.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M238.9 71.3 Q381.1 70.2 521.0 70.9 M520.4 70.6 Q522.2 98.1 518.8 122.4 M518.9 121.0 Q379.4 122.1 239.8 123.4 M241.3 123.1 Q238.9 97.2 240.6 71.1" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="380.0" y="96.0">n , cost c</tspan></text>
+<rect x="240.0" y="155.0" width="280.0" height="52.0" rx="10" fill="#a5d8ff"/>
+<path d="M240.1 154.7 Q377.4 154.8 520.8 156.1 M520.1 154.5 Q519.9 178.9 518.6 205.5 M519.9 207.5 Q378.4 205.5 238.4 206.8 M239.2 208.2 Q240.5 181.6 239.2 154.3" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M241.4 154.7 Q382.3 157.0 520.1 156.2 M521.1 154.4 Q521.1 178.2 520.7 205.9 M521.3 208.2 Q381.6 204.4 241.1 207.5 M240.4 206.2 Q238.7 183.8 239.5 155.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="380.0" y="181.0">n/2 , cost c</tspan></text>
+<rect x="240.0" y="240.0" width="280.0" height="52.0" rx="10" fill="#a5d8ff"/>
+<path d="M239.8 239.1 Q378.5 242.1 519.1 239.9 M519.3 240.3 Q518.7 263.8 520.3 293.5 M520.2 291.0 Q381.7 293.3 239.2 292.9 M238.9 293.3 Q241.1 266.2 241.0 240.9" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M240.5 240.9 Q380.7 238.5 518.6 240.5 M520.2 239.3 Q519.7 267.7 521.6 290.7 M519.4 290.9 Q377.2 290.3 239.6 291.9 M241.1 292.8 Q241.5 265.9 238.5 238.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="380.0" y="266.0">n/4 , cost c</tspan></text>
+<rect x="240.0" y="325.0" width="280.0" height="52.0" rx="10" fill="#a5d8ff"/>
+<path d="M240.9 326.0 Q378.0 327.3 520.7 323.5 M520.9 325.6 Q520.8 352.0 520.1 376.5 M520.4 378.2 Q378.1 375.2 241.2 377.4 M241.4 376.7 Q242.3 353.0 240.1 326.2" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M239.9 323.5 Q382.0 326.5 519.1 325.2 M518.7 325.8 Q517.7 348.5 519.9 376.1 M520.3 375.9 Q378.7 374.5 240.8 377.6 M239.8 375.4 Q242.1 350.2 238.9 324.6" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="380.0" y="351.0">n/8 , cost c</tspan></text>
+<rect x="240.0" y="410.0" width="280.0" height="52.0" rx="10" fill="#a5d8ff"/>
+<path d="M240.4 408.9 Q382.5 409.4 519.0 409.8 M521.2 411.3 Q522.0 434.9 521.1 462.6 M518.9 462.6 Q382.3 464.2 238.4 462.0 M240.5 462.9 Q240.7 434.5 238.6 410.5" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M240.6 409.3 Q379.7 407.2 518.6 410.6 M519.6 411.2 Q517.7 438.4 519.6 461.2 M520.6 463.3 Q381.8 463.4 238.9 461.4 M239.7 461.2 Q242.7 433.9 238.6 410.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="380.0" y="436.0">... log2(n) levels total</tspan></text>
+<rect x="190.0" y="495.0" width="380.0" height="60.0" rx="10" fill="#b2f2bb"/>
+<path d="M190.0 496.3 Q380.8 496.6 571.2 496.1 M570.5 495.4 Q570.4 523.7 569.2 554.5 M568.7 554.8 Q378.9 553.0 191.0 554.7 M189.9 553.5 Q192.0 526.5 189.1 495.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M189.4 496.0 Q379.4 493.5 570.8 494.6 M570.2 496.5 Q572.6 524.5 568.8 555.0 M568.8 556.3 Q378.9 555.5 190.5 554.9 M191.1 556.1 Q192.7 524.2 189.3 495.3" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="380.0" y="514.4">n / 2^k = 1 , base case reached</tspan><tspan x="380.0" y="535.6">Total cost = Theta(log n)</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="380.0" y="578.0">Each level does constant work c across log2(n) levels yielding logarithmic complexity</tspan></text>
+</svg>
