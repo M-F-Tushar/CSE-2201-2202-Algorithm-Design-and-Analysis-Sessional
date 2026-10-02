@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="540" viewBox="0 0 1020 540" role="img" aria-label="Exponential Redundancy in Naive Recursion vs Memoization">
+<rect width="1020" height="540" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="510.0" y="34.0">Exponential Redundancy in Naive Recursion vs Memoization</tspan></text>
+<path d="M509.9 111.5 Q510.0 121.6 510.6 131.5 M509.5 131.6 Q405.1 131.1 300.5 131.0 M300.6 131.5 Q300.1 138.8 300.0 150.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M295.9 139.8 L300.0 150.0 L304.1 139.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M509.8 111.5 Q511.3 122.8 511.0 131.4 M509.5 132.0 Q606.3 129.4 700.4 131.7 M701.0 131.4 Q698.4 141.0 700.7 150.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M695.9 139.8 L700.0 150.0 L704.1 139.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M299.4 201.7 Q299.7 211.8 300.1 220.7 M299.7 221.1 Q245.3 219.6 189.7 220.8 M190.1 220.7 Q188.6 231.0 189.8 240.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M185.9 229.8 L190.0 240.0 L194.1 229.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M300.3 201.2 Q300.9 210.0 300.0 221.6 M299.2 221.0 Q343.5 220.8 390.6 221.5 M390.0 221.6 Q389.8 232.2 390.5 239.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M385.9 229.8 L390.0 240.0 L394.1 229.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M700.8 201.6 Q700.3 211.5 699.7 221.2 M699.6 220.7 Q655.0 220.2 610.2 221.2 M609.7 221.2 Q609.2 232.1 610.2 240.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M605.9 229.8 L610.0 240.0 L614.1 229.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M700.1 201.8 Q699.9 209.7 700.2 220.9 M699.8 221.2 Q753.2 221.8 809.9 220.9 M810.2 220.9 Q810.8 229.9 809.9 239.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M805.9 229.8 L810.0 240.0 L814.1 229.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M610.1 291.8 Q610.4 306.9 610.4 321.5 M609.8 321.4 Q560.4 319.7 510.5 321.2 M510.4 321.5 Q508.7 335.4 510.2 350.2" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="9 7" opacity="0.85"/>
+<path d="M505.9 339.8 L510.0 350.0 L514.1 339.8" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M810.3 292.7 Q809.9 305.7 809.7 321.7 M810.7 320.7 Q659.2 321.3 510.7 320.9 M509.7 321.7 Q510.3 333.8 509.9 349.5" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="9 7" opacity="0.85"/>
+<path d="M505.9 339.8 L510.0 350.0 L514.1 339.8" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M510.5 419.1 Q510.3 427.6 510.3 435.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M505.9 424.8 L510.0 435.0 L514.1 424.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="400.0" y="60.0" width="220.0" height="52.0" rx="10" fill="#ffec99"/>
+<path d="M398.9 60.2 Q509.4 60.2 619.5 58.5 M620.2 59.1 Q617.3 86.9 620.1 111.5 M621.2 110.5 Q509.5 113.4 399.0 112.1 M398.5 111.9 Q399.1 83.5 400.8 60.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M398.9 61.3 Q511.1 60.2 621.0 60.9 M620.4 60.6 Q622.2 88.1 618.8 112.4 M618.9 111.0 Q509.4 112.1 399.8 113.4 M401.3 113.1 Q398.9 87.2 400.6 61.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="510.0" y="86.0">Original Call f(n)</tspan></text>
+<rect x="200.0" y="150.0" width="200.0" height="52.0" rx="10" fill="#a5d8ff"/>
+<path d="M200.1 149.7 Q297.4 149.8 400.8 151.1 M400.1 149.5 Q399.9 173.9 398.6 200.5 M399.9 202.5 Q298.4 200.5 198.4 201.8 M199.2 203.2 Q200.5 176.6 199.2 149.3" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M201.4 149.7 Q302.3 152.0 400.1 151.2 M401.1 149.4 Q401.1 173.2 400.7 200.9 M401.3 203.2 Q301.6 199.4 201.1 202.5 M200.4 201.2 Q198.7 178.8 199.5 150.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="300.0" y="176.0">Subproblem A</tspan></text>
+<rect x="600.0" y="150.0" width="200.0" height="52.0" rx="10" fill="#a5d8ff"/>
+<path d="M599.8 149.1 Q698.5 152.1 799.1 149.9 M799.3 150.3 Q798.7 173.8 800.3 203.5 M800.2 201.0 Q701.7 203.3 599.2 202.9 M598.9 203.3 Q601.1 176.2 601.0 150.9" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M600.5 150.9 Q700.7 148.5 798.6 150.5 M800.2 149.3 Q799.7 177.7 801.6 200.7 M799.4 200.9 Q697.2 200.3 599.6 201.9 M601.1 202.8 Q601.5 175.9 598.5 148.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="700.0" y="176.0">Subproblem B</tspan></text>
+<rect x="100.0" y="240.0" width="180.0" height="52.0" rx="10" fill="#ffec99"/>
+<path d="M100.9 241.0 Q188.0 242.3 280.7 238.5 M280.9 240.6 Q280.8 267.0 280.1 291.5 M280.4 293.2 Q188.1 290.2 101.2 292.4 M101.4 291.7 Q102.3 268.0 100.1 241.2" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M99.9 238.5 Q192.0 241.5 279.1 240.2 M278.7 240.8 Q277.7 263.5 279.9 291.1 M280.3 290.9 Q188.7 289.5 100.8 292.6 M99.8 290.4 Q102.1 265.2 98.9 239.6" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="190.0" y="266.0">Subproblem C</tspan></text>
+<rect x="300.0" y="240.0" width="180.0" height="52.0" rx="10" fill="#ffec99"/>
+<path d="M300.4 238.9 Q392.5 239.4 479.0 239.8 M481.2 241.3 Q482.0 264.9 481.1 292.6 M478.9 292.6 Q392.3 294.2 298.4 292.0 M300.5 292.9 Q300.7 264.5 298.6 240.5" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M300.6 239.3 Q389.7 237.2 478.6 240.6 M479.6 241.2 Q477.7 268.4 479.6 291.2 M480.6 293.3 Q391.8 293.4 298.9 291.4 M299.7 291.2 Q302.7 263.9 298.6 240.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="390.0" y="266.0">Subproblem D</tspan></text>
+<rect x="520.0" y="240.0" width="180.0" height="52.0" rx="10" fill="#ffc9c9"/>
+<path d="M520.0 241.3 Q610.8 241.6 701.2 241.1 M700.5 240.4 Q700.4 264.7 699.2 291.5 M698.7 291.8 Q608.9 290.0 521.0 291.7 M519.9 290.5 Q522.0 267.5 519.1 240.2" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M519.4 241.0 Q609.4 238.5 700.8 239.6 M700.2 241.5 Q702.6 265.5 698.8 292.0 M698.8 293.3 Q608.9 292.5 520.5 291.9 M521.1 293.1 Q522.7 265.2 519.3 240.3" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="610.0" y="255.4">Subproblem C</tspan><tspan x="610.0" y="276.6">(Duplicate!)</tspan></text>
+<rect x="720.0" y="240.0" width="180.0" height="52.0" rx="10" fill="#ffc9c9"/>
+<path d="M719.7 239.4 Q809.8 237.2 898.9 239.6 M900.2 241.1 Q897.6 267.5 900.8 290.5 M899.1 290.7 Q810.5 290.0 718.6 290.5 M720.6 291.3 Q719.7 263.2 718.6 240.6" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M719.9 239.4 Q812.0 242.0 900.3 240.1 M900.3 241.5 Q902.3 264.4 899.6 291.5 M901.4 291.9 Q807.9 289.4 720.6 293.2 M718.8 293.0 Q720.4 265.8 720.1 240.2" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="810.0" y="255.4">Subproblem D</tspan><tspan x="810.0" y="276.6">(Duplicate!)</tspan></text>
+<rect x="150.0" y="350.0" width="720.0" height="70.0" rx="10" fill="#ffc9c9"/>
+<path d="M148.5 350.3 Q511.1 348.7 868.9 350.8 M870.6 349.8 Q869.3 387.1 868.4 418.9 M869.2 418.7 Q511.1 422.3 151.3 419.9 M149.4 421.0 Q149.4 383.5 150.8 349.6" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M151.2 348.8 Q507.9 351.8 868.6 349.7 M870.2 350.2 Q872.4 384.5 869.9 420.7 M868.6 420.1 Q508.9 419.9 150.0 419.2 M150.7 419.9 Q152.6 383.8 151.3 348.7" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="510.0" y="363.9">Repeated Computation!</tspan><tspan x="510.0" y="385.0">Naive recursion recomputes identical states</tspan><tspan x="510.0" y="406.1">leading to O(2^n) time complexity</tspan></text>
+<rect x="140.0" y="435.0" width="740.0" height="60.0" rx="10" fill="#b2f2bb"/>
+<path d="M139.9 435.6 Q508.9 436.8 881.3 433.9 M879.6 434.7 Q880.3 467.7 879.2 493.6 M880.0 496.4 Q507.8 497.3 139.7 493.6 M139.9 494.4 Q142.0 467.0 140.3 435.1" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M139.2 434.4 Q511.2 434.8 879.9 436.1 M878.7 436.4 Q881.1 466.9 879.3 493.6 M880.2 496.1 Q509.3 495.0 140.2 493.7 M140.5 495.0 Q137.3 466.2 139.3 433.5" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="bold" fill="#1e1e1e"><tspan x="510.0" y="455.8">DP Fix: Store in memo table -&gt; O(1) lookup on return</tspan><tspan x="510.0" y="474.2">Guarantees O(n) total running time!</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="510.0" y="518.0">Memoization ensures each distinct subproblem state is computed exactly once</tspan></text>
+</svg>

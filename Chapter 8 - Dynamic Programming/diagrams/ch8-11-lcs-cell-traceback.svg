@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="460" viewBox="0 0 1140 460" role="img" aria-label="Longest Common Subsequence (LCS) State Transitions">
+<rect width="1140" height="460" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="570.0" y="34.0">Longest Common Subsequence (LCS) State Transitions</tspan></text>
+<rect x="50.0" y="70.0" width="440.0" height="330.0" rx="10" fill="#f8f9fa" opacity="0.4"/>
+<path d="M50.7 68.7 Q270.8 72.4 489.3 71.3 M488.8 68.6 Q490.2 235.3 488.6 399.2 M489.7 401.4 Q271.5 402.8 48.8 401.0 M51.1 400.3 Q49.9 236.4 49.6 70.0" fill="none" stroke="#adb5bd" stroke-width="1.6" stroke-dasharray="6 4" stroke-linecap="round" opacity="0.8"/>
+<rect x="64.0" y="59.0" width="304" height="22" rx="4" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#adb5bd"><tspan x="216.0" y="70.0">LCS Table Neighbors for Cell c[i, j]</tspan></text>
+<rect x="520.0" y="70.0" width="570.0" height="330.0" rx="10" fill="#f8f9fa" opacity="0.4"/>
+<path d="M521.0 70.8 Q807.0 70.5 1091.6 70.9 M1090.0 70.0 Q1090.5 234.4 1090.8 399.1 M1091.0 400.1 Q803.7 400.5 520.8 399.2 M521.3 400.8 Q520.4 233.2 518.7 71.5" fill="none" stroke="#adb5bd" stroke-width="1.6" stroke-dasharray="6 4" stroke-linecap="round" opacity="0.8"/>
+<rect x="534.0" y="59.0" width="240" height="22" rx="4" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#adb5bd"><tspan x="654.0" y="70.0">Transition Logic &amp; Traceback</tspan></text>
+<path d="M249.9 149.5 Q257.5 150.1 265.6 150.5 M264.5 150.6 Q265.1 205.1 265.5 260.0 M265.6 260.5 Q272.6 258.3 280.0 260.0" fill="none" stroke="#2f9e44" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M269.8 264.1 L280.0 260.0 L269.8 255.9" fill="none" stroke="#2f9e44" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M279.8 149.5 Q323.8 151.3 366.0 150.4 M364.5 151.0 Q366.3 203.4 365.4 260.7 M366.0 260.4 Q405.9 260.5 450.7 260.7" fill="none" stroke="#1971c2" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M439.8 264.1 L450.0 260.0 L439.8 255.9" fill="none" stroke="#1971c2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M249.4 259.7 Q264.7 260.3 280.1 259.7" fill="none" stroke="#1971c2" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M269.8 264.1 L280.0 260.0 L269.8 255.9" fill="none" stroke="#1971c2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M770.3 179.2 Q780.9 178.5 790.0 180.6 M789.2 180.0 Q788.5 157.3 790.6 135.5 M790.0 135.6 Q799.8 136.7 810.5 134.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M799.8 139.1 L810.0 135.0 L799.8 130.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="771.0" y="145.5" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="790.0" y="157.5">Yes</tspan></text>
+<path d="M770.8 179.6 Q780.3 180.0 789.7 180.2 M789.6 179.7 Q790.0 216.7 790.2 255.2 M789.7 255.2 Q799.2 256.6 810.2 255.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M799.8 259.1 L810.0 255.0 L799.8 250.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="775.0" y="205.5" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="790.0" y="217.5">No</tspan></text>
+<rect x="80.0" y="120.0" width="170.0" height="60.0" rx="10" fill="#b2f2bb"/>
+<path d="M78.9 120.2 Q164.4 120.2 249.5 118.5 M250.2 119.1 Q247.3 150.9 250.1 179.5 M251.2 178.5 Q164.5 181.4 79.0 180.1 M78.5 179.9 Q79.1 147.5 80.8 120.1" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M78.9 121.3 Q166.1 120.2 251.0 120.9 M250.4 120.6 Q252.2 152.1 248.8 180.4 M248.9 179.0 Q164.4 180.1 79.8 181.4 M81.3 181.1 Q78.9 151.2 80.6 121.1" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="165.0" y="139.4">c[i-1, j-1]</tspan><tspan x="165.0" y="160.6">Diagonal match</tspan></text>
+<rect x="280.0" y="120.0" width="170.0" height="60.0" rx="10" fill="#a5d8ff"/>
+<path d="M280.1 119.7 Q362.4 119.8 450.8 121.1 M450.1 119.5 Q449.9 147.9 448.6 178.5 M449.9 180.5 Q363.4 178.5 278.4 179.8 M279.2 181.2 Q280.5 150.6 279.2 119.3" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M281.4 119.7 Q367.3 122.0 450.1 121.2 M451.1 119.4 Q451.1 147.2 450.7 178.9 M451.3 181.2 Q366.6 177.4 281.1 180.5 M280.4 179.2 Q278.7 152.8 279.5 120.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="365.0" y="139.4">c[i-1, j]</tspan><tspan x="365.0" y="160.6">Drop X[i]</tspan></text>
+<rect x="80.0" y="230.0" width="170.0" height="60.0" rx="10" fill="#a5d8ff"/>
+<path d="M79.8 229.1 Q163.5 232.1 249.1 229.9 M249.3 230.3 Q248.7 257.8 250.3 291.5 M250.2 289.0 Q166.7 291.3 79.2 290.9 M78.9 291.3 Q81.1 260.2 81.0 230.9" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M80.5 230.9 Q165.7 228.5 248.6 230.5 M250.2 229.3 Q249.7 261.7 251.6 288.7 M249.4 288.9 Q162.2 288.3 79.6 289.9 M81.1 290.8 Q81.5 259.9 78.5 228.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="165.0" y="249.4">c[i, j-1]</tspan><tspan x="165.0" y="270.6">Drop Y[j]</tspan></text>
+<rect x="280.0" y="230.0" width="170.0" height="60.0" rx="10" fill="#ffec99"/>
+<path d="M280.9 231.0 Q363.0 232.3 450.7 228.5 M450.9 230.6 Q450.8 261.0 450.1 289.5 M450.4 291.2 Q363.1 288.2 281.2 290.4 M281.4 289.7 Q282.3 262.0 280.1 231.2" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M279.9 228.5 Q367.0 231.5 449.1 230.2 M448.7 230.8 Q447.7 257.5 449.9 289.1 M450.3 288.9 Q363.7 287.5 280.8 290.6 M279.8 288.4 Q282.1 259.2 278.9 229.6" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="365.0" y="260.0">Target: c[i, j]</tspan></text>
+<polygon points="660.0,140 770,180.0 660.0,220 550,180.0" fill="#ffec99"/>
+<path d="M660.4 138.9 Q717.5 159.4 769.0 179.8 M771.1 179.4 Q716.1 197.2 660.7 218.9 M660.9 218.6 Q603.5 199.1 550.5 180.4 M551.0 179.7 Q604.3 159.8 659.4 138.9" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M660.6 139.3 Q714.7 157.2 768.6 180.6 M768.7 181.3 Q717.3 198.0 659.9 220.6 M659.2 218.6 Q602.9 200.0 550.2 181.5 M550.5 179.9 Q605.1 162.0 659.4 140.3" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="660.0" y="170.1">Do characters match?</tspan><tspan x="660.0" y="189.9">X[i] == Y[j]</tspan></text>
+<rect x="810.0" y="100.0" width="260.0" height="70.0" rx="10" fill="#b2f2bb"/>
+<path d="M810.0 101.3 Q940.8 101.6 1071.2 101.1 M1070.5 100.4 Q1070.4 133.7 1069.2 169.5 M1068.7 169.8 Q938.9 168.0 811.0 169.7 M809.9 168.5 Q812.0 136.5 809.1 100.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M809.4 101.0 Q939.4 98.5 1070.8 99.6 M1070.2 101.5 Q1072.6 134.5 1068.8 170.0 M1068.8 171.3 Q938.9 170.5 810.5 169.9 M811.1 171.1 Q812.7 134.2 809.3 100.3" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="940.0" y="117.8">Match Action:</tspan><tspan x="940.0" y="135.0">c[i, j] = 1 + c[i-1, j-1]</tspan><tspan x="940.0" y="152.2">(Diagonal arrow)</tspan></text>
+<rect x="810.0" y="220.0" width="260.0" height="70.0" rx="10" fill="#a5d8ff"/>
+<path d="M809.7 219.4 Q939.8 217.2 1068.9 219.6 M1070.2 221.1 Q1067.6 256.5 1070.8 288.5 M1069.1 288.7 Q940.5 288.0 808.6 288.5 M810.6 289.3 Q809.7 252.2 808.6 220.6" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M809.9 219.4 Q942.0 222.0 1070.3 220.1 M1070.3 221.5 Q1072.3 253.4 1069.6 289.5 M1071.4 289.9 Q937.9 287.4 810.6 291.2 M808.8 291.0 Q810.4 254.8 810.1 220.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="940.0" y="237.8">Mismatch Action:</tspan><tspan x="940.0" y="255.0">c[i, j] = max(up, left)</tspan><tspan x="940.0" y="272.2">(Up or Left arrow)</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="570.0" y="438.0">Traceback moves diagonally on character matches and horizontally/vertically on mismatches</tspan></text>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="360" viewBox="0 0 1140 360" role="img" aria-label="Climbing Stairs State Dependencies (1, 2, or 3 Steps)">
+<rect width="1140" height="360" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="570.0" y="34.0">Climbing Stairs State Dependencies (1, 2, or 3 Steps)</tspan></text>
+<rect x="40.0" y="70.0" width="360.0" height="230.0" rx="10" fill="#f8f9fa" opacity="0.4"/>
+<path d="M40.7 68.7 Q220.8 72.4 399.3 71.3 M398.8 68.6 Q400.2 185.3 398.6 299.2 M399.7 301.4 Q221.5 302.8 38.8 301.0 M41.1 300.3 Q39.9 186.4 39.6 70.0" fill="none" stroke="#adb5bd" stroke-width="1.6" stroke-dasharray="6 4" stroke-linecap="round" opacity="0.8"/>
+<rect x="54.0" y="59.0" width="96" height="22" rx="4" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#adb5bd"><tspan x="102.0" y="70.0">Base Cases</tspan></text>
+<rect x="430.0" y="70.0" width="670.0" height="230.0" rx="10" fill="#f8f9fa" opacity="0.4"/>
+<path d="M431.0 70.8 Q767.0 70.5 1101.6 70.9 M1100.0 70.0 Q1100.5 184.4 1100.8 299.1 M1101.0 300.1 Q763.7 300.5 430.8 299.2 M431.3 300.8 Q430.4 183.2 428.7 71.5" fill="none" stroke="#adb5bd" stroke-width="1.6" stroke-dasharray="6 4" stroke-linecap="round" opacity="0.8"/>
+<rect x="444.0" y="59.0" width="256" height="22" rx="4" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#adb5bd"><tspan x="572.0" y="70.0">Bottom-Up Computation Sequence</tspan></text>
+<path d="M129.9 129.5 Q130.0 110.1 130.6 90.5 M129.5 90.6 Q335.1 90.1 540.5 90.0 M540.6 90.5 Q540.1 128.3 540.0 170.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M535.9 159.8 L540.0 170.0 L544.1 159.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M129.8 259.5 Q131.3 278.8 131.0 295.4 M129.5 296.0 Q336.3 293.4 540.4 295.7 M541.0 295.4 Q538.4 258.0 540.7 220.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M544.1 230.2 L540.0 220.0 L535.9 230.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M369.4 194.7 Q414.7 195.3 460.1 194.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M449.8 199.1 L460.0 195.0 L449.8 190.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M130.3 259.2 Q130.9 286.0 130.0 315.6 M129.2 315.0 Q443.5 314.8 760.6 315.5 M760.0 315.6 Q759.8 269.2 760.5 219.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M764.1 230.2 L760.0 220.0 L755.9 230.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M300.8 169.6 Q300.3 150.0 299.7 130.2 M299.6 129.7 Q530.0 129.2 760.2 130.2 M759.7 130.2 Q759.2 151.6 760.2 170.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M755.9 159.8 L760.0 170.0 L764.1 159.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M620.1 194.8 Q649.9 193.2 680.2 194.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M669.8 199.1 L680.0 195.0 L669.8 190.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M300.1 169.8 Q300.4 140.4 300.4 110.5 M299.8 110.4 Q642.9 108.7 985.5 110.2 M985.4 110.5 Q983.7 139.9 985.2 170.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M980.9 159.8 L985.0 170.0 L989.1 159.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M540.3 220.7 Q539.9 239.2 539.7 260.7 M540.7 259.7 Q761.7 260.3 985.7 259.9 M984.7 260.7 Q985.3 238.3 984.9 219.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M989.1 230.2 L985.0 220.0 L980.9 230.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M840.5 194.1 Q870.3 195.1 900.3 195.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M889.8 199.1 L900.0 195.0 L889.8 190.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="60.0" y="130.0" width="140.0" height="50.0" rx="10" fill="#a5d8ff"/>
+<path d="M58.9 130.2 Q129.4 130.2 199.5 128.5 M200.2 129.1 Q197.3 155.9 200.1 179.5 M201.2 178.5 Q129.5 181.4 59.0 180.1 M58.5 179.9 Q59.1 152.5 60.8 130.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M58.9 131.3 Q131.1 130.2 201.0 130.9 M200.4 130.6 Q202.2 157.1 198.8 180.4 M198.9 179.0 Q129.4 180.1 59.8 181.4 M61.3 181.1 Q58.9 156.2 60.6 131.1" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="130.0" y="155.0">Ways(0) = 1</tspan></text>
+<rect x="60.0" y="210.0" width="140.0" height="50.0" rx="10" fill="#a5d8ff"/>
+<path d="M60.1 209.7 Q127.4 209.8 200.8 211.1 M200.1 209.5 Q199.9 232.9 198.6 258.5 M199.9 260.5 Q128.4 258.5 58.4 259.8 M59.2 261.2 Q60.5 235.6 59.2 209.3" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M61.4 209.7 Q132.3 212.0 200.1 211.2 M201.1 209.4 Q201.1 232.2 200.7 258.9 M201.3 261.2 Q131.6 257.4 61.1 260.5 M60.4 259.2 Q58.7 237.8 59.5 210.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="130.0" y="235.0">Ways(1) = 1</tspan></text>
+<rect x="230.0" y="170.0" width="140.0" height="50.0" rx="10" fill="#a5d8ff"/>
+<path d="M229.8 169.1 Q298.5 172.1 369.1 169.9 M369.3 170.3 Q368.7 192.8 370.3 221.5 M370.2 219.0 Q301.7 221.3 229.2 220.9 M228.9 221.3 Q231.1 195.2 231.0 170.9" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M230.5 170.9 Q300.7 168.5 368.6 170.5 M370.2 169.3 Q369.7 196.7 371.6 218.7 M369.4 218.9 Q297.2 218.3 229.6 219.9 M231.1 220.8 Q231.5 194.9 228.5 168.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="300.0" y="195.0">Ways(2) = 2</tspan></text>
+<rect x="460.0" y="170.0" width="160.0" height="50.0" rx="10" fill="#b2f2bb"/>
+<path d="M460.9 171.0 Q538.0 172.3 620.7 168.5 M620.9 170.6 Q620.8 196.0 620.1 219.5 M620.4 221.2 Q538.1 218.2 461.2 220.4 M461.4 219.7 Q462.3 197.0 460.1 171.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M459.9 168.5 Q542.0 171.5 619.1 170.2 M618.7 170.8 Q617.7 192.5 619.9 219.1 M620.3 218.9 Q538.7 217.5 460.8 220.6 M459.8 218.4 Q462.1 194.2 458.9 169.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="540.0" y="195.0">Ways(3) = 4</tspan></text>
+<rect x="680.0" y="170.0" width="160.0" height="50.0" rx="10" fill="#b2f2bb"/>
+<path d="M680.4 168.9 Q762.5 169.4 839.0 169.8 M841.2 171.3 Q842.0 193.9 841.1 220.6 M838.9 220.6 Q762.3 222.2 678.4 220.0 M680.5 220.9 Q680.7 193.5 678.6 170.5" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M680.6 169.3 Q759.7 167.2 838.6 170.6 M839.6 171.2 Q837.7 197.4 839.6 219.2 M840.6 221.3 Q761.8 221.4 678.9 219.4 M679.7 219.2 Q682.7 192.9 678.6 170.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="760.0" y="195.0">Ways(4) = 7</tspan></text>
+<rect x="900.0" y="170.0" width="170.0" height="50.0" rx="10" fill="#ffec99"/>
+<path d="M900.0 171.3 Q985.8 171.6 1071.2 171.1 M1070.5 170.4 Q1070.4 193.7 1069.2 219.5 M1068.7 219.8 Q983.9 218.0 901.0 219.7 M899.9 218.5 Q902.0 196.5 899.1 170.2" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M899.4 171.0 Q984.4 168.5 1070.8 169.6 M1070.2 171.5 Q1072.6 194.5 1068.8 220.0 M1068.8 221.3 Q983.9 220.5 900.5 219.9 M901.1 221.1 Q902.7 194.2 899.3 170.3" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="985.0" y="195.0">Ways(5) = 13</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="570.0" y="338.0">Recurrence: Ways(n) = Ways(n-1) + Ways(n-2) + Ways(n-3) with sliding 3-variable window</tspan></text>
+</svg>

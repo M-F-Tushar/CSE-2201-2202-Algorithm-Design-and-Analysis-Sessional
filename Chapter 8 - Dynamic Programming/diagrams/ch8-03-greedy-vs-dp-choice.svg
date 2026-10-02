@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="480" viewBox="0 0 1180 480" role="img" aria-label="Algorithmic Paradigm Comparison - Greedy Choice vs DP Choice">
+<rect width="1180" height="480" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="590.0" y="34.0">Algorithmic Paradigm Comparison - Greedy Choice vs DP Choice</tspan></text>
+<rect x="50.0" y="70.0" width="520.0" height="330.0" rx="10" fill="#f8f9fa" opacity="0.4"/>
+<path d="M50.7 68.7 Q310.8 72.4 569.3 71.3 M568.8 68.6 Q570.2 235.3 568.6 399.2 M569.7 401.4 Q311.5 402.8 48.8 401.0 M51.1 400.3 Q49.9 236.4 49.6 70.0" fill="none" stroke="#adb5bd" stroke-width="1.6" stroke-dasharray="6 4" stroke-linecap="round" opacity="0.8"/>
+<rect x="64.0" y="59.0" width="352" height="22" rx="4" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#adb5bd"><tspan x="240.0" y="70.0">Greedy Paradigm (Irrevocable Local Choice)</tspan></text>
+<rect x="610.0" y="70.0" width="520.0" height="330.0" rx="10" fill="#f8f9fa" opacity="0.4"/>
+<path d="M611.0 70.8 Q872.0 70.5 1131.6 70.9 M1130.0 70.0 Q1130.5 234.4 1130.8 399.1 M1131.0 400.1 Q868.7 400.5 610.8 399.2 M611.3 400.8 Q610.4 233.2 608.7 71.5" fill="none" stroke="#adb5bd" stroke-width="1.6" stroke-dasharray="6 4" stroke-linecap="round" opacity="0.8"/>
+<rect x="624.0" y="59.0" width="448" height="22" rx="4" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#adb5bd"><tspan x="848.0" y="70.0">Dynamic Programming (Systematic Exhaustive Evaluation)</tspan></text>
+<path d="M304.9 145.5 Q315.0 146.1 325.6 146.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M314.8 150.1 L325.0 146.0 L314.8 141.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M324.8 145.5 Q321.3 147.3 316.0 146.4 M314.5 147.0 Q316.3 189.4 315.4 236.7 M316.0 236.4 Q308.4 236.5 305.7 236.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M315.2 231.9 L305.0 236.0 L315.2 240.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M304.4 235.7 Q314.7 235.3 325.1 233.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M315.3 239.1 L325.0 234.0 L314.4 230.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M325.3 233.2 Q365.9 232.5 405.0 234.6 M404.2 234.0 Q403.5 276.8 405.6 320.5 M405.0 320.6 Q444.8 321.7 485.5 319.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M474.8 324.1 L485.0 320.0 L474.8 315.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M865.8 145.6 Q875.3 146.0 884.7 146.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M874.8 150.1 L885.0 146.0 L874.8 141.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M885.1 145.8 Q879.9 144.2 875.2 145.9 M874.8 146.2 Q873.2 191.8 874.9 235.9 M875.2 235.9 Q870.8 235.4 864.9 235.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M875.2 231.9 L865.0 236.0 L875.2 240.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M865.1 235.8 Q875.4 236.4 885.4 236.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M874.8 240.1 L885.0 236.0 L874.8 231.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M885.3 236.7 Q927.4 235.2 969.7 236.7 M970.7 235.7 Q969.2 278.3 970.7 319.9 M969.7 320.7 Q1012.8 318.3 1054.9 319.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M1044.8 324.1 L1055.0 320.0 L1044.8 315.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="70.0" y="120.0" width="235.0" height="52.0" rx="10" fill="#ffec99"/>
+<path d="M68.9 120.2 Q186.9 120.2 304.5 118.5 M305.2 119.1 Q302.3 146.9 305.1 171.5 M306.2 170.5 Q187.0 173.4 69.0 172.1 M68.5 171.9 Q69.1 143.5 70.8 120.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M68.9 121.3 Q188.6 120.2 306.0 120.9 M305.4 120.6 Q307.2 148.1 303.8 172.4 M303.9 171.0 Q186.9 172.1 69.8 173.4 M71.3 173.1 Q68.9 147.2 70.6 121.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="187.5" y="146.0">Inspect current state</tspan></text>
+<rect x="325.0" y="120.0" width="235.0" height="52.0" rx="10" fill="#ffec99"/>
+<path d="M325.1 119.7 Q439.9 119.8 560.8 121.1 M560.1 119.5 Q559.9 143.9 558.6 170.5 M559.9 172.5 Q440.9 170.5 323.4 171.8 M324.2 173.2 Q325.5 146.6 324.2 119.3" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M326.4 119.7 Q444.8 122.0 560.1 121.2 M561.1 119.4 Q561.1 143.2 560.7 170.9 M561.3 173.2 Q444.1 169.4 326.1 172.5 M325.4 171.2 Q323.7 148.8 324.5 120.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="442.5" y="146.0">Pick locally best option</tspan></text>
+<rect x="70.0" y="210.0" width="235.0" height="52.0" rx="10" fill="#ffec99"/>
+<path d="M69.8 209.1 Q186.0 212.1 304.1 209.9 M304.3 210.3 Q303.7 233.8 305.3 263.5 M305.2 261.0 Q189.2 263.3 69.2 262.9 M68.9 263.3 Q71.1 236.2 71.0 210.9" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M70.5 210.9 Q188.2 208.5 303.6 210.5 M305.2 209.3 Q304.7 237.7 306.6 260.7 M304.4 260.9 Q184.7 260.3 69.6 261.9 M71.1 262.8 Q71.5 235.9 68.5 208.7" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="187.5" y="236.0">Never reconsider or undo</tspan></text>
+<rect x="325.0" y="205.0" width="235.0" height="58.0" rx="10" fill="#ffec99"/>
+<path d="M325.9 206.0 Q440.5 207.3 560.7 203.5 M560.9 205.6 Q560.8 235.0 560.1 262.5 M560.4 264.2 Q440.6 261.2 326.2 263.4 M326.4 262.7 Q327.3 236.0 325.1 206.2" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M324.9 203.5 Q444.5 206.5 559.1 205.2 M558.7 205.8 Q557.7 231.5 559.9 262.1 M560.3 261.9 Q441.2 260.5 325.8 263.6 M324.8 261.4 Q327.1 233.2 323.9 204.6" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="442.5" y="225.4">Requires Greedy-Choice</tspan><tspan x="442.5" y="242.6">Property</tspan></text>
+<rect x="135.0" y="290.0" width="350.0" height="60.0" rx="10" fill="#ffc9c9"/>
+<path d="M135.4 288.9 Q312.5 289.4 484.0 289.8 M486.2 291.3 Q487.0 318.9 486.1 350.6 M483.9 350.6 Q312.3 352.2 133.4 350.0 M135.5 350.9 Q135.7 318.5 133.6 290.5" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M135.6 289.3 Q309.7 287.2 483.6 290.6 M484.6 291.2 Q482.7 322.4 484.6 349.2 M485.6 351.3 Q311.8 351.4 133.9 349.4 M134.7 349.2 Q137.7 317.9 133.6 290.2" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="bold" fill="#1e1e1e"><tspan x="310.0" y="310.8">Fast (O(n log n)), but fragile</tspan><tspan x="310.0" y="329.2">(Fails without matroid structure)</tspan></text>
+<rect x="630.0" y="120.0" width="235.0" height="52.0" rx="10" fill="#a5d8ff"/>
+<path d="M630.0 121.3 Q748.3 121.6 866.2 121.1 M865.5 120.4 Q865.4 144.7 864.2 171.5 M863.7 171.8 Q746.4 170.0 631.0 171.7 M629.9 170.5 Q632.0 147.5 629.1 120.2" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M629.4 121.0 Q746.9 118.5 865.8 119.6 M865.2 121.5 Q867.6 145.5 863.8 172.0 M863.8 173.3 Q746.4 172.5 630.5 171.9 M631.1 173.1 Q632.7 145.2 629.3 120.3" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="747.5" y="146.0">Define state representation</tspan></text>
+<rect x="885.0" y="117.0" width="235.0" height="58.0" rx="10" fill="#a5d8ff"/>
+<path d="M884.7 116.4 Q1002.3 114.2 1118.9 116.6 M1120.2 118.1 Q1117.6 147.5 1120.8 173.5 M1119.1 173.7 Q1003.0 173.0 883.6 173.5 M885.6 174.3 Q884.7 143.2 883.6 117.6" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M884.9 116.4 Q1004.5 119.0 1120.3 117.1 M1120.3 118.5 Q1122.3 144.4 1119.6 174.5 M1121.4 174.9 Q1000.4 172.4 885.6 176.2 M883.8 176.0 Q885.4 145.8 885.1 117.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="1002.5" y="137.4">Explore ALL valid</tspan><tspan x="1002.5" y="154.6">transitions</tspan></text>
+<rect x="630.0" y="210.0" width="235.0" height="52.0" rx="10" fill="#a5d8ff"/>
+<path d="M628.5 210.3 Q748.6 208.7 863.9 210.8 M865.6 209.8 Q864.3 238.1 863.4 260.9 M864.2 260.7 Q748.6 264.3 631.3 261.9 M629.4 263.0 Q629.4 234.5 630.8 209.6" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M631.2 208.8 Q745.4 211.8 863.6 209.7 M865.2 210.2 Q867.4 235.5 864.9 262.7 M863.6 262.1 Q746.4 261.9 630.0 261.2 M630.7 261.9 Q632.6 234.8 631.3 208.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="747.5" y="236.0">Reuse cached subproblems</tspan></text>
+<rect x="885.0" y="210.0" width="235.0" height="52.0" rx="10" fill="#a5d8ff"/>
+<path d="M884.9 210.6 Q1001.4 211.8 1121.3 208.9 M1119.6 209.7 Q1120.3 238.7 1119.2 260.6 M1120.0 263.4 Q1000.3 264.3 884.7 260.6 M884.9 261.4 Q887.0 238.0 885.3 210.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M884.2 209.4 Q1003.7 209.8 1119.9 211.1 M1118.7 211.4 Q1121.1 237.9 1119.3 260.6 M1120.2 263.1 Q1001.8 262.0 885.2 260.7 M885.5 262.0 Q882.3 237.2 884.3 208.5" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="1002.5" y="236.0">Combines optimal subpaths</tspan></text>
+<rect x="695.0" y="290.0" width="360.0" height="60.0" rx="10" fill="#b2f2bb"/>
+<path d="M693.6 288.8 Q874.8 288.9 1056.3 290.5 M1055.1 291.1 Q1055.6 322.7 1056.1 349.3 M1054.5 351.3 Q877.5 349.9 694.1 349.3 M696.2 348.8 Q692.9 321.8 693.6 289.7" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M693.7 289.6 Q876.0 290.0 1055.0 291.4 M1053.5 288.5 Q1052.5 322.0 1055.7 348.9 M1053.8 350.6 Q876.6 351.6 696.2 349.0 M694.2 350.7 Q692.9 320.9 695.8 290.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="bold" fill="#1e1e1e"><tspan x="875.0" y="310.8">Always optimal if subproblems overlap</tspan><tspan x="875.0" y="329.2">and optimal substructure holds</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="590.0" y="458.0">Greedy commits blindly to local heuristics; DP systematically evaluates all possibilities via cached subproblems</tspan></text>
+</svg>

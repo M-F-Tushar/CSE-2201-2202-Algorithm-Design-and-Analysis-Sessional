@@ -60,31 +60,7 @@ Here, the state is $F(n)$, the base cases are $F(0)$ and $F(1)$, and each later 
 
 ### Visual Map: DP Design Flow
 
-```mermaid
-flowchart LR
-    Problem["Original problem"] --> State["1. State<br/>What does one subproblem mean?"]
-    State --> Base["2. Base cases<br/>Which answers are already known?"]
-    Base --> Recurrence["3. Recurrence<br/>How do choices connect states?"]
-    Recurrence --> Order["4. Evaluation order<br/>Which states must be ready first?"]
-    Order --> Table["5. Memo or table<br/>Store each solved state"]
-    Table --> Answer["Final answer<br/>Read the target state"]
-
-    State -. gives meaning to .-> Subproblem["Subproblem family"]
-    Recurrence -. compares .-> Choice["Valid choices"]
-    Order -. protects .-> Dependency["Dependency direction"]
-    Table -. prevents .-> Repeat["Repeated computation"]
-
-    classDef input fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-    classDef design fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    classDef storage fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    classDef support fill:#f1f5f9,stroke:#64748b,stroke-dasharray: 5 5,color:#0f172a;
-    classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class Problem input;
-    class State,Base,Recurrence,Order design;
-    class Table storage;
-    class Subproblem,Choice,Dependency,Repeat support;
-    class Answer answer;
-```
+![The Dynamic Programming 5-Step Design Framework](diagrams/ch8-01-dp-design-flow.svg)
 
 ---
 
@@ -123,36 +99,7 @@ With DP, store $F(3)=2$ the first time it is found. The second request reuses 2 
 
 ### Visual Map: Repeated Work Removed by DP
 
-```mermaid
-flowchart TD
-    Root["Original call"] --> A1["Subproblem A"]
-    Root --> B1["Subproblem B"]
-    A1 --> C1["Subproblem C"]
-    A1 --> D1["Subproblem D"]
-    B1 --> C2["Subproblem C again"]
-    B1 --> D2["Subproblem D again"]
-
-    C1 --> Waste["Repeated work"]
-    C2 --> Waste
-    D1 --> Waste
-    D2 --> Waste
-
-    Waste --> Memo["Memo or table"]
-    Memo --> SolveC["Solve C once"]
-    Memo --> SolveD["Solve D once"]
-    SolveC --> Reuse["Reuse saved C"]
-    SolveD --> Reuse
-    Reuse --> Fast["Smaller running time"]
-
-    classDef callNode fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef duplicate fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-    classDef store fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    classDef result fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    class Root,A1,B1 callNode;
-    class C1,C2,D1,D2,Waste duplicate;
-    class Memo,SolveC,SolveD,Reuse store;
-    class Fast result;
-```
+![Exponential Redundancy in Naive Recursion vs Memoization](diagrams/ch8-02-repeated-work-removed.svg)
 
 ---
 
@@ -183,36 +130,7 @@ Greedy makes a locally attractive choice (4), but it misses the globally optimal
 
 ### Visual Map: Greedy Choice vs DP Choice
 
-```mermaid
-flowchart TB
-    Start["Optimization problem"]
-
-    subgraph G[Greedy lane]
-        G1["Look at current position"] --> G2["Take locally best choice"]
-        G2 --> G3["Never revisit that choice"]
-        G3 --> G4["Correct only with greedy-choice property"]
-    end
-
-    subgraph D[DP lane]
-        D1["Define state"] --> D2["Try every valid choice"]
-        D2 --> D3["Use solved subproblems"]
-        D3 --> D4["Store globally best state value"]
-    end
-
-    Start --> G1
-    Start --> D1
-    G4 --> Compare["Use when local optimal is globally safe"]
-    D4 --> Compare2["Use when choices interact across states"]
-
-    classDef start fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-    classDef greedy fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#431407;
-    classDef dp fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    classDef note fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#422006;
-    class Start start;
-    class G1,G2,G3,G4 greedy;
-    class D1,D2,D3,D4 dp;
-    class Compare,Compare2 note;
-```
+![Algorithmic Paradigm Comparison - Greedy Choice vs DP Choice](diagrams/ch8-03-greedy-vs-dp-choice.svg)
 
 ---
 
@@ -237,27 +155,7 @@ The subpath $B \rightarrow D$ must itself be shortest. If another route from $B$
 
 ### Visual Map: Optimal Path Contains Optimal Subpaths
 
-```mermaid
-flowchart LR
-    A((A)) -->|part of optimal path| B((B))
-    B -->|must also be optimal| D((D))
-    A ==> Whole["Optimal A to D route"]
-    Whole ==> D
-
-    AltB((B)) -.->|cheaper suffix?| X((X))
-    X -.-> D2((D))
-    D2 -. would replace .-> Whole
-    Whole --> Contradiction["Contradiction if suffix was not optimal"]
-
-    classDef path fill:#dcfce7,stroke:#16a34a,stroke-width:3px,color:#052e16;
-    classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef alt fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-    classDef warn fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    class A,B,D node;
-    class Whole path;
-    class AltB,X,D2 alt;
-    class Contradiction warn;
-```
+![Optimal Substructure Principle - Optimal Path Contains Optimal Subpaths](diagrams/ch8-04-optimal-subpaths.svg)
 
 ---
 
@@ -311,37 +209,7 @@ Both $F(5)=F(4)+F(3)$ and $F(4)=F(3)+F(2)$ require $F(3)$. The subproblem $F(3)$
 
 ### Visual Map: DP Elements Working Together
 
-```mermaid
-flowchart TB
-    subgraph Validity[Problem properties]
-        Optimal["Optimal substructure"]
-        Overlap["Overlapping subproblems"]
-    end
-
-    subgraph Design[DP design]
-        State["State"] --> Recurrence["Recurrence"]
-        Base["Base cases"] --> Recurrence
-        Recurrence --> Order["Evaluation order"]
-        Order --> Table["Memo or table"]
-    end
-
-    subgraph Output[Result]
-        Table --> Final["Final answer"]
-        Final --> Trace["Optional traceback"]
-    end
-
-    Optimal -. validates .-> Recurrence
-    Overlap -. motivates .-> Table
-
-    classDef property fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#2e1065;
-    classDef design fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-    classDef storage fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    classDef answer fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    class Optimal,Overlap property;
-    class State,Recurrence,Base,Order design;
-    class Table storage;
-    class Final,Trace answer;
-```
+![Core Dynamic Programming Elements and Cohesion](diagrams/ch8-05-dp-elements-working-together.svg)
 
 ---
 
@@ -397,34 +265,7 @@ Both methods compute the same answer. Memoization follows the needed calls from 
 
 ### Visual Map: Top-Down vs Bottom-Up
 
-```mermaid
-flowchart LR
-    subgraph Top[Memoization: top-down]
-        Goal["Original state"] --> Need["Ask for needed smaller states"]
-        Need --> Hit{"Already cached?"}
-        Hit -->|Yes| Cached["Return cached value"]
-        Hit -->|No| Recurse["Recurse, compute, store"]
-        Recurse --> Cached
-    end
-
-    subgraph Bottom[Tabulation: bottom-up]
-        Base["Base cases"] --> Small["Small states"]
-        Small --> Medium["Medium states"]
-        Medium --> Large["Target state"]
-    end
-
-    Cached --> Answer1["Answer"]
-    Large --> Answer2["Answer"]
-
-    classDef top fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef bottom fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class Goal,Need,Cached,Recurse top;
-    class Base,Small,Medium,Large bottom;
-    class Hit decision;
-    class Answer1,Answer2 answer;
-```
+![Top-Down (Memoization) vs Bottom-Up (Tabulation)](diagrams/ch8-06-top-down-vs-bottom-up.svg)
 
 ---
 
@@ -492,38 +333,7 @@ Therefore, there are **13** distinct ways to climb 5 stairs.
 
 #### Mermaid Diagram: Climbing Stairs State Dependencies
 
-```mermaid
-flowchart LR
-    subgraph BaseCases[Base cases]
-        W0["Ways(0)=1"]
-        W1["Ways(1)=1"]
-        W2["Ways(2)=2"]
-    end
-
-    subgraph Build[Bottom-up build]
-        W3["Ways(3)=4"]
-        W4["Ways(4)=7"]
-        W5["Ways(5)=13"]
-    end
-
-    W0 --> W3
-    W1 --> W3
-    W2 --> W3
-    W1 --> W4
-    W2 --> W4
-    W3 --> W4
-    W2 --> W5
-    W3 --> W5
-    W4 --> W5
-    W5 --> Answer["Answer: 13 ways"]
-
-    classDef base fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef computed fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class W0,W1,W2 base;
-    class W3,W4 computed;
-    class W5,Answer answer;
-```
+![Climbing Stairs State Dependencies (1, 2, or 3 Steps)](diagrams/ch8-07-climbing-stairs-dependencies.svg)
 
 #### Algorithm
 
@@ -609,22 +419,7 @@ CLIMBING-STAIRS-ONE-OR-TWO(n)
 
 Directly translating the recurrence $C(n) = C(n-1) + C(n-2)$ into recursive calls, without memoization or tabulation, recomputes the same smaller subproblems many times:
 
-```mermaid
-flowchart TD
-    C4["C(4)"] --> C3["C(3)"]
-    C4 --> C2a["C(2)"]
-    C3 --> C2b["C(2)"]
-    C3 --> C1a["C(1) = 1"]
-    C2a --> C1b["C(1) = 1"]
-    C2a --> C0a["C(0) = 1"]
-    C2b --> C1c["C(1) = 1"]
-    C2b --> C0b["C(0) = 1"]
-
-    classDef call fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    classDef base fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    class C4,C3,C2a,C2b call;
-    class C1a,C1b,C0a,C1c,C0b base;
-```
+![Climbing Stairs Recursion Tree (1 or 2 Steps for n = 4)](diagrams/ch8-08-climbing-stairs-tree.svg)
 
 Notice $C(2)$ is computed twice and $C(1)$ three times â€” the same overlapping-subproblems pattern seen in Fibonacci. Each call spawns two more calls until a base case is hit, so the call tree has roughly $2^n$ nodes in the worst case:
 
@@ -777,38 +572,7 @@ Traceback gives item 4 and item 1. Maximum value: **12**.
 
 #### Mermaid Diagram: 0/1 Knapsack Decision and Traceback
 
-```mermaid
-flowchart TB
-    subgraph CellRule[Cell update rule]
-        State["Cell V[i,j]<br/>first i items, capacity j"] --> Fit{"w_i &lt;= j?"}
-        Fit -->|No| SkipOnly["Item cannot fit<br/>copy V[i-1,j]"]
-        Fit -->|Yes| Choice{"Better of two choices"}
-        Choice --> Skip["Skip item<br/>V[i-1,j]"]
-        Choice --> Take["Take item<br/>v_i + V[i-1,j-w_i]"]
-        Skip --> Max["Store max value"]
-        Take --> Max
-        SkipOnly --> Max
-    end
-
-    subgraph Traceback["Traceback from V[n,W]"]
-        End["Start at final cell"] --> Same{"Same as upper cell?"}
-        Same -->|Yes| MoveUp["Skip item i<br/>move up"]
-        Same -->|No| Select["Select item i<br/>move up-left by w_i"]
-    end
-
-    Max --> End
-
-    classDef state fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    classDef take fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    classDef skip fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-    classDef result fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class State,End state;
-    class Fit,Choice,Same decision;
-    class Take,Select take;
-    class Skip,SkipOnly,MoveUp skip;
-    class Max result;
-```
+![0/1 Knapsack Cell Decision Rule and Traceback Path](diagrams/ch8-09-knapsack-decision-traceback.svg)
 
 #### Algorithm
 
@@ -909,35 +673,7 @@ Optimal cuts: **2 and 3**. Maximum revenue: **13**.
 
 #### Mermaid Diagram: Rod Cutting as Unbounded Choices
 
-```mermaid
-flowchart LR
-    Rod["Rod length j"] --> Decision{"Try piece length i"}
-    Decision -->|Does not fit| ExcludeOnly["Copy T[i-1,j]"]
-    Decision -->|Fits| Split["Split rod"]
-
-    Split --> Piece["Sell piece i<br/>earn p_i"]
-    Split --> Remainder["Remaining length j-i"]
-    Remainder --> SameRow["Solve T[i,j-i]<br/>same row: piece i can repeat"]
-    Piece --> Include["p_i + T[i,j-i]"]
-    SameRow --> Include
-
-    ExcludeOnly --> Best["Best revenue T[i,j]"]
-    Include --> Best
-    Best --> Trace["Traceback cuts"]
-    Trace --> Cut["Different from row above:<br/>use length i"]
-    Trace --> Skip["Same as row above:<br/>skip length i"]
-
-    classDef rod fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    classDef include fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    classDef skip fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-    classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class Rod,Remainder rod;
-    class Decision,Split decision;
-    class Piece,SameRow,Include,Cut include;
-    class ExcludeOnly,Skip skip;
-    class Best,Trace answer;
-```
+![Rod Cutting - Unbounded Knapsack Recurrence](diagrams/ch8-10-rod-cutting-unbounded.svg)
 
 #### Algorithm
 
@@ -1167,36 +903,7 @@ Traceback gives the LCS **aadb** with length **4**.
 
 #### Mermaid Diagram: LCS Match, Mismatch, and Traceback
 
-```mermaid
-flowchart TB
-    subgraph Matrix[One LCS table cell]
-        Up["c[i-1,j]<br/>drop X[i]"]
-        Left["c[i,j-1]<br/>drop Y[j]"]
-        Diag["c[i-1,j-1]<br/>previous match length"]
-        Current["c[i,j]"]
-    end
-
-    Compare{"X[i] == Y[j]?"} -->|Yes| Match["Use diagonal + 1"]
-    Compare -->|No| Mismatch["Use max(up, left)"]
-    Diag --> Match --> Current
-    Up --> Mismatch --> Current
-    Left --> Mismatch
-
-    Current --> Trace["Traceback"]
-    Trace --> DiagMove["Diagonal move: print character"]
-    Trace --> UpLeftMove["Up or left move: skip character"]
-
-    classDef table fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-    classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    classDef match fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    classDef skip fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-    classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class Up,Left,Diag,Current table;
-    class Compare decision;
-    class Match,DiagMove match;
-    class Mismatch,UpLeftMove skip;
-    class Trace answer;
-```
+![Longest Common Subsequence (LCS) State Transitions](diagrams/ch8-11-lcs-cell-traceback.svg)
 
 #### Algorithm
 
@@ -1327,42 +1034,7 @@ The minimum cost is **405**, obtained by splitting at $k=2$: $(A_1A_2)(A_3A_4)$.
 
 #### Mermaid Diagram: Matrix Chain Interval Splits
 
-```mermaid
-flowchart TD
-    Interval["Interval M[1,4]<br/>A1 A2 A3 A4"] --> K1["Split k=1"]
-    Interval --> K2["Split k=2"]
-    Interval --> K3["Split k=3"]
-
-    K1 --> L1["Left: A1"]
-    K1 --> R1["Right: A2 A3 A4"]
-    K1 --> C1["Cost 580"]
-
-    K2 --> L2["Left: A1 A2"]
-    K2 --> R2["Right: A3 A4"]
-    K2 --> C2["Cost 405"]
-
-    K3 --> L3["Left: A1 A2 A3"]
-    K3 --> R3["Right: A4"]
-    K3 --> C3["Cost 630"]
-
-    C1 --> Min["Minimum cost"]
-    C2 --> Min
-    C3 --> Min
-    Min --> Answer["Use k=2<br/>(A1A2)(A3A4)"]
-
-    classDef interval fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef split fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    classDef subproblem fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-    classDef bad fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-    classDef good fill:#dcfce7,stroke:#16a34a,stroke-width:3px,color:#052e16;
-    classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class Interval interval;
-    class K1,K2,K3 split;
-    class L1,R1,L2,R2,L3,R3 subproblem;
-    class C1,C3 bad;
-    class C2 good;
-    class Min,Answer answer;
-```
+![Matrix Chain Multiplication - Evaluating Interval Splits M(1, 4)](diagrams/ch8-12-matrix-chain-splits.svg)
 
 #### Algorithm
 
@@ -1491,42 +1163,7 @@ The optimal root for keys 1 through 3 is $k_2$, because the minimum value for $E
 
 #### Mermaid Diagram: Optimal BST Root Choices
 
-```mermaid
-flowchart TB
-    Interval["Interval E[1,3]<br/>keys k1, k2, k3"] --> Try1["Try root k1"]
-    Interval --> Try2["Try root k2"]
-    Interval --> Try3["Try root k3"]
-
-    Try1 --> L1["Left empty"]
-    Try1 --> R1["Right E[2,3]"]
-    Try1 --> Cost1["Cost 1.30"]
-
-    Try2 --> L2["Left E[1,1]"]
-    Try2 --> R2["Right E[3,3]"]
-    Try2 --> Cost2["Cost 1.25"]
-
-    Try3 --> L3["Left E[1,2]"]
-    Try3 --> R3["Right empty"]
-    Try3 --> Cost3["Cost 1.50"]
-
-    Cost1 --> Best["Choose lowest expected cost"]
-    Cost2 --> Best
-    Cost3 --> Best
-    Best --> Root["Optimal root: k2"]
-
-    classDef interval fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef root fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    classDef subtree fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-    classDef bad fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-    classDef good fill:#dcfce7,stroke:#16a34a,stroke-width:3px,color:#052e16;
-    classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class Interval interval;
-    class Try1,Try2,Try3 root;
-    class L1,R1,L2,R2,L3,R3 subtree;
-    class Cost1,Cost3 bad;
-    class Cost2 good;
-    class Best,Root answer;
-```
+![Optimal Binary Search Tree - Root Selection for Keys {k1, k2, k3}](diagrams/ch8-13-optimal-bst-root-choices.svg)
 
 #### Algorithm
 
@@ -1586,66 +1223,7 @@ Use this 5-stage graph:
 
 #### Mermaid Diagram: Multistage Graph Layout
 
-```mermaid
-flowchart LR
-    subgraph S1 [Stage 1]
-        A((A))
-    end
-    subgraph S2 [Stage 2]
-        B((B))
-        C((C))
-        D((D))
-    end
-    subgraph S3 [Stage 3]
-        E((E))
-        F((F))
-        G((G))
-    end
-    subgraph S4 [Stage 4]
-        H((H))
-        I((I))
-        J((J))
-    end
-    subgraph S5 [Stage 5]
-        K((K))
-    end
-
-    A -->|9| B
-    A -->|7| C
-    A -->|3| D
-    B -->|4| E
-    B -->|2| F
-    B -->|1| G
-    C -->|2| E
-    C -->|7| F
-    C -->|11| G
-    D -->|5| E
-    D -->|11| F
-    D -->|8| G
-    E -->|11| H
-    E -->|8| I
-    E -->|5| J
-    F -->|4| H
-    F -->|3| I
-    F -->|7| J
-    G -->|5| H
-    G -->|6| I
-    G -->|2| J
-    H -->|4| K
-    I -->|2| K
-    J -->|5| K
-
-    classDef source fill:#fef3c7,stroke:#d97706,stroke-width:3px,color:#111827;
-    classDef stage2 fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef stage3 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-    classDef stage4 fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    classDef sink fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class A source;
-    class B,C,D stage2;
-    class E,F,G stage3;
-    class H,I,J stage4;
-    class K sink;
-```
+![Multistage Graph Shortest Path Layout (5 Stages)](diagrams/ch8-14-multistage-graph-layout.svg)
 
 #### Subproblem Decomposition
 
@@ -1747,51 +1325,7 @@ This confirms the same minimum cost: **16**.
 
 #### Mermaid Diagram: Backward DP Cost Flow
 
-```mermaid
-flowchart RL
-    subgraph Stage5[Stage 5]
-        K["K<br/>Cost 0"]
-    end
-    subgraph Stage4[Stage 4]
-        H["H<br/>Cost 4"]
-        I["I<br/>Cost 2"]
-        J["J<br/>Cost 5"]
-    end
-    subgraph Stage3[Stage 3]
-        E["E<br/>Cost 10"]
-        F["F<br/>Cost 5"]
-        G["G<br/>Cost 7"]
-    end
-    subgraph Stage2[Stage 2]
-        B["B<br/>Cost 7"]
-        C["C<br/>Cost 12"]
-        D["D<br/>Cost 15"]
-    end
-    subgraph Stage1[Stage 1]
-        A["A<br/>Cost 16"]
-    end
-
-    K --> I
-    K --> H
-    K --> J
-    I --> F
-    J --> G
-    I --> E
-    F --> B
-    E --> C
-    G --> D
-    B --> A
-    A --> Path["Optimal path<br/>A -&gt; B -&gt; F -&gt; I -&gt; K"]
-
-    classDef target fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    classDef chosen fill:#dcfce7,stroke:#16a34a,stroke-width:3px,color:#052e16;
-    classDef candidate fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-    classDef answer fill:#fef3c7,stroke:#d97706,stroke-width:3px,color:#111827;
-    class K target;
-    class A,B,F,I chosen;
-    class H,J,E,G,C,D candidate;
-    class Path answer;
-```
+![Backward Dynamic Programming Cost Evaluation (Target K to Source A)](diagrams/ch8-15-backward-dp-cost-flow.svg)
 
 #### Algorithm
 
@@ -1910,33 +1444,7 @@ Minimum tour cost: **21**. One optimal tour is **$1 \to 3 \to 4 \to 2 \to 1$**.
 
 #### Mermaid Diagram: TSP Subset DP Expansion
 
-```mermaid
-flowchart TB
-    Start(("City 1")) --> Branch{"First city after 1"}
-    Branch --> Path2["Choose 2<br/>remaining {3,4}"]
-    Branch --> Path3["Choose 3<br/>remaining {2,4}"]
-    Branch --> Path4["Choose 4<br/>remaining {2,3}"]
-
-    Path2 --> Cost2["2 + g(2,{3,4})<br/>= 22"]
-    Path3 --> Cost3["9 + g(3,{2,4})<br/>= 21"]
-    Path4 --> Cost4["10 + g(4,{2,3})<br/>= 30"]
-
-    Cost2 --> Min["Take minimum tour cost"]
-    Cost3 --> Min
-    Cost4 --> Min
-    Min --> Tour["Tour: 1 -&gt; 3 -&gt; 4 -&gt; 2 -&gt; 1<br/>Cost 21"]
-
-    classDef start fill:#fef3c7,stroke:#d97706,stroke-width:3px,color:#111827;
-    classDef branch fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-    classDef bad fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-    classDef good fill:#dcfce7,stroke:#16a34a,stroke-width:3px,color:#052e16;
-    classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class Start start;
-    class Branch,Path2,Path3,Path4 branch;
-    class Cost2,Cost4 bad;
-    class Cost3 good;
-    class Min,Tour answer;
-```
+![Traveling Salesperson Problem (TSP) Held-Karp Subset State Expansion](diagrams/ch8-16-tsp-subset-expansion.svg)
 
 #### Algorithm
 
@@ -2059,30 +1567,7 @@ Maximum reliability: **0.4704**.
 
 #### Mermaid Diagram: Reliability Design Budget Choices
 
-```mermaid
-flowchart LR
-    Budget["Budget B = 5"] --> C111["1,1,1 copies<br/>cost 4<br/>R = 0.3360"]
-    Budget --> C112["1,1,2 copies<br/>cost 5<br/>R = 0.4704"]
-    Budget --> C211["2,1,1 copies<br/>cost 5<br/>R = 0.4032"]
-    Budget --> Reject["Other choices<br/>cost over budget"]
-
-    C111 --> Best["Keep highest feasible reliability"]
-    C112 --> Best
-    C211 --> Best
-    Reject -.-> Best
-    Best --> Answer["Best design<br/>copies 1, 1, 2<br/>R = 0.4704"]
-
-    classDef budget fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef feasible fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-    classDef good fill:#dcfce7,stroke:#16a34a,stroke-width:3px,color:#052e16;
-    classDef bad fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-    classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class Budget budget;
-    class C111,C112,C211 feasible;
-    class Best good;
-    class Reject bad;
-    class Answer answer;
-```
+![Reliability Design Optimization under Cost Constraint (Budget B = 5)](diagrams/ch8-17-reliability-design-budget.svg)
 
 #### Algorithm
 

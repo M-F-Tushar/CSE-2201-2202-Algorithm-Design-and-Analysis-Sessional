@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="420" viewBox="0 0 1140 420" role="img" aria-label="Rod Cutting - Unbounded Knapsack Recurrence">
+<rect width="1140" height="420" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="570.0" y="34.0">Rod Cutting - Unbounded Knapsack Recurrence</tspan></text>
+<path d="M199.9 179.5 Q225.0 180.1 250.6 180.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M239.8 184.1 L250.0 180.0 L239.8 175.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M249.8 179.5 Q306.3 181.3 361.0 180.4 M359.5 181.0 Q361.3 243.4 360.4 310.7 M361.0 310.4 Q413.4 310.5 470.7 310.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M459.8 314.1 L470.0 310.0 L459.8 305.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="305.0" y="233.0" width="110" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="360.0" y="245.0">Does not fit</tspan></text>
+<path d="M469.4 179.7 Q499.7 180.3 530.1 179.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M519.8 184.1 L530.0 180.0 L519.8 175.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="477.0" y="168.0" width="46" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="500.0" y="180.0">Fits</tspan></text>
+<path d="M710.3 179.2 Q725.9 178.5 740.0 180.6 M739.2 180.0 Q738.5 140.8 740.6 102.5 M740.0 102.6 Q754.8 103.7 770.5 101.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M759.8 106.1 L770.0 102.0 L759.8 97.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M710.8 179.6 Q725.3 180.0 739.7 180.2 M739.6 179.7 Q740.0 195.2 740.2 212.2 M739.7 212.2 Q754.2 213.6 770.2 212.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M759.8 216.1 L770.0 212.0 L759.8 207.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1040.1 101.8 Q1067.4 100.2 1095.2 101.9 M1094.8 102.2 Q1093.2 218.8 1094.9 333.9 M1095.2 333.9 Q1058.3 333.4 1019.9 333.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M1030.2 329.9 L1020.0 334.0 L1030.2 338.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M770.1 211.8 Q832.9 212.4 895.4 212.5 M894.8 212.4 Q895.4 271.7 895.5 334.2 M895.4 334.5 Q956.2 333.9 1020.2 334.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M1009.8 338.1 L1020.0 334.0 L1009.8 329.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M470.3 310.7 Q522.4 309.2 574.7 310.7 M575.7 309.7 Q574.2 322.3 575.7 333.9 M574.7 334.7 Q627.8 332.3 679.9 333.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M669.8 338.1 L680.0 334.0 L669.8 329.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="40.0" y="150.0" width="160.0" height="60.0" rx="10" fill="#a5d8ff"/>
+<path d="M38.9 150.2 Q119.4 150.2 199.5 148.5 M200.2 149.1 Q197.3 180.9 200.1 209.5 M201.2 208.5 Q119.5 211.4 39.0 210.1 M38.5 209.9 Q39.1 177.5 40.8 150.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M38.9 151.3 Q121.1 150.2 201.0 150.9 M200.4 150.6 Q202.2 182.1 198.8 210.4 M198.9 209.0 Q119.4 210.1 39.8 211.4 M41.3 211.1 Q38.9 181.2 40.6 151.1" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="120.0" y="180.0">Rod Length j</tspan></text>
+<polygon points="360.0,140 470,180.0 360.0,220 250,180.0" fill="#ffec99"/>
+<path d="M360.1 139.7 Q412.4 159.8 470.8 181.1 M470.0 178.8 Q415.9 197.2 359.6 219.9 M361.2 219.2 Q305.6 202.7 249.3 180.3 M249.2 180.9 Q302.4 158.0 361.0 140.7" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M361.4 139.7 Q417.3 162.0 470.1 181.2 M470.6 178.4 Q417.2 201.9 360.0 221.3 M359.2 219.5 Q307.8 197.7 250.2 179.3 M249.6 179.9 Q305.3 162.0 358.5 139.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="360.0" y="170.1">Try Piece of Length i</tspan><tspan x="360.0" y="189.9">(Cut decision)</tspan></text>
+<rect x="250.0" y="280.0" width="220.0" height="60.0" rx="10" fill="#ffc9c9"/>
+<path d="M249.8 279.1 Q358.5 282.1 469.1 279.9 M469.3 280.3 Q468.7 307.8 470.3 341.5 M470.2 339.0 Q361.7 341.3 249.2 340.9 M248.9 341.3 Q251.1 310.2 251.0 280.9" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M250.5 280.9 Q360.7 278.5 468.6 280.5 M470.2 279.3 Q469.7 311.7 471.6 338.7 M469.4 338.9 Q357.2 338.3 249.6 339.9 M251.1 340.8 Q251.5 309.9 248.5 278.7" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="360.0" y="299.4">Cut length i &gt; j:</tspan><tspan x="360.0" y="320.6">Copy T[i-1, j]</tspan></text>
+<rect x="530.0" y="150.0" width="180.0" height="60.0" rx="10" fill="#b2f2bb"/>
+<path d="M530.9 151.0 Q618.0 152.3 710.7 148.5 M710.9 150.6 Q710.8 181.0 710.1 209.5 M710.4 211.2 Q618.1 208.2 531.2 210.4 M531.4 209.7 Q532.3 182.0 530.1 151.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M529.9 148.5 Q622.0 151.5 709.1 150.2 M708.7 150.8 Q707.7 177.5 709.9 209.1 M710.3 208.9 Q618.7 207.5 530.8 210.6 M529.8 208.4 Q532.1 179.2 528.9 149.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="620.0" y="170.8">Valid Cut (i &lt;= j):</tspan><tspan x="620.0" y="189.2">Split rod</tspan></text>
+<rect x="770.0" y="70.0" width="270.0" height="64.0" rx="10" fill="#b2f2bb"/>
+<path d="M770.4 68.9 Q907.5 69.4 1039.0 69.8 M1041.2 71.3 Q1042.0 100.9 1041.1 134.6 M1038.9 134.6 Q907.3 136.2 768.4 134.0 M770.5 134.9 Q770.7 100.5 768.6 70.5" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M770.6 69.3 Q904.7 67.2 1038.6 70.6 M1039.6 71.2 Q1037.7 104.4 1039.6 133.2 M1040.6 135.3 Q906.8 135.4 768.9 133.4 M769.7 133.2 Q772.7 99.9 768.6 70.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="905.0" y="91.4">Sell Piece i: earn p_i</tspan><tspan x="905.0" y="112.6">Remaining length: j - i</tspan></text>
+<rect x="770.0" y="180.0" width="280.0" height="64.0" rx="10" fill="#99e9f2"/>
+<path d="M770.0 181.3 Q910.8 181.6 1051.2 181.1 M1050.5 180.4 Q1050.4 210.7 1049.2 243.5 M1048.7 243.8 Q908.9 242.0 771.0 243.7 M769.9 242.5 Q772.0 213.5 769.1 180.2" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M769.4 181.0 Q909.4 178.5 1050.8 179.6 M1050.2 181.5 Q1052.6 211.5 1048.8 244.0 M1048.8 245.3 Q908.9 244.5 770.5 243.9 M771.1 245.1 Q772.7 211.2 769.3 180.3" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="910.0" y="203.4">Solve Subproblem: T[i, j - i]</tspan><tspan x="910.0" y="220.6">(SAME row allows repeating!)</tspan></text>
+<rect x="680.0" y="300.0" width="340.0" height="68.0" rx="10" fill="#b2f2bb"/>
+<path d="M679.7 299.4 Q849.8 297.2 1018.9 299.6 M1020.2 301.1 Q1017.6 335.5 1020.8 366.5 M1019.1 366.7 Q850.5 366.0 678.6 366.5 M680.6 367.3 Q679.7 331.2 678.6 300.6" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M679.9 299.4 Q852.0 302.0 1020.3 300.1 M1020.3 301.5 Q1022.3 332.4 1019.6 367.5 M1021.4 367.9 Q847.9 365.4 680.6 369.2 M678.8 369.0 Q680.4 333.8 680.1 300.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="850.0" y="323.4">Best Revenue T[i, j]:</tspan><tspan x="850.0" y="344.6">max(T[i-1, j], p_i + T[i, j - i])</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="570.0" y="398.0">Unbounded knapsack looks at the same row i for j-i, permitting unlimited duplicates of each item</tspan></text>
+</svg>

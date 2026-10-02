@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="480" viewBox="0 0 1140 480" role="img" aria-label="Top-Down (Memoization) vs Bottom-Up (Tabulation)">
+<rect width="1140" height="480" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="570.0" y="34.0">Top-Down (Memoization) vs Bottom-Up (Tabulation)</tspan></text>
+<rect x="40.0" y="70.0" width="520.0" height="330.0" rx="10" fill="#f8f9fa" opacity="0.4"/>
+<path d="M40.7 68.7 Q300.8 72.4 559.3 71.3 M558.8 68.6 Q560.2 235.3 558.6 399.2 M559.7 401.4 Q301.5 402.8 38.8 401.0 M41.1 400.3 Q39.9 236.4 39.6 70.0" fill="none" stroke="#adb5bd" stroke-width="1.6" stroke-dasharray="6 4" stroke-linecap="round" opacity="0.8"/>
+<rect x="54.0" y="59.0" width="320" height="22" rx="4" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#adb5bd"><tspan x="214.0" y="70.0">Top-Down (Memoization - Demand Driven)</tspan></text>
+<rect x="580.0" y="70.0" width="520.0" height="330.0" rx="10" fill="#f8f9fa" opacity="0.4"/>
+<path d="M581.0 70.8 Q842.0 70.5 1101.6 70.9 M1100.0 70.0 Q1100.5 234.4 1100.8 399.1 M1101.0 400.1 Q838.7 400.5 580.8 399.2 M581.3 400.8 Q580.4 233.2 578.7 71.5" fill="none" stroke="#adb5bd" stroke-width="1.6" stroke-dasharray="6 4" stroke-linecap="round" opacity="0.8"/>
+<rect x="594.0" y="59.0" width="344" height="22" rx="4" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#adb5bd"><tspan x="766.0" y="70.0">Bottom-Up (Tabulation - Systematic Build)</tspan></text>
+<path d="M289.9 145.5 Q305.0 146.1 320.6 146.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M309.8 150.1 L320.0 146.0 L309.8 141.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M499.8 145.5 Q456.3 147.3 411.0 146.4 M409.5 147.0 Q411.3 194.4 410.4 246.7 M411.0 246.4 Q363.4 246.5 320.7 246.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M330.2 241.9 L320.0 246.0 L330.2 250.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="391.0" y="184.0" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="410.0" y="196.0">Yes</tspan></text>
+<path d="M319.4 145.7 Q312.2 146.3 305.1 145.7 M304.7 146.1 Q305.3 197.6 304.7 251.8 M305.1 251.7 Q296.1 252.5 289.8 252.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M300.2 247.9 L290.0 252.0 L300.2 256.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="290.0" y="187.0" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="305.0" y="199.0">No</tspan></text>
+<path d="M290.3 251.2 Q298.4 250.5 305.0 252.6 M304.2 252.0 Q303.5 248.8 305.6 246.5 M305.0 246.6 Q312.3 247.7 320.5 245.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M309.8 250.1 L320.0 246.0 L309.8 241.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M820.8 145.6 Q830.3 146.0 839.7 146.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M829.8 150.1 L840.0 146.0 L829.8 141.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M840.1 145.8 Q837.4 144.2 835.2 145.9 M834.8 146.2 Q833.2 194.8 834.9 241.9 M835.2 241.9 Q833.3 241.4 829.9 241.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M840.2 237.9 L830.0 242.0 L840.2 246.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M830.1 241.8 Q835.4 242.4 840.4 242.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M829.8 246.1 L840.0 242.0 L829.8 237.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="60.0" y="120.0" width="230.0" height="52.0" rx="10" fill="#e0d5fa"/>
+<path d="M58.9 120.2 Q174.4 120.2 289.5 118.5 M290.2 119.1 Q287.3 146.9 290.1 171.5 M291.2 170.5 Q174.5 173.4 59.0 172.1 M58.5 171.9 Q59.1 143.5 60.8 120.1" fill="none" stroke="#6741d9" stroke-width="2" stroke-linecap="round"/>
+<path d="M58.9 121.3 Q176.1 120.2 291.0 120.9 M290.4 120.6 Q292.2 148.1 288.8 172.4 M288.9 171.0 Q174.4 172.1 59.8 173.4 M61.3 173.1 Q58.9 147.2 60.6 121.1" fill="none" stroke="#6741d9" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="175.0" y="146.0">Request Target State f(n)</tspan></text>
+<polygon points="410.0,110 500,146.0 410.0,182 320,146.0" fill="#ffec99"/>
+<path d="M410.1 109.7 Q452.4 127.8 500.8 147.1 M500.0 144.8 Q455.9 161.2 409.6 181.9 M411.2 181.2 Q365.6 166.7 319.3 146.3 M319.2 146.9 Q362.4 126.0 411.0 110.7" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M411.4 109.7 Q457.3 130.0 500.1 147.2 M500.6 144.4 Q457.2 165.9 410.0 183.3 M409.2 181.5 Q367.8 161.7 320.2 145.3 M319.6 145.9 Q365.3 130.0 408.5 109.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="410.0" y="146.0">Cached in Memo?</tspan></text>
+<rect x="320.0" y="220.0" width="190.0" height="52.0" rx="10" fill="#b2f2bb"/>
+<path d="M319.8 219.1 Q413.5 222.1 509.1 219.9 M509.3 220.3 Q508.7 243.8 510.3 273.5 M510.2 271.0 Q416.7 273.3 319.2 272.9 M318.9 273.3 Q321.1 246.2 321.0 220.9" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M320.5 220.9 Q415.7 218.5 508.6 220.5 M510.2 219.3 Q509.7 247.7 511.6 270.7 M509.4 270.9 Q412.2 270.3 319.6 271.9 M321.1 272.8 Q321.5 245.9 318.5 218.7" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="415.0" y="246.0">Return cached result</tspan></text>
+<rect x="60.0" y="220.0" width="230.0" height="64.0" rx="10" fill="#a5d8ff"/>
+<path d="M60.9 221.0 Q173.0 222.3 290.7 218.5 M290.9 220.6 Q290.8 253.0 290.1 283.5 M290.4 285.2 Q173.1 282.2 61.2 284.4 M61.4 283.7 Q62.3 254.0 60.1 221.2" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M59.9 218.5 Q177.0 221.5 289.1 220.2 M288.7 220.8 Q287.7 249.5 289.9 283.1 M290.3 282.9 Q173.7 281.5 60.8 284.6 M59.8 282.4 Q62.1 251.2 58.9 219.6" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="175.0" y="243.4">Recurse on subproblems</tspan><tspan x="175.0" y="260.6">Compute &amp; store in memo</tspan></text>
+<rect x="90.0" y="310.0" width="420.0" height="56.0" rx="10" fill="#ced4da"/>
+<path d="M90.4 308.9 Q302.5 309.4 509.0 309.8 M511.2 311.3 Q512.0 336.9 511.1 366.6 M508.9 366.6 Q302.3 368.2 88.4 366.0 M90.5 366.9 Q90.7 336.5 88.6 310.5" fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="round"/>
+<path d="M90.6 309.3 Q299.7 307.2 508.6 310.6 M509.6 311.2 Q507.7 340.4 509.6 365.2 M510.6 367.3 Q301.8 367.4 88.9 365.4 M89.7 365.2 Q92.7 335.9 88.6 310.2" fill="none" stroke="#1e1e1e" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="300.0" y="329.4">Pros: Solves only needed states</tspan><tspan x="300.0" y="346.6">Cons: Recursion stack overhead</tspan></text>
+<rect x="600.0" y="120.0" width="220.0" height="52.0" rx="10" fill="#b2f2bb"/>
+<path d="M600.0 121.3 Q710.8 121.6 821.2 121.1 M820.5 120.4 Q820.4 144.7 819.2 171.5 M818.7 171.8 Q708.9 170.0 601.0 171.7 M599.9 170.5 Q602.0 147.5 599.1 120.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M599.4 121.0 Q709.4 118.5 820.8 119.6 M820.2 121.5 Q822.6 145.5 818.8 172.0 M818.8 173.3 Q708.9 172.5 600.5 171.9 M601.1 173.1 Q602.7 145.2 599.3 120.3" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="710.0" y="146.0">Fill Base Cases (0, 1)</tspan></text>
+<rect x="840.0" y="120.0" width="230.0" height="52.0" rx="10" fill="#99e9f2"/>
+<path d="M839.7 119.4 Q954.8 117.2 1068.9 119.6 M1070.2 121.1 Q1067.6 147.5 1070.8 170.5 M1069.1 170.7 Q955.5 170.0 838.6 170.5 M840.6 171.3 Q839.7 143.2 838.6 120.6" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M839.9 119.4 Q957.0 122.0 1070.3 120.1 M1070.3 121.5 Q1072.3 144.4 1069.6 171.5 M1071.4 171.9 Q952.9 169.4 840.6 173.2 M838.8 173.0 Q840.4 145.8 840.1 120.2" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="955.0" y="146.0">Iterate through Table loops</tspan></text>
+<rect x="600.0" y="210.0" width="230.0" height="64.0" rx="10" fill="#a5d8ff"/>
+<path d="M598.5 210.3 Q716.1 208.7 828.9 210.8 M830.6 209.8 Q829.3 244.1 828.4 272.9 M829.2 272.7 Q716.1 276.3 601.3 273.9 M599.4 275.0 Q599.4 240.5 600.8 209.6" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M601.2 208.8 Q712.9 211.8 828.6 209.7 M830.2 210.2 Q832.4 241.5 829.9 274.7 M828.6 274.1 Q713.9 273.9 600.0 273.2 M600.7 273.9 Q602.6 240.8 601.3 208.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="715.0" y="233.4">Compute larger states</tspan><tspan x="715.0" y="250.6">from smaller ready states</tspan></text>
+<rect x="840.0" y="210.0" width="230.0" height="64.0" rx="10" fill="#b2f2bb"/>
+<path d="M839.9 210.6 Q953.9 211.8 1071.3 208.9 M1069.6 209.7 Q1070.3 244.7 1069.2 272.6 M1070.0 275.4 Q952.8 276.3 839.7 272.6 M839.9 273.4 Q842.0 244.0 840.3 210.1" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M839.2 209.4 Q956.2 209.8 1069.9 211.1 M1068.7 211.4 Q1071.1 243.9 1069.3 272.6 M1070.2 275.1 Q954.3 274.0 840.2 272.7 M840.5 274.0 Q837.3 243.2 839.3 208.5" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="bold" fill="#1e1e1e"><tspan x="955.0" y="242.0">Reach Target State cell</tspan></text>
+<rect x="630.0" y="310.0" width="430.0" height="56.0" rx="10" fill="#ced4da"/>
+<path d="M628.6 308.8 Q844.8 308.9 1061.3 310.5 M1060.1 311.1 Q1060.6 340.7 1061.1 365.3 M1059.5 367.3 Q847.5 365.9 629.1 365.3 M631.2 364.8 Q627.9 339.8 628.6 309.7" fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="round"/>
+<path d="M628.7 309.6 Q846.0 310.0 1060.0 311.4 M1058.5 308.5 Q1057.5 340.0 1060.7 364.9 M1058.8 366.6 Q846.6 367.6 631.2 365.0 M629.2 366.7 Q627.9 338.9 630.8 310.6" fill="none" stroke="#1e1e1e" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="12" font-weight="normal" fill="#1e1e1e"><tspan x="845.0" y="330.1">Pros: No recursion overhead, space optimizable</tspan><tspan x="845.0" y="345.9">Cons: Computes all states within bounds</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="570.0" y="458.0">Top-down explores states lazily; bottom-up builds answers systematically in topological order</tspan></text>
+</svg>

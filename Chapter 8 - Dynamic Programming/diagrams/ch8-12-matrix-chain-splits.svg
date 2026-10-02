@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="480" viewBox="0 0 1140 480" role="img" aria-label="Matrix Chain Multiplication - Evaluating Interval Splits M[1, 4]">
+<rect width="1140" height="480" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="570.0" y="34.0">Matrix Chain Multiplication - Evaluating Interval Splits M[1, 4]</tspan></text>
+<path d="M569.9 115.5 Q570.0 129.6 570.6 143.5 M569.5 143.6 Q395.1 143.1 220.5 143.0 M220.6 143.5 Q220.1 154.8 220.0 170.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M215.9 159.8 L220.0 170.0 L224.1 159.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M569.8 115.5 Q571.3 144.3 571.0 170.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M565.9 159.8 L570.0 170.0 L574.1 159.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M569.4 115.7 Q569.7 129.8 570.1 142.7 M569.7 143.1 Q745.3 141.6 919.7 142.8 M920.1 142.7 Q918.6 157.0 919.8 170.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M915.9 159.8 L920.0 170.0 L924.1 159.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M570.3 243.2 Q570.9 280.5 570.0 320.6" fill="none" stroke="#2f9e44" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M565.9 309.8 L570.0 320.0 L574.1 309.8" fill="none" stroke="#2f9e44" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="515.0" y="270.0" width="110" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="570.0" y="282.0">minimum cost</tspan></text>
+<rect x="400.0" y="60.0" width="340.0" height="56.0" rx="10" fill="#ffec99"/>
+<path d="M398.9 60.2 Q569.4 60.2 739.5 58.5 M740.2 59.1 Q737.3 88.9 740.1 115.5 M741.2 114.5 Q569.5 117.4 399.0 116.1 M398.5 115.9 Q399.1 85.5 400.8 60.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M398.9 61.3 Q571.1 60.2 741.0 60.9 M740.4 60.6 Q742.2 90.1 738.8 116.4 M738.9 115.0 Q569.4 116.1 399.8 117.4 M401.3 117.1 Q398.9 89.2 400.6 61.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="570.0" y="77.4">Matrix Interval M[1, 4]</tspan><tspan x="570.0" y="98.6">Product: A1 * A2 * A3 * A4</tspan></text>
+<rect x="80.0" y="170.0" width="280.0" height="74.0" rx="10" fill="#ffc9c9"/>
+<path d="M80.1 169.7 Q217.4 169.8 360.8 171.1 M360.1 169.5 Q359.9 204.9 358.6 242.5 M359.9 244.5 Q218.4 242.5 78.4 243.8 M79.2 245.2 Q80.5 207.6 79.2 169.3" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M81.4 169.7 Q222.3 172.0 360.1 171.2 M361.1 169.4 Q361.1 204.2 360.7 242.9 M361.3 245.2 Q221.6 241.4 81.1 244.5 M80.4 243.2 Q78.7 209.8 79.5 170.2" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="220.0" y="185.9">Split at k = 1</tspan><tspan x="220.0" y="207.0">(A1) * (A2 A3 A4)</tspan><tspan x="220.0" y="228.1">Cost = 580 ops</tspan></text>
+<rect x="430.0" y="170.0" width="280.0" height="74.0" rx="10" fill="#b2f2bb"/>
+<path d="M429.8 169.1 Q568.5 172.1 709.1 169.9 M709.3 170.3 Q708.7 204.8 710.3 245.5 M710.2 243.0 Q571.7 245.3 429.2 244.9 M428.9 245.3 Q431.1 207.2 431.0 170.9" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M430.5 170.9 Q570.7 168.5 708.6 170.5 M710.2 169.3 Q709.7 208.7 711.6 242.7 M709.4 242.9 Q567.2 242.3 429.6 243.9 M431.1 244.8 Q431.5 206.9 428.5 168.7" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="570.0" y="185.9">Split at k = 2</tspan><tspan x="570.0" y="207.0">(A1 A2) * (A3 A4)</tspan><tspan x="570.0" y="228.1">Cost = 405 ops</tspan></text>
+<rect x="780.0" y="170.0" width="280.0" height="74.0" rx="10" fill="#ffc9c9"/>
+<path d="M780.9 171.0 Q918.0 172.3 1060.7 168.5 M1060.9 170.6 Q1060.8 208.0 1060.1 243.5 M1060.4 245.2 Q918.1 242.2 781.2 244.4 M781.4 243.7 Q782.3 209.0 780.1 171.2" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M779.9 168.5 Q922.0 171.5 1059.1 170.2 M1058.7 170.8 Q1057.7 204.5 1059.9 243.1 M1060.3 242.9 Q918.7 241.5 780.8 244.6 M779.8 242.4 Q782.1 206.2 778.9 169.6" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="920.0" y="185.9">Split at k = 3</tspan><tspan x="920.0" y="207.0">(A1 A2 A3) * (A4)</tspan><tspan x="920.0" y="228.1">Cost = 660 ops</tspan></text>
+<rect x="180.0" y="320.0" width="780.0" height="80.0" rx="10" fill="#b2f2bb"/>
+<path d="M180.4 318.9 Q572.5 319.4 959.0 319.8 M961.2 321.3 Q962.0 358.9 961.1 400.6 M958.9 400.6 Q572.3 402.2 178.4 400.0 M180.5 400.9 Q180.7 358.5 178.6 320.5" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M180.6 319.3 Q569.7 317.2 958.6 320.6 M959.6 321.2 Q957.7 362.4 959.6 399.2 M960.6 401.3 Q571.8 401.4 178.9 399.4 M179.7 399.2 Q182.7 357.9 178.6 320.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="570.0" y="338.9">Optimal Partition: k = 2 (Cost 405)</tspan><tspan x="570.0" y="360.0">Parenthesization: ((A1 * A2) * (A3 * A4))</tspan><tspan x="570.0" y="381.1">Saves 255 scalar multiplications compared to worst split!</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="570.0" y="458.0">Dynamic programming solves matrix chain order in O(n^3) by minimizing over all valid split indices k</tspan></text>
+</svg>
