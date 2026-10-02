@@ -82,16 +82,7 @@ The same idea applies when the counter is divided instead of multiplied each tim
 
 ### Visual Map: Loop Growth Rate
 
-```mermaid
-flowchart LR
-    Linear["i = i + 1 <br/> additive step"] --> LinearT["runs n times <br/> T(n) = O(n)"]
-    Log["i = i * 2 <br/> multiplicative step"] --> LogT["runs log2(n) times <br/> T(n) = O(log n)"]
-
-    classDef step fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class Linear,Log step;
-    class LinearT,LogT answer;
-```
+![Loop Growth Rate - Additive vs Multiplicative Steps](diagrams/ch2-01-loop-growth-rate.svg)
 
 ---
 
@@ -145,21 +136,7 @@ Big-Theta means $g(n)$ sandwiches $f(n)$ from both above and below, so it gives 
 
 ### Visual Map: Upper vs Lower vs Tight Bound
 
-```mermaid
-flowchart TD
-    F["f(n)"] --> O["Big-O: f(n) <= c.g(n) <br/> upper bound"]
-    F --> Omega["Big-Omega: f(n) >= c.g(n) <br/> lower bound"]
-    O --> Theta{"Do Big-O and Big-Omega <br/> hold with the same g(n)?"}
-    Omega --> Theta
-    Theta -->|Yes| Tight["Big-Theta: f(n) = Theta(g(n)) <br/> tight bound"]
-
-    classDef bound fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-    classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-    class F,O,Omega bound;
-    class Theta decision;
-    class Tight answer;
-```
+![Asymptotic Bounds - Big-O, Big-Omega, and Big-Theta](diagrams/ch2-02-asymptotic-bounds.svg)
 
 ---
 
