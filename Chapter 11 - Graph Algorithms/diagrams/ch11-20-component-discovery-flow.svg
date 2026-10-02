@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1060" height="520" viewBox="0 0 1060 520" role="img" aria-label="Connected Components Discovery Procedure">
+<rect width="1060" height="520" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="530.0" y="34.0">Connected Components Discovery Procedure</tspan></text>
+<path d="M529.9 111.5 Q530.0 126.1 530.6 140.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M525.9 129.8 L530.0 140.0 L534.1 129.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M529.8 213.5 Q531.3 230.8 531.0 245.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M525.9 234.8 L530.0 245.0 L534.1 234.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="511.0" y="217.5" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="530.0" y="229.5">Yes</tspan></text>
+<path d="M529.4 300.7 Q529.7 315.8 530.1 329.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M525.9 319.8 L530.0 330.0 L534.1 319.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M720.3 357.2 Q750.9 356.5 780.0 358.6 M779.2 358.0 Q778.5 267.3 780.6 177.5 M780.0 177.6 Q704.8 178.7 630.5 176.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M640.2 172.9 L630.0 177.0 L640.2 181.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="737.0" y="255.5" width="86" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="780.0" y="267.5">loop back</tspan></text>
+<path d="M430.8 176.6 Q360.3 177.0 289.7 177.2 M289.6 176.7 Q290.0 309.2 290.2 443.2 M289.7 443.2 Q324.2 444.6 360.2 443.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M349.8 447.1 L360.0 443.0 L349.8 438.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="275.0" y="298.0" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="290.0" y="310.0">No</tspan></text>
+<rect x="380.0" y="60.0" width="300.0" height="52.0" rx="10" fill="#ffec99"/>
+<path d="M378.9 60.2 Q529.4 60.2 679.5 58.5 M680.2 59.1 Q677.3 86.9 680.1 111.5 M681.2 110.5 Q529.5 113.4 379.0 112.1 M378.5 111.9 Q379.1 83.5 380.8 60.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M378.9 61.3 Q531.1 60.2 681.0 60.9 M680.4 60.6 Q682.2 88.1 678.8 112.4 M678.9 111.0 Q529.4 112.1 379.8 113.4 M381.3 113.1 Q378.9 87.2 380.6 61.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="530.0" y="86.0">Mark All Vertices as Unvisited</tspan></text>
+<polygon points="530.0,140 630,177.0 530.0,214 430,177.0" fill="#ffec99"/>
+<path d="M530.1 139.7 Q577.4 158.3 630.8 178.1 M630.0 175.8 Q580.9 192.7 529.6 213.9 M531.2 213.2 Q480.6 198.2 429.3 177.3 M429.2 177.9 Q477.4 156.5 531.0 140.7" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M531.4 139.7 Q582.3 160.5 630.1 178.2 M630.6 175.4 Q582.2 197.4 530.0 215.3 M529.2 213.5 Q482.8 193.2 430.2 176.3 M429.6 176.9 Q480.3 160.5 528.5 139.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="530.0" y="167.8">Unvisited Vertices</tspan><tspan x="530.0" y="186.2">Remain?</tspan></text>
+<rect x="370.0" y="245.0" width="320.0" height="56.0" rx="10" fill="#a5d8ff"/>
+<path d="M369.8 244.1 Q528.5 247.1 689.1 244.9 M689.3 245.3 Q688.7 270.8 690.3 302.5 M690.2 300.0 Q531.7 302.3 369.2 301.9 M368.9 302.3 Q371.1 273.2 371.0 245.9" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M370.5 245.9 Q530.7 243.5 688.6 245.5 M690.2 244.3 Q689.7 274.7 691.6 299.7 M689.4 299.9 Q527.2 299.3 369.6 300.9 M371.1 301.8 Q371.5 272.9 368.5 243.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="530.0" y="264.4">Pick Unvisited Vertex u as Root</tspan><tspan x="530.0" y="281.6">Start new component label</tspan></text>
+<rect x="340.0" y="330.0" width="380.0" height="56.0" rx="10" fill="#b2f2bb"/>
+<path d="M340.9 331.0 Q528.0 332.3 720.7 328.5 M720.9 330.6 Q720.8 359.0 720.1 385.5 M720.4 387.2 Q528.1 384.2 341.2 386.4 M341.4 385.7 Q342.3 360.0 340.1 331.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M339.9 328.5 Q532.0 331.5 719.1 330.2 M718.7 330.8 Q717.7 355.5 719.9 385.1 M720.3 384.9 Q528.7 383.5 340.8 386.6 M339.8 384.4 Q342.1 357.2 338.9 329.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="530.0" y="349.4">Run BFS or DFS from Root u</tspan><tspan x="530.0" y="366.6">Mark reached vertices with component ID</tspan></text>
+<rect x="360.0" y="415.0" width="340.0" height="56.0" rx="10" fill="#99e9f2"/>
+<path d="M360.4 413.9 Q532.5 414.4 699.0 414.8 M701.2 416.3 Q702.0 441.9 701.1 471.6 M698.9 471.6 Q532.3 473.2 358.4 471.0 M360.5 471.9 Q360.7 441.5 358.6 415.5" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M360.6 414.3 Q529.7 412.2 698.6 415.6 M699.6 416.2 Q697.7 445.4 699.6 470.2 M700.6 472.3 Q531.8 472.4 358.9 470.4 M359.7 470.2 Q362.7 440.9 358.6 415.2" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="530.0" y="434.4">All Connected Components Identified!</tspan><tspan x="530.0" y="451.6">Partition: V = C1 U C2 U ... U Ck</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="530.0" y="498.0">Total time O(V + E) since each vertex and edge is processed once across all component runs</tspan></text>
+</svg>

@@ -118,41 +118,7 @@ Study this chapter in the following order:
 
 ### Visual Map: Graph Algorithm Roadmap
 
-```mermaid
-flowchart TB
-	Graph["Graph G = (V, E)"] --> Types["Graph categories"]
-	Graph --> Store["Graph representation"]
-	Graph --> Traverse["Traversal-based algorithms"]
-	Graph --> Weighted["Weighted path algorithms"]
-	Graph --> Sets["Set-based structure"]
-
-	Types --> T1["Weighted or unweighted"]
-	Types --> T2["Directed or undirected"]
-	Types --> T3["Cyclic or acyclic"]
-
-	Store --> Matrix["Adjacency matrix"]
-	Store --> List["Adjacency list"]
-
-	Traverse --> BFS["BFS shortest path<br/>unweighted graph"]
-	Traverse --> Topo["Topological sorting<br/>DAG only"]
-	Traverse --> CC["Connected components<br/>undirected graph"]
-	Traverse --> SCC["Strongly connected components<br/>directed graph"]
-
-	Weighted --> Dijkstra["Dijkstra's Algorithm<br/>nonnegative edge weights"]
-	Weighted --> BF["Bellman-Ford<br/>handles negative edges"]
-	Weighted --> FW["Floyd-Warshall<br/>all-pairs shortest paths"]
-	Weighted --> MST["Minimum spanning tree<br/>Prim and Kruskal"]
-	MST --> DSU["Union-Find / DSU<br/>cycle support for Kruskal"]
-
-	classDef root fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-	classDef group fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef algo fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef detail fill:#f1f5f9,stroke:#64748b,stroke-dasharray: 5 5,color:#0f172a;
-	class Graph root;
-	class Types,Store,Traverse,Weighted,Sets group;
-	class BFS,Topo,CC,SCC,Dijkstra,BF,FW,MST,DSU algo;
-	class T1,T2,T3,Matrix,List detail;
-```
+![Comprehensive Graph Algorithms Taxonomy and Roadmap](diagrams/ch11-01-graph-algorithm-roadmap.svg)
 
 ---
 
@@ -183,31 +149,7 @@ For $4$ vertices:
 
 ### Visual Map: Tree Is a Special Graph
 
-```mermaid
-flowchart LR
-	subgraph Tree[Tree]
-		A((A)) --- B((B))
-		A --- C((C))
-		C --- D((D))
-	end
-
-	subgraph General[General graph]
-		P((P)) --- Q((Q))
-		Q --- R((R))
-		R --- P
-		R --- S((S))
-	end
-
-	Tree --> Note1["Connected<br/>No cycle<br/>Edges = V - 1"]
-	General --> Note2["May contain cycle<br/>May have many paths"]
-
-	classDef tree fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef graphNode fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef note fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	class A,B,C,D tree;
-	class P,Q,R,S graphNode;
-	class Note1,Note2 note;
-```
+![Tree vs General Graph Comparison](diagrams/ch11-02-tree-special-graph.svg)
 
 ---
 
@@ -263,29 +205,7 @@ A **DAG** means **Directed Acyclic Graph**. DAGs are very important for topologi
 
 ### Visual Map: Main Graph Categories
 
-```mermaid
-flowchart TB
-	G["Graph"] --> Weight["By edge cost"]
-	G --> Direction["By edge direction"]
-	G --> Cycle["By cycle property"]
-
-	Weight --> UW["Unweighted<br/>all edges equal"]
-	Weight --> W["Weighted<br/>edge has cost"]
-
-	Direction --> UD["Undirected<br/>two-way edge"]
-	Direction --> D["Directed<br/>one-way edge"]
-
-	Cycle --> CY["Cyclic<br/>has a cycle"]
-	Cycle --> AC["Acyclic<br/>no cycle"]
-	AC --> DAG["DAG<br/>directed and acyclic"]
-
-	classDef root fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-	classDef category fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef type fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	class G root;
-	class Weight,Direction,Cycle category;
-	class UW,W,UD,D,CY,AC,DAG type;
-```
+![Main Graph Classifications and Properties](diagrams/ch11-03-main-graph-categories.svg)
 
 ---
 
@@ -308,16 +228,7 @@ $$
 E = \{(A,B),(A,C),(B,D),(C,D)\}
 $$
 
-```mermaid
-graph LR
-	A((A)) --- B((B))
-	A --- C((C))
-	B --- D((D))
-	C --- D
-
-	classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	class A,B,C,D node;
-```
+![Sample 4-Vertex Graph for Representation Comparison](diagrams/ch11-04-graph-representation.svg)
 
 ### Adjacency Matrix
 
@@ -405,23 +316,7 @@ D: empty
 
 ### Visual Map: Matrix vs List
 
-```mermaid
-flowchart LR
-	GraphInput["Input graph"] --> Matrix["Adjacency matrix<br/>V x V table"]
-	GraphInput --> List["Adjacency list<br/>vertex to neighbors"]
-
-	Matrix --> M1["Fast edge check"]
-	Matrix --> M2["More space"]
-	List --> L1["Fast neighbor traversal"]
-	List --> L2["Less space for sparse graph"]
-
-	classDef input fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-	classDef rep fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef note fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	class GraphInput input;
-	class Matrix,List rep;
-	class M1,M2,L1,L2 note;
-```
+![Adjacency Matrix vs Adjacency List Trade-Offs](diagrams/ch11-05-matrix-vs-list.svg)
 
 ---
 
@@ -458,29 +353,7 @@ The meaning of "minimum cost" depends on the graph:
 
 ### Visual Map: Shortest Path Choice
 
-```mermaid
-flowchart TD
-	Start["Shortest path problem"] --> Unweighted{"All edges equal cost?"}
-	Unweighted -->|Yes| BFS["Use BFS<br/>distance = number of edges"]
-	Unweighted -->|No| Negative{"Any negative edge weight?"}
-	Negative -->|No| Dijkstra["Use Dijkstra's Algorithm<br/>finalize nearest vertex greedily"]
-	Negative -->|Yes| AllPairs{"Need all-pairs distances?"}
-	AllPairs -->|Yes| FW["Use Floyd-Warshall<br/>relax through every vertex k"]
-	AllPairs -->|No| BF["Use Bellman-Ford<br/>relax edges V - 1 times"]
-	BF --> Cycle{"Negative cycle reachable?"}
-	FW --> Cycle
-	Cycle -->|Yes| Bad["No finite shortest path"]
-	Cycle -->|No| Dist["Shortest distances found"]
-
-	classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef algo fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef warn fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-	classDef result fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	class Start,Dist result;
-	class Unweighted,Negative,Cycle,AllPairs decision;
-	class BFS,Dijkstra,BF,FW algo;
-	class Bad warn;
-```
+![Shortest Path Algorithm Decision Flowchart](diagrams/ch11-06-shortest-path-choice.svg)
 
 ---
 
@@ -512,21 +385,7 @@ The first time BFS visits a vertex, it has found the shortest unweighted distanc
 
 Find shortest paths from source $S$.
 
-```mermaid
-graph LR
-	S((S)) --- A((A))
-	S --- B((B))
-	A --- C((C))
-	B --- C
-	B --- D((D))
-	C --- T((T))
-	D --- T
-
-	classDef source fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	class S source;
-	class A,B,C,D,T node;
-```
+![Unweighted Shortest Path Graph (Source S to Target T)](diagrams/ch11-07-bfs-unweighted-graph.svg)
 
 Assume neighbors are processed alphabetically. Mark a vertex when it is enqueued so that it is not added a second time. The table uses the same queue-trace format as the BFS traversal section: the queue is shown after the current vertex is processed, with the front in bold.
 
@@ -557,39 +416,7 @@ This path uses $3$ edges, so the shortest distance is $3$.
 
 ### Mermaid Diagram: BFS Layer Expansion
 
-```mermaid
-flowchart LR
-	subgraph L0["Layer 0"]
-		S["S<br/>dist = 0"]
-	end
-
-	subgraph L1["Layer 1"]
-		A["A<br/>dist = 1"]
-		B["B<br/>dist = 1"]
-	end
-
-	subgraph L2["Layer 2"]
-		C["C<br/>dist = 2"]
-		D["D<br/>dist = 2"]
-	end
-
-	subgraph L3["Layer 3"]
-		T["T<br/>dist = 3"]
-	end
-
-	S --> A
-	S --> B
-	A --> C
-	B --> D
-	C --> T
-
-	classDef source fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	classDef layer fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef target fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-	class S source;
-	class A,B,C,D layer;
-	class T target;
-```
+![BFS Layer Expansion and Distance Frontiers](diagrams/ch11-08-bfs-layer-expansion.svg)
 
 ### Algorithm
 
@@ -667,21 +494,7 @@ If negative edges exist, the greedy choice may be wrong because a vertex finaliz
 
 Source vertex: $A$. This example finalizes one vertex per step, always picking the **unvisited vertex with the smallest tentative distance**, then relaxing all of its edges.
 
-```mermaid
-flowchart LR
-	A((A)) ---|14| B((B))
-	A ---|9| C((C))
-	A ---|7| F((F))
-	B ---|2| C
-	B ---|8| D((D))
-	C ---|11| E((E))
-	C ---|10| F
-	D ---|6| E
-	F ---|15| E
-
-	classDef src fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	class A src;
-```
+![Dijkstra Worked Example 1 - Undirected Weighted Graph](diagrams/ch11-09-dijkstra-undirected-graph.svg)
 
 **Step 0 - Initialize.** $d(A) = 0$, every other vertex starts at $\infty$.
 
@@ -737,21 +550,7 @@ The same relaxation rule applies to a **directed** graph; a vertex can only rela
 
 Source vertex: $A$.
 
-```mermaid
-flowchart LR
-	A((A)) -->|11| F((F))
-	A -->|2| B((B))
-	A -->|5| C((C))
-	F -->|17| D((D))
-	B -->|5| D
-	B -->|13| E((E))
-	C -->|8| B
-	C -->|12| E
-	E -->|1| D
-
-	classDef src fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	class A src;
-```
+![Dijkstra Worked Example 2 - Directed Weighted Graph](diagrams/ch11-10-dijkstra-directed-graph.svg)
 
 **Step 0 - Initialize.** $d(A) = 0$, every other vertex starts at $\infty$.
 
@@ -803,31 +602,7 @@ Reconstructing the path to $E$: $E$ was last updated by $B$ ($2+13=15$), and $B$
 
 The diagram below visualizes the finalization order from **Worked Example 1**: $A \to F \to C \to B \to D \to E$.
 
-```mermaid
-flowchart LR
-	Init["Initialize source A = 0<br/>others = infinity"] --> PickA["Finalize A<br/>distance 0"]
-	PickA --> PickF["Finalize F<br/>distance 7"]
-	PickF --> PickC["Finalize C<br/>distance 9"]
-	PickC --> PickB["Finalize B<br/>distance 11"]
-	PickB --> PickD["Finalize D<br/>distance 19"]
-	PickD --> PickE["Finalize E<br/>distance 20"]
-	PickE --> Done["All reachable vertices finalized"]
-
-	Relax["Relax outgoing edges<br/>d(v) = min(d(v), d(u) + c(u,v))"] -. after each pick .-> PickA
-	Relax -. after each pick .-> PickF
-	Relax -. after each pick .-> PickC
-	Relax -. after each pick .-> PickB
-	Relax -. after each pick .-> PickD
-
-	classDef init fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef step fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef helper fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	class Init init;
-	class PickA,PickF,PickC,PickB,PickD,PickE step;
-	class Relax helper;
-	class Done answer;
-```
+![Dijkstra Greedy Finalization Sequence (Source A)](diagrams/ch11-11-dijkstra-greedy-finalization.svg)
 
 ### Algorithm
 
@@ -900,22 +675,7 @@ This walkthrough traces Bellman-Ford the way it is often done by hand: edges are
 
 Graph and source vertex $A$:
 
-```mermaid
-flowchart LR
-	A((A)) -->|6| B((B))
-	A -->|4| C((C))
-	A -->|5| D((D))
-	B -->|-1| E((E))
-	C -->|-2| B
-	D -->|-2| C
-	D -->|-1| F((F))
-	E -->|3| F((F))
-
-	classDef source fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	class A source;
-	class B,C,D,E,F node;
-```
+![Bellman-Ford Worked Example - Six Vertices with Negative Edges](diagrams/ch11-12-bellman-ford-six-vertex-graph.svg)
 
 With $|V| = 6$, Bellman-Ford needs $|V|-1 = 5$ relaxation rounds.
 
@@ -987,19 +747,7 @@ Final shortest distances from $A$:
 
 The extra check pass in Bellman-Ford exists because a **reachable negative cycle** stops the distances from ever settling. Every trip around the cycle keeps lowering the distance, so no finite shortest path exists. This example uses the same selected-vertex table to see it happen directly.
 
-```mermaid
-flowchart LR
-	A((A)) -->|1| B((B))
-	A -->|2| C((C))
-	B -->|2| C
-	C -->|2| D((D))
-	D -->|-5| B
-
-	classDef source fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	class A source;
-	class B,C,D node;
-```
+![Pathological Negative Cycle Preventing Shortest Path Convergence](diagrams/ch11-13-bellman-ford-negative-cycle.svg)
 
 The cycle $B \to C \to D \to B$ has total weight $2 + 2 + (-5) = -1$. With $|V|=4$, only $|V|-1 = 3$ rounds are theoretically required — watch what the 4th round (the check pass) still does.
 
@@ -1047,29 +795,7 @@ $dist(B)$ keeps falling by exactly 1 every round ($1 \to -1 \to -2 \to -3 \to -4
 
 ### Mermaid Diagram: Bellman-Ford Relaxation Flow
 
-```mermaid
-flowchart TB
-	Init["Initialize<br/>dist[source] = 0<br/>others = infinity"] --> Rounds["Repeat V - 1 rounds"]
-	Rounds --> Edge["For each edge (u, v)"]
-	Edge --> Check{"dist[u] + w(u,v) &lt; dist[v]?"}
-	Check -->|Yes| Update["Update dist[v]<br/>parent[v] = u"]
-	Check -->|No| Keep["Keep old distance"]
-	Update --> NextEdge["Continue"]
-	Keep --> NextEdge
-	NextEdge --> Detect["Extra pass for negative cycle"]
-	Detect --> Cycle{"Any edge still improves?"}
-	Cycle -->|Yes| Bad["Negative cycle reachable"]
-	Cycle -->|No| Good["Shortest distances are final"]
-
-	classDef process fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef update fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef warn fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-	class Init,Rounds,Edge,NextEdge,Detect process;
-	class Check,Cycle decision;
-	class Update,Keep,Good update;
-	class Bad warn;
-```
+![Bellman-Ford Algorithm Execution & Cycle Detection Flow](diagrams/ch11-14-bellman-ford-relaxation-flow.svg)
 
 ### Algorithm
 
@@ -1191,33 +917,7 @@ The shortest path from 1 to 3 is updated from **6** to **4** through vertex 2.
 
 ### Mermaid Diagram: Floyd-Warshall Detour Update
 
-```mermaid
-flowchart LR
-	subgraph DirectPath[Current known path]
-		I1((i)) -->|"D[i,j]"| J1((j))
-	end
-
-	subgraph DetourPath[Candidate detour through k]
-		I2((i)) -->|"D[i,k]"| K((k))
-		K -->|"D[k,j]"| J2((j))
-	end
-
-	J1 --> Compare{"Which is shorter?"}
-	J2 --> Compare
-	Compare --> Keep["Keep direct distance"]
-	Compare --> Update["Update through k"]
-	Update --> Cell["New D[i,j]"]
-	Keep --> Cell
-
-	classDef direct fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef detour fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	class I1,J1,Keep direct;
-	class I2,K,J2,Update detour;
-	class Compare decision;
-	class Cell answer;
-```
+![Floyd-Warshall Detour Relaxation Principle](diagrams/ch11-15-floyd-warshall-detour.svg)
 
 ### Algorithm
 
@@ -1252,18 +952,7 @@ FLOYD-WARSHALL(W, n)
 
 All other pairs have no direct edge ($\infty$).
 
-```mermaid
-flowchart LR
-	V1((1)) -->|"1"| V2((2))
-	V2 -->|"4"| V1
-	V1 -->|"-2"| V3((3))
-	V2 -->|"3"| V3
-	V3 -->|"2"| V4((4))
-	V4 -->|"5"| V1
-
-	classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	class V1,V2,V3,V4 node;
-```
+![Classroom Problem: 4-Vertex Graph with Negative Weights](diagrams/ch11-16-floyd-warshall-four-vertex.svg)
 
 #### Initial Matrix $D^{(0)}$
 
@@ -1489,18 +1178,7 @@ Suppose tasks have these dependencies:
 | D -> F | D must be completed before F |
 | E -> F | E must be completed before F |
 
-```mermaid
-flowchart LR
-	A((A)) --> C((C))
-	B((B)) --> C
-	C --> D((D))
-	C --> E((E))
-	D --> F((F))
-	E --> F
-
-	classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	class A,B,C,D,E,F node;
-```
+![Topological Sorting Worked Example on Directed Acyclic Graph](diagrams/ch11-17-topological-dag-example.svg)
 
 One valid topological order is:
 
@@ -1565,27 +1243,7 @@ Every edge points left-to-right in this result: $A$ and $B$ occur before $C$; $C
 
 ### Mermaid Diagram: DFS Finish-Time Idea
 
-```mermaid
-flowchart TB
-	Start["Scan every vertex"] --> Root{"Unvisited start vertex?"}
-	Root -->|Yes| Visit["DFS: mark vertex u visited"]
-	Root -->|No| Reverse["Pop finish stack"]
-	Visit --> Neigh{"Unvisited outgoing neighbour?"}
-	Neigh -->|Yes| Recurse["DFS on that neighbour"]
-	Recurse --> Neigh
-	Neigh -->|No| Finish["All outgoing neighbours are finished"]
-	Finish --> Push["Push u onto finish stack"]
-	Push --> Return["Return from DFS call / continue scan"]
-	Return --> Root
-	Reverse --> Order["Topological order"]
-
-	classDef process fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef result fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	class Start,Visit,Recurse,Finish,Push,Return,Reverse process;
-	class Root,Neigh decision;
-	class Order result;
-```
+![DFS Finishing Time Algorithm for Topological Sort & SCC](diagrams/ch11-18-dfs-finish-time-flow.svg)
 
 #### Algorithm
 
@@ -1676,24 +1334,7 @@ A **connected component** is a maximal group of vertices where every vertex can 
 
 ### Worked Example
 
-```mermaid
-graph LR
-	A((A)) --- B((B))
-	B --- C((C))
-
-	D((D)) --- E((E))
-
-
-	F((F))
-
-
-	classDef comp1 fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef comp2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef comp3 fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	class A,B,C comp1;
-	class D,E comp2;
-	class F comp3;
-```
+![Undirected Graph with 3 Disconnected Components](diagrams/ch11-19-connected-components-example.svg)
 
 This graph has 3 connected components:
 
@@ -1766,22 +1407,7 @@ CONNECTED-COMPONENTS-BFS(G)
 
 ### Mermaid Diagram: Component Discovery
 
-```mermaid
-flowchart TB
-	Start["All vertices unvisited"] --> Pick["Pick an unvisited vertex"]
-	Pick --> Search["Run DFS or BFS"]
-	Search --> Group["All reached vertices form one component"]
-	Group --> More{"Any unvisited vertex left?"}
-	More -->|Yes| Pick
-	More -->|No| Done["All components found"]
-
-	classDef process fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef result fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	class Start,Pick,Search process;
-	class More decision;
-	class Group,Done result;
-```
+![Connected Components Discovery Procedure](diagrams/ch11-20-component-discovery-flow.svg)
 
 ### Complexity Analysis
 
@@ -1816,19 +1442,7 @@ $$
 \end{aligned}
 $$
 
-```mermaid
-flowchart LR
-    zero((0)) --> one((1))
-    one --> two((2))
-    two --> zero
-    two --> three((3))
-    three --> four((4))
-    four --> five((5))
-    five --> six((6))
-    six --> four
-    four --> seven((7))
-    six --> seven
-```
+![Kosaraju Algorithm - Original Directed Graph G](diagrams/ch11-21-kosaraju-original-graph.svg)
 
 The SCCs in this graph are $\{0, 1, 2\}$, $\{3\}$, $\{4, 5, 6\}$, and $\{7\}$. Kosaraju's Algorithm obtains these groups in three steps.
 
@@ -1879,19 +1493,7 @@ Equivalently, popping the stack produces `0, 1, 2, 3, 4, 5, 6, 7`; vertices alre
 
 Construct $G^T$ by reversing every arrow of the original graph, then reset every `visited` value to `false`.
 
-```mermaid
-flowchart LR
-    zero((0)) --> two((2))
-    two --> one((1))
-    one --> zero
-    three((3)) --> two
-    four((4)) --> three
-    five((5)) --> four
-    six((6)) --> five
-    four --> six
-    seven((7)) --> four
-    seven --> six
-```
+![Kosaraju Algorithm - Transposed Graph G^T (Reversed Edges)](diagrams/ch11-22-kosaraju-reversed-graph.svg)
 
 For example, the original edge $2 \to 3$ becomes $3 \to 2$, and the original edge $6 \to 4$ becomes $4 \to 6$.
 
@@ -1916,15 +1518,7 @@ $$
 
 ### Mermaid Diagram: Kosaraju Three-Step Flow
 
-```mermaid
-flowchart TB
-    G["Original directed graph G"] --> DFS1["Step 1: DFS and push on finish"]
-    DFS1 --> Stack["Stack: top 0, 1, 2, 3, 4, 5, 6, 7 bottom"]
-    G --> Transpose["Step 2: create G^T by reversing edges"]
-    Stack --> DFS2["Step 3: pop and DFS in G^T"]
-    Transpose --> DFS2
-    DFS2 --> SCC["One DFS tree = one SCC"]
-```
+![Kosaraju's Two-Pass Algorithm Flowchart](diagrams/ch11-23-kosaraju-three-step-flow.svg)
 
 ### Algorithm
 
@@ -2019,24 +1613,7 @@ For a connected graph with $V$ vertices, every spanning tree:
 4. forms exactly one cycle if any non-tree edge is added; and
 5. may not be unique, because the original graph can contain several valid spanning trees.
 
-```mermaid
-flowchart LR
-    subgraph G["Original connected graph"]
-        A1((A)) --- B1((B))
-        A1 --- C1((C))
-        B1 --- C1
-        B1 --- D1((D))
-        C1 --- D1
-    end
-
-    subgraph T["One spanning tree"]
-        A2((A)) --- B2((B))
-        B2 --- C2((C))
-        C2 --- D2((D))
-    end
-
-    G -->|"remove cycle-forming edges"| T
-```
+![Spanning Tree Definition - Connected Subgraph Covering All Vertices](diagrams/ch11-24-mst-properties.svg)
 
 ### Tree vs Graph
 
@@ -2071,23 +1648,7 @@ An MST has $V-1$ edges, contains no cycle, and may have more than one valid solu
 
 Both algorithms below use the supplied weighted graph:
 
-```mermaid
-flowchart LR
-    V1((V1)) ---|3| V2((V2))
-    V2 ---|7| V3((V3))
-    V1 ---|5| V4((V4))
-    V1 ---|2| V5((V5))
-    V2 ---|6| V5
-    V3 ---|10| V5
-    V3 ---|2| V6((V6))
-    V4 ---|3| V5
-    V5 ---|7| V6
-    V4 ---|2| V7((V7))
-    V5 ---|5| V7
-    V5 ---|5| V8((V8))
-    V7 ---|4| V8
-    V8 ---|6| V6
-```
+![Shared 8-Vertex Benchmark Graph for MST Algorithms](diagrams/ch11-25-shared-worked-graph.svg)
 
 ### Algorithms
 
@@ -2129,28 +1690,9 @@ The selected weights do not have to increase: $V_6V_3(2)$ becomes eligible only 
 
 Each label below gives `selection step: edge weight`. Edges numbered $1$ through $k$ show the tree after step $k$.
 
-```mermaid
-flowchart LR
-    V1((V1)) ---|"1: weight 2"| V5((V5))
-    V5 ---|"2: weight 3"| V4((V4))
-    V4 ---|"3: weight 2"| V7((V7))
-    V1 ---|"4: weight 3"| V2((V2))
-    V7 ---|"5: weight 4"| V8((V8))
-    V8 ---|"6: weight 6"| V6((V6))
-    V6 ---|"7: weight 2"| V3((V3))
-```
+![Prim's Algorithm - Resulting MST (Total Weight = 22)](diagrams/ch11-26-prim-algorithm-graph.svg)
 
-```mermaid
-flowchart TB
-    Start["Start with V1"] --> P1["1. Add V1-V5 (2)"]
-    P1 --> P2["2. Add V5-V4 (3)"]
-    P2 --> P3["3. Add V4-V7 (2)"]
-    P3 --> P4["4. Add V1-V2 (3)"]
-    P4 --> P5["5. Add V7-V8 (4)"]
-    P5 --> P6["6. Add V8-V6 (6)"]
-    P6 --> P7["7. Add V6-V3 (2)"]
-    P7 --> Done["MST complete: 7 edges, weight 22"]
-```
+![Prim's Step-by-Step Edge Selection Trace](diagrams/ch11-27-prim-algorithm-flow.svg)
 
 #### 2. Kruskal's Algorithm
 
@@ -2190,30 +1732,9 @@ Stop after scan 11 because $V-1=7$ edges have been accepted. The remaining edges
 
 Each edge label below gives its accepted-edge number. Accepted edges $1$ through $k$ show Kruskal's forest after acceptance step $k$.
 
-```mermaid
-flowchart LR
-    V1((V1)) ---|"accepted 1: weight 2"| V5((V5))
-    V4((V4)) ---|"accepted 2: weight 2"| V7((V7))
-    V3((V3)) ---|"accepted 3: weight 2"| V6((V6))
-    V1 ---|"accepted 4: weight 3"| V2((V2))
-    V4 ---|"accepted 5: weight 3"| V5
-    V7 ---|"accepted 6: weight 4"| V8((V8))
-    V8 ---|"accepted 7: weight 6"| V6
-```
+![Kruskal's Algorithm - Resulting MST (Total Weight = 22)](diagrams/ch11-28-kruskal-algorithm-graph.svg)
 
-```mermaid
-flowchart TB
-    Sort["Sort edges by nondecreasing weight"] --> K1["Take V1-V5 (2)"]
-    K1 --> K2["Take V4-V7 (2)"]
-    K2 --> K3["Take V3-V6 (2)"]
-    K3 --> K4["Take V1-V2 (3)"]
-    K4 --> K5["Take V4-V5 (3)"]
-    K5 --> K6["Take V7-V8 (4)"]
-    K6 --> R1["Skip V1-V4, V5-V7, V5-V8 (5): cycles"]
-    R1 --> R2["Skip V2-V5 (6): cycle"]
-    R2 --> K7["Take V8-V6 (6)"]
-    K7 --> Done["MST complete: 7 edges, weight 22"]
-```
+![Kruskal's Global Edge Sorting and Cycle Avoidance Flow](diagrams/ch11-29-kruskal-algorithm-flow.svg)
 
 Both algorithms produce the same MST edge set (possibly in a different order):
 
@@ -2281,25 +1802,7 @@ Set changes:
 
 #### Mermaid Diagram: DSU Cycle Check
 
-```mermaid
-flowchart TB
-	Edge["Consider edge (u, v)"] --> FindU["FIND(u)"]
-	Edge --> FindV["FIND(v)"]
-	FindU --> Same{"Same representative?"}
-	FindV --> Same
-	Same -->|Yes| Reject["Reject edge<br/>cycle would form"]
-	Same -->|No| Accept["Accept edge"]
-	Accept --> Union["UNION(u, v)"]
-
-	classDef process fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef accept fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef reject fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-	class Edge,FindU,FindV process;
-	class Same decision;
-	class Accept,Union accept;
-	class Reject reject;
-```
+![Disjoint Set Union (DSU) Cycle Detection in Kruskal's Algorithm](diagrams/ch11-30-dsu-cycle-check.svg)
 
 #### DSU Algorithm
 

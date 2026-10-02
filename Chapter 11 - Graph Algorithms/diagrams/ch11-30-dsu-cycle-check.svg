@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="500" viewBox="0 0 1020 500" role="img" aria-label="Disjoint Set Union (DSU) Cycle Detection in Kruskal's Algorithm">
+<rect width="1020" height="500" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="510.0" y="34.0">Disjoint Set Union (DSU) Cycle Detection in Kruskal's Algorithm</tspan></text>
+<path d="M509.9 111.5 Q510.0 121.6 510.6 131.5 M509.5 131.6 Q402.6 131.1 295.5 131.0 M295.6 131.5 Q295.1 138.8 295.0 150.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M290.9 139.8 L295.0 150.0 L299.1 139.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M509.8 111.5 Q511.3 122.8 511.0 131.4 M509.5 132.0 Q618.8 129.4 725.4 131.7 M726.0 131.4 Q723.4 141.0 725.7 150.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M720.9 139.8 L725.0 150.0 L729.1 139.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M294.4 205.7 Q294.7 214.8 295.1 222.7 M294.7 223.1 Q402.8 221.6 509.7 222.8 M510.1 222.7 Q508.6 232.0 509.8 240.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M505.9 229.8 L510.0 240.0 L514.1 229.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M725.3 205.2 Q725.9 213.0 725.0 223.6 M724.2 223.0 Q616.0 222.8 510.6 223.5 M510.0 223.6 Q509.8 233.2 510.5 239.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M505.9 229.8 L510.0 240.0 L514.1 229.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M510.8 313.6 Q510.3 324.3 509.7 334.7 M509.6 334.2 Q385.0 333.7 260.2 334.7 M259.7 334.7 Q259.2 346.3 260.2 355.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M255.9 344.8 L260.0 355.0 L264.1 344.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="330.0" y="322.5" width="110" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="385.0" y="334.5">Yes (Cycle!)</tspan></text>
+<path d="M510.1 313.8 Q509.9 322.5 510.2 334.4 M509.8 334.7 Q633.2 335.3 759.9 334.4 M760.2 334.4 Q760.8 344.1 759.9 354.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M755.9 344.8 L760.0 355.0 L764.1 344.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="588.0" y="322.5" width="94" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="635.0" y="334.5">No (Safe!)</tspan></text>
+<rect x="360.0" y="60.0" width="300.0" height="52.0" rx="10" fill="#ffec99"/>
+<path d="M358.9 60.2 Q509.4 60.2 659.5 58.5 M660.2 59.1 Q657.3 86.9 660.1 111.5 M661.2 110.5 Q509.5 113.4 359.0 112.1 M358.5 111.9 Q359.1 83.5 360.8 60.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M358.9 61.3 Q511.1 60.2 661.0 60.9 M660.4 60.6 Q662.2 88.1 658.8 112.4 M658.9 111.0 Q509.4 112.1 359.8 113.4 M361.3 113.1 Q358.9 87.2 360.6 61.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="bold" fill="#1e1e1e"><tspan x="510.0" y="86.0">Consider Candidate Edge (u, v)</tspan></text>
+<rect x="170.0" y="150.0" width="250.0" height="56.0" rx="10" fill="#a5d8ff"/>
+<path d="M170.1 149.7 Q292.4 149.8 420.8 151.1 M420.1 149.5 Q419.9 175.9 418.6 204.5 M419.9 206.5 Q293.4 204.5 168.4 205.8 M169.2 207.2 Q170.5 178.6 169.2 149.3" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M171.4 149.7 Q297.3 152.0 420.1 151.2 M421.1 149.4 Q421.1 175.2 420.7 204.9 M421.3 207.2 Q296.6 203.4 171.1 206.5 M170.4 205.2 Q168.7 180.8 169.5 150.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="295.0" y="169.4">Find Set Representative:</tspan><tspan x="295.0" y="186.6">root_u = FIND(u)</tspan></text>
+<rect x="600.0" y="150.0" width="250.0" height="56.0" rx="10" fill="#a5d8ff"/>
+<path d="M599.8 149.1 Q723.5 152.1 849.1 149.9 M849.3 150.3 Q848.7 175.8 850.3 207.5 M850.2 205.0 Q726.7 207.3 599.2 206.9 M598.9 207.3 Q601.1 178.2 601.0 150.9" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M600.5 150.9 Q725.7 148.5 848.6 150.5 M850.2 149.3 Q849.7 179.7 851.6 204.7 M849.4 204.9 Q722.2 204.3 599.6 205.9 M601.1 206.8 Q601.5 177.9 598.5 148.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="725.0" y="169.4">Find Set Representative:</tspan><tspan x="725.0" y="186.6">root_v = FIND(v)</tspan></text>
+<polygon points="510.0,240 630,277.0 510.0,314 390,277.0" fill="#ffec99"/>
+<path d="M510.9 241.0 Q568.0 260.8 630.7 275.5 M630.4 277.6 Q572.2 297.6 508.8 314.4 M509.7 314.1 Q452.0 296.5 391.2 278.3 M388.4 277.0 Q451.9 259.3 511.3 241.2" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M509.9 238.5 Q572.0 260.0 629.1 277.2 M628.7 275.6 Q568.0 297.0 508.5 314.3 M508.4 312.9 Q449.2 294.0 389.6 278.2 M388.9 276.4 Q449.2 257.9 511.0 240.8" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="510.0" y="267.8">Are roots identical?</tspan><tspan x="510.0" y="286.2">root_u == root_v</tspan></text>
+<rect x="90.0" y="355.0" width="340.0" height="76.0" rx="10" fill="#ffc9c9"/>
+<path d="M90.4 353.9 Q262.5 354.4 429.0 354.8 M431.2 356.3 Q432.0 391.9 431.1 431.6 M428.9 431.6 Q262.3 433.2 88.4 431.0 M90.5 431.9 Q90.7 391.5 88.6 355.5" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M90.6 354.3 Q259.7 352.2 428.6 355.6 M429.6 356.2 Q427.7 395.4 429.6 430.2 M430.6 432.3 Q261.8 432.4 88.9 430.4 M89.7 430.2 Q92.7 390.9 88.6 355.2" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="260.0" y="375.8">REJECT EDGE!</tspan><tspan x="260.0" y="393.0">u and v already connected;</tspan><tspan x="260.0" y="410.2">adding edge creates a cycle</tspan></text>
+<rect x="590.0" y="355.0" width="340.0" height="76.0" rx="10" fill="#b2f2bb"/>
+<path d="M590.0 356.3 Q760.8 356.6 931.2 356.1 M930.5 355.4 Q930.4 391.7 929.2 430.5 M928.7 430.8 Q758.9 429.0 591.0 430.7 M589.9 429.5 Q592.0 394.5 589.1 355.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M589.4 356.0 Q759.4 353.5 930.8 354.6 M930.2 356.5 Q932.6 392.5 928.8 431.0 M928.8 432.3 Q758.9 431.5 590.5 430.9 M591.1 432.1 Q592.7 392.2 589.3 355.3" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="760.0" y="375.8">ACCEPT EDGE!</tspan><tspan x="760.0" y="393.0">Merge components:</tspan><tspan x="760.0" y="410.2">UNION(root_u, root_v)</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="510.0" y="478.0">Path compression and union by rank reduce FIND and UNION operations to nearly O(1) amortized time (alpha(V))</tspan></text>
+</svg>

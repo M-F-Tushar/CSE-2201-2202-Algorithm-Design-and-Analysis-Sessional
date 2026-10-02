@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="600" viewBox="0 0 1180 600" role="img" aria-label="Shortest Path Algorithm Decision Flowchart">
+<rect width="1180" height="600" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="590.0" y="34.0">Shortest Path Algorithm Decision Flowchart</tspan></text>
+<path d="M589.9 109.5 Q590.0 125.1 590.6 140.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M585.9 129.8 L590.0 140.0 L594.1 129.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M589.8 139.5 Q591.3 159.8 591.0 177.4 M589.5 178.0 Q416.3 175.4 240.4 177.7 M241.0 177.4 Q238.4 196.0 240.7 214.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M235.9 203.8 L240.0 214.0 L244.1 203.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="396.0" y="165.0" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="415.0" y="177.0">Yes</tspan></text>
+<path d="M589.4 211.7 Q589.7 233.8 590.1 254.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M585.9 244.8 L590.0 255.0 L594.1 244.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="575.0" y="221.5" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="590.0" y="233.5">No</tspan></text>
+<path d="M590.3 254.2 Q590.9 272.0 590.0 292.6 M589.2 292.0 Q766.0 291.8 945.6 292.5 M945.0 292.6 Q944.8 312.2 945.5 328.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M940.9 318.8 L945.0 329.0 L949.1 318.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="752.5" y="280.0" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="767.5" y="292.0">No</tspan></text>
+<path d="M590.8 326.6 Q590.3 348.5 589.7 370.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M585.9 359.8 L590.0 370.0 L594.1 359.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="571.0" y="336.5" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="590.0" y="348.5">Yes</tspan></text>
+<path d="M590.1 441.8 Q589.9 447.2 590.2 455.9 M589.8 456.2 Q423.2 456.8 259.9 455.9 M260.2 455.9 Q260.8 462.4 259.9 469.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M255.9 459.8 L260.0 470.0 L264.1 459.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="366.0" y="444.0" width="118" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="425.0" y="456.0">Single source</tspan></text>
+<path d="M590.1 441.8 Q590.4 449.4 590.4 456.5 M589.8 456.4 Q725.4 454.7 860.5 456.2 M860.4 456.5 Q858.7 462.9 860.2 470.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M855.9 459.8 L860.0 470.0 L864.1 459.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="682.0" y="444.0" width="86" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="725.0" y="456.0">All pairs</tspan></text>
+<rect x="470.0" y="60.0" width="240.0" height="50.0" rx="10" fill="#ffec99"/>
+<path d="M468.9 60.2 Q589.4 60.2 709.5 58.5 M710.2 59.1 Q707.3 85.9 710.1 109.5 M711.2 108.5 Q589.5 111.4 469.0 110.1 M468.5 109.9 Q469.1 82.5 470.8 60.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M468.9 61.3 Q591.1 60.2 711.0 60.9 M710.4 60.6 Q712.2 87.1 708.8 110.4 M708.9 109.0 Q589.4 110.1 469.8 111.4 M471.3 111.1 Q468.9 86.2 470.6 61.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="590.0" y="85.0">Shortest Path Problem</tspan></text>
+<polygon points="590.0,140 690,176.0 590.0,212 490,176.0" fill="#ffec99"/>
+<path d="M590.1 139.7 Q637.4 157.8 690.8 177.1 M690.0 174.8 Q640.9 191.2 589.6 211.9 M591.2 211.2 Q540.6 196.7 489.3 176.3 M489.2 176.9 Q537.4 156.0 591.0 140.7" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M591.4 139.7 Q642.3 160.0 690.1 177.2 M690.6 174.4 Q642.2 195.9 590.0 213.3 M589.2 211.5 Q542.8 191.7 490.2 175.3 M489.6 175.9 Q540.3 160.0 588.5 139.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="590.0" y="166.8">Are all edges</tspan><tspan x="590.0" y="185.2">equal weight?</tspan></text>
+<rect x="70.0" y="138.0" width="340.0" height="76.0" rx="10" fill="#b2f2bb"/>
+<path d="M69.8 137.1 Q238.5 140.1 409.1 137.9 M409.3 138.3 Q408.7 173.8 410.3 215.5 M410.2 213.0 Q241.7 215.3 69.2 214.9 M68.9 215.3 Q71.1 176.2 71.0 138.9" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M70.5 138.9 Q240.7 136.5 408.6 138.5 M410.2 137.3 Q409.7 177.7 411.6 212.7 M409.4 212.9 Q237.2 212.3 69.6 213.9 M71.1 214.8 Q71.5 175.9 68.5 136.7" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="240.0" y="158.8">Use Breadth-First Search (BFS)</tspan><tspan x="240.0" y="176.0">Time: O(V + E)</tspan><tspan x="240.0" y="193.2">Distance = edge hop count</tspan></text>
+<polygon points="590.0,255 690,291.0 590.0,327 490,291.0" fill="#ffec99"/>
+<path d="M590.9 256.0 Q638.0 275.3 690.7 289.5 M690.4 291.6 Q642.2 311.1 588.8 327.4 M589.7 327.1 Q542.0 310.0 491.2 292.3 M488.4 291.0 Q541.9 273.8 591.3 256.2" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M589.9 253.5 Q642.0 274.5 689.1 291.2 M688.7 289.6 Q638.0 310.5 588.5 327.3 M588.4 325.9 Q539.2 307.5 489.6 292.2 M488.9 290.4 Q539.2 272.4 591.0 255.8" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="590.0" y="281.8">Any negative</tspan><tspan x="590.0" y="300.2">edge weights?</tspan></text>
+<rect x="780.0" y="253.0" width="330.0" height="76.0" rx="10" fill="#b2f2bb"/>
+<path d="M780.4 251.9 Q947.5 252.4 1109.0 252.8 M1111.2 254.3 Q1112.0 289.9 1111.1 329.6 M1108.9 329.6 Q947.3 331.2 778.4 329.0 M780.5 329.9 Q780.7 289.5 778.6 253.5" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M780.6 252.3 Q944.7 250.2 1108.6 253.6 M1109.6 254.2 Q1107.7 293.4 1109.6 328.2 M1110.6 330.3 Q946.8 330.4 778.9 328.4 M779.7 328.2 Q782.7 288.9 778.6 253.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="945.0" y="273.8">Use Dijkstra's Algorithm</tspan><tspan x="945.0" y="291.0">Time: O((V + E) log V)</tspan><tspan x="945.0" y="308.2">Greedy relaxation via min-heap</tspan></text>
+<polygon points="590.0,370 690,406.0 590.0,442 490,406.0" fill="#ffec99"/>
+<path d="M590.0 371.3 Q640.8 389.6 691.2 407.1 M690.2 405.3 Q639.7 425.7 591.6 440.7 M588.5 441.1 Q541.5 421.3 490.2 407.1 M488.6 404.5 Q541.5 389.1 590.3 368.9" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M589.4 371.0 Q639.4 386.5 690.8 405.6 M691.4 405.7 Q642.3 425.0 588.6 440.8 M591.1 441.3 Q539.2 423.0 490.3 407.5 M490.6 407.2 Q539.5 385.9 588.8 368.6" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="590.0" y="396.8">Need all-pairs</tspan><tspan x="590.0" y="415.2">distances?</tspan></text>
+<rect x="90.0" y="470.0" width="340.0" height="76.0" rx="10" fill="#99e9f2"/>
+<path d="M89.7 469.4 Q259.8 467.2 428.9 469.6 M430.2 471.1 Q427.6 509.5 430.8 544.5 M429.1 544.7 Q260.5 544.0 88.6 544.5 M90.6 545.3 Q89.7 505.2 88.6 470.6" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M89.9 469.4 Q262.0 472.0 430.3 470.1 M430.3 471.5 Q432.3 506.4 429.6 545.5 M431.4 545.9 Q257.9 543.4 90.6 547.2 M88.8 547.0 Q90.4 507.8 90.1 470.2" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="260.0" y="490.8">Use Bellman-Ford</tspan><tspan x="260.0" y="508.0">Time: O(V * E)</tspan><tspan x="260.0" y="525.2">Handles negative edges &amp; flags cycles</tspan></text>
+<rect x="690.0" y="470.0" width="340.0" height="76.0" rx="10" fill="#e0d5fa"/>
+<path d="M688.5 470.3 Q861.1 468.7 1028.9 470.8 M1030.6 469.8 Q1029.3 510.1 1028.4 544.9 M1029.2 544.7 Q861.1 548.3 691.3 545.9 M689.4 547.0 Q689.4 506.5 690.8 469.6" fill="none" stroke="#6741d9" stroke-width="2" stroke-linecap="round"/>
+<path d="M691.2 468.8 Q857.9 471.8 1028.6 469.7 M1030.2 470.2 Q1032.4 507.5 1029.9 546.7 M1028.6 546.1 Q858.9 545.9 690.0 545.2 M690.7 545.9 Q692.6 506.8 691.3 468.7" fill="none" stroke="#6741d9" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="860.0" y="490.8">Use Floyd-Warshall</tspan><tspan x="860.0" y="508.0">Time: O(V^3)</tspan><tspan x="860.0" y="525.2">Matrix DP relaxing through vertex k</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="590.0" y="578.0">Dijkstra assumes optimal substructure holds greedily; negative edges require Bellman-Ford or Floyd-Warshall</tspan></text>
+</svg>

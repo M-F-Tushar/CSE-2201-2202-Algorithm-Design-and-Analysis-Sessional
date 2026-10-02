@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="600" viewBox="0 0 1080 600" role="img" aria-label="DFS Finishing Time Algorithm for Topological Sort &amp; SCC">
+<rect width="1080" height="600" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="540.0" y="34.0">DFS Finishing Time Algorithm for Topological Sort &amp; SCC</tspan></text>
+<path d="M539.9 111.5 Q540.0 126.1 540.6 140.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M535.9 129.8 L540.0 140.0 L544.1 129.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M539.8 209.5 Q541.3 226.3 541.0 240.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M535.9 229.8 L540.0 240.0 L544.1 229.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="521.0" y="213.0" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="540.0" y="225.0">Yes</tspan></text>
+<path d="M539.4 291.7 Q539.7 306.3 540.1 319.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M535.9 309.8 L540.0 320.0 L544.1 309.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M540.3 319.2 Q540.9 334.0 540.0 351.6 M539.2 351.0 Q698.5 350.8 860.6 351.5 M860.0 351.6 Q859.8 368.2 860.5 381.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M855.9 371.8 L860.0 382.0 L864.1 371.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="681.0" y="339.0" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="700.0" y="351.0">Yes</tspan></text>
+<path d="M860.8 381.6 Q860.3 366.5 859.7 351.2 M859.6 350.7 Q700.0 350.2 540.2 351.2 M539.7 351.2 Q539.2 337.1 540.2 320.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M544.1 330.2 L540.0 320.0 L535.9 330.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M540.1 393.8 Q539.9 410.2 540.2 429.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M535.9 419.8 L540.0 430.0 L544.1 419.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="525.0" y="400.0" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="540.0" y="412.0">No</tspan></text>
+<path d="M400.1 456.8 Q365.4 457.4 330.4 457.5 M329.8 457.4 Q330.4 314.7 330.5 175.2 M330.4 175.5 Q383.7 174.9 440.2 175.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M429.8 179.1 L440.0 175.0 L429.8 170.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M640.3 175.7 Q834.9 174.2 1029.7 175.7 M1030.7 174.7 Q1029.2 355.3 1030.7 534.9 M1029.7 535.7 Q935.3 533.3 839.9 534.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M850.2 530.9 L840.0 535.0 L850.2 539.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="979.0" y="343.0" width="102" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="1030.0" y="355.0">All visited</tspan></text>
+<rect x="400.0" y="60.0" width="280.0" height="52.0" rx="10" fill="#ffec99"/>
+<path d="M398.9 60.2 Q539.4 60.2 679.5 58.5 M680.2 59.1 Q677.3 86.9 680.1 111.5 M681.2 110.5 Q539.5 113.4 399.0 112.1 M398.5 111.9 Q399.1 83.5 400.8 60.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M398.9 61.3 Q541.1 60.2 681.0 60.9 M680.4 60.6 Q682.2 88.1 678.8 112.4 M678.9 111.0 Q539.4 112.1 399.8 113.4 M401.3 113.1 Q398.9 87.2 400.6 61.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="540.0" y="86.0">Scan Every Vertex in Graph G</tspan></text>
+<polygon points="540.0,140 640,175.0 540.0,210 440,175.0" fill="#ffec99"/>
+<path d="M540.1 139.7 Q587.4 157.3 640.8 176.1 M640.0 173.8 Q590.9 189.7 539.6 209.9 M541.2 209.2 Q490.6 195.2 439.3 175.3 M439.2 175.9 Q487.4 155.5 541.0 140.7" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M541.4 139.7 Q592.3 159.5 640.1 176.2 M640.6 173.4 Q592.2 194.4 540.0 211.3 M539.2 209.5 Q492.8 190.2 440.2 174.3 M439.6 174.9 Q490.3 159.5 538.5 139.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="540.0" y="175.0">Unvisited Vertex?</tspan></text>
+<rect x="400.0" y="240.0" width="280.0" height="52.0" rx="10" fill="#a5d8ff"/>
+<path d="M399.8 239.1 Q538.5 242.1 679.1 239.9 M679.3 240.3 Q678.7 263.8 680.3 293.5 M680.2 291.0 Q541.7 293.3 399.2 292.9 M398.9 293.3 Q401.1 266.2 401.0 240.9" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M400.5 240.9 Q540.7 238.5 678.6 240.5 M680.2 239.3 Q679.7 267.7 681.6 290.7 M679.4 290.9 Q537.2 290.3 399.6 291.9 M401.1 292.8 Q401.5 265.9 398.5 238.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="540.0" y="255.4">Call DFS(u):</tspan><tspan x="540.0" y="276.6">Mark vertex u as VISITED</tspan></text>
+<polygon points="540.0,320 650,357.0 540.0,394 430,357.0" fill="#ffec99"/>
+<path d="M540.9 321.0 Q593.0 340.8 650.7 355.5 M650.4 357.6 Q597.2 377.6 538.8 394.4 M539.7 394.1 Q487.0 376.5 431.2 358.3 M428.4 357.0 Q486.9 339.3 541.3 321.2" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M539.9 318.5 Q597.0 340.0 649.1 357.2 M648.7 355.6 Q593.0 377.0 538.5 394.3 M538.4 392.9 Q484.2 374.0 429.6 358.2 M428.9 356.4 Q484.2 337.9 541.0 320.8" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="540.0" y="347.1">Unvisited outgoing</tspan><tspan x="540.0" y="366.9">neighbor v exists?</tspan></text>
+<rect x="740.0" y="330.0" width="240.0" height="52.0" rx="10" fill="#a5d8ff"/>
+<path d="M740.4 328.9 Q862.5 329.4 979.0 329.8 M981.2 331.3 Q982.0 354.9 981.1 382.6 M978.9 382.6 Q862.3 384.2 738.4 382.0 M740.5 382.9 Q740.7 354.5 738.6 330.5" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M740.6 329.3 Q859.7 327.2 978.6 330.6 M979.6 331.2 Q977.7 358.4 979.6 381.2 M980.6 383.3 Q861.8 383.4 738.9 381.4 M739.7 381.2 Q742.7 353.9 738.6 330.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="860.0" y="356.0">Recursively call DFS(v)</tspan></text>
+<rect x="400.0" y="430.0" width="280.0" height="54.0" rx="10" fill="#b2f2bb"/>
+<path d="M400.0 431.3 Q540.8 431.6 681.2 431.1 M680.5 430.4 Q680.4 455.7 679.2 483.5 M678.7 483.8 Q538.9 482.0 401.0 483.7 M399.9 482.5 Q402.0 458.5 399.1 430.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M399.4 431.0 Q539.4 428.5 680.8 429.6 M680.2 431.5 Q682.6 456.5 678.8 484.0 M678.8 485.3 Q538.9 484.5 400.5 483.9 M401.1 485.1 Q402.7 456.2 399.3 430.3" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="540.0" y="446.4">All neighbors explored!</tspan><tspan x="540.0" y="467.6">Push u onto Finish Stack</tspan></text>
+<rect x="240.0" y="510.0" width="600.0" height="50.0" rx="10" fill="#99e9f2"/>
+<path d="M239.7 509.4 Q539.8 507.2 838.9 509.6 M840.2 511.1 Q837.6 536.5 840.8 558.5 M839.1 558.7 Q540.5 558.0 238.6 558.5 M240.6 559.3 Q239.7 532.2 238.6 510.6" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M239.9 509.4 Q542.0 512.0 840.3 510.1 M840.3 511.5 Q842.3 533.4 839.6 559.5 M841.4 559.9 Q537.9 557.4 240.6 561.2 M238.8 561.0 Q240.4 534.8 240.1 510.2" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="540.0" y="535.0">Reverse Finish Stack -&gt; Yields Valid Topological Ordering!</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="540.0" y="578.0">A vertex finishes only after all its descendants have finished, ensuring proper precedence</tspan></text>
+</svg>

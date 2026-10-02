@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="480" viewBox="0 0 1140 480" role="img" aria-label="Adjacency Matrix vs Adjacency List Trade-Offs">
+<rect width="1140" height="480" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="570.0" y="34.0">Adjacency Matrix vs Adjacency List Trade-Offs</tspan></text>
+<path d="M219.9 229.5 Q232.5 230.1 245.6 230.5 M244.5 230.6 Q245.1 181.1 245.5 132.0 M245.6 132.5 Q257.6 130.3 270.0 132.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M259.8 136.1 L270.0 132.0 L259.8 127.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M549.8 131.5 Q558.8 133.3 566.0 132.4 M564.5 133.0 Q566.3 111.4 565.4 94.7 M566.0 94.4 Q570.9 94.5 580.7 94.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M569.8 98.1 L580.0 94.0 L569.8 89.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M549.4 131.7 Q557.2 132.3 565.1 131.7 M564.7 132.1 Q565.3 146.6 564.7 163.8 M565.1 163.7 Q571.1 164.5 579.8 164.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M569.8 168.1 L580.0 164.0 L569.8 159.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M220.3 229.2 Q233.4 228.5 245.0 230.6 M244.2 230.0 Q243.5 280.8 245.6 332.5 M245.0 332.6 Q257.3 333.7 270.5 331.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M259.8 336.1 L270.0 332.0 L259.8 327.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M550.8 331.6 Q557.8 332.0 564.7 332.2 M564.6 331.7 Q565.0 312.2 565.2 294.2 M564.7 294.2 Q571.7 295.6 580.2 294.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M569.8 298.1 L580.0 294.0 L569.8 289.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M550.1 331.8 Q557.4 330.2 565.2 331.9 M564.8 332.2 Q563.2 348.8 564.9 363.9 M565.2 363.9 Q573.3 363.4 579.9 363.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M569.8 368.1 L580.0 364.0 L569.8 359.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="40.0" y="200.0" width="180.0" height="60.0" rx="10" fill="#ffec99"/>
+<path d="M38.9 200.2 Q129.4 200.2 219.5 198.5 M220.2 199.1 Q217.3 230.9 220.1 259.5 M221.2 258.5 Q129.5 261.4 39.0 260.1 M38.5 259.9 Q39.1 227.5 40.8 200.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M38.9 201.3 Q131.1 200.2 221.0 200.9 M220.4 200.6 Q222.2 232.1 218.8 260.4 M218.9 259.0 Q129.4 260.1 39.8 261.4 M41.3 261.1 Q38.9 231.2 40.6 201.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="130.0" y="230.0">Graph G = (V, E)</tspan></text>
+<rect x="270.0" y="100.0" width="280.0" height="64.0" rx="10" fill="#a5d8ff"/>
+<path d="M270.1 99.7 Q407.4 99.8 550.8 101.1 M550.1 99.5 Q549.9 129.9 548.6 162.5 M549.9 164.5 Q408.4 162.5 268.4 163.8 M269.2 165.2 Q270.5 132.6 269.2 99.3" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M271.4 99.7 Q412.3 102.0 550.1 101.2 M551.1 99.4 Q551.1 129.2 550.7 162.9 M551.3 165.2 Q411.6 161.4 271.1 164.5 M270.4 163.2 Q268.7 134.8 269.5 100.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="410.0" y="122.8">Adjacency Matrix</tspan><tspan x="410.0" y="141.2">2D Array: matrix[u][v]</tspan></text>
+<rect x="580.0" y="65.0" width="270.0" height="58.0" rx="10" fill="#b2f2bb"/>
+<path d="M579.8 64.1 Q713.5 67.1 849.1 64.9 M849.3 65.3 Q848.7 91.8 850.3 124.5 M850.2 122.0 Q716.7 124.3 579.2 123.9 M578.9 124.3 Q581.1 94.2 581.0 65.9" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M580.5 65.9 Q715.7 63.5 848.6 65.5 M850.2 64.3 Q849.7 95.7 851.6 121.7 M849.4 121.9 Q712.2 121.3 579.6 122.9 M581.1 123.8 Q581.5 93.9 578.5 63.7" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="715.0" y="85.4">Fast Edge Lookup: O(1) query</tspan><tspan x="715.0" y="102.6">Simple 2D array representation</tspan></text>
+<rect x="580.0" y="135.0" width="270.0" height="58.0" rx="10" fill="#ffc9c9"/>
+<path d="M580.9 136.0 Q713.0 137.3 850.7 133.5 M850.9 135.6 Q850.8 165.0 850.1 192.5 M850.4 194.2 Q713.1 191.2 581.2 193.4 M581.4 192.7 Q582.3 166.0 580.1 136.2" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M579.9 133.5 Q717.0 136.5 849.1 135.2 M848.7 135.8 Q847.7 161.5 849.9 192.1 M850.3 191.9 Q713.7 190.5 580.8 193.6 M579.8 191.4 Q582.1 163.2 578.9 134.6" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="715.0" y="155.4">High Space: O(V^2) memory</tspan><tspan x="715.0" y="172.6">Neighbor scan: O(V) time</tspan></text>
+<rect x="270.0" y="300.0" width="280.0" height="64.0" rx="10" fill="#99e9f2"/>
+<path d="M270.4 298.9 Q412.5 299.4 549.0 299.8 M551.2 301.3 Q552.0 330.9 551.1 364.6 M548.9 364.6 Q412.3 366.2 268.4 364.0 M270.5 364.9 Q270.7 330.5 268.6 300.5" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M270.6 299.3 Q409.7 297.2 548.6 300.6 M549.6 301.2 Q547.7 334.4 549.6 363.2 M550.6 365.3 Q411.8 365.4 268.9 363.4 M269.7 363.2 Q272.7 329.9 268.6 300.2" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="410.0" y="322.8">Adjacency List</tspan><tspan x="410.0" y="341.2">Array of linked lists / vectors</tspan></text>
+<rect x="580.0" y="265.0" width="270.0" height="58.0" rx="10" fill="#b2f2bb"/>
+<path d="M580.0 266.3 Q715.8 266.6 851.2 266.1 M850.5 265.4 Q850.4 292.7 849.2 322.5 M848.7 322.8 Q713.9 321.0 581.0 322.7 M579.9 321.5 Q582.0 295.5 579.1 265.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M579.4 266.0 Q714.4 263.5 850.8 264.6 M850.2 266.5 Q852.6 293.5 848.8 323.0 M848.8 324.3 Q713.9 323.5 580.5 322.9 M581.1 324.1 Q582.7 293.2 579.3 265.3" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="715.0" y="285.4">Space Efficient: O(V + E)</tspan><tspan x="715.0" y="302.6">Neighbor iteration: O(deg(u))</tspan></text>
+<rect x="580.0" y="335.0" width="270.0" height="58.0" rx="10" fill="#ffec99"/>
+<path d="M579.7 334.4 Q714.8 332.2 848.9 334.6 M850.2 336.1 Q847.6 365.5 850.8 391.5 M849.1 391.7 Q715.5 391.0 578.6 391.5 M580.6 392.3 Q579.7 361.2 578.6 335.6" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M579.9 334.4 Q717.0 337.0 850.3 335.1 M850.3 336.5 Q852.3 362.4 849.6 392.5 M851.4 392.9 Q712.9 390.4 580.6 394.2 M578.8 394.0 Q580.4 363.8 580.1 335.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="715.0" y="355.4">Edge Query: O(deg(u))</tspan><tspan x="715.0" y="372.6">Cache locality overhead</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="570.0" y="458.0">Adjacency lists are preferred for sparse graphs (|E| &lt;&lt; |V|^2); matrices suit dense graphs (|E| ~ |V|^2)</tspan></text>
+</svg>
