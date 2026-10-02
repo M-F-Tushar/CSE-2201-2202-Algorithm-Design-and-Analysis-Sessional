@@ -39,17 +39,7 @@ For a problem, a lower bound of $\Omega(f(n))$ means:
 - A **lower bound** comes from an argument about the problem itself: "every possible algorithm needs at least $\Omega(f(n))$ steps."
 - When the upper bound of the best known algorithm matches the proven lower bound, the algorithm is called **asymptotically optimal**.
 
-```mermaid
-flowchart LR
-    P["Problem"] --> LB["Lower bound: Omega(f(n))\nevery algorithm needs at least this many steps"]
-    P --> UB["Upper bound: O(g(n))\nbest known algorithm's running time"]
-    LB -->|"f(n) = g(n)"| Optimal["Algorithm is asymptotically optimal"]
-
-    classDef bound fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef result fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    class LB,UB bound;
-    class Optimal result;
-```
+![Lower Bound Theory - Bridging the Complexity Gap](diagrams/ch15-01-lower-bound-concept.svg)
 
 ### Comparison Sorting Lower Bound
 
@@ -79,25 +69,7 @@ A **decision tree** models every possible execution of a comparison-based algori
 - Each **leaf** represents one final answer (for sorting, one permutation of the input that the algorithm would output).
 - The **height of the tree** equals the worst-case number of comparisons, because it is the longest root-to-leaf path.
 
-```mermaid
-flowchart TB
-    Root{"a1 <= a2 ?"}
-    Root -->|Yes| N1{"a2 <= a3 ?"}
-    Root -->|No| N2{"a1 <= a3 ?"}
-    N1 -->|Yes| L1["a1,a2,a3"]
-    N1 -->|No| N3{"a1 <= a3 ?"}
-    N3 -->|Yes| L2["a1,a3,a2"]
-    N3 -->|No| L3["a3,a1,a2"]
-    N2 -->|Yes| L4["a2,a1,a3"]
-    N2 -->|No| N4{"a2 <= a3 ?"}
-    N4 -->|Yes| L5["a2,a3,a1"]
-    N4 -->|No| L6["a3,a2,a1"]
-
-    classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-    classDef leaf fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    class Root,N1,N2,N3,N4 decision;
-    class L1,L2,L3,L4,L5,L6 leaf;
-```
+![Comparison Tree Model for n = 3 Elements (Lower Bound Omega(n log n))](diagrams/ch15-02-decision-tree-model.svg)
 
 For $n=3$ elements there are $3!=6$ possible orderings, so the tree needs at least $6$ leaves, and its height is at least $\lceil\log_2 6\rceil = 3$ comparisons in the worst case &mdash; matching the tree shown above.
 
@@ -163,16 +135,7 @@ Such algorithms become impractical even for moderately large inputs.
 | Practical for large inputs | Yes | No |
 | Examples | Sorting, searching, BFS | TSP (brute force), Subset Sum (brute force) |
 
-```mermaid
-flowchart LR
-    Problems["All decision problems"] --> T["Tractable\nO(1) .. O(n^5)"]
-    Problems --> I["Intractable\nO(2^n), O(n!), O(n^n) ..."]
-
-    classDef good fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    classDef bad fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-    class T good;
-    class I bad;
-```
+![Tractable vs Intractable Problems](diagrams/ch15-03-intractable-problems.svg)
 
 ### Complexity Class P (Polynomial Time)
 
@@ -298,19 +261,7 @@ $$
 
 where $\le_p$ denotes **polynomial-time reduction**. If some already-known NP-Complete problem $L'$ can be transformed into $L$ in polynomial time, then $L$ is at least as hard as every problem in NP (because every NP problem already reduces to $L'$, and $L'$ reduces to $L$).
 
-```mermaid
-flowchart LR
-    Every["Every problem in NP"] -->|"poly-time reduces to"| Known["Known NP-Complete problem L'"]
-    Known -->|"poly-time reduces to (Condition 2)"| L["Candidate problem L"]
-    L -->|"Condition 1: verifiable in poly time"| NPmember["L is in NP"]
-    NPmember --> Result["L is NP-Complete"]
-    L --> Result
-
-    classDef step fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef result fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-    class Every,Known,L,NPmember step;
-    class Result result;
-```
+![Conditions for Proving NP-Completeness of Problem L](diagrams/ch15-04-conditions-np-completeness.svg)
 
 #### Characteristics of NP-Complete Problems
 
@@ -358,25 +309,7 @@ Therefore, NP-Hard problems do not need to have a polynomial-time verification a
 | May be an optimization problem | Usually no | Yes |
 | May be undecidable | No | Yes |
 
-```mermaid
-flowchart TB
-    subgraph NPHard["NP-Hard"]
-        subgraph NP["NP"]
-            subgraph P["P"]
-            end
-            subgraph NPC["NP-Complete"]
-            end
-        end
-    end
-
-    Note1["P: solved in poly time"] -.-> P
-    Note2["NP: verified in poly time"] -.-> NP
-    Note3["NP-Complete: in NP and NP-Hard"] -.-> NPC
-    Note4["NP-Hard: at least as hard as NP,\nmay lie outside NP (e.g. Halting Problem)"] -.-> NPHard
-
-    classDef note fill:#fef3c7,stroke:#d97706,stroke-width:1px,color:#111827;
-    class Note1,Note2,Note3,Note4 note;
-```
+![Complexity Class Hierarchy (Assuming P != NP)](diagrams/ch15-05-np-complete-vs-np-hard.svg)
 
 The diagram assumes the common conjecture $P \ne NP$; if $P = NP$ were ever proven, the $P$ and $NP$ regions above would coincide.
 
