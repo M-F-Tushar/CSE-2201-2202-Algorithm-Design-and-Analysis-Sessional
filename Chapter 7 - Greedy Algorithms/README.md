@@ -58,38 +58,7 @@ Greedy algorithms are usually simple and fast, but they must be proved correct. 
 
 ### Visual Map: Greedy Decision Flow
 
-```mermaid
-flowchart LR
-	Problem["Optimization problem"] --> Candidates["Candidate set"]
-	Candidates --> Rule["Selection rule<br/>choose best current option"]
-	Rule --> Feasible{"Still feasible?"}
-	Feasible -->|Yes| Commit["Commit choice<br/>do not undo it"]
-	Feasible -->|No| Reject["Reject candidate"]
-	Reject --> Rule
-	Commit --> Update["Update remaining problem"]
-	Update --> Done{"Solution complete?"}
-	Done -->|No| Candidates
-	Done -->|Yes| Answer["Greedy solution"]
-
-	Rule -. must satisfy .-> GreedyChoice["Greedy-choice property"]
-	Update -. must preserve .-> OptimalSub["Optimal substructure"]
-	GreedyChoice --> Correct["Correctness proof"]
-	OptimalSub --> Correct
-	Correct --> Answer
-
-	classDef input fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-	classDef step fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef good fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef bad fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-	classDef proof fill:#f1f5f9,stroke:#64748b,stroke-dasharray: 5 5,color:#0f172a;
-	classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	class Problem,Candidates input;
-	class Rule,Feasible,Update,Done step;
-	class Commit good;
-	class Reject bad;
-	class GreedyChoice,OptimalSub,Correct proof;
-	class Answer answer;
-```
+![Greedy Algorithm Decision and Proof Framework](diagrams/ch7-01-greedy-decision-flow.svg)
 
 ---
 
@@ -115,25 +84,7 @@ The word greedy does not mean careless. It means the algorithm is designed aroun
 
 ### Visual Map: Local Choice to Global Answer
 
-```mermaid
-flowchart TD
-	Local["Best local choice"] --> Safe{"Is it safe?"}
-	Safe -->|Yes| Partial["Add to partial solution"]
-	Safe -->|No| Counter["Greedy fails for this rule"]
-	Partial --> Smaller["Smaller remaining problem"]
-	Smaller --> Same["Same type of problem"]
-	Same --> Repeat["Repeat greedy choice"]
-	Repeat --> Global["Global optimum"]
-
-	classDef choice fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef good fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef bad fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-	classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	class Local,Safe choice;
-	class Partial,Smaller,Same,Repeat good;
-	class Counter bad;
-	class Global answer;
-```
+![From Local Best Choice to Global Optimum](diagrams/ch7-02-local-to-global.svg)
 
 ---
 
@@ -238,26 +189,7 @@ Examples:
 
 ### Visual Map: Greedy Correctness Checklist
 
-```mermaid
-flowchart TB
-	Start["Design greedy rule"] --> Choice["Identify local best choice"]
-	Choice --> Feasible["Check feasibility"]
-	Feasible --> Safe["Prove choice is safe"]
-	Safe --> Remain["Show remaining problem has same structure"]
-	Remain --> Stop["Define stopping condition"]
-	Stop --> Complexity["Analyze time and space"]
-
-	Safe -. evidence .-> Proof1["Exchange argument"]
-	Safe -. evidence .-> Proof2["Cut property"]
-	Safe -. evidence .-> Proof3["Induction"]
-
-	classDef main fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-	classDef proof fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef done fill:#dcfce7,stroke:#16a34a,stroke-width:3px,color:#052e16;
-	class Start,Choice,Feasible,Safe,Remain,Stop main;
-	class Proof1,Proof2,Proof3 proof;
-	class Complexity done;
-```
+![Greedy Correctness Verification Checklist](diagrams/ch7-03-correctness-checklist.svg)
 
 ---
 
@@ -344,22 +276,7 @@ $$
 
 #### Mermaid Diagram: Fractional Knapsack Greedy Fill
 
-```mermaid
-flowchart LR
-	Items["Items with value/weight ratio"] --> Sort["Sort by ratio descending"]
-	Sort --> I1["Take item 1<br/>ratio 6"]
-	I1 --> I2["Take item 2<br/>ratio 5"]
-	I2 --> I3["Take fraction of item 3<br/>ratio 4"]
-	I3 --> Full["Capacity full"]
-	Full --> Answer["Maximum value 240"]
-
-	classDef input fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-	classDef step fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	class Items,Sort input;
-	class I1,I2,I3,Full step;
-	class Answer answer;
-```
+![Fractional Knapsack Greedy Strategy (Sort by Value/Weight Ratio)](diagrams/ch7-04-fractional-knapsack.svg)
 
 #### Algorithm
 
@@ -469,28 +386,7 @@ So the greedy rule must be used only when the coin system supports it, or when t
 
 #### Mermaid Diagram: Coin Change Greedy Loop
 
-```mermaid
-flowchart TD
-	Amount["Target amount"] --> Sort["Use denominations from largest to smallest"]
-	Sort --> Pick["Pick largest coin &lt;= remaining"]
-	Pick --> Subtract["Subtract coin from remaining amount"]
-	Subtract --> Done{"Remaining amount is 0?"}
-	Done -->|No| Pick
-	Done -->|Yes| Answer["Return selected coins"]
-
-	Warning["Check coin system<br/>greedy is not always optimal"] -. applies to .-> Pick
-
-	classDef input fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-	classDef step fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef warn fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-	classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	class Amount,Sort input;
-	class Pick,Subtract step;
-	class Done decision;
-	class Warning warn;
-	class Answer answer;
-```
+![Coin Change Greedy Loop (Standard vs Canonical Systems)](diagrams/ch7-05-coin-change-loop.svg)
 
 #### Algorithm
 
@@ -580,28 +476,7 @@ $$
 
 #### Mermaid Diagram: Fibonacci Iterative Flow
 
-```mermaid
-flowchart LR
-	F0["F(0)=0"] --> F2["F(2)=1"]
-	F1["F(1)=1"] --> F2
-	F1 --> F3["F(3)=2"]
-	F2 --> F3
-	F2 --> F4["F(4)=3"]
-	F3 --> F4
-	F3 --> F5["F(5)=5"]
-	F4 --> F5
-	F4 --> F6["F(6)=8"]
-	F5 --> F6
-	F5 --> F7["F(7)=13"]
-	F6 --> F7
-
-	classDef base fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef computed fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef answer fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	class F0,F1 base;
-	class F2,F3,F4,F5,F6 computed;
-	class F7 answer;
-```
+![Fibonacci Number Generation - Iterative Bottom-Up Build](diagrams/ch7-06-fibonacci-iterative.svg)
 
 #### Algorithm
 
@@ -689,26 +564,7 @@ The exact 0/1 labels may differ, but the total encoded length remains optimal.
 
 #### Mermaid Diagram: Huffman Merge Tree
 
-```mermaid
-flowchart TD
-	Root["100"] --> F["f:45<br/>code 0"]
-	Root --> N55["55"]
-	N55 --> N25["25"]
-	N55 --> N30["30"]
-	N25 --> C["c:12<br/>code 100"]
-	N25 --> D["d:13<br/>code 101"]
-	N30 --> N14["14"]
-	N30 --> E["e:16<br/>code 111"]
-	N14 --> A["a:5<br/>code 1100"]
-	N14 --> B["b:9<br/>code 1101"]
-
-	classDef internal fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-	classDef leaf fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef root fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	class Root root;
-	class N55,N25,N30,N14 internal;
-	class A,B,C,D,E,F leaf;
-```
+![Huffman Coding Tree Construction (Total Weight 100)](diagrams/ch7-07-huffman-merge-tree.svg)
 
 #### Algorithm
 
@@ -759,24 +615,7 @@ Sort ascending: $C{=}1,\ D{=}1,\ B{=}2,\ G{=}2,\ A{=}9$, then repeatedly extract
 
 ##### Resulting Huffman Tree and Codes
 
-```mermaid
-flowchart TD
-	Root["15"] --> A["A:9<br/>code 0"]
-	Root --> N6["6"]
-	N6 --> N10["4"]
-	N6 --> N11["2"]
-	N10 --> G["G:2<br/>code 100"]
-	N10 --> B["B:2<br/>code 101"]
-	N11 --> C["C:1<br/>code 110"]
-	N11 --> D["D:1<br/>code 111"]
-
-	classDef internal fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-	classDef leaf fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef root fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	class Root root;
-	class N6,N10,N11 internal;
-	class A,G,B,C,D leaf;
-```
+![Five-Symbol Huffman Tree (Total Frequency 15)](diagrams/ch7-08-five-symbol-huffman.svg)
 
 | Character | Huffman Code | Code Length |
 | :---: | :---: | :---: |
@@ -857,21 +696,7 @@ Maximum number of selected activities: **4**.
 
 #### Mermaid Diagram: Activity Selection Timeline
 
-```mermaid
-gantt
-	title Activity Selection by Earliest Finish Time
-	dateFormat  X
-	axisFormat %s
-	section Selected
-	A1 :a1, 1, 3
-	A4 :a4, 5, 2
-	A8 :a8, 8, 3
-	A11 :a11, 12, 4
-	section Rejected Examples
-	A2 :crit, a2, 3, 2
-	A3 :crit, a3, 0, 6
-	A6 :crit, a6, 5, 4
-```
+![Activity Selection Problem - Timeline by Earliest Finish Time](diagrams/ch7-09-activity-selection-timeline.svg)
 
 #### Correctness Idea
 

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="420" viewBox="0 0 1180 420" role="img" aria-label="Fractional Knapsack Greedy Strategy (Sort by Value/Weight Ratio)">
+<rect width="1180" height="420" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="590.0" y="34.0">Fractional Knapsack Greedy Strategy (Sort by Value/Weight Ratio)</tspan></text>
+<path d="M219.9 183.5 Q235.0 184.1 250.6 184.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M239.8 188.1 L250.0 184.0 L239.8 179.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M449.8 183.5 Q461.3 185.3 471.0 184.4 M469.5 185.0 Q471.3 141.4 470.4 102.7 M471.0 102.4 Q478.4 102.5 490.7 102.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M479.8 106.1 L490.0 102.0 L479.8 97.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M489.4 101.7 Q542.2 102.3 595.1 101.7 M594.7 102.1 Q595.3 145.6 594.7 191.8 M595.1 191.7 Q646.1 192.5 699.8 192.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M689.8 196.1 L700.0 192.0 L689.8 187.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M490.3 191.2 Q543.4 190.5 595.0 192.6 M594.2 192.0 Q593.5 236.8 595.6 282.5 M595.0 282.6 Q647.3 283.7 700.5 281.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M689.8 286.1 L700.0 282.0 L689.8 277.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M700.8 281.6 Q710.3 282.0 719.7 282.2 M719.6 281.7 Q720.0 231.2 720.2 182.2 M719.7 182.2 Q729.2 183.6 740.2 182.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M729.8 186.1 L740.0 182.0 L729.8 177.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M940.1 181.8 Q957.4 180.2 975.2 181.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M964.8 186.1 L975.0 182.0 L964.8 177.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="40.0" y="150.0" width="180.0" height="68.0" rx="10" fill="#a5d8ff"/>
+<path d="M38.9 150.2 Q129.4 150.2 219.5 148.5 M220.2 149.1 Q217.3 184.9 220.1 217.5 M221.2 216.5 Q129.5 219.4 39.0 218.1 M38.5 217.9 Q39.1 181.5 40.8 150.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M38.9 151.3 Q131.1 150.2 221.0 150.9 M220.4 150.6 Q222.2 186.1 218.8 218.4 M218.9 217.0 Q129.4 218.1 39.8 219.4 M41.3 219.1 Q38.9 185.2 40.6 151.1" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="130.0" y="174.8">Item Pool</tspan><tspan x="130.0" y="193.2">(values &amp; weights)</tspan></text>
+<rect x="250.0" y="150.0" width="200.0" height="68.0" rx="10" fill="#ffec99"/>
+<path d="M250.1 149.7 Q347.4 149.8 450.8 151.1 M450.1 149.5 Q449.9 181.9 448.6 216.5 M449.9 218.5 Q348.4 216.5 248.4 217.8 M249.2 219.2 Q250.5 184.6 249.2 149.3" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M251.4 149.7 Q352.3 152.0 450.1 151.2 M451.1 149.4 Q451.1 181.2 450.7 216.9 M451.3 219.2 Q351.6 215.4 251.1 218.5 M250.4 217.2 Q248.7 186.8 249.5 150.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="350.0" y="173.4">Sort Descending</tspan><tspan x="350.0" y="194.6">by Ratio (v_i / w_i)</tspan></text>
+<rect x="490.0" y="70.0" width="210.0" height="64.0" rx="10" fill="#b2f2bb"/>
+<path d="M489.8 69.1 Q593.5 72.1 699.1 69.9 M699.3 70.3 Q698.7 99.8 700.3 135.5 M700.2 133.0 Q596.7 135.3 489.2 134.9 M488.9 135.3 Q491.1 102.2 491.0 70.9" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M490.5 70.9 Q595.7 68.5 698.6 70.5 M700.2 69.3 Q699.7 103.7 701.6 132.7 M699.4 132.9 Q592.2 132.3 489.6 133.9 M491.1 134.8 Q491.5 101.9 488.5 68.7" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="595.0" y="91.4">Item 1 (Ratio 6)</tspan><tspan x="595.0" y="112.6">Take 100% (full)</tspan></text>
+<rect x="490.0" y="160.0" width="210.0" height="64.0" rx="10" fill="#b2f2bb"/>
+<path d="M490.9 161.0 Q593.0 162.3 700.7 158.5 M700.9 160.6 Q700.8 193.0 700.1 223.5 M700.4 225.2 Q593.1 222.2 491.2 224.4 M491.4 223.7 Q492.3 194.0 490.1 161.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M489.9 158.5 Q597.0 161.5 699.1 160.2 M698.7 160.8 Q697.7 189.5 699.9 223.1 M700.3 222.9 Q593.7 221.5 490.8 224.6 M489.8 222.4 Q492.1 191.2 488.9 159.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="595.0" y="181.4">Item 2 (Ratio 5)</tspan><tspan x="595.0" y="202.6">Take 100% (full)</tspan></text>
+<rect x="490.0" y="250.0" width="210.0" height="64.0" rx="10" fill="#ffec99"/>
+<path d="M490.4 248.9 Q597.5 249.4 699.0 249.8 M701.2 251.3 Q702.0 280.9 701.1 314.6 M698.9 314.6 Q597.3 316.2 488.4 314.0 M490.5 314.9 Q490.7 280.5 488.6 250.5" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M490.6 249.3 Q594.7 247.2 698.6 250.6 M699.6 251.2 Q697.7 284.4 699.6 313.2 M700.6 315.3 Q596.8 315.4 488.9 313.4 M489.7 313.2 Q492.7 279.9 488.6 250.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="595.0" y="272.8">Item 3 (Ratio 4)</tspan><tspan x="595.0" y="291.2">Take fraction</tspan></text>
+<rect x="740.0" y="150.0" width="200.0" height="64.0" rx="10" fill="#99e9f2"/>
+<path d="M740.0 151.3 Q840.8 151.6 941.2 151.1 M940.5 150.4 Q940.4 180.7 939.2 213.5 M938.7 213.8 Q838.9 212.0 741.0 213.7 M739.9 212.5 Q742.0 183.5 739.1 150.2" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M739.4 151.0 Q839.4 148.5 940.8 149.6 M940.2 151.5 Q942.6 181.5 938.8 214.0 M938.8 215.3 Q838.9 214.5 740.5 213.9 M741.1 215.1 Q742.7 181.2 739.3 150.3" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="840.0" y="171.4">Knapsack Capacity</tspan><tspan x="840.0" y="192.6">Fully Exhausted</tspan></text>
+<rect x="975.0" y="150.0" width="150.0" height="64.0" rx="10" fill="#b2f2bb"/>
+<path d="M974.7 149.4 Q1049.8 147.2 1123.9 149.6 M1125.2 151.1 Q1122.6 183.5 1125.8 212.5 M1124.1 212.7 Q1050.5 212.0 973.6 212.5 M975.6 213.3 Q974.7 179.2 973.6 150.6" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M974.9 149.4 Q1052.0 152.0 1125.3 150.1 M1125.3 151.5 Q1127.3 180.4 1124.6 213.5 M1126.4 213.9 Q1047.9 211.4 975.6 215.2 M973.8 215.0 Q975.4 181.8 975.1 150.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="1050.0" y="171.4">Max Value:</tspan><tspan x="1050.0" y="192.6">Total = 240</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="590.0" y="398.0">Fractional knapsack admits greedy solution because items can be subdivided; 0/1 knapsack cannot</tspan></text>
+</svg>

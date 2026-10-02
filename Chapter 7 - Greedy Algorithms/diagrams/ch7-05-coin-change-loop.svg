@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="620" viewBox="0 0 1080 620" role="img" aria-label="Coin Change Greedy Loop (Standard vs Canonical Systems)">
+<rect width="1080" height="620" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="540.0" y="34.0">Coin Change Greedy Loop (Standard vs Canonical Systems)</tspan></text>
+<path d="M499.9 113.5 Q500.0 129.6 500.6 145.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M495.9 134.8 L500.0 145.0 L504.1 134.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M499.8 198.5 Q501.3 215.8 501.0 230.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M495.9 219.8 L500.0 230.0 L504.1 219.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M499.4 283.7 Q499.7 299.8 500.1 314.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M495.9 304.8 L500.0 315.0 L504.1 304.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M500.3 368.2 Q500.9 383.0 500.0 400.6" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M495.9 389.8 L500.0 400.0 L504.1 389.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M400.8 439.6 Q350.3 440.0 299.7 440.2 M299.6 439.7 Q300.0 347.7 300.2 257.2 M299.7 257.2 Q329.2 258.6 360.2 257.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M349.8 261.1 L360.0 257.0 L349.8 252.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="285.0" y="336.5" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="300.0" y="348.5">No</tspan></text>
+<path d="M500.1 479.8 Q499.9 495.7 500.2 514.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M495.9 504.8 L500.0 515.0 L504.1 504.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="481.0" y="485.5" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="500.0" y="497.5">Yes</tspan></text>
+<path d="M690.1 259.8 Q665.4 258.9 640.4 257.5" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="9 7" opacity="0.85"/>
+<path d="M650.4 253.5 L640.0 257.0 L649.9 261.7" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="360.0" y="60.0" width="280.0" height="54.0" rx="10" fill="#a5d8ff"/>
+<path d="M358.9 60.2 Q499.4 60.2 639.5 58.5 M640.2 59.1 Q637.3 87.9 640.1 113.5 M641.2 112.5 Q499.5 115.4 359.0 114.1 M358.5 113.9 Q359.1 84.5 360.8 60.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M358.9 61.3 Q501.1 60.2 641.0 60.9 M640.4 60.6 Q642.2 89.1 638.8 114.4 M638.9 113.0 Q499.4 114.1 359.8 115.4 M361.3 115.1 Q358.9 88.2 360.6 61.1" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="500.0" y="87.0">Target Amount Remaining</tspan></text>
+<rect x="350.0" y="145.0" width="300.0" height="54.0" rx="10" fill="#ffec99"/>
+<path d="M350.1 144.7 Q497.4 144.8 650.8 146.1 M650.1 144.5 Q649.9 169.9 648.6 197.5 M649.9 199.5 Q498.4 197.5 348.4 198.8 M349.2 200.2 Q350.5 172.6 349.2 144.3" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M351.4 144.7 Q502.3 147.0 650.1 146.2 M651.1 144.4 Q651.1 169.2 650.7 197.9 M651.3 200.2 Q501.6 196.4 351.1 199.5 M350.4 198.2 Q348.7 174.8 349.5 145.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="500.0" y="161.4">Sort Denominations Descending</tspan><tspan x="500.0" y="182.6">[c1 &gt; c2 &gt; c3 &gt; ...]</tspan></text>
+<rect x="360.0" y="230.0" width="280.0" height="54.0" rx="10" fill="#ffec99"/>
+<path d="M359.8 229.1 Q498.5 232.1 639.1 229.9 M639.3 230.3 Q638.7 254.8 640.3 285.5 M640.2 283.0 Q501.7 285.3 359.2 284.9 M358.9 285.3 Q361.1 257.2 361.0 230.9" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M360.5 230.9 Q500.7 228.5 638.6 230.5 M640.2 229.3 Q639.7 258.7 641.6 282.7 M639.4 282.9 Q497.2 282.3 359.6 283.9 M361.1 284.8 Q361.5 256.9 358.5 228.7" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="500.0" y="247.8">Pick Largest Coin</tspan><tspan x="500.0" y="266.2">&lt;= Remaining Amount</tspan></text>
+<rect x="360.0" y="315.0" width="280.0" height="54.0" rx="10" fill="#b2f2bb"/>
+<path d="M360.9 316.0 Q498.0 317.3 640.7 313.5 M640.9 315.6 Q640.8 343.0 640.1 368.5 M640.4 370.2 Q498.1 367.2 361.2 369.4 M361.4 368.7 Q362.3 344.0 360.1 316.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M359.9 313.5 Q502.0 316.5 639.1 315.2 M638.7 315.8 Q637.7 339.5 639.9 368.1 M640.3 367.9 Q498.7 366.5 360.8 369.6 M359.8 367.4 Q362.1 341.2 358.9 314.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="500.0" y="331.4">Subtract Coin from Amount:</tspan><tspan x="500.0" y="352.6">Remaining -= Coin</tspan></text>
+<polygon points="500.0,400 600,440.0 500.0,480 400,440.0" fill="#ffec99"/>
+<path d="M500.4 398.9 Q552.5 419.4 599.0 439.8 M601.1 439.4 Q551.1 457.2 500.7 478.9 M500.9 478.6 Q448.5 459.1 400.5 440.4 M401.0 439.7 Q449.3 419.8 499.4 398.9" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M500.6 399.3 Q549.7 417.2 598.6 440.6 M598.7 441.3 Q552.3 458.0 499.9 480.6 M499.2 478.6 Q447.9 460.0 400.2 441.5 M400.5 439.9 Q450.1 422.0 499.4 400.3" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="500.0" y="430.1">Remaining Amount</tspan><tspan x="500.0" y="449.9">== 0?</tspan></text>
+<rect x="380.0" y="515.0" width="240.0" height="50.0" rx="10" fill="#b2f2bb"/>
+<path d="M380.0 516.3 Q500.8 516.6 621.2 516.1 M620.5 515.4 Q620.4 538.7 619.2 564.5 M618.7 564.8 Q498.9 563.0 381.0 564.7 M379.9 563.5 Q382.0 541.5 379.1 515.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M379.4 516.0 Q499.4 513.5 620.8 514.6 M620.2 516.5 Q622.6 539.5 618.8 565.0 M618.8 566.3 Q498.9 565.5 380.5 564.9 M381.1 566.1 Q382.7 539.2 379.3 515.3" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="500.0" y="540.0">Return Coin Selection</tspan></text>
+<rect x="690.0" y="215.0" width="340.0" height="90.0" rx="10" fill="#ffc9c9"/>
+<path d="M689.7 214.4 Q859.8 212.2 1028.9 214.6 M1030.2 216.1 Q1027.6 261.5 1030.8 303.5 M1029.1 303.7 Q860.5 303.0 688.6 303.5 M690.6 304.3 Q689.7 257.2 688.6 215.6" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M689.9 214.4 Q862.0 217.0 1030.3 215.1 M1030.3 216.5 Q1032.3 258.4 1029.6 304.5 M1031.4 304.9 Q857.9 302.4 690.6 306.2 M688.8 306.0 Q690.4 259.8 690.1 215.2" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="860.0" y="242.8">Warning: Greedy fails</tspan><tspan x="860.0" y="260.0">for non-canonical systems</tspan><tspan x="860.0" y="277.2">such as {1, 3, 4} for 6!</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="540.0" y="598.0">Canonical coin denominations guarantee matroid properties where greedy strategy succeeds</tspan></text>
+</svg>

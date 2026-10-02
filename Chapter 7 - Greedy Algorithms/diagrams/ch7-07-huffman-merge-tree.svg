@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="600" viewBox="0 0 1140 600" role="img" aria-label="Huffman Coding Tree Construction (Total Weight 100)">
+<rect width="1140" height="600" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="570.0" y="34.0">Huffman Coding Tree Construction (Total Weight 100)</tspan></text>
+<path d="M569.9 109.5 Q570.0 122.6 570.6 135.5 M569.5 135.6 Q450.1 135.1 330.5 135.0 M330.6 135.5 Q330.1 145.8 330.0 160.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M325.9 149.8 L330.0 160.0 L334.1 149.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="439.0" y="123.0" width="22" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="450.0" y="135.0">0</tspan></text>
+<path d="M569.8 109.5 Q571.3 123.8 571.0 135.4 M569.5 136.0 Q671.3 133.4 770.4 135.7 M771.0 135.4 Q768.4 148.0 770.7 160.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M765.9 149.8 L770.0 160.0 L774.1 149.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="659.0" y="123.0" width="22" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="670.0" y="135.0">1</tspan></text>
+<path d="M769.4 209.7 Q769.7 222.8 770.1 234.7 M769.7 235.1 Q700.3 233.6 629.7 234.8 M630.1 234.7 Q628.6 248.0 629.8 260.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M625.9 249.8 L630.0 260.0 L634.1 249.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="689.0" y="223.0" width="22" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="700.0" y="235.0">0</tspan></text>
+<path d="M770.3 209.2 Q770.9 221.0 770.0 235.6 M769.2 235.0 Q828.5 234.8 890.6 235.5 M890.0 235.6 Q889.8 249.2 890.5 259.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M885.9 249.8 L890.0 260.0 L894.1 249.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="819.0" y="223.0" width="22" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="830.0" y="235.0">1</tspan></text>
+<path d="M630.8 309.6 Q630.3 322.5 629.7 335.2 M629.6 334.7 Q577.5 334.2 525.2 335.2 M524.7 335.2 Q524.2 349.1 525.2 360.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M520.9 349.8 L525.0 360.0 L529.1 349.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="566.5" y="323.0" width="22" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="577.5" y="335.0">0</tspan></text>
+<path d="M630.1 309.8 Q629.9 320.7 630.2 334.9 M629.8 335.2 Q660.7 335.8 694.9 334.9 M695.2 334.9 Q695.8 346.9 694.9 359.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M690.9 349.8 L695.0 360.0 L699.1 349.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="651.5" y="323.0" width="22" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="662.5" y="335.0">1</tspan></text>
+<path d="M890.1 309.8 Q890.4 322.9 890.4 335.5 M889.8 335.4 Q872.9 333.7 855.5 335.2 M855.4 335.5 Q853.7 347.4 855.2 360.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M850.9 349.8 L855.0 360.0 L859.1 349.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="861.5" y="323.0" width="22" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="872.5" y="335.0">0</tspan></text>
+<path d="M890.3 310.7 Q889.9 321.7 889.7 335.7 M890.7 334.7 Q956.7 335.3 1025.7 334.9 M1024.7 335.7 Q1025.3 345.8 1024.9 359.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M1020.9 349.8 L1025.0 360.0 L1029.1 349.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="946.5" y="323.0" width="22" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="957.5" y="335.0">1</tspan></text>
+<path d="M855.5 409.1 Q855.3 425.1 855.3 440.9 M854.1 440.3 Q815.1 440.5 775.9 440.2 M775.3 440.9 Q775.5 455.4 775.2 470.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M770.9 459.8 L775.0 470.0 L779.1 459.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="804.0" y="428.0" width="22" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="815.0" y="440.0">0</tspan></text>
+<path d="M854.6 409.3 Q855.8 425.4 856.0 440.2 M854.3 441.0 Q900.4 440.9 945.2 440.5 M946.0 440.2 Q945.9 455.3 945.5 470.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M940.9 459.8 L945.0 470.0 L949.1 459.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="889.0" y="428.0" width="22" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="900.0" y="440.0">1</tspan></text>
+<rect x="500.0" y="60.0" width="140.0" height="50.0" rx="10" fill="#ffec99"/>
+<path d="M498.9 60.2 Q569.4 60.2 639.5 58.5 M640.2 59.1 Q637.3 85.9 640.1 109.5 M641.2 108.5 Q569.5 111.4 499.0 110.1 M498.5 109.9 Q499.1 82.5 500.8 60.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M498.9 61.3 Q571.1 60.2 641.0 60.9 M640.4 60.6 Q642.2 87.1 638.8 110.4 M638.9 109.0 Q569.4 110.1 499.8 111.4 M501.3 111.1 Q498.9 86.2 500.6 61.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="570.0" y="85.0">Root: 100</tspan></text>
+<rect x="250.0" y="160.0" width="160.0" height="54.0" rx="10" fill="#b2f2bb"/>
+<path d="M250.1 159.7 Q327.4 159.8 410.8 161.1 M410.1 159.5 Q409.9 184.9 408.6 212.5 M409.9 214.5 Q328.4 212.5 248.4 213.8 M249.2 215.2 Q250.5 187.6 249.2 159.3" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M251.4 159.7 Q332.3 162.0 410.1 161.2 M411.1 159.4 Q411.1 184.2 410.7 212.9 M411.3 215.2 Q331.6 211.4 251.1 214.5 M250.4 213.2 Q248.7 189.8 249.5 160.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="330.0" y="176.4">f: 45</tspan><tspan x="330.0" y="197.6">code: 0</tspan></text>
+<rect x="690.0" y="160.0" width="160.0" height="50.0" rx="10" fill="#a5d8ff"/>
+<path d="M689.8 159.1 Q768.5 162.1 849.1 159.9 M849.3 160.3 Q848.7 182.8 850.3 211.5 M850.2 209.0 Q771.7 211.3 689.2 210.9 M688.9 211.3 Q691.1 185.2 691.0 160.9" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M690.5 160.9 Q770.7 158.5 848.6 160.5 M850.2 159.3 Q849.7 186.7 851.6 208.7 M849.4 208.9 Q767.2 208.3 689.6 209.9 M691.1 210.8 Q691.5 184.9 688.5 158.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="770.0" y="185.0">Internal: 55</tspan></text>
+<rect x="550.0" y="260.0" width="160.0" height="50.0" rx="10" fill="#a5d8ff"/>
+<path d="M550.9 261.0 Q628.0 262.3 710.7 258.5 M710.9 260.6 Q710.8 286.0 710.1 309.5 M710.4 311.2 Q628.1 308.2 551.2 310.4 M551.4 309.7 Q552.3 287.0 550.1 261.2" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M549.9 258.5 Q632.0 261.5 709.1 260.2 M708.7 260.8 Q707.7 282.5 709.9 309.1 M710.3 308.9 Q628.7 307.5 550.8 310.6 M549.8 308.4 Q552.1 284.2 548.9 259.6" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="630.0" y="285.0">Internal: 25</tspan></text>
+<rect x="810.0" y="260.0" width="160.0" height="50.0" rx="10" fill="#a5d8ff"/>
+<path d="M810.4 258.9 Q892.5 259.4 969.0 259.8 M971.2 261.3 Q972.0 283.9 971.1 310.6 M968.9 310.6 Q892.3 312.2 808.4 310.0 M810.5 310.9 Q810.7 283.5 808.6 260.5" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M810.6 259.3 Q889.7 257.2 968.6 260.6 M969.6 261.2 Q967.7 287.4 969.6 309.2 M970.6 311.3 Q891.8 311.4 808.9 309.4 M809.7 309.2 Q812.7 282.9 808.6 260.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="890.0" y="285.0">Internal: 30</tspan></text>
+<rect x="450.0" y="360.0" width="150.0" height="54.0" rx="10" fill="#b2f2bb"/>
+<path d="M450.0 361.3 Q525.8 361.6 601.2 361.1 M600.5 360.4 Q600.4 385.7 599.2 413.5 M598.7 413.8 Q523.9 412.0 451.0 413.7 M449.9 412.5 Q452.0 388.5 449.1 360.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M449.4 361.0 Q524.4 358.5 600.8 359.6 M600.2 361.5 Q602.6 386.5 598.8 414.0 M598.8 415.3 Q523.9 414.5 450.5 413.9 M451.1 415.1 Q452.7 386.2 449.3 360.3" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="525.0" y="376.4">c: 12</tspan><tspan x="525.0" y="397.6">code: 100</tspan></text>
+<rect x="620.0" y="360.0" width="150.0" height="54.0" rx="10" fill="#b2f2bb"/>
+<path d="M619.7 359.4 Q694.8 357.2 768.9 359.6 M770.2 361.1 Q767.6 388.5 770.8 412.5 M769.1 412.7 Q695.5 412.0 618.6 412.5 M620.6 413.3 Q619.7 384.2 618.6 360.6" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M619.9 359.4 Q697.0 362.0 770.3 360.1 M770.3 361.5 Q772.3 385.4 769.6 413.5 M771.4 413.9 Q692.9 411.4 620.6 415.2 M618.8 415.0 Q620.4 386.8 620.1 360.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="695.0" y="376.4">d: 13</tspan><tspan x="695.0" y="397.6">code: 101</tspan></text>
+<rect x="780.0" y="360.0" width="150.0" height="50.0" rx="10" fill="#a5d8ff"/>
+<path d="M778.5 360.3 Q856.1 358.7 928.9 360.8 M930.6 359.8 Q929.3 387.1 928.4 408.9 M929.2 408.7 Q856.1 412.3 781.3 409.9 M779.4 411.0 Q779.4 383.5 780.8 359.6" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M781.2 358.8 Q852.9 361.8 928.6 359.7 M930.2 360.2 Q932.4 384.5 929.9 410.7 M928.6 410.1 Q853.9 409.9 780.0 409.2 M780.7 409.9 Q782.6 383.8 781.3 358.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="855.0" y="385.0">Internal: 14</tspan></text>
+<rect x="950.0" y="360.0" width="150.0" height="54.0" rx="10" fill="#b2f2bb"/>
+<path d="M949.9 360.6 Q1023.9 361.8 1101.3 358.9 M1099.6 359.7 Q1100.3 389.7 1099.2 412.6 M1100.0 415.4 Q1022.8 416.3 949.7 412.6 M949.9 413.4 Q952.0 389.0 950.3 360.1" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M949.2 359.4 Q1026.2 359.8 1099.9 361.1 M1098.7 361.4 Q1101.1 388.9 1099.3 412.6 M1100.2 415.1 Q1024.3 414.0 950.2 412.7 M950.5 414.0 Q947.3 388.2 949.3 358.5" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="1025.0" y="376.4">e: 16</tspan><tspan x="1025.0" y="397.6">code: 111</tspan></text>
+<rect x="700.0" y="470.0" width="150.0" height="54.0" rx="10" fill="#b2f2bb"/>
+<path d="M698.6 468.8 Q774.8 468.9 851.3 470.5 M850.1 471.1 Q850.6 499.7 851.1 523.3 M849.5 525.3 Q777.5 523.9 699.1 523.3 M701.2 522.8 Q697.9 498.8 698.6 469.7" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M698.7 469.6 Q776.0 470.0 850.0 471.4 M848.5 468.5 Q847.5 499.0 850.7 522.9 M848.8 524.6 Q776.6 525.6 701.2 523.0 M699.2 524.7 Q697.9 497.9 700.8 470.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="775.0" y="486.4">a: 5</tspan><tspan x="775.0" y="507.6">code: 1100</tspan></text>
+<rect x="870.0" y="470.0" width="150.0" height="54.0" rx="10" fill="#b2f2bb"/>
+<path d="M869.3 471.4 Q947.1 467.9 1019.9 470.6 M1019.7 468.8 Q1020.4 497.4 1021.0 524.1 M1020.7 525.3 Q942.6 524.2 869.7 522.4 M869.2 523.4 Q871.2 496.8 869.9 471.1" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M869.0 470.9 Q943.5 471.3 1020.9 470.1 M1020.6 468.8 Q1017.8 499.5 1020.5 524.4 M1019.3 523.2 Q943.9 523.3 870.6 524.4 M871.2 525.3 Q871.5 499.7 871.3 469.0" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="945.0" y="486.4">b: 9</tspan><tspan x="945.0" y="507.6">code: 1101</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="570.0" y="578.0">Frequent characters receive shorter prefix codes; infrequent characters sit deeper in the tree</tspan></text>
+</svg>
