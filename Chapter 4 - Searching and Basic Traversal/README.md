@@ -57,36 +57,7 @@ The two most important basic graph traversal techniques are:
 
 ### Visual Map: Search and Traversal Flow
 
-```mermaid
-flowchart TB
-	Start["Start from data structure"] --> Goal{"Goal?"}
-
-	Goal -->|Find a specific item| Search["Searching"]
-	Goal -->|Visit reachable elements| Traversal["Traversal"]
-
-	Search --> Check["Check current element"]
-	Check --> Found{"Target found?"}
-	Found -->|Yes| Stop["Stop and return result"]
-	Found -->|No| Move["Move to next candidate"]
-	Move --> Check
-
-	Traversal --> Visit["Visit current element"]
-	Visit --> Frontier["Add unvisited neighbors"]
-	Frontier --> Done{"No element left?"}
-	Done -->|No| Visit
-	Done -->|Yes| Complete["Traversal complete"]
-
-	classDef start fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
-	classDef search fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef traverse fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef decision fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-	classDef result fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	class Start start;
-	class Search,Check,Move search;
-	class Traversal,Visit,Frontier traverse;
-	class Goal,Found,Done decision;
-	class Stop,Complete result;
-```
+![Searching vs Traversal - Decision and Process Flow](diagrams/ch4-01-search-traversal-flow.svg)
 
 ---
 
@@ -152,29 +123,7 @@ Example:
 
 ### Visual Map: Same Movement, Different Purpose
 
-```mermaid
-flowchart LR
-	Start((A)) --> B((B))
-	Start --> C((C))
-	B --> D((D))
-	B --> E((E))
-	C --> F((F))
-	E --> G((G))
-	F --> G
-
-	SearchGoal["Searching goal:<br/>stop when G is found"]
-	TraversalGoal["Traversal goal:<br/>visit all reachable vertices"]
-
-	G --> SearchGoal
-	Start --> TraversalGoal
-
-	classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef target fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	classDef note fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	class Start,B,C,D,E,F node;
-	class G target;
-	class SearchGoal,TraversalGoal note;
-```
+![Same Graph Movement, Different Algorithmic Purpose](diagrams/ch4-02-movement-purpose.svg)
 
 ---
 
@@ -195,19 +144,7 @@ The most common graph representation for BFS and DFS is an **adjacency list**.
 
 Example graph:
 
-```mermaid
-flowchart LR
-	A((A)) --- B((B))
-	A --- C((C))
-	B --- D((D))
-	B --- E((E))
-	C --- F((F))
-	E --- G((G))
-	F --- G
-
-	classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	class A,B,C,D,E,F,G node;
-```
+![Introductory Graph for Traversal Demonstrations](diagrams/ch4-03-intro-graph-traversal.svg)
 
 Adjacency list for the graph:
 
@@ -293,16 +230,7 @@ BFS uses a **queue**, so the first discovered vertex is processed first.
 
 Use this undirected graph for the BFS trace below. Process every adjacency list in alphabetical order.
 
-```mermaid
-flowchart LR
-    A((A)) --- B((B))
-    A --- C((C))
-    B --- D((D))
-    B --- E((E))
-    C --- F((F))
-    E --- G((G))
-    F --- G
-```
+![BFS Traversal on 7-Vertex Graph (Source A)](diagrams/ch4-04-bfs-traversal-graph.svg)
 
 ### BFS Idea
 
@@ -317,31 +245,7 @@ Because BFS expands in layers, it finds the shortest path in an unweighted graph
 
 ### Visual Map: BFS Level Movement
 
-```mermaid
-flowchart TB
-	A["Level 0<br/>A"] --> B["Level 1<br/>B"]
-	A --> C["Level 1<br/>C"]
-	B --> D["Level 2<br/>D"]
-	B --> E["Level 2<br/>E"]
-	C --> F["Level 2<br/>F"]
-	E --> G["Level 3<br/>G"]
-	F --> G
-
-	L0["Process A first"] --> L1["Then B and C"]
-	L1 --> L2["Then D, E, and F"]
-	L2 --> L3["Then G"]
-
-	classDef level0 fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111827;
-	classDef level1 fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef level2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef level3 fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	classDef note fill:#f1f5f9,stroke:#64748b,stroke-width:2px,color:#0f172a;
-	class A level0;
-	class B,C level1;
-	class D,E,F level2;
-	class G level3;
-	class L0,L1,L2,L3 note;
-```
+![BFS Level-by-Level Discovery and Queue Processing Order](diagrams/ch4-05-bfs-level-movement.svg)
 
 ### BFS Instruction Algorithm
 
@@ -476,16 +380,7 @@ DFS can be implemented in two common ways:
 
 Use this same undirected graph for the DFS trace below. Process every adjacency list in alphabetical order.
 
-```mermaid
-flowchart LR
-    A((A)) --- B((B))
-    A --- C((C))
-    B --- D((D))
-    B --- E((E))
-    C --- F((F))
-    E --- G((G))
-    F --- G
-```
+![DFS Traversal on 7-Vertex Graph (Source A)](diagrams/ch4-06-dfs-traversal-graph.svg)
 
 ### DFS Idea
 
@@ -501,32 +396,7 @@ DFS is useful when we need to explore complete paths, detect structure, or proce
 
 ### Visual Map: DFS Deep Movement and Backtracking
 
-```mermaid
-flowchart TB
-	A((A)) --> B((B))
-	A --> C((C))
-	B --> D((D))
-	B --> E((E))
-	C --> F((F))
-	E --> G((G))
-	F --> G
-
-	A -. "go deep" .-> B
-	B -. "go deep" .-> D
-	D -. "backtrack" .-> B
-	B -. "next branch" .-> E
-	E -. "go deep" .-> G
-	G -. "go deep" .-> F
-	F -. "go deep" .-> C
-
-	Note["DFS keeps following one branch<br/>until it must backtrack"]
-	C --> Note
-
-	classDef node fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef note fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	class A,B,C,D,E,F,G node;
-	class Note note;
-```
+![DFS Deep Movement and Backtracking Trace](diagrams/ch4-07-dfs-backtracking.svg)
 
 ### DFS Instruction Algorithm
 
@@ -697,30 +567,7 @@ DFS is usually preferred when the problem needs deep exploration, backtracking, 
 
 ### Visual Map: BFS Queue vs DFS Stack
 
-```mermaid
-flowchart LR
-	subgraph BFS["BFS with queue"]
-		B1["Discover A"] --> B2["Enqueue B, C"]
-		B2 --> B3["Process B before D and E"]
-		B3 --> B4["Complete one level before next"]
-	end
-
-	subgraph DFS["DFS with stack or recursion"]
-		D1["Discover A"] --> D2["Move to B"]
-		D2 --> D3["Move to D"]
-		D3 --> D4["Backtrack when stuck"]
-	end
-
-	B4 --> Result1["BFS order example:<br/>A, B, C, D, E, F, G"]
-	D4 --> Result2["DFS order example:<br/>A, B, D, E, G, F, C"]
-
-	classDef bfs fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-	classDef dfs fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16;
-	classDef result fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
-	class B1,B2,B3,B4 bfs;
-	class D1,D2,D3,D4 dfs;
-	class Result1,Result2 result;
-```
+![BFS Queue vs DFS Stack Comparison](diagrams/ch4-08-bfs-queue-vs-dfs-stack.svg)
 
 ---
 

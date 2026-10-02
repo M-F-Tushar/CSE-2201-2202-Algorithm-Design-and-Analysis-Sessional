@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="500" viewBox="0 0 1080 500" role="img" aria-label="BFS Level-by-Level Discovery and Queue Processing Order">
+<rect width="1080" height="500" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="540.0" y="34.0">BFS Level-by-Level Discovery and Queue Processing Order</tspan></text>
+<path d="M259.9 103.5 Q280.0 104.1 300.6 104.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M289.8 108.1 L300.0 104.0 L289.8 99.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M259.8 103.5 Q271.3 105.3 281.0 104.4 M279.5 105.0 Q281.3 147.4 280.4 194.7 M281.0 194.4 Q288.4 194.5 300.7 194.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M289.8 198.1 L300.0 194.0 L289.8 189.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M519.4 103.7 Q539.7 104.3 560.1 103.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M549.8 108.1 L560.0 104.0 L549.8 99.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M520.3 103.2 Q530.9 102.5 540.0 104.6 M539.2 104.0 Q538.5 148.8 540.6 194.5 M540.0 194.6 Q549.8 195.7 560.5 193.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M549.8 198.1 L560.0 194.0 L549.8 189.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M520.8 193.6 Q530.3 194.0 539.7 194.2 M539.6 193.7 Q540.0 238.2 540.2 284.2 M539.7 284.2 Q549.2 285.6 560.2 284.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M549.8 288.1 L560.0 284.0 L549.8 279.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M780.1 193.8 Q799.9 192.2 820.2 193.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M809.8 198.1 L820.0 194.0 L809.8 189.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M780.1 283.8 Q790.4 284.4 800.4 284.5 M799.8 284.4 Q800.4 237.7 800.5 194.2 M800.4 194.5 Q808.7 193.9 820.2 194.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M809.8 198.1 L820.0 194.0 L809.8 189.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="40.0" y="70.0" width="220.0" height="68.0" rx="10" fill="#ffec99"/>
+<path d="M38.9 70.2 Q149.4 70.2 259.5 68.5 M260.2 69.1 Q257.3 104.9 260.1 137.5 M261.2 136.5 Q149.5 139.4 39.0 138.1 M38.5 137.9 Q39.1 101.5 40.8 70.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M38.9 71.3 Q151.1 70.2 261.0 70.9 M260.4 70.6 Q262.2 106.1 258.8 138.4 M258.9 137.0 Q149.4 138.1 39.8 139.4 M41.3 139.1 Q38.9 105.2 40.6 71.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="150.0" y="93.4">Level 0</tspan><tspan x="150.0" y="114.6">Vertex A (dist = 0)</tspan></text>
+<rect x="300.0" y="70.0" width="220.0" height="68.0" rx="10" fill="#a5d8ff"/>
+<path d="M300.1 69.7 Q407.4 69.8 520.8 71.1 M520.1 69.5 Q519.9 101.9 518.6 136.5 M519.9 138.5 Q408.4 136.5 298.4 137.8 M299.2 139.2 Q300.5 104.6 299.2 69.3" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M301.4 69.7 Q412.3 72.0 520.1 71.2 M521.1 69.4 Q521.1 101.2 520.7 136.9 M521.3 139.2 Q411.6 135.4 301.1 138.5 M300.4 137.2 Q298.7 106.8 299.5 70.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="410.0" y="93.4">Level 1: Vertex B</tspan><tspan x="410.0" y="114.6">(dist = 1, parent A)</tspan></text>
+<rect x="300.0" y="160.0" width="220.0" height="68.0" rx="10" fill="#a5d8ff"/>
+<path d="M299.8 159.1 Q408.5 162.1 519.1 159.9 M519.3 160.3 Q518.7 191.8 520.3 229.5 M520.2 227.0 Q411.7 229.3 299.2 228.9 M298.9 229.3 Q301.1 194.2 301.0 160.9" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M300.5 160.9 Q410.7 158.5 518.6 160.5 M520.2 159.3 Q519.7 195.7 521.6 226.7 M519.4 226.9 Q407.2 226.3 299.6 227.9 M301.1 228.8 Q301.5 193.9 298.5 158.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="410.0" y="183.4">Level 1: Vertex C</tspan><tspan x="410.0" y="204.6">(dist = 1, parent A)</tspan></text>
+<rect x="560.0" y="70.0" width="220.0" height="68.0" rx="10" fill="#b2f2bb"/>
+<path d="M560.9 71.0 Q668.0 72.3 780.7 68.5 M780.9 70.6 Q780.8 105.0 780.1 137.5 M780.4 139.2 Q668.1 136.2 561.2 138.4 M561.4 137.7 Q562.3 106.0 560.1 71.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M559.9 68.5 Q672.0 71.5 779.1 70.2 M778.7 70.8 Q777.7 101.5 779.9 137.1 M780.3 136.9 Q668.7 135.5 560.8 138.6 M559.8 136.4 Q562.1 103.2 558.9 69.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="670.0" y="93.4">Level 2: Vertex D</tspan><tspan x="670.0" y="114.6">(dist = 2, parent B)</tspan></text>
+<rect x="560.0" y="160.0" width="220.0" height="68.0" rx="10" fill="#b2f2bb"/>
+<path d="M560.4 158.9 Q672.5 159.4 779.0 159.8 M781.2 161.3 Q782.0 192.9 781.1 228.6 M778.9 228.6 Q672.3 230.2 558.4 228.0 M560.5 228.9 Q560.7 192.5 558.6 160.5" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M560.6 159.3 Q669.7 157.2 778.6 160.6 M779.6 161.2 Q777.7 196.4 779.6 227.2 M780.6 229.3 Q671.8 229.4 558.9 227.4 M559.7 227.2 Q562.7 191.9 558.6 160.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="670.0" y="183.4">Level 2: Vertex E</tspan><tspan x="670.0" y="204.6">(dist = 2, parent B)</tspan></text>
+<rect x="560.0" y="250.0" width="220.0" height="68.0" rx="10" fill="#b2f2bb"/>
+<path d="M560.0 251.3 Q670.8 251.6 781.2 251.1 M780.5 250.4 Q780.4 282.7 779.2 317.5 M778.7 317.8 Q668.9 316.0 561.0 317.7 M559.9 316.5 Q562.0 285.5 559.1 250.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M559.4 251.0 Q669.4 248.5 780.8 249.6 M780.2 251.5 Q782.6 283.5 778.8 318.0 M778.8 319.3 Q668.9 318.5 560.5 317.9 M561.1 319.1 Q562.7 283.2 559.3 250.3" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="670.0" y="273.4">Level 2: Vertex F</tspan><tspan x="670.0" y="294.6">(dist = 2, parent C)</tspan></text>
+<rect x="820.0" y="160.0" width="220.0" height="68.0" rx="10" fill="#99e9f2"/>
+<path d="M819.7 159.4 Q929.8 157.2 1038.9 159.6 M1040.2 161.1 Q1037.6 195.5 1040.8 226.5 M1039.1 226.7 Q930.5 226.0 818.6 226.5 M820.6 227.3 Q819.7 191.2 818.6 160.6" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M819.9 159.4 Q932.0 162.0 1040.3 160.1 M1040.3 161.5 Q1042.3 192.4 1039.6 227.5 M1041.4 227.9 Q927.9 225.4 820.6 229.2 M818.8 229.0 Q820.4 193.8 820.1 160.2" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="930.0" y="183.4">Level 3: Vertex G</tspan><tspan x="930.0" y="204.6">(dist = 3, parent E/F)</tspan></text>
+<rect x="120.0" y="380.0" width="840.0" height="64.0" rx="10" fill="#ced4da"/>
+<path d="M118.5 380.3 Q541.1 378.7 958.9 380.8 M960.6 379.8 Q959.3 414.1 958.4 442.9 M959.2 442.7 Q541.1 446.3 121.3 443.9 M119.4 445.0 Q119.4 410.5 120.8 379.6" fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="round"/>
+<path d="M121.2 378.8 Q537.9 381.8 958.6 379.7 M960.2 380.2 Q962.4 411.5 959.9 444.7 M958.6 444.1 Q538.9 443.9 120.0 443.2 M120.7 443.9 Q122.6 410.8 121.3 378.7" fill="none" stroke="#1e1e1e" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="540.0" y="401.4">Queue Order: [ A ] -&gt; [ B, C ] -&gt; [ D, E, F ] -&gt; [ G ]</tspan><tspan x="540.0" y="422.6">FIFO structure guarantees shortest unweighted hop count</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="540.0" y="478.0">BFS guarantees shortest distance in unweighted graphs because vertices are visited in nondecreasing order of distance</tspan></text>
+</svg>
