@@ -37,55 +37,7 @@ This repository aims to provide:
 
 ## 🧭 Course Roadmap
 
-```mermaid
-graph TB
-	Start([🚀 Start Journey]) --> P1
-
-	subgraph P1[Phase 1: Foundations and Analysis]
-		C1[Algorithm Foundations]
-		C2[Complexity Analysis]
-		C3[Recurrences and Correctness]
-		C1 --> C2 --> C3
-	end
-
-	P1 --> P2
-
-	subgraph P2[Phase 2: Basic Algorithms]
-		C4[Searching and Basic Traversal]
-		C5[Sorting Algorithms]
-		C6[Divide and Conquer]
-		C4 --> C5 --> C6
-	end
-
-	P2 --> P3
-
-	subgraph P3[Phase 3: Algorithm Design Paradigms]
-		C7[Greedy Algorithms]
-		C8[Dynamic Programming]
-		C9[Backtracking]
-		C10[Branch and Bound]
-		C7 --> C8 --> C9 --> C10
-	end
-
-	P3 --> P4
-
-	subgraph P4[Phase 4: Graph and Network Algorithms]
-		C11[Graph Algorithms]
-		C12[Flow Algorithms]
-		C11 --> C12
-	end
-
-	P4 --> P5
-
-	subgraph P5[Phase 5: Advanced Algorithmic Theory]
-		C13[Approximation Algorithms]
-		C14[Randomized and Parallel Algorithms]
-		C15[Lower Bound Theory and NP Completeness]
-		C13 --> C14 --> C15
-	end
-
-	P5 --> End([🎓 Mastery Achieved])
-```
+![Algorithm Design and Analysis - Course Roadmap](diagrams/roadmap-01-course-overview.svg)
 
 ---
 
