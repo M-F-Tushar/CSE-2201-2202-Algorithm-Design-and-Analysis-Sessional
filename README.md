@@ -53,6 +53,7 @@ This repository covers the following major topics:
 - Searching techniques
 - Sorting algorithms
 - Divide-and-Conquer paradigm
+- Prefix sums and segment trees for range queries
 - Greedy method
 - Dynamic programming
 - Backtracking
@@ -155,7 +156,7 @@ Covers insertion sort, bubble sort, selection sort, merge sort, quick sort, heap
 
 ### Chapter 6 - Divide and Conquer
 
-Covers divide-and-conquer strategy, merge sort, quick sort, binary search, Strassen matrix multiplication, and recurrence analysis.
+Covers divide-and-conquer strategy, merge sort, quick sort, binary search, Strassen matrix multiplication, recurrence analysis, and range-query structures: prefix sums for static data and segment trees for range queries with point updates.
 
 ### Chapter 7 - Greedy Algorithms
 
