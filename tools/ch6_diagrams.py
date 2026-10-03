@@ -120,4 +120,65 @@ query_update = D(
     caption="A query prunes disjoint ranges and returns stored sums for fully covered ranges; an update changes one leaf and its ancestors.",
 )
 
-DIAGRAMS = [prefix_sum, segment_tree, query_update]
+# 4 --------------------------------------- maximum-sum subarray
+maximum_subarray = D(
+    key="ch6-04-maximum-sum-subarray",
+    title="Maximum Sum Subarray: Three Ways to Find the Best Contiguous Range",
+    size=(1700, 890),
+    flow="V",
+    nodes=[
+        N("array-label", "Input", 30, 102, 100, 68, "dark", size=15, bold=True),
+        *[
+            N(
+                f"value-{i}",
+                f"i = {i}\n{value}",
+                145 + i * 165,
+                102,
+                145,
+                68,
+                "green" if i >= 3 else "blue",
+                size=15,
+                bold=i >= 3,
+            )
+            for i, value in enumerate([2, 3, -8, 7, 2, -1, 3])
+        ],
+        N("dc-title", "Divide and conquer", 65, 235, 710, 56, "yellow", size=18, bold=True),
+        N("dc-root", "Solve [0,6]\nmid = 3", 300, 325, 240, 74, "yellow", size=15, bold=True),
+        N("dc-left", "Left [0,3]\nbest = 7", 30, 460, 215, 76, "blue", size=14),
+        N("dc-cross", "Crossing: 7 + 4\nsum = 11", 295, 460, 250, 76, "green", size=14, bold=True),
+        N("dc-right", "Right [4,6]\nbest = 4", 600, 460, 215, 76, "blue", size=14),
+        N("dc-result", "max(7, 4, 11) = 11\nThe crossing case wins", 175, 590, 500, 76, "green", size=16, bold=True),
+        N("kadane-title", "Kadane: extend or restart at each index", 865, 235, 775, 56, "teal", size=18, bold=True),
+        N("kadane-rule", "ending_here = max(a[i], ending_here + a[i])\nKeep best = max(best, ending_here)", 900, 325, 710, 74, "blue", size=15, bold=True),
+        N(
+            "kadane-trace",
+            "i | a[i] | ending_here | best\n"
+            "0 |   2  |      2      |  2\n"
+            "1 |   3  |      5      |  5\n"
+            "2 |  -8  |     -3      |  5\n"
+            "3 |   7  |      7      |  7  restart\n"
+            "4 |   2  |      9      |  9\n"
+            "5 |  -1  |      8      |  9\n"
+            "6 |   3  |     11      | 11",
+            925,
+            445,
+            660,
+            202,
+            "light",
+            size=13,
+        ),
+        N("kadane-result", "Best subarray: [3,6] = {7, 2, -1, 3}\nMaximum sum = 11", 920, 685, 670, 76, "green", size=15, bold=True),
+        N("complexities", "Brute force O(n^2)   |   Divide and conquer O(n log n)   |   Kadane O(n)", 235, 790, 1230, 52, "dark", size=15, bold=True),
+    ],
+    edges=[
+        E("dc-root", "dc-left"),
+        E("dc-root", "dc-cross", color="#2f9e44"),
+        E("dc-root", "dc-right"),
+        E("dc-left", "dc-result"),
+        E("dc-cross", "dc-result", color="#2f9e44"),
+        E("dc-right", "dc-result"),
+    ],
+    caption="A non-empty maximum subarray is wholly left, wholly right, or crosses the split; Kadane keeps the best ending-at-i sum.",
+)
+
+DIAGRAMS = [prefix_sum, segment_tree, query_update, maximum_subarray]
