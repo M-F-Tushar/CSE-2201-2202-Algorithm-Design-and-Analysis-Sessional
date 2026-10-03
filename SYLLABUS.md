@@ -207,6 +207,10 @@ Bubble sort and selection sort are included as supplementary sorting algorithms 
 - Strassen matrix multiplication
 - Divide-and-conquer recurrence analysis
 - Advantages and limitations of divide-and-conquer
+- Prefix sums for static range-sum queries
+- Segment trees for range-sum queries with point updates
+- Segment-tree construction, overlap cases, and range-query/update dry runs
+- Prefix-sum vs. segment-tree complexity and structure selection
 
 ### Book Reference
 
