@@ -106,6 +106,8 @@ Big-O gives the **worst-case growth rate** — $g(n)$ grows at least as fast as 
 
 **Example:** $3n + 5 = O(n)$, because for large $n$ the term $n$ dominates the constant terms. Choosing $c = 8$ and $n_0 = 1$ satisfies $3n + 5 \le 8n$ for all $n \ge 1$.
 
+> Some class notes label this crossing point $k$ instead of $n_0$: the graph of $f(n)$ and $c \cdot g(n)$ cross at $n = k$, and $f(n) \le c \cdot g(n)$ holds for every $n$ to the right of $k$. Both names refer to the same idea.
+
 ### Big-Omega Notation - Lower Bound
 
 $$
@@ -118,7 +120,9 @@ $$
 f(n) \ge c \cdot g(n), \qquad \text{for all } n \ge n_0
 $$
 
-Big-Omega gives the **best-case (minimum) growth rate** — $f(n)$ never grows slower than $g(n)$ beyond $n_0$.
+Big-Omega gives the **best-case (minimum) growth rate** — $f(n)$ never grows slower than $g(n)$ beyond $n_0$ (again labeled $k$ in some class notes).
+
+Drawn on a graph, Big-O and Big-Omega look like mirror images: for Big-O, $c \cdot g(n)$ sits **above** $f(n)$ once $n \ge k$ (an upper bound); for Big-Omega, $c \cdot g(n)$ sits **below** $f(n)$ once $n \ge k$ (a lower bound).
 
 ### Big-Theta Notation - Tight Bound
 
