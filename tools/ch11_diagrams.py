@@ -821,6 +821,177 @@ dsu_cycle = D(
     caption="Path compression and union by rank reduce FIND and UNION operations to nearly O(1) amortized time (alpha(V))",
 )
 
+# 31 ---------------------------------------------------- DSU sets and union
+
+dsu_sets_union = D(
+    key="ch11-31-dsu-sets-and-union",
+    title="Disjoint Set Parent Trees and Component Merge",
+    size=(1120, 460),
+    flow="H",
+    containers=[
+        N("initial_panel", "Initial: five singleton sets", 30, 85, 500, 300, "container"),
+        N("merged_panel", "After UNIONs (0,1), (0,2), (2,3)", 590, 85, 500, 300, "container"),
+    ],
+    nodes=[
+        N("i0", "0", 70, 180, 48, 48, "blue", "circle", bold=True),
+        N("i1", "1", 155, 180, 48, 48, "blue", "circle"),
+        N("i2", "2", 240, 180, 48, 48, "blue", "circle"),
+        N("i3", "3", 325, 180, 48, 48, "blue", "circle"),
+        N("i4", "4", 410, 180, 48, 48, "blue", "circle"),
+        N("i_arr", "Parent array: [-1, -1, -1, -1, -1]", 85, 280, 390, 48, "light", size=13),
+        N("m0", "0", 735, 145, 52, 52, "green", "circle", bold=True),
+        N("m1", "1", 665, 240, 48, 48, "blue", "circle"),
+        N("m2", "2", 735, 240, 48, 48, "blue", "circle"),
+        N("m3", "3", 805, 240, 48, 48, "blue", "circle"),
+        N("m4", "4", 990, 180, 48, 48, "yellow", "circle"),
+        N("m_arr", "Parent array: [-1, 0, 0, 0, -1]", 640, 315, 390, 48, "light", size=13),
+    ],
+    edges=[E("m0", "m1"), E("m0", "m2"), E("m0", "m3")],
+    caption="A DSU parent forest stores component membership, not the original graph's edges",
+)
+
+# 32 ---------------------------------------------------- path compression
+
+dsu_path_compression = D(
+    key="ch11-32-dsu-path-compression",
+    title="Path Compression Flattens a Find Path",
+    size=(1120, 470),
+    flow="H",
+    containers=[
+        N("before_panel", "Before FIND(4): a tall parent chain", 25, 85, 500, 320, "container"),
+        N("after_panel", "After FIND(4): visited nodes point to root 0", 595, 85, 500, 320, "container"),
+    ],
+    nodes=[
+        N("b0", "0", 260, 125, 48, 48, "green", "circle", bold=True),
+        N("b1", "1", 260, 180, 48, 48, "blue", "circle"),
+        N("b2", "2", 260, 235, 48, 48, "blue", "circle"),
+        N("b3", "3", 260, 290, 48, 48, "blue", "circle"),
+        N("b4", "4", 260, 345, 48, 48, "yellow", "circle"),
+        N("b_arr", "parent: [0, 0, 1, 2, 3]", 90, 415, 360, 42, "light", size=13),
+        N("a0", "0", 820, 130, 48, 48, "green", "circle", bold=True),
+        N("a1", "1", 690, 255, 48, 48, "blue", "circle"),
+        N("a2", "2", 775, 255, 48, 48, "blue", "circle"),
+        N("a3", "3", 860, 255, 48, 48, "blue", "circle"),
+        N("a4", "4", 945, 255, 48, 48, "yellow", "circle"),
+        N("a_arr", "parent: [0, 0, 0, 0, 0]", 665, 345, 360, 42, "light", size=13),
+    ],
+    edges=[
+        E("b1", "b0"), E("b2", "b1"), E("b3", "b2"), E("b4", "b3"),
+        E("a0", "a1", route="straight"), E("a0", "a2", route="straight"), E("a0", "a3", route="straight"), E("a0", "a4", route="straight"),
+    ],
+    caption="One find may pay for a longer walk, then shorten future finds along the same path",
+)
+
+# 33 ---------------------------------------------------- union by size
+
+dsu_union_by_size = D(
+    key="ch11-33-dsu-union-by-size",
+    title="Union by Size Attaches the Smaller Tree Under the Larger",
+    size=(1120, 480),
+    flow="H",
+    containers=[
+        N("small_panel", "Before: compare component sizes", 25, 85, 500, 330, "container"),
+        N("large_panel", "After UNION: attach smaller root below larger", 595, 85, 500, 330, "container"),
+    ],
+    nodes=[
+        N("s0", "A\nsize 3", 170, 145, 78, 58, "green", "circle", size=12, bold=True),
+        N("s1", "1", 105, 255, 48, 48, "blue", "circle"),
+        N("s2", "2", 200, 255, 48, 48, "blue", "circle"),
+        N("t0", "B\nsize 2", 350, 145, 78, 58, "yellow", "circle", size=12, bold=True),
+        N("t1", "4", 365, 255, 48, 48, "yellow", "circle"),
+        N("r0", "A\nsize 5", 835, 145, 82, 62, "green", "circle", size=12, bold=True),
+        N("r1", "1", 675, 285, 48, 48, "blue", "circle"),
+        N("r2", "2", 765, 285, 48, 48, "blue", "circle"),
+        N("r3", "B", 855, 285, 48, 48, "yellow", "circle"),
+        N("r4", "4", 945, 285, 48, 48, "yellow", "circle"),
+        N("rule", "Attach B under A; combined set size = 5", 660, 355, 390, 44, "light", size=13),
+    ],
+    edges=[
+        E("s0", "s1", route="straight"), E("s0", "s2", route="straight"), E("t0", "t1", route="straight"),
+        E("r0", "r1", route="straight"), E("r0", "r2", route="straight"), E("r0", "r3", route="straight"), E("r3", "r4", route="straight"),
+    ],
+    caption="The larger root remains the representative, limiting tree growth during merges",
+)
+
+# 34 ---------------------------------------------------- lecture Kruskal example
+
+kruskal_lecture_example = D(
+    key="ch11-34-kruskal-lecture-example",
+    title="Kruskal's Lecture Example: Weight Order and Cycle Rejection",
+    size=(1320, 560),
+    flow="H",
+    containers=[
+        N("graph_panel", "Five-vertex input graph: green edges are selected", 25, 95, 470, 390, "container"),
+        N("trace_panel", "Process edge tuples in nondecreasing weight order", 535, 95, 760, 390, "container"),
+    ],
+    nodes=[
+        N("v0", "0", 75, 155, 48, 48, "blue", "circle", bold=True),
+        N("v1", "1", 255, 110, 48, 48, "blue", "circle", bold=True),
+        N("v4", "4", 405, 205, 48, 48, "blue", "circle", bold=True),
+        N("v3", "3", 280, 345, 48, 48, "blue", "circle", bold=True),
+        N("v2", "2", 75, 345, 48, 48, "blue", "circle", bold=True),
+        N("row1", "1   (1, 4, 1)    ACCEPT", 570, 125, 690, 42, "green", size=14),
+        N("row2", "2   (0, 1, 1)    ACCEPT", 570, 175, 690, 42, "green", size=14),
+        N("row3", "3   (3, 4, 2)    ACCEPT", 570, 225, 690, 42, "green", size=14),
+        N("row4", "4   (1, 3, 2)    SKIP: cycle", 570, 275, 690, 42, "red", size=14),
+        N("row5", "5   (2, 3, 3)    ACCEPT", 570, 325, 690, 42, "green", size=14),
+        N("row6", "6   (0, 2, 5)    SKIP: cycle", 570, 375, 690, 42, "red", size=14),
+        N("mst_result", "MST: 4 edges; total weight = 7", 650, 435, 530, 40, "teal", size=15, bold=True),
+    ],
+    edges=[
+        E("v1", "v4", "1", route="straight", color="#2f9e44"),
+        E("v0", "v1", "1", route="straight", color="#2f9e44"),
+        E("v3", "v4", "2", route="straight", color="#2f9e44"),
+        E("v1", "v3", "2", route="straight", color="#e03131", dashed=True),
+        E("v2", "v3", "3", route="straight", color="#2f9e44"),
+        E("v0", "v2", "5", route="straight", color="#e03131", dashed=True),
+    ],
+    caption="The same-root test rejects edges 4 and 6; accepted edges form a minimum spanning tree",
+)
+
+# 35 ---------------------------------------------------- union by rank
+
+union_by_rank = D(
+    key="ch11-35-union-by-rank",
+    title="Union by Rank: Prefer the Taller Root and Increment Only on a Tie",
+    size=(1320, 500),
+    flow="H",
+    containers=[
+        N("unequal_panel", "Unequal ranks: rank 2 remains the root", 25, 95, 620, 330, "container"),
+        N("equal_panel", "Equal ranks: choose a root and raise its rank", 675, 95, 620, 330, "container"),
+    ],
+    nodes=[
+        N("hroot", "H\nrank 2", 90, 145, 84, 58, "green", "circle", size=12, bold=True),
+        N("hleaf", "h", 108, 245, 48, 48, "blue", "circle"),
+        N("lroot", "L\nrank 1", 255, 145, 84, 58, "yellow", "circle", size=12, bold=True),
+        N("lleaf", "l", 273, 245, 48, 48, "blue", "circle"),
+
+        N("hroot_after", "H\nrank 2", 445, 145, 84, 58, "green", "circle", size=12, bold=True),
+        N("hleaf_after", "h", 385, 245, 48, 48, "blue", "circle"),
+        N("lroot_after", "L\nrank 1", 485, 245, 84, 58, "yellow", "circle", size=12, bold=True),
+        N("lleaf_after", "l", 503, 330, 48, 48, "blue", "circle"),
+        N("aroot", "A\nrank 1", 745, 145, 84, 58, "green", "circle", size=12, bold=True),
+        N("aleaf", "a", 763, 235, 48, 48, "blue", "circle"),
+        N("broot", "B\nrank 1", 885, 145, 84, 58, "yellow", "circle", size=12, bold=True),
+        N("bleaf", "b", 903, 235, 48, 48, "blue", "circle"),
+        N("aroot_after", "A\nrank 2", 1110, 145, 84, 58, "green", "circle", size=12, bold=True),
+        N("aleaf_after", "a", 1040, 260, 48, 48, "blue", "circle"),
+        N("broot_after", "B\nrank 1", 1135, 260, 84, 58, "yellow", "circle", size=12, bold=True),
+        N("bleaf_after", "b", 1153, 345, 48, 48, "blue", "circle"),
+    ],
+    edges=[
+        E("hroot", "hleaf", route="straight"), E("lroot", "lleaf", route="straight"),
+        E("hroot_after", "hleaf_after", route="straight"),
+        E("hroot_after", "lroot_after", route="straight"),
+        E("lroot_after", "lleaf_after", route="straight"),
+        E("aroot", "aleaf", route="straight"), E("broot", "bleaf", route="straight"),
+        E("aroot_after", "aleaf_after", route="straight"),
+        E("aroot_after", "broot_after", route="straight"),
+        E("broot_after", "bleaf_after", route="straight"),
+    ],
+    caption="Rank is a height bound, not a node count; a root's rank increases only when equal ranks merge",
+)
+
 DIAGRAMS = [
     graph_roadmap,
     tree_vs_graph,
@@ -852,4 +1023,9 @@ DIAGRAMS = [
     kruskal_graph,
     kruskal_flow,
     dsu_cycle,
+    dsu_sets_union,
+    dsu_path_compression,
+    dsu_union_by_size,
+    kruskal_lecture_example,
+    union_by_rank,
 ]
