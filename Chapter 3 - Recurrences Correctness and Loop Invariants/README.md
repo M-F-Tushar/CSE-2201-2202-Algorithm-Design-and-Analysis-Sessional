@@ -42,6 +42,12 @@ $$
 T(n) = T(n/2) + c, \qquad T(1) = 1
 $$
 
+Written as a piecewise (base-case + recursive-case) definition, the same recurrence reads:
+
+$$
+T(n) = \begin{cases} T(n/2) + c & \text{if } n \ge 1 \\ 1 & \text{if } n = 1 \end{cases}
+$$
+
 ### Solving by Expansion (Recursion-Tree/Substitution)
 
 Expand the recurrence one level at a time:
@@ -83,6 +89,8 @@ T(n) = \Theta(\log n)
 $$
 
 So **binary search runs in $O(\log n)$ time**, matching the iterative analysis in [Chapter 4 - Searching and Basic Traversal](../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md).
+
+> **Where the $\log n$ comes from:** substituting $n = 2^k$ into $T(n) = T(n/2^k) + kc$ gives $\log_2 n = \log_2 2^k = k \log_2 2 = k$, so $k = \log_2 n$ &mdash; this is exactly the substitution used above.
 
 ### Visual Map: Recursion Tree for T(n) = T(n/2) + c
 
