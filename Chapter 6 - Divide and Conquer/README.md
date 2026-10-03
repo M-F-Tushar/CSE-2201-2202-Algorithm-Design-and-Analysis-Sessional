@@ -4,7 +4,7 @@
 
 ---
 
-This chapter's range-query lesson follows a divide-and-conquer idea: first use prefix sums for a static array, then replace that one-dimensional summary with a hierarchy of smaller ranges when point updates are needed. The examples follow the supplied C++ lecture sheet; the main repository otherwise uses Python.
+This chapter develops divide-and-conquer through two applications: maximum-sum subarrays and range queries. For the subarray problem, compare brute force, divide and conquer, and Kadane's one-pass dynamic-programming recurrence. For range queries, start with prefix sums for a static array, then use a segment tree when point updates are needed. These examples follow the supplied C++ lecture sheets; the main repository otherwise uses Python.
 
 ## Table of Contents
 
@@ -24,6 +24,14 @@ This chapter's range-query lesson follows a divide-and-conquer idea: first use p
 8. [Course Guidance and Common Mistakes](#8-course-guidance-and-common-mistakes)
 9. [Practice and Next Steps](#9-practice-and-next-steps)
 10. [Quick Recap](#10-quick-recap)
+11. [Maximum Sum Subarray](#11-maximum-sum-subarray)
+    - [Problem and Three Approaches](#problem-and-three-approaches)
+    - [Brute Force](#brute-force)
+    - [Divide and Conquer](#divide-and-conquer)
+    - [Kadane's Algorithm](#kadanes-algorithm)
+    - [Worked Trace](#worked-trace)
+    - [Edge Cases and Recovering the Subarray](#edge-cases-and-recovering-the-subarray)
+    - [Complexity, Applications, and Practice](#complexity-applications-and-practice)
 
 ---
 
@@ -278,5 +286,126 @@ change, including:
 | Query | Prune no-overlap nodes; return fully covered summaries; split partial overlaps: `O(log n)` |
 | Point update | Replace one leaf and recompute its ancestors: `O(log n)` |
 | Selection rule | Static data: prefix sums; frequent point updates: segment tree |
+
+---
+
+## 11. Maximum Sum Subarray
+
+This classic optimization problem asks for the largest sum over any **non-empty contiguous** part of an integer array. Contiguous means the selected elements occupy consecutive indices; choosing scattered elements is not allowed. The lecture progresses from the simple baseline to two faster ideas: brute force, divide and conquer, and Kadane's algorithm.
+
+For `a = {2, 3, -8, 7, 2, -1, 3}`, the winning subarray is `{7, 2, -1, 3}` at inclusive indices `[3, 6]`, with sum `11`. All three methods find that same sum; their work and design ideas differ.
+
+![Divide-and-conquer cases and Kadane's running state for the maximum-sum subarray](diagrams/ch6-04-maximum-sum-subarray.svg)
+
+### Problem and Three Approaches
+
+A maximum subarray must be non-empty and contiguous. For any range split into `[left, middle]` and `[middle + 1, right]`, an optimal answer has exactly one of three locations:
+
+1. Entirely in the left half.
+2. Entirely in the right half.
+3. Crossing the split, with elements on both sides.
+
+Brute force checks every candidate; divide and conquer combines those three cases recursively; Kadane's algorithm maintains the best subarray ending at each position while scanning once. The last is also a compact dynamic-programming recurrence because each state depends only on the previous state's value. It is included here alongside divide and conquer because the lecture compares all three solutions to this same problem.
+
+### Brute Force
+
+Choose each possible start index, extend the end index one step at a time, and maintain the running sum. Compare each sum with the best found so far. Maintaining the running sum is important: restarting the sum calculation for every pair of endpoints would add an unnecessary factor of `n`.
+
+```text
+best = a[0]
+for start = 0 ... n-1:
+    current = 0
+    for end = start ... n-1:
+        current += a[end]
+        best = max(best, current)
+return best
+```
+
+There are `n(n + 1) / 2` contiguous subarrays, so this implementation takes `O(n^2)` time and `O(1)` extra space. It is an easy correctness baseline, but quadratic work becomes expensive as the input grows.
+
+### Divide and Conquer
+
+For a range `[left, right]`:
+
+1. **Base case:** if `left == right`, the only subarray is that single element; return it.
+2. Compute `middle = left + (right - left) / 2`.
+3. Recursively find the best result contained in each half.
+4. Find the best crossing result: scan leftward from `middle` to find the largest suffix sum of the left half; scan rightward from `middle + 1` to find the largest prefix sum of the right half; add the two.
+5. Return the maximum of the left, right, and crossing sums.
+
+The crossing scan must include `a[middle]` and `a[middle + 1]`. A crossing subarray consists of a suffix ending at the split on the left and a prefix starting immediately after the split on the right. These three cases are exhaustive, which is why their maximum is the answer. Initializing each side's best sum from its first element also preserves correctness when all values are negative.
+
+The two recursive calls create `T(n) = 2T(n/2) + O(n)`, so time is `O(n log n)`. The recursion stack uses `O(log n)` space. Use the overflow-safe midpoint expression above rather than `(left + right) / 2` in general-purpose code.
+
+### Kadane's Algorithm
+
+Let `ending_here` be the best sum of a non-empty subarray that ends exactly at the current index. At each value `a[i]`, either extend the previous subarray or start a new one:
+
+$$
+ending\_here_i = \max(a[i],\ ending\_here_{i-1} + a[i])
+$$
+
+Track the largest `ending_here` value seen anywhere as `best`. Initialize both values to `a[0]` and continue from index `1`; do **not** initialize `best` to zero, because the empty subarray is not permitted.
+
+```text
+ending_here = best = a[0]
+for i = 1 ... n-1:
+    ending_here = max(a[i], ending_here + a[i])
+    best = max(best, ending_here)
+return best
+```
+
+The max comparison is the precise restart rule. Extending is better exactly when the previous `ending_here` is positive; if it is negative, starting fresh wins, and if it is zero, both choices tie. A negative result after adding the current value is **not itself** a reason to restart: for example, extending `5` by `-8` gives `-3`, which is still better than starting at `-8`.
+
+Kadane's algorithm runs in `O(n)` time and uses `O(1)` extra space. It is the fastest of these three methods for finding the sum.
+
+### Worked Trace
+
+At the top divide-and-conquer call for `{2, 3, -8, 7, 2, -1, 3}`, `middle = 3`. The best value fully in the left range `[0, 3]` is `7`; fully in the right range `[4, 6]` it is `4` (`2 - 1 + 3`). The crossing left suffix is `7`, the crossing right prefix is `4`, so the crossing sum is `11`. Therefore `max(7, 4, 11) = 11`.
+
+Kadane's scan arrives at the same answer as follows:
+
+| Index `i` | `a[i]` | `ending_here` calculation | `ending_here` | Best so far |
+| :---: | :---: | :--- | :---: | :---: |
+| 0 | 2 | Initialize | 2 | 2 |
+| 1 | 3 | `max(3, 2 + 3)` | 5 | 5 |
+| 2 | -8 | `max(-8, 5 - 8)` | -3 | 5 |
+| 3 | 7 | `max(7, -3 + 7)`; restart | 7 | 7 |
+| 4 | 2 | `max(2, 7 + 2)` | 9 | 9 |
+| 5 | -1 | `max(-1, 9 - 1)` | 8 | 9 |
+| 6 | 3 | `max(3, 8 + 3)` | 11 | **11** |
+
+The restart happens at index `3`, not at index `2`: the sum at index `2` is negative, but it includes a helpful prior sum of `5`; at index `3`, the carried sum before adding `7` is negative, so starting fresh is better.
+
+### Edge Cases and Recovering the Subarray
+
+- **All negative:** `{-5, -2, -9}` has answer `-2`, the largest single element. Starting `best` at `0` or clamping `ending_here` to zero incorrectly invents an empty subarray.
+- **One element:** `{7}` returns `7`; `{-7}` returns `-7`. Kadane's loop has no iterations, and divide and conquer reaches its single-element base case.
+- **Empty input:** there is no non-empty subarray and therefore no numeric answer. The C++ functions in the example throw `std::invalid_argument`; callers should handle that explicitly.
+- **Integer range:** the sample code uses `long long`; the caller must ensure individual values and every possible accumulated sum fit that type.
+
+To return the subarray as well as its sum, retain `current_start` for the current Kadane candidate and update it only when the algorithm restarts. When a new global best is found, save `current_start` and the current index as the inclusive best endpoints. Updating the best endpoint only when the best sum improves avoids returning indices for a worse later candidate. The example's strict `>` comparisons keep the first best subarray found when sums tie.
+
+For the sample, the index-aware result is sum `11`, start `3`, end `6`, selecting `{7, 2, -1, 3}`. The implementation, including sum-only versions of all three approaches and the index-returning Kadane variant, is in [`examples/maximum_sum_subarray.cpp`](examples/maximum_sum_subarray.cpp).
+
+### Complexity, Applications, and Practice
+
+| Approach | Time | Extra space | Main idea |
+| :--- | :---: | :---: | :--- |
+| Brute force | `O(n^2)` | `O(1)` | Extend every possible starting point |
+| Divide and conquer | `O(n log n)` | `O(log n)` | Compare left, right, and crossing answers |
+| Kadane | `O(n)` | `O(1)` | Keep the best subarray ending at the current position |
+
+Maximum-subarray reasoning can identify the best contiguous period of gains/losses in stock-return data, a high-energy stretch in a signal, a high-scoring region in a sequence, or a team's strongest consecutive performance. In each case, values must represent additive scores over the interval; for stock-price changes, use gains/losses rather than raw prices.
+
+**Course and exam guidance:** understand why the divide-and-conquer answer has three cases and why its crossing scan touches the midpoint before memorizing the code. If a question explicitly asks for recursion or the divide-and-conquer combine step, give that method rather than substituting Kadane's. Dry-run the recursive split and Kadane's `ending_here`/`best` values by hand.
+
+**Practice:**
+
+1. Implement all three sum-only methods without looking at the example file; verify each returns `11` for the sample.
+2. Trace Kadane on `{-5, -2, -9}` and `{7}` to test initialization and the base case.
+3. Draw the recursion tree for a short array and classify its winning subarray as left, right, or crossing at each merge.
+4. Extend brute force and Kadane to return the winning inclusive indices, then test ties and all-negative input.
+5. Compile and run the supplied C++ example; all three methods should report `11` and the index-aware version should report `[3, 6]`.
 
 [Chapter 6 diagram index](diagrams/README.md)
