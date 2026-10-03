@@ -50,7 +50,7 @@ This chapter keeps only the requested graph theory and graph algorithm topics. E
 	- [Minimum Spanning Tree (MST)](#minimum-spanning-tree-mst)
 	- [Prim's Algorithm](#1-prims-algorithm)
 	- [Kruskal's Algorithm](#2-kruskals-algorithm)
-	- [Union-Find / Disjoint Set Union for Kruskal](#3-union-find--disjoint-set-union-for-kruskal)
+	- [Disjoint Set Union (Union-Find)](#3-disjoint-set-union-union-find)
 	- [Time Complexity](#4-time-complexity)
 	- [Applications](#applications-1)
 14. [Analyze Time Complexity of Above Topics](#analyze-time-complexity-of-above-topics)
@@ -1696,7 +1696,15 @@ Each label below gives `selection step: edge weight`. Edges numbered $1$ through
 
 #### 2. Kruskal's Algorithm
 
-Kruskal's Algorithm begins with a forest of one-vertex trees. Sort every edge by nondecreasing weight and accept an edge only when it joins two different components.
+Kruskal's Algorithm begins with a forest of one-vertex trees. Sort every edge by nondecreasing weight and accept an edge only when it joins two different components. It is a **greedy** algorithm: at each step it takes the cheapest remaining edge that is safe to add. The selected edges stay acyclic, and the process ends when they connect all vertices.
+
+Represent each weighted edge as a record or tuple with three fields: source, destination, and weight. Store the records in an edge list. The sorting rule must compare **weights**, not the first tuple field (source): a default lexicographic tuple sort compares fields from left to right and therefore does not implement Kruskal's ordering rule. The language-neutral ordering key is:
+
+```text
+SORT edges by weight(edge), in nondecreasing order
+```
+
+Equal-weight edges may appear in either order. A different tie order can select a different edge set, but all resulting MSTs have the same minimum total weight.
 
 ```text
 KRUSKAL(G)
@@ -1711,6 +1719,8 @@ KRUSKAL(G)
 9.         break
 10. return MST
 ```
+
+The DSU test is applied to the roots of both endpoints: same root means skip the edge; distinct roots means merge their sets and record the edge. Always link representatives, not arbitrary vertices: linking non-roots can still combine two distinct components, but it may add unnecessary depth and violates the root-only precondition used by balancing rules such as union by rank or size. The `UNION` operation in the complete pseudocode calls `FIND` internally, so callers can pass the original endpoints safely. Stop as soon as $V-1$ edges have been accepted. If the edge list ends first, the input graph is disconnected and no spanning tree exists; the accepted edges form a minimum spanning forest instead.
 
 Equal-weight edges may be processed in any order. This table follows the supplied visual sequence.
 
@@ -1743,112 +1753,287 @@ T=\{V_1V_5,V_4V_7,V_3V_6,V_1V_2,V_4V_5,V_7V_8,V_8V_6\}
 $$
 
 $$
-w(T)=2+2+2+3+3+4+6=\boxed{22}
+w(T)=2+2+2+3+3+4+6=\\boxed{22}
 $$
 
-### 3. Union-Find / Disjoint Set Union for Kruskal
+#### Lecture worked example: sort, test, and accept
 
-Union-Find, also called **Disjoint Set Union** or **DSU**, is a data structure for maintaining groups of elements.
+The lecture uses this zero-indexed input for five vertices and six weighted edges:
 
-In this chapter, DSU is included only as support for Kruskal's algorithm.
+```text
+5 6
+3 4 2
+1 4 1
+1 3 2
+2 3 3
+0 2 5
+0 1 1
+```
 
-Kruskal's algorithm considers edges in increasing weight order. DSU helps answer this question quickly:
+Stored as edge tuples, those entries are `(3, 4, 2), (1, 4, 1), (1, 3, 2), (2, 3, 3), (0, 2, 5), (0, 1, 1)`.
 
-> Are the two endpoints of this edge already in the same component?
+Sort by the weight field. The displayed order retains the input order among equal-weight edges; any ordering within an equal-weight group is valid:
 
-If yes, adding the edge creates a cycle, so Kruskal skips it.
+```text
+(1, 4, 1), (0, 1, 1), (3, 4, 2), (1, 3, 2), (2, 3, 3), (0, 2, 5)
+```
 
-If no, adding the edge is safe for connecting two different components, so Kruskal accepts it and unions the two sets.
+Using union by rank with the tie rule in the implementation below, the trace is:
 
-#### DSU Operations
+| Scan | Edge | Weight | Roots before decision | Decision | Accepted MST so far |
+| :---: | :---: | :---: | :---: | :--- | :--- |
+| 1 | `(1,4)` | 1 | `1`, `4` | Accept; merge | `(1,4,1)` |
+| 2 | `(0,1)` | 1 | `0`, `1` | Accept; merge | add `(0,1,1)` |
+| 3 | `(3,4)` | 2 | `3`, `1` | Accept; merge | add `(3,4,2)` |
+| 4 | `(1,3)` | 2 | `1`, `1` | Skip; cycle | unchanged |
+| 5 | `(2,3)` | 3 | `2`, `1` | Accept; merge | add `(2,3,3)` |
+| 6 | `(0,2)` | 5 | `1`, `1` | Skip; cycle | unchanged |
 
-| Operation | Meaning |
-| :--- | :--- |
-| `MAKE-SET(x)` | Create a new set containing only $x$ |
-| `FIND(x)` | Return the representative/root of the set containing $x$ |
-| `UNION(x, y)` | Merge the sets containing $x$ and $y$ |
+The final MST has $V-1=4$ edges and total weight $1+1+2+3=7$. The two skipped edges close cycles among vertices already connected by cheaper choices.
 
-#### Two Important Optimizations
+![Kruskal sorted edge trace and five-vertex lecture example](diagrams/ch11-34-kruskal-lecture-example.svg)
 
-| Optimization | Idea | Benefit |
-| :--- | :--- | :--- |
-| Path compression | During `FIND`, make each visited node point directly to the root | Makes future finds faster |
-| Union by rank/size | Attach the smaller or shallower tree under the larger or deeper tree | Keeps the tree height small |
+#### Complete Kruskal pseudocode with union by rank
 
-#### Worked Example for Kruskal Support
-
-Use the class-note sequence: sort the edges, inspect one edge at a time, compare the representatives of its endpoints, and immediately write whether the edge is accepted or rejected and how the component sets change.
-
-Suppose Kruskal considers these undirected weighted edges in sorted order:
-
-| Order | Edge | Weight | DSU decision |
-| :---: | :---: | :---: | :--- |
-| 1 | A-B | 1 | Different sets, accept and union A,B |
-| 2 | C-D | 2 | Different sets, accept and union C,D |
-| 3 | B-C | 3 | Different sets, accept and union B,C |
-| 4 | A-C | 4 | Same set, reject because it creates a cycle |
-| 5 | D-E | 5 | Different sets, accept and union D,E |
-
-Set changes:
-
-| Step | Accepted edge? | Current sets |
-| :---: | :---: | :--- |
-| Initial | - | {A}, {B}, {C}, {D}, {E} |
-| 1 | A-B | {A,B}, {C}, {D}, {E} |
-| 2 | C-D | {A,B}, {C,D}, {E} |
-| 3 | B-C | {A,B,C,D}, {E} |
-| 4 | A-C rejected | {A,B,C,D}, {E} |
-| 5 | D-E | {A,B,C,D,E} |
-
-#### Mermaid Diagram: DSU Cycle Check
-
-![Disjoint Set Union (DSU) Cycle Detection in Kruskal's Algorithm](diagrams/ch11-30-dsu-cycle-check.svg)
-
-#### DSU Algorithm
+This language-neutral outline combines weight-based sorting, path-compressed `FIND`, and union by rank. `UNION` finds the endpoint representatives and reports whether it merged two sets. If the graph is disconnected, the accepted edges form a minimum spanning forest; only a result with $V-1$ edges is a spanning tree.
 
 ```text
 MAKE-SET(x)
-1. parent[x] = x
-2. rank[x] = 0
+1. parent[x] <- x
+2. rank[x] <- 0
 
 FIND(x)
-1. if parent[x] != x:
-2.     parent[x] = FIND(parent[x])
-3. return parent[x]
+1. while parent[x] != x:
+2.     parent[x] <- parent[parent[x]]
+3.     x <- parent[x]
+4. return x
 
 UNION(x, y)
-1. rootX = FIND(x)
-2. rootY = FIND(y)
-3. if rootX == rootY:
-4.     return
-5. if rank[rootX] < rank[rootY]:
-6.     parent[rootX] = rootY
-7. else if rank[rootX] > rank[rootY]:
-8.     parent[rootY] = rootX
-9. else:
-10.    parent[rootY] = rootX
-11.    rank[rootX] = rank[rootX] + 1
+1. rootX <- FIND(x)
+2. rootY <- FIND(y)
+3. if rootX = rootY: return FALSE
+4. if rank[rootX] < rank[rootY]: swap rootX and rootY
+5. parent[rootY] <- rootX
+6. if rank[rootX] = rank[rootY]: rank[rootX] <- rank[rootX] + 1
+7. return TRUE
+
+KRUSKAL(V, E)
+1. create one singleton set for every vertex
+2. sort E by nondecreasing edge weight
+3. MST <- empty list; totalWeight <- 0
+4. for each edge (u, v, w) in sorted E:
+5.     if UNION(u, v):
+6.         append (u, v, w) to MST
+7.         totalWeight <- totalWeight + w
+8.         if |MST| = |V| - 1: break
+9. return MST, totalWeight
 ```
 
-#### DSU Complexity Analysis
+For the lecture input, the output is:
 
-With path compression and union by rank/size:
+```text
+Minimum spanning tree:
+1 4 1
+0 1 1
+3 4 2
+2 3 3
+Total weight: 7
+```
 
-| Operation | Amortized Complexity |
+Union by rank changes only the shape of the DSU forest; it does not change Kruskal's sorted-edge decisions or the MST weight. To complete an implementation, read the vertex and edge counts, read each source-destination-weight record, call `KRUSKAL`, and print each returned edge and the total weight. If fewer than $V-1$ edges were returned, report that the graph is disconnected and the result is a forest, not a spanning tree.
+
+### 3. Disjoint Set Union (Union-Find)
+
+A **Disjoint Set** data structure—also called **Union-Find** or **Disjoint Set Union (DSU)**—maintains a collection of non-overlapping sets. Each element belongs to exactly one set. As relationships are added, DSU efficiently answers whether two elements are already in the same group and merges groups when needed.
+
+For graph algorithms, imagine processing an undirected graph's edges one at a time. DSU records the connected components formed by the edges processed so far; it does **not** store the graph or its adjacency structure. Its central rule is:
+
+> **Different roots → merge the sets. Same root → already connected.**
+
+For a new undirected edge, equal roots mean a path already connects its endpoints, so adding the edge closes a cycle. This is the same test used by Kruskal's algorithm to reject a cycle-forming edge. DSU is also useful for incremental connectivity and grouping problems; it is not a general replacement for DFS/BFS when the whole graph must be traversed, and ordinary DSU does not support deleting edges.
+
+![Disjoint sets as parent trees and component merges](diagrams/ch11-31-dsu-sets-and-union.svg)
+
+#### Core operations and parent representation
+
+| Operation | Meaning |
+| :--- | :--- |
+| `MAKE-SET(x)` | Create a singleton set containing `x` |
+| `FIND(x)` | Return the representative/root of the set containing `x` |
+| `UNION(x, y)` | Merge the sets containing `x` and `y` (if distinct) |
+
+A set is represented as a rooted tree. Every non-root node points to its parent; repeatedly following parent links reaches the set's **root**, the representative shared by all members. A parent array stores these links. Initially every vertex is its own one-element set.
+
+There are two valid root conventions. The basic version below marks roots with a null parent; the optimized version uses a self-parent. **Do not mix a convention's initialization and root test.** A null-parent initialization paired with a self-parent root test is incorrect and prevents the search from reaching its base case.
+
+| Version | Initialization | Root test |
+| :--- | :--- | :--- |
+| Basic | Initialize each parent to `NIL` | A node is a root when `parent[x] = NIL` |
+| Optimized | Initialize each node as its own parent | A node is a root when `parent[x] = x` |
+
+#### Build the basic version
+
+The basic `FIND` climbs the parent chain. `UNION` links one **root** under the other root; always find roots first, rather than linking arbitrary input nodes.
+
+```text
+MAKE-SET-ALL(V)
+1. for each vertex x in V: parent[x] <- NIL
+
+FIND-BASIC(x)
+1. if parent[x] = NIL: return x
+2. return FIND-BASIC(parent[x])
+
+UNION-ROOTS-BASIC(rootX, rootY)
+1. require rootX and rootY are distinct roots
+2. parent[rootY] <- rootX
+```
+
+For `n` vertices, initialize one singleton set per vertex. For example, with vertices `0..4`, initially the sets are `{0}, {1}, {2}, {3}, {4}`. After processing `(0,1)`, `(0,2)`, and `(2,3)`, the sets are `{0,1,2,3}` and `{4}`. The parent-tree shape can vary with the order of unions, but the represented partition must be the same.
+
+#### Cycle detection in an undirected graph
+
+For each edge `(u, v)`, find both representatives. If they match, a prior path already joins the endpoints and this edge creates a cycle. Otherwise, merge the two sets and continue. If every edge joins distinct sets, the graph has no cycle. The rule assumes an **undirected** graph; directed cycle detection requires a different method.
+
+```text
+HAS-CYCLE-BASIC(V, E)
+1. initialize one singleton set for every vertex
+2. for each undirected edge (u, v) in E:
+3.     rootU <- FIND-BASIC(u)
+4.     rootV <- FIND-BASIC(v)
+5.     if rootU = rootV: return TRUE
+6.     UNION-ROOTS-BASIC(rootU, rootV)
+7. return FALSE
+```
+
+The PDF's five-vertex example makes the decision trace explicit:
+
+| Edge | Representatives before decision | Decision | Components afterward |
+| :---: | :---: | :--- | :--- |
+| Initial | — | — | `{0}, {1}, {2}, {3}, {4}` |
+| `(0,1)` | `0`, `1` | Merge | `{0,1}, {2}, {3}, {4}` |
+| `(0,2)` | `0`, `2` | Merge | `{0,1,2}, {3}, {4}` |
+| `(1,3)` | `0`, `3` | Merge | `{0,1,2,3}, {4}` |
+| `(2,4)` | `0`, `4` | Merge | `{0,1,2,3,4}` |
+| `(3,4)` | `0`, `0` | Cycle; stop | unchanged |
+
+So these edges contain a cycle, detected at `(3,4)`. Conversely, when processing a forest, every edge is accepted and the final result is `False`—the explicit final return matters.
+
+![DSU cycle detection decision in Kruskal's algorithm](diagrams/ch11-30-dsu-cycle-check.svg)
+
+#### Why the basic version needs optimization
+
+A basic `FIND` may visit every node in a chain, taking $O(V)$ time in the worst case. Blindly attaching roots can create a chain of height $V$. Cycle detection then takes $O(EV)$ in the worst case. A recursive `FIND` can also exhaust the call stack on a sufficiently deep chain. Replacing recursion with a loop avoids that stack failure, but alone it still has the same $O(V)$ worst-case time:
+
+```text
+FIND-ITERATIVE-BASIC(x)
+1. while parent[x] != NIL: x <- parent[x]
+2. return x
+```
+
+#### Optimize `FIND`: path compression
+
+With **path compression**, after finding a root, make nodes visited on the search path point directly to it. The recursive definition is:
+
+```text
+FIND-WITH-COMPRESSION(x)
+1. if parent[x] != x:
+2.     parent[x] <- FIND-WITH-COMPRESSION(parent[x])
+3. return parent[x]
+```
+
+A single `FIND(4)` on the chain `4 → 3 → 2 → 1 → 0` changes each visited node's parent to `0`; subsequent finds on those nodes are much shorter. For very deep inputs, an iterative `FIND` avoids recursion-stack limits; the optimized pseudocode below uses path halving.
+
+#### Optimize `UNION`: union by size
+
+Maintain `size[root]`, the number of elements in the root's set. When merging distinct roots, make the smaller tree's root a child of the larger tree's root, then add the sizes. If sizes tie, either root may become the parent. This complements path compression: union by size limits tree growth, while path compression flattens paths encountered by queries.
+
+#### Alternative balancing rule: union by rank
+
+Union by **rank** is another way to keep DSU trees shallow. Initialize `rank[root] = 0`. Compare ranks only after finding the roots; attach the lower-rank root below the higher-rank root. If the ranks tie, choose either root and increment only the new root's rank. Rank is **not** the number of children or the set's size: without path compression it tracks tree height, and with path compression it remains an upper bound on height. Values stored for non-roots are no longer used.
+
+```text
+UNION-BY-RANK(rootX, rootY)
+1. require rootX and rootY are distinct roots
+2. if rank[rootX] < rank[rootY]: swap rootX and rootY
+3. parent[rootY] <- rootX
+4. if rank[rootX] = rank[rootY]: rank[rootX] <- rank[rootX] + 1
+```
+
+In Kruskal's implementation above, this balancing rule is combined with path compression. Union by size, used in the DSU implementation immediately below, is a different heuristic with a similar balancing goal; do not mix up the meaning or update rules of `rank` and `size`.
+
+![Union by rank keeps a higher-rank root and increments rank only on ties](diagrams/ch11-35-union-by-rank.svg)
+
+![Path compression flattens the find path](diagrams/ch11-32-dsu-path-compression.svg)
+
+![Union by size keeps the larger tree as the root](diagrams/ch11-33-dsu-union-by-size.svg)
+
+#### Complete optimized DSU pseudocode
+
+This version uses the self-parent root convention, iterative path halving, and union by size. `UNION` returns `FALSE` when the endpoints are already connected, which makes the cycle test direct.
+
+```text
+MAKE-SET(x)
+1. parent[x] <- x
+2. size[x] <- 1
+
+FIND(x)
+1. while parent[x] != x:
+2.     parent[x] <- parent[parent[x]]
+3.     x <- parent[x]
+4. return x
+
+UNION(x, y)
+1. rootX <- FIND(x); rootY <- FIND(y)
+2. if rootX = rootY: return FALSE
+3. if size[rootX] < size[rootY]: swap rootX and rootY
+4. parent[rootY] <- rootX
+5. size[rootX] <- size[rootX] + size[rootY]
+6. return TRUE
+
+HAS-CYCLE(V, E)
+1. initialize one singleton set for every vertex
+2. for each undirected edge (u, v) in E:
+3.     if UNION(u, v) = FALSE: return TRUE
+4. return FALSE
+```
+
+For instance, the five-vertex edge sequence in the cycle-detection example returns `TRUE`. The same structure answers dynamic-connectivity queries by comparing `FIND(u)` and `FIND(v)` after the unions processed so far.
+
+#### DSU applications and connection to Kruskal
+
+- **Undirected cycle detection:** same root means the new edge closes a cycle.
+- **Kruskal's MST:** after sorting edges by nondecreasing weight, accept an edge only if `union(u, v)` succeeds. A failed union means the endpoints are already connected, so skip that edge.
+- **Dynamic connectivity / network components:** answer whether two objects are in the same group as links are added.
+- **Grouping tasks:** for example, friend circles, connected image regions, and percolation components.
+
+The structure is especially effective when the workload consists mostly of **merges and connectivity queries**. It does not preserve paths or edge details, and standard DSU cannot efficiently undo arbitrary merges or handle edge deletions.
+
+For Kruskal, process edges in nondecreasing weight order and use DSU only to decide whether each candidate joins distinct components:
+
+| Order | Edge | Weight | Decision | Components afterward |
+| :---: | :---: | :---: | :--- | :--- |
+| Initial | — | — | — | `{A}, {B}, {C}, {D}, {E}` |
+| 1 | A-B | 1 | Accept; union | `{A,B}, {C}, {D}, {E}` |
+| 2 | C-D | 2 | Accept; union | `{A,B}, {C,D}, {E}` |
+| 3 | B-C | 3 | Accept; union | `{A,B,C,D}, {E}` |
+| 4 | A-C | 4 | Reject; same root | unchanged |
+| 5 | D-E | 5 | Accept; union | `{A,B,C,D,E}` |
+
+The rejected edge A-C has the highest weight among the cycle's edges, so skipping it preserves the cheaper connections already selected.
+
+#### DSU and Kruskal complexity
+
+With path compression and union by size/rank, a sequence of operations has near-constant **amortized** cost per operation, conventionally written using the inverse Ackermann function $\\alpha(V)$:
+
+| Operation / workload | Complexity |
 | :--- | :---: |
-| `MAKE-SET` | $\Theta(1)$ |
-| `FIND` | $O(\alpha(V))$ |
-| `UNION` | $O(\alpha(V))$ |
+| `MAKE-SET` per element | $\\Theta(1)$ |
+| `FIND`, `UNION` | $O(\\alpha(V))$ amortized |
+| Basic cycle detection without balancing/compression | $O(EV)$ worst case |
+| Cycle detection with optimized DSU | $O((V+E)\\alpha(V))$ |
+| Kruskal, including edge sorting | $O(E\\log E + E\\alpha(V)) = O(E\\log E)$ |
 
-$\alpha(V)$ is the inverse Ackermann function. For practical input sizes, it behaves almost like a constant.
-
-For Kruskal support:
-
-| Part | Complexity |
-| :--- | :---: |
-| Sorting edges | $\Theta(E \log E)$ |
-| DSU operations | $O(E\alpha(V))$ |
-| Overall Kruskal support cost | $\Theta(E \log E)$ dominated by sorting |
+Here $V$ and $E$ are the graph's vertex and edge counts. The inverse Ackermann function grows so slowly that it is at most a small constant for all practical input sizes; the complexity remains amortized rather than a strict constant bound for every individual operation.
 
 ### 4. Time Complexity
 
@@ -1917,8 +2102,12 @@ Before moving to the next chapter, make sure you can explain:
 - How Kosaraju's Algorithm finds SCCs using two DFS passes.
 - The definition and properties of a spanning tree and an MST.
 - How Prim grows one tree using the cheapest crossing edge.
-- How Kruskal grows a forest using globally sorted safe edges.
-- How DSU helps Kruskal reject cycle-forming edges.
+- How Kruskal grows a forest using globally sorted safe edges, and why the edge sort must use weight rather than source.
+- How the parent array represents disjoint sets and how `MAKE-SET`, `FIND`, and `UNION` work.
+- Why a root-convention mismatch is incorrect, and how path compression plus union by size/rank improve DSU.
+- Why rank differs from set size, and why rank increases only when equal-rank roots are merged.
+- How DSU detects cycles in an undirected graph and supports Kruskal's safe-edge check.
+- Why a disconnected input produces a minimum spanning forest rather than a spanning tree.
 
 ---
 
