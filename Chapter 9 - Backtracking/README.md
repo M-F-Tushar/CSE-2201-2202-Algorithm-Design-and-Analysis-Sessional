@@ -20,8 +20,9 @@ This chapter follows the two lecture sheets on Backtracking and N-Queens. It exp
 6. [Finding One Solution or Every Solution](#finding-one-solution-or-every-solution)
 7. [Correctness: Why the Search Works](#correctness-why-the-search-works)
 8. [Complexity Analysis](#complexity-analysis)
-9. [Related Backtracking Problems](#related-backtracking-problems)
-10. [Practice and Exam Notes](#practice-and-exam-notes)
+9. [Sudoku: Backtracking with Three Constraints](#sudoku-backtracking-with-three-constraints)
+10. [Related Backtracking Problems](#related-backtracking-problems)
+11. [Practice and Exam Notes](#practice-and-exam-notes)
 
 ---
 
@@ -182,11 +183,66 @@ The lecture notes quote O(N!) for the N-Queens search. That is the common search
 
 ---
 
+## Sudoku: Backtracking with Three Constraints
+
+Sudoku is a constraint-placement problem like N-Queens: choose a value for an unfilled position, test whether the partial board remains valid, continue if it does, and undo the choice if a later decision leads to a dead end. The difference is the constraints and the way the next position is selected. This section develops the Sudoku material from the lecture sheet conceptually; it intentionally does not reproduce its Python or C++ implementation.
+
+### Board and constraints
+
+A standard puzzle is a 9 × 9 grid divided into nine 3 × 3 boxes. Some cells are givens; empty cells can be represented conceptually by 0. A completed board must satisfy all three rules:
+
+- Each row contains digits 1 through 9 without repetition.
+- Each column contains digits 1 through 9 without repetition.
+- Each 3 × 3 box contains digits 1 through 9 without repetition.
+
+A candidate digit is **locally safe** when it conflicts with none of the current digits in its row, column, or box. Local safety is necessary, but it does not prove that the candidate belongs in the final solution. A choice can appear valid now and cause a contradiction much deeper in the search; that delayed failure is exactly why the algorithm must preserve the ability to backtrack.
+
+### From N-Queens to Sudoku
+
+Both problems use the same high-level cycle: choose, test, continue, and undo. In N-Queens, queens are placed row by row, so safety checks need only consider already-filled rows above the candidate. Sudoku givens can occur anywhere, so a candidate must be checked across the entire row and column as well as its box. Sudoku also tests a specific candidate digit (one of 1–9), rather than placing one indistinguishable queen marker. Its safety question therefore depends on the cell and the proposed digit.
+
+### The three-part safety test
+
+For a proposed digit at cell (r, c), reject the candidate if that digit already occurs in any of these regions:
+
+1. **Row r:** inspect all nine columns while keeping the row fixed.
+2. **Column c:** inspect all nine rows while keeping the column fixed.
+3. **The cell's 3 × 3 box:** inspect all nine cells in that box.
+
+The first two checks cover the whole row and column—not just earlier positions—because the initial clues are distributed throughout the board. The box check is the new geometric step compared with N-Queens.
+
+For zero-based row and column indices, the top-left coordinate of the relevant box is obtained by rounding each index down to the nearest multiple of three:
+
+- Box start row = ⌊r / 3⌋ × 3
+- Box start column = ⌊c / 3⌋ × 3
+
+For example, cell (2, 7) belongs to the box starting at (0, 6), while (8, 5) belongs to the box starting at (6, 3). This is constant-time index arithmetic and avoids branching through separate cases for the top, middle, and bottom bands (or left, middle, and right bands).
+
+### Search order: finish the row before advancing
+
+The lecture's recursive search scans the current row from left to right until it finds an empty cell, then considers candidate digits 1 through 9. For each safe digit, it tentatively fills that cell and searches again **in the same row**. Several empty cells may remain in that row, so advancing immediately to the next row would skip them. Only after the scan finds no empty cell in the current row does the search continue to the next row.
+
+If a candidate eventually leads to a state where no digit can be placed, the failure returns to the most recent tentative placement. That digit is cleared, and the next candidate is tried. Failures may appear several recursive decisions later; the call stack preserves the chain of choices so they can be undone in reverse order. Reaching row 9 means every row has been completed and the search has found a solution. If every candidate for an empty cell fails, the current partial board has no completion along that branch.
+
+![Sudoku backtracking checks the row, column, and 3 by 3 box, then continues within the same row or backtracks](diagrams/ch9-04-sudoku-backtracking.svg)
+
+The editable source is [`ch9-04-sudoku-backtracking.excalidraw`](diagrams/ch9-04-sudoku-backtracking.excalidraw).
+
+### Human solving and the search discipline
+
+Human Sudoku strategies often look for constrained digits or cells and postpone a placement when several locations remain possible. This reflects a useful distinction: a candidate may be locally permitted without being forced or ultimately correct. The backtracking search can tentatively explore such a candidate, but it must retain the option to undo it. Skilled human solvers generally use deduction and candidate notes to avoid guessing; the basic backtracking model is more general and systematically explores alternatives when deduction alone does not settle the puzzle.
+
+### Complexity and scope
+
+For a fixed 9 × 9 board, one safety test examines at most nine row cells, nine column cells, and nine box cells, so its cost is O(1) with respect to the fixed puzzle size. In a generalized puzzle of side length N, these checks are O(N). The search is exponential in the worst case: each empty cell may admit multiple candidate digits, and later conflicts can force long chains of choices to be undone. A precise bound depends on the puzzle and search strategy; a useful conceptual upper bound is branching over up to nine choices at each of up to 81 empty cells. The board itself takes O(1) space for standard Sudoku, while the recursion stack can grow with the number of empty cells. This discussion describes the search model, not a code-level performance claim.
+
+---
+
 ## Related Backtracking Problems
 
-The same choose, check, continue, and undo structure applies beyond N-Queens:
+The same choose, check, continue, and undo structure applies to other problems:
 
-- **Sudoku:** try a digit in an empty square; check its row, column, and 3 × 3 box; continue; clear the square if the choice leads to a contradiction. Unlike N-Queens, Sudoku checks the full row and column, not only previously filled rows.
+- **Graph coloring:** assign a color to a vertex only when it differs from the colors of already-colored neighbors; undo it if later vertices cannot be assigned.
 - **Graph coloring:** assign a color to a vertex only when it differs from the colors of already-colored neighbors; undo it if later vertices cannot be assigned.
 - **Subset sum:** include or exclude each number and prune when the partial sum cannot meet the target, subject to the assumptions on the input values.
 - **Hamiltonian circuit:** extend a path by an unvisited adjacent vertex and backtrack if no extension can complete a cycle through all vertices.
@@ -198,7 +254,8 @@ For each problem, identify the state, the valid next choices, a promising test, 
 ## Practice and Exam Notes
 
 - Derive the safety checks from the board geometry rather than memorizing loop syntax. Explain why the upper-right check moves upward and rightward at the same time.
-- Trace one failed branch and one successful branch on a 4 × 4 board. Identify where each failed queen placement is undone.
+- Trace one failed branch and one successful branch on a 4 × 4 N-Queens board. Identify where each failed queen placement is undone.
+- For Sudoku, explain why checking the full row and column differs from N-Queens, derive the 3 × 3 box start for several cells, and distinguish the recursive continuation within the same row from advancing to the next row.
 - Distinguish the two search goals: report the first valid board and stop, or record every board and continue.
 - Useful cases to reason through are N = 1 (one solution), N = 2 and N = 3 (no solution), and N = 4 (two solutions when enumerating all).
 - The lecture notes emphasize understanding and reconstructing the algorithm rather than memorizing a long program. They describe Backtracking and N-Queens primarily as conceptual and complexity-analysis topics for the course exam; the specific coding question was noted as coming from Segment Tree or Maximum Sum Subarray.
