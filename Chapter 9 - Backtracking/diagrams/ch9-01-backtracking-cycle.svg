@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1420" height="600" viewBox="0 0 1420 600" role="img" aria-label="Backtracking: Choose, Test, Recurse, and Undo">
+<rect width="1420" height="600" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="710.0" y="34.0">Backtracking: Choose, Test, Recurse, and Undo</tspan></text>
+<path d="M204.9 253.5 Q227.5 254.1 250.6 254.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M239.8 258.1 L250.0 254.0 L239.8 249.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M439.8 253.5 Q466.3 253.8 491.0 251.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M480.1 255.7 L490.0 251.0 L479.6 247.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M689.4 250.7 Q717.2 252.8 745.1 253.7" fill="none" stroke="#2f9e44" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M734.6 257.6 L745.0 254.0 L735.0 249.3" fill="none" stroke="#2f9e44" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="698.5" y="240.5" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="717.5" y="252.5">yes</tspan></text>
+<path d="M590.3 296.2 Q588.4 329.5 585.0 365.6" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M581.6 354.5 L585.0 365.0 L589.9 355.1" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="572.5" y="319.0" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="587.5" y="331.0">no</tspan></text>
+<path d="M935.8 253.6 Q962.8 252.5 989.7 251.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M980.0 255.7 L990.0 251.0 L979.6 247.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1085.1 204.8 Q1084.9 195.2 1085.2 188.9 M1084.8 189.2 Q1185.7 189.8 1289.9 188.9 M1290.2 188.9 Q1290.8 180.4 1289.9 172.0" fill="none" stroke="#2f9e44" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M1294.1 183.2 L1290.0 173.0 L1285.9 183.2" fill="none" stroke="#2f9e44" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="1168.5" y="177.0" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="1187.5" y="189.0">yes</tspan></text>
+<path d="M1085.1 296.8 Q1085.4 320.7 1085.4 344.0 M1084.8 343.9 Q981.7 342.2 878.0 343.7 M877.9 344.0 Q876.2 366.6 877.7 390.2" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M873.4 379.8 L877.5 390.0 L881.6 379.8" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="966.2" y="331.5" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="981.2" y="343.5">no</tspan></text>
+<path d="M690.3 398.7 Q707.4 397.2 724.7 398.7 M725.7 397.7 Q724.2 412.3 725.7 425.9 M724.7 426.7 Q742.8 424.3 759.9 425.5" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M749.8 430.1 L760.0 426.0 L749.8 421.9" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M878.0 461.1 Q877.8 489.6 877.8 517.9 M876.6 517.3 Q611.4 517.5 345.9 517.2 M345.3 517.9 Q345.5 402.9 345.2 288.1" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M349.1 298.2 L345.0 288.0 L340.9 298.2" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="532.2" y="505.0" width="158" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="611.2" y="517.0">try next candidate</tspan></text>
+<ellipse cx="120.0" cy="254.0" rx="85.0" ry="34.0" fill="#a5d8ff"/>
+<path d="M205.0 254.0 Q199.8 266.6 180.1 278.0 M180.1 278.0 Q153.7 285.7 120.0 288.0 M120.0 288.0 Q86.0 286.6 59.9 278.0 M59.9 278.0 Q37.7 267.7 35.0 254.0 M35.0 254.0 Q38.8 242.1 59.9 230.0 M59.9 230.0 Q86.6 220.9 120.0 220.0 M120.0 220.0 Q152.2 220.4 180.1 230.0 M180.1 230.0 Q201.1 239.5 205.0 254.0" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M205.0 254.0 Q199.8 266.9 180.1 278.0 M180.1 278.0 Q154.8 286.6 120.0 288.0 M120.0 288.0 Q87.5 285.6 59.9 278.0 M59.9 278.0 Q40.0 269.0 35.0 254.0 M35.0 254.0 Q39.7 239.3 59.9 230.0 M59.9 230.0 Q86.6 221.5 120.0 220.0 M120.0 220.0 Q153.0 222.6 180.1 230.0 M180.1 230.0 Q201.3 240.3 205.0 254.0" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="bold" fill="#1e1e1e"><tspan x="120.0" y="254.0">Partial solution</tspan></text>
+<rect x="250.0" y="220.0" width="190.0" height="68.0" rx="10" fill="#ffec99"/>
+<path d="M250.1 219.7 Q342.4 219.8 440.8 221.1 M440.1 219.5 Q439.9 251.9 438.6 286.5 M439.9 288.5 Q343.4 286.5 248.4 287.8 M249.2 289.2 Q250.5 254.6 249.2 219.3" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M251.4 219.7 Q347.3 222.0 440.1 221.2 M441.1 219.4 Q441.1 251.2 440.7 286.9 M441.3 289.2 Q346.6 285.4 251.1 288.5 M250.4 287.2 Q248.7 256.8 249.5 220.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="345.0" y="254.0">Choose a candidate</tspan></text>
+<polygon points="590.0,205 690,251.0 590.0,297 490,251.0" fill="#e0d5fa"/>
+<path d="M589.8 204.1 Q638.5 230.1 689.1 250.9 M689.3 249.8 Q638.2 272.5 588.9 297.2 M591.3 298.0 Q540.2 273.1 490.9 251.6 M491.2 251.4 Q539.6 230.5 588.9 204.0" fill="none" stroke="#6741d9" stroke-width="2" stroke-linecap="round"/>
+<path d="M590.5 205.9 Q640.7 226.5 688.6 251.5 M689.8 252.0 Q638.0 273.3 589.7 296.4 M590.8 295.5 Q539.9 272.4 488.7 251.8 M490.8 251.6 Q541.1 227.7 589.3 203.6" fill="none" stroke="#6741d9" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="590.0" y="242.4">Promising?</tspan><tspan x="590.0" y="259.6">Does it respect constraints?</tspan></text>
+<rect x="480.0" y="365.0" width="210.0" height="66.0" rx="10" fill="#ffc9c9"/>
+<path d="M480.9 366.0 Q583.0 367.3 690.7 363.5 M690.9 365.6 Q690.8 399.0 690.1 430.5 M690.4 432.2 Q583.1 429.2 481.2 431.4 M481.4 430.7 Q482.3 400.0 480.1 366.2" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M479.9 363.5 Q587.0 366.5 689.1 365.2 M688.7 365.8 Q687.7 395.5 689.9 430.1 M690.3 429.9 Q583.7 428.5 480.8 431.6 M479.8 429.4 Q482.1 397.2 478.9 364.6" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="585.0" y="388.8">No: prune this</tspan><tspan x="585.0" y="407.2">invalid choice</tspan></text>
+<rect x="745.0" y="220.0" width="190.0" height="68.0" rx="10" fill="#99e9f2"/>
+<path d="M745.4 218.9 Q842.5 219.4 934.0 219.8 M936.2 221.3 Q937.0 252.9 936.1 288.6 M933.9 288.6 Q842.3 290.2 743.4 288.0 M745.5 288.9 Q745.7 252.5 743.6 220.5" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M745.6 219.3 Q839.7 217.2 933.6 220.6 M934.6 221.2 Q932.7 256.4 934.6 287.2 M935.6 289.3 Q841.8 289.4 743.9 287.4 M744.7 287.2 Q747.7 251.9 743.6 220.2" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="840.0" y="244.8">Yes: apply choice</tspan><tspan x="840.0" y="263.2">and recurse</tspan></text>
+<polygon points="1085.0,205 1180,251.0 1085.0,297 990,251.0" fill="#e0d5fa"/>
+<path d="M1085.0 206.3 Q1133.3 229.6 1181.2 252.1 M1180.2 250.3 Q1132.2 275.7 1086.6 295.7 M1083.5 296.1 Q1039.0 271.3 990.2 252.1 M988.6 249.5 Q1039.0 229.1 1085.3 203.9" fill="none" stroke="#6741d9" stroke-width="2" stroke-linecap="round"/>
+<path d="M1084.4 206.0 Q1131.9 226.5 1180.8 250.6 M1181.4 250.7 Q1134.8 275.0 1083.6 295.8 M1086.1 296.3 Q1036.7 273.0 990.3 252.5 M990.6 252.2 Q1037.0 225.9 1083.8 203.6" fill="none" stroke="#6741d9" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="1085.0" y="251.0">Complete solution?</tspan></text>
+<rect x="1190.0" y="95.0" width="200.0" height="78.0" rx="10" fill="#b2f2bb"/>
+<path d="M1189.7 94.4 Q1289.8 92.2 1388.9 94.6 M1390.2 96.1 Q1387.6 135.5 1390.8 171.5 M1389.1 171.7 Q1290.5 171.0 1188.6 171.5 M1190.6 172.3 Q1189.7 131.2 1188.6 95.6" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M1189.9 94.4 Q1292.0 97.0 1390.3 95.1 M1390.3 96.5 Q1392.3 132.4 1389.6 172.5 M1391.4 172.9 Q1287.9 170.4 1190.6 174.2 M1188.8 174.0 Q1190.4 133.8 1190.1 95.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="1290.0" y="125.4">Yes: report solution</tspan><tspan x="1290.0" y="142.6">(or stop if one is enough)</tspan></text>
+<rect x="760.0" y="390.0" width="235.0" height="72.0" rx="10" fill="#ffc9c9"/>
+<path d="M758.5 390.3 Q878.6 388.7 993.9 390.8 M995.6 389.8 Q994.3 428.1 993.4 460.9 M994.2 460.7 Q878.6 464.3 761.3 461.9 M759.4 463.0 Q759.4 424.5 760.8 389.6" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M761.2 388.8 Q875.4 391.8 993.6 389.7 M995.2 390.2 Q997.4 425.5 994.9 462.7 M993.6 462.1 Q876.4 461.9 760.0 461.2 M760.7 461.9 Q762.6 424.8 761.3 388.7" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="877.5" y="417.4">Dead end / recurse failed:</tspan><tspan x="877.5" y="434.6">undo the choice</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="710.0" y="578.0">A failed partial assignment is restored before its parent tries another candidate</tspan></text>
+</svg>
