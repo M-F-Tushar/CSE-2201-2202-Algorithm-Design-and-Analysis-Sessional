@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" role="img" aria-label="Sudoku backtracking: three constraints, same-row continuation, and undo on failure">
+<rect width="1000" height="620" fill="#fff" rx="10"/>
+<text x="500" y="42" text-anchor="middle" font-family="sans-serif" font-size="24" font-weight="bold" fill="#1e1e1e">Sudoku Backtracking: Check Three Constraints, Then Continue</text>
+<!-- 9 by 9 conceptual grid; highlighted middle box, row, column, candidate cell -->
+<rect x="80" y="100" width="270" height="270" fill="#fff" stroke="#1e1e1e" stroke-width="4"/>
+<rect x="170" y="190" width="90" height="90" fill="#d0ebff"/>
+<rect x="170" y="190" width="30" height="30" fill="#ffc9c9" stroke="#e03131" stroke-width="2"/>
+<path d="M110 100V370 M140 100V370 M170 100V370 M200 100V370 M230 100V370 M260 100V370 M290 100V370 M320 100V370 M80 130H350 M80 160H350 M80 190H350 M80 220H350 M80 250H350 M80 280H350 M80 310H350 M80 340H350" stroke="#adb5bd" stroke-width="1"/>
+<path d="M170 100V370 M260 100V370 M80 190H350 M80 280H350" stroke="#1e1e1e" stroke-width="3"/>
+<text x="395" y="120" font-family="sans-serif" font-size="20" fill="#1e1e1e">1. Check all 9 cells in candidate row</text>
+<text x="395" y="170" font-family="sans-serif" font-size="20" fill="#1e1e1e">2. Check all 9 cells in candidate column</text>
+<text x="395" y="220" font-family="sans-serif" font-size="20" fill="#1e1e1e">3. Check the candidate's 3 × 3 box</text>
+<text x="395" y="275" font-family="sans-serif" font-size="19" fill="#1971c2">Box start: (⌊r/3⌋ × 3, ⌊c/3⌋ × 3)</text>
+<text x="80" y="415" font-family="sans-serif" font-size="20" fill="#1e1e1e">Safe candidate → place tentatively → search same row for its next empty cell</text>
+<text x="80" y="470" font-family="sans-serif" font-size="20" fill="#e03131">Deeper contradiction → undo the latest digit → try another candidate</text>
+<text x="80" y="525" font-family="sans-serif" font-size="20" fill="#2f9e44">Only when the current row is full → advance to the next row</text>
+<text x="80" y="580" font-family="sans-serif" font-size="15" fill="#495057">Blue: containing 3 × 3 box · highlighted row/column: full-range conflict checks</text>
+</svg>
