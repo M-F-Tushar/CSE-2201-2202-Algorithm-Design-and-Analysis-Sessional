@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="270" viewBox="0 0 1100 270" role="img" aria-label="Algorithm vs Program - From Problem to Output">
+<rect width="1100" height="270" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="550.0" y="34.0">Algorithm vs Program - From Problem to Output</tspan></text>
+<path d="M239.9 115.5 Q270.0 116.1 300.6 116.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M289.8 120.1 L300.0 116.0 L289.8 111.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="239.0" y="104.0" width="62" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="270.0" y="116.0">design</tspan></text>
+<path d="M499.8 115.5 Q531.3 117.3 561.0 116.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M549.8 120.1 L560.0 116.0 L549.8 111.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="487.0" y="104.0" width="86" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="530.0" y="116.0">implement</tspan></text>
+<path d="M759.4 115.7 Q789.7 116.3 820.1 115.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M809.8 120.1 L820.0 116.0 L809.8 111.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="771.0" y="104.0" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="790.0" y="116.0">run</tspan></text>
+<rect x="40.0" y="80.0" width="200.0" height="72.0" rx="10" fill="#e9ecef"/>
+<path d="M38.9 80.2 Q139.4 80.2 239.5 78.5 M240.2 79.1 Q237.3 116.9 240.1 151.5 M241.2 150.5 Q139.5 153.4 39.0 152.1 M38.5 151.9 Q39.1 113.5 40.8 80.1" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M38.9 81.3 Q141.1 80.2 241.0 80.9 M240.4 80.6 Q242.2 118.1 238.8 152.4 M238.9 151.0 Q139.4 152.1 39.8 153.4 M41.3 153.1 Q38.9 117.2 40.6 81.1" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="140.0" y="105.4">Problem Statement</tspan><tspan x="140.0" y="126.6">GCD of a and b</tspan></text>
+<rect x="300.0" y="80.0" width="200.0" height="72.0" rx="10" fill="#a5d8ff"/>
+<path d="M300.1 79.7 Q397.4 79.8 500.8 81.1 M500.1 79.5 Q499.9 113.9 498.6 150.5 M499.9 152.5 Q398.4 150.5 298.4 151.8 M299.2 153.2 Q300.5 116.6 299.2 79.3" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M301.4 79.7 Q402.3 82.0 500.1 81.2 M501.1 79.4 Q501.1 113.2 500.7 150.9 M501.3 153.2 Q401.6 149.4 301.1 152.5 M300.4 151.2 Q298.7 118.8 299.5 80.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="400.0" y="105.4">Algorithm</tspan><tspan x="400.0" y="126.6">steps in pseudocode</tspan></text>
+<rect x="560.0" y="80.0" width="200.0" height="72.0" rx="10" fill="#99e9f2"/>
+<path d="M559.8 79.1 Q658.5 82.1 759.1 79.9 M759.3 80.3 Q758.7 113.8 760.3 153.5 M760.2 151.0 Q661.7 153.3 559.2 152.9 M558.9 153.3 Q561.1 116.2 561.0 80.9" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M560.5 80.9 Q660.7 78.5 758.6 80.5 M760.2 79.3 Q759.7 117.7 761.6 150.7 M759.4 150.9 Q657.2 150.3 559.6 151.9 M561.1 152.8 Q561.5 115.9 558.5 78.7" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="660.0" y="105.4">Program</tspan><tspan x="660.0" y="126.6">C / Python code</tspan></text>
+<rect x="820.0" y="80.0" width="200.0" height="72.0" rx="10" fill="#b2f2bb"/>
+<path d="M820.9 81.0 Q918.0 82.3 1020.7 78.5 M1020.9 80.6 Q1020.8 117.0 1020.1 151.5 M1020.4 153.2 Q918.1 150.2 821.2 152.4 M821.4 151.7 Q822.3 118.0 820.1 81.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M819.9 78.5 Q922.0 81.5 1019.1 80.2 M1018.7 80.8 Q1017.7 113.5 1019.9 151.1 M1020.3 150.9 Q918.7 149.5 820.8 152.6 M819.8 150.4 Q822.1 115.2 818.9 79.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="920.0" y="105.4">Output</tspan><tspan x="920.0" y="126.6">for the input</tspan></text>
+<rect x="150.0" y="190.0" width="800.0" height="44.0" rx="10" fill="#ced4da"/>
+<path d="M150.4 188.9 Q552.5 189.4 949.0 189.8 M951.2 191.3 Q952.0 210.9 951.1 234.6 M948.9 234.6 Q552.3 236.2 148.4 234.0 M150.5 234.9 Q150.7 210.5 148.6 190.5" fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="round"/>
+<path d="M150.6 189.3 Q549.7 187.2 948.6 190.6 M949.6 191.2 Q947.7 214.4 949.6 233.2 M950.6 235.3 Q551.8 235.4 148.9 233.4 M149.7 233.2 Q152.7 209.9 148.6 190.2" fill="none" stroke="#1e1e1e" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="bold" fill="#1e1e1e"><tspan x="550.0" y="212.0">A program may run forever (e.g. an OS); an algorithm must always stop</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="550.0" y="248.0">A program is one concrete implementation of an algorithm; the same algorithm can be written in many languages</tspan></text>
+</svg>
