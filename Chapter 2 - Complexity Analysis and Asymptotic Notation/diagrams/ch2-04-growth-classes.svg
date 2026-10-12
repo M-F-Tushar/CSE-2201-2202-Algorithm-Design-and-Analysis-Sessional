@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="380" viewBox="0 0 1000 380" role="img" aria-label="Growth of Common Complexity Classes - Slowest to Fastest">
+<rect width="1000" height="380" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="500.0" y="34.0">Growth of Common Complexity Classes - Slowest to Fastest</tspan></text>
+<path d="M138.9 119.5 Q150.0 120.1 161.6 120.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M150.8 124.1 L161.0 120.0 L150.8 115.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M278.8 119.5 Q291.3 121.3 302.0 120.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M290.8 124.1 L301.0 120.0 L290.8 115.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M418.4 119.7 Q429.7 120.3 441.1 119.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M430.8 124.1 L441.0 120.0 L430.8 115.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M559.3 119.2 Q570.9 118.5 581.0 120.6" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M570.8 124.1 L581.0 120.0 L570.8 115.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M699.8 119.6 Q710.3 120.0 720.7 120.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M710.8 124.1 L721.0 120.0 L710.8 115.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M839.1 119.8 Q849.9 118.2 861.2 119.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M850.8 124.1 L861.0 120.0 L850.8 115.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M80.1 149.8 Q80.4 175.4 80.4 200.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M75.9 189.8 L80.0 200.0 L84.1 189.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M220.3 150.7 Q219.9 174.2 219.7 200.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M215.9 189.8 L220.0 200.0 L224.1 189.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M360.5 149.1 Q360.3 175.1 360.3 200.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M355.9 189.8 L360.0 200.0 L364.1 189.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M499.6 149.3 Q500.8 175.4 501.0 200.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M495.9 189.8 L500.0 200.0 L504.1 189.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M639.8 149.6 Q640.2 175.1 639.0 199.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M635.9 189.8 L640.0 200.0 L644.1 189.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M780.1 150.0 Q779.6 176.5 779.7 199.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M775.9 189.8 L780.0 200.0 L784.1 189.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M919.1 150.0 Q921.0 173.9 919.7 199.3" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M915.9 189.8 L920.0 200.0 L924.1 189.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="21.0" y="90.0" width="118.0" height="60.0" rx="10" fill="#b2f2bb"/>
+<path d="M19.9 90.2 Q79.4 90.2 138.5 88.5 M139.2 89.1 Q136.3 120.9 139.1 149.5 M140.2 148.5 Q79.5 151.4 20.0 150.1 M19.5 149.9 Q20.1 117.5 21.8 90.1" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M19.9 91.3 Q81.1 90.2 140.0 90.9 M139.4 90.6 Q141.2 122.1 137.8 150.4 M137.9 149.0 Q79.4 150.1 20.8 151.4 M22.3 151.1 Q19.9 121.2 21.6 91.1" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="80.0" y="120.0">O(1)</tspan></text>
+<rect x="161.0" y="90.0" width="118.0" height="60.0" rx="10" fill="#b2f2bb"/>
+<path d="M161.1 89.7 Q217.4 89.8 279.8 91.1 M279.1 89.5 Q278.9 117.9 277.6 148.5 M278.9 150.5 Q218.4 148.5 159.4 149.8 M160.2 151.2 Q161.5 120.6 160.2 89.3" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M162.4 89.7 Q222.3 92.0 279.1 91.2 M280.1 89.4 Q280.1 117.2 279.7 148.9 M280.3 151.2 Q221.6 147.4 162.1 150.5 M161.4 149.2 Q159.7 122.8 160.5 90.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="220.0" y="120.0">O(log n)</tspan></text>
+<rect x="301.0" y="90.0" width="118.0" height="60.0" rx="10" fill="#99e9f2"/>
+<path d="M300.8 89.1 Q358.5 92.1 418.1 89.9 M418.3 90.3 Q417.7 117.8 419.3 151.5 M419.2 149.0 Q361.7 151.3 300.2 150.9 M299.9 151.3 Q302.1 120.2 302.0 90.9" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M301.5 90.9 Q360.7 88.5 417.6 90.5 M419.2 89.3 Q418.7 121.7 420.6 148.7 M418.4 148.9 Q357.2 148.3 300.6 149.9 M302.1 150.8 Q302.5 119.9 299.5 88.7" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="360.0" y="120.0">O(n)</tspan></text>
+<rect x="441.0" y="90.0" width="118.0" height="60.0" rx="10" fill="#99e9f2"/>
+<path d="M441.9 91.0 Q498.0 92.3 559.7 88.5 M559.9 90.6 Q559.8 121.0 559.1 149.5 M559.4 151.2 Q498.1 148.2 442.2 150.4 M442.4 149.7 Q443.3 122.0 441.1 91.2" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M440.9 88.5 Q502.0 91.5 558.1 90.2 M557.7 90.8 Q556.7 117.5 558.9 149.1 M559.3 148.9 Q498.7 147.5 441.8 150.6 M440.8 148.4 Q443.1 119.2 439.9 89.6" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="500.0" y="120.0">O(n log n)</tspan></text>
+<rect x="581.0" y="90.0" width="118.0" height="60.0" rx="10" fill="#ffec99"/>
+<path d="M581.4 88.9 Q642.5 89.4 698.0 89.8 M700.2 91.3 Q701.0 118.9 700.1 150.6 M697.9 150.6 Q642.3 152.2 579.4 150.0 M581.5 150.9 Q581.7 118.5 579.6 90.5" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M581.6 89.3 Q639.7 87.2 697.6 90.6 M698.6 91.2 Q696.7 122.4 698.6 149.2 M699.6 151.3 Q641.8 151.4 579.9 149.4 M580.7 149.2 Q583.7 117.9 579.6 90.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="640.0" y="120.0">O(n^2)</tspan></text>
+<rect x="721.0" y="90.0" width="118.0" height="60.0" rx="10" fill="#ffd8a8"/>
+<path d="M721.0 91.3 Q780.8 91.6 840.2 91.1 M839.5 90.4 Q839.4 118.7 838.2 149.5 M837.7 149.8 Q778.9 148.0 722.0 149.7 M720.9 148.5 Q723.0 121.5 720.1 90.2" fill="none" stroke="#e8590c" stroke-width="2" stroke-linecap="round"/>
+<path d="M720.4 91.0 Q779.4 88.5 839.8 89.6 M839.2 91.5 Q841.6 119.5 837.8 150.0 M837.8 151.3 Q778.9 150.5 721.5 149.9 M722.1 151.1 Q723.7 119.2 720.3 90.3" fill="none" stroke="#e8590c" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="780.0" y="120.0">O(2^n)</tspan></text>
+<rect x="861.0" y="90.0" width="118.0" height="60.0" rx="10" fill="#ffc9c9"/>
+<path d="M860.7 89.4 Q919.8 87.2 977.9 89.6 M979.2 91.1 Q976.6 121.5 979.8 148.5 M978.1 148.7 Q920.5 148.0 859.6 148.5 M861.6 149.3 Q860.7 117.2 859.6 90.6" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M860.9 89.4 Q922.0 92.0 979.3 90.1 M979.3 91.5 Q981.3 118.4 978.6 149.5 M980.4 149.9 Q917.9 147.4 861.6 151.2 M859.8 151.0 Q861.4 119.8 861.1 90.2" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="920.0" y="120.0">O(n!)</tspan></text>
+<rect x="21.0" y="200.0" width="118.0" height="64.0" rx="10" fill="#e9ecef"/>
+<path d="M19.5 200.3 Q81.1 198.7 137.9 200.8 M139.6 199.8 Q138.3 234.1 137.4 262.9 M138.2 262.7 Q81.1 266.3 22.3 263.9 M20.4 265.0 Q20.4 230.5 21.8 199.6" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M22.2 198.8 Q77.9 201.8 137.6 199.7 M139.2 200.2 Q141.4 231.5 138.9 264.7 M137.6 264.1 Q78.9 263.9 21.0 263.2 M21.7 263.9 Q23.6 230.8 22.3 198.7" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="80.0" y="223.4">array</tspan><tspan x="80.0" y="240.6">indexing</tspan></text>
+<rect x="161.0" y="200.0" width="118.0" height="64.0" rx="10" fill="#e9ecef"/>
+<path d="M160.9 200.6 Q218.9 201.8 280.3 198.9 M278.6 199.7 Q279.3 234.7 278.2 262.6 M279.0 265.4 Q217.8 266.3 160.7 262.6 M160.9 263.4 Q163.0 234.0 161.3 200.1" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M160.2 199.4 Q221.2 199.8 278.9 201.1 M277.7 201.4 Q280.1 233.9 278.3 262.6 M279.2 265.1 Q219.3 264.0 161.2 262.7 M161.5 264.0 Q158.3 233.2 160.3 198.5" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="220.0" y="223.4">binary</tspan><tspan x="220.0" y="240.6">search</tspan></text>
+<rect x="301.0" y="200.0" width="118.0" height="64.0" rx="10" fill="#e9ecef"/>
+<path d="M299.6 198.8 Q359.8 198.9 420.3 200.5 M419.1 201.1 Q419.6 234.7 420.1 263.3 M418.5 265.3 Q362.5 263.9 300.1 263.3 M302.2 262.8 Q298.9 233.8 299.6 199.7" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M299.7 199.6 Q361.0 200.0 419.0 201.4 M417.5 198.5 Q416.5 234.0 419.7 262.9 M417.8 264.6 Q361.6 265.6 302.2 263.0 M300.2 264.7 Q298.9 232.9 301.8 200.6" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="360.0" y="223.4">linear</tspan><tspan x="360.0" y="240.6">search</tspan></text>
+<rect x="441.0" y="200.0" width="118.0" height="64.0" rx="10" fill="#e9ecef"/>
+<path d="M440.3 201.4 Q502.1 197.9 558.9 200.6 M558.7 198.8 Q559.4 232.4 560.0 264.1 M559.7 265.3 Q497.6 264.2 440.7 262.4 M440.2 263.4 Q442.2 231.8 440.9 201.1" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M440.0 200.9 Q498.5 201.3 559.9 200.1 M559.6 198.8 Q556.8 234.5 559.5 264.4 M558.3 263.2 Q498.9 263.3 441.6 264.4 M442.2 265.3 Q442.5 234.7 442.3 199.0" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="500.0" y="223.4">merge</tspan><tspan x="500.0" y="240.6">sort</tspan></text>
+<rect x="581.0" y="200.0" width="118.0" height="64.0" rx="10" fill="#e9ecef"/>
+<path d="M579.4 198.6 Q638.5 198.9 699.1 200.0 M700.1 200.7 Q696.7 234.6 698.9 265.3 M697.6 264.6 Q640.3 266.0 582.0 262.5 M579.7 263.6 Q582.0 232.0 581.0 201.4" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M581.4 199.4 Q642.1 202.3 698.6 198.9 M698.0 200.9 Q700.2 230.3 700.5 265.0 M697.6 262.4 Q638.0 263.4 579.6 263.3 M581.3 263.9 Q581.6 232.8 582.4 200.3" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="640.0" y="223.4">bubble sort</tspan><tspan x="640.0" y="240.6">nested loops</tspan></text>
+<rect x="721.0" y="200.0" width="118.0" height="64.0" rx="10" fill="#e9ecef"/>
+<path d="M719.5 200.2 Q777.7 199.3 840.1 200.2 M840.4 200.5 Q836.2 229.3 839.0 263.3 M837.9 262.6 Q777.9 265.1 722.1 262.7 M720.0 264.9 Q719.5 233.3 721.9 200.1" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M720.3 198.9 Q780.5 199.9 838.6 199.3 M839.3 200.3 Q839.7 229.9 839.4 264.5 M838.1 264.4 Q779.4 263.5 721.6 264.5 M721.1 265.2 Q719.1 232.7 722.6 199.9" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="780.0" y="223.4">all subsets</tspan><tspan x="780.0" y="240.6">(brute force)</tspan></text>
+<rect x="861.0" y="200.0" width="118.0" height="64.0" rx="10" fill="#e9ecef"/>
+<path d="M859.7 198.8 Q918.2 201.6 979.6 201.2 M979.1 199.2 Q980.1 229.9 979.7 264.8 M979.4 262.8 Q918.8 262.6 862.4 264.9 M861.4 263.4 Q863.1 234.3 860.6 198.9" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M861.5 199.6 Q920.1 202.1 978.7 201.1 M978.9 198.9 Q978.7 230.8 979.4 264.7 M980.2 263.9 Q917.5 265.6 861.5 265.0 M861.3 264.9 Q859.6 234.0 861.4 199.7" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="920.0" y="232.0">permutations</tspan></text>
+<rect x="60.0" y="300.0" width="880.0" height="48.0" rx="10" fill="#e9ecef"/>
+<path d="M60.9 299.3 Q500.7 298.9 939.2 300.6 M938.9 301.2 Q938.2 325.5 941.3 349.3 M941.0 348.7 Q497.5 345.1 59.0 347.9 M59.3 346.9 Q60.5 323.9 59.6 299.3" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M61.0 298.6 Q500.6 301.7 940.9 300.4 M939.7 299.2 Q939.9 321.6 941.1 349.2 M939.4 347.9 Q500.6 350.6 60.5 349.0 M59.1 348.8 Q60.7 324.6 60.8 299.5" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="bold" fill="#1e1e1e"><tspan x="500.0" y="324.0">Each step to the right grows much faster; O(2^n) and O(n!) fail even for small n</tspan></text>
+</svg>
