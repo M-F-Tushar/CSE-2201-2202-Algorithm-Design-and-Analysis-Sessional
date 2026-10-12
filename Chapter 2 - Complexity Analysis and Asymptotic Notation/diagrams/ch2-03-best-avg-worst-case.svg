@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="390" viewBox="0 0 960 390" role="img" aria-label="Best, Average, and Worst Case - Linear Search">
+<rect width="960" height="390" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="480.0" y="34.0">Best, Average, and Worst Case - Linear Search</tspan></text>
+<path d="M479.9 91.5 Q480.0 106.6 480.6 121.5 M479.5 121.6 Q325.1 121.1 170.5 121.0 M170.6 121.5 Q170.1 133.8 170.0 150.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M165.9 139.8 L170.0 150.0 L174.1 139.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M479.8 91.5 Q481.3 122.3 481.0 150.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M475.9 139.8 L480.0 150.0 L484.1 139.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M479.4 91.7 Q479.7 106.8 480.1 120.7 M479.7 121.1 Q635.3 119.6 789.7 120.8 M790.1 120.7 Q788.6 136.0 789.8 150.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M785.9 139.8 L790.0 150.0 L794.1 139.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="300.0" y="40.0" width="360.0" height="52.0" rx="10" fill="#a5d8ff"/>
+<path d="M298.9 40.2 Q479.4 40.2 659.5 38.5 M660.2 39.1 Q657.3 66.9 660.1 91.5 M661.2 90.5 Q479.5 93.4 299.0 92.1 M298.5 91.9 Q299.1 63.5 300.8 40.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M298.9 41.3 Q481.1 40.2 661.0 40.9 M660.4 40.6 Q662.2 68.1 658.8 92.4 M658.9 91.0 Q479.4 92.1 299.8 93.4 M301.3 93.1 Q298.9 67.2 300.6 41.1" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="480.0" y="66.0">Linear Search on n elements</tspan></text>
+<rect x="40.0" y="150.0" width="260.0" height="100.0" rx="10" fill="#b2f2bb"/>
+<path d="M40.1 149.7 Q167.4 149.8 300.8 151.1 M300.1 149.5 Q299.9 197.9 298.6 248.5 M299.9 250.5 Q168.4 248.5 38.4 249.8 M39.2 251.2 Q40.5 200.6 39.2 149.3" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M41.4 149.7 Q172.3 152.0 300.1 151.2 M301.1 149.4 Q301.1 197.2 300.7 248.9 M301.3 251.2 Q171.6 247.4 41.1 250.5 M40.4 249.2 Q38.7 202.8 39.5 150.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="170.0" y="181.5">Best Case</tspan><tspan x="170.0" y="200.0">target at position 1</tspan><tspan x="170.0" y="218.5">1 comparison = Theta(1)</tspan></text>
+<rect x="350.0" y="150.0" width="260.0" height="100.0" rx="10" fill="#ffec99"/>
+<path d="M349.8 149.1 Q478.5 152.1 609.1 149.9 M609.3 150.3 Q608.7 197.8 610.3 251.5 M610.2 249.0 Q481.7 251.3 349.2 250.9 M348.9 251.3 Q351.1 200.2 351.0 150.9" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M350.5 150.9 Q480.7 148.5 608.6 150.5 M610.2 149.3 Q609.7 201.7 611.6 248.7 M609.4 248.9 Q477.2 248.3 349.6 249.9 M351.1 250.8 Q351.5 199.9 348.5 148.7" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="480.0" y="181.5">Average Case</tspan><tspan x="480.0" y="200.0">target at any position</tspan><tspan x="480.0" y="218.5">(n+1)/2 comparisons = Theta(n)</tspan></text>
+<rect x="660.0" y="150.0" width="260.0" height="100.0" rx="10" fill="#ffd8a8"/>
+<path d="M660.9 151.0 Q788.0 152.3 920.7 148.5 M920.9 150.6 Q920.8 201.0 920.1 249.5 M920.4 251.2 Q788.1 248.2 661.2 250.4 M661.4 249.7 Q662.3 202.0 660.1 151.2" fill="none" stroke="#e8590c" stroke-width="2" stroke-linecap="round"/>
+<path d="M659.9 148.5 Q792.0 151.5 919.1 150.2 M918.7 150.8 Q917.7 197.5 919.9 249.1 M920.3 248.9 Q788.7 247.5 660.8 250.6 M659.8 248.4 Q662.1 199.2 658.9 149.6" fill="none" stroke="#e8590c" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="790.0" y="181.5">Worst Case</tspan><tspan x="790.0" y="200.0">target absent or at the end</tspan><tspan x="790.0" y="218.5">n comparisons = O(n)</tspan></text>
+<rect x="40.0" y="300.0" width="880.0" height="56.0" rx="10" fill="#e9ecef"/>
+<path d="M40.4 298.9 Q482.5 299.4 919.0 299.8 M921.2 301.3 Q922.0 326.9 921.1 356.6 M918.9 356.6 Q482.3 358.2 38.4 356.0 M40.5 356.9 Q40.7 326.5 38.6 300.5" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M40.6 299.3 Q479.7 297.2 918.6 300.6 M919.6 301.2 Q917.7 330.4 919.6 355.2 M920.6 357.3 Q481.8 357.4 38.9 355.4 M39.7 355.2 Q42.7 325.9 38.6 300.2" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="bold" fill="#1e1e1e"><tspan x="480.0" y="328.0">Each case is a different input; Theta, O, and Omega can be applied to each case's count</tspan></text>
+</svg>
