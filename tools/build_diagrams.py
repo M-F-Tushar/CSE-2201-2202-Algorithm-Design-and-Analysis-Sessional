@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 MODULES = [
     "root_diagrams",
+    "ch1_diagrams",
     "ch2_diagrams",
     "ch3_diagrams",
     "ch4_diagrams",
