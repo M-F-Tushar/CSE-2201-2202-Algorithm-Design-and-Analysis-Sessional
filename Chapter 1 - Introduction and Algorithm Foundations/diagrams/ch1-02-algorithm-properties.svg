@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="300" viewBox="0 0 1020 300" role="img" aria-label="Five Properties of a Valid Algorithm">
+<rect width="1020" height="300" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="510.0" y="34.0">Five Properties of a Valid Algorithm</tspan></text>
+<path d="M509.9 101.5 Q510.0 119.1 510.6 136.5 M509.5 136.6 Q316.1 136.1 122.5 136.0 M122.6 136.5 Q122.1 151.3 122.0 170.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M117.9 159.8 L122.0 170.0 L126.1 159.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M509.8 101.5 Q511.3 120.3 511.0 136.4 M509.5 137.0 Q414.3 134.4 316.4 136.7 M317.0 136.4 Q314.4 153.5 316.7 170.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M311.9 159.8 L316.0 170.0 L320.1 159.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M509.4 101.7 Q509.7 136.3 510.1 169.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M505.9 159.8 L510.0 170.0 L514.1 159.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M510.3 101.2 Q510.9 117.5 510.0 136.6 M509.2 136.0 Q605.5 135.8 704.6 136.5 M704.0 136.6 Q703.8 154.7 704.5 169.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M699.9 159.8 L704.0 170.0 L708.1 159.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M510.8 101.6 Q510.3 119.0 509.7 136.2 M509.6 135.7 Q704.0 135.2 898.2 136.2 M897.7 136.2 Q897.2 154.6 898.2 170.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M893.9 159.8 L898.0 170.0 L902.1 159.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="300.0" y="50.0" width="420.0" height="52.0" rx="10" fill="#b2f2bb"/>
+<path d="M298.9 50.2 Q509.4 50.2 719.5 48.5 M720.2 49.1 Q717.3 76.9 720.1 101.5 M721.2 100.5 Q509.5 103.4 299.0 102.1 M298.5 101.9 Q299.1 73.5 300.8 50.1" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M298.9 51.3 Q511.1 50.2 721.0 50.9 M720.4 50.6 Q722.2 78.1 718.8 102.4 M718.9 101.0 Q509.4 102.1 299.8 103.4 M301.3 103.1 Q298.9 77.2 300.6 51.1" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="510.0" y="76.0">A valid algorithm satisfies all five</tspan></text>
+<rect x="32.0" y="170.0" width="180.0" height="64.0" rx="10" fill="#a5d8ff"/>
+<path d="M32.1 169.7 Q119.4 169.8 212.8 171.1 M212.1 169.5 Q211.9 199.9 210.6 232.5 M211.9 234.5 Q120.4 232.5 30.4 233.8 M31.2 235.2 Q32.5 202.6 31.2 169.3" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M33.4 169.7 Q124.3 172.0 212.1 171.2 M213.1 169.4 Q213.1 199.2 212.7 232.9 M213.3 235.2 Q123.6 231.4 33.1 234.5 M32.4 233.2 Q30.7 204.8 31.5 170.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="122.0" y="192.8">Input</tspan><tspan x="122.0" y="211.2">0 or more inputs</tspan></text>
+<rect x="226.0" y="170.0" width="180.0" height="64.0" rx="10" fill="#a5d8ff"/>
+<path d="M225.8 169.1 Q314.5 172.1 405.1 169.9 M405.3 170.3 Q404.7 199.8 406.3 235.5 M406.2 233.0 Q317.7 235.3 225.2 234.9 M224.9 235.3 Q227.1 202.2 227.0 170.9" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M226.5 170.9 Q316.7 168.5 404.6 170.5 M406.2 169.3 Q405.7 203.7 407.6 232.7 M405.4 232.9 Q313.2 232.3 225.6 233.9 M227.1 234.8 Q227.5 201.9 224.5 168.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="316.0" y="192.8">Output</tspan><tspan x="316.0" y="211.2">1 or more outputs</tspan></text>
+<rect x="420.0" y="170.0" width="180.0" height="64.0" rx="10" fill="#ffec99"/>
+<path d="M420.9 171.0 Q508.0 172.3 600.7 168.5 M600.9 170.6 Q600.8 203.0 600.1 233.5 M600.4 235.2 Q508.1 232.2 421.2 234.4 M421.4 233.7 Q422.3 204.0 420.1 171.2" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M419.9 168.5 Q512.0 171.5 599.1 170.2 M598.7 170.8 Q597.7 199.5 599.9 233.1 M600.3 232.9 Q508.7 231.5 420.8 234.6 M419.8 232.4 Q422.1 201.2 418.9 169.6" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="510.0" y="192.8">Definiteness</tspan><tspan x="510.0" y="211.2">no ambiguous steps</tspan></text>
+<rect x="614.0" y="170.0" width="180.0" height="64.0" rx="10" fill="#ffec99"/>
+<path d="M614.4 168.9 Q706.5 169.4 793.0 169.8 M795.2 171.3 Q796.0 200.9 795.1 234.6 M792.9 234.6 Q706.3 236.2 612.4 234.0 M614.5 234.9 Q614.7 200.5 612.6 170.5" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M614.6 169.3 Q703.7 167.2 792.6 170.6 M793.6 171.2 Q791.7 204.4 793.6 233.2 M794.6 235.3 Q705.8 235.4 612.9 233.4 M613.7 233.2 Q616.7 199.9 612.6 170.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="704.0" y="192.8">Finiteness</tspan><tspan x="704.0" y="211.2">ends in finite steps</tspan></text>
+<rect x="808.0" y="170.0" width="180.0" height="64.0" rx="10" fill="#ffec99"/>
+<path d="M808.0 171.3 Q898.8 171.6 989.2 171.1 M988.5 170.4 Q988.4 200.7 987.2 233.5 M986.7 233.8 Q896.9 232.0 809.0 233.7 M807.9 232.5 Q810.0 203.5 807.1 170.2" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M807.4 171.0 Q897.4 168.5 988.8 169.6 M988.2 171.5 Q990.6 201.5 986.8 234.0 M986.8 235.3 Q896.9 234.5 808.5 233.9 M809.1 235.1 Q810.7 201.2 807.3 170.3" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="898.0" y="192.8">Effectiveness</tspan><tspan x="898.0" y="211.2">basic, doable steps</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="510.0" y="278.0">Input and output define the interface; definiteness, finiteness, and effectiveness make the steps valid</tspan></text>
+</svg>
