@@ -20,3 +20,5 @@ Every diagram in this section is a hand-drawn **Excalidraw** scene, stored twice
 |---|---------|---------|------|
 | 1 | Loop Growth Rate - Additive vs Multiplicative Steps | [`ch2-01-loop-growth-rate.svg`](ch2-01-loop-growth-rate.svg) | [`ch2-01-loop-growth-rate.excalidraw`](ch2-01-loop-growth-rate.excalidraw) |
 | 2 | Asymptotic Bounds - Big-O, Big-Omega, and Big-Theta | [`ch2-02-asymptotic-bounds.svg`](ch2-02-asymptotic-bounds.svg) | [`ch2-02-asymptotic-bounds.excalidraw`](ch2-02-asymptotic-bounds.excalidraw) |
+| 3 | Best, Average, and Worst Case - Linear Search | [`ch2-03-best-avg-worst-case.svg`](ch2-03-best-avg-worst-case.svg) | [`ch2-03-best-avg-worst-case.excalidraw`](ch2-03-best-avg-worst-case.excalidraw) |
+| 4 | Growth of Common Complexity Classes - Slowest to Fastest | [`ch2-04-growth-classes.svg`](ch2-04-growth-classes.svg) | [`ch2-04-growth-classes.excalidraw`](ch2-04-growth-classes.excalidraw) |
