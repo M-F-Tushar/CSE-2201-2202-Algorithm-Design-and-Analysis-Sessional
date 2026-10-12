@@ -8,6 +8,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(Path(__file__).parent))
 
 import root_diagrams  # noqa: E402
+import ch1_diagrams   # noqa: E402
 import ch2_diagrams   # noqa: E402
 import ch3_diagrams   # noqa: E402
 import ch4_diagrams   # noqa: E402
@@ -40,6 +41,7 @@ Every diagram in this section is a hand-drawn **Excalidraw** scene, stored twice
 
 TARGETS = [
     ("Algorithm Design and Analysis — Course Roadmap", root_diagrams),
+    ("Chapter 1 — Introduction and Algorithm Foundations", ch1_diagrams),
     ("Chapter 2 — Complexity Analysis and Asymptotic Notation", ch2_diagrams),
     ("Chapter 3 — Recurrences Correctness and Loop Invariants", ch3_diagrams),
     ("Chapter 4 — Searching and Basic Traversal", ch4_diagrams),
