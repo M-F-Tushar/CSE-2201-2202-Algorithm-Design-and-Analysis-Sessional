@@ -8,6 +8,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(Path(__file__).parent))
 
 import root_diagrams  # noqa: E402
+import ch1_diagrams   # noqa: E402
 import ch2_diagrams   # noqa: E402
 import ch3_diagrams   # noqa: E402
 import ch4_diagrams   # noqa: E402
@@ -18,6 +19,7 @@ import ch15_diagrams  # noqa: E402
 
 MODULES = [
     root_diagrams,
+    ch1_diagrams,
     ch2_diagrams,
     ch3_diagrams,
     ch4_diagrams,
