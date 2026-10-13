@@ -12,6 +12,7 @@ import ch1_diagrams   # noqa: E402
 import ch2_diagrams   # noqa: E402
 import ch3_diagrams   # noqa: E402
 import ch4_diagrams   # noqa: E402
+import ch5_diagrams   # noqa: E402
 import ch7_diagrams   # noqa: E402
 import ch8_diagrams   # noqa: E402
 import ch11_diagrams  # noqa: E402
@@ -45,6 +46,7 @@ TARGETS = [
     ("Chapter 2 — Complexity Analysis and Asymptotic Notation", ch2_diagrams),
     ("Chapter 3 — Recurrences Correctness and Loop Invariants", ch3_diagrams),
     ("Chapter 4 — Searching and Basic Traversal", ch4_diagrams),
+    ("Chapter 5 — Sorting Algorithms", ch5_diagrams),
     ("Chapter 7 — Greedy Algorithms", ch7_diagrams),
     ("Chapter 8 — Dynamic Programming", ch8_diagrams),
     ("Chapter 11 — Graph Algorithms", ch11_diagrams),
