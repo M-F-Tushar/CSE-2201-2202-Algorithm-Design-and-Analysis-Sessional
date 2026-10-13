@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="620" viewBox="0 0 780 620" role="img" aria-label="Selection Sort Control Flow">
+<rect width="780" height="620" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="390.0" y="34.0">Selection Sort Control Flow</tspan></text>
+<path d="M459.9 89.5 Q460.0 107.1 460.6 124.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M455.9 113.8 L460.0 124.0 L464.1 113.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M459.8 177.5 Q461.3 196.3 461.0 212.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M455.9 201.8 L460.0 212.0 L464.1 201.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M459.4 271.7 Q459.7 289.3 460.1 305.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M455.9 295.8 L460.0 306.0 L464.1 295.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M460.3 359.2 Q460.9 375.5 460.0 394.6" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M455.9 383.8 L460.0 394.0 L464.1 383.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M620.8 433.6 Q650.3 434.0 679.7 434.2 M679.6 433.7 Q680.0 291.7 680.2 151.2 M679.7 151.2 Q649.2 152.6 620.2 151.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M630.2 146.9 L620.0 151.0 L630.2 155.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="661.0" y="280.5" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="680.0" y="292.5">Yes</tspan></text>
+<path d="M460.1 473.8 Q459.9 489.2 460.2 507.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M455.9 497.8 L460.0 508.0 L464.1 497.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="445.0" y="479.0" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="460.0" y="491.0">No</tspan></text>
+<rect x="300.0" y="30.0" width="320.0" height="60.0" rx="10" fill="#a5d8ff"/>
+<path d="M298.9 30.2 Q459.4 30.2 619.5 28.5 M620.2 29.1 Q617.3 60.9 620.1 89.5 M621.2 88.5 Q459.5 91.4 299.0 90.1 M298.5 89.9 Q299.1 57.5 300.8 30.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M298.9 31.3 Q461.1 30.2 621.0 30.9 M620.4 30.6 Q622.2 62.1 618.8 90.4 M618.9 89.0 Q459.4 90.1 299.8 91.4 M301.3 91.1 Q298.9 61.2 300.6 31.1" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="460.0" y="50.1">Start with i = 0</tspan><tspan x="460.0" y="69.9">(whole array unsorted)</tspan></text>
+<rect x="300.0" y="124.0" width="320.0" height="54.0" rx="10" fill="#ffec99"/>
+<path d="M300.1 123.7 Q457.4 123.8 620.8 125.1 M620.1 123.5 Q619.9 148.9 618.6 176.5 M619.9 178.5 Q458.4 176.5 298.4 177.8 M299.2 179.2 Q300.5 151.6 299.2 123.3" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M301.4 123.7 Q462.3 126.0 620.1 125.2 M621.1 123.4 Q621.1 148.2 620.7 176.9 M621.3 179.2 Q461.6 175.4 301.1 178.5 M300.4 177.2 Q298.7 153.8 299.5 124.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="460.0" y="151.0">Scan A[i..n-1] for the minimum</tspan></text>
+<rect x="300.0" y="212.0" width="320.0" height="60.0" rx="10" fill="#b2f2bb"/>
+<path d="M299.8 211.1 Q458.5 214.1 619.1 211.9 M619.3 212.3 Q618.7 239.8 620.3 273.5 M620.2 271.0 Q461.7 273.3 299.2 272.9 M298.9 273.3 Q301.1 242.2 301.0 212.9" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M300.5 212.9 Q460.7 210.5 618.6 212.5 M620.2 211.3 Q619.7 243.7 621.6 270.7 M619.4 270.9 Q457.2 270.3 299.6 271.9 M301.1 272.8 Q301.5 241.9 298.5 210.7" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="460.0" y="232.1">Swap minimum with A[i]</tspan><tspan x="460.0" y="251.9">(at most n - 1 swaps)</tspan></text>
+<rect x="300.0" y="306.0" width="320.0" height="54.0" rx="10" fill="#a5d8ff"/>
+<path d="M300.9 307.0 Q458.0 308.3 620.7 304.5 M620.9 306.6 Q620.8 334.0 620.1 359.5 M620.4 361.2 Q458.1 358.2 301.2 360.4 M301.4 359.7 Q302.3 335.0 300.1 307.2" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M299.9 304.5 Q462.0 307.5 619.1 306.2 M618.7 306.8 Q617.7 330.5 619.9 359.1 M620.3 358.9 Q458.7 357.5 300.8 360.6 M299.8 358.4 Q302.1 332.2 298.9 305.6" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="460.0" y="333.0">Grow sorted prefix: i = i + 1</tspan></text>
+<polygon points="460.0,394 620,434.0 460.0,474 300,434.0" fill="#ffec99"/>
+<path d="M460.4 392.9 Q542.5 413.4 619.0 433.8 M621.1 433.4 Q541.1 451.2 460.7 472.9 M460.9 472.6 Q378.5 453.1 300.5 434.4 M301.0 433.7 Q379.3 413.8 459.4 392.9" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M460.6 393.3 Q539.7 411.2 618.6 434.6 M618.7 435.3 Q542.3 452.0 459.9 474.6 M459.2 472.6 Q377.9 454.0 300.2 435.5 M300.5 433.9 Q380.1 416.0 459.4 394.3" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="460.0" y="434.0">Is i &lt; n - 1?</tspan></text>
+<rect x="300.0" y="508.0" width="320.0" height="54.0" rx="10" fill="#99e9f2"/>
+<path d="M300.0 509.3 Q460.8 509.6 621.2 509.1 M620.5 508.4 Q620.4 533.7 619.2 561.5 M618.7 561.8 Q458.9 560.0 301.0 561.7 M299.9 560.5 Q302.0 536.5 299.1 508.2" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M299.4 509.0 Q459.4 506.5 620.8 507.6 M620.2 509.5 Q622.6 534.5 618.8 562.0 M618.8 563.3 Q458.9 562.5 300.5 561.9 M301.1 563.1 Q302.7 534.2 299.3 508.3" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="460.0" y="535.0">Array fully sorted</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="390.0" y="598.0">Selection sort always scans the unsorted part fully, even when the array is already sorted</tspan></text>
+</svg>

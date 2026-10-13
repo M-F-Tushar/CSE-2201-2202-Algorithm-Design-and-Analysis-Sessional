@@ -12,6 +12,7 @@ import ch1_diagrams   # noqa: E402
 import ch2_diagrams   # noqa: E402
 import ch3_diagrams   # noqa: E402
 import ch4_diagrams   # noqa: E402
+import ch5_diagrams   # noqa: E402
 import ch7_diagrams   # noqa: E402
 import ch8_diagrams   # noqa: E402
 import ch11_diagrams  # noqa: E402
@@ -23,6 +24,7 @@ MODULES = [
     ch2_diagrams,
     ch3_diagrams,
     ch4_diagrams,
+    ch5_diagrams,
     ch7_diagrams,
     ch8_diagrams,
     ch11_diagrams,

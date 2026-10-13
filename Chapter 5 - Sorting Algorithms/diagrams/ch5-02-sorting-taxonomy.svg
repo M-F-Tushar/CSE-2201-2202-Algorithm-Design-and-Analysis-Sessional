@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="420" viewBox="0 0 1180 420" role="img" aria-label="Classification of Sorting Algorithms in This Chapter">
+<rect width="1180" height="420" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="590.0" y="34.0">Classification of Sorting Algorithms in This Chapter</tspan></text>
+<path d="M549.9 85.5 Q550.0 102.1 550.6 118.5 M549.5 118.6 Q445.1 118.1 340.5 118.0 M340.6 118.5 Q340.1 132.3 340.0 150.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M335.9 139.8 L340.0 150.0 L344.1 139.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M549.8 85.5 Q551.3 103.3 551.0 118.4 M549.5 119.0 Q721.3 116.4 890.4 118.7 M891.0 118.4 Q888.4 134.5 890.7 150.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M885.9 139.8 L890.0 150.0 L894.1 139.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M339.4 213.7 Q339.7 230.8 340.1 246.7 M339.7 247.1 Q242.8 245.6 144.7 246.8 M145.1 246.7 Q143.6 264.0 144.8 280.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M140.9 269.8 L145.0 280.0 L149.1 269.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M340.3 213.2 Q340.9 229.0 340.0 247.6 M339.2 247.0 Q368.5 246.8 400.6 247.5 M400.0 247.6 Q399.8 265.2 400.5 279.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M395.9 269.8 L400.0 280.0 L404.1 269.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M340.8 213.6 Q340.3 230.5 339.7 247.2 M339.6 246.7 Q490.0 246.2 640.2 247.2 M639.7 247.2 Q639.2 265.1 640.2 280.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M635.9 269.8 L640.0 280.0 L644.1 269.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M890.1 213.8 Q889.9 228.7 890.2 246.9 M889.8 247.2 Q875.7 247.8 864.9 246.9 M865.2 246.9 Q865.8 262.9 864.9 279.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M860.9 269.8 L865.0 280.0 L869.1 269.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M890.1 213.8 Q890.4 230.9 890.4 247.5 M889.8 247.4 Q972.9 245.7 1055.5 247.2 M1055.4 247.5 Q1053.7 263.4 1055.2 280.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M1050.9 269.8 L1055.0 280.0 L1059.1 269.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="440.0" y="30.0" width="220.0" height="56.0" rx="10" fill="#a5d8ff"/>
+<path d="M438.9 30.2 Q549.4 30.2 659.5 28.5 M660.2 29.1 Q657.3 58.9 660.1 85.5 M661.2 84.5 Q549.5 87.4 439.0 86.1 M438.5 85.9 Q439.1 55.5 440.8 30.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M438.9 31.3 Q551.1 30.2 661.0 30.9 M660.4 30.6 Q662.2 60.1 658.8 86.4 M658.9 85.0 Q549.4 86.1 439.8 87.4 M441.3 87.1 Q438.9 59.2 440.6 31.1" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="550.0" y="58.0">Sorting Algorithms</tspan></text>
+<rect x="20.0" y="150.0" width="640.0" height="64.0" rx="10" fill="#ffec99"/>
+<path d="M20.1 149.7 Q337.4 149.8 660.8 151.1 M660.1 149.5 Q659.9 179.9 658.6 212.5 M659.9 214.5 Q338.4 212.5 18.4 213.8 M19.2 215.2 Q20.5 182.6 19.2 149.3" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M21.4 149.7 Q342.3 152.0 660.1 151.2 M661.1 149.4 Q661.1 179.2 660.7 212.9 M661.3 215.2 Q341.6 211.4 21.1 214.5 M20.4 213.2 Q18.7 184.8 19.5 150.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="340.0" y="171.4">Comparative Sorts</tspan><tspan x="340.0" y="192.6">Decide order by comparing two items</tspan></text>
+<rect x="700.0" y="150.0" width="380.0" height="64.0" rx="10" fill="#b2f2bb"/>
+<path d="M699.8 149.1 Q888.5 152.1 1079.1 149.9 M1079.3 150.3 Q1078.7 179.8 1080.3 215.5 M1080.2 213.0 Q891.7 215.3 699.2 214.9 M698.9 215.3 Q701.1 182.2 701.0 150.9" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M700.5 150.9 Q890.7 148.5 1078.6 150.5 M1080.2 149.3 Q1079.7 183.7 1081.6 212.7 M1079.4 212.9 Q887.2 212.3 699.6 213.9 M701.1 214.8 Q701.5 181.9 698.5 148.7" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="890.0" y="171.4">Non-Comparative Sorts</tspan><tspan x="890.0" y="192.6">Use digit or key structure</tspan></text>
+<rect x="20.0" y="280.0" width="250.0" height="64.0" rx="10" fill="#ffc9c9"/>
+<path d="M20.9 281.0 Q143.0 282.3 270.7 278.5 M270.9 280.6 Q270.8 313.0 270.1 343.5 M270.4 345.2 Q143.1 342.2 21.2 344.4 M21.4 343.7 Q22.3 314.0 20.1 281.2" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M19.9 278.5 Q147.0 281.5 269.1 280.2 M268.7 280.8 Q267.7 309.5 269.9 343.1 M270.3 342.9 Q143.7 341.5 20.8 344.6 M19.8 342.4 Q22.1 311.2 18.9 279.6" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="145.0" y="302.8">Quadratic</tspan><tspan x="145.0" y="321.2">Bubble, Selection, Insertion</tspan></text>
+<rect x="290.0" y="280.0" width="220.0" height="64.0" rx="10" fill="#99e9f2"/>
+<path d="M290.4 278.9 Q402.5 279.4 509.0 279.8 M511.2 281.3 Q512.0 310.9 511.1 344.6 M508.9 344.6 Q402.3 346.2 288.4 344.0 M290.5 344.9 Q290.7 310.5 288.6 280.5" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M290.6 279.3 Q399.7 277.2 508.6 280.6 M509.6 281.2 Q507.7 314.4 509.6 343.2 M510.6 345.3 Q401.8 345.4 288.9 343.4 M289.7 343.2 Q292.7 309.9 288.6 280.2" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="400.0" y="302.8">Divide and Conquer</tspan><tspan x="400.0" y="321.2">Merge Sort, Quick Sort</tspan></text>
+<rect x="530.0" y="280.0" width="220.0" height="64.0" rx="10" fill="#e0d5fa"/>
+<path d="M530.0 281.3 Q640.8 281.6 751.2 281.1 M750.5 280.4 Q750.4 310.7 749.2 343.5 M748.7 343.8 Q638.9 342.0 531.0 343.7 M529.9 342.5 Q532.0 313.5 529.1 280.2" fill="none" stroke="#6741d9" stroke-width="2" stroke-linecap="round"/>
+<path d="M529.4 281.0 Q639.4 278.5 750.8 279.6 M750.2 281.5 Q752.6 311.5 748.8 344.0 M748.8 345.3 Q638.9 344.5 530.5 343.9 M531.1 345.1 Q532.7 311.2 529.3 280.3" fill="none" stroke="#6741d9" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="640.0" y="302.8">Heap-Based</tspan><tspan x="640.0" y="321.2">Heap Sort</tspan></text>
+<rect x="780.0" y="280.0" width="170.0" height="64.0" rx="10" fill="#b2f2bb"/>
+<path d="M779.7 279.4 Q864.8 277.2 948.9 279.6 M950.2 281.1 Q947.6 313.5 950.8 342.5 M949.1 342.7 Q865.5 342.0 778.6 342.5 M780.6 343.3 Q779.7 309.2 778.6 280.6" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M779.9 279.4 Q867.0 282.0 950.3 280.1 M950.3 281.5 Q952.3 310.4 949.6 343.5 M951.4 343.9 Q862.9 341.4 780.6 345.2 M778.8 345.0 Q780.4 311.8 780.1 280.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="865.0" y="302.8">Counting Sort</tspan><tspan x="865.0" y="321.2">Small key range</tspan></text>
+<rect x="970.0" y="280.0" width="170.0" height="64.0" rx="10" fill="#b2f2bb"/>
+<path d="M968.5 280.3 Q1056.1 278.7 1138.9 280.8 M1140.6 279.8 Q1139.3 314.1 1138.4 342.9 M1139.2 342.7 Q1056.1 346.3 971.3 343.9 M969.4 345.0 Q969.4 310.5 970.8 279.6" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M971.2 278.8 Q1052.9 281.8 1138.6 279.7 M1140.2 280.2 Q1142.4 311.5 1139.9 344.7 M1138.6 344.1 Q1053.9 343.9 970.0 343.2 M970.7 343.9 Q972.6 310.8 971.3 278.7" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="1055.0" y="302.8">Radix / Bucket</tspan><tspan x="1055.0" y="321.2">Digit-by-digit</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="590.0" y="398.0">Comparative sorts are bounded below by Ω(n log n); non-comparative sorts can beat that bound under key assumptions</tspan></text>
+</svg>

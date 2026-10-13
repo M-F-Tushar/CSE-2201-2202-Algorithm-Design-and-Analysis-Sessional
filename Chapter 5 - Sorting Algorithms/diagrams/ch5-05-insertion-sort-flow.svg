@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="620" viewBox="0 0 780 620" role="img" aria-label="Insertion Sort Control Flow">
+<rect width="780" height="620" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="390.0" y="34.0">Insertion Sort Control Flow</tspan></text>
+<path d="M459.9 83.5 Q460.0 101.1 460.6 118.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M455.9 107.8 L460.0 118.0 L464.1 107.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M459.8 171.5 Q461.3 190.3 461.0 206.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M455.9 195.8 L460.0 206.0 L464.1 195.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M459.4 265.7 Q459.7 283.3 460.1 299.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M455.9 289.8 L460.0 300.0 L464.1 289.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M460.3 353.2 Q460.9 369.5 460.0 388.6" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M455.9 377.8 L460.0 388.0 L464.1 377.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M620.8 427.6 Q650.3 428.0 679.7 428.2 M679.6 427.7 Q680.0 285.7 680.2 145.2 M679.7 145.2 Q649.2 146.6 620.2 145.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M630.2 140.9 L620.0 145.0 L630.2 149.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="661.0" y="274.5" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="680.0" y="286.5">Yes</tspan></text>
+<path d="M460.1 467.8 Q459.9 483.2 460.2 501.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M455.9 491.8 L460.0 502.0 L464.1 491.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="445.0" y="473.0" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="460.0" y="485.0">No</tspan></text>
+<rect x="300.0" y="30.0" width="320.0" height="54.0" rx="10" fill="#a5d8ff"/>
+<path d="M298.9 30.2 Q459.4 30.2 619.5 28.5 M620.2 29.1 Q617.3 57.9 620.1 83.5 M621.2 82.5 Q459.5 85.4 299.0 84.1 M298.5 83.9 Q299.1 54.5 300.8 30.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M298.9 31.3 Q461.1 30.2 621.0 30.9 M620.4 30.6 Q622.2 59.1 618.8 84.4 M618.9 83.0 Q459.4 84.1 299.8 85.4 M301.3 85.1 Q298.9 58.2 300.6 31.1" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="460.0" y="57.0">Treat A[0] as the sorted prefix</tspan></text>
+<rect x="300.0" y="118.0" width="320.0" height="54.0" rx="10" fill="#ffec99"/>
+<path d="M300.1 117.7 Q457.4 117.8 620.8 119.1 M620.1 117.5 Q619.9 142.9 618.6 170.5 M619.9 172.5 Q458.4 170.5 298.4 171.8 M299.2 173.2 Q300.5 145.6 299.2 117.3" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M301.4 117.7 Q462.3 120.0 620.1 119.2 M621.1 117.4 Q621.1 142.2 620.7 170.9 M621.3 173.2 Q461.6 169.4 301.1 172.5 M300.4 171.2 Q298.7 147.8 299.5 118.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="460.0" y="145.0">Take key = A[i] (next item)</tspan></text>
+<rect x="300.0" y="206.0" width="320.0" height="60.0" rx="10" fill="#b2f2bb"/>
+<path d="M299.8 205.1 Q458.5 208.1 619.1 205.9 M619.3 206.3 Q618.7 233.8 620.3 267.5 M620.2 265.0 Q461.7 267.3 299.2 266.9 M298.9 267.3 Q301.1 236.2 301.0 206.9" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M300.5 206.9 Q460.7 204.5 618.6 206.5 M620.2 205.3 Q619.7 237.7 621.6 264.7 M619.4 264.9 Q457.2 264.3 299.6 265.9 M301.1 266.8 Q301.5 235.9 298.5 204.7" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="460.0" y="236.0">Shift larger items one step right</tspan></text>
+<rect x="300.0" y="300.0" width="320.0" height="54.0" rx="10" fill="#b2f2bb"/>
+<path d="M300.9 301.0 Q458.0 302.3 620.7 298.5 M620.9 300.6 Q620.8 328.0 620.1 353.5 M620.4 355.2 Q458.1 352.2 301.2 354.4 M301.4 353.7 Q302.3 329.0 300.1 301.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M299.9 298.5 Q462.0 301.5 619.1 300.2 M618.7 300.8 Q617.7 324.5 619.9 353.1 M620.3 352.9 Q458.7 351.5 300.8 354.6 M299.8 352.4 Q302.1 326.2 298.9 299.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="460.0" y="327.0">Drop key into the gap</tspan></text>
+<polygon points="460.0,388 620,428.0 460.0,468 300,428.0" fill="#ffec99"/>
+<path d="M460.4 386.9 Q542.5 407.4 619.0 427.8 M621.1 427.4 Q541.1 445.2 460.7 466.9 M460.9 466.6 Q378.5 447.1 300.5 428.4 M301.0 427.7 Q379.3 407.8 459.4 386.9" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M460.6 387.3 Q539.7 405.2 618.6 428.6 M618.7 429.3 Q542.3 446.0 459.9 468.6 M459.2 466.6 Q377.9 448.0 300.2 429.5 M300.5 427.9 Q380.1 410.0 459.4 388.3" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="460.0" y="428.0">More items left?</tspan></text>
+<rect x="300.0" y="502.0" width="320.0" height="54.0" rx="10" fill="#99e9f2"/>
+<path d="M300.0 503.3 Q460.8 503.6 621.2 503.1 M620.5 502.4 Q620.4 527.7 619.2 555.5 M618.7 555.8 Q458.9 554.0 301.0 555.7 M299.9 554.5 Q302.0 530.5 299.1 502.2" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M299.4 503.0 Q459.4 500.5 620.8 501.6 M620.2 503.5 Q622.6 528.5 618.8 556.0 M618.8 557.3 Q458.9 556.5 300.5 555.9 M301.1 557.1 Q302.7 528.2 299.3 502.3" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="460.0" y="529.0">Array fully sorted</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="390.0" y="598.0">Insertion sort is fast on nearly sorted input because the shift loop does little work</tspan></text>
+</svg>
