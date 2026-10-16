@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Q2(b): illustrative n = 8 loop counts">
+<rect width="800" height="600" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="400.0" y="34.0">Q2(b): illustrative n = 8 loop counts</tspan></text>
+<path d="M358.8 159.5 Q317.9 200.1 277.4 240.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M281.2 229.9 L276.8 240.0 L286.9 235.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M440.9 159.5 Q483.5 201.3 524.2 240.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M513.1 235.8 L523.2 240.0 L518.8 229.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="70.0" y="80.0" width="660.0" height="80.0" rx="10" fill="#a5d8ff"/>
+<path d="M68.9 80.2 Q399.4 80.2 729.5 78.5 M730.2 79.1 Q727.3 120.9 730.1 159.5 M731.2 158.5 Q399.5 161.4 69.0 160.1 M68.5 159.9 Q69.1 117.5 70.8 80.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M68.9 81.3 Q401.1 80.2 731.0 80.9 M730.4 80.6 Q732.2 122.1 728.8 160.4 M728.9 159.0 Q399.4 160.1 69.8 161.4 M71.3 161.1 Q68.9 121.2 70.6 81.1" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="400.0" y="109.4">Both outer loops use i = 1, 2, 4, 8</tspan><tspan x="400.0" y="130.6">K = floor(log2(n)) = 3</tspan></text>
+<rect x="35.0" y="240.0" width="350.0" height="130.0" rx="10" fill="#a5d8ff"/>
+<path d="M35.1 239.7 Q207.4 239.8 385.8 241.1 M385.1 239.5 Q384.9 302.9 383.6 368.5 M384.9 370.5 Q208.4 368.5 33.4 369.8 M34.2 371.2 Q35.5 305.6 34.2 239.3" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M36.4 239.7 Q212.3 242.0 385.1 241.2 M386.1 239.4 Q386.1 302.2 385.7 368.9 M386.3 371.2 Q211.6 367.4 36.1 370.5 M35.4 369.2 Q33.7 307.8 34.5 240.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="210.0" y="283.9">(i) Inner limit n</tspan><tspan x="210.0" y="305.0">8 + 8 + 8 + 8 = 32</tspan><tspan x="210.0" y="326.1">n (floor(log2(n)) + 1)</tspan></text>
+<rect x="415.0" y="240.0" width="350.0" height="130.0" rx="10" fill="#b2f2bb"/>
+<path d="M414.8 239.1 Q588.5 242.1 764.1 239.9 M764.3 240.3 Q763.7 302.8 765.3 371.5 M765.2 369.0 Q591.7 371.3 414.2 370.9 M413.9 371.3 Q416.1 305.2 416.0 240.9" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M415.5 240.9 Q590.7 238.5 763.6 240.5 M765.2 239.3 Q764.7 306.7 766.6 368.7 M764.4 368.9 Q587.2 368.3 414.6 369.9 M416.1 370.8 Q416.5 304.9 413.5 238.7" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="590.0" y="283.9">(ii) Inner limit i</tspan><tspan x="590.0" y="305.0">1 + 2 + 4 + 8 = 15</tspan><tspan x="590.0" y="326.1">2^(K+1) - 1</tspan></text>
+<rect x="70.0" y="455.0" width="660.0" height="85.0" rx="10" fill="#ffec99"/>
+<path d="M70.9 456.0 Q398.0 457.3 730.7 453.5 M730.9 455.6 Q730.8 498.5 730.1 539.5 M730.4 541.2 Q398.1 538.2 71.2 540.4 M71.4 539.7 Q72.3 499.5 70.1 456.2" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M69.9 453.5 Q402.0 456.5 729.1 455.2 M728.7 455.8 Q727.7 495.0 729.9 539.1 M730.3 538.9 Q398.7 537.5 70.8 540.6 M69.8 538.4 Q72.1 496.7 68.9 454.6" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="400.0" y="486.9">(i) Theta(n log n)     (ii) Theta(n)</tspan><tspan x="400.0" y="508.1">Positive integer n, constant-time body, no overflow</tspan></text>
+</svg>
