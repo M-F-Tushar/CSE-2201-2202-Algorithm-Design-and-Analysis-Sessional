@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="630" viewBox="0 0 800 630" role="img" aria-label="Q3(c): Strassen method on 2x2 blocks">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
+<rect width="800" height="630" fill="#ffffff" rx="10"/>
+<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
+<text x="400" y="28.0" text-anchor="middle" font-size="20" fill="#1e1e1e" font-weight="bold">Q3(c): Strassen Method for A × B (2 × 2 blocks)</text>
+<text x="215" y="62.0" text-anchor="middle" font-size="16" fill="#1e1e1e" font-weight="bold">Matrix A</text>
+<rect x="130" y="80" width="84" height="54" rx="8" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="172" y="107.0" text-anchor="middle" font-size="14" fill="#1e1e1e">A11 = 1</text>
+<rect x="214" y="80" width="84" height="54" rx="8" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="256" y="107.0" text-anchor="middle" font-size="14" fill="#1e1e1e">A12 = 3</text>
+<rect x="130" y="134" width="84" height="54" rx="8" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="172" y="161.0" text-anchor="middle" font-size="14" fill="#1e1e1e">A21 = 7</text>
+<rect x="214" y="134" width="84" height="54" rx="8" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="256" y="161.0" text-anchor="middle" font-size="14" fill="#1e1e1e">A22 = 5</text>
+<text x="341" y="136.0" text-anchor="middle" font-size="26" fill="#1e1e1e">×</text>
+<text x="470" y="62.0" text-anchor="middle" font-size="16" fill="#1e1e1e" font-weight="bold">Matrix B</text>
+<rect x="385" y="80" width="84" height="54" rx="8" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="427" y="107.0" text-anchor="middle" font-size="14" fill="#1e1e1e">B11 = 6</text>
+<rect x="469" y="80" width="84" height="54" rx="8" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="511" y="107.0" text-anchor="middle" font-size="14" fill="#1e1e1e">B12 = 8</text>
+<rect x="385" y="134" width="84" height="54" rx="8" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="427" y="161.0" text-anchor="middle" font-size="14" fill="#1e1e1e">B21 = 4</text>
+<rect x="469" y="134" width="84" height="54" rx="8" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="511" y="161.0" text-anchor="middle" font-size="14" fill="#1e1e1e">B22 = 2</text>
+<text x="250" y="222.0" text-anchor="middle" font-size="16" fill="#1e1e1e" font-weight="bold">Seven Strassen products</text>
+<rect x="25" y="240" width="450" height="34" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2"/>
+<text x="250" y="257.0" text-anchor="middle" font-size="12" fill="#1e1e1e">P1 = A11 · (B12 − B22) = 1 · (8 − 2) = 6</text>
+<rect x="25" y="280" width="450" height="34" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2"/>
+<text x="250" y="297.0" text-anchor="middle" font-size="12" fill="#1e1e1e">P2 = (A11 + A12) · B22 = (1 + 3) · 2 = 8</text>
+<rect x="25" y="320" width="450" height="34" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2"/>
+<text x="250" y="337.0" text-anchor="middle" font-size="12" fill="#1e1e1e">P3 = (A21 + A22) · B11 = (7 + 5) · 6 = 72</text>
+<rect x="25" y="360" width="450" height="34" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2"/>
+<text x="250" y="377.0" text-anchor="middle" font-size="12" fill="#1e1e1e">P4 = A22 · (B21 − B11) = 5 · (4 − 6) = −10</text>
+<rect x="25" y="400" width="450" height="34" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2"/>
+<text x="250" y="417.0" text-anchor="middle" font-size="12" fill="#1e1e1e">P5 = (A11 + A22) · (B11 + B22) = (1 + 5) · (6 + 2) = 48</text>
+<rect x="25" y="440" width="450" height="34" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2"/>
+<text x="250" y="457.0" text-anchor="middle" font-size="12" fill="#1e1e1e">P6 = (A12 − A22) · (B21 + B22) = (3 − 5) · (4 + 2) = −12</text>
+<rect x="25" y="480" width="450" height="34" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2"/>
+<text x="250" y="497.0" text-anchor="middle" font-size="12" fill="#1e1e1e">P7 = (A11 − A21) · (B11 + B12) = (1 − 7) · (6 + 8) = −84</text>
+<text x="640" y="222.0" text-anchor="middle" font-size="16" fill="#1e1e1e" font-weight="bold">Combine into C</text>
+<text x="490" y="250.0" text-anchor="start" font-size="13" fill="#1e1e1e">C11 = P5 + P4 − P2 + P6</text>
+<text x="490" y="274.0" text-anchor="start" font-size="13" fill="#1e1e1e">     = 48 − 10 − 8 − 12 = 18</text>
+<text x="490" y="298.0" text-anchor="start" font-size="13" fill="#1e1e1e">C12 = P1 + P2 = 6 + 8 = 14</text>
+<text x="490" y="322.0" text-anchor="start" font-size="13" fill="#1e1e1e">C21 = P3 + P4 = 72 − 10 = 62</text>
+<text x="490" y="346.0" text-anchor="start" font-size="13" fill="#1e1e1e">C22 = P5 + P1 − P3 − P7</text>
+<text x="490" y="370.0" text-anchor="start" font-size="13" fill="#1e1e1e">     = 48 + 6 − 72 + 84 = 66</text>
+<text x="640" y="392.0" text-anchor="middle" font-size="16" fill="#1e1e1e" font-weight="bold">C = A × B</text>
+<rect x="520" y="410" width="84" height="54" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="562" y="437.0" text-anchor="middle" font-size="14" fill="#1e1e1e">C11 = 18</text>
+<rect x="604" y="410" width="84" height="54" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="646" y="437.0" text-anchor="middle" font-size="14" fill="#1e1e1e">C12 = 14</text>
+<rect x="520" y="464" width="84" height="54" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="562" y="491.0" text-anchor="middle" font-size="14" fill="#1e1e1e">C21 = 62</text>
+<rect x="604" y="464" width="84" height="54" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="646" y="491.0" text-anchor="middle" font-size="14" fill="#1e1e1e">C22 = 66</text>
+<text x="400" y="556.0" text-anchor="middle" font-size="14" fill="#1e1e1e">Strassen uses 7 block products (P1 to P7) instead of 8 multiplications.</text>
+<text x="400" y="580.0" text-anchor="middle" font-size="14" fill="#868e96">Check: [[1·6+3·4, 1·8+3·2], [7·6+5·4, 7·8+5·2]] = [[18, 14], [62, 66]].</text>
+</g>
+</svg>
