@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="660" viewBox="0 0 1040 660" role="img" aria-label="Q6(a): Reuse Fibonacci states instead of recomputing calls">
+<rect width="1040" height="660" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="520.0" y="34.0">Q6(a): Reuse Fibonacci states instead of recomputing calls</tspan></text>
+<path d="M339.9 422.0 Q350.0 422.6 360.6 423.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M349.8 426.6 L360.0 422.5 L349.8 418.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M499.8 422.0 Q511.3 423.8 521.0 422.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M509.8 426.6 L520.0 422.5 L509.8 418.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M659.4 422.2 Q669.7 422.8 680.1 422.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M669.8 426.6 L680.0 422.5 L669.8 418.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M820.3 421.7 Q830.9 421.0 840.0 423.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M829.8 426.6 L840.0 422.5 L829.8 418.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M110.8 389.6 Q110.3 337.5 109.7 285.2 M109.6 284.7 Q270.0 284.2 430.2 285.2 M429.7 285.2 Q429.2 339.1 430.2 390.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M425.9 379.8 L430.0 390.0 L434.1 379.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M270.1 389.8 Q269.9 345.7 270.2 304.9 M269.8 305.2 Q428.2 305.8 589.9 304.9 M590.2 304.9 Q590.8 346.9 589.9 389.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M585.9 379.8 L590.0 390.0 L594.1 379.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M430.1 389.8 Q430.4 357.9 430.4 325.5 M429.8 325.4 Q590.4 323.7 750.5 325.2 M750.4 325.5 Q748.7 357.4 750.2 390.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M745.9 379.8 L750.0 390.0 L754.1 379.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M590.3 390.7 Q589.9 366.7 589.7 345.7 M590.7 344.7 Q749.2 345.3 910.7 344.9 M909.7 345.7 Q910.3 365.8 909.9 389.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M905.9 379.8 L910.0 390.0 L914.1 379.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="40.0" y="390.0" width="140.0" height="65.0" rx="10" fill="#b2f2bb"/>
+<path d="M38.9 390.2 Q109.4 390.2 179.5 388.5 M180.2 389.1 Q177.3 423.4 180.1 454.5 M181.2 453.5 Q109.5 456.4 39.0 455.1 M38.5 454.9 Q39.1 420.0 40.8 390.1" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M38.9 391.3 Q111.1 390.2 181.0 390.9 M180.4 390.6 Q182.2 424.6 178.8 455.4 M178.9 454.0 Q109.4 455.1 39.8 456.4 M41.3 456.1 Q38.9 423.7 40.6 391.1" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="110.0" y="422.5">F(0) = 0</tspan></text>
+<rect x="200.0" y="390.0" width="140.0" height="65.0" rx="10" fill="#b2f2bb"/>
+<path d="M200.1 389.7 Q267.4 389.8 340.8 391.1 M340.1 389.5 Q339.9 420.4 338.6 453.5 M339.9 455.5 Q268.4 453.5 198.4 454.8 M199.2 456.2 Q200.5 423.1 199.2 389.3" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M201.4 389.7 Q272.3 392.0 340.1 391.2 M341.1 389.4 Q341.1 419.7 340.7 453.9 M341.3 456.2 Q271.6 452.4 201.1 455.5 M200.4 454.2 Q198.7 425.3 199.5 390.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="270.0" y="422.5">F(1) = 1</tspan></text>
+<rect x="360.0" y="390.0" width="140.0" height="65.0" rx="10" fill="#b2f2bb"/>
+<path d="M359.8 389.1 Q428.5 392.1 499.1 389.9 M499.3 390.3 Q498.7 420.3 500.3 456.5 M500.2 454.0 Q431.7 456.3 359.2 455.9 M358.9 456.3 Q361.1 422.7 361.0 390.9" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M360.5 390.9 Q430.7 388.5 498.6 390.5 M500.2 389.3 Q499.7 424.2 501.6 453.7 M499.4 453.9 Q427.2 453.3 359.6 454.9 M361.1 455.8 Q361.5 422.4 358.5 388.7" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="430.0" y="422.5">F(2) = 1</tspan></text>
+<rect x="520.0" y="390.0" width="140.0" height="65.0" rx="10" fill="#b2f2bb"/>
+<path d="M520.9 391.0 Q588.0 392.3 660.7 388.5 M660.9 390.6 Q660.8 423.5 660.1 454.5 M660.4 456.2 Q588.1 453.2 521.2 455.4 M521.4 454.7 Q522.3 424.5 520.1 391.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M519.9 388.5 Q592.0 391.5 659.1 390.2 M658.7 390.8 Q657.7 420.0 659.9 454.1 M660.3 453.9 Q588.7 452.5 520.8 455.6 M519.8 453.4 Q522.1 421.7 518.9 389.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="590.0" y="422.5">F(3) = 2</tspan></text>
+<rect x="680.0" y="390.0" width="140.0" height="65.0" rx="10" fill="#b2f2bb"/>
+<path d="M680.4 388.9 Q752.5 389.4 819.0 389.8 M821.2 391.3 Q822.0 421.4 821.1 455.6 M818.9 455.6 Q752.3 457.2 678.4 455.0 M680.5 455.9 Q680.7 421.0 678.6 390.5" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M680.6 389.3 Q749.7 387.2 818.6 390.6 M819.6 391.2 Q817.7 424.9 819.6 454.2 M820.6 456.3 Q751.8 456.4 678.9 454.4 M679.7 454.2 Q682.7 420.4 678.6 390.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="750.0" y="422.5">F(4) = 3</tspan></text>
+<rect x="840.0" y="390.0" width="140.0" height="65.0" rx="10" fill="#b2f2bb"/>
+<path d="M840.0 391.3 Q910.8 391.6 981.2 391.1 M980.5 390.4 Q980.4 421.2 979.2 454.5 M978.7 454.8 Q908.9 453.0 841.0 454.7 M839.9 453.5 Q842.0 424.0 839.1 390.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M839.4 391.0 Q909.4 388.5 980.8 389.6 M980.2 391.5 Q982.6 422.0 978.8 455.0 M978.8 456.3 Q908.9 455.5 840.5 454.9 M841.1 456.1 Q842.7 421.7 839.3 390.3" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="910.0" y="422.5">F(5) = 5</tspan></text>
+<rect x="40.0" y="100.0" width="450.0" height="140.0" rx="10" fill="#a5d8ff"/>
+<path d="M39.7 99.4 Q264.8 97.2 488.9 99.6 M490.2 101.1 Q487.6 171.5 490.8 238.5 M489.1 238.7 Q265.5 238.0 38.6 238.5 M40.6 239.3 Q39.7 167.2 38.6 100.6" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M39.9 99.4 Q267.0 102.0 490.3 100.1 M490.3 101.5 Q492.3 168.4 489.6 239.5 M491.4 239.9 Q262.9 237.4 40.6 241.2 M38.8 241.0 Q40.4 169.8 40.1 100.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="265.0" y="147.6">Naive F(5): 15 calls total</tspan><tspan x="265.0" y="170.0">F(3) twice; F(2) three times</tspan><tspan x="265.0" y="192.4">F(1) five times; F(0) three times</tspan></text>
+<rect x="550.0" y="100.0" width="450.0" height="140.0" rx="10" fill="#ffec99"/>
+<path d="M548.5 100.3 Q776.1 98.7 998.9 100.8 M1000.6 99.8 Q999.3 172.1 998.4 238.9 M999.2 238.7 Q776.1 242.3 551.3 239.9 M549.4 241.0 Q549.4 168.5 550.8 99.6" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M551.2 98.8 Q772.9 101.8 998.6 99.7 M1000.2 100.2 Q1002.4 169.5 999.9 240.7 M998.6 240.1 Q773.9 239.9 550.0 239.2 M550.7 239.9 Q552.6 168.8 551.3 98.7" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="775.0" y="147.6">DP: one stored answer per index</tspan><tspan x="775.0" y="170.0">Base cases F(0)=0, F(1)=1</tspan><tspan x="775.0" y="192.4">F(i)=F(i−1)+F(i−2)</tspan></text>
+<rect x="40.0" y="545.0" width="960.0" height="65.0" rx="10" fill="#e9ecef"/>
+<path d="M39.9 545.6 Q518.9 546.8 1001.3 543.9 M999.6 544.7 Q1000.3 580.2 999.2 608.6 M1000.0 611.4 Q517.8 612.3 39.7 608.6 M39.9 609.4 Q42.0 579.5 40.3 545.1" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M39.2 544.4 Q521.2 544.8 999.9 546.1 M998.7 546.4 Q1001.1 579.4 999.3 608.6 M1000.2 611.1 Q519.3 610.0 40.2 608.7 M40.5 610.0 Q37.3 578.7 39.3 543.5" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="520.0" y="577.5">Unit-cost arithmetic: Θ(n) time; Θ(n) table words, or Θ(1) words retaining only two values.</tspan></text>
+</svg>
