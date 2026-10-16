@@ -2,33 +2,29 @@
 
 [Previous: 1st Batch Theory](../../1st%20Batch/Theory/README.md) | [Chapter 0 - Previous Year Questions](../../README.md) | [Home](../../../README.md) | [Next: 2nd Batch Lab Final](../Lab%20Final/README.md)
 
-This page answers the CSE 2201 theory paper (2nd Batch). It covers **Section A, Q1 to Q4 (all parts)** and **Section B, Q5 to Q8 (all parts)**. The paper asks you to answer any 3 questions from each section, so every part is answered here so you can choose.
+This study guide covers **Section A, Q1–Q4**, and **Section B, Q5–Q8**, with answers to all **24 subquestions**. The retained notes say to answer any three questions per section; the marks below are also retained from those notes, not independently authenticated.
 
-| Question | Topic | a | b | c | d |
-|----------|-------|---|---|---|---|
-| Q1 | Algorithm design, time and space, asymptotic bounds | 6 | 9 | 20 | - |
-| Q2 | NP classes, BFS shortest path, activity DAG | 7 | 10 | 18 | - |
-| Q3 | Searching vs traversing, linear and binary search, Strassen | 5 | 20 | 10 | - |
-| Q4 | Insertion vs bubble sort, quick sort, merge sort | 10 | 10 | 15 | - |
-| Q5 | Greedy algorithms, fractional knapsack, MST | 8 | 12 | 15 | - |
-| Q6 | Dynamic programming, Floyd-Warshall, LCS | 11 | 12 | 12 | - |
-| Q7 | Backtracking: graph colouring, LC-search, N-Queens | 10 | 10 | 15 | - |
-| Q8 | Decision vs optimization, branch and bound, TSP | 8 | 12 | 15 | - |
+> [!IMPORTANT]
+> **Source and reconstruction policy.** No original 2nd Batch theory paper or scan is available in this repository for this review. The wording is a self-contained study reconstruction, not a verified verbatim transcription. Worked inputs retained below (IDs, arrays, matrices, LCS strings, item/job lists, and graphs) are **illustrative or unverified transcriptions**, not claimed to be the original exam data. In particular, Q2(c)'s dependencies are assumed, Q5(c)'s weights are uncertain, and Q7(a), Q7(b), and Q8(b) are explicitly reconstructed examples. Results are exact **for the stated inputs**; different original givens require recomputation.
 
-### Visual Map: How the Topics Connect
+Every subquestion includes a relevant SVG preview with an editable Excalidraw source in the [diagram index](diagrams/README.md).
 
-The first questions give you the tools (complexity and recurrences). Sorting and greedy use them. Dynamic programming and backtracking are the last big ideas, and branch and bound and TSP build on both.
+| Question | Topic | (a) marks | (b) marks | (c) marks |
+|----------|-------|-----------|-----------|-----------|
+| Q1 | Algorithm design, time and space, asymptotic bounds | 6 | 9 | 20 |
+| Q2 | NP classes, BFS shortest path, activity DAG | 7 | 10 | 18 |
+| Q3 | Searching vs traversing, linear and binary search, Strassen | 5 | 20 | 10 |
+| Q4 | Insertion vs bubble sort, quick sort, merge sort | 10 | 10 | 15 |
+| Q5 | Greedy algorithms, fractional knapsack, MST | 8 | 12 | 15 |
+| Q6 | Dynamic programming, Floyd-Warshall, LCS | 11 | 12 | 12 |
+| Q7 | Backtracking: graph colouring, LC-search, N-Queens | 10 | 10 | 15 |
+| Q8 | Decision vs optimization, branch and bound, TSP | 8 | 12 | 15 |
 
-```mermaid
-flowchart TD
-    Q1[Q1: Complexity and recurrences] --> Q3[Q3: Searching and sorting basics]
-    Q1 --> Q2[Q2: NP classes, BFS, DAG]
-    Q3 --> Q4[Q4: Quick sort and merge sort]
-    Q4 --> Q5[Q5: Greedy and MST]
-    Q5 --> Q6[Q6: Dynamic programming]
-    Q6 --> Q7[Q7: Backtracking]
-    Q7 --> Q8[Q8: Branch and bound and TSP]
-```
+### Visual Map: Full-Paper Topic Roadmap
+
+The roadmap groups questions by section; it is **not a prerequisite chain**. Q1's analysis techniques apply throughout. Q3 covers searching, traversal, and **Strassen's matrix multiplication**, while sorting is Q4. Greedy, dynamic programming, and backtracking are distinct strategies—not successive stages built on greedy. Specific connections include fractional knapsack's relaxation as a bound in Q7(b), dynamic programming for TSP in Q8(c), and complexity classes in Q2(a) alongside decision versus optimization in Q8(a). Q7(b) is best-first branch and bound, distinct from Q7(a)/(c)'s depth-first backtracking.
+
+![Full-paper roadmap of all eight questions and their subtopics, grouped by section rather than prerequisites](diagrams/b2-theory-25-paper-roadmap.svg)
 
 ---
 
@@ -39,7 +35,7 @@ flowchart TD
 #### Q1(a) Define time complexity and space complexity. When is space critical?
 
 - **Time complexity** is how the number of steps grows as the input size $n$ grows. Example: a single loop over $n$ items takes $\Theta(n)$ time.
-- **Space complexity** is how much extra memory the algorithm needs as $n$ grows. Example: merge sort needs an extra array of size $n$, so its space is $\Theta(n)$. Insertion sort needs only $\Theta(1)$ extra space.
+- **Space complexity** measures memory as a function of input size. **Total space** includes input storage; **auxiliary space** excludes it but includes temporary arrays and the recursion stack. Here, sorting-space comparisons mean auxiliary space: array merge sort uses $\Theta(n)$, while iterative insertion sort uses $\Theta(1)$.
 
 Both are written with asymptotic notation (see [Chapter 2](../../../Chapter%202%20-%20Complexity%20Analysis%20and%20Asymptotic%20Notation/README.md)).
 
@@ -49,7 +45,9 @@ Both are written with asymptotic notation (see [Chapter 2](../../../Chapter%202%
 2. The device is small (phones, embedded boards, sensors).
 3. Many programs run at the same time and share the same memory.
 
-Example: sorting $10^9$ numbers on a small device. Merge sort needs about another $10^9$ slots, so heap sort (which sorts in place) is the safer choice, even though it is a little slower in practice.
+Example: if $10^9$ numbers already fit in RAM but a second array does not, iterative heap sort can sort them with $\Theta(1)$ auxiliary space. If the input itself does not fit, use an external-memory method, such as external merge sort; choosing an in-place RAM algorithm alone does not solve that problem. Actual speed depends on the implementation and workload.
+
+![Time, total space, and auxiliary space](diagrams/b2-theory-15-time-space.svg)
 
 #### Q1(b) Define an algorithm design paradigm. Describe divide and conquer and greedy, with examples.
 
@@ -61,13 +59,13 @@ A **design paradigm** is a general strategy that solves many different problems.
 2. **Conquer** each part by solving it (recursively, or directly if it is small).
 3. **Combine** the answers into the final answer.
 
-Examples: merge sort, quick sort, binary search (see [Chapter 6](../../../Chapter%206%20-%20Divide%20and%20Conquer/README.md)).
+Examples: merge sort and quick sort; binary search recurses into only one half (also called decrease-and-conquer) (see [Chapter 6](../../../Chapter%206%20-%20Divide%20and%20Conquer/README.md)).
 
 **Greedy**
 
 At every step, pick the option that looks best right now, and never go back. This works when the best local choice is always part of some best overall answer.
 
-Example: **activity selection**. Among activities that do not overlap, always pick the one that **finishes earliest**. This gives the largest possible number of activities (see [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md)).
+Example: **unweighted activity selection on one resource**. Repeatedly choose the earliest-finishing activity compatible with the last selected one, treating intervals as $[s,f)$ so that $s_{next}\ge f_{last}$ is allowed. This maximizes the number selected (see [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md)).
 
 | | Divide and conquer | Greedy |
 |--|--------------------|--------|
@@ -75,13 +73,21 @@ Example: **activity selection**. Among activities that do not overlap, always pi
 | Going back? | Not needed, since parts are solved fully | Never changes a choice |
 | Example | Merge sort | Activity selection, Kruskal's MST |
 
-#### Q1(c) Find the asymptotic bounds of four recurrences.
+![Divide-and-conquer and greedy design patterns](diagrams/b2-theory-16-design-paradigms.svg)
+
+#### Q1(c) Find tight asymptotic bounds for $2T(n/2)+n$, $T(n-1)+1$, $4T(n/2)+n^2$, and $T(n/3)+\log n$.
+
+Assume constant positive base-case cost $T(n)=\Theta(1)$ for $n\le1$, fixed logarithm base greater than 1, and positive integer sizes. Use powers of 2 or 3 for the respective divide recurrences; standard floors/ceilings do not change the bounds.
 
 Method used: the **Master theorem** for $T(n) = aT(n/b) + f(n)$ (see [Chapter 3](../../../Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md)). Compare $f(n)$ with $n^{\log_b a}$:
 
-- If $f(n)$ is smaller, $T(n) = \Theta(n^{\log_b a})$.
-- If they are equal, $T(n) = \Theta(n^{\log_b a} \log n)$.
-- If $f(n)$ is larger (and regular), $T(n) = \Theta(f(n))$.
+Let $p=\log_b a$, with $a\ge1$, $b>1$ and asymptotically nonnegative $f$.
+
+- **Case 1:** $f(n)=O(n^{p-\varepsilon})$ for some fixed $\varepsilon>0$ gives $T(n)=\Theta(n^p)$.
+- **Case 2 (extended):** $f(n)=\Theta(n^p\log^k n)$, $k\ge0$, gives $T(n)=\Theta(n^p\log^{k+1}n)$.
+- **Case 3:** $f(n)=\Omega(n^{p+\varepsilon})$ for some fixed $\varepsilon>0$, and $af(n/b)\le cf(n)$ for some $c<1$ and sufficiently large $n$, gives $T(n)=\Theta(f(n))$.
+
+Merely being smaller or larger is not sufficient in Cases 1 and 3: the polynomial gap matters.
 
 **(i) $T(n) = 2T(n/2) + n$**
 
@@ -105,7 +111,7 @@ $$T(n) = T(n-1) + 1 = T(n-2) + 2 = \dots = T(1) + (n-1)$$
 
 **(iv) $T(n) = T(n/3) + \log n$**
 
-- Here $a = 1$, $b = 3$, so $n^{\log_3 1} = 1$. The basic Master theorem does not fit because $f(n) = \log n$ is not a plain power of $n$.
+- Here $a = 1$, $b = 3$, so $n^{\log_3 1} = 1$. The basic three-case form does not apply: $\log n$ is larger than 1 but not polynomially larger, so Case 3's polynomial-gap condition fails.
 - Use the **extended** Case 2 form: if $f(n) = \Theta(\log^k n)$ with $k \ge 0$, then $T(n) = \Theta(\log^{k+1} n)$. Here $k = 1$.
 - Check by expansion. Level $i$ costs $\log(n / 3^i) = \log n - i\log 3$. There are about $\log_3 n$ levels. Adding them gives about $\frac{(\log n)^2}{2\log 3}$.
 - **Answer: $T(n) = \Theta(\log^2 n)$.**
@@ -117,16 +123,20 @@ $$T(n) = T(n-1) + 1 = T(n-2) + 2 = \dots = T(1) + (n-1)$$
 | $4T(n/2) + n^2$ | 4, 2 | Master, Case 2 | $\Theta(n^2 \log n)$ |
 | $T(n/3) + \log n$ | 1, 3 | Extended Case 2 | $\Theta(\log^2 n)$ |
 
+![Recursion-level costs and tight bounds](diagrams/b2-theory-17-recurrences.svg)
+
 ---
 
 ### Q2. NP Classes, BFS, and Activity Graph
 
 #### Q2(a) Define NP, NP-hard, and NP-complete.
 
-- **P**: problems that can be **solved** in polynomial time, such as $n^2$ or $n^3$ steps.
-- **NP**: problems where a **"yes" answer can be checked** in polynomial time, if someone gives you the answer (a certificate). We do not know a fast way to *find* the answer. Example: given a tour, check if its cost is at most $k$.
-- **NP-hard**: at least as hard as every problem in NP. It does **not** have to be in NP. Example: the optimization version of TSP ("find the shortest tour").
-- **NP-complete**: a problem that is **both** in NP and NP-hard. These are the hardest problems inside NP. Examples: the decision version of TSP, SAT, Hamiltonian cycle, subset sum, and graph colouring.
+Use polynomial-time reductions and measure time in the **encoded input length** (for example, integer weights written in binary).
+
+- **P**: decision problems solvable by a deterministic algorithm in polynomial time.
+- **NP**: decision problems whose yes-instances have polynomial-length certificates verifiable in polynomial time. This includes **all of P**; NP does not mean “no fast solution is known.” Example: a proposed tour certifies that a TSP instance has a tour of cost at most $k$.
+- **NP-hard**: every problem in NP reduces to it in polynomial time. For decision problems, use polynomial-time many-one reductions. NP-hard problems need not be in NP, or even decidable. TSP optimization is NP-hard because an optimizer would solve its NP-complete threshold decision problem.
+- **NP-complete**: both in NP and NP-hard. Examples: TSP decision, SAT, Hamiltonian cycle, subset sum decision, and deciding whether a graph has a proper $k$-colouring for fixed $k\ge3$ (or when $k$ is part of the input). **2-colouring is in P**, so “graph colouring” without a specified variant is ambiguous.
 
 Every P problem is also in NP, because a checker can simply solve the problem itself. Whether P = NP is still an open question (see [Chapter 15](../../../Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md)).
 
@@ -144,9 +154,9 @@ In an **unweighted** graph every edge counts as 1 step. BFS explores the graph i
    - For each neighbour $v$ of $u$ that is **not visited**: mark $v$ visited, set $d(v) = d(u) + 1$, set `parent[v] = u`, and add $v$ to the queue.
 3. To print the path to a target, follow `parent` back from the target to $S$, then reverse it.
 
-Time: $O(V + E)$. (BFS is covered in [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md) and [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md).)
+Time: $O(V+E)$ with adjacency lists; auxiliary space: $O(V)$. With an adjacency matrix, scanning neighbours takes $O(V^2)$. If a target is unreachable, its distance stays $\infty$ and no parent path exists. (BFS is covered in [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md) and [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md).)
 
-**Example.** Graph with source $S$, edges S-A, S-B, A-C, B-C, B-D, C-E, D-E.
+**Illustrative givens.** Undirected graph $V=\{S,A,B,C,D,E\}$ with edges S-A, S-B, A-C, B-C, B-D, C-E, D-E; source $S$, target $E$. Visit each vertex's neighbours alphabetically, marking them **when enqueued**, not when dequeued.
 
 | Step | Pop from queue | Newly discovered (distance) | Queue after step |
 |------|----------------|-----------------------------|------------------|
@@ -156,6 +166,7 @@ Time: $O(V + E)$. (BFS is covered in [Chapter 4](../../../Chapter%204%20-%20Sear
 | 3 | B | D (2); C is already visited | C, D |
 | 4 | C | E (3) | D, E |
 | 5 | D | E is already visited | E |
+| 6 | E | None | Empty |
 
 Shortest path from $S$ to $E$: follow parents $E \leftarrow C \leftarrow A \leftarrow S$, so **S-A-C-E** (3 edges). S-B-D-E is also 3 edges.
 
@@ -163,7 +174,7 @@ Shortest path from $S$ to $E$: follow parents $E \leftarrow C \leftarrow A \left
 
 #### Q2(c) Activity DAG: directed graph, topological order, and variations.
 
-The activities are: Wake up, Brush teeth, Take breakfast, Go to class, Study in library, Do homework, Sleep. The question lists them in order, so I take each activity to depend on the one before it. (If the real dependencies are different, the answers below change accordingly.)
+**Reconstructed givens.** The seven activities are Wake up, Brush teeth, Take breakfast, Go to class, Study in library, Do homework, Sleep. A list alone does **not** specify dependencies. For this worked example, explicitly assume the six consecutive precedence edges shown below. Find a topological order, decide whether it is unique, and analyze replacing the final chain by Study in library → Sleep → Do homework.
 
 **(i) Directed graph.** Each activity is a vertex. Each arrow means "must finish before":
 
@@ -183,13 +194,13 @@ This is a **DAG** (directed acyclic graph): the arrows all point forward, so the
 
 Method: Kahn's algorithm removes vertices with no incoming arrows one by one (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)). Only "Wake up" has no incoming arrow at first, and each removal unlocks the next.
 
-**(iii) Is more than one order possible?** For these arrows, **no**. Each activity has exactly one parent, so the order is forced. If the rules were looser (for example, brushing teeth and breakfast could happen in either order), there would be more than one valid order, such as 1 Wake up, 2 Take breakfast, 3 Brush teeth, and so on.
+**(iii) Is more than one order possible?** For this directed **chain**, **no**: every earlier activity must precede every later one. Equivalently, Kahn's algorithm has exactly one zero-indegree choice at every step. “At most one parent per vertex” alone would not imply uniqueness (a branching tree can have many orders). If the rules were looser (for example, brushing teeth and breakfast could happen in either order), there would be more than one valid order, such as 1 Wake up, 2 Take breakfast, 3 Brush teeth, and so on.
 
-**(iv) What if Sleep comes before Homework?** The arrows change to ... Study in library → Sleep → Do homework. The new topological order is:
+**(iv) What if Sleep comes before Homework?** **Replace** Study in library → Do homework → Sleep with Study in library → Sleep → Do homework. The other four edges stay unchanged. The new topological order is:
 
 1. Wake up, 2. Brush teeth, 3. Take breakfast, 4. Go to class, 5. Study in library, 6. **Sleep**, 7. **Do homework**
 
-The graph is still a DAG, so a topological order still exists. It would only fail if the change created a **cycle**, for example an arrow from Sleep back to Wake up. Then no order could satisfy all arrows.
+The replacement graph is still a DAG. In contrast, **adding** Sleep → Do homework while retaining Do homework → Sleep creates a 2-cycle, so **no** topological order exists. Merely moving Sleep earlier in a list does not change the original constraints; the new list would violate them.
 
 ![Activity DAG and the variant with Sleep before Homework](diagrams/b2-theory-03-activity-dag.svg)
 
@@ -206,11 +217,15 @@ The graph is still a DAG, so a topological order still exists. It would only fai
 | Stops early? | Yes, when found | Usually no, it visits all items |
 | Examples | Linear search, binary search, search in a BST or hash table | BFS, DFS, in-order traversal of a tree |
 
+A traversal can implement a search: BFS or DFS may stop when it finds a target. For disconnected graphs, a traversal from one source visits only its reachable component; restart at unvisited vertices to cover the whole graph. The distinction is the task's objective, not an absolute restriction on which algorithm can be used.
+
+![Searching for a target versus traversing all entries](diagrams/b2-theory-18-search-traverse.svg)
+
 Both are covered in [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md). A simple way to remember it: searching asks "Is 511 here?", traversing asks "Show me every item."
 
 #### Q3(b) Find 511 in the sorted IDs with linear and binary search. Count comparisons, and compare best, average, and worst cases.
 
-Array (sorted): `[102, 205, 307, 409, 511, 613, 715, 817]`, so $n = 8$, target $511$.
+**Illustrative givens.** Sorted random-access array `[102, 205, 307, 409, 511, 613, 715, 817]`, $n=8$, target $511$. Use zero-based indices and $mid=\lfloor(lo+hi)/2\rfloor$. Count one **three-way key comparison** per inspected element (less/equal/greater); do not count loop/index tests.
 
 **Linear search** checks items from the start:
 
@@ -232,24 +247,26 @@ Linear search needs **5 comparisons** and finds 511 at index 4.
 | 2 | 4 | 7 | 5 | 613 | $613 > 511$, so $hi = 4$ |
 | 3 | 4 | 4 | 4 | 511 | **Found** |
 
-Binary search needs **3 comparisons**.
+Binary search needs **3 three-way key comparisons**, inspecting 409, 613, 511. If implemented as `if a[mid] == key` followed by `elif a[mid] < key`, it uses **5 individual key predicates** (2 + 2 + 1), versus linear search's 5 equality tests. State the cost model before comparing counts.
 
 **Best, average, and worst cases**
 
 | Search | Best case | Average case | Worst case |
 |--------|-----------|--------------|------------|
-| Linear | $\Theta(1)$: target is the first item | $\Theta(n)$: about $n/2$ checks | $\Theta(n)$: target is last or missing |
+| Linear | $\Theta(1)$: target is the first item | $\Theta(n)$: $(n+1)/2$ checks for a uniformly located successful target | $\Theta(n)$: target is last or missing |
 | Binary | $\Theta(1)$: target is the middle item | $\Theta(\log n)$ | $\Theta(\log n)$ |
 
-For 511: linear takes 5 comparisons, binary takes 3.
+Average-case statements assume uniformly distributed successful target positions. For this eight-item array, the exact averages are $36/8=4.5$ probes for linear search and $21/8=2.625$ for the specified binary search; binary search's worst case is **4**, not 3, probes (target 817). For 511, the counts are 5 versus 3.
 
-**Which is better?** Binary search is better here, because it halves the range each time and needs about $\log_2 8 = 3$ checks. Its big cost is that the data must already be sorted. Linear search is still the right choice for unsorted data, or when you search only once.
+**Which is better?** Binary search uses fewer probes here and requires sorted random-access data. Its worst-case successful count is $\lfloor\log_2 n\rfloor+1$ for $n\ge1$. For one query on unsorted data, linear search avoids paying for sorting; for already-sorted data, binary search can be useful even for a single query. Both iterative searches use $O(1)$ auxiliary space.
+
+![Linear probes and binary-search intervals for 511](diagrams/b2-theory-19-search-trace.svg)
 
 #### Q3(c) Apply Strassen's method to $A = \begin{bmatrix}1 & 3 \\ 7 & 5\end{bmatrix}$ and $B = \begin{bmatrix}6 & 8 \\ 4 & 2\end{bmatrix}$.
 
 Strassen's idea: split each $2 \times 2$ matrix into four blocks. Normal multiplication uses 8 block products. Strassen uses **7** products and then some extra additions. This saves time for large matrices, because the recurrence becomes $T(n) = 7T(n/2) + \Theta(n^2)$, which gives $\Theta(n^{\log_2 7}) \approx \Theta(n^{2.81})$.
 
-This method is not covered in the repo's chapters, so the steps below come from the standard Strassen formulas. Here each block is a single number: $A_{11} = 1$, $A_{12} = 3$, $A_{21} = 7$, $A_{22} = 5$, and $B_{11} = 6$, $B_{12} = 8$, $B_{21} = 4$, $B_{22} = 2$.
+For the illustrative matrices stated in the question, use the following standard Strassen formulas. Here each block is a single number: $A_{11} = 1$, $A_{12} = 3$, $A_{21} = 7$, $A_{22} = 5$, and $B_{11} = 6$, $B_{12} = 8$, $B_{21} = 4$, $B_{22} = 2$.
 
 | Product | Formula | Value |
 |---------|---------|-------|
@@ -305,7 +322,9 @@ Bubble sort swaps neighbours in repeated passes. A small item at the **end** of 
 
 Total: **21 comparisons**, **6 swaps**. The early-exit flag does not help here, because a swap happens in every pass.
 
-**Conclusion:** insertion sort does about 11 comparisons and bubble sort about 21 on the same input. On a nearly sorted array, insertion sort is close to linear time, while bubble sort still has to make many passes.
+**Conclusion:** insertion sort does about 11 comparisons and bubble sort about 21 on the same input. Insertion sort takes $\Theta(n+I)$ time for $I$ inversions, so it is linear when $I=O(n)$. This input has $I=6$. Standard **left-to-right** bubble sort, even with shrinking pass limits and early exit, can still take $\Theta(n^2)$ time on this family of inputs. This is not a claim that every nearly sorted input makes bubble sort slow; an already sorted array takes $\Theta(n)$ with early exit. Counts here include only comparisons between array keys and exclude loop tests and the final insertion write.
+
+![Insertion shifts versus six left-to-right bubble passes](diagrams/b2-theory-20-insertion-bubble.svg)
 
 #### Q4(b) Quick sort on $[1023, 1010, 1055, 1005, 1040]$. Show the pivot, the partitions, and the final array.
 
@@ -327,7 +346,7 @@ Finally, swap the pivot with $a[i+1] = a[3]$: **1023, 1010, 1005, 1040, 1055**. 
 
 **Pass 2 (left part):** pivot = 1005. Both 1023 and 1010 are greater than 1005, so $i$ stays at $-1$. Swap the pivot with $a[0]$: **1005, 1010, 1023**. Left part is empty. Right part is $[1010, 1023]$.
 
-**Pass 3 (right part of pass 2):** pivot = 1023. 1010 is less than 1023, so it stays. Result: **1010, 1023**. Each side now has one item.
+**Pass 3 (right part of pass 2):** pivot = 1023. 1010 is less than 1023, so it stays. Result: **1010, 1023**. The left side is $[1010]$ and the right side is empty. There are **7 key–pivot comparisons** over the three partitions (4 + 2 + 1).
 
 ![Quick sort partition tree](diagrams/b2-theory-05-quicksort-partition.svg)
 
@@ -335,7 +354,7 @@ Finally, swap the pivot with $a[i+1] = a[3]$: **1023, 1010, 1005, 1040, 1055**. 
 
 #### Q4(c) Divide and conquer (merge sort style) on $[38, 27, 43, 3, 9, 82, 10]$. Show divide, conquer, and combine.
 
-**Divide** (split in the middle each time):
+**Divide** (for an odd length, put the extra element in the **left** half):
 
 - $[38, 27, 43, 3, 9, 82, 10]$ splits into $[38, 27, 43, 3]$ and $[9, 82, 10]$.
 - $[38, 27, 43, 3]$ splits into $[38, 27]$ and $[43, 3]$, then into single items.
@@ -373,7 +392,9 @@ Greedy gives an optimal answer when two conditions hold:
 
 Proofs usually use an **exchange argument**: take any optimal solution, swap in the greedy choice, and show the answer does not get worse.
 
-**Counterexample (greedy fails):** coins $\{1, 3, 4\}$ and amount $6$. Greedy takes $4 + 1 + 1$ (3 coins), but $3 + 3$ uses only 2 coins. Here the greedy choice property does not hold.
+**Counterexample (greedy fails):** with unlimited coins $\{1,3,4\}$, minimize the number summing to 6. Largest-coin-first takes $4+1+1$ (3 coins), but $3+3$ uses 2. Optimal substructure alone is insufficient: the **specific selection rule** must have a proved safe greedy choice on every residual instance. Runtime also depends on the algorithm; greedy does not automatically mean constant or linear time.
+
+![Greedy exchange argument and a coin-change counterexample](diagrams/b2-theory-21-greedy-proof.svg)
 
 #### Q5(b) Fractional knapsack with $W = 50$. Items $(w, p)$: $(10, 60)$, $(20, 100)$, $(30, 120)$. Find the ratios, the selection, and the maximum profit.
 
@@ -393,7 +414,11 @@ Selection (capacity 50):
 | 2 | All of item 2 | 30 | 160 |
 | 3 | $\frac{20}{30}$ of item 3 (only 20 weight is left) | 50 | 160 + $\frac{2}{3}$ × 120 = **240** |
 
-**Maximum profit: 240.** (The 0/1 version, where items cannot be split, would give only 220 here, so splitting helps.) See [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md) for the proof.
+**Maximum profit: 240**, with fractions $(1,1,2/3)$. Optimality: if a solution uses lower-ratio weight while higher-ratio weight remains available, exchange equal amounts of weight; profit cannot decrease. Repeating gives the stated ratio-ordered fill. Sorting costs $O(n\log n)$ and filling costs $O(n)$. (The 0/1 optimum is 220, from items 2 and 3, so splitting helps.)
+
+![Fractional knapsack fill by decreasing profit density](diagrams/b2-theory-22-fractional-knapsack.svg)
+
+See [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md) for the proof.
 
 #### Q5(c) Define a minimum spanning tree (MST). Apply Kruskal's algorithm to the given graph. Show the steps and the total cost.
 
@@ -406,9 +431,9 @@ Selection (capacity 50):
 3. Stop when $V - 1$ edges are taken.
 
 > [!NOTE]
-> The edge weights below were read from a low-resolution scan of the paper. Please check them against the original paper before relying on the numbers. The method is the same for any weights.
+> **Unverified transcription.** Earlier notes attributed these weights to a low-resolution scan, but that scan is unavailable here. Treat the following complete edge list as the worked instance, not an authenticated original.
 
-Sorted edges: (1,5)=1, (1,4)=1, (2,1)=2, (3,2)=3, (3,1)=3, (3,4)=5, (4,5)=6, (0,2)=7, (0,3)=9.
+**Givens:** connected undirected graph $V=\{0,1,2,3,4,5\}$, with **only** the following nine edges. Sorted edges (ties broken in the displayed order): (1,5)=1, (1,4)=1, (2,1)=2, (3,2)=3, (3,1)=3, (3,4)=5, (4,5)=6, (0,2)=7, (0,3)=9.
 
 | Step | Edge | Weight | Same component already? | Action | Total cost |
 |------|------|--------|-------------------------|--------|------------|
@@ -423,9 +448,9 @@ Sorted edges: (1,5)=1, (1,4)=1, (2,1)=2, (3,2)=3, (3,1)=3, (3,4)=5, (4,5)=6, (0,
 
 After step 8 we have $6 - 1 = 5$ edges, so we stop. (Edge (0,3) is not needed.)
 
-![Kruskal MST on the given graph](diagrams/b2-theory-07-kruskal-mst.svg)
+![Kruskal MST on the unverified transcribed graph](diagrams/b2-theory-07-kruskal-mst.svg)
 
-**Total MST cost = 1 + 1 + 2 + 3 + 7 = 14**
+**Total MST cost = 1 + 1 + 2 + 3 + 7 = 14.** Another MST replaces (3,2) by (3,1), also weight 3; the MST is not unique. Sorting plus disjoint-set operations takes $O(E\log E)$ time. For a disconnected graph Kruskal returns a minimum spanning forest, not a spanning tree.
 
 ---
 
@@ -438,27 +463,34 @@ After step 8 we have $6 - 1 = 5$ edges, so we stop. (Edge (0,3) is not needed.)
 1. **Overlapping subproblems:** the same smaller problem appears many times.
 2. **Optimal substructure:** the best answer uses best answers to subproblems (see [Chapter 8](../../../Chapter%208%20-%20Dynamic%20Programming/README.md)).
 
-**Fibonacci:** $F(n) = F(n-1) + F(n-2)$.
+**Fibonacci:** $F(0)=0$, $F(1)=1$, and $F(n)=F(n-1)+F(n-2)$ for $n\ge2$. Naive recursion stops immediately at 0 or 1. For this counting problem, DP uses a reusable recurrence; it need not be an optimization problem with a “best” answer.
 
 The naive recursion for $F(5)$ calls:
 
 - $F(3)$ **twice**
 - $F(2)$ **three times**
-- $F(1)$ and $F(0)$ many times
+- $F(1)$ five times and $F(0)$ three times
+- $F(5)$ and $F(4)$ once each
 
 In total, $F(5)$ makes **15** calls, and the number grows exponentially with $n$. Those repeated calls are the **overlapping subproblems**.
 
 With DP, each $F(i)$ is computed once and stored:
 
 ```
+if n == 0: return 0
 F[0] = 0, F[1] = 1
 for i = 2 to n:
     F[i] = F[i-1] + F[i-2]
+return F[n]
 ```
 
-This takes $O(n)$ time and $O(n)$ space.
+The table for $F(5)$ is $[0,1,1,2,3,5]$. With unit-cost arithmetic, tabulation takes $\Theta(n)$ time and $\Theta(n)$ auxiliary words. Keeping just the previous two values reduces auxiliary storage to $\Theta(1)$ words. Exact $F(n)$ has $\Theta(n)$ bits, so arbitrary-precision arithmetic is not constant-cost: straightforward addition gives $\Theta(n^2)$ bit operations and two-value storage still uses $\Theta(n)$ bits.
 
-#### Q6(b) Floyd-Warshall on the given $D_0$. Show the intermediate matrices and the final matrix.
+![Repeated Fibonacci calls versus one stored value per state](diagrams/b2-theory-23-fibonacci-dp.svg)
+
+#### Q6(b) Apply Floyd-Warshall to the illustrative $D_0$ below. Show all intermediate matrices and the final matrix.
+
+**Givens:** directed graph on vertices 1–4, with exactly the four weighted edges listed below; $\infty$ means no direct edge, and diagonal zero represents a length-zero path. Process intermediate vertices in order 1, 2, 3, 4. There are no negative cycles.
 
 Floyd-Warshall finds the shortest distance between **every pair** of vertices. Let $D_k(i,j)$ be the shortest distance from $i$ to $j$ using only vertices $1..k$ as middle vertices. Then:
 
@@ -514,12 +546,13 @@ So for each middle vertex $k$, we check whether going through $k$ is shorter (se
 
 ![Floyd-Warshall graph and matrix changes](diagrams/b2-theory-08-floyd-warshall.svg)
 
-The time is $O(n^3)$ for $n$ vertices.
+The time is $\Theta(n^3)$ and the distance matrix takes $\Theta(n^2)$ space; in-place updates suffice. The shortest 1→4 path is **1→2→3→4**, cost 9. In general negative edges are allowed, but a negative diagonal after the algorithm signals a negative cycle, so some pairs have no finite shortest-path value.
 
-#### Q6(c) LCS of $X = $ AGGTAB and $Y = $ GXTXAYB. Give the full DP table, the traceback, the LCS, and its length.
+#### Q6(c) LCS of $X=\text{AGGTAB}$ and $Y=\text{GXTXAYB}$. Give the full DP table, the traceback, the LCS, and its length.
 
 Rule (let $L[i][j]$ be the LCS length of the first $i$ letters of $X$ and the first $j$ letters of $Y$):
 
+- Initialize $L[0][j]=L[i][0]=0$ (an empty string has LCS length zero).
 - If $X_i = Y_j$: $L[i][j] = L[i-1][j-1] + 1$.
 - Otherwise: $L[i][j] = \max(L[i-1][j],\ L[i][j-1])$.
 
@@ -550,7 +583,7 @@ Rule (let $L[i][j]$ be the LCS length of the first $i$ letters of $X$ and the fi
 
 Reading the taken letters backwards gives **G, T, A, B**.
 
-**LCS = GTAB, length = 4**
+**LCS = GTAB, length = 4.** The move at $(3,2)$ is a tie; choose up to reproduce this traceback. Other valid tie choices can produce a different embedding of the same subsequence. Filling the table costs $\Theta(|X||Y|)$ time and space; traceback costs $O(|X|+|Y|)$.
 
 ![LCS table with traceback](diagrams/b2-theory-09-lcs-table.svg)
 
@@ -561,20 +594,20 @@ Reading the taken letters backwards gives **G, T, A, B**.
 #### Q7(a) Graph colouring by backtracking on a 5-vertex graph. Show the vertex order and the backtracking steps.
 
 > [!NOTE]
-> The exact graph is not reproduced in my reference notes, so this answer uses a sample 5-vertex graph and 3 colours (Red = 1, Green = 2, Blue = 3). The same steps work for any graph.
+> **Reconstructed example:** the original graph is unavailable. Use the five-vertex graph below and three colours (Red = 1, Green = 2, Blue = 3); no claim is made that it matches the paper.
 
 **Sample graph:** edges 1-2, 1-3, 2-3, 3-4, 4-5, 3-5, 2-5.
 
-**Method:** colour vertices in order 1, 2, 3, 4, 5. For each vertex, try each colour that differs from the colours of already-coloured neighbours. If no colour works, **backtrack** to the previous vertex and try its next colour (see [Chapter 9](../../../Chapter%209%20-%20Backtracking/README.md)).
+**Method:** the sample graph is simple and undirected, with exactly the seven listed edges. Initialize all colours to `none`; colour vertices in order 1, 2, 3, 4, 5, trying Red, Green, Blue in that order. For each vertex, try each colour that differs from the colours of already-coloured neighbours. If no colour works, **backtrack** to the previous vertex and try its next colour (see [Chapter 9](../../../Chapter%209%20-%20Backtracking/README.md)).
 
 ```
-colour(v):
+colour_vertex(v):
     if v > n: return true              (all vertices coloured)
     for c in 1..3:
-        if no neighbour of v already has colour c:
-            colour[v] = c
-            if colour(v + 1): return true
-    colour[v] = none                   (backtrack)
+        if every already-coloured neighbour has a colour different from c:
+            colours[v] = c
+            if colour_vertex(v + 1): return true
+            colours[v] = none          (undo before trying another colour)
     return false
 ```
 
@@ -585,27 +618,29 @@ colour(v):
 | 1 | v1 | Red | First colour | Coloured |
 | 2 | v2 | Green | Red is used by neighbour v1 | Coloured |
 | 3 | v3 | Blue | Red (v1) and Green (v2) are used | Coloured |
-| 4 | v4 | Red | Only neighbour is v3 (Blue) | Coloured |
+| 4 | v4 | Red | Only already-coloured neighbour is v3 (Blue) | Coloured |
 | 5 | v5 | none | Neighbours v2 (Green), v3 (Blue), v4 (Red) use all 3 colours | **Dead end** |
 | 6 | v4 | Green | Backtrack: next colour for v4 | Coloured |
 | 7 | v5 | Red | Neighbours v2 (Green), v3 (Blue), v4 (Green) | **Solution** |
 
-**Final colouring:** v1 Red, v2 Green, v3 Blue, v4 Green, v5 Red.
+**Final colouring:** v1 Red, v2 Green, v3 Blue, v4 Green, v5 Red. Every listed edge has differently coloured endpoints. The triangle 1–2–3 requires at least three colours, and the displayed 3-colouring proves the chromatic number is **3**. The search may examine $O(m^n)$ assignments for $m$ colours ($O(nm^n)$ time if each safety check scans all vertices), with $O(n)$ search storage excluding the graph.
 
 ![Graph colouring backtracking tree](diagrams/b2-theory-10-colouring-tree.svg)
 
 #### Q7(b) LC-search on the 0/1 knapsack problem with at least 4 items. Draw the state-space tree.
 
 > [!NOTE]
-> The exact items are not reproduced in my reference notes, so this answer uses the instance below. The method is the same for any items.
+> **Reconstructed example:** the original items are unavailable. The four items below specify the worked problem completely; their profits and weights are not authenticated exam givens.
 
 **Instance:** capacity $W = 10$. Items (weight, profit): **A** (4, 40), **C** (3, 18), **B** (6, 30), **D** (5, 20). Sorted by profit per weight: A (10), C (6), B (5), D (4).
 
-**LC-search** (least cost, here "largest bound first") works like a best-first search. Live nodes wait in a priority queue. The node with the **best upper bound** is expanded next. Each node has a bound $ub$:
+**LC-search** (least cost) uses a min-priority queue; for this maximization problem assign cost $-ub$, equivalently expand the **largest upper bound first**. This is best-first branch and bound, not ordinary depth-first backtracking. Live nodes wait in a priority queue. The node with the **best upper bound** is expanded next. Each node has a bound $ub$:
 
 $$ub = \text{profit so far} + \text{best fractional fill of the remaining items}$$
 
-A node is **pruned** when $ub$ is not better than the best complete solution found so far.
+A node is **pruned** if overweight or if $ub$ is no larger than the incumbent feasible profit. Equality pruning is sufficient to find **one** optimum, but may discard alternative optimal solutions.
+
+**Deterministic policy:** generate include then exclude children; break equal-$ub$ queue ties by **earlier insertion** (FIFO). Initialize the incumbent to the empty selection (profit 0). Whenever a feasible partial node is generated, complete it by skipping all undecided items to update the incumbent. Thus profits 40 and 58 are incumbents before 70. A pruned node is never expanded; omitted D decisions are unnecessary once bounded.
 
 **Expansion**
 
@@ -615,13 +650,15 @@ A node is **pruned** when $ub$ is not better than the best complete solution fou
 | A=1 | take A | 4 | 40 | 73 | Expand |
 | A=0 | skip A | 0 | 0 | 52 | Pruned later (52 ≤ 70) |
 | A=1, C=1 | take A, C | 7 | 58 | 73 | Expand |
-| A=1, C=0 | take A | 4 | 40 | 70 | Expand |
-| A=1, C=1, B=1 | take A, C, B | 13 | - | - | **Infeasible** (13 > 10) |
+| A=1, C=0 | take A, skip C | 4 | 40 | 70 | Expand before the later-inserted equal-bound node |
+| A=1, C=1, B=1 | take A, C, B | 13 | 88 | — | **Infeasible** (13 > 10) |
 | A=1, C=1, B=0 | take A, C | 7 | 58 | 70 | Pruned (70 ≤ 70) |
 | A=1, C=0, B=1 | take A, B | 10 | 70 | 70 | **Solution: best = 70** |
 | A=1, C=0, B=0 | take A | 4 | 40 | 60 | Pruned (60 ≤ 70) |
 
-After the solution with profit 70 is found, every live node has $ub \le 70$, so none can beat it and the search stops.
+**Bound arithmetic:** root and A=1: $40+18+(3/6)30=73$; A=0: $18+30+(1/5)20=52$; A=1,C=1: $58+(3/6)30=73$; A=1,C=0: $40+30=70$; A=1,C=1,B=0: $58+(3/5)20=70$; A=1,C=0,B=0: $40+20=60$.
+
+**Actual pop/expansion order:** root → A=1 → A=1,C=1 → A=1,C=0. At the last expansion, generating B=1 yields the complete feasible choice A+B (D=0), profit 70. The equal-bound node A=1,C=1,B=0 was enqueued **after** A=1,C=0, so FIFO ties make the stated sequence valid. Remaining live bounds are at most 70; none is expanded. The table lists generated nodes, not nine successive expansions.
 
 **Answer:** take **A and B**. Profit = 70, weight = 10. (Checking all subsets confirms that no other set gives more profit within capacity 10.)
 
@@ -629,9 +666,9 @@ After the solution with profit 70 is found, every live node has $ub \le 70$, so 
 
 #### Q7(c) N-Queens with N = 5 by backtracking. Show the partial boards.
 
-Place one queen in each row. Two queens attack each other if they share a **column** or a **diagonal** (same difference between row and column). If a row has no safe column, go back to the previous row and move its queen (see [Chapter 9](../../../Chapter%209%20-%20Backtracking/README.md)).
+Place one queen in each row. Two queens attack each other if they share a **column** or a **diagonal** ($|r_i-r_j|=|c_i-c_j|$, covering both diagonal directions). If a row has no safe column, go back to the previous row and move its queen (see [Chapter 9](../../../Chapter%209%20-%20Backtracking/README.md)).
 
-**Trace for the first solution**
+**Trace for the first solution:** process rows 1–5 and try columns 1–5 in ascending order; reject a column if it conflicts with any earlier queen. Represent a partial board by its queen-column vector.
 
 | Row | Columns tried | Result | Partial board (queen columns so far) |
 |-----|---------------|--------|--------------------------------------|
@@ -641,7 +678,7 @@ Place one queen in each row. Two queens attack each other if they share a **colu
 | 4 | 1 (column), 2 | Safe at column 2 | [1, 3, 5, 2] |
 | 5 | 1, 2, 3 (columns), 4 | Safe at column 4 | [1, 3, 5, 2, 4] ✓ |
 
-**A dead end (backtracking).** Try row 2 at column 5 instead, with the board [1, 5]:
+**A later dead end (when enumerating all solutions).** Continue after the first two solutions under row 1 = column 1, undoing queens before each next trial. Eventually row 2 reaches column 5, giving [1, 5]:
 
 - Row 3: only column 2 is safe, so the board is [1, 5, 2].
 - Row 4: column 3 is on a diagonal with (3,2), and column 4 is on a diagonal with (1,1). **No safe column.** Row 3 has no other option, and row 2 has no columns left to try (columns 3 and 4 were already explored and gave solutions). So the search goes back to row 1 and tries column 2.
@@ -656,7 +693,7 @@ Q . . . .
 . . . Q .
 ```
 
-The search finds **10 solutions** for $N = 5$. The second one is [1, 4, 2, 5, 3].
+Continuing enumeration finds **10 distinct boards** for $N=5$, counting rotations and reflections separately (**2** symmetry classes). The second ascending-column solution is [1, 4, 2, 5, 3]. A solver that stops at the first solution does not reach the later dead end or enumerate all ten. At most $O(N!)$ partial placements survive column uniqueness. Trying all $N$ columns and scanning up to $N$ earlier queens per placement gives a conservative $O(N^2 N!)$ time upper bound for a straightforward implementation, with $O(N)$ auxiliary storage.
 
 ![N-Queens backtracking tree and final board](diagrams/b2-theory-12-nqueens-tree.svg)
 
@@ -669,41 +706,45 @@ The search finds **10 solutions** for $N = 5$. The second one is [1, 4, 2, 5, 3]
 | | Decision problem | Optimization problem |
 |--|------------------|----------------------|
 | Question | Is there a solution with a property? Answer yes or no. | What is the best value (minimum or maximum)? |
-| Example (knapsack) | Can we reach profit at least $P$? | What is the maximum profit? |
+| Example (0/1 knapsack) | Is there a subset with weight at most $W$ and profit at least $P$? | Among subsets of weight at most $W$, what is the maximum profit? |
 | Example (TSP) | Is there a tour with cost at most $k$? | What is the cheapest tour? |
 | Output | Yes or no | A value and a solution |
 
-The two are closely related. If we can solve the optimization problem, we can answer the decision problem by comparing the optimum with $k$ or $P$. In the other direction, asking the decision question many times (for example, with binary search over $k$) finds the optimum value. This is why NP-completeness is defined using **decision** problems (see [Chapter 15](../../../Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md)). The decision version of an NP-complete problem is in NP, and the optimization version is NP-hard.
+For problems such as TSP and knapsack, an exact optimizer answers a threshold decision query by comparing its optimum with $k$ or $P$ (handling infeasibility separately). Conversely, a threshold-decision oracle plus **known integer objective bounds** permits binary search for the optimum value in logarithmically many queries in the numeric range. For example, nonnegative integer TSP costs bounded by $M$ give a tour-cost range $[0,nM]$. This alone returns a **value**, not a tour; recovering a witness requires additional self-reduction queries. Such a reduction is not automatic for every optimization problem or arbitrary real-valued objective.
+
+P and NP are classes of decision problems; standard TSP decision is NP-complete, while TSP optimization is NP-hard (see [Chapter 15](../../../Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md)).
+
+![Threshold decision versus finding an optimum and witness](diagrams/b2-theory-24-decision-optimization.svg)
 
 #### Q8(b) Admissible heuristic and bounding function in branch and bound. Solve a job-sequencing instance.
 
 **Branch and bound (B&B)** explores the state-space tree like backtracking. It also uses a **bounding function** to skip branches that cannot give a better answer than the best one found so far (see [Chapter 10](../../../Chapter%2010%20-%20Branch%20and%20Bound/README.md)).
 
-- **Bounding function:** gives an estimate for a node, which is the best value any solution below that node could reach. For a maximization problem this is an **upper bound**.
-- **Admissible heuristic:** a bound that is **optimistic**. It never says a subtree is worse than it really is. For maximization, the bound is never lower than the true best value below the node. So it never prunes the branch that holds the optimal answer.
+- **Bounding function:** gives a guaranteed **upper bound** on the best feasible descendant profit for maximization, or a **lower bound** on descendant cost for minimization. It need not equal the achievable optimum; a relaxation can be deliberately optimistic.
+- **Admissible heuristic:** an optimistic remaining-cost estimate. In a minimization formulation, $h(node)$ never overestimates the best remaining cost, so $g+h$ is a lower bound. In maximization, use an upper bound that never underestimates the best achievable profit. Prune when $ub\le incumbent$ (maximize), or $lb\ge incumbent$ (minimize). Equality pruning may remove tied optima, but cannot remove all optima before an equally good feasible incumbent exists.
 
-**Job sequencing with deadlines (maximize profit).** Each job takes 1 time unit and must finish by its deadline. A set of jobs is feasible if, for each time $t$, at most $t$ chosen jobs have deadline $\le t$.
+**Job sequencing with deadlines (maximize profit).** One machine, all jobs available at time 0, positive integer deadlines, positive profits, one unit per job, no preemption. Slot $t$ runs from time $t-1$ to $t$; a job selected for profit must finish by its deadline. A selected set is feasible iff, for each integer $t\ge1$, at most $t$ selected jobs have deadline $\le t$. To test feasibility, sort the selected jobs by deadline and check the $i$th deadline is at least $i$.
 
 > [!NOTE]
-> The exact paper instance is not in my reference notes, so this answer uses the example below.
+> **Reconstructed example:** the original job list is unavailable. Solve the fully specified four-job instance below, without assuming these were the paper's jobs.
 
 **Instance:** J1 (profit 100, deadline 2), J4 (profit 27, deadline 1), J3 (profit 15, deadline 2), J2 (profit 10, deadline 1). Jobs are considered in order of profit.
 
-**Bound:** $ub$ = profit so far + total profit of all jobs not decided yet. This is admissible, because it can never be lower than the best reachable profit.
+**Bound:** $ub$ = selected profit + sum of profits of all undecided jobs. With these nonnegative profits it is admissible, since it relaxes all remaining deadline constraints. Use **depth-first B&B**, include child before exclude child, and start with incumbent 0. For the trace below, update the incumbent **only at complete feasible leaves**; if instead updated at every feasible partial selection, profit 127 would be known earlier and several later branches could already be pruned.
 
 | Node | Decision | Profit | $ub$ | Status |
 |------|----------|--------|------|--------|
 | Root | none | 0 | 152 | Branch |
 | J1 = 1 | take J1 | 100 | 152 | Branch |
 | J1 = 1, J4 = 1 | take J1, J4 | 127 | 152 | Branch (feasible: J4 in slot 1, J1 in slot 2) |
-| J1, J4, J3 | take J3 too | - | - | **Infeasible**: 3 jobs with deadline ≤ 2 |
-| J1, J4, J3 = 0 | skip J3 | 127 | 137 | Branch |
-| J1, J4, J2 | take J2 too | - | - | **Infeasible**: 2 jobs with deadline ≤ 1 |
-| J1, J4, J3 = 0, J2 = 0 | leaf | 127 | 127 | **Best = 127** |
+| J1=1, J4=1, J3=1 | take J3 too | — | — | **Infeasible**: 3 jobs with deadline ≤ 2 |
+| J1=1, J4=1, J3=0 | skip J3 | 127 | 137 | Branch |
+| J1=1, J4=1, J3=0, J2=1 | take J2 too | — | — | **Infeasible**: 2 jobs with deadline ≤ 1 |
+| J1=1, J4=1, J3=0, J2=0 | leaf | 127 | 127 | **Best = 127** |
 | J1 = 1, J4 = 0 | skip J4 | 100 | 125 | **Pruned** (125 ≤ 127) |
 | J1 = 0 | skip J1 | 0 | 52 | **Pruned** (52 ≤ 127) |
 
-**Answer:** take **J1 and J4**. Maximum profit = **127**. Schedule: J4 in slot 1 and J1 in slot 2.
+**Answer:** take **J1 and J4**. Maximum profit = **127**. Schedule: J4 in slot 1 and J1 in slot 2. The displayed bounds are $152=100+27+15+10$, $137=127+10$, $125=100+15+10$, and $52=27+15+10$. The two unvisited sibling subtrees have bounds 125 and 52, both below 127; together with the infeasible include branches, this proves optimality. This is an exponential worst-case search, not a claim that job sequencing requires B&B; this unit-time variant also admits an efficient profit-ordered greedy algorithm.
 
 ![Branch and bound tree for job sequencing](diagrams/b2-theory-13-bnb-job-tree.svg)
 
@@ -711,7 +752,7 @@ The two are closely related. If we can solve the optimization problem, we can an
 
 The travelling salesman problem (TSP) visits every city once and returns to the start, with the lowest total cost. It is NP-hard. The subset DP reduces the work from $n!$ orders to about $n^2 2^n$ (see [Chapter 8](../../../Chapter%208%20-%20Dynamic%20Programming/README.md)).
 
-**Cost matrix** (cities 1 to 4, start and end at city 1):
+**Illustrative cost matrix** (complete undirected graph on cities 1–4; integer symmetric costs; start and end at city 1):
 
 | | 1 | 2 | 3 | 4 |
 |--|---|---|---|---|
@@ -720,7 +761,7 @@ The travelling salesman problem (TSP) visits every city once and returns to the 
 | 3 | 42 | 30 | 0 | 12 |
 | 4 | 35 | 34 | 12 | 0 |
 
-**Definition:** $g(i, S)$ is the cheapest path that starts at city $i$, visits every city in set $S$ exactly once, and ends at city 1.
+**Definition:** $g(i,S)$ is the cheapest path starting at $i$, visiting exactly the still-unvisited cities $S$, then returning to city 1. For intermediate states $i\ne1$ and $S\subseteq\{2,3,4\}\setminus\{i\}$; city 1 is visited only at the end. The final state is $g(1,\{2,3,4\})$.
 
 $$g(i, S) = \min_{j \in S}\big[c(i,j) + g(j, S \setminus \{j\})\big], \qquad g(i, \varnothing) = c(i,1)$$
 
@@ -758,23 +799,29 @@ $$g(1, \{2,3,4\}) = \min(20 + 77,\ 42 + 66,\ 35 + 62) = \min(97, 108, 97) = \mat
 - $1 \to 2 \to 3 \to 4 \to 1$: $20 + 30 + 12 + 35 = 97$
 - $1 \to 4 \to 3 \to 2 \to 1$: $35 + 12 + 30 + 20 = 97$
 
+The two tours are reversals of the same undirected cycle. All six orders of cities 2,3,4 have costs **97, 108, 141, 108, 141, 97** in lexicographic order, confirming the DP optimum. Held–Karp costs $O(n^2 2^n)$ time and $O(n2^n)$ space; store a minimizing next city at each state to reconstruct a tour.
+
 ![TSP subset DP](diagrams/b2-theory-14-tsp-subsets.svg)
 
 ---
+
+## Verification
+
+Run `python tools/verify_b2_theory.py` from the repository root to recheck the published numerical tables, search traces and bounds, exhaustive small-instance optima, local links, all 24 subquestion visual references, and all 25 SVG/Excalidraw pairs (including the roadmap). The checks are read-only and use Python's standard library. They supplement the mathematical review; they do not authenticate the missing original paper or automatically prove every prose statement.
 
 ## Quick Revision
 
 | Topic | One-line memory |
 |-------|-----------------|
-| Time vs space | Time = steps as $n$ grows; space = extra memory; space is critical on small or huge data |
-| Master theorem | Compare $f(n)$ with $n^{\log_b a}$: smaller, equal (adds a $\log$), or larger |
+| Time vs space | Time counts operations; total space includes input, auxiliary space excludes input but includes the stack |
+| Master theorem | Compare with $n^{\log_b a}$; Cases 1/3 need a polynomial gap, Case 3 also needs regularity |
 | $T(n/3) + \log n$ | $\Theta(\log^2 n)$ (extended Case 2) |
 | P, NP, NP-hard, NP-complete | P = solve fast; NP = verify fast; NP-complete = NP and NP-hard |
 | BFS shortest path | Level by level with a queue; first visit = shortest distance (unweighted) |
 | Topological order | Every arrow goes forward; remove vertices with no incoming arrows |
-| Linear vs binary search | 5 vs 3 comparisons for 511; binary needs sorted data |
+| Linear vs binary search | 5 vs 3 three-way probes for 511; binary needs sorted random access; eight-item worst case is 4 |
 | Strassen | 7 block products instead of 8; $T(n) = 7T(n/2) + \Theta(n^2)$ |
-| Insertion vs bubble | Insertion is near-linear on nearly sorted data; bubble needs many passes |
+| Insertion vs bubble | Insertion takes $\Theta(n+I)$ for $I$ inversions; left-to-right bubble can still be quadratic |
 | Quick sort | Partition around the pivot; last-element pivot gives $[1005, 1010, 1023, 1040, 1055]$ |
 | Merge sort | Split in half, merge sorted halves, $\Theta(n \log n)$, needs extra space |
 | Greedy | Best local choice; needs greedy choice + optimal substructure |
