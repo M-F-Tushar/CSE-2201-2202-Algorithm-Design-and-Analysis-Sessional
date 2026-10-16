@@ -1,51 +1,96 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560" role="img" aria-label="Q2(c): Activity DAG and topological order">
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
-<rect width="800" height="560" fill="#ffffff" rx="10"/>
-<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
-<text x="400" y="28.0" text-anchor="middle" font-size="20" fill="#1e1e1e" font-weight="bold">Q2(c): Activity DAG and Topological Order</text>
-<text x="200" y="64.0" text-anchor="middle" font-size="16" fill="#1e1e1e" font-weight="bold">Given order (DAG)</text>
-<rect x="90" y="83" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="200" y="100.0" text-anchor="middle" font-size="15" fill="#1e1e1e">1. Wake up</text>
-<rect x="90" y="141" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="200" y="158.0" text-anchor="middle" font-size="15" fill="#1e1e1e">2. Brush teeth</text>
-<polyline points="200.0,117.0 200.0,141.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="90" y="199" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="200" y="216.0" text-anchor="middle" font-size="15" fill="#1e1e1e">3. Take breakfast</text>
-<polyline points="200.0,175.0 200.0,199.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="90" y="257" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="200" y="274.0" text-anchor="middle" font-size="15" fill="#1e1e1e">4. Go to class</text>
-<polyline points="200.0,233.0 200.0,257.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="90" y="315" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="200" y="332.0" text-anchor="middle" font-size="15" fill="#1e1e1e">5. Study in library</text>
-<polyline points="200.0,291.0 200.0,315.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="90" y="373" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="200" y="390.0" text-anchor="middle" font-size="15" fill="#1e1e1e">6. Do homework</text>
-<polyline points="200.0,349.0 200.0,373.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="90" y="431" width="220" height="34" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
-<text x="200" y="448.0" text-anchor="middle" font-size="15" fill="#1e1e1e">7. Sleep</text>
-<polyline points="200.0,407.0 200.0,431.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="600" y="64.0" text-anchor="middle" font-size="16" fill="#1e1e1e" font-weight="bold">Variant: Sleep before Homework</text>
-<rect x="490" y="83" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="600" y="100.0" text-anchor="middle" font-size="15" fill="#1e1e1e">1. Wake up</text>
-<rect x="490" y="141" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="600" y="158.0" text-anchor="middle" font-size="15" fill="#1e1e1e">2. Brush teeth</text>
-<polyline points="600.0,117.0 600.0,141.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="490" y="199" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="600" y="216.0" text-anchor="middle" font-size="15" fill="#1e1e1e">3. Take breakfast</text>
-<polyline points="600.0,175.0 600.0,199.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="490" y="257" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="600" y="274.0" text-anchor="middle" font-size="15" fill="#1e1e1e">4. Go to class</text>
-<polyline points="600.0,233.0 600.0,257.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="490" y="315" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="600" y="332.0" text-anchor="middle" font-size="15" fill="#1e1e1e">5. Study in library</text>
-<polyline points="600.0,291.0 600.0,315.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="490" y="373" width="220" height="34" rx="8" fill="#ffec99" stroke="#1e1e1e" stroke-width="2"/>
-<text x="600" y="390.0" text-anchor="middle" font-size="15" fill="#1e1e1e">6. Sleep</text>
-<polyline points="600.0,349.0 600.0,373.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="490" y="431" width="220" height="34" rx="8" fill="#ffec99" stroke="#1e1e1e" stroke-width="2"/>
-<text x="600" y="448.0" text-anchor="middle" font-size="15" fill="#1e1e1e">7. Do homework</text>
-<polyline points="600.0,407.0 600.0,431.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="400" y="508.0" text-anchor="middle" font-size="14" fill="#1e1e1e">Left: each activity depends on the one before it, so one topological order: 1 to 7.</text>
-<text x="400" y="532.0" text-anchor="middle" font-size="14" fill="#1e1e1e">Right: Sleep moved before Homework. Still no cycle, so it is still a valid order.</text>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="1000" viewBox="0 0 980 1000" role="img" aria-label="Q2(c): Assumed activity dependencies and an explicit replacement">
+<rect width="980" height="1000" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="490.0" y="34.0">Q2(c): Assumed activity dependencies and an explicit replacement</tspan></text>
+<path d="M239.9 234.5 Q240.0 255.1 240.6 275.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M235.9 264.8 L240.0 275.0 L244.1 264.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M239.8 329.5 Q241.3 351.3 241.0 370.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M235.9 359.8 L240.0 370.0 L244.1 359.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M239.4 424.7 Q239.7 445.3 240.1 464.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M235.9 454.8 L240.0 465.0 L244.1 454.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M240.3 519.2 Q240.9 538.5 240.0 560.6" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M235.9 549.8 L240.0 560.0 L244.1 549.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M240.8 614.6 Q240.3 635.0 239.7 655.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M235.9 644.8 L240.0 655.0 L244.1 644.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M240.1 709.8 Q239.9 728.2 240.2 749.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M235.9 739.8 L240.0 750.0 L244.1 739.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M740.1 234.8 Q740.4 255.4 740.4 275.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M735.9 264.8 L740.0 275.0 L744.1 264.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M740.3 330.7 Q739.9 349.2 739.7 370.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M735.9 359.8 L740.0 370.0 L744.1 359.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M740.5 424.1 Q740.3 445.1 740.3 465.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M735.9 454.8 L740.0 465.0 L744.1 454.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M739.6 519.3 Q740.8 540.4 741.0 560.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M735.9 549.8 L740.0 560.0 L744.1 549.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M739.8 614.6 Q740.2 635.1 739.0 654.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M735.9 644.8 L740.0 655.0 L744.1 644.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M740.1 710.0 Q739.6 731.5 739.7 749.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M735.9 739.8 L740.0 750.0 L744.1 739.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="40.0" y="80.0" width="400.0" height="60.0" rx="10" fill="#ffec99"/>
+<path d="M38.9 80.2 Q239.4 80.2 439.5 78.5 M440.2 79.1 Q437.3 110.9 440.1 139.5 M441.2 138.5 Q239.5 141.4 39.0 140.1 M38.5 139.9 Q39.1 107.5 40.8 80.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M38.9 81.3 Q241.1 80.2 441.0 80.9 M440.4 80.6 Q442.2 112.1 438.8 140.4 M438.9 139.0 Q239.4 140.1 39.8 141.4 M41.3 141.1 Q38.9 111.2 40.6 81.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="240.0" y="110.0">Reconstructed six-edge chain</tspan></text>
+<rect x="540.0" y="80.0" width="400.0" height="60.0" rx="10" fill="#ffec99"/>
+<path d="M540.1 79.7 Q737.4 79.8 940.8 81.1 M940.1 79.5 Q939.9 107.9 938.6 138.5 M939.9 140.5 Q738.4 138.5 538.4 139.8 M539.2 141.2 Q540.5 110.6 539.2 79.3" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M541.4 79.7 Q742.3 82.0 940.1 81.2 M941.1 79.4 Q941.1 107.2 940.7 138.9 M941.3 141.2 Q741.6 137.4 541.1 140.5 M540.4 139.2 Q538.7 112.8 539.5 80.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="110.0">REPLACE the last two edges</tspan></text>
+<rect x="40.0" y="180.0" width="400.0" height="55.0" rx="10" fill="#a5d8ff"/>
+<path d="M39.8 179.1 Q238.5 182.1 439.1 179.9 M439.3 180.3 Q438.7 205.3 440.3 236.5 M440.2 234.0 Q241.7 236.3 39.2 235.9 M38.9 236.3 Q41.1 207.7 41.0 180.9" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M40.5 180.9 Q240.7 178.5 438.6 180.5 M440.2 179.3 Q439.7 209.2 441.6 233.7 M439.4 233.9 Q237.2 233.3 39.6 234.9 M41.1 235.8 Q41.5 207.4 38.5 178.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="240.0" y="207.5">Wake up</tspan></text>
+<rect x="40.0" y="275.0" width="400.0" height="55.0" rx="10" fill="#a5d8ff"/>
+<path d="M40.9 276.0 Q238.0 277.3 440.7 273.5 M440.9 275.6 Q440.8 303.5 440.1 329.5 M440.4 331.2 Q238.1 328.2 41.2 330.4 M41.4 329.7 Q42.3 304.5 40.1 276.2" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M39.9 273.5 Q242.0 276.5 439.1 275.2 M438.7 275.8 Q437.7 300.0 439.9 329.1 M440.3 328.9 Q238.7 327.5 40.8 330.6 M39.8 328.4 Q42.1 301.7 38.9 274.6" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="240.0" y="302.5">Brush teeth</tspan></text>
+<rect x="40.0" y="370.0" width="400.0" height="55.0" rx="10" fill="#a5d8ff"/>
+<path d="M40.4 368.9 Q242.5 369.4 439.0 369.8 M441.2 371.3 Q442.0 396.4 441.1 425.6 M438.9 425.6 Q242.3 427.2 38.4 425.0 M40.5 425.9 Q40.7 396.0 38.6 370.5" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M40.6 369.3 Q239.7 367.2 438.6 370.6 M439.6 371.2 Q437.7 399.9 439.6 424.2 M440.6 426.3 Q241.8 426.4 38.9 424.4 M39.7 424.2 Q42.7 395.4 38.6 370.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="240.0" y="397.5">Take breakfast</tspan></text>
+<rect x="40.0" y="465.0" width="400.0" height="55.0" rx="10" fill="#a5d8ff"/>
+<path d="M40.0 466.3 Q240.8 466.6 441.2 466.1 M440.5 465.4 Q440.4 491.2 439.2 519.5 M438.7 519.8 Q238.9 518.0 41.0 519.7 M39.9 518.5 Q42.0 494.0 39.1 465.2" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M39.4 466.0 Q239.4 463.5 440.8 464.6 M440.2 466.5 Q442.6 492.0 438.8 520.0 M438.8 521.3 Q238.9 520.5 40.5 519.9 M41.1 521.1 Q42.7 491.7 39.3 465.3" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="240.0" y="492.5">Go to class</tspan></text>
+<rect x="40.0" y="560.0" width="400.0" height="55.0" rx="10" fill="#a5d8ff"/>
+<path d="M39.7 559.4 Q239.8 557.2 438.9 559.6 M440.2 561.1 Q437.6 589.0 440.8 613.5 M439.1 613.7 Q240.5 613.0 38.6 613.5 M40.6 614.3 Q39.7 584.7 38.6 560.6" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M39.9 559.4 Q242.0 562.0 440.3 560.1 M440.3 561.5 Q442.3 585.9 439.6 614.5 M441.4 614.9 Q237.9 612.4 40.6 616.2 M38.8 616.0 Q40.4 587.3 40.1 560.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="240.0" y="587.5">Study in library</tspan></text>
+<rect x="40.0" y="655.0" width="400.0" height="55.0" rx="10" fill="#b2f2bb"/>
+<path d="M38.5 655.3 Q241.1 653.7 438.9 655.8 M440.6 654.8 Q439.3 684.6 438.4 708.9 M439.2 708.7 Q241.1 712.3 41.3 709.9 M39.4 711.0 Q39.4 681.0 40.8 654.6" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M41.2 653.8 Q237.9 656.8 438.6 654.7 M440.2 655.2 Q442.4 682.0 439.9 710.7 M438.6 710.1 Q238.9 709.9 40.0 709.2 M40.7 709.9 Q42.6 681.3 41.3 653.7" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="240.0" y="682.5">Do homework</tspan></text>
+<rect x="40.0" y="750.0" width="400.0" height="55.0" rx="10" fill="#b2f2bb"/>
+<path d="M39.9 750.6 Q238.9 751.8 441.3 748.9 M439.6 749.7 Q440.3 780.2 439.2 803.6 M440.0 806.4 Q237.8 807.3 39.7 803.6 M39.9 804.4 Q42.0 779.5 40.3 750.1" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M39.2 749.4 Q241.2 749.8 439.9 751.1 M438.7 751.4 Q441.1 779.4 439.3 803.6 M440.2 806.1 Q239.3 805.0 40.2 803.7 M40.5 805.0 Q37.3 778.7 39.3 748.5" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="240.0" y="777.5">Sleep</tspan></text>
+<rect x="540.0" y="180.0" width="400.0" height="55.0" rx="10" fill="#a5d8ff"/>
+<path d="M538.6 178.8 Q739.8 178.9 941.3 180.5 M940.1 181.1 Q940.6 210.2 941.1 234.3 M939.5 236.3 Q742.5 234.9 539.1 234.3 M541.2 233.8 Q537.9 209.3 538.6 179.7" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M538.7 179.6 Q741.0 180.0 940.0 181.4 M938.5 178.5 Q937.5 209.5 940.7 233.9 M938.8 235.6 Q741.6 236.6 541.2 234.0 M539.2 235.7 Q537.9 208.4 540.8 180.6" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="207.5">Wake up</tspan></text>
+<rect x="540.0" y="275.0" width="400.0" height="55.0" rx="10" fill="#a5d8ff"/>
+<path d="M539.3 276.4 Q742.1 272.9 939.9 275.6 M939.7 273.8 Q940.4 302.9 941.0 330.1 M940.7 331.3 Q737.6 330.2 539.7 328.4 M539.2 329.4 Q541.2 302.3 539.9 276.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M539.0 275.9 Q738.5 276.3 940.9 275.1 M940.6 273.8 Q937.8 305.0 940.5 330.4 M939.3 329.2 Q738.9 329.3 540.6 330.4 M541.2 331.3 Q541.5 305.2 541.3 274.0" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="302.5">Brush teeth</tspan></text>
+<rect x="540.0" y="370.0" width="400.0" height="55.0" rx="10" fill="#a5d8ff"/>
+<path d="M538.4 368.6 Q738.5 368.9 940.1 370.0 M941.1 370.7 Q937.7 400.1 939.9 426.3 M938.6 425.6 Q740.3 427.0 541.0 423.5 M538.7 424.6 Q541.0 397.5 540.0 371.4" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M540.4 369.4 Q742.1 372.3 939.6 368.9 M939.0 370.9 Q941.2 395.8 941.5 426.0 M938.6 423.4 Q738.0 424.4 538.6 424.3 M540.3 424.9 Q540.6 398.3 541.4 370.3" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="397.5">Take breakfast</tspan></text>
+<rect x="540.0" y="465.0" width="400.0" height="55.0" rx="10" fill="#a5d8ff"/>
+<path d="M538.5 465.2 Q737.7 464.3 941.1 465.2 M941.4 465.5 Q937.2 489.8 940.0 519.3 M938.9 518.6 Q737.9 521.1 541.1 518.7 M539.0 520.9 Q538.5 493.8 540.9 465.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M539.3 463.9 Q740.5 464.9 939.6 464.3 M940.3 465.3 Q940.7 490.4 940.4 520.5 M939.1 520.4 Q739.4 519.5 540.6 520.5 M540.1 521.2 Q538.1 493.2 541.6 464.9" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="492.5">Go to class</tspan></text>
+<rect x="540.0" y="560.0" width="400.0" height="55.0" rx="10" fill="#a5d8ff"/>
+<path d="M538.7 558.8 Q738.2 561.6 940.6 561.2 M940.1 559.2 Q941.1 585.4 940.7 615.8 M940.4 613.8 Q738.8 613.6 541.4 615.9 M540.4 614.4 Q542.1 589.8 539.6 558.9" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M540.5 559.6 Q740.1 562.1 939.7 561.1 M939.9 558.9 Q939.7 586.3 940.4 615.7 M941.2 614.9 Q737.5 616.6 540.5 616.0 M540.3 615.9 Q538.6 589.5 540.4 559.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="587.5">Study in library</tspan></text>
+<rect x="540.0" y="655.0" width="400.0" height="55.0" rx="10" fill="#b2f2bb"/>
+<path d="M540.9 654.3 Q740.7 653.9 939.2 655.6 M938.9 656.2 Q938.2 684.0 941.3 711.3 M941.0 710.7 Q737.5 707.1 539.0 709.9 M539.3 708.9 Q540.5 682.4 539.6 654.3" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M541.0 653.6 Q740.6 656.7 940.9 655.4 M939.7 654.2 Q939.9 680.1 941.1 711.2 M939.4 709.9 Q740.6 712.6 540.5 711.0 M539.1 710.8 Q540.7 683.1 540.8 654.5" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="682.5">Sleep</tspan></text>
+<rect x="540.0" y="750.0" width="400.0" height="55.0" rx="10" fill="#b2f2bb"/>
+<path d="M539.9 748.6 Q738.8 748.0 938.4 748.6 M939.3 750.3 Q940.6 778.1 939.9 806.4 M940.5 805.4 Q738.5 805.7 538.8 803.7 M540.5 804.6 Q540.1 779.6 539.7 751.1" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M541.0 750.3 Q738.4 751.4 941.5 751.2 M939.5 750.4 Q937.9 777.5 940.3 806.0 M940.4 805.1 Q740.7 804.8 540.2 804.7 M540.7 804.0 Q542.4 775.1 539.4 749.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="777.5">Do homework</tspan></text>
+<rect x="40.0" y="865.0" width="900.0" height="90.0" rx="10" fill="#ffc9c9"/>
+<path d="M38.7 864.1 Q491.0 864.4 940.4 865.6 M941.1 865.1 Q939.8 908.1 941.2 956.6 M940.7 954.8 Q492.2 954.8 39.3 953.7 M41.0 953.6 Q40.6 911.7 40.9 865.4" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M39.7 865.4 Q491.3 863.2 939.9 864.6 M939.6 866.4 Q940.2 911.5 938.7 954.3 M938.9 953.8 Q491.6 952.5 39.9 953.4 M40.7 956.1 Q41.6 907.2 40.1 866.2" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="490.0" y="899.4">Each chain has one topological order. Adding Sleep → Homework without removing</tspan><tspan x="490.0" y="920.6">Homework → Sleep instead creates a 2-cycle: no topological order.</tspan></text>
 </svg>
