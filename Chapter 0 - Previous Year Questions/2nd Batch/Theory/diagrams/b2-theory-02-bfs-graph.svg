@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="540" viewBox="0 0 800 540" role="img" aria-label="Q2(b): BFS shortest path from S in an unweighted graph">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
+<rect width="800" height="540" fill="#ffffff" rx="10"/>
+<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
+<text x="400" y="30.0" text-anchor="middle" font-size="20" fill="#1e1e1e" font-weight="bold">Q2(b): BFS from S on an Unweighted Graph</text>
+<polyline points="318.3,338.8 471.7,161.2" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6"/>
+<polyline points="513.9,345.4 646.1,264.6" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6"/>
+<polyline points="143.9,264.6 276.1,345.4" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="328.0,360.0 462.0,360.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="143.9,235.4 276.1,154.6" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="328.0,140.0 462.0,140.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="513.9,154.6 646.1,235.4" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<circle cx="120" cy="250" r="28" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="120" y="250.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">S</text>
+<text x="120" y="294.0" text-anchor="middle" font-size="14" fill="#868e96">d = 0</text>
+<circle cx="300" cy="140" r="28" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="300" y="140.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">A</text>
+<text x="300" y="184.0" text-anchor="middle" font-size="14" fill="#868e96">d = 1</text>
+<circle cx="300" cy="360" r="28" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="300" y="360.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">B</text>
+<text x="300" y="404.0" text-anchor="middle" font-size="14" fill="#868e96">d = 1</text>
+<circle cx="490" cy="140" r="28" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="490" y="140.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">C</text>
+<text x="490" y="184.0" text-anchor="middle" font-size="14" fill="#868e96">d = 2</text>
+<circle cx="490" cy="360" r="28" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="490" y="360.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">D</text>
+<text x="490" y="404.0" text-anchor="middle" font-size="14" fill="#868e96">d = 2</text>
+<circle cx="670" cy="250" r="28" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="670" y="250.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">E</text>
+<text x="670" y="294.0" text-anchor="middle" font-size="14" fill="#868e96">d = 3</text>
+<text x="400" y="462.0" text-anchor="middle" font-size="15" fill="#1e1e1e">BFS levels: S  |  A, B  |  C, D  |  E</text>
+<text x="400" y="488.0" text-anchor="middle" font-size="15" fill="#1e1e1e">Shortest path S to E: S-A-C-E (3 edges). S-B-D-E is also 3 edges.</text>
+<text x="400" y="514.0" text-anchor="middle" font-size="14" fill="#868e96">Green = shortest path found by BFS.   Grey dashed = edges BFS does not use.</text>
+</g>
+</svg>
