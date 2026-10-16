@@ -1,49 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520" role="img" aria-label="Q7(a): graph colouring by backtracking">
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
-<rect width="800" height="520" fill="#ffffff" rx="10"/>
-<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="575" viewBox="0 0 800 575" role="img" aria-label="Q7(a): graph colouring by backtracking">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e" /></marker></defs>
+<rect width="800" height="575" fill="#ffffff" rx="10" />
+<g font-family="&quot;Segoe Print&quot;, &quot;Bradley Hand&quot;, Chilanka, &quot;Comic Sans MS&quot;, &quot;Comic Neue&quot;, cursive" dominant-baseline="central">
 <text x="400" y="26.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">Q7(a): 3-Colouring by Backtracking (Red = 1, Green = 2, Blue = 3)</text>
-<text x="170" y="62.0" text-anchor="middle" font-size="15" fill="#1e1e1e" font-weight="bold">Graph (5 vertices)</text>
-<polyline points="122.0,140.0 238.0,140.0" fill="none" stroke="#868e96" stroke-width="2"/>
-<polyline points="112.9,157.8 167.1,232.2" fill="none" stroke="#868e96" stroke-width="2"/>
-<polyline points="247.1,157.8 192.9,232.2" fill="none" stroke="#868e96" stroke-width="2"/>
-<polyline points="167.1,267.8 112.9,342.2" fill="none" stroke="#868e96" stroke-width="2"/>
-<polyline points="122.0,360.0 238.0,360.0" fill="none" stroke="#868e96" stroke-width="2"/>
-<polyline points="192.9,267.8 247.1,342.2" fill="none" stroke="#868e96" stroke-width="2"/>
-<polyline points="260.0,162.0 260.0,338.0" fill="none" stroke="#868e96" stroke-width="2"/>
-<circle cx="100" cy="140" r="22" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="170" y="62.0" text-anchor="middle" font-size="15" fill="#1e1e1e" font-weight="bold">Illustrative graph (5 vertices)</text>
+<polyline points="122.0,140.0 238.0,140.0" fill="none" stroke="#868e96" stroke-width="2" />
+<polyline points="112.9,157.8 167.1,232.2" fill="none" stroke="#868e96" stroke-width="2" />
+<polyline points="247.1,157.8 192.9,232.2" fill="none" stroke="#868e96" stroke-width="2" />
+<polyline points="167.1,267.8 112.9,342.2" fill="none" stroke="#868e96" stroke-width="2" />
+<polyline points="122.0,360.0 238.0,360.0" fill="none" stroke="#868e96" stroke-width="2" />
+<polyline points="192.9,267.8 247.1,342.2" fill="none" stroke="#868e96" stroke-width="2" />
+<polyline points="260.0,162.0 260.0,338.0" fill="none" stroke="#868e96" stroke-width="2" />
+<circle cx="100" cy="140" r="22" fill="#ffffff" stroke="#1e1e1e" stroke-width="2" />
 <text x="100" y="140.0" text-anchor="middle" font-size="14" fill="#1e1e1e" font-weight="bold">v1</text>
-<circle cx="260" cy="140" r="22" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<circle cx="260" cy="140" r="22" fill="#ffffff" stroke="#1e1e1e" stroke-width="2" />
 <text x="260" y="140.0" text-anchor="middle" font-size="14" fill="#1e1e1e" font-weight="bold">v2</text>
-<circle cx="180" cy="250" r="22" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<circle cx="180" cy="250" r="22" fill="#ffffff" stroke="#1e1e1e" stroke-width="2" />
 <text x="180" y="250.0" text-anchor="middle" font-size="14" fill="#1e1e1e" font-weight="bold">v3</text>
-<circle cx="100" cy="360" r="22" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<circle cx="100" cy="360" r="22" fill="#ffffff" stroke="#1e1e1e" stroke-width="2" />
 <text x="100" y="360.0" text-anchor="middle" font-size="14" fill="#1e1e1e" font-weight="bold">v4</text>
-<circle cx="260" cy="360" r="22" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<circle cx="260" cy="360" r="22" fill="#ffffff" stroke="#1e1e1e" stroke-width="2" />
 <text x="260" y="360.0" text-anchor="middle" font-size="14" fill="#1e1e1e" font-weight="bold">v5</text>
 <text x="570" y="62.0" text-anchor="middle" font-size="15" fill="#1e1e1e" font-weight="bold">Backtracking tree</text>
-<rect x="485" y="92" width="170" height="36" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<rect x="485" y="92" width="170" height="36" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2" />
 <text x="570" y="110.0" text-anchor="middle" font-size="14" fill="#1e1e1e">v1 = Red</text>
-<rect x="485" y="152" width="170" height="36" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<rect x="485" y="152" width="170" height="36" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2" />
 <text x="570" y="170.0" text-anchor="middle" font-size="14" fill="#1e1e1e">v2 = Green</text>
-<rect x="485" y="212" width="170" height="36" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<rect x="485" y="212" width="170" height="36" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2" />
 <text x="570" y="230.0" text-anchor="middle" font-size="14" fill="#1e1e1e">v3 = Blue</text>
-<rect x="345" y="282" width="170" height="36" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2"/>
+<rect x="345" y="282" width="170" height="36" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2" />
 <text x="430" y="300.0" text-anchor="middle" font-size="14" fill="#1e1e1e">v4 = Red</text>
-<rect x="625" y="282" width="170" height="36" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<rect x="625" y="282" width="170" height="36" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2" />
 <text x="710" y="300.0" text-anchor="middle" font-size="14" fill="#1e1e1e">v4 = Green</text>
-<rect x="345" y="352" width="170" height="36" rx="8" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2"/>
+<rect x="345" y="352" width="170" height="36" rx="8" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" />
 <text x="430" y="370.0" text-anchor="middle" font-size="14" fill="#1e1e1e">v5: no colour ✗</text>
-<rect x="625" y="352" width="170" height="36" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<rect x="625" y="352" width="170" height="36" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2" />
 <text x="710" y="370.0" text-anchor="middle" font-size="14" fill="#1e1e1e">v5 = Red ✓</text>
-<polyline points="570.0,128.0 570.0,152.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<polyline points="570.0,188.0 570.0,212.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<polyline points="570.0,248.0 430.0,282.0" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
-<polyline points="570.0,248.0 710.0,282.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
-<polyline points="430.0,318.0 430.0,352.0" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
-<polyline points="710.0,318.0 710.0,352.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="570.0,128.0 570.0,152.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)" />
+<polyline points="570.0,188.0 570.0,212.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)" />
+<polyline points="570.0,248.0 430.0,282.0" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)" />
+<polyline points="570.0,248.0 710.0,282.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)" />
+<polyline points="430.0,318.0 430.0,352.0" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)" />
+<polyline points="710.0,318.0 710.0,352.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)" />
 <text x="40" y="440.0" text-anchor="start" font-size="13" fill="#1e1e1e">Step 1-3: v1 = Red, v2 = Green (not Red), v3 = Blue (not Red or Green).</text>
-<text x="40" y="462.0" text-anchor="start" font-size="13" fill="#1e1e1e">Step 4: v4 touches only v3, so v4 = Red is tried first.</text>
+<text x="40" y="462.0" text-anchor="start" font-size="13" fill="#1e1e1e">Step 4: only v3 is already coloured next to v4; try Red first.</text>
 <text x="40" y="484.0" text-anchor="start" font-size="13" fill="#1e1e1e">Step 5: v5 touches Green, Blue and Red, so it fails. Backtrack to v4.</text>
 <text x="40" y="506.0" text-anchor="start" font-size="13" fill="#1e1e1e">Step 6: v4 = Green is allowed, and then v5 = Red works.</text>
 <text x="40" y="532.0" text-anchor="start" font-size="15" fill="#2f9e44" font-weight="bold">Final colouring: v1 Red, v2 Green, v3 Blue, v4 Green, v5 Red.</text>
