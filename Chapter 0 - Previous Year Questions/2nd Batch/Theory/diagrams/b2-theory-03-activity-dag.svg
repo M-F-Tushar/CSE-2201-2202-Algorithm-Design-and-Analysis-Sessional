@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560" role="img" aria-label="Q2(c): Activity DAG and topological order">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
+<rect width="800" height="560" fill="#ffffff" rx="10"/>
+<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
+<text x="400" y="28.0" text-anchor="middle" font-size="20" fill="#1e1e1e" font-weight="bold">Q2(c): Activity DAG and Topological Order</text>
+<text x="200" y="64.0" text-anchor="middle" font-size="16" fill="#1e1e1e" font-weight="bold">Given order (DAG)</text>
+<rect x="90" y="83" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="200" y="100.0" text-anchor="middle" font-size="15" fill="#1e1e1e">1. Wake up</text>
+<rect x="90" y="141" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="200" y="158.0" text-anchor="middle" font-size="15" fill="#1e1e1e">2. Brush teeth</text>
+<polyline points="200.0,117.0 200.0,141.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="90" y="199" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="200" y="216.0" text-anchor="middle" font-size="15" fill="#1e1e1e">3. Take breakfast</text>
+<polyline points="200.0,175.0 200.0,199.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="90" y="257" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="200" y="274.0" text-anchor="middle" font-size="15" fill="#1e1e1e">4. Go to class</text>
+<polyline points="200.0,233.0 200.0,257.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="90" y="315" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="200" y="332.0" text-anchor="middle" font-size="15" fill="#1e1e1e">5. Study in library</text>
+<polyline points="200.0,291.0 200.0,315.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="90" y="373" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="200" y="390.0" text-anchor="middle" font-size="15" fill="#1e1e1e">6. Do homework</text>
+<polyline points="200.0,349.0 200.0,373.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="90" y="431" width="220" height="34" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="200" y="448.0" text-anchor="middle" font-size="15" fill="#1e1e1e">7. Sleep</text>
+<polyline points="200.0,407.0 200.0,431.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="600" y="64.0" text-anchor="middle" font-size="16" fill="#1e1e1e" font-weight="bold">Variant: Sleep before Homework</text>
+<rect x="490" y="83" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="600" y="100.0" text-anchor="middle" font-size="15" fill="#1e1e1e">1. Wake up</text>
+<rect x="490" y="141" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="600" y="158.0" text-anchor="middle" font-size="15" fill="#1e1e1e">2. Brush teeth</text>
+<polyline points="600.0,117.0 600.0,141.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="490" y="199" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="600" y="216.0" text-anchor="middle" font-size="15" fill="#1e1e1e">3. Take breakfast</text>
+<polyline points="600.0,175.0 600.0,199.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="490" y="257" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="600" y="274.0" text-anchor="middle" font-size="15" fill="#1e1e1e">4. Go to class</text>
+<polyline points="600.0,233.0 600.0,257.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="490" y="315" width="220" height="34" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="600" y="332.0" text-anchor="middle" font-size="15" fill="#1e1e1e">5. Study in library</text>
+<polyline points="600.0,291.0 600.0,315.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="490" y="373" width="220" height="34" rx="8" fill="#ffec99" stroke="#1e1e1e" stroke-width="2"/>
+<text x="600" y="390.0" text-anchor="middle" font-size="15" fill="#1e1e1e">6. Sleep</text>
+<polyline points="600.0,349.0 600.0,373.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="490" y="431" width="220" height="34" rx="8" fill="#ffec99" stroke="#1e1e1e" stroke-width="2"/>
+<text x="600" y="448.0" text-anchor="middle" font-size="15" fill="#1e1e1e">7. Do homework</text>
+<polyline points="600.0,407.0 600.0,431.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="400" y="508.0" text-anchor="middle" font-size="14" fill="#1e1e1e">Left: each activity depends on the one before it, so one topological order: 1 to 7.</text>
+<text x="400" y="532.0" text-anchor="middle" font-size="14" fill="#1e1e1e">Right: Sleep moved before Homework. Still no cycle, so it is still a valid order.</text>
+</g>
+</svg>
