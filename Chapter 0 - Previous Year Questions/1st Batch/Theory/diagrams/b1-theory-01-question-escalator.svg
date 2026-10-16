@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="1st Batch Theory Escalator: From Algorithm Basics to Backtracking">
+<defs>
+<marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0 0 L10 5 L0 10 z" fill="#1e1e1e"/>
+</marker>
+</defs>
+<rect width="1200" height="560" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="600" y="34">1st Batch Theory Escalator: From Algorithm Basics to Backtracking</tspan></text>
+
+<path d="M210 408 L258 393" fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="round" marker-end="url(#arr)"/>
+<rect x="210" y="374" width="50" height="18" rx="6" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" fill="#495057"><tspan x="235" y="383">climb</tspan></text>
+
+<path d="M440 328 L488 313" fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="round" marker-end="url(#arr)"/>
+<rect x="440" y="294" width="50" height="18" rx="6" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" fill="#495057"><tspan x="465" y="303">climb</tspan></text>
+
+<path d="M670 248 L718 233" fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="round" marker-end="url(#arr)"/>
+<rect x="670" y="214" width="50" height="18" rx="6" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" fill="#495057"><tspan x="695" y="223">climb</tspan></text>
+
+<path d="M900 168 L948 153" fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="round" marker-end="url(#arr)"/>
+<rect x="900" y="134" width="50" height="18" rx="6" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" fill="#495057"><tspan x="925" y="143">climb</tspan></text>
+
+<rect x="30" y="400" width="180" height="84" rx="10" fill="#ffc9c9" stroke="#e03131" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' fill="#1e1e1e"><tspan x="120" y="430" font-size="14" font-weight="bold">Q1: Foundations</tspan><tspan x="120" y="454" font-size="12">Design, analysis, cases</tspan></text>
+
+<rect x="260" y="320" width="180" height="84" rx="10" fill="#ffec99" stroke="#f08c00" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' fill="#1e1e1e"><tspan x="350" y="350" font-size="14" font-weight="bold">Q2: Recurrences</tspan><tspan x="350" y="374" font-size="12">Loops, T(n), O(n log n)</tspan></text>
+
+<rect x="490" y="240" width="180" height="84" rx="10" fill="#99e9f2" stroke="#0c8599" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' fill="#1e1e1e"><tspan x="580" y="270" font-size="14" font-weight="bold">Q3: Divide &amp; Conquer</tspan><tspan x="580" y="294" font-size="12">Merge, quick, heap sort</tspan></text>
+
+<rect x="720" y="160" width="180" height="84" rx="10" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' fill="#1e1e1e"><tspan x="810" y="190" font-size="14" font-weight="bold">Q4: Greedy &amp; Memo</tspan><tspan x="810" y="214" font-size="12">Local choice, MST</tspan></text>
+
+<rect x="950" y="80" width="180" height="84" rx="10" fill="#eebefa" stroke="#9c36b5" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' fill="#1e1e1e"><tspan x="1040" y="110" font-size="14" font-weight="bold">Q5: Backtracking</tspan><tspan x="1040" y="134" font-size="12">N-Queen, prune dead ends</tspan></text>
+
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" fill="#868e96"><tspan x="600" y="530">Each step builds on the one below it: tools first, then sorting and paradigms, then backtracking</tspan></text>
+</svg>
