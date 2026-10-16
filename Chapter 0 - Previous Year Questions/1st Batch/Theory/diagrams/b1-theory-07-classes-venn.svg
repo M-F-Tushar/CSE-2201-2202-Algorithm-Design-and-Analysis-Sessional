@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="580" viewBox="0 0 800 580" role="img" aria-label="Relationship between P, NP, NP-hard and NP-complete">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
+<rect width="800" height="580" fill="#ffffff" rx="10"/>
+<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
+<text x="400" y="30" text-anchor="middle" font-weight="bold" font-size="20" fill="#1e1e1e">Q8(a): How P, NP, NP-hard, and NP-complete Relate</text>
+<ellipse cx="330" cy="265" rx="240" ry="170" fill="none" stroke="#0c8599" stroke-width="2"/>
+<ellipse cx="520" cy="265" rx="200" ry="150" fill="none" stroke="#e03131" stroke-width="2"/>
+<ellipse cx="220" cy="270" rx="90" ry="75" fill="none" stroke="#2f9e44" stroke-width="2"/>
+<text x="330" y="118" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">NP</text>
+<text x="220" y="270" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">P</text>
+<text x="445" y="262" text-anchor="middle" font-weight="bold" font-size="16" fill="#1e1e1e">NP-complete</text>
+<text x="650" y="248" text-anchor="middle" font-weight="bold" font-size="16" fill="#1e1e1e">NP-hard</text>
+<text x="650" y="272" text-anchor="middle" font-size="14" fill="#1e1e1e">but not in NP</text>
+<text x="60" y="470" text-anchor="start" font-size="14" fill="#1e1e1e">P: decision problems solvable in polynomial time.</text>
+<text x="60" y="492" text-anchor="start" font-size="14" fill="#1e1e1e">NP: a yes answer can be verified in polynomial time.</text>
+<text x="60" y="514" text-anchor="start" font-size="14" fill="#1e1e1e">NP-hard: at least as hard as every NP problem (need not be in NP).</text>
+<text x="60" y="536" text-anchor="start" font-size="14" fill="#1e1e1e">NP-complete: problems that are both in NP and NP-hard.</text>
+<text x="60" y="558" text-anchor="start" font-size="14" fill="#1e1e1e">Known: P is a subset of NP. Whether P = NP is still an open question.</text>
+</g>
+</svg>
