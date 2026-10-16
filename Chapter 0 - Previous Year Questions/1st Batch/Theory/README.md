@@ -136,6 +136,8 @@ So $T(n) = O(n \log n)$.
 | ... | ... | ... | $n$ |
 | $\log_2 n$ | $n$ | 1 | $n$ |
 
+![Recursion tree for T(n) = 2T(n/2) + n](diagrams/b1-theory-02-recursion-tree.svg)
+
 There are $\log_2 n + 1$ levels, each doing $n$ work. Total: $n(\log_2 n + 1)$.
 
 **Method 3: Master Theorem**
@@ -202,13 +204,7 @@ Indices start at 0. For index $i$, the children are at $2i+1$ and $2i+2$. We bui
 
 Heap as a tree:
 
-```
-            7
-         /     \
-        4       6
-       / \     / \
-      3   2   5   1
-```
+![Max-heap after the build step](diagrams/b1-theory-03-heap-build-tree.svg)
 
 **Step 2: Sort (repeat until size is 1)**
 
