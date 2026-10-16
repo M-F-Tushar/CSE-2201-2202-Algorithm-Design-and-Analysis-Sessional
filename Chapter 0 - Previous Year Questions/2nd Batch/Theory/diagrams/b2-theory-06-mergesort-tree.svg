@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Q4(c): merge sort divide and merge tree">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
+<rect width="800" height="600" fill="#ffffff" rx="10"/>
+<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
+<text x="400" y="26.0" text-anchor="middle" font-size="19" fill="#1e1e1e" font-weight="bold">Q4(c): Merge Sort on [38, 27, 43, 3, 9, 82, 10]</text>
+<text x="400" y="52.0" text-anchor="middle" font-size="13" fill="#868e96">Black arrows = divide (split in half).   Green arrows = merge (combine two sorted lists).</text>
+<rect x="240" y="70" width="320" height="40" rx="8" fill="#ffec99" stroke="#1e1e1e" stroke-width="2"/>
+<text x="400" y="90.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[38, 27, 43, 3, 9, 82, 10]</text>
+<rect x="90" y="150" width="220" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="200" y="170.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[38, 27, 43, 3]</text>
+<rect x="500" y="150" width="200" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="600" y="170.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[9, 82, 10]</text>
+<rect x="50" y="230" width="120" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="110" y="250.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[38, 27]</text>
+<rect x="230" y="230" width="120" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="290" y="250.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[43, 3]</text>
+<rect x="450" y="230" width="120" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="510" y="250.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[9, 82]</text>
+<rect x="630" y="230" width="120" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="690" y="250.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[10]</text>
+<rect x="47" y="310" width="56" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="75" y="330.0" text-anchor="middle" font-size="14" fill="#1e1e1e">38</text>
+<rect x="117" y="310" width="56" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="145" y="330.0" text-anchor="middle" font-size="14" fill="#1e1e1e">27</text>
+<rect x="227" y="310" width="56" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="255" y="330.0" text-anchor="middle" font-size="14" fill="#1e1e1e">43</text>
+<rect x="297" y="310" width="56" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="325" y="330.0" text-anchor="middle" font-size="14" fill="#1e1e1e">3</text>
+<rect x="447" y="310" width="56" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="475" y="330.0" text-anchor="middle" font-size="14" fill="#1e1e1e">9</text>
+<rect x="517" y="310" width="56" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="545" y="330.0" text-anchor="middle" font-size="14" fill="#1e1e1e">82</text>
+<rect x="50" y="390" width="120" height="40" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="110" y="410.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[27, 38]</text>
+<rect x="230" y="390" width="120" height="40" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="290" y="410.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[3, 43]</text>
+<rect x="450" y="390" width="120" height="40" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="510" y="410.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[9, 82]</text>
+<rect x="630" y="390" width="120" height="40" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="690" y="410.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[10]</text>
+<rect x="90" y="460" width="220" height="40" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="200" y="480.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[3, 27, 38, 43]</text>
+<rect x="500" y="460" width="200" height="40" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="600" y="480.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[9, 10, 82]</text>
+<rect x="210" y="530" width="380" height="40" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="400" y="550.0" text-anchor="middle" font-size="14" fill="#1e1e1e">[3, 9, 10, 27, 38, 43, 82]</text>
+<polyline points="400.0,110.0 200.0,150.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="400.0,110.0 600.0,150.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="200.0,190.0 110.0,230.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="200.0,190.0 290.0,230.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="600.0,190.0 510.0,230.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="600.0,190.0 690.0,230.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="110.0,270.0 75.0,310.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="110.0,270.0 145.0,310.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="290.0,270.0 255.0,310.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="290.0,270.0 325.0,310.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="510.0,270.0 475.0,310.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="510.0,270.0 545.0,310.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="75.0,350.0 110.0,390.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="145.0,350.0 110.0,390.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="255.0,350.0 290.0,390.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="325.0,350.0 290.0,390.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="475.0,350.0 510.0,390.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="545.0,350.0 510.0,390.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="690.0,270.0 690.0,390.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="110.0,430.0 200.0,460.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="290.0,430.0 200.0,460.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="510.0,430.0 600.0,460.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="690.0,430.0 600.0,460.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="200.0,500.0 400.0,530.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="600.0,500.0 400.0,530.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+</g>
+</svg>
