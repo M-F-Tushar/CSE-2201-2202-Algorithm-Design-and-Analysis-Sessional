@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470" role="img" aria-label="Q2(a): How P, NP, NP-complete and NP-hard relate">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
+<rect width="800" height="470" fill="#ffffff" rx="10"/>
+<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
+<text x="400" y="28.0" text-anchor="middle" font-size="20" fill="#1e1e1e" font-weight="bold">Q2(a): How P, NP, NP-complete and NP-hard Relate</text>
+<circle cx="300" cy="260" r="170" fill="transparent" stroke="#1971c2" stroke-width="2"/>
+<circle cx="480" cy="260" r="170" fill="transparent" stroke="#e8590c" stroke-width="2"/>
+<circle cx="230" cy="260" r="60" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="230" y="260.0" text-anchor="middle" font-size="20" fill="#1e1e1e">P</text>
+<text x="210" y="128.0" text-anchor="middle" font-size="20" fill="#1971c2" font-weight="bold">NP</text>
+<text x="390" y="260.0" text-anchor="middle" font-size="16" fill="#1e1e1e" font-weight="bold">NP-complete</text>
+<text x="565" y="235.6" text-anchor="middle" font-size="15" fill="#e8590c">NP-hard</text>
+<text x="565" y="254.4" text-anchor="middle" font-size="15" fill="#e8590c">(not in NP)</text>
+<text x="400" y="400.0" text-anchor="middle" font-size="14" fill="#1e1e1e">P is inside NP. NP-complete = NP and NP-hard together (the hardest problems in NP).</text>
+<text x="400" y="425.0" text-anchor="middle" font-size="14" fill="#1e1e1e">NP-hard problems need not be in NP (for example, optimization versions of NP-complete problems).</text>
+<text x="400" y="450.0" text-anchor="middle" font-size="14" fill="#868e96">Picture assumes P is not equal to NP (not proven), so P and NP-complete do not overlap.</text>
+</g>
+</svg>
