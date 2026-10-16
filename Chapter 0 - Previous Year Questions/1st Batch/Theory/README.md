@@ -1,8 +1,8 @@
-# 1st Batch Theory: Page 1 Answers
+# 1st Batch Theory: Answers
 
 [Previous: Chapter 0 - Previous Year Questions](../../README.md) | [Home](../../../README.md) | [Next: 2nd Batch Theory](../../2nd%20Batch/Theory/README.md)
 
-This page answers **page 1** of the CSE 2201 theory paper (1st Batch). It covers **Section A, Q1 to Q4 (all parts)** and **Section B, Q5 (parts a and b)**. Later parts (Q5 c-d, Q6 to Q8) are not covered here yet.
+This page answers the full CSE 2201 theory paper (1st Batch, 2023). It covers **Section A, Q1 to Q4 (all parts)** and **Section B, Q5 to Q8 (all parts)**. The paper asks you to answer any 3 questions from each section.
 
 | Question | Topic | a | b | c | d |
 |----------|-------|---|---|---|---|
@@ -10,7 +10,10 @@ This page answers **page 1** of the CSE 2201 theory paper (1st Batch). It covers
 | Q2 | Recurrences and loop analysis | 10 | 10 | 15 | - |
 | Q3 | Divide and conquer, merge sort, quick sort, heap sort | 5 | 10 | 10 | 10 |
 | Q4 | Greedy, memoization vs tabulation, MST | 10 | 10 | 15 | - |
-| Q5 | Backtracking (page 2 has c and d) | 5 | 10 | - | - |
+| Q5 | Backtracking: N-Queen, subset sum, Hamiltonian circuit | 5 | 10 | 10 | 10 |
+| Q6 | Dynamic programming: knapsack, grid, coin change | 5 | 10 | 10 | 10 |
+| Q7 | Bellman-Ford, optimality, 0/1 knapsack | 10 | 10 | 15 | - |
+| Q8 | P, NP, decision vs optimization, Dijkstra | 10 | 10 | 15 | - |
 
 ### Visual Map: Question Escalator
 
@@ -346,7 +349,12 @@ It is a depth-first search over a **state-space tree**. Branches that cannot lea
 
 **Problem:** place $N$ queens on an $N \times N$ board so that no two queens attack each other. Queens attack along the same row, same column, or same diagonal.
 
-**Idea:** place one queen per row. Queen in row $k$ goes into some column. Check whether it is safe. If no column is safe in row $k$, go back to row $k-1$ and move that queen.
+**Idea:** place one queen per row. To place the $k$-th queen (in row $k$):
+
+1. Try columns $0, 1, \dots, N-1$ in order.
+2. A column is safe if no earlier queen (rows $0$ to $k-1$) is in the same column or on the same diagonal.
+3. If a safe column is found, place the queen and move to row $k+1$.
+4. If no column is safe, **backtrack**: go back to queen $k-1$ and move it to its next column.
 
 **Pseudocode**
 
@@ -403,6 +411,222 @@ For $N = 4$ there are 2 solutions in total. The first one is shown above.
 > [!TIP]
 > A working C++ version of this idea is in `Chapter 0 - Previous Year Questions/Lab Practice/Backtracking.cpp`.
 
+#### Q5(c) Subset sum with $A = \{3, 5, 6, 7\}$ and $d = 15$. Use backtracking.
+
+**Idea:** go through the items in order. For each item, try **take it** first, then **skip it**.
+
+- If the sum goes above $d$, **prune** that branch.
+- If the sum equals $d$, we found a solution.
+- If no items are left and the sum is not $d$, it is a **dead end**.
+
+**Trace**
+
+1. Take 3: sum = 3.
+2. Take 5: sum = 8.
+3. Take 6: sum = 14.
+4. Take 7: sum = 21. This is more than 15, so **prune**.
+5. Skip 7: sum = 14. No items left, so **dead end**. Backtrack.
+6. Skip 6: sum = 8.
+7. Take 7: sum = 15. **Solution found.**
+
+![Backtracking trace for subset sum with d = 15](diagrams/b1-theory-04-subset-sum-tree.svg)
+
+**Answer: $\{3, 5, 7\}$**, because $3 + 5 + 7 = 15$. It is the only subset with sum 15. The other subsets do not work: the 2-item sums are at most 13, and the other 3-item sums are 14, 16, and 18.
+
+#### Q5(d) Find a Hamiltonian circuit starting from vertex $a$.
+
+A **Hamiltonian circuit** visits every vertex exactly once and returns to the start.
+
+Neighbours (read from the figure):
+
+| Vertex | Neighbours |
+|--------|------------|
+| a | b, c, d |
+| b | a, c, f |
+| c | a, b, d, e, f |
+| d | a, c, e |
+| e | c, d, f |
+| f | b, c, e |
+
+**Idea:** start at $a$. Go to an unvisited neighbour (try them in alphabetical order). If we get stuck, backtrack.
+
+**Trace**
+
+1. $a \to b \to c \to d \to e \to f$. All 6 vertices are visited, but $f$ is not adjacent to $a$. **Dead end.**
+2. Back to $c$, try $e$: $a \to b \to c \to e \to d$. From $d$, the only unvisited vertex is $f$, and $d$-$f$ is not an edge. **Dead end.**
+3. Back to $c$, try $e$ then $f$: $a \to b \to c \to e \to f$. From $f$, the only unvisited vertex is $d$, and $f$-$d$ is not an edge. **Dead end.**
+4. Back to $c$, try $f$: $a \to b \to c \to f \to e \to d$. All 6 vertices are visited, and $d$ is adjacent to $a$. **Circuit found.**
+
+![Backtracking search tree for a Hamiltonian circuit from a](diagrams/b1-theory-05-hamiltonian-tree.svg)
+
+**Answer:** $a - b - c - f - e - d - a$. Another valid circuit is $a - b - f - e - d - c - a$.
+
+---
+
+### Q6. Dynamic Programming
+
+#### Q6(a) Two properties that a problem needs for dynamic programming.
+
+1. **Optimal substructure**: the best answer to the big problem is built from the best answers to smaller subproblems.
+2. **Overlapping subproblems**: the same smaller subproblem is needed many times. DP stores its answer, so it is computed only once.
+
+Fibonacci has both properties. Merge sort does not have overlapping subproblems, so it is solved with divide and conquer instead.
+
+#### Q6(b) 0/1 knapsack using DP. Write the recurrence.
+
+**Problem:** $n$ items, each with weight $w_i$ and profit $p_i$. The bag has capacity $W$. Each item is taken whole or not at all (0/1). Maximise the profit.
+
+**Table:** $DP[i][w]$ = maximum profit using the first $i$ items with capacity $w$.
+
+**Recurrence:**
+
+$$DP[i][w] = \begin{cases} DP[i-1][w] & \text{if } w_i > w \\ \max\big(DP[i-1][w],\; p_i + DP[i-1][w - w_i]\big) & \text{if } w_i \le w \end{cases}$$
+
+- If item $i$ does not fit, we cannot take it.
+- Otherwise, take the better of two choices: skip item $i$, or take it and add its profit to the best answer for the remaining capacity.
+
+**Base case:** $DP[0][w] = 0$ for all $w$ (no items, no profit).
+
+**Answer:** $DP[n][W]$. Time: $O(nW)$.
+
+#### Q6(c) Coins on a grid: maximum coins from top-left to bottom-right.
+
+Find the maximum number of coins you can collect from $(0,0)$ to $(3,2)$. Moves are assumed to be **right or down** only. Each cell has 1 coin or 0 coins.
+
+| | col 0 | col 1 | col 2 |
+|---|---|---|---|
+| row 0 | 1 | 0 | 1 |
+| row 1 | 0 | 1 | 0 |
+| row 2 | 1 | 1 | 1 |
+| row 3 | 0 | 0 | 1 |
+
+**DP:** $dp[r][c] = \text{grid}[r][c] + \max(dp[r-1][c],\ dp[r][c-1])$, using only the neighbours that exist.
+
+| | col 0 | col 1 | col 2 |
+|---|---|---|---|
+| row 0 | 1 | 1 | 2 |
+| row 1 | 1 | 2 | 2 |
+| row 2 | 2 | 3 | 4 |
+| row 3 | 2 | 3 | **5** |
+
+**Answer: 5 coins.** One optimal path: $(0,0) \to (0,1) \to (1,1) \to (2,1) \to (2,2) \to (3,2)$, which collects $1+0+1+1+1+1 = 5$. Another path, $(0,0) \to (1,0) \to (2,0) \to (2,1) \to (2,2) \to (3,2)$, also gives 5, so there is a tie.
+
+#### Q6(d) Coin change with coins $\{1, 3, 4\}$ and $n = 6$. Find the minimum number of coins.
+
+**Recurrence:** $C[x] = 1 + \min_{c \le x} C[x - c]$, with $C[0] = 0$.
+
+| $x$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|---|
+| $C[x]$ | 0 | 1 | 2 | 1 | 1 | 2 | 2 |
+
+**Answer: 2 coins** ($3 + 3$). Greedy would pick $4 + 1 + 1$ (3 coins), as in Q4(a). This is why DP is needed here.
+
+### Q7. Shortest Paths, Optimality, and Knapsack
+
+#### Q7(a) Why does Dijkstra fail with negative edge weights? How does Bellman-Ford handle them?
+
+**Dijkstra** takes the closest unvisited vertex and never looks at it again. This is only safe if no later path can make that distance smaller. A negative edge breaks this rule.
+
+**Example:** edges $A \to B = 1$, $A \to C = 4$, $C \to B = -5$.
+
+- Dijkstra takes $B$ first (distance 1) and fixes it.
+- Then $C$ (distance 4) gives $4 + (-5) = -1$ for $B$. This is shorter, but $B$ is already fixed, so Dijkstra keeps $B = 1$. The true answer is $-1$.
+
+**Bellman-Ford** does not fix vertices early. It relaxes **all** edges, $V - 1$ times. Every shortest path has at most $V - 1$ edges, so after $V - 1$ rounds all distances are correct. It works with negative edges. Time: $O(VE)$.
+
+**Negative cycle check:** run one more round. If any distance still gets smaller, there is a negative cycle.
+
+#### Q7(b) Apply Bellman-Ford from A on the directed graph.
+
+**Edges (read from the figure):** A to B = 6, A to C = 7, B to D = 5, B to E = -4, C to B = -3, C to D = 8, D to E = -2, E to A = 2.
+
+Each pass goes through the edges in the order above. For example, in pass 1, B first becomes 6 (from A), then C to B gives $7 + (-3) = 4$, so B becomes 4.
+
+| Pass | A | B | C | D | E |
+|------|---|---|---|---|---|
+| Start | 0 | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+| 1 | 0 | 4 | 7 | 11 | 2 |
+| 2 | 0 | 4 | 7 | 9 | 0 |
+| 3 | 0 | 4 | 7 | 9 | 0 |
+
+Pass 3 changes nothing, so we stop early.
+
+**Final distances from A:** A = 0, B = 4 (A to C to B), C = 7 (A to C), D = 9 (A to C to B to D), E = 0 (A to C to B to E).
+
+**Negative cycle:** none. Every cycle goes through A, since E to A is the only edge back. The smallest cycle total is 2 (A to C to B to E to A: $7 - 3 - 4 + 2 = 2$), which is positive.
+
+![Bellman-Ford directed graph with shortest distances from A](diagrams/b1-theory-06-bellman-ford-graph.svg)
+
+#### Q7(c) What is algorithm optimality? Is the 0/1 knapsack DP optimal? Solve the example.
+
+**Optimality:** an algorithm is **optimal** if it always gives the best answer (maximum or minimum, as the problem asks) for every valid input.
+
+**Is 0/1 knapsack DP optimal?** Yes. For each item, the DP checks both choices (skip or take). It uses the optimal answers of smaller subproblems (optimal substructure), so the best choice is never missed.
+
+**Example:** capacity $W = 8$.
+
+| Item | 1 | 2 | 3 | 4 |
+|------|---|---|---|---|
+| Weight | 3 | 4 | 5 | 6 |
+| Profit | 2 | 3 | 1 | 4 |
+
+**DP table** (rows: first $i$ items; columns: capacity $w = 0$ to $8$):
+
+| $i$ \ $w$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|---|---|---|
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 1 | 0 | 0 | 0 | 2 | 2 | 2 | 2 | 2 | 2 |
+| 2 | 0 | 0 | 0 | 2 | 3 | 3 | 3 | 5 | 5 |
+| 3 | 0 | 0 | 0 | 2 | 3 | 3 | 3 | 5 | 5 |
+| 4 | 0 | 0 | 0 | 2 | 3 | 3 | 4 | 5 | 5 |
+
+**Answer: profit 5**, using items 1 and 2 (weight $3 + 4 = 7 \le 8$, profit $2 + 3 = 5$).
+
+**Traceback:** $DP[4][8] = DP[3][8] = 5$, so item 4 is not taken. Likewise item 3 is not taken. $DP[2][8] = 5 \ne DP[1][8] = 2$, so item 2 is taken, and the capacity becomes $8 - 4 = 4$. $DP[1][4] = 2 \ne DP[0][4] = 0$, so item 1 is taken.
+
+### Q8. P, NP, Decision vs Optimization, and Dijkstra
+
+#### Q8(a) Define P, NP, NP-hard, and NP-complete. Show their relation.
+
+- **P**: problems that can be **solved** in polynomial time. Example: sorting, shortest path.
+- **NP**: problems where a **yes** answer can be **verified** in polynomial time, if we are given a proposed solution. Example: given a tour, check its cost quickly. (NP does not mean "not polynomial".)
+- **NP-hard**: at least as hard as every problem in NP. Every NP problem can be reduced to it in polynomial time. It does not need to be in NP.
+- **NP-complete**: problems that are both in NP and NP-hard.
+
+**Relation:** every P problem is also in NP, so $P \subseteq NP$. NP-complete problems are the hardest problems inside NP. Whether $P = NP$ is still an **open question**.
+
+![How P, NP, NP-hard, and NP-complete relate](diagrams/b1-theory-07-classes-venn.svg)
+
+#### Q8(b) Decision problem vs optimization problem. Why does this matter?
+
+- **Decision problem**: the answer is yes or no. Example: "Is there a tour with cost at most $k$?"
+- **Optimization problem**: find the best solution. Example: "Find the cheapest tour."
+
+NP-completeness is defined for decision problems. If the decision version can be solved in polynomial time, the optimization version can also be solved in polynomial time. We do this by binary search on $k$, which takes only about $\log$ (cost range) calls. So the two versions are about equally hard.
+
+#### Q8(c) Run Dijkstra's algorithm from A.
+
+**Edges (read from the figure, treated as undirected):** A-B 2, A-D 8, B-E 6, B-D 5, E-D 3, E-F 1, E-C 9, F-C 3, D-F 2.
+
+**Relaxation rule:** if $dist[u] + w(u,v) < dist[v]$, then set $dist[v] = dist[u] + w(u,v)$.
+
+| Step | Visit | Distances updated |
+|------|-------|-------------------|
+| 1 | A (0) | B = 2, D = 8 |
+| 2 | B (2) | E = 8, D = 7 |
+| 3 | D (7) | F = 9 |
+| 4 | E (8) | C = 17. (F: 8 + 1 = 9, no change) |
+| 5 | F (9) | C = 12 |
+| 6 | C (12) | none |
+
+**Final distances:** A = 0, B = 2, D = 7, E = 8, F = 9, C = 12.
+
+**Shortest path to C:** A to B to D to F to C = $2 + 5 + 2 + 3 = 12$.
+
+F also has distance 9 through A to B to E to F ($2 + 6 + 1 = 9$), a tie. Either path is valid.
+
+![Dijkstra shortest path tree from A](diagrams/b1-theory-08-dijkstra-graph.svg)
+
 ---
 
 ## Quick Revision
@@ -418,6 +642,18 @@ For $N = 4$ there are 2 solutions in total. The first one is shown above.
 | Memo vs tab | Memo = top-down with cache; tab = bottom-up with table |
 | MST | Prim grows one tree; Kruskal adds the smallest safe edge |
 | Backtracking | Choose, check, undo on dead end |
+| Subset sum | Take or skip each item; prune if sum > $d$ |
+| Hamiltonian circuit | Visit every vertex once, return to start, backtrack on dead end |
+| DP properties | Optimal substructure + overlapping subproblems |
+| 0/1 knapsack | $DP[i][w] = \max(\text{skip}, p_i + \text{take})$ |
+| Grid max coins | Cell value + max(up, left) |
+| Coin change DP | $C[x] = 1 + \min C[x - c]$; greedy can fail |
+| Bellman-Ford | $V - 1$ passes over all edges; handles negative edges |
+| Dijkstra vs Bellman-Ford | Dijkstra fails with negative edges; Bellman-Ford works |
+| Optimality | Always returns the best answer for every valid input |
+| P, NP, NP-hard, NP-complete | P = solve fast; NP = verify fast; NP-complete = NP and NP-hard |
+| Decision vs optimization | Yes/no question vs find the best answer |
+| Dijkstra | Repeatedly take the closest vertex and relax its edges |
 
 ---
 
