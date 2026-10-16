@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="480" viewBox="0 0 900 480" role="img" aria-label="Recursion tree for T(n) = 2T(n/2) + n">
+<rect width="900" height="480" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="450" y="34">Recursion Tree for T(n) = 2T(n/2) + n</tspan></text>
+
+<g stroke="#1e1e1e" stroke-width="1.8" stroke-linecap="round" fill="none">
+<path d="M450 110 L260 170 M450 110 L640 170"/>
+<path d="M260 210 L170 270 M260 210 L350 270"/>
+<path d="M640 210 L550 270 M640 210 L730 270"/>
+<path d="M170 310 L120 370 M170 310 L220 370"/>
+<path d="M350 310 L320 370 M350 310 L420 370"/>
+<path d="M550 310 L520 370 M550 310 L620 370"/>
+<path d="M730 310 L720 370 M730 310 L820 370"/>
+</g>
+
+<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="bold" fill="#1e1e1e">
+<rect x="405" y="90" width="90" height="40" rx="8" fill="#ffc9c9" stroke="#e03131" stroke-width="2"/>
+<text x="450" y="110">n</text>
+<rect x="215" y="190" width="90" height="40" rx="8" fill="#ffec99" stroke="#f08c00" stroke-width="2"/>
+<text x="260" y="210">n/2</text>
+<rect x="595" y="190" width="90" height="40" rx="8" fill="#ffec99" stroke="#f08c00" stroke-width="2"/>
+<text x="640" y="210">n/2</text>
+<rect x="125" y="270" width="90" height="40" rx="8" fill="#99e9f2" stroke="#0c8599" stroke-width="2"/>
+<text x="170" y="290">n/4</text>
+<rect x="305" y="270" width="90" height="40" rx="8" fill="#99e9f2" stroke="#0c8599" stroke-width="2"/>
+<text x="350" y="290">n/4</text>
+<rect x="505" y="270" width="90" height="40" rx="8" fill="#99e9f2" stroke="#0c8599" stroke-width="2"/>
+<text x="550" y="290">n/4</text>
+<rect x="685" y="270" width="90" height="40" rx="8" fill="#99e9f2" stroke="#0c8599" stroke-width="2"/>
+<text x="730" y="290">n/4</text>
+<rect x="95" y="370" width="50" height="34" rx="6" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="120" y="387">1</text>
+<rect x="195" y="370" width="50" height="34" rx="6" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="220" y="387">1</text>
+<rect x="295" y="370" width="50" height="34" rx="6" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="320" y="387">1</text>
+<rect x="395" y="370" width="50" height="34" rx="6" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="420" y="387">1</text>
+<rect x="495" y="370" width="50" height="34" rx="6" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="520" y="387">1</text>
+<rect x="595" y="370" width="50" height="34" rx="6" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="620" y="387">1</text>
+<rect x="695" y="370" width="50" height="34" rx="6" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="720" y="387">1</text>
+<rect x="795" y="370" width="50" height="34" rx="6" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="820" y="387">1</text>
+</g>
+
+<text font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' text-anchor="start" dominant-baseline="central" font-size="13" fill="#495057"><tspan x="40" y="128">Level 0: work n</tspan><tspan x="40" y="228">Level 1: 2 nodes, work n</tspan><tspan x="40" y="308">Level 2: 4 nodes, work n</tspan><tspan x="40" y="424">Leaves: n nodes of size 1</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="bold" fill="#1e1e1e"><tspan x="450" y="462">Each level costs n, and there are log2(n) + 1 levels: T(n) = Θ(n log n)</tspan></text>
+</svg>
