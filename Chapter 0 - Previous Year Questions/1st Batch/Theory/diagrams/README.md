@@ -19,3 +19,5 @@ Diagrams for the 1st Batch CSE 2201 theory paper answers (page 1).
 | # | Diagram | Preview | Edit |
 |---|---------|---------|------|
 | 1 | 1st Batch Theory Escalator: From Algorithm Basics to Backtracking | [`b1-theory-01-question-escalator.svg`](b1-theory-01-question-escalator.svg) | [`b1-theory-01-question-escalator.excalidraw`](b1-theory-01-question-escalator.excalidraw) |
+| 2 | Q2(c) Recursion Tree for $T(n) = 2T(n/2) + n$ | [`b1-theory-02-recursion-tree.svg`](b1-theory-02-recursion-tree.svg) | [`b1-theory-02-recursion-tree.excalidraw`](b1-theory-02-recursion-tree.excalidraw) |
+| 3 | Q3(d) Max-Heap After the Build Step | [`b1-theory-03-heap-build-tree.svg`](b1-theory-03-heap-build-tree.svg) | [`b1-theory-03-heap-build-tree.excalidraw`](b1-theory-03-heap-build-tree.excalidraw) |
