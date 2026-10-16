@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="540" viewBox="0 0 800 540" role="img" aria-label="Backtracking state-space tree for subset sum with d = 15">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
+<rect width="800" height="540" fill="#ffffff" rx="10"/>
+<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
+<text x="400" y="30" text-anchor="middle" font-weight="bold" font-size="20" fill="#1e1e1e">Q5(c): Backtracking Trace for Subset Sum (d = 15)</text>
+<line x1="400" y1="115" x2="400" y2="142" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="432" y="130" text-anchor="middle" font-weight="bold" font-size="14" fill="#868e96">take 3</text>
+<line x1="400" y1="195" x2="400" y2="222" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="432" y="210" text-anchor="middle" font-weight="bold" font-size="14" fill="#868e96">take 5</text>
+<line x1="397.1" y1="272.6" x2="235.9" y2="306.8" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="282" y="272" text-anchor="middle" font-weight="bold" font-size="14" fill="#868e96">take 6</text>
+<line x1="402.9" y1="272.6" x2="574.1" y2="306.8" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="530" y="272" text-anchor="middle" font-weight="bold" font-size="14" fill="#868e96">skip 6</text>
+<line x1="227.2" y1="353.2" x2="125.5" y2="395.7" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="162" y="352" text-anchor="middle" font-weight="bold" font-size="14" fill="#868e96">take 7</text>
+<line x1="232.8" y1="353.1" x2="344.4" y2="395.9" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="308" y="352" text-anchor="middle" font-weight="bold" font-size="14" fill="#868e96">skip 7</text>
+<line x1="580" y1="355" x2="580" y2="392" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="606" y="375" text-anchor="middle" font-weight="bold" font-size="14" fill="#868e96">take 7</text>
+<rect x="295" y="68" width="210" height="44" rx="6" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="400" y="90" text-anchor="middle" font-size="14" fill="#1e1e1e">start: {}, sum 0</text>
+<rect x="295" y="148" width="210" height="44" rx="6" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="400" y="170" text-anchor="middle" font-size="14" fill="#1e1e1e">{3}, sum 3</text>
+<rect x="295" y="228" width="210" height="44" rx="6" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="400" y="250" text-anchor="middle" font-size="14" fill="#1e1e1e">{3,5}, sum 8</text>
+<rect x="125" y="308" width="210" height="44" rx="6" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="230" y="330" text-anchor="middle" font-size="14" fill="#1e1e1e">{3,5,6}, sum 14</text>
+<rect x="475" y="308" width="210" height="44" rx="6" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="580" y="330" text-anchor="middle" font-size="14" fill="#1e1e1e">{3,5}, skip 6, sum 8</text>
+<rect x="10" y="398" width="220" height="44" rx="6" fill="#ffc9c9" stroke="#e03131" stroke-width="2"/>
+<text x="120" y="420" text-anchor="middle" font-size="14" fill="#1e1e1e">{3,5,6,7}: prune (21 &gt; 15)</text>
+<rect x="240" y="398" width="220" height="44" rx="6" fill="#ffc9c9" stroke="#e03131" stroke-width="2"/>
+<text x="350" y="420" text-anchor="middle" font-size="14" fill="#1e1e1e">{3,5,6}, skip 7: dead end</text>
+<rect x="470" y="398" width="220" height="44" rx="6" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="580" y="420" text-anchor="middle" font-size="14" fill="#1e1e1e">{3,5,7}: solution</text>
+<text x="40" y="482" text-anchor="start" font-size="15" fill="#868e96">Red = pruned or dead end (backtrack).   Green = solution found.</text>
+<text x="40" y="508" text-anchor="start" font-size="15" fill="#868e96">Rule: if sum &gt; 15, prune. If no items are left and sum &lt; 15, dead end.</text>
+</g>
+</svg>
