@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Q8(b): branch and bound for job sequencing">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
+<rect width="800" height="600" fill="#ffffff" rx="10"/>
+<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
+<text x="400" y="26.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">Q8(b): Branch and Bound for Job Sequencing (maximize profit)</text>
+<text x="400" y="50.0" text-anchor="middle" font-size="13" fill="#1e1e1e">Jobs (profit, deadline), each takes 1 unit: J1 (100, 2), J4 (27, 1), J3 (15, 2), J2 (10, 1).</text>
+<rect x="300" y="89" width="200" height="52" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="400" y="106.9" text-anchor="middle" font-size="13" fill="#1e1e1e">Start: profit 0</text>
+<text x="400" y="123.1" text-anchor="middle" font-size="13" fill="#1e1e1e">ub = 152</text>
+<rect x="160" y="179" width="180" height="52" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="250" y="196.9" text-anchor="middle" font-size="13" fill="#1e1e1e">J1 = 1 (take)</text>
+<text x="250" y="213.1" text-anchor="middle" font-size="13" fill="#1e1e1e">profit 100, ub = 152</text>
+<rect x="535" y="179" width="170" height="52" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2"/>
+<text x="620" y="196.9" text-anchor="middle" font-size="13" fill="#1e1e1e">J1 = 0</text>
+<text x="620" y="213.1" text-anchor="middle" font-size="13" fill="#1e1e1e">ub = 52  ✗ pruned</text>
+<rect x="70" y="279" width="160" height="52" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="150" y="296.9" text-anchor="middle" font-size="13" fill="#1e1e1e">J4 = 1 (take)</text>
+<text x="150" y="313.1" text-anchor="middle" font-size="13" fill="#1e1e1e">profit 127, ub = 152</text>
+<rect x="280" y="279" width="180" height="52" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2"/>
+<text x="370" y="296.9" text-anchor="middle" font-size="13" fill="#1e1e1e">J4 = 0</text>
+<text x="370" y="313.1" text-anchor="middle" font-size="13" fill="#1e1e1e">ub = 125  ✗ pruned</text>
+<rect x="15" y="379" width="150" height="52" rx="8" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2"/>
+<text x="90" y="396.9" text-anchor="middle" font-size="13" fill="#1e1e1e">J3 = 1</text>
+<text x="90" y="413.1" text-anchor="middle" font-size="13" fill="#1e1e1e">infeasible ✗</text>
+<rect x="165" y="379" width="150" height="52" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="240" y="396.9" text-anchor="middle" font-size="13" fill="#1e1e1e">J3 = 0</text>
+<text x="240" y="413.1" text-anchor="middle" font-size="13" fill="#1e1e1e">profit 127, ub = 137</text>
+<rect x="90" y="479" width="150" height="52" rx="8" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2"/>
+<text x="165" y="496.9" text-anchor="middle" font-size="13" fill="#1e1e1e">J2 = 1</text>
+<text x="165" y="513.1" text-anchor="middle" font-size="13" fill="#1e1e1e">infeasible ✗</text>
+<rect x="240" y="479" width="150" height="52" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="315" y="496.9" text-anchor="middle" font-size="13" fill="#1e1e1e">J2 = 0 (leaf)</text>
+<text x="315" y="513.1" text-anchor="middle" font-size="13" fill="#1e1e1e">profit 127 ✓ best</text>
+<polyline points="400.0,141.0 250.0,179.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="400.0,141.0 620.0,179.0" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+<polyline points="250.0,231.0 150.0,279.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="250.0,231.0 370.0,279.0" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+<polyline points="150.0,331.0 90.0,379.0" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+<polyline points="150.0,331.0 240.0,379.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="240.0,431.0 165.0,479.0" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+<polyline points="240.0,431.0 315.0,479.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="400" y="555.0" text-anchor="middle" font-size="13" fill="#1e1e1e">ub = profit so far + profit of every undecided job (admissible: never below the true best).</text>
+<text x="400" y="578.0" text-anchor="middle" font-size="14" fill="#2f9e44" font-weight="bold">Best found: take J1 and J4 (profit 127). Feasible: J4 in slot 1, J1 in slot 2.</text>
+</g>
+</svg>
