@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="590" viewBox="0 0 800 590" role="img" aria-label="Backtracking search tree for a Hamiltonian circuit from vertex a">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
+<rect width="800" height="590" fill="#ffffff" rx="10"/>
+<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
+<text x="400" y="30" text-anchor="middle" font-weight="bold" font-size="20" fill="#1e1e1e">Q5(d): Hamiltonian Circuit Search from Vertex a</text>
+<line x1="400" y1="112" x2="400" y2="138" stroke="#2f9e44" stroke-width="2"/>
+<line x1="400" y1="192" x2="400" y2="218" stroke="#2f9e44" stroke-width="2"/>
+<line x1="374.4" y1="253.5" x2="185.6" y2="316.5" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="160" y1="352" x2="160" y2="378" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="160" y1="432" x2="160" y2="458" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="400" y1="272" x2="400" y2="298" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="378.9" y1="341.9" x2="321.1" y2="388.1" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="421.1" y1="341.9" x2="478.9" y2="388.1" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="425.6" y1="253.5" x2="614.4" y2="316.5" stroke="#2f9e44" stroke-width="2"/>
+<line x1="640" y1="352" x2="640" y2="378" stroke="#2f9e44" stroke-width="2"/>
+<line x1="640" y1="432" x2="640" y2="458" stroke="#2f9e44" stroke-width="2"/>
+<circle cx="400" cy="85" r="24" fill="#99e9f2" stroke="#0c8599" stroke-width="2"/>
+<text x="400" y="85" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">a</text>
+<circle cx="400" cy="165" r="24" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="400" y="165" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">b</text>
+<circle cx="400" cy="245" r="24" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="400" y="245" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">c</text>
+<circle cx="160" cy="325" r="24" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="160" y="325" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">d</text>
+<circle cx="400" cy="325" r="24" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="400" y="325" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">e</text>
+<circle cx="640" cy="325" r="24" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="640" y="325" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">f</text>
+<circle cx="160" cy="405" r="24" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="160" y="405" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">e</text>
+<circle cx="300" cy="405" r="24" fill="#ffc9c9" stroke="#e03131" stroke-width="2"/>
+<text x="300" y="405" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">d</text>
+<circle cx="500" cy="405" r="24" fill="#ffc9c9" stroke="#e03131" stroke-width="2"/>
+<text x="500" y="405" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">f</text>
+<circle cx="640" cy="405" r="24" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="640" y="405" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">e</text>
+<circle cx="160" cy="485" r="24" fill="#ffc9c9" stroke="#e03131" stroke-width="2"/>
+<text x="160" y="485" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">f</text>
+<circle cx="640" cy="485" r="24" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<text x="640" y="485" text-anchor="middle" font-weight="bold" font-size="18" fill="#1e1e1e">d</text>
+<text x="300" y="442" text-anchor="middle" font-size="14" fill="#e03131">dead end</text>
+<text x="500" y="442" text-anchor="middle" font-size="14" fill="#e03131">dead end</text>
+<text x="160" y="522" text-anchor="middle" font-size="14" fill="#e03131">dead end</text>
+<text x="640" y="522" text-anchor="middle" font-size="14" fill="#2f9e44">circuit found</text>
+<text x="40" y="552" text-anchor="start" font-size="14" fill="#868e96">Red = dead end (backtrack). Green = circuit a-b-c-f-e-d-a.</text>
+<text x="40" y="574" text-anchor="start" font-size="14" fill="#868e96">Edges read from the figure: a-b, a-c, a-d, b-c, b-f, c-d, c-e, c-f, d-e, e-f.</text>
+</g>
+</svg>
