@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560" role="img" aria-label="Q7(b): LC-search state-space tree for 0/1 knapsack">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
+<rect width="800" height="560" fill="#ffffff" rx="10"/>
+<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
+<text x="400" y="26.0" text-anchor="middle" font-size="19" fill="#1e1e1e" font-weight="bold">Q7(b): LC-Search on 0/1 Knapsack (Capacity W = 10)</text>
+<text x="400" y="48.0" text-anchor="middle" font-size="13" fill="#1e1e1e">Items (weight, profit): A (4, 40), C (3, 18), B (6, 30), D (5, 20).</text>
+<text x="400" y="68.0" text-anchor="middle" font-size="13" fill="#868e96">Sorted by profit/weight: A (10), C (6), B (5), D (4). ub = upper bound (fractional fill).</text>
+<rect x="375" y="86" width="200" height="52" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="475" y="104.5" text-anchor="middle" font-size="12" fill="#1e1e1e">Start (nothing decided)</text>
+<text x="475" y="119.5" text-anchor="middle" font-size="12" fill="#1e1e1e">ub = 73</text>
+<rect x="210" y="179" width="200" height="52" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="310" y="197.5" text-anchor="middle" font-size="12" fill="#1e1e1e">A = 1 (take A)</text>
+<text x="310" y="212.5" text-anchor="middle" font-size="12" fill="#1e1e1e">w = 4, p = 40, ub = 73</text>
+<rect x="555" y="179" width="170" height="52" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2"/>
+<text x="640" y="197.5" text-anchor="middle" font-size="12" fill="#1e1e1e">A = 0</text>
+<text x="640" y="212.5" text-anchor="middle" font-size="12" fill="#1e1e1e">ub = 52  ✗ pruned</text>
+<rect x="67" y="279" width="170" height="52" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="152" y="297.5" text-anchor="middle" font-size="12" fill="#1e1e1e">C = 1 (take C)</text>
+<text x="152" y="312.5" text-anchor="middle" font-size="12" fill="#1e1e1e">w = 7, p = 58, ub = 73</text>
+<rect x="382" y="279" width="170" height="52" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="467" y="297.5" text-anchor="middle" font-size="12" fill="#1e1e1e">C = 0 (skip C)</text>
+<text x="467" y="312.5" text-anchor="middle" font-size="12" fill="#1e1e1e">w = 4, p = 40, ub = 70</text>
+<rect x="1" y="389" width="148" height="52" rx="8" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2"/>
+<text x="75" y="407.5" text-anchor="middle" font-size="12" fill="#1e1e1e">B = 1</text>
+<text x="75" y="422.5" text-anchor="middle" font-size="12" fill="#1e1e1e">w = 13 &gt; 10  ✗</text>
+<rect x="156" y="389" width="148" height="52" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2"/>
+<text x="230" y="407.5" text-anchor="middle" font-size="12" fill="#1e1e1e">B = 0</text>
+<text x="230" y="422.5" text-anchor="middle" font-size="12" fill="#1e1e1e">ub = 70  ✗ pruned</text>
+<rect x="316" y="389" width="148" height="52" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="390" y="407.5" text-anchor="middle" font-size="12" fill="#1e1e1e">B = 1 (take B)</text>
+<text x="390" y="422.5" text-anchor="middle" font-size="12" fill="#1e1e1e">p = 70, w = 10  ✓</text>
+<rect x="471" y="389" width="148" height="52" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2"/>
+<text x="545" y="407.5" text-anchor="middle" font-size="12" fill="#1e1e1e">B = 0</text>
+<text x="545" y="422.5" text-anchor="middle" font-size="12" fill="#1e1e1e">ub = 60  ✗ pruned</text>
+<polyline points="475.0,138.0 310.0,179.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="475.0,138.0 640.0,179.0" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+<polyline points="310.0,231.0 152.0,279.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="310.0,231.0 467.0,279.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="152.0,331.0 75.0,389.0" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+<polyline points="152.0,331.0 230.0,389.0" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+<polyline points="467.0,331.0 390.0,389.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="467.0,331.0 545.0,389.0" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+<text x="400" y="480.0" text-anchor="middle" font-size="13" fill="#1e1e1e">Expansion order: Start → A = 1 → C = 1 → C = 0 → B = 1 gives profit 70 (best so far).</text>
+<text x="400" y="504.0" text-anchor="middle" font-size="13" fill="#868e96">After that, every node with ub ≤ 70 is pruned, because it cannot beat 70.</text>
+<text x="400" y="530.0" text-anchor="middle" font-size="16" fill="#2f9e44" font-weight="bold">Answer: take A and B. Profit 70, weight 10.</text>
+</g>
+</svg>
