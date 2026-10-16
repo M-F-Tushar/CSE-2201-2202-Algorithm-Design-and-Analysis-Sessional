@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="530" viewBox="0 0 800 530" role="img" aria-label="Q8(c): TSP dynamic programming over subsets">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
+<rect width="800" height="530" fill="#ffffff" rx="10"/>
+<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
+<text x="400" y="26.0" text-anchor="middle" font-size="19" fill="#1e1e1e" font-weight="bold">Q8(c): TSP by DP over Subsets (Held-Karp)</text>
+<text x="400" y="50.0" text-anchor="middle" font-size="13" fill="#868e96">g(i, S) = cheapest path that starts at i, visits every city in S once, and ends at city 1.</text>
+<text x="60" y="100.0" text-anchor="start" font-size="14" fill="#1e1e1e" font-weight="bold">|S| = 0</text>
+<text x="60" y="200.0" text-anchor="start" font-size="14" fill="#1e1e1e" font-weight="bold">|S| = 1</text>
+<text x="60" y="300.0" text-anchor="start" font-size="14" fill="#1e1e1e" font-weight="bold">|S| = 2</text>
+<text x="60" y="400.0" text-anchor="start" font-size="14" fill="#1e1e1e" font-weight="bold">Final</text>
+<rect x="175" y="80" width="150" height="40" rx="8" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="250" y="100.0" text-anchor="middle" font-size="13" fill="#1e1e1e">g(2, ∅) = 20</text>
+<rect x="375" y="80" width="150" height="40" rx="8" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="450" y="100.0" text-anchor="middle" font-size="13" fill="#1e1e1e">g(3, ∅) = 42</text>
+<rect x="575" y="80" width="150" height="40" rx="8" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="650" y="100.0" text-anchor="middle" font-size="13" fill="#1e1e1e">g(4, ∅) = 35</text>
+<rect x="110" y="180" width="110" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="165" y="200.0" text-anchor="middle" font-size="13" fill="#1e1e1e">g(2, {3}) = 72</text>
+<rect x="225" y="180" width="110" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="280" y="200.0" text-anchor="middle" font-size="13" fill="#1e1e1e">g(2, {4}) = 69</text>
+<rect x="340" y="180" width="110" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="395" y="200.0" text-anchor="middle" font-size="13" fill="#1e1e1e">g(3, {2}) = 50</text>
+<rect x="455" y="180" width="110" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="510" y="200.0" text-anchor="middle" font-size="13" fill="#1e1e1e">g(3, {4}) = 47</text>
+<rect x="570" y="180" width="110" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="625" y="200.0" text-anchor="middle" font-size="13" fill="#1e1e1e">g(4, {2}) = 54</text>
+<rect x="685" y="180" width="110" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="740" y="200.0" text-anchor="middle" font-size="13" fill="#1e1e1e">g(4, {3}) = 54</text>
+<rect x="175" y="280" width="150" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="250" y="300.0" text-anchor="middle" font-size="13" fill="#1e1e1e">g(2, {3,4}) = 77</text>
+<rect x="375" y="280" width="150" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="450" y="300.0" text-anchor="middle" font-size="13" fill="#1e1e1e">g(3, {2,4}) = 66</text>
+<rect x="575" y="280" width="150" height="40" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
+<text x="650" y="300.0" text-anchor="middle" font-size="13" fill="#1e1e1e">g(4, {2,3}) = 62</text>
+<rect x="190" y="380" width="420" height="40" rx="8" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
+<text x="400" y="400.0" text-anchor="middle" font-size="13" fill="#1e1e1e">g(1, {2,3,4}) = min(20+77, 42+66, 35+62) = 97</text>
+<polyline points="650.0,120.0 510.0,180.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="510.0,220.0 250.0,280.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="250.0,120.0 395.0,180.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="395.0,220.0 650.0,280.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="250.0,320.0 400.0,380.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="650.0,320.0 400.0,380.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="400" y="470.0" text-anchor="middle" font-size="13" fill="#1e1e1e">Green paths: 1→2→3→4→1 = 20 + 30 + 12 + 35 = 97,   and   1→4→3→2→1 = 35 + 12 + 30 + 20 = 97.</text>
+<text x="400" y="494.0" text-anchor="middle" font-size="14" fill="#2f9e44" font-weight="bold">Minimum tour cost = 97. Each stage builds on the one before it (|S| grows by 1).</text>
+</g>
+</svg>
