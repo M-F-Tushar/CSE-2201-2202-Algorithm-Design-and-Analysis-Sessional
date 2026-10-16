@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="650" viewBox="0 0 800 650" role="img" aria-label="Q1(b): illustrative linear search, n = 5">
+<rect width="800" height="650" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="400.0" y="34.0">Q1(b): illustrative linear search, n = 5</tspan></text>
+<rect x="60.0" y="80.0" width="680.0" height="80.0" rx="10" fill="#a5d8ff"/>
+<path d="M58.9 80.2 Q399.4 80.2 739.5 78.5 M740.2 79.1 Q737.3 120.9 740.1 159.5 M741.2 158.5 Q399.5 161.4 59.0 160.1 M58.5 159.9 Q59.1 117.5 60.8 80.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M58.9 81.3 Q401.1 80.2 741.0 80.9 M740.4 80.6 Q742.2 122.1 738.8 160.4 M738.9 159.0 Q399.4 160.1 59.8 161.4 M61.3 161.1 Q58.9 121.2 60.6 81.1" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="400.0" y="109.4">Array: [9, 2, 7, 4, 1]</tspan><tspan x="400.0" y="130.6">Scan left to right, stop on the first match</tspan></text>
+<rect x="60.0" y="220.0" width="310.0" height="90.0" rx="10" fill="#b2f2bb"/>
+<path d="M60.1 219.7 Q212.4 219.8 370.8 221.1 M370.1 219.5 Q369.9 262.9 368.6 308.5 M369.9 310.5 Q213.4 308.5 58.4 309.8 M59.2 311.2 Q60.5 265.6 59.2 219.3" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M61.4 219.7 Q217.3 222.0 370.1 221.2 M371.1 219.4 Q371.1 262.2 370.7 308.9 M371.3 311.2 Q216.6 307.4 61.1 310.5 M60.4 309.2 Q58.7 267.8 59.5 220.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="215.0" y="254.4">Best: target 9</tspan><tspan x="215.0" y="275.6">1 comparison = Theta(1)</tspan></text>
+<rect x="430.0" y="220.0" width="310.0" height="90.0" rx="10" fill="#ffc9c9"/>
+<path d="M429.8 219.1 Q583.5 222.1 739.1 219.9 M739.3 220.3 Q738.7 262.8 740.3 311.5 M740.2 309.0 Q586.7 311.3 429.2 310.9 M428.9 311.3 Q431.1 265.2 431.0 220.9" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
+<path d="M430.5 220.9 Q585.7 218.5 738.6 220.5 M740.2 219.3 Q739.7 266.7 741.6 308.7 M739.4 308.9 Q582.2 308.3 429.6 309.9 M431.1 310.8 Q431.5 264.9 428.5 218.7" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="585.0" y="254.4">Worst: target 1 or absent</tspan><tspan x="585.0" y="275.6">5 comparisons = Theta(n)</tspan></text>
+<rect x="60.0" y="390.0" width="680.0" height="120.0" rx="10" fill="#ffec99"/>
+<path d="M60.9 391.0 Q398.0 392.3 740.7 388.5 M740.9 390.6 Q740.8 451.0 740.1 509.5 M740.4 511.2 Q398.1 508.2 61.2 510.4 M61.4 509.7 Q62.3 452.0 60.1 391.2" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M59.9 388.5 Q402.0 391.5 739.1 390.2 M738.7 390.8 Q737.7 447.5 739.9 509.1 M740.3 508.9 Q398.7 507.5 60.8 510.6 M59.8 508.4 Q62.1 449.2 58.9 389.6" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="400.0" y="428.9">Average: target occurs once; uniform position</tspan><tspan x="400.0" y="450.0">(1 + 2 + 3 + 4 + 5) / 5 = 3</tspan><tspan x="400.0" y="471.1">In general (n + 1) / 2 = Theta(n)</tspan></text>
+<rect x="60.0" y="550.0" width="680.0" height="55.0" rx="10" fill="#e9ecef"/>
+<path d="M60.4 548.9 Q402.5 549.4 739.0 549.8 M741.2 551.3 Q742.0 576.4 741.1 605.6 M738.9 605.6 Q402.3 607.2 58.4 605.0 M60.5 605.9 Q60.7 576.0 58.6 550.5" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M60.6 549.3 Q399.7 547.2 738.6 550.6 M739.6 551.2 Q737.7 579.9 739.6 604.2 M740.6 606.3 Q401.8 606.4 58.9 604.4 M59.7 604.2 Q62.7 575.4 58.6 550.2" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="400.0" y="577.5">Different probabilities can change the average; state them.</tspan></text>
+</svg>
