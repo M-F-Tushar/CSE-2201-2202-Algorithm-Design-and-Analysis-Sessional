@@ -1,35 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="540" viewBox="0 0 800 540" role="img" aria-label="Q2(b): BFS shortest path from S in an unweighted graph">
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
-<rect width="800" height="540" fill="#ffffff" rx="10"/>
-<g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
-<text x="400" y="30.0" text-anchor="middle" font-size="20" fill="#1e1e1e" font-weight="bold">Q2(b): BFS from S on an Unweighted Graph</text>
-<polyline points="318.3,338.8 471.7,161.2" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6"/>
-<polyline points="513.9,345.4 646.1,264.6" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="7 6"/>
-<polyline points="143.9,264.6 276.1,345.4" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<polyline points="328.0,360.0 462.0,360.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
-<polyline points="143.9,235.4 276.1,154.6" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
-<polyline points="328.0,140.0 462.0,140.0" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
-<polyline points="513.9,154.6 646.1,235.4" fill="none" stroke="#2f9e44" stroke-width="3" marker-end="url(#arrow)"/>
-<circle cx="120" cy="250" r="28" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="120" y="250.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">S</text>
-<text x="120" y="294.0" text-anchor="middle" font-size="14" fill="#868e96">d = 0</text>
-<circle cx="300" cy="140" r="28" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="300" y="140.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">A</text>
-<text x="300" y="184.0" text-anchor="middle" font-size="14" fill="#868e96">d = 1</text>
-<circle cx="300" cy="360" r="28" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="300" y="360.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">B</text>
-<text x="300" y="404.0" text-anchor="middle" font-size="14" fill="#868e96">d = 1</text>
-<circle cx="490" cy="140" r="28" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="490" y="140.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">C</text>
-<text x="490" y="184.0" text-anchor="middle" font-size="14" fill="#868e96">d = 2</text>
-<circle cx="490" cy="360" r="28" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
-<text x="490" y="360.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">D</text>
-<text x="490" y="404.0" text-anchor="middle" font-size="14" fill="#868e96">d = 2</text>
-<circle cx="670" cy="250" r="28" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2"/>
-<text x="670" y="250.0" text-anchor="middle" font-size="18" fill="#1e1e1e" font-weight="bold">E</text>
-<text x="670" y="294.0" text-anchor="middle" font-size="14" fill="#868e96">d = 3</text>
-<text x="400" y="462.0" text-anchor="middle" font-size="15" fill="#1e1e1e">BFS levels: S  |  A, B  |  C, D  |  E</text>
-<text x="400" y="488.0" text-anchor="middle" font-size="15" fill="#1e1e1e">Shortest path S to E: S-A-C-E (3 edges). S-B-D-E is also 3 edges.</text>
-<text x="400" y="514.0" text-anchor="middle" font-size="14" fill="#868e96">Green = shortest path found by BFS.   Grey dashed = edges BFS does not use.</text>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="780" viewBox="0 0 960 780" role="img" aria-label="Q2(b): BFS levels and a shortest path from S">
+<rect width="960" height="780" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="480.0" y="34.0">Q2(b): BFS levels and a shortest path from S</tspan></text>
+<path d="M129.9 248.3 Q205.0 205.1 280.6 161.8" fill="none" stroke="#2f9e44" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M129.8 300.7 Q206.3 346.3 281.0 389.2" fill="none" stroke="#343a40" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M369.4 134.7 Q449.7 135.3 530.1 134.7" fill="none" stroke="#2f9e44" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M361.0 374.2 Q450.9 273.5 539.3 175.6" fill="none" stroke="#343a40" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="9 7" opacity="0.85"/>
+<path d="M370.8 414.6 Q450.3 415.0 529.7 415.2" fill="none" stroke="#343a40" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M620.1 160.0 Q699.9 203.2 780.2 249.7" fill="none" stroke="#2f9e44" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M620.1 389.6 Q700.4 345.4 780.4 300.7" fill="none" stroke="#343a40" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="9 7" opacity="0.85"/>
+<ellipse cx="85.0" cy="275.0" rx="45.0" ry="40.0" fill="#b2f2bb"/>
+<path d="M130.0 275.0 Q126.7 289.9 116.8 303.3 M116.8 303.3 Q103.0 312.4 85.0 315.0 M85.0 315.0 Q66.8 313.3 53.2 303.3 M53.2 303.3 Q40.7 291.1 40.0 275.0 M40.0 275.0 Q41.8 260.7 53.2 246.7 M53.2 246.7 Q67.3 236.2 85.0 235.0 M85.0 235.0 Q101.5 235.7 116.8 246.7 M116.8 246.7 Q128.1 258.2 130.0 275.0" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M130.0 275.0 Q126.7 290.3 116.8 303.3 M116.8 303.3 Q104.0 313.3 85.0 315.0 M85.0 315.0 Q68.3 312.3 53.2 303.3 M53.2 303.3 Q43.0 292.3 40.0 275.0 M40.0 275.0 Q42.8 258.0 53.2 246.7 M53.2 246.7 Q67.4 236.8 85.0 235.0 M85.0 235.0 Q102.2 237.9 116.8 246.7 M116.8 246.7 Q128.2 258.9 130.0 275.0" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="85.0" y="263.8">S</tspan><tspan x="85.0" y="286.2">d=0</tspan></text>
+<ellipse cx="325.0" cy="135.0" rx="45.0" ry="40.0" fill="#b2f2bb"/>
+<path d="M370.0 135.0 Q367.9 151.8 356.8 163.3 M356.8 163.3 Q342.5 173.9 325.0 175.0 M325.0 175.0 Q308.0 173.7 293.2 163.3 M293.2 163.3 Q283.3 150.9 280.0 135.0 M280.0 135.0 Q280.7 118.7 293.2 106.7 M293.2 106.7 Q307.2 97.4 325.0 95.0 M325.0 95.0 Q343.6 97.5 356.8 106.7 M356.8 106.7 Q367.9 118.1 370.0 135.0" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M370.0 135.0 Q369.2 149.3 356.8 163.3 M356.8 163.3 Q342.4 171.7 325.0 175.0 M325.0 175.0 Q307.3 173.9 293.2 163.3 M293.2 163.3 Q283.4 150.7 280.0 135.0 M280.0 135.0 Q283.5 118.4 293.2 106.7 M293.2 106.7 Q308.4 95.6 325.0 95.0 M325.0 95.0 Q343.3 95.5 356.8 106.7 M356.8 106.7 Q368.9 117.7 370.0 135.0" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="325.0" y="123.8">A</tspan><tspan x="325.0" y="146.2">d=1</tspan></text>
+<ellipse cx="325.0" cy="415.0" rx="45.0" ry="40.0" fill="#a5d8ff"/>
+<path d="M370.0 415.0 Q367.6 430.8 356.8 443.3 M356.8 443.3 Q341.9 454.3 325.0 455.0 M325.0 455.0 Q306.4 454.3 293.2 443.3 M293.2 443.3 Q282.0 431.9 280.0 415.0 M280.0 415.0 Q281.3 399.8 293.2 386.7 M293.2 386.7 Q308.4 378.0 325.0 375.0 M325.0 375.0 Q341.9 376.4 356.8 386.7 M356.8 386.7 Q367.2 399.9 370.0 415.0" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M370.0 415.0 Q368.3 429.6 356.8 443.3 M356.8 443.3 Q343.6 452.7 325.0 455.0 M325.0 455.0 Q305.8 454.2 293.2 443.3 M293.2 443.3 Q282.7 430.3 280.0 415.0 M280.0 415.0 Q282.6 398.4 293.2 386.7 M293.2 386.7 Q306.4 375.7 325.0 375.0 M325.0 375.0 Q342.2 378.3 356.8 386.7 M356.8 386.7 Q368.0 399.1 370.0 415.0" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="325.0" y="403.8">B</tspan><tspan x="325.0" y="426.2">d=1</tspan></text>
+<ellipse cx="575.0" cy="135.0" rx="45.0" ry="40.0" fill="#b2f2bb"/>
+<path d="M620.0 135.0 Q618.7 149.3 606.8 163.3 M606.8 163.3 Q593.7 173.6 575.0 175.0 M575.0 175.0 Q558.0 173.5 543.2 163.3 M543.2 163.3 Q530.7 149.9 530.0 135.0 M530.0 135.0 Q531.1 118.7 543.2 106.7 M543.2 106.7 Q558.5 97.1 575.0 95.0 M575.0 95.0 Q593.8 96.2 606.8 106.7 M606.8 106.7 Q618.7 120.8 620.0 135.0" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M620.0 135.0 Q617.7 149.3 606.8 163.3 M606.8 163.3 Q591.2 173.2 575.0 175.0 M575.0 175.0 Q556.3 174.5 543.2 163.3 M543.2 163.3 Q532.3 149.6 530.0 135.0 M530.0 135.0 Q533.3 119.2 543.2 106.7 M543.2 106.7 Q558.1 98.4 575.0 95.0 M575.0 95.0 Q591.2 96.6 606.8 106.7 M606.8 106.7 Q616.5 117.9 620.0 135.0" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="575.0" y="123.8">C</tspan><tspan x="575.0" y="146.2">d=2</tspan></text>
+<ellipse cx="575.0" cy="415.0" rx="45.0" ry="40.0" fill="#a5d8ff"/>
+<path d="M620.0 415.0 Q618.3 429.8 606.8 443.3 M606.8 443.3 Q591.7 453.2 575.0 455.0 M575.0 455.0 Q556.3 454.2 543.2 443.3 M543.2 443.3 Q532.0 431.6 530.0 415.0 M530.0 415.0 Q533.6 397.7 543.2 386.7 M543.2 386.7 Q556.9 375.6 575.0 375.0 M575.0 375.0 Q592.8 377.8 606.8 386.7 M606.8 386.7 Q619.1 399.2 620.0 415.0" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M620.0 415.0 Q618.5 430.0 606.8 443.3 M606.8 443.3 Q592.0 453.4 575.0 455.0 M575.0 455.0 Q555.9 454.6 543.2 443.3 M543.2 443.3 Q532.8 430.3 530.0 415.0 M530.0 415.0 Q532.0 398.7 543.2 386.7 M543.2 386.7 Q555.7 378.2 575.0 375.0 M575.0 375.0 Q591.6 376.1 606.8 386.7 M606.8 386.7 Q617.4 398.5 620.0 415.0" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="575.0" y="403.8">D</tspan><tspan x="575.0" y="426.2">d=2</tspan></text>
+<ellipse cx="825.0" cy="275.0" rx="45.0" ry="40.0" fill="#b2f2bb"/>
+<path d="M870.0 275.0 Q867.9 289.4 856.8 303.3 M856.8 303.3 Q844.0 313.7 825.0 315.0 M825.0 315.0 Q808.5 312.9 793.2 303.3 M793.2 303.3 Q783.2 289.2 780.0 275.0 M780.0 275.0 Q782.6 258.1 793.2 246.7 M793.2 246.7 Q808.1 236.6 825.0 235.0 M825.0 235.0 Q841.3 238.1 856.8 246.7 M856.8 246.7 Q868.4 258.8 870.0 275.0" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M870.0 275.0 Q867.2 290.8 856.8 303.3 M856.8 303.3 Q843.7 313.3 825.0 315.0 M825.0 315.0 Q808.0 313.3 793.2 303.3 M793.2 303.3 Q781.7 290.6 780.0 275.0 M780.0 275.0 Q781.8 260.0 793.2 246.7 M793.2 246.7 Q806.4 238.2 825.0 235.0 M825.0 235.0 Q841.3 236.6 856.8 246.7 M856.8 246.7 Q868.0 257.6 870.0 275.0" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="825.0" y="263.8">E</tspan><tspan x="825.0" y="286.2">d=3</tspan></text>
+<rect x="40.0" y="555.0" width="880.0" height="55.0" rx="10" fill="#e9ecef"/>
+<path d="M39.7 554.4 Q479.8 552.2 918.9 554.6 M920.2 556.1 Q917.6 584.0 920.8 608.5 M919.1 608.7 Q480.5 608.0 38.6 608.5 M40.6 609.3 Q39.7 579.7 38.6 555.6" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M39.9 554.4 Q482.0 557.0 920.3 555.1 M920.3 556.5 Q922.3 580.9 919.6 609.5 M921.4 609.9 Q477.9 607.4 40.6 611.2 M38.8 611.0 Q40.4 582.3 40.1 555.2" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="480.0" y="582.5">Illustrative UNDIRECTED graph; neighbours processed alphabetically</tspan></text>
+<rect x="40.0" y="645.0" width="880.0" height="90.0" rx="10" fill="#ffec99"/>
+<path d="M38.5 645.3 Q481.1 643.7 918.9 645.8 M920.6 644.8 Q919.3 692.1 918.4 733.9 M919.2 733.7 Q481.1 737.3 41.3 734.9 M39.4 736.0 Q39.4 688.5 40.8 644.6" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M41.2 643.8 Q477.9 646.8 918.6 644.7 M920.2 645.2 Q922.4 689.5 919.9 735.7 M918.6 735.1 Q478.9 734.9 40.0 734.2 M40.7 734.9 Q42.6 688.8 41.3 643.7" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="480.0" y="679.4">Green edges: S–A–C–E, distance 3. All seven edges have unit length.</tspan><tspan x="480.0" y="700.6">BFS tree also includes S–B and B–D; cross edges are dashed.</tspan></text>
 </svg>
