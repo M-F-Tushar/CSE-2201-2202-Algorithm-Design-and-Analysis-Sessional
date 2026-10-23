@@ -5,211 +5,343 @@ from tools.excalidraw_gen import D, E, N
 OUT = "Chapter 5 - Sorting Algorithms/diagrams"
 
 
-def stack(items, x=300, w=320, y0=30, gap=34):
-    """Vertical flowchart column. Each item: (id, label, color, shape, height)."""
-    nodes, y = [], y0
-    for nid, label, color, shape, h in items:
-        nodes.append(N(nid, label, x, y, w, h, color, shape, 15))
-        y += h + gap
-    return nodes
+def array_walkthrough(key, title, rows, caption, size=(940, 520)):
+    """Create a plain-language, row-by-row array walkthrough."""
+    nodes = []
+    row_y = 86
+    row_height = 44
+    row_gap = 12
+    label_x = 30
+    label_width = 220
+    cell_x = 270
+    cell_width = 64
+    cell_gap = 8
+
+    for row_index, step in enumerate(rows):
+        y = row_y + row_index * (row_height + row_gap)
+        nodes.append(
+            N(
+                f"step-{row_index}",
+                step["label"],
+                label_x,
+                y,
+                label_width,
+                row_height,
+                "gray",
+                size=12,
+            )
+        )
+        colors = step.get("colors", [])
+        for item_index, value in enumerate(step["values"]):
+            color = colors[item_index] if item_index < len(colors) else "white"
+            nodes.append(
+                N(
+                    f"step-{row_index}-item-{item_index}",
+                    str(value),
+                    cell_x + item_index * (cell_width + cell_gap),
+                    y,
+                    cell_width,
+                    row_height,
+                    color,
+                    size=16,
+                    bold=color == "green",
+                )
+            )
+
+    return D(
+        key=key,
+        title=title,
+        size=size,
+        nodes=nodes,
+        caption=caption,
+    )
 
 
-# 1 ---------------------------------------------------- reach escalator
-reach_escalator = D(
+def group_walkthrough(key, title, stages, caption):
+    """Show merge sort's groups changing as lists split and join."""
+    nodes = []
+    row_y = 78
+    row_height = 42
+    row_gap = 8
+    label_x = 24
+    label_width = 226
+    group_x = 275
+    group_gap = 8
+    group_area_width = 700
+
+    for row_index, stage in enumerate(stages):
+        y = row_y + row_index * (row_height + row_gap)
+        nodes.append(
+            N(
+                f"stage-{row_index}",
+                stage["label"],
+                label_x,
+                y,
+                label_width,
+                row_height,
+                "gray",
+                size=12,
+            )
+        )
+        groups = stage["groups"]
+        group_width = min(180, (group_area_width - (len(groups) - 1) * group_gap) / len(groups))
+        total_width = len(groups) * group_width + (len(groups) - 1) * group_gap
+        x = group_x + (group_area_width - total_width) / 2
+        for group_index, group in enumerate(groups):
+            nodes.append(
+                N(
+                    f"stage-{row_index}-group-{group_index}",
+                    group,
+                    x + group_index * (group_width + group_gap),
+                    y,
+                    group_width,
+                    row_height,
+                    "teal" if group_index % 2 == 0 else "yellow",
+                    size=13,
+                )
+            )
+
+    return D(
+        key=key,
+        title=title,
+        size=(1000, 510),
+        nodes=nodes,
+        caption=caption,
+    )
+
+
+def counting_diagram():
+    """Show counting sort's input, counts, running totals, and result."""
+    nodes = []
+    label_x = 30
+    label_width = 220
+    cell_width = 76
+    cell_gap = 8
+    row_height = 50
+    rows = [
+        ("input", "Starting list", ["4", "1", "3", "4", "2", "1"]),
+        ("counts", "How often each value\nappears", ["0 : 0", "1 : 2", "2 : 1", "3 : 1", "4 : 2"]),
+        ("totals", "Running totals", ["0 : 0", "1 : 2", "2 : 3", "3 : 4", "4 : 6"]),
+        ("result", "Sorted list", ["1", "1", "2", "3", "4", "4"]),
+    ]
+    first_y = 102
+    row_gap = 72
+
+    for row_index, (row_id, label, values) in enumerate(rows):
+        y = first_y + row_index * row_gap
+        nodes.append(
+            N(row_id, label, label_x, y, label_width, row_height, "gray", size=12)
+        )
+        cells_width = len(values) * cell_width + (len(values) - 1) * cell_gap
+        x0 = 280 + (650 - cells_width) / 2
+        for value_index, value in enumerate(values):
+            color = "green" if row_id == "result" else "yellow" if row_id == "totals" else "white"
+            nodes.append(
+                N(
+                    f"{row_id}-{value_index}",
+                    value,
+                    x0 + value_index * (cell_width + cell_gap),
+                    y,
+                    cell_width,
+                    row_height,
+                    color,
+                    size=14,
+                    bold=row_id == "result",
+                )
+            )
+
+    return D(
+        key="ch5-06-sorting-counts-flow",
+        title="Counting Sort: Count Values, Then Place Them",
+        size=(980, 500),
+        nodes=nodes,
+        caption="The running total tells where each value belongs in the output.",
+    )
+
+
+# 1 — a practical guide, not a ranking of the algorithms
+choose_sort = D(
     key="ch5-01-sorting-reach-escalator",
-    title="Sorting Reach Escalator: From Quadratic Sorts to O(n log n)",
-    size=(1200, 560),
-    flow="H",
+    title="Choose a Sort by What the Situation Needs",
+    size=(1020, 470),
     nodes=[
-        N("e1", "Bubble, Selection, Insertion\nO(n²) worst case", 40, 370, 250, 90, "red", size=14, bold=True),
-        N("e2", "Merge Sort\nO(n log n) always", 330, 280, 250, 90, "yellow", size=14, bold=True),
-        N("e3", "Quick Sort\nO(n log n) average, in-place", 620, 190, 250, 90, "teal", size=14, bold=True),
-        N("e4", "Heap Sort\nO(n log n), in-place", 910, 100, 250, 90, "green", size=14, bold=True),
+        N("small", "Insertion sort\nSmall or nearly sorted lists", 35, 100, 290, 100, "yellow", size=14, bold=True),
+        N("stable", "Merge sort\nStable results\nExtra memory is okay", 365, 100, 290, 100, "teal", size=14, bold=True),
+        N("general", "Quick sort\nOften fast; pivot choice matters", 695, 100, 290, 100, "blue", size=14, bold=True),
+        N("memory", "Heap sort\nReliable time; little extra memory", 200, 255, 290, 100, "violet", size=14, bold=True),
+        N("range", "Counting sort\nSmall, known integer range", 530, 255, 290, 100, "green", size=14, bold=True),
     ],
-    edges=[
-        E("e1", "e2", "climb", route="straight"),
-        E("e2", "e3", "climb", route="straight"),
-        E("e3", "e4", "climb", route="straight"),
-    ],
-    caption="Each step reaches a faster guarantee; counting and radix sort go further by avoiding comparisons",
+    caption="Choose for the input and the trade-off you care about; no single method fits every case.",
 )
 
-# 2 ---------------------------------------------------- taxonomy
+# 2 — sorts grouped by how they decide order
 taxonomy = D(
     key="ch5-02-sorting-taxonomy",
-    title="Classification of Sorting Algorithms in This Chapter",
-    size=(1180, 420),
+    title="Two Ways to Decide Which Item Comes First",
+    size=(1080, 440),
     flow="V",
     nodes=[
-        N("root", "Sorting Algorithms", 440, 30, 220, 56, "blue", bold=True),
-        N("comp", "Comparative Sorts\nDecide order by comparing two items", 20, 150, 640, 64, "yellow"),
-        N("non", "Non-Comparative Sorts\nUse digit or key structure", 700, 150, 380, 64, "green"),
-        N("quad", "Quadratic\nBubble, Selection, Insertion", 20, 280, 250, 64, "red", size=14),
-        N("dnc", "Divide and Conquer\nMerge Sort, Quick Sort", 290, 280, 220, 64, "teal", size=14),
-        N("heap", "Heap-Based\nHeap Sort", 530, 280, 220, 64, "violet", size=14),
-        N("cnt", "Counting Sort\nSmall key range", 780, 280, 170, 64, "green", size=14),
-        N("rad", "Radix / Bucket\nDigit-by-digit", 970, 280, 170, 64, "green", size=14),
+        N("root", "Sorting methods", 405, 54, 270, 58, "blue", bold=True),
+        N("compare", "Comparison sorts\nCompare items to decide their order", 90, 150, 430, 68, "yellow", size=14),
+        N("count", "Counting sort\nCount known integer values", 610, 150, 380, 68, "green", size=14),
+        N("simple", "Simple sorts\nBubble, selection,\ninsertion", 20, 295, 190, 76, "red", size=13),
+        N("merge", "Split and join\nMerge sort", 220, 295, 190, 76, "teal", size=13),
+        N("quick", "Pivot and divide\nQuick sort", 420, 295, 190, 76, "blue", size=13),
+        N("heap", "Heap structure\nHeap sort", 620, 295, 190, 76, "violet", size=13),
     ],
     edges=[
-        E("root", "comp"), E("root", "non"),
-        E("comp", "quad"), E("comp", "dnc"), E("comp", "heap"),
-        E("non", "cnt"), E("non", "rad"),
+        E("root", "compare"),
+        E("root", "count"),
+        E("compare", "simple"),
+        E("compare", "merge"),
+        E("compare", "quick"),
+        E("compare", "heap"),
     ],
-    caption="Comparative sorts are bounded below by Ω(n log n); non-comparative sorts can beat that bound under key assumptions",
+    caption="Counting sort avoids item-to-item comparisons when the possible values are few and known.",
 )
 
-# 3 ---------------------------------------------------- bubble sort flow
-bubble_flow = D(
-    key="ch5-03-bubble-sort-flow",
-    title="Bubble Sort Control Flow",
-    size=(780, 720),
-    flow="V",
-    nodes=stack([
-        ("s", "Start pass with j = 0", "blue", "rect", 54),
-        ("c", "Compare A[j] with A[j+1]", "yellow", "rect", 54),
-        ("d", "A[j] > A[j+1]?", "yellow", "diamond", 80),
-        ("sw", "Swap the pair\nset swapped = true", "green", "rect", 60),
-        ("adv", "Move to next pair (j = j + 1)", "blue", "rect", 54),
-        ("end", "End of unsorted part?", "yellow", "diamond", 80),
-        ("fin", "No swap in a full pass?\nIf not, repeat with one fewer item", "teal", "rect", 60),
-    ]),
-    edges=[
-        E("s", "c"), E("c", "d"),
-        E("d", "sw", "Yes"),
-        E("sw", "adv"),
-        E("d", "adv", "No", route="loopr", bend=60),
-        E("adv", "end"),
-        E("end", "c", "No", route="loopr", bend=100),
-        E("end", "fin", "Yes"),
+# 3 — bubble sort
+bubble_walk = array_walkthrough(
+    "ch5-03-bubble-sort-flow",
+    "Bubble Sort: Large Values Move to the End",
+    [
+        {"label": "Starting list", "values": [5, 2, 4, 6, 1, 3]},
+        {"label": "Pass 1: settle 6", "values": [2, 4, 5, 1, 3, 6], "colors": ["white", "white", "white", "white", "white", "green"]},
+        {"label": "Pass 2: settle 5", "values": [2, 4, 1, 3, 5, 6], "colors": ["white", "white", "white", "white", "green", "green"]},
+        {"label": "Pass 3: settle 4", "values": [2, 1, 3, 4, 5, 6], "colors": ["white", "white", "white", "green", "green", "green"]},
+        {"label": "Pass 4: list is sorted", "values": [1, 2, 3, 4, 5, 6], "colors": ["green"] * 6},
+        {"label": "Pass 5: no switches; stop", "values": [1, 2, 3, 4, 5, 6], "colors": ["green"] * 6},
     ],
-    caption="The largest unsorted value bubbles to the end of each pass",
+    "Each pass settles one more large value at the right-hand end.",
 )
 
-# 4 ---------------------------------------------------- selection sort flow
-selection_flow = D(
-    key="ch5-04-selection-sort-flow",
-    title="Selection Sort Control Flow",
-    size=(780, 620),
-    flow="V",
-    nodes=stack([
-        ("s", "Start with i = 0\n(whole array unsorted)", "blue", "rect", 60),
-        ("scan", "Scan A[i..n-1] for the minimum", "yellow", "rect", 54),
-        ("swp", "Swap minimum with A[i]\n(at most n - 1 swaps)", "green", "rect", 60),
-        ("grow", "Grow sorted prefix: i = i + 1", "blue", "rect", 54),
-        ("chk", "Is i < n - 1?", "yellow", "diamond", 80),
-        ("done", "Array fully sorted", "teal", "rect", 54),
-    ]),
-    edges=[
-        E("s", "scan"), E("scan", "swp"), E("swp", "grow"), E("grow", "chk"),
-        E("chk", "scan", "Yes", route="loopr", bend=60),
-        E("chk", "done", "No"),
+# 4 — selection sort
+selection_walk = array_walkthrough(
+    "ch5-04-selection-sort-flow",
+    "Selection Sort: Find the Smallest Unplaced Value",
+    [
+        {"label": "Starting list", "values": [5, 2, 4, 6, 1, 3]},
+        {"label": "Round 1: place 1", "values": [1, 2, 4, 6, 5, 3], "colors": ["green"] + ["white"] * 5},
+        {"label": "Round 2: 2 is already first", "values": [1, 2, 4, 6, 5, 3], "colors": ["green", "green"] + ["white"] * 4},
+        {"label": "Round 3: place 3", "values": [1, 2, 3, 6, 5, 4], "colors": ["green"] * 3 + ["white"] * 3},
+        {"label": "Round 4: place 4", "values": [1, 2, 3, 4, 5, 6], "colors": ["green"] * 4 + ["white"] * 2},
+        {"label": "Round 5: no change", "values": [1, 2, 3, 4, 5, 6], "colors": ["green"] * 6},
     ],
-    caption="Selection sort always scans the unsorted part fully, even when the array is already sorted",
+    "The sorted part grows from the left, one position at a time.",
 )
 
-# 5 ---------------------------------------------------- insertion sort flow
-insertion_flow = D(
-    key="ch5-05-insertion-sort-flow",
-    title="Insertion Sort Control Flow",
-    size=(780, 620),
-    flow="V",
-    nodes=stack([
-        ("s", "Treat A[0] as the sorted prefix", "blue", "rect", 54),
-        ("pick", "Take key = A[i] (next item)", "yellow", "rect", 54),
-        ("shift", "Shift larger items one step right", "green", "rect", 60),
-        ("place", "Drop key into the gap", "green", "rect", 54),
-        ("more", "More items left?", "yellow", "diamond", 80),
-        ("done", "Array fully sorted", "teal", "rect", 54),
-    ]),
-    edges=[
-        E("s", "pick"), E("pick", "shift"), E("shift", "place"), E("place", "more"),
-        E("more", "pick", "Yes", route="loopr", bend=60),
-        E("more", "done", "No"),
+# 5 — insertion sort
+insertion_walk = array_walkthrough(
+    "ch5-05-insertion-sort-flow",
+    "Insertion Sort: Add Each Item to the Sorted Part",
+    [
+        {"label": "Start with 5 sorted", "values": [5, 2, 4, 6, 1, 3], "colors": ["green"] + ["white"] * 5},
+        {"label": "Insert 2", "values": [2, 5, 4, 6, 1, 3], "colors": ["green"] * 2 + ["white"] * 4},
+        {"label": "Insert 4", "values": [2, 4, 5, 6, 1, 3], "colors": ["green"] * 3 + ["white"] * 3},
+        {"label": "Insert 6", "values": [2, 4, 5, 6, 1, 3], "colors": ["green"] * 4 + ["white"] * 2},
+        {"label": "Insert 1", "values": [1, 2, 4, 5, 6, 3], "colors": ["green"] * 5 + ["white"]},
+        {"label": "Insert 3: finished", "values": [1, 2, 3, 4, 5, 6], "colors": ["green"] * 6},
     ],
-    caption="Insertion sort is fast on nearly sorted input because the shift loop does little work",
+    "Larger sorted items slide right to make a gap for the new item.",
 )
 
-# 6 ---------------------------------------------------- counting sort flow
-counting_flow = D(
-    key="ch5-06-counting-sort-flow",
-    title="Counting Sort Pipeline",
-    size=(780, 620),
-    flow="V",
-    nodes=stack([
-        ("s", "Find min and max keys\nk = max - min + 1", "blue", "rect", 60),
-        ("cnt", "Count occurrences of each key", "yellow", "rect", 54),
-        ("pre", "Prefix sums give final positions", "yellow", "rect", 54),
-        ("build", "Place items from right to left\n(keeps equal keys stable)", "green", "rect", 60),
-        ("done", "Sorted output\nO(n + k) time, O(k) space", "teal", "rect", 60),
-    ]),
-    edges=[E("s", "cnt"), E("cnt", "pre"), E("pre", "build"), E("build", "done")],
-    caption="Counting sort never compares elements, so it works only when the key range k is small",
+# 6 — counting sort
+counting_walk = counting_diagram()
+
+# 7 — merge sort
+merge_walk = group_walkthrough(
+    "ch5-07-merge-sort-divide-conquer",
+    "Merge Sort: Split the List, Then Join Sorted Pieces",
+    [
+        {"label": "Starting list", "groups": ["[5, 2, 4, 6, 1, 3]"]},
+        {"label": "Split in two", "groups": ["[5, 2, 4]", "[6, 1, 3]"]},
+        {"label": "Split again", "groups": ["[5, 2]", "[4]", "[6, 1]", "[3]"]},
+        {"label": "Split to single items", "groups": ["[5]", "[2]", "[4]", "[6]", "[1]", "[3]"]},
+        {"label": "Join sorted neighbors", "groups": ["[2, 5]", "[4]", "[1, 6]", "[3]"]},
+        {"label": "Join larger pieces", "groups": ["[2, 4, 5]", "[1, 3, 6]"]},
+        {"label": "Join to finish", "groups": ["[1, 2, 3, 4, 5, 6]"]},
+    ],
+    "Single-item pieces are already sorted; each join puts two sorted pieces together.",
 )
 
-# 7 ---------------------------------------------------- merge sort flow
-merge_flow = D(
-    key="ch5-07-merge-sort-divide-conquer",
-    title="Merge Sort: Divide and Conquer Phases",
-    size=(780, 620),
-    flow="V",
-    nodes=stack([
-        ("s", "Input array of n items", "blue", "rect", 54),
-        ("div", "DIVIDE: split into two halves", "yellow", "rect", 54),
-        ("base", "Recurse until one item is left", "yellow", "rect", 60),
-        ("con", "CONQUER: merge two sorted halves\nusing a temporary buffer", "green", "rect", 60),
-        ("done", "Sorted array\n(log n levels of merging)", "teal", "rect", 60),
-    ]),
-    edges=[E("s", "div"), E("div", "base"), E("base", "con"), E("con", "done")],
-    caption="The divide step costs nothing; all comparisons happen while merging, so merge sort is always O(n log n)",
+# 8 — quick sort
+quick_walk = array_walkthrough(
+    "ch5-08-quick-sort-partition",
+    "Quick Sort: Each Pivot Finds Its Final Place",
+    [
+        {"label": "Starting list", "values": [5, 2, 4, 6, 1, 3]},
+        {"label": "Pivot 3 divides the list", "values": [2, 1, 3, 6, 5, 4], "colors": ["white", "white", "green", "white", "white", "white"]},
+        {"label": "Pivot 1 settles left side", "values": [1, 2, 3, 6, 5, 4], "colors": ["green", "white", "green", "white", "white", "white"]},
+        {"label": "Pivot 4 settles right side", "values": [1, 2, 3, 4, 5, 6], "colors": ["green", "white", "green", "green", "white", "white"]},
+        {"label": "Last pair is already ordered", "values": [1, 2, 3, 4, 5, 6], "colors": ["green"] * 6},
+    ],
+    "After a pivot is placed, quick sort works on the parts to its left and right.",
 )
 
-# 8 ---------------------------------------------------- quick sort flow
-quick_flow = D(
-    key="ch5-08-quick-sort-partition",
-    title="Quick Sort Partition Flow",
-    size=(780, 620),
-    flow="V",
-    nodes=stack([
-        ("s", "Choose a pivot value\n(first, last, median, or random)", "blue", "rect", 60),
-        ("part", "Partition: smaller values left,\nlarger values right", "yellow", "rect", 60),
-        ("piv", "Pivot lands in its final position", "green", "rect", 54),
-        ("rec", "Recurse on left and right parts", "yellow", "rect", 54),
-        ("base", "Stop when 0 or 1 item is left", "teal", "rect", 54),
-    ]),
-    edges=[E("s", "part"), E("part", "piv"), E("piv", "rec"), E("rec", "base")],
-    caption="A poor pivot produces unbalanced partitions, which raises the worst case to O(n²)",
-)
+# 9 — heap sort, showing both the max-heap and the changing list
+heap_nodes = [
+    N("heap-note", "A parent is at least\nas large as its children.", 28, 128, 230, 72, "light", size=13),
+    N("heap-root", "6", 470, 72, 58, 44, "green", size=18, bold=True),
+    N("heap-left", "5", 360, 142, 58, 44, "yellow", size=18, bold=True),
+    N("heap-right", "4", 580, 142, 58, 44, "yellow", size=18, bold=True),
+    N("heap-left-left", "2", 305, 212, 58, 44, "white", size=18),
+    N("heap-left-right", "1", 415, 212, 58, 44, "white", size=18),
+    N("heap-right-left", "3", 525, 212, 58, 44, "white", size=18),
+]
 
-# 9 ---------------------------------------------------- heap sort flow
-heap_flow = D(
+heap_rows = [
+    {"label": "Move 6; repair heap", "values": [5, 3, 4, 2, 1, 6], "colors": ["yellow", "white", "white", "white", "white", "green"]},
+    {"label": "Move 5; repair heap", "values": [4, 3, 1, 2, 5, 6], "colors": ["yellow", "white", "white", "white", "green", "green"]},
+    {"label": "Move 4; repair heap", "values": [3, 2, 1, 4, 5, 6], "colors": ["yellow", "white", "white", "green", "green", "green"]},
+    {"label": "Move 3; repair heap", "values": [2, 1, 3, 4, 5, 6], "colors": ["yellow", "white", "green", "green", "green", "green"]},
+    {"label": "Move 2; list is sorted", "values": [1, 2, 3, 4, 5, 6], "colors": ["green"] * 6},
+]
+
+for row_index, step in enumerate(heap_rows):
+    y = 300 + row_index * 60
+    heap_nodes.append(
+        N(f"heap-step-{row_index}", step["label"], 30, y, 220, 44, "gray", size=12)
+    )
+    colors = step["colors"]
+    for item_index, value in enumerate(step["values"]):
+        color = colors[item_index]
+        heap_nodes.append(
+            N(
+                f"heap-step-{row_index}-item-{item_index}",
+                str(value),
+                270 + item_index * 72,
+                y,
+                64,
+                44,
+                color,
+                size=16,
+                bold=color == "green",
+            )
+        )
+
+heap_walk = D(
     key="ch5-09-heap-sort-flow",
-    title="Heap Sort Control Flow",
-    size=(780, 660),
-    flow="V",
-    nodes=stack([
-        ("s", "Build max-heap from the array", "blue", "rect", 54),
-        ("swp", "Swap root (largest) with last item", "green", "rect", 54),
-        ("shr", "Shrink heap by one item", "yellow", "rect", 54),
-        ("fix", "Sift new root down to restore heap", "yellow", "rect", 54),
-        ("chk", "Heap size > 1?", "yellow", "diamond", 80),
-        ("done", "Ascending array\nO(n log n) time, O(1) extra space", "teal", "rect", 60),
-    ]),
+    title="Heap Sort: Build a Max-Heap, Then Shrink It",
+    size=(1000, 660),
+    nodes=heap_nodes,
     edges=[
-        E("s", "swp"), E("swp", "shr"), E("shr", "fix"), E("fix", "chk"),
-        E("chk", "swp", "Yes", route="loopr", bend=60),
-        E("chk", "done", "No"),
+        E("heap-root", "heap-left", route="straight"),
+        E("heap-root", "heap-right", route="straight"),
+        E("heap-left", "heap-left-left", route="straight"),
+        E("heap-left", "heap-left-right", route="straight"),
+        E("heap-right", "heap-right-left", route="straight"),
     ],
-    caption="The sorted tail grows at the end of the array while the heap shrinks at the front",
+    caption="The green tail is sorted; the remaining front part is still a heap.",
 )
 
 DIAGRAMS = [
-    reach_escalator,
+    choose_sort,
     taxonomy,
-    bubble_flow,
-    selection_flow,
-    insertion_flow,
-    counting_flow,
-    merge_flow,
-    quick_flow,
-    heap_flow,
+    bubble_walk,
+    selection_walk,
+    insertion_walk,
+    counting_walk,
+    merge_walk,
+    quick_walk,
+    heap_walk,
 ]
