@@ -2,12 +2,14 @@
 
 [Previous: 1st Batch Theory](../../1st%20Batch/Theory/README.md) | [Chapter 0 - Previous Year Questions](../../README.md) | [Home](../../../README.md) | [Next: 2nd Batch Lab Final](../Lab%20Final/README.md)
 
-This study guide covers **Section A, Q1–Q4**, and **Section B, Q5–Q8**, with answers to all **24 subquestions**. The retained notes say to answer any three questions per section; the marks below are also retained from those notes, not independently authenticated.
+This guide answers all 24 subquestions in the supplied CSE 2201 final-examination paper for 2024. The paper says to answer any 3 questions from each section. Question wording, year, marks, and printed data were checked against the supplied scan; line breaks are normalized.
 
 > [!IMPORTANT]
-> **Source and reconstruction policy.** No original 2nd Batch theory paper or scan is available in this repository for this review. The wording is a self-contained study reconstruction, not a verified verbatim transcription. Worked inputs retained below (IDs, arrays, matrices, LCS strings, item/job lists, and graphs) are **illustrative or unverified transcriptions**, not claimed to be the original exam data. In particular, Q2(c)'s dependencies are assumed, Q5(c)'s weights are uncertain, and Q7(a), Q7(b), and Q8(b) are explicitly reconstructed examples. Results are exact **for the stated inputs**; different original givens require recomputation.
+> **Source:** the supplied scan identifies the paper as the 2024 CSE 2201 final examination. Question wording and all printed numerical data were checked against it. Q7(a), Q7(b), and Q8(b) do not give specific graph, item, or job data, so their worked examples are clearly labeled as examples chosen for the answers.
 
 Every subquestion includes a relevant SVG preview with an editable Excalidraw source in the [diagram index](diagrams/README.md).
+
+**Language:** Answers use short explanations and show the working. Necessary course terms are kept and explained in simple words.
 
 | Question | Topic | (a) marks | (b) marks | (c) marks |
 |----------|-------|-----------|-----------|-----------|
@@ -32,7 +34,11 @@ The roadmap groups questions by section; it is **not a prerequisite chain**. Q1'
 
 ### Q1. Algorithm Design, Complexity, and Asymptotic Bounds
 
-#### Q1(a) Define time complexity and space complexity. When is space critical?
+#### Q1(a)
+
+**Question (transcribed):** Define time complexity and space complexity. Provide examples demonstrating when space complexity becomes a critical factor in algorithm design.
+
+**Answer.**
 
 - **Time complexity** is how the number of steps grows as the input size $n$ grows. Example: a single loop over $n$ items takes $\Theta(n)$ time.
 - **Space complexity** measures memory as a function of input size. **Total space** includes input storage; **auxiliary space** excludes it but includes temporary arrays and the recursion stack. Here, sorting-space comparisons mean auxiliary space: array merge sort uses $\Theta(n)$, while iterative insertion sort uses $\Theta(1)$.
@@ -49,7 +55,11 @@ Example: if $10^9$ numbers already fit in RAM but a second array does not, itera
 
 ![Time, total space, and auxiliary space](diagrams/b2-theory-15-time-space.svg)
 
-#### Q1(b) Define an algorithm design paradigm. Describe divide and conquer and greedy, with examples.
+#### Q1(b)
+
+**Question (transcribed):** Define algorithm design paradigm. Briefly describe divide-and-conquer and greedy paradigms with suitable examples.
+
+**Answer.**
 
 A **design paradigm** is a general strategy that solves many different problems. Common paradigms are divide and conquer, greedy, dynamic programming, backtracking, and branch and bound. (See [Chapter 1](../../../Chapter%201%20-%20Introduction%20and%20Algorithm%20Foundations/README.md) for the full list.)
 
@@ -75,7 +85,11 @@ Example: **unweighted activity selection on one resource**. Repeatedly choose th
 
 ![Divide-and-conquer and greedy design patterns](diagrams/b2-theory-16-design-paradigms.svg)
 
-#### Q1(c) Find tight asymptotic bounds for $2T(n/2)+n$, $T(n-1)+1$, $4T(n/2)+n^2$, and $T(n/3)+\log n$.
+#### Q1(c)
+
+**Question (transcribed):** Evaluate asymptotic bounds for: (i) T(n) = 2T(n/2) + n; (ii) T(n) = T(n - 1) + 1; (iii) T(n) = 4T(n/2) + n^2; (iv) T(n) = T(n/3) + log n.
+
+**Answer.**
 
 Assume constant positive base-case cost $T(n)=\Theta(1)$ for $n\le1$, fixed logarithm base greater than 1, and positive integer sizes. Use powers of 2 or 3 for the respective divide recurrences; standard floors/ceilings do not change the bounds.
 
@@ -129,7 +143,11 @@ $$T(n) = T(n-1) + 1 = T(n-2) + 2 = \dots = T(1) + (n-1)$$
 
 ### Q2. NP Classes, BFS, and Activity Graph
 
-#### Q2(a) Define NP, NP-hard, and NP-complete.
+#### Q2(a)
+
+**Question (transcribed):** Define the complexity classes NP, NP-hard, and NP-complete.
+
+**Answer.**
 
 Use polynomial-time reductions and measure time in the **encoded input length** (for example, integer weights written in binary).
 
@@ -142,7 +160,11 @@ Every P problem is also in NP, because a checker can simply solve the problem it
 
 ![How P, NP, NP-complete, and NP-hard relate](diagrams/b2-theory-01-np-classes-venn.svg)
 
-#### Q2(b) Explain how BFS finds the shortest path in an unweighted graph. Show a diagram and the steps.
+#### Q2(b)
+
+**Question (transcribed):** Explain how BFS is used to find the shortest path in an unweighted graph. Demonstrate the process with a diagram and step-by-step explanation.
+
+**Answer.**
 
 In an **unweighted** graph every edge counts as 1 step. BFS explores the graph in levels: first all vertices 1 edge away, then 2 edges away, and so on. The first time BFS reaches a vertex, it has found the shortest path to that vertex.
 
@@ -172,9 +194,19 @@ Shortest path from $S$ to $E$: follow parents $E \leftarrow C \leftarrow A \left
 
 ![BFS shortest path from S](diagrams/b2-theory-02-bfs-graph.svg)
 
-#### Q2(c) Activity DAG: directed graph, topological order, and variations.
+#### Q2(c)
 
-**Reconstructed givens.** The seven activities are Wake up, Brush teeth, Take breakfast, Go to class, Study in library, Do homework, Sleep. A list alone does **not** specify dependencies. For this worked example, explicitly assume the six consecutive precedence edges shown below. Find a topological order, decide whether it is unique, and analyze replacing the final chain by Study in library → Sleep → Do homework.
+**Question (transcribed):** A student performs several activities during a day. Some activities must be completed before others can begin.
+
+**Activities:** Wake up; Brush teeth; Take breakfast; Go to class; Study in library; Do homework; Sleep.
+
+**Dependencies:** Wake up must be completed before brushing teeth. Brushing teeth must be completed before taking breakfast. Taking breakfast must be completed before going to class. Going to class must be completed before studying in the library. Studying in the library must be completed before doing homework. Doing homework must be completed before sleeping.
+
+Based on the above situation answer the following questions: (i) Represent the above activities and dependencies using a directed graph. (ii) Apply topological sorting to determine a valid order of activities. (iii) Is more than one valid topological order possible? Explain briefly. (iv) What will happen if sleeping is done before completing homework?
+
+**Answer.**
+
+**Givens from the paper.** The activities are Wake up, Brush teeth, Take breakfast, Go to class, Study in library, Do homework, and Sleep. The paper gives the six dependencies listed below. We use them to draw the graph and answer all four parts.
 
 **(i) Directed graph.** Each activity is a vertex. Each arrow means "must finish before":
 
@@ -208,7 +240,11 @@ The replacement graph is still a DAG. In contrast, **adding** Sleep → Do homew
 
 ### Q3. Searching, Traversing, and Matrix Multiplication
 
-#### Q3(a) Searching vs traversing: purpose, operations, and examples.
+#### Q3(a)
+
+**Question (transcribed):** Explain the difference between searching and traversing by highlighting their purposes, typical operations, and examples.
+
+**Answer.**
 
 | | Searching | Traversing |
 |--|-----------|------------|
@@ -223,9 +259,13 @@ A traversal can implement a search: BFS or DFS may stop when it finds a target. 
 
 Both are covered in [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md). A simple way to remember it: searching asks "Is 511 here?", traversing asks "Show me every item."
 
-#### Q3(b) Find 511 in the sorted IDs with linear and binary search. Count comparisons, and compare best, average, and worst cases.
+#### Q3(b)
 
-**Illustrative givens.** Sorted random-access array `[102, 205, 307, 409, 511, 613, 715, 817]`, $n=8$, target $511$. Use zero-based indices and $mid=\lfloor(lo+hi)/2\rfloor$. Count one **three-way key comparison** per inspected element (less/equal/greater); do not count loop/index tests.
+**Question (transcribed):** A sorted list of student IDs is [102, 205, 307, 409, 511, 613, 715, 817]. Compare linear search and binary search to find ID 511 by: (i) showing all comparisons made in each method; (ii) counting the total number of comparisons for each search; (iii) analyzing the best-, average-, and worst-case time complexities; (iv) explaining which method is more efficient for this search and why.
+
+**Answer.**
+
+**Givens from the paper.** The sorted array is `[102, 205, 307, 409, 511, 613, 715, 817]`, and the target is $511$. Use zero-based indices and $mid=\lfloor(lo+hi)/2\rfloor$. Count one **three-way key comparison** per inspected element (less/equal/greater); do not count loop/index tests.
 
 **Linear search** checks items from the start:
 
@@ -262,11 +302,15 @@ Average-case statements assume uniformly distributed successful target positions
 
 ![Linear probes and binary-search intervals for 511](diagrams/b2-theory-19-search-trace.svg)
 
-#### Q3(c) Apply Strassen's method to $A = \begin{bmatrix}1 & 3 \\ 7 & 5\end{bmatrix}$ and $B = \begin{bmatrix}6 & 8 \\ 4 & 2\end{bmatrix}$.
+#### Q3(c)
+
+**Question (transcribed):** Explain Strassen's matrix multiplication algorithm. Multiply the following two 2×2 matrices using Strassen's method: A = [[1, 3], [7, 5]], B = [[6, 8], [4, 2]].
+
+**Answer.**
 
 Strassen's idea: split each $2 \times 2$ matrix into four blocks. Normal multiplication uses 8 block products. Strassen uses **7** products and then some extra additions. This saves time for large matrices, because the recurrence becomes $T(n) = 7T(n/2) + \Theta(n^2)$, which gives $\Theta(n^{\log_2 7}) \approx \Theta(n^{2.81})$.
 
-For the illustrative matrices stated in the question, use the following standard Strassen formulas. Here each block is a single number: $A_{11} = 1$, $A_{12} = 3$, $A_{21} = 7$, $A_{22} = 5$, and $B_{11} = 6$, $B_{12} = 8$, $B_{21} = 4$, $B_{22} = 2$.
+For the matrices stated in the question, use the following standard Strassen formulas. Here each block is a single number: $A_{11} = 1$, $A_{12} = 3$, $A_{21} = 7$, $A_{22} = 5$, and $B_{11} = 6$, $B_{12} = 8$, $B_{21} = 4$, $B_{22} = 2$.
 
 | Product | Formula | Value |
 |---------|---------|-------|
@@ -295,7 +339,11 @@ $$C = \begin{bmatrix}18 & 14 \\ 62 & 66\end{bmatrix}$$
 
 ### Q4. Sorting: Insertion, Bubble, Quick Sort, and Merge Sort
 
-#### Q4(a) Why is insertion sort better than bubble sort on a nearly sorted array? Give an example.
+#### Q4(a)
+
+**Question (transcribed):** Why is insertion sort more efficient than bubble sort for nearly sorted arrays? Justify your answer with an example.
+
+**Answer.**
 
 Insertion sort takes each new item and slides it left into place. On a nearly sorted array, most items are already in the right place, so each one moves only a short distance. The work is close to $n$ plus the number of out-of-order pairs. (See [Chapter 5](../../../Chapter%205%20-%20Sorting%20Algorithms/README.md).)
 
@@ -326,7 +374,11 @@ Total: **21 comparisons**, **6 swaps**. The early-exit flag does not help here, 
 
 ![Insertion shifts versus six left-to-right bubble passes](diagrams/b2-theory-20-insertion-bubble.svg)
 
-#### Q4(b) Quick sort on $[1023, 1010, 1055, 1005, 1040]$. Show the pivot, the partitions, and the final array.
+#### Q4(b)
+
+**Question (transcribed):** A company stores the employee IDs [1023, 1010, 1055, 1005, 1040] in an unsorted array. The HR software needs the IDs in ascending order to generate reports efficiently. (i) Explain how quick sort can be applied to sort these IDs. (ii) Show the pivot selection and partitioning steps. (iii) Give the final sorted array.
+
+**Answer.**
 
 We use the **last element as the pivot** (Lomuto partition, see [Chapter 5](../../../Chapter%205%20-%20Sorting%20Algorithms/README.md)). The index $i$ marks the end of the "smaller than pivot" part.
 
@@ -352,7 +404,11 @@ Finally, swap the pivot with $a[i+1] = a[3]$: **1023, 1010, 1005, 1040, 1055**. 
 
 **Final sorted array: $[1005, 1010, 1023, 1040, 1055]$**
 
-#### Q4(c) Divide and conquer (merge sort style) on $[38, 27, 43, 3, 9, 82, 10]$. Show divide, conquer, and combine.
+#### Q4(c)
+
+**Question (transcribed):** Explain the divide-and-conquer technique in algorithm design. Illustrate your answer by applying it to merge sort to sort the array [38, 27, 43, 3, 9, 82, 10], showing the divide, conquer, and combine steps.
+
+**Answer.**
 
 **Divide** (for an odd length, put the extra element in the **left** half):
 
@@ -381,7 +437,11 @@ Merge sort runs in $\Theta(n \log n)$ time (see Q1(c)(i)) and needs an extra $\T
 
 ### Q5. Greedy Algorithms and Minimum Spanning Tree
 
-#### Q5(a) What is a greedy algorithm? State the conditions for it to give an optimal answer.
+#### Q5(a)
+
+**Question (transcribed):** What is a greedy algorithm? State the conditions under which a greedy approach produces an optimal solution.
+
+**Answer.**
 
 A **greedy algorithm** builds the answer one step at a time. At each step it takes the choice that looks best **right now**, and it never undoes a choice. It is fast and simple, but it is only correct for some problems (see [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md)).
 
@@ -396,7 +456,11 @@ Proofs usually use an **exchange argument**: take any optimal solution, swap in 
 
 ![Greedy exchange argument and a coin-change counterexample](diagrams/b2-theory-21-greedy-proof.svg)
 
-#### Q5(b) Fractional knapsack with $W = 50$. Items $(w, p)$: $(10, 60)$, $(20, 100)$, $(30, 120)$. Find the ratios, the selection, and the maximum profit.
+#### Q5(b)
+
+**Question (transcribed):** A thief has a knapsack with capacity 50. He can take fractions of items. The available items have the following weights and profits: Item 1 (weight 10, profit 60), Item 2 (weight 20, profit 100), Item 3 (weight 30, profit 120). Solve the fractional knapsack problem to maximize profit. Show (i) the profit-to-weight ratio for each item; (ii) the items or fractions to include in the knapsack; (iii) the maximum total profit obtained.
+
+**Answer.**
 
 In the **fractional** knapsack we may take part of an item. The best rule is to take items in order of **profit per unit weight** (ratio).
 
@@ -420,43 +484,42 @@ Selection (capacity 50):
 
 See [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md) for the proof.
 
-#### Q5(c) Define a minimum spanning tree (MST). Apply Kruskal's algorithm to the given graph. Show the steps and the total cost.
+#### Q5(c)
 
-**MST:** for a connected, weighted, undirected graph with $V$ vertices, an MST is a set of $V - 1$ edges that connects all vertices, has **no cycle**, and has the **smallest total weight**.
+**Question (transcribed):** Define minimum spanning tree (MST). Using the given graph, find the MST by using the Kruskal algorithm and show the step-by-step process by indicating the edges selected and the total minimum cost.
 
-**Kruskal's algorithm:**
+**Answer.**
 
-1. Sort all edges by weight.
-2. Go through the edges in order. Take an edge if it connects two different components (no cycle). Skip it if both ends are already connected.
-3. Stop when $V - 1$ edges are taken.
+A **minimum spanning tree** connects every vertex, has no cycle, and has the smallest possible total edge weight. For 6 vertices, a spanning tree has 5 edges.
 
-> [!NOTE]
-> **Unverified transcription.** Earlier notes attributed these weights to a low-resolution scan, but that scan is unavailable here. Treat the following complete edge list as the worked instance, not an authenticated original.
+**Graph transcribed from the paper:** this undirected graph has $V=\{1,2,3,4,5,6\}$ and exactly these edges, listed from lowest to highest weight:
 
-**Givens:** connected undirected graph $V=\{0,1,2,3,4,5\}$, with **only** the following nine edges. Sorted edges (ties broken in the displayed order): (1,5)=1, (1,4)=1, (2,1)=2, (3,2)=3, (3,1)=3, (3,4)=5, (4,5)=6, (0,2)=7, (0,3)=9.
+$$(5,1)=1,\ (4,1)=1,\ (1,2)=2,\ (4,2)=3,\ (3,2)=3,\ (4,3)=5,\ (2,6)=7,\ (3,6)=8,\ (5,4)=9.$$
 
-| Step | Edge | Weight | Same component already? | Action | Total cost |
-|------|------|--------|-------------------------|--------|------------|
-| 1 | (1,5) | 1 | No | Take | 1 |
-| 2 | (1,4) | 1 | No | Take | 2 |
-| 3 | (2,1) | 2 | No | Take | 4 |
-| 4 | (3,2) | 3 | No | Take | 7 |
-| 5 | (3,1) | 3 | Yes (3-2-1) | Skip (cycle) | 7 |
-| 6 | (3,4) | 5 | Yes (3-2-1-4) | Skip (cycle) | 7 |
-| 7 | (4,5) | 6 | Yes (4-1-5) | Skip (cycle) | 7 |
-| 8 | (0,2) | 7 | No | Take | **14** |
+Kruskal's algorithm takes the next lightest edge if it does not make a cycle. It skips an edge if its endpoints are already connected.
 
-After step 8 we have $6 - 1 = 5$ edges, so we stop. (Edge (0,3) is not needed.)
+| Step | Edge | Weight | Decision | Total so far |
+|------|------|--------|----------|--------------|
+| 1 | (5,1) | 1 | Take | 1 |
+| 2 | (4,1) | 1 | Take | 2 |
+| 3 | (1,2) | 2 | Take | 4 |
+| 4 | (4,2) | 3 | Skip: path 4–1–2 already connects them | 4 |
+| 5 | (3,2) | 3 | Take | 7 |
+| 6 | (4,3) | 5 | Skip: path 4–1–2–3 already connects them | 7 |
+| 7 | (2,6) | 7 | Take; we now have 5 edges, so stop | **14** |
 
-![Kruskal MST on the unverified transcribed graph](diagrams/b2-theory-07-kruskal-mst.svg)
+**MST edges:** $(5,1),(4,1),(1,2),(3,2),(2,6)$.
+**Minimum cost:** $1+1+2+3+7=14$.
 
-**Total MST cost = 1 + 1 + 2 + 3 + 7 = 14.** Another MST replaces (3,2) by (3,1), also weight 3; the MST is not unique. Sorting plus disjoint-set operations takes $O(E\log E)$ time. For a disconnected graph Kruskal returns a minimum spanning forest, not a spanning tree.
+The MST is unique: the five selected edges are the only set of five edges that connects all six vertices without a cycle at this minimum total weight. The diagram highlights these edges from the paper's graph.
 
----
+![Kruskal MST on the graph shown in the paper](diagrams/b2-theory-07-kruskal-mst.svg)
 
-### Q6. Dynamic Programming: Fibonacci, Floyd-Warshall, and LCS
+#### Q6(a)
 
-#### Q6(a) Define dynamic programming. Explain overlapping subproblems with Fibonacci.
+**Question (transcribed):** Define dynamic programming. Discuss overlapping subproblems using Fibonacci.
+
+**Answer.**
 
 **Dynamic programming (DP)** solves a problem by splitting it into smaller subproblems, solving each one **once**, storing the answer, and reusing it. DP works when:
 
@@ -488,7 +551,11 @@ The table for $F(5)$ is $[0,1,1,2,3,5]$. With unit-cost arithmetic, tabulation t
 
 ![Repeated Fibonacci calls versus one stored value per state](diagrams/b2-theory-23-fibonacci-dp.svg)
 
-#### Q6(b) Apply Floyd-Warshall to the illustrative $D_0$ below. Show all intermediate matrices and the final matrix.
+#### Q6(b)
+
+**Question (transcribed):** Explain how the Floyd-Warshall algorithm computes all-pairs shortest paths in a weighted graph. Using the adjacency matrix [[0, 5, ∞, 10], [∞, 0, 3, ∞], [∞, ∞, 0, 1], [∞, ∞, ∞, 0]], perform the algorithm step by step, updating the distance matrix for each intermediate vertex. Show all intermediate matrices in sequence and present the final shortest-path matrix with explanations.
+
+**Answer.**
 
 **Givens:** directed graph on vertices 1–4, with exactly the four weighted edges listed below; $\infty$ means no direct edge, and diagonal zero represents a length-zero path. Process intermediate vertices in order 1, 2, 3, 4. There are no negative cycles.
 
@@ -548,7 +615,11 @@ So for each middle vertex $k$, we check whether going through $k$ is shorter (se
 
 The time is $\Theta(n^3)$ and the distance matrix takes $\Theta(n^2)$ space; in-place updates suffice. The shortest 1→4 path is **1→2→3→4**, cost 9. In general negative edges are allowed, but a negative diagonal after the algorithm signals a negative cycle, so some pairs have no finite shortest-path value.
 
-#### Q6(c) LCS of $X=\text{AGGTAB}$ and $Y=\text{GXTXAYB}$. Give the full DP table, the traceback, the LCS, and its length.
+#### Q6(c)
+
+**Question (transcribed):** Explain how dynamic programming is used to compute the longest common subsequence (LCS) of two strings. For X = AGGTAB and Y = GXTXAYB, build the full DP table row by row. After completing the table, demonstrate how to trace back through it to find the final LCS, and clearly state both the LCS and its length.
+
+**Answer.**
 
 Rule (let $L[i][j]$ be the LCS length of the first $i$ letters of $X$ and the first $j$ letters of $Y$):
 
@@ -591,10 +662,14 @@ Reading the taken letters backwards gives **G, T, A, B**.
 
 ### Q7. Backtracking: Graph Colouring, LC-Search, and N-Queens
 
-#### Q7(a) Graph colouring by backtracking on a 5-vertex graph. Show the vertex order and the backtracking steps.
+#### Q7(a)
+
+**Question (transcribed):** Apply backtracking to graph colouring for a graph of 5 vertices. Show the order of colour assignment and the backtracking steps.
+
+**Answer.**
 
 > [!NOTE]
-> **Reconstructed example:** the original graph is unavailable. Use the five-vertex graph below and three colours (Red = 1, Green = 2, Blue = 3); no claim is made that it matches the paper.
+> **Worked example:** the paper gives no particular graph or number of colours. For a clear example, use the five-vertex graph below and three colours (Red = 1, Green = 2, Blue = 3).
 
 **Sample graph:** edges 1-2, 1-3, 2-3, 3-4, 4-5, 3-5, 2-5.
 
@@ -627,7 +702,11 @@ colour_vertex(v):
 
 ![Graph colouring backtracking tree](diagrams/b2-theory-10-colouring-tree.svg)
 
-#### Q7(b) LC-search on the 0/1 knapsack problem with at least 4 items. Draw the state-space tree.
+#### Q7(b)
+
+**Question (transcribed):** Demonstrate LC-search on a 0/1 knapsack instance with at least four items. Draw the state-space tree.
+
+**Answer.**
 
 > [!NOTE]
 > **Reconstructed example:** the original items are unavailable. The four items below specify the worked problem completely; their profits and weights are not authenticated exam givens.
@@ -664,7 +743,11 @@ A node is **pruned** if overweight or if $ub$ is no larger than the incumbent fe
 
 ![LC-search state-space tree](diagrams/b2-theory-11-lc-knapsack-tree.svg)
 
-#### Q7(c) N-Queens with N = 5 by backtracking. Show the partial boards.
+#### Q7(c)
+
+**Question (transcribed):** Solve the N-Queens problem for N = 5 using backtracking. Show partial board configurations and backtracking steps.
+
+**Answer.**
 
 Place one queen in each row. Two queens attack each other if they share a **column** or a **diagonal** ($|r_i-r_j|=|c_i-c_j|$, covering both diagonal directions). If a row has no safe column, go back to the previous row and move its queen (see [Chapter 9](../../../Chapter%209%20-%20Backtracking/README.md)).
 
@@ -701,7 +784,11 @@ Continuing enumeration finds **10 distinct boards** for $N=5$, counting rotation
 
 ### Q8. Decision vs Optimization, Branch and Bound, and TSP
 
-#### Q8(a) Decision problems vs optimization problems.
+#### Q8(a)
+
+**Question (transcribed):** Differentiate between decision problem and optimization problem in computational complexity.
+
+**Answer.**
 
 | | Decision problem | Optimization problem |
 |--|------------------|----------------------|
@@ -716,7 +803,11 @@ P and NP are classes of decision problems; standard TSP decision is NP-complete,
 
 ![Threshold decision versus finding an optimum and witness](diagrams/b2-theory-24-decision-optimization.svg)
 
-#### Q8(b) Admissible heuristic and bounding function in branch and bound. Solve a job-sequencing instance.
+#### Q8(b)
+
+**Question (transcribed):** Explain admissible heuristic and bounding function in branch-and-bound. Solve a branch-and-bound job sequencing problem.
+
+**Answer.**
 
 **Branch and bound (B&B)** explores the state-space tree like backtracking. It also uses a **bounding function** to skip branches that cannot give a better answer than the best one found so far (see [Chapter 10](../../../Chapter%2010%20-%20Branch%20and%20Bound/README.md)).
 
@@ -726,7 +817,7 @@ P and NP are classes of decision problems; standard TSP decision is NP-complete,
 **Job sequencing with deadlines (maximize profit).** One machine, all jobs available at time 0, positive integer deadlines, positive profits, one unit per job, no preemption. Slot $t$ runs from time $t-1$ to $t$; a job selected for profit must finish by its deadline. A selected set is feasible iff, for each integer $t\ge1$, at most $t$ selected jobs have deadline $\le t$. To test feasibility, sort the selected jobs by deadline and check the $i$th deadline is at least $i$.
 
 > [!NOTE]
-> **Reconstructed example:** the original job list is unavailable. Solve the fully specified four-job instance below, without assuming these were the paper's jobs.
+> **Worked example:** the paper asks for a job-sequencing example but gives no job list. The following four jobs are an example chosen to demonstrate the method.
 
 **Instance:** J1 (profit 100, deadline 2), J4 (profit 27, deadline 1), J3 (profit 15, deadline 2), J2 (profit 10, deadline 1). Jobs are considered in order of profit.
 
@@ -748,66 +839,63 @@ P and NP are classes of decision problems; standard TSP decision is NP-complete,
 
 ![Branch and bound tree for job sequencing](diagrams/b2-theory-13-bnb-job-tree.svg)
 
-#### Q8(c) TSP by dynamic programming (Held-Karp). Use the cost matrix to find the minimum tour.
+#### Q8(c)
 
-The travelling salesman problem (TSP) visits every city once and returns to the start, with the lowest total cost. It is NP-hard. The subset DP reduces the work from $n!$ orders to about $n^2 2^n$ (see [Chapter 8](../../../Chapter%208%20-%20Dynamic%20Programming/README.md)).
+**Question (transcribed):** Explain how the dynamic-programming method is used to solve the traveling salesperson problem. Using the cost matrix [[0, 20, 42, 35], [20, 0, 30, 34], [42, 30, 0, 12], [35, 34, 12, 0]] with start city 0, evaluate all relevant subsets of intermediate cities of size 1 and 2, show the partial DP table computed from these subsets, and determine the minimum tour cost based on these computed values.
 
-**Illustrative cost matrix** (complete undirected graph on cities 1–4; integer symmetric costs; start and end at city 1):
+**Answer.**
 
-| | 1 | 2 | 3 | 4 |
-|--|---|---|---|---|
-| 1 | 0 | 20 | 42 | 35 |
-| 2 | 20 | 0 | 30 | 34 |
-| 3 | 42 | 30 | 0 | 12 |
-| 4 | 35 | 34 | 12 | 0 |
+The travelling salesperson problem asks for the cheapest tour that visits every city once and returns to the start. Let $g(i,S)$ be the minimum cost to start at city $i$, visit every city in set $S$, then return to city 0.
 
-**Definition:** $g(i,S)$ is the cheapest path starting at $i$, visiting exactly the still-unvisited cities $S$, then returning to city 1. For intermediate states $i\ne1$ and $S\subseteq\{2,3,4\}\setminus\{i\}$; city 1 is visited only at the end. The final state is $g(1,\{2,3,4\})$.
+$$g(i,S)=\min_{j\in S}\big(c_{ij}+g(j,S\setminus\{j\})\big),\qquad g(i,\varnothing)=c_{i0}.$$
 
-$$g(i, S) = \min_{j \in S}\big[c(i,j) + g(j, S \setminus \{j\})\big], \qquad g(i, \varnothing) = c(i,1)$$
+The cost matrix in the question is for cities 0, 1, 2, and 3:
 
-**Stage 0 (|S| = 0)**
+| From/to | 0 | 1 | 2 | 3 |
+|---------|---|---|---|---|
+| 0 | 0 | 20 | 42 | 35 |
+| 1 | 20 | 0 | 30 | 34 |
+| 2 | 42 | 30 | 0 | 12 |
+| 3 | 35 | 34 | 12 | 0 |
 
-- $g(2, \varnothing) = c_{21} = 20$
-- $g(3, \varnothing) = c_{31} = 42$
-- $g(4, \varnothing) = c_{41} = 35$
+The base values are:
 
-**Stage 1 (|S| = 1)**
+- $g(1,\varnothing)=c_{10}=20$
+- $g(2,\varnothing)=c_{20}=42$
+- $g(3,\varnothing)=c_{30}=35$
 
-| Value | Calculation | Result |
-|-------|-------------|--------|
-| $g(2, \{3\})$ | $c_{23} + g(3,\varnothing) = 30 + 42$ | 72 |
-| $g(2, \{4\})$ | $c_{24} + g(4,\varnothing) = 34 + 35$ | 69 |
-| $g(3, \{2\})$ | $c_{32} + g(2,\varnothing) = 30 + 20$ | 50 |
-| $g(3, \{4\})$ | $c_{34} + g(4,\varnothing) = 12 + 35$ | 47 |
-| $g(4, \{2\})$ | $c_{42} + g(2,\varnothing) = 34 + 20$ | 54 |
-| $g(4, \{3\})$ | $c_{43} + g(3,\varnothing) = 12 + 42$ | 54 |
+**Subsets of size 1**
 
-**Stage 2 (|S| = 2)**
+| State | Calculation | Value |
+|-------|-------------|-------|
+| $g(1,\{2\})$ | $30+42$ | 72 |
+| $g(1,\{3\})$ | $34+35$ | 69 |
+| $g(2,\{1\})$ | $30+20$ | 50 |
+| $g(2,\{3\})$ | $12+35$ | 47 |
+| $g(3,\{1\})$ | $34+20$ | 54 |
+| $g(3,\{2\})$ | $12+42$ | 54 |
 
-| Value | Calculation | Result |
-|-------|-------------|--------|
-| $g(2, \{3,4\})$ | $\min(c_{23} + g(3,\{4\}),\ c_{24} + g(4,\{3\})) = \min(30 + 47,\ 34 + 54)$ | **77** |
-| $g(3, \{2,4\})$ | $\min(c_{32} + g(2,\{4\}),\ c_{34} + g(4,\{2\})) = \min(30 + 69,\ 12 + 54)$ | 66 |
-| $g(4, \{2,3\})$ | $\min(c_{42} + g(2,\{3\}),\ c_{43} + g(3,\{2\})) = \min(34 + 72,\ 12 + 50)$ | **62** |
+**Subsets of size 2**
 
-**Final answer (start and end at city 1)**
+| State | Calculation | Value |
+|-------|-------------|-------|
+| $g(1,\{2,3\})$ | $\min(30+47,\ 34+54)$ | **77** |
+| $g(2,\{1,3\})$ | $\min(30+69,\ 12+54)$ | **66** |
+| $g(3,\{1,2\})$ | $\min(34+72,\ 12+50)$ | **62** |
 
-$$g(1, \{2,3,4\}) = \min(20 + 77,\ 42 + 66,\ 35 + 62) = \min(97, 108, 97) = \mathbf{97}$$
+Now choose the first city after 0:
 
-**Minimum tour cost = 97.** Two tours reach it:
+$$g(0,\{1,2,3\})=\min(20+77,\ 42+66,\ 35+62)=\min(97,108,97)=97.$$
 
-- $1 \to 2 \to 3 \to 4 \to 1$: $20 + 30 + 12 + 35 = 97$
-- $1 \to 4 \to 3 \to 2 \to 1$: $35 + 12 + 30 + 20 = 97$
+**Minimum tour cost: 97.** One optimal tour is $0\to1\to2\to3\to0$; its cost is $20+30+12+35=97$. The reverse tour $0\to3\to2\to1\to0$ also costs 97. The six tours, in lexicographic order of the intermediate cities, cost **97, 108, 141, 108, 141, 97**. The subset DP takes $O(n^2 2^n)$ time and $O(n2^n)$ space.
 
-The two tours are reversals of the same undirected cycle. All six orders of cities 2,3,4 have costs **97, 108, 141, 108, 141, 97** in lexicographic order, confirming the DP optimum. Held–Karp costs $O(n^2 2^n)$ time and $O(n2^n)$ space; store a minimizing next city at each state to reconstruct a tour.
-
-![TSP subset DP](diagrams/b2-theory-14-tsp-subsets.svg)
+![Held-Karp DP states for the source matrix, starting at city 0](diagrams/b2-theory-14-tsp-subsets.svg)
 
 ---
 
 ## Verification
 
-Run `python tools/verify_b2_theory.py` from the repository root to recheck the published numerical tables, search traces and bounds, exhaustive small-instance optima, local links, all 24 subquestion visual references, and all 25 SVG/Excalidraw pairs (including the roadmap). The checks are read-only and use Python's standard library. They supplement the mathematical review; they do not authenticate the missing original paper or automatically prove every prose statement.
+Run `python tools/verify_b2_theory.py` from the repository root to check the numerical tables, search traces and bounds, exhaustive small-instance optima, local links, all 24 question diagrams, and all 25 SVG/Excalidraw pairs (including the roadmap). These read-only checks supplement the review; they do not prove every prose statement.
 
 ## Quick Revision
 
