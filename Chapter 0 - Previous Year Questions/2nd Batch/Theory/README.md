@@ -40,10 +40,6 @@ The roadmap groups questions by section; it is **not a prerequisite chain**. Q1'
 
 **Answer.**
 
-**Question (transcribed):** Define time complexity and space complexity. Provide examples demonstrating when space complexity becomes a critical factor in algorithm design.
-
-**Answer.**
-
 - **Time complexity**: how the **number of steps** grows as the input size `n` grows. Example: one loop over `n` items is Θ(n).
 - **Space complexity**: how the **memory used** grows as `n` grows. It includes the input, extra arrays, and the recursion stack. The *extra* memory only is called **auxiliary space**.
 
@@ -59,10 +55,6 @@ The roadmap groups questions by section; it is **not a prerequisite chain**. Q1'
 ![Time, total space, and auxiliary space](diagrams/b2-theory-15-time-space.svg)
 
 #### Q1(b)
-
-**Question (transcribed):** Define algorithm design paradigm. Briefly describe divide-and-conquer and greedy paradigms with suitable examples.
-
-**Answer.**
 
 **Question (transcribed):** Define algorithm design paradigm. Briefly describe divide-and-conquer and greedy paradigms with suitable examples.
 
