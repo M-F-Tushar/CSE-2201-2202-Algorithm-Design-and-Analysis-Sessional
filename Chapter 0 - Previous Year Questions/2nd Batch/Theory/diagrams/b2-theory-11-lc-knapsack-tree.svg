@@ -20,7 +20,7 @@
 <rect x="30.0" y="70.0" width="1100.0" height="55.0" rx="10" fill="#e9ecef"/>
 <path d="M28.9 70.2 Q579.4 70.2 1129.5 68.5 M1130.2 69.1 Q1127.3 98.4 1130.1 124.5 M1131.2 123.5 Q579.5 126.4 29.0 125.1 M28.5 124.9 Q29.1 95.0 30.8 70.1" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
 <path d="M28.9 71.3 Q581.1 70.2 1131.0 70.9 M1130.4 70.6 Q1132.2 99.6 1128.8 125.4 M1128.9 124.0 Q579.4 125.1 29.8 126.4 M31.3 126.1 Q28.9 98.7 30.6 71.1" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="580.0" y="97.5">Reconstructed instance: W=10; decision order A(4,40), C(3,18), B(6,30), D(5,20)</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="580.0" y="97.5">Example instance: W=10; decision order A(4,40), C(3,18), B(6,30), D(5,20)</tspan></text>
 <rect x="400.0" y="165.0" width="350.0" height="85.0" rx="10" fill="#a5d8ff"/>
 <path d="M400.1 164.7 Q572.4 164.8 750.8 166.1 M750.1 164.5 Q749.9 205.4 748.6 248.5 M749.9 250.5 Q573.4 248.5 398.4 249.8 M399.2 251.2 Q400.5 208.1 399.2 164.3" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
 <path d="M401.4 164.7 Q577.3 167.0 750.1 166.2 M751.1 164.4 Q751.1 204.7 750.7 248.9 M751.3 251.2 Q576.6 247.4 401.1 250.5 M400.4 249.2 Q398.7 210.3 399.5 165.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
