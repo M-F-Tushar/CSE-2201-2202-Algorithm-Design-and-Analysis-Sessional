@@ -110,7 +110,7 @@ def matrix(text: str) -> list[list[int]]:
 def check_search(text: str) -> None:
     s = section(text, "3b")
     values = array(s)
-    target = int(match(r"target\s*\$(\d+)\$", s, "search target").group(1))
+    target = int(match(r"target(?:\s+is)?\s*\$(\d+)\$", s, "search target").group(1))
     need(values == sorted(values), "Q3(b): binary search requires sorted input")
     linear, binary, complexity = tables(s)
     expected_linear = []
@@ -163,8 +163,14 @@ def check_search(text: str) -> None:
 
 def check_strassen(text: str) -> None:
     s = section(text, "3c")
-    given = {name: matrix(body) for name, body in re.findall(r"([AB])\s*=\s*\\begin\{bmatrix\}(.*?)\\end\{bmatrix\}", s)}
-    a, b = given["A"], given["B"]
+    given = [
+        [[int(a), int(b)], [int(c), int(d)]]
+        for a, b, c, d in re.findall(
+            r"\[\[(\d+),\s*(\d+)\],\s*\[(\d+),\s*(\d+)\]\]", s
+        )
+    ]
+    expect(len(given), 2, "Q3(c) input matrix count")
+    a, b = given
     (aa, ab), (ac, ad) = a
     (ba, bb), (bc, bd) = b
     products = [aa*(bb-bd), (aa+ab)*bd, (ac+ad)*ba, ad*(bc-ba), (aa+ad)*(ba+bd), (ab-ad)*(bc+bd), (aa-ac)*(ba+bb)]
@@ -318,9 +324,10 @@ def check_quicksort_merge(text: str) -> None:
 
 def check_fractional_mst(text: str) -> None:
     s = section(text, "5b")
-    capacity = int(match(r"W\s*=\s*(\d+)", s, "fractional capacity").group(1))
-    givens = s.split("\n", 1)[0]
-    items = [tuple(map(int, pair)) for pair in re.findall(r"\((\d+),\s*(\d+)\)", givens)]
+    capacity = int(match(r"capacity(?:\s*=\s*|\s+)(\d+)", s, "fractional capacity").group(1))
+    items = [tuple(map(int, pair)) for pair in re.findall(
+        r"weight\s+(\d+),\s*profit\s+(\d+)", s
+    )]
     rows, selections = tables(s)
     order = sorted(range(len(items)), key=lambda i: Fraction(items[i][1], items[i][0]), reverse=True)
     expect(len(rows), len(items), "Q5(b) item rows")
@@ -391,22 +398,19 @@ def check_fractional_mst(text: str) -> None:
     expect(len(rows), len(computed), "Q5(c) Kruskal row count")
     for i, (row, (a, b, weight, cycle, cost, selected)) in enumerate(zip(rows, computed), 1):
         expect((int(row[0]), integers(row[1]), int(row[2])), (i, [a, b], weight), "Q5(c) edge step")
-        expect(row[3].startswith("Yes"), cycle, "Q5(c) cycle detection")
-        expect(row[4], "Skip (cycle)" if cycle else "Take", "Q5(c) action")
-        expect(int(row[5]), cost, "Q5(c) cumulative cost")
+        expect(row[3].startswith("Skip"), cycle, "Q5(c) cycle decision")
         if cycle:
             path = [int(v) for v in re.findall(r"\d+", row[3])]
             expect((path[0], path[-1]), (a, b), "Q5(c) cycle-witness endpoints")
             need(all(any({u, v} == {x, y} for x, y, _ in selected) for u, v in it.pairwise(path)), "Q5(c) cycle witness uses chosen edges")
+        else:
+            expect(row[3], "Take" if i < len(computed) else "Take; we now have 5 edges, so stop", "Q5(c) take decision")
+        expect(int(row[4].replace("**", "")), cost, "Q5(c) cumulative cost")
     tree_costs = [sum(w for _, _, w in subset) for subset in it.combinations(edges, len(vertices)-1) if reachable(next(iter(vertices)), subset) == vertices]
     expect(cost, min(tree_costs), "Q5(c) exhaustive spanning-tree optimum")
-    expression = match(r"Total MST cost = ([^*\n]+)", s, "MST total").group(1).rstrip(". ")
+    expression = match(r"\*\*Minimum cost:\*\*\s*\$([^$]+)\$", s, "MST total").group(1)
     equation(expression, cost, "Q5(c) total arithmetic")
-    need(tree_costs.count(cost) > 1 and "MST is not unique" in s, "Q5(c) multiple optimum trees")
-    replacement = match(r"replaces \((\d+),(\d+)\) by \((\d+),(\d+)\)", s, "alternative MST")
-    a, b, c, d = map(int, replacement.groups())
-    alternative = [e for e in chosen_edges if set(e[:2]) != {a, b}] + [e for e in edges if set(e[:2]) == {c, d}]
-    expect((len(alternative), reachable(next(iter(vertices)), alternative), sum(e[2] for e in alternative)), (len(vertices)-1, vertices, cost), "Q5(c) alternative MST")
+    need(tree_costs.count(cost) == 1 and "MST is unique" in s, "Q5(c) unique minimum spanning tree")
 
 
 def check_dp(text: str) -> None:
@@ -441,9 +445,8 @@ def check_dp(text: str) -> None:
         expect(readmatrix(rows), stages[k], f"Q6(b) D{k}")
 
     s = section(text, "6c")
-    heading = unstyle(s.splitlines()[0])
-    x = match(r"\$X\s*=\s*([A-Z]+)\s*\$", heading, "LCS string X").group(1)
-    y = match(r"\$Y\s*=\s*([A-Z]+)\s*\$", heading, "LCS string Y").group(1)
+    inputs = match(r"\bX\s*=\s*([A-Z]+)\s+and\s+Y\s*=\s*([A-Z]+)", s, "LCS input strings")
+    x, y = inputs.groups()
     lengths = [[0]*(len(y)+1) for _ in range(len(x)+1)]
     for i, a in enumerate(x, 1):
         for j, b in enumerate(y, 1):
@@ -476,7 +479,7 @@ def check_dp(text: str) -> None:
 
     @lru_cache(None)
     def g(i: int, remaining: tuple[int, ...]) -> int:
-        return min(costs[i-1][j-1]+g(j, tuple(k for k in remaining if k != j)) for j in remaining) if remaining else costs[i-1][0]
+        return min(costs[i][j]+g(j, tuple(k for k in remaining if k != j)) for j in remaining) if remaining else costs[i][0]
 
     states = []
     for rows in tables(s)[1:]:
@@ -484,17 +487,17 @@ def check_dp(text: str) -> None:
             state = integers(row[0])
             states.append((state[0], tuple(state[1:])))
             expect(int(row[2]), g(state[0], tuple(state[1:])), "Q8(c) Held-Karp state")
-    required_states = [(i, subset) for size in range(1, len(costs)-1) for i in range(2, len(costs)+1) for subset in it.combinations([j for j in range(2, len(costs)+1) if j != i], size)]
+    required_states = [(i, subset) for size in range(1, len(costs)-1) for i in range(1, len(costs)) for subset in it.combinations([j for j in range(1, len(costs)) if j != i], size)]
     expect(Counter(states), Counter(required_states), "Q8(c) complete subset-state tables")
-    bases = re.findall(r"g\((\d+), \\varnothing\).*?= (\d+)\$", s)
-    expect([int(city) for city, _ in bases], list(range(2, len(costs)+1)), "Q8(c) complete base states")
+    bases = re.findall(r"g\((\d+),\\varnothing\).*?=\s*(\d+)\$", s)
+    expect([int(city) for city, _ in bases], list(range(1, len(costs))), "Q8(c) complete base states")
     for city, value in bases:
         expect(int(value), g(int(city), ()), "Q8(c) empty-subset state")
-    tours = [(1,)+p+(1,) for p in it.permutations(range(2, len(costs)+1))]
-    values = [sum(costs[a-1][b-1] for a, b in it.pairwise(t)) for t in tours]
-    expect(g(1, tuple(range(2, len(costs)+1))), min(values), "Q8(c) exhaustive TSP optimum")
-    expect(int(match(r"Minimum tour cost = (\d+)", s, "TSP optimum").group(1)), min(values), "Q8(c) reported optimum")
-    expect(integers(match(r"costs \*\*([^*]+)\*\* in lexicographic order", s, "all tour costs").group(1)), values, "Q8(c) all tours")
+    tours = [(0,)+p+(0,) for p in it.permutations(range(1, len(costs)))]
+    values = [sum(costs[a][b] for a, b in it.pairwise(t)) for t in tours]
+    expect(g(0, tuple(range(1, len(costs)))), min(values), "Q8(c) exhaustive TSP optimum")
+    expect(int(match(r"Minimum tour cost:\s*(\d+)", s, "TSP optimum").group(1)), min(values), "Q8(c) reported optimum")
+    expect(integers(match(r"intermediate cities, cost \*\*([^*]+)\*\*", s, "all tour costs").group(1)), values, "Q8(c) all tours")
 
 
 def check_colouring_queens(text: str) -> None:
