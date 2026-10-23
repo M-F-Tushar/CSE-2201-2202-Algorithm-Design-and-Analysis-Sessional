@@ -71,32 +71,31 @@ add("04-subset-sum-tree", "Q5(c): positive-item subset-sum search prefix", (1000
     ("s356","over","take 7"), ("s356","end","skip 7"), ("skip6","sol","take 7")]])
 
 # Full reconstructed graph above the actual alphabetical DFS prefix.
-positions = {"a": (95, 100), "b": (345, 100), "c": (595, 100),
-             "d": (95, 300), "e": (345, 300), "f": (595, 300)}
+positions = {"a": (95, 100), "b": (445, 100), "c": (270, 200),
+             "d": (95, 300), "e": (445, 300), "f": (620, 200)}
 nodes = [N(v, v, x, y, 52, 52, "teal", "ellipse", 18) for v, (x, y) in positions.items()]
-graph_edges = ["ab", "ac", "ad", "bc", "bf", "cd", "ce", "cf", "de", "ef"]
+# Nine edges, as drawn in the paper (there is no c-f edge); the layout is planar.
+graph_edges = ["ab", "ac", "ad", "bc", "bf", "cd", "ce", "de", "ef"]
 edges = [E(s, t, directed=False, route="straight") for s, t in graph_edges]
-# a--c routes above b; c--d routes below the two rows to avoid node crossings.
-edges[1].pts = [(121, 100), (121, 70), (621, 70), (621, 100)]
-edges[5].pts = [(647, 126), (715, 126), (715, 390), (121, 390), (121, 352)]
-nodes += [box("given", "Undirected graph transcribed from the paper; no unlisted edges\nBelow: DFS prefix only, until first circuit", 50, 425, 700, 70, "gray")]
-for nid, label, x, y, color in [
-    ("abc", "a-b-c", 285, 540, "blue"),
-    ("abcd", "a-b-c-d", 30, 655, "blue"),
-    ("abce", "a-b-c-e", 285, 655, "blue"),
-    ("abcf", "a-b-c-f", 540, 655, "green"),
-    ("abcdef", "a-b-c-d-e-f\nNo f-a: dead end", 30, 770, "red"),
-    ("abced", "a-b-c-e-d\nNo d-f: dead end", 260, 770, "red"),
-    ("abcef", "a-b-c-e-f\nNo f-d: dead end", 260, 885, "red"),
-    ("abcfed", "a-b-c-f-e-d-a\nCircuit closes", 540, 770, "green"),
+nodes += [box("given", "Undirected graph transcribed from the paper; no unlisted edges\nBelow: DFS prefix only, until first circuit", 50, 425, 900, 70, "gray")]
+for nid, label, x, y, w, color in [
+    ("ab", "a-b", 390, 530, 220, "blue"),
+    ("abc", "a-b-c", 150, 640, 220, "blue"),
+    ("abf", "a-b-f", 640, 640, 220, "green"),
+    ("abcd", "a-b-c-d", 20, 750, 220, "blue"),
+    ("abce", "a-b-c-e", 280, 750, 220, "blue"),
+    ("abfe", "a-b-f-e", 640, 750, 220, "green"),
+    ("abcdef", "a-b-c-d-e-f\nNo f-a: dead end", 10, 860, 200, "red"),
+    ("abced", "a-b-c-e-d\nNo d-f: dead end", 225, 860, 200, "red"),
+    ("abcef", "a-b-c-e-f\nNo f-d: dead end", 440, 860, 200, "red"),
+    ("abfecd", "a-b-f-e-c-d-a\nCircuit closes", 655, 860, 200, "green"),
 ]:
-    nodes.append(box(nid, label, x, y, 220, 80, color))
+    nodes.append(box(nid, label, x, y, w, 80, color))
 edges += [E(a, b, route="straight") for a, b in [
-    ("abc", "abcd"), ("abc", "abce"), ("abc", "abcf"),
-    ("abcd", "abcdef"), ("abce", "abced"), ("abce", "abcef"), ("abcf", "abcfed")]]
-# Route the second e child around the first dead-end box.
-edges[-2].pts = [(505, 695), (520, 695), (520, 925), (480, 925)]
-add("05-hamiltonian-tree", "Q5(d): paper graph and backtracking", (800, 1010), nodes, edges)
+    ("ab", "abc"), ("ab", "abf"), ("abc", "abcd"), ("abc", "abce"),
+    ("abf", "abfe"), ("abcd", "abcdef"), ("abce", "abced"),
+    ("abce", "abcef"), ("abfe", "abfecd")]]
+add("05-hamiltonian-tree", "Q5(d): paper graph and backtracking", (1000, 1010), nodes, edges)
 
 add("07-classes-venn", "Q8(a): known class relations (not a strict Venn)", (850, 670), [
     box("p", "P\nPolynomial-time decision", 40, 100, 300, 80, "blue"),
