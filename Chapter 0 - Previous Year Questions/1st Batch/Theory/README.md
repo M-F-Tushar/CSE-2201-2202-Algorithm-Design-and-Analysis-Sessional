@@ -2,10 +2,12 @@
 
 [Previous: Chapter 0 - Previous Year Questions](../../README.md) | [Home](../../../README.md) | [Next: 2nd Batch Theory](../../2nd%20Batch/Theory/README.md)
 
-This study guide covers **Section A, Q1–Q4 (all parts)** and **Section B, Q5–Q8 (all parts)** of the paper identified in these notes as CSE 2201, 1st Batch, 2023. The recorded instruction is to answer any 3 questions from each section; all 27 subquestions are answered here.
+This guide answers all 27 subquestions in the supplied CSE 2201 final-examination paper for 2023. The paper says to answer any 3 questions from each section. The question text and marks below were checked against the supplied scan; line breaks are normalized.
 
 > [!IMPORTANT]
-> **Source and reconstruction:** no original paper scan or original question figures accompany this Theory subtree. The wording, year, marks, and instructions below are retained from the existing notes, not independently authenticated. Arrays, graphs, loop snippets, boards, grids, and numerical examples are specified here as **reconstructed/illustrative working inputs**, not claimed to be historical originals. Answers and diagrams apply to exactly these stated inputs. A supplied original could require different numerical answers.
+> **Source:** the supplied scan identifies the paper as the 2023 CSE 2201 final examination. Question wording, year, marks, instructions, and printed numerical data were checked against that scan. Line breaks and spacing are normalized. Any extra example used to explain a question that gives no data is marked as illustrative.
+
+**Language:** Answers use short explanations and show the working. Necessary course terms are kept and explained in simple words.
 
 **Conventions:** $\log$ means $\log_2$ unless stated otherwise. Complexity counts unit-cost operations under the stated model; arbitrary-precision arithmetic can cost more. Graphs are finite, with no unlisted edges. All 27 parts include a suitable SVG with a matching editable source in the [diagram index](diagrams/README.md).
 
@@ -32,7 +34,11 @@ Foundations support the later topics; the roadmap groups all eight questions wit
 
 ### Q1. Algorithm Design, Analysis, and Complexity
 
-#### Q1(a) Design and analysis of an algorithm. What makes a good algorithm?
+#### Q1(a)
+
+**Question (transcribed):** What do you mean by the terms Design and Analysis of algorithm? What are the properties of a good algorithm?
+
+**Answer.**
 
 - **Design** means deciding how the algorithm will solve the problem. It is the method or plan (for example: divide the problem, or sort first, or try all choices).
 - **Analysis** means deriving time and space bounds under a stated computation model and establishing correctness. Mathematical analysis complements, but is not replaced by, timing experiments.
@@ -49,9 +55,13 @@ A good algorithm has these qualities:
 4. **Simple**: it is easy to understand, write, and debug.
 5. **Handles all valid inputs**: it works for edge cases such as an empty array or one element.
 
-#### Q1(b) Best, worst, and average case. Give examples.
+#### Q1(b)
 
-For a deterministic algorithm, let $t(x)$ be its cost on input $x$ of size $n$.
+**Question (transcribed):** Distinguish between best-case, worst-case, and average-case analysis for an algorithm. When is each most relevant?
+
+**Answer.**
+
+For an algorithm that makes no random choices, let $t(x)$ be the work it does on input $x$ of size $n$.
 
 - **Best-case time**: $B(n)=\min_{|x|=n}t(x)$, the least work on any size-$n$ input.
 - **Worst-case time**: $W(n)=\max_{|x|=n}t(x)$, the greatest work on any size-$n$ input.
@@ -62,11 +72,17 @@ For a deterministic algorithm, let $t(x)$ be its cost on input $x$ of size $n$.
 | Algorithm | Best case | Worst case | Average case |
 |-----------|-----------|------------|--------------|
 | Linear search | $\Theta(1)$: the item is the first element | $\Theta(n)$: the item is last or not present | $(n+1)/2$ comparisons, hence $\Theta(n)$, if the target occurs once and each position is equally likely |
-| Insertion sort | $\Theta(n)$: input is already sorted | $\Theta(n^2)$: input is reverse sorted | $\Theta(n^2)$ for a uniformly random permutation of distinct keys |
+| Insertion sort | $\Theta(n)$: input is already sorted | $\Theta(n^2)$: input is reverse sorted | $\Theta(n^2)$ for a uniformly random order of distinct items |
 
-#### Q1(c) Two algorithms: A takes $n^2$ time, B takes $n \log n$ time. Which one is better? Why?
+**When each case is useful:** use the best case to see the fastest possible behavior, the worst case when you need a guarantee for every input, and the average case when you know how likely different inputs are in normal use. Always state the assumptions behind an average case.
 
-**Answer: B is asymptotically faster**, assuming runtimes $\Theta(n^2)$ and $\Theta(n\log n)$ with positive fixed leading constants. Merely knowing upper bounds $O(n^2)$ and $O(n\log n)$ would not establish a strict comparison. The illustrative counts below use unit coefficients.
+#### Q1(c)
+
+**Question (transcribed):** Given two algorithms, Algorithm A with time complexity O(n^2) and Algorithm B with time complexity O(n log n), which one would you prefer for large input sizes and why? Justify your answer.
+
+**Answer.**
+
+For large inputs, prefer **Algorithm B**: $n\log n$ grows more slowly than $n^2$. The table uses coefficient 1 to show this growth. In practice, constant costs can affect which program is faster for small inputs. Strictly, an $O(\cdot)$ statement is only an upper bound; the usual comparison assumes these are the algorithms' actual growth rates.
 
 ![Growth comparison under unit coefficients](diagrams/b1-theory-11-growth.svg)
 
@@ -85,7 +101,11 @@ At $n = 10^6$, Algorithm B does about 50,000 times less work.
 
 ### Q2. Recurrences and Loop Analysis
 
-#### Q2(a) What is a recurrence? How do we solve one?
+#### Q2(a)
+
+**Question (transcribed):** Explain the significance of recurrence relations.
+
+**Answer.**
 
 A **recurrence** defines a sequence or function in terms of smaller arguments, together with base cases. In algorithm analysis, it often expresses running time $T(n)$ using the running times on smaller inputs.
 
@@ -99,41 +119,45 @@ We solve recurrences in three common ways:
 2. **Recursion tree method**: draw the calls as a tree, add the work per level, and sum all levels.
 3. **Master Theorem**: compare $f(n)$ with $n^{\log_b a}$ for $T(n)=aT(n/b)+f(n)$, where $a\ge1$ and $b>1$ are constants. Apply it only when the chosen case's growth/regularity conditions hold; not every recurrence fits.
 
-#### Q2(b) Analyze the loops (count the inner work).
+#### Q2(b)
 
-**Illustrative snippets:** let $n\ge1$ be an integer, initialize `sum = 0`, and assume unit-cost arithmetic with no overflow (including `i * 2`). Each inner loop body takes constant time, so we count iterations.
-
-![Loop iteration counts for n equals 8](diagrams/b1-theory-12-loop-counts.svg)
+**Question (transcribed):** Determine the time complexity for the following algorithms:
 
 **(i)**
 
 ```text
+sum = 0;
 for (i = 1; i <= n; i = i * 2)
     for (j = 1; j <= n; j++)
-        sum = sum + i * j;
+        sum += i * j;
 ```
-
-- The outer loop runs for $i = 1, 2, 4, \dots$ up to $n$. That is $\lfloor \log_2 n \rfloor + 1$ times.
-- For each outer iteration, the inner loop runs $n$ times.
-- Total iterations: $(\lfloor \log_2 n \rfloor + 1) \cdot n$.
-
-**Result: $\Theta(n \log n)$.** For $n = 8$: outer runs 4 times, inner runs 8 times, so total = 32.
 
 **(ii)**
 
 ```text
+sum = 0;
 for (i = 1; i <= n; i = i * 2)
     for (j = 1; j <= i; j++)
-        sum = sum + 1;
+        sum += i * j;
 ```
 
-- The inner loop runs $i$ times, for $i = 1, 2, 4, \dots, 2^K$, where $2^K \le n < 2^{K+1}$.
-- Total: $1 + 2 + 4 + \dots + 2^K = 2^{K+1} - 1$.
-- Since $n \le 2^{K+1} - 1 \le 2n - 1$, the total is between $n$ and $2n - 1$.
+**Answer.**
 
-**Result: $\Theta(n)$.** For $n = 8$: $K = 3$, total = $1+2+4+8 = 15$.
+Assume integer $n\ge1$, constant-time arithmetic, and no overflow. Each loop body takes constant time, so count how many times it runs.
 
-#### Q2(c) Solve $T(n) = 2T(n/2) + n$ with $T(1) = 1$. Show the steps.
+![Loop iteration counts for n equals 8](diagrams/b1-theory-12-loop-counts.svg)
+
+**(i)** The outer loop uses $i=1,2,4,\dots$ up to $n$, so it runs $\lfloor\log_2 n\rfloor+1$ times. The inner loop runs $n$ times for each outer step. Total: $n(\lfloor\log_2 n\rfloor+1)$, so the time is **$\Theta(n\log n)$**. For $n = 8$: total = 32 iterations.
+
+**(ii)** The inner loop runs $i$ times for $i=1,2,4,\dots,2^K$, where $2^K\le n<2^{K+1}$. Total: $1+2+4+\dots+2^K=2^{K+1}-1$. This is between $n$ and $2n-1$, so the time is **$\Theta(n)$**. For $n = 8$: total = $1+2+4+8 = 15$.
+
+#### Q2(c)
+
+**Question (transcribed):** Prove that $T(n)=O(n\log n)$ for the recurrence relation:
+
+$$T(n)=\begin{cases}2T(n/2)+n,&n>1,\\n,&n=1.\end{cases}$$
+
+**Answer.**
 
 **Domain:** $n=2^k$ for integer $k\ge0$; the recurrence applies only when $n>1$.
 
@@ -174,7 +198,11 @@ Here $a = 2$, $b = 2$, $f(n) = n$. Then $n^{\log_b a} = n^{\log_2 2} = n^1 = n$.
 
 ### Q3. Divide and Conquer, Merge Sort, Quick Sort, Heap Sort
 
-#### Q3(a) Explain the three steps of divide and conquer. Give an example.
+#### Q3(a)
+
+**Question (transcribed):** Explain the main steps of the Divide-and-Conquer algorithmic paradigm.
+
+**Answer.**
 
 1. **Divide**: split the problem into smaller subproblems.
 2. **Conquer**: solve each subproblem (recursively). When a subproblem is small enough, solve it directly (the base case).
@@ -191,7 +219,11 @@ Here $a = 2$, $b = 2$, $f(n) = n$. Then $n^{\log_b a} = n^{\log_2 2} = n^1 = n$.
 [2, 4, 5, 7]          combine (merge)
 ```
 
-#### Q3(b) Write the merge sort recurrence and show that its complexity is $\Theta(n \log n)$.
+#### Q3(b)
+
+**Question (transcribed):** Analyze the recurrence relation for Merge Sort: T(n) = 2T(n/2) + O(n). What is its time complexity?
+
+**Answer.**
 
 **Algorithm idea:** split the array into two halves, sort each half recursively, then merge the two sorted halves.
 
@@ -213,7 +245,11 @@ This balanced form assumes powers of two. For arbitrary $n>1$, use $T(\lfloor n/
 
 **Space:** standard array merge sort needs a $\Theta(n)$ auxiliary merge buffer plus $O(\log n)$ stack space, hence $\Theta(n)$ auxiliary space overall; this implementation is **not in-place**.
 
-#### Q3(c) What is an in-place sorting algorithm? Is quick sort in-place?
+#### Q3(c)
+
+**Question (transcribed):** What is in-place sorting? Is Quicksort an in-place sorting algorithm? Justify.
+
+**Answer.**
 
 Under the **strict definition**, an in-place sort uses $O(1)$ total auxiliary space. Some textbooks exclude the recursion stack when calling a sort in-place; state the convention.
 
@@ -224,7 +260,11 @@ Under the **strict definition**, an in-place sort uses $O(1)$ total auxiliary sp
 > [!NOTE]
 > Quick sort is **not stable**: equal elements may change their relative order.
 
-#### Q3(d) Heap sort on $A = [7, 2, 5, 3, 4, 6, 1]$. Show the steps.
+#### Q3(d)
+
+**Question (transcribed):** Trace Heap Sort on the array A = [7, 2, 5, 3, 4, 6, 1]. Show the heap construction and sorting phases step by step.
+
+**Answer.**
 
 **Illustrative input:** the array in the heading is the working example, not an authenticated original. Indices start at 0. For index $i$, the children are at $2i+1$ and $2i+2$ when within the active heap. We build a **max-heap** first, then repeatedly move the largest element to the end.
 
@@ -259,7 +299,11 @@ Each round: swap the root (largest) with the last element in the heap, shrink th
 
 ### Q4. Greedy Algorithms, Memoization vs Tabulation, and MST
 
-#### Q4(a) What is a greedy algorithm? Give a counterexample where it fails.
+#### Q4(a)
+
+**Question (transcribed):** At each step, Greedy Algorithm chooses local optimal solution. With suitable example show that, choosing local optimal solution at each step may not lead to the global optimal solution.
+
+**Answer.**
 
 A **greedy algorithm** builds the solution step by step. At each step it picks the locally best choice and never goes back to change it.
 
@@ -272,7 +316,11 @@ A **greedy algorithm** builds the solution step by step. At each step it picks t
 
 Greedy is not always optimal for every problem. It works for problems with the greedy-choice property (such as Kruskal's and Prim's MST algorithms).
 
-#### Q4(b) Memoization vs tabulation. Explain the difference with an example.
+#### Q4(b)
+
+**Question (transcribed):** Differentiate between memoization and tabulation.
+
+**Answer.**
 
 Both are techniques for **dynamic programming**: they store answers to subproblems so that each subproblem is solved only once.
 
@@ -314,7 +362,11 @@ def fib_tab(n):
 
 Both implementations use $O(n)$ arithmetic operations and $O(n)$ stored values; memoization also has $O(n)$ recursion depth. Fibonacci needs all preceding states in either version, so this example does not save states top-down. Tabulation can keep just two previous values for $O(1)$ stored values. These are unit-cost arithmetic bounds; Fibonacci integers grow in bit length.
 
-#### Q4(c) Find the MST of the graph, using Prim's and Kruskal's algorithms.
+#### Q4(c)
+
+**Question (transcribed):** Consider the following graph with weighted edges: Vertices: A, B, C, D, E; Edges: A-B (2), A-C (3), B-C (1), B-D (4), C-D (5), C-E (6), D-E (7). (i) Find the Minimum Spanning Tree using Prim's Algorithm. (ii) Find the Minimum Spanning Tree using Kruskal's Algorithm.
+
+**Answer.**
 
 A **minimum spanning tree (MST)** is a connected, acyclic subgraph covering every vertex with minimum total edge weight; it has $|V|-1$ edges.
 
@@ -363,7 +415,11 @@ Both algorithms give the same MST. Distinct edge weights make it unique. The cut
 
 ### Q5. Backtracking
 
-#### Q5(a) What is backtracking? Explain briefly.
+#### Q5(a)
+
+**Question (transcribed):** Explain the concept of Backtracking.
+
+**Answer.**
 
 **Backtracking** solves a problem by building a solution one step at a time. At each step it:
 
@@ -375,9 +431,15 @@ It is a depth-first search over a **state-space tree**. Branches that cannot lea
 
 ![Choose, reject, undo, and find a four-queen solution](diagrams/b1-theory-18-queens-backtracking.svg)
 
-#### Q5(b) Explain the N-Queen problem using backtracking. Place 4 queens on a $4 \times 4$ board.
+#### Q5(b)
 
-**Illustrative instance:** $N=4$, with zero-based rows and columns. In general, place $N$ queens on an $N \times N$ board so that no two queens attack each other. Queens attack along the same row, same column, or same diagonal.
+**Question (transcribed):** Describe how a backtracking algorithm would typically solve the N-Queen problem. How would it determine where to place the k-th queen, and what are the conditions that would lead to backtracking?
+
+**Answer.**
+
+In general, place $N$ queens on an $N \times N$ board so that no two queens attack each other. Queens attack along the same row, same column, or same diagonal.
+
+**Illustrative instance:** Place 4 queens on a $4 \times 4$ board, with zero-based rows and columns.
 
 ![Four-queen search branches and the first solution board](diagrams/b1-theory-18-queens-backtracking.svg)
 
@@ -440,7 +502,11 @@ Q . . .
 
 Call `SOLVE(0)` with a length-$N$ array `board`; only entries before `row` are consulted, so stale later entries are ignored after backtracking. For $N=4$ there are exactly two solutions, encoded by column per row: $[1,3,0,2]$ and $[2,0,3,1]$. The first is shown above. With this $O(N)$ safety scan and distinct-column branching, a coarse upper bound is $O(N^2N!)$ time and $O(N)$ auxiliary space (excluding output); pruning improves many instances.
 
-#### Q5(c) Subset sum with $A = \{3, 5, 6, 7\}$ and $d = 15$. Use backtracking.
+#### Q5(c)
+
+**Question (transcribed):** Find a subset of the given set A = {3, 5, 6, 7} whose sum is d = 15. Show a partial trace of the backtracking algorithm and highlight when it explores a path and when it backtracks.
+
+**Answer.**
 
 **Illustrative input:** four distinct positive integers, each usable at most once; find all subsets summing exactly to $d=15$. Go through items in the stated order; try **take** before **skip**. The trace and diagram show only the prefix through the first solution, not the entire tree.
 
@@ -472,11 +538,15 @@ SUBSETS(i, total, chosen):
 
 Call `SUBSETS(0, 0, [])`. Positivity makes returning at the target sound for enumerating all solutions. There are $O(2^n)$ search nodes and $O(n)$ recursion depth. Mutable push/pop choices use $O(n)$ auxiliary space; literally copying the lists in this pseudocode can use $O(n^2)$ live space and add an $O(n)$ factor to time. Output storage is additional.
 
-#### Q5(d) Find a Hamiltonian circuit starting from vertex $a$.
+#### Q5(d)
+
+**Question (transcribed):** Trace the initial steps of the backtracking algorithm, starting from vertex a, to find a Hamiltonian Circuit. Show at least two different paths explored (one that might lead to a solution, and one that leads to backtracking).
+
+**Answer.**
 
 A **Hamiltonian circuit** visits every vertex exactly once and returns to the start.
 
-**Reconstructed working graph:** simple and undirected, $V=\{a,b,c,d,e,f\}$, with exactly the symmetric adjacency list below. It defines this example; the unavailable original figure is not being inferred.
+**Graph transcribed from the paper's figure:** a simple undirected graph on $V=\{a,b,c,d,e,f\}$. The adjacency list below records every edge shown.
 
 | Vertex | Neighbours |
 |--------|------------|
@@ -496,7 +566,7 @@ A **Hamiltonian circuit** visits every vertex exactly once and returns to the st
 3. Back to $c$, try $e$ then $f$: $a \to b \to c \to e \to f$. From $f$, the only unvisited vertex is $d$, and $f$-$d$ is not an edge. **Dead end.**
 4. Back to $c$, try $f$: $a \to b \to c \to f \to e \to d$. All 6 vertices are visited, and $d$ is adjacent to $a$. **Circuit found.**
 
-![Backtracking search tree for a Hamiltonian circuit from a](diagrams/b1-theory-05-hamiltonian-tree.svg)
+![Backtracking search tree using the graph shown in the paper](diagrams/b1-theory-05-hamiltonian-tree.svg)
 
 **Answer:** $a-b-c-f-e-d-a$. Another valid circuit is $a-b-f-e-d-c-a$. Every consecutive pair, including the closing edge to $a$, occurs in the adjacency list.
 
@@ -516,7 +586,11 @@ Call `EXTEND([a], {a})`; stop after the first output for the trace shown, or con
 
 ### Q6. Dynamic Programming
 
-#### Q6(a) Two properties that a problem needs for dynamic programming.
+#### Q6(a)
+
+**Question (transcribed):** What are the two key properties that a problem must possess for Dynamic Programming to be applicable?
+
+**Answer.**
 
 1. **Optimal substructure**: the best answer to the big problem is built from the best answers to smaller subproblems.
 2. **Overlapping subproblems**: the same smaller subproblem is needed many times. DP stores its answer, so it is computed only once.
@@ -525,7 +599,11 @@ For **optimization DP**, optimal substructure makes the recurrence valid, and ov
 
 ![Overlapping knapsack states and optimal substructure](diagrams/b1-theory-19-dp-properties.svg)
 
-#### Q6(b) 0/1 knapsack using DP. Write the recurrence.
+#### Q6(b)
+
+**Question (transcribed):** Define the DP[i][w] state for the 0/1 Knapsack problem. Write down the dynamic programming recurrence relation for the knapsack problem.
+
+**Answer.**
 
 **Problem:** $n\ge1$ items with positive integer weights $w_i$, nonnegative profits $p_i$, and nonnegative integer capacity $W$. Each item is taken whole at most once; total weight must be **at most** $W$. The empty selection is allowed. Maximize profit.
 
@@ -544,7 +622,11 @@ $$DP[i][w] = \begin{cases} DP[i-1][w] & \text{if } w_i > w \\ \max\big(DP[i-1][w
 
 **Answer:** $DP[n][W]$. Time and table space are $O(nW)$ (more precisely $O(n(W+1))$, including $W=0$). Value-only space can be $O(W+1)$ by scanning capacities **downward** for each item; upward updates could reuse an item. The time is **pseudo-polynomial** because binary encoding of $W$ needs only $\Theta(\log(W+2))$ bits. For reconstruction, walk backward through the full table, skipping ties or taking item $i$ when its row improves the value; then subtract $w_i$. See Q7(c) for a complete example.
 
-#### Q6(c) Coins on a grid: maximum coins from top-left to bottom-right.
+#### Q6(c)
+
+**Question (transcribed):** Given the following 4 x 3 grid with coins (1) or no coins (0) at each cell, construct the DP table and trace the path that yields the maximum number of coins collected from (0,0) to (3,2). What is the maximum number of coins?
+
+**Answer.**
 
 **Illustrative grid:** find the maximum coins collected from $(0,0)$ to $(3,2)$ using **right or down** moves only, with no blocked cells. A cell's 0 or 1 coin is collected upon visiting, including both endpoints.
 
@@ -568,7 +650,11 @@ $$DP[i][w] = \begin{cases} DP[i-1][w] & \text{if } w_i > w \\ \max\big(DP[i-1][w
 
 **Answer: 5 coins.** One optimal path: $(0,0) \to (0,1) \to (1,1) \to (2,1) \to (2,2) \to (3,2)$, which collects $1+0+1+1+1+1 = 5$. Another path, $(0,0) \to (1,0) \to (2,0) \to (2,1) \to (2,2) \to (3,2)$, also gives 5, so there is a tie.
 
-#### Q6(d) Coin change with coins $\{1, 3, 4\}$ and $n = 6$. Find the minimum number of coins.
+#### Q6(d)
+
+**Question (transcribed):** Solve the change-making problem by DP for the amount n = 6 and the denominations 1, 3, and 4.
+
+**Answer.**
 
 **Illustrative instance:** unlimited coins of each stated positive integer denomination; make amount 6 exactly. Let $D=\{1,3,4\}$.
 
@@ -586,7 +672,11 @@ $$DP[i][w] = \begin{cases} DP[i-1][w] & \text{if } w_i > w \\ \max\big(DP[i-1][w
 
 ### Q7. Shortest Paths, Optimality, and Knapsack
 
-#### Q7(a) Why does Dijkstra fail with negative edge weights? How does Bellman-Ford handle them?
+#### Q7(a)
+
+**Question (transcribed):** Explain why Dijkstra's algorithm fails to find correct shortest paths in graphs with negative-weight edges, whereas Bellman-Ford succeeds.
+
+**Answer.**
 
 **Standard label-setting Dijkstra** settles the minimum-tentative-distance unsettled vertex and never revises a settled label. Nonnegative weights guarantee this is safe; negative edges invalidate the guarantee (though not every such instance fails).
 
@@ -601,7 +691,11 @@ $$DP[i][w] = \begin{cases} DP[i-1][w] & \text{if } w_i > w \\ \max\big(DP[i-1][w
 
 **Negative-cycle check:** after the passes, a still-relaxable edge with finite tail distance implies a **source-reachable** negative cycle. Vertices reachable from such a cycle have no finite minimum distance. An unreachable negative cycle does not affect this single-source computation.
 
-#### Q7(b) Apply Bellman-Ford from A on the directed graph.
+#### Q7(b)
+
+**Question (transcribed):** Consider the directed graph with vertices A, B, C, D, E and the edges A-B (6), A-C (7), B-D (5), B-E (-4), C-B (-3), C-D (8), D-E (-2), and E-A (2). Using Bellman-Ford, find the shortest paths from source vertex A to all other vertices.
+
+**Answer.**
 
 **Reconstructed working graph:** directed, $V=\{A,B,C,D,E\}$, source A, with exactly these edges **in scan order**: A to B = 6, A to C = 7, B to D = 5, B to E = -4, C to B = -3, C to D = 8, D to E = -2, E to A = 2. These givens are not authenticated against an original figure.
 
@@ -622,7 +716,11 @@ Pass 3 changes nothing, so we stop early.
 
 ![Bellman-Ford directed graph with shortest distances from A](diagrams/b1-theory-06-bellman-ford-graph.svg)
 
-#### Q7(c) What is algorithm optimality? Is the 0/1 knapsack DP optimal? Solve the example.
+#### Q7(c)
+
+**Question (transcribed):** What is algorithm optimality? Find an optimal solution for the 0/1 knapsack problem using dynamic programming. Maximum weight = 8; item weights = [3, 4, 5, 6]; item profits = [2, 3, 1, 4].
+
+**Answer.**
 
 **Two meanings of optimality:** (1) **solution optimality** means attaining the best feasible objective value; (2) **algorithmic/resource optimality** means matching a lower bound on time or space in a stated computation model. A correct exact optimization algorithm guarantees the first, not automatically the second.
 
@@ -655,7 +753,11 @@ Pass 3 changes nothing, so we stop early.
 
 ### Q8. P, NP, Decision vs Optimization, and Dijkstra
 
-#### Q8(a) Define P, NP, NP-hard, and NP-complete. Show their relation.
+#### Q8(a)
+
+**Question (transcribed):** Define the classes P, NP, NP-hard, and NP-complete. Explain the relationships between these classes.
+
+**Answer.**
 
 These classes are defined for **decision problems** (languages), measured against input **bit length**, using polynomial-time many-one reductions unless stated otherwise.
 
@@ -668,7 +770,11 @@ These classes are defined for **decision problems** (languages), measured agains
 
 ![How P, NP, NP-hard, and NP-complete relate](diagrams/b1-theory-07-classes-venn.svg)
 
-#### Q8(b) Decision problem vs optimization problem. Why does this matter?
+#### Q8(b)
+
+**Question (transcribed):** Differentiate between decision problems and optimization problems in the context of NP-completeness.
+
+**Answer.**
 
 For the **traveling salesperson problem (TSP)**, a tour visits every vertex exactly once and returns to its start; its cost is the sum of its edge weights.
 
@@ -683,11 +789,15 @@ For nonnegative integer-weight TSP on a complete $n$-vertex graph with maximum e
 
 ![Threshold decision, value search, and conditional witness recovery](diagrams/b1-theory-23-decision-optimization.svg)
 
-#### Q8(c) Run Dijkstra's algorithm from A.
+#### Q8(c)
 
-**Reconstructed working graph:** simple, **undirected**, nonnegative-weighted, $V=\{A,B,C,D,E,F\}$, source A, with exactly A-B 2, A-D 8, B-E 6, B-D 5, E-D 3, E-F 1, E-C 9, F-C 3, D-F 2. Undirectedness is a declared working assumption, not verified against an original figure.
+**Question (transcribed):** For the following graph, find the shortest path along with cost from Node A to all other nodes using Dijkstra's Algorithm. Mention the formula for relaxation.
 
-Initialize $dist[A]=0$, all others $\infty$, and no predecessors. Repeatedly settle an unsettled vertex of minimum tentative distance. For each unsettled neighbour $v$, if $dist[u]+w(u,v)<dist[v]$, set that distance and `pred[v] = u`. Keep the first predecessor on equal-distance ties; a heap implementation discards stale entries. Stop when no finite unsettled distance remains.
+**Answer.**
+
+**Graph transcribed from the paper's figure:** an undirected graph with nonnegative edge weights, vertices $A,B,C,D,E,F$, and source $A$. Its complete edge list is: A-B (2), A-D (8), B-D (5), B-E (6), D-E (3), D-F (2), E-F (1), E-C (9), and F-C (3).
+
+Initialize $dist[A]=0$, all others $\infty$, and no predecessors. Repeatedly settle an unsettled vertex of minimum tentative distance. For each unsettled neighbour $v$, use the relaxation formula $dist[v] \leftarrow \min(dist[v],\,dist[u]+w(u,v))$; if the value decreases, set `pred[v] = u`. Keep the first predecessor on equal-distance ties; a heap implementation discards stale entries. Stop when no finite unsettled distance remains.
 
 | Step | Visit | Distances updated |
 |------|-------|-------------------|
@@ -710,7 +820,7 @@ F also has distance 9 through A to B to E to F ($2+6+1=9$), a tie. Either path i
 
 ## Verification
 
-Run `python tools/verify_b1_theory.py` from the repository root to recheck the published numerical tables, graph/search results, local links, all 27 subquestion visual references, and all 23 SVG/Excalidraw pairs. The checks are read-only and use Python's standard library. They supplement the mathematical review; they do not authenticate the missing original paper or automatically prove every prose statement.
+Run `python tools/verify_b1_theory.py` from the repository root to check the numerical tables, graph/search results, local links, all 27 question diagrams, and all 23 SVG/Excalidraw pairs. These read-only checks supplement the review; they do not prove every prose statement.
 
 ## Quick Revision
 
