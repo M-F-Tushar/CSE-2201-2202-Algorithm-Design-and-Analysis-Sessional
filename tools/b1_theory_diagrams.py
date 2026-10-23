@@ -79,7 +79,7 @@ edges = [E(s, t, directed=False, route="straight") for s, t in graph_edges]
 # a--c routes above b; c--d routes below the two rows to avoid node crossings.
 edges[1].pts = [(121, 100), (121, 70), (621, 70), (621, 100)]
 edges[5].pts = [(647, 126), (715, 126), (715, 390), (121, 390), (121, 352)]
-nodes += [box("given", "Reconstructed undirected graph; no unlisted edges\nBelow: DFS prefix only, until first circuit", 50, 425, 700, 70, "gray")]
+nodes += [box("given", "Undirected graph transcribed from the paper; no unlisted edges\nBelow: DFS prefix only, until first circuit", 50, 425, 700, 70, "gray")]
 for nid, label, x, y, color in [
     ("abc", "a-b-c", 285, 540, "blue"),
     ("abcd", "a-b-c-d", 30, 655, "blue"),
@@ -96,7 +96,7 @@ edges += [E(a, b, route="straight") for a, b in [
     ("abcd", "abcdef"), ("abce", "abced"), ("abce", "abcef"), ("abcf", "abcfed")]]
 # Route the second e child around the first dead-end box.
 edges[-2].pts = [(505, 695), (520, 695), (520, 925), (480, 925)]
-add("05-hamiltonian-tree", "Q5(d): reconstructed graph and backtracking", (800, 1010), nodes, edges)
+add("05-hamiltonian-tree", "Q5(d): paper graph and backtracking", (800, 1010), nodes, edges)
 
 add("07-classes-venn", "Q8(a): known class relations (not a strict Venn)", (850, 670), [
     box("p", "P\nPolynomial-time decision", 40, 100, 300, 80, "blue"),
@@ -323,8 +323,8 @@ def write_index():
     lines = ["# 1st Batch Theory — Diagram Index", "",
              "All **27/27 subquestions** have suitable linked visuals: **23 SVG/source pairs**",
              "(22 topic visuals plus one full-paper roadmap). Shared visuals are listed against",
-             "every part they genuinely explain. All numerical inputs are reconstructed/illustrative;",
-             "no diagram authenticates the unavailable historical question figures.", "",
+             "every part they genuinely explain. Printed inputs and the two source-paper graphs were",
+             "checked against the supplied 2023 scan; extra teaching examples are labeled illustrative.", "",
              "The `.excalidraw` scene is editable in [Excalidraw](https://excalidraw.com).",
              "After a manual scene edit, re-export its SVG so the Markdown preview stays synchronized.",
              "The scoped generator `tools/b1_theory_diagrams.py` uses the shared engine without",
@@ -340,7 +340,7 @@ def write_index():
     lines += ["", "## Interpretation notes", "",
               "- Recurrence tree uses a complete n=8 example, not disconnected symbolic leaves.",
               "- Subset-sum and queen trees show only the search prefix; they do not claim full enumeration.",
-              "- Hamiltonian visual includes the exact reconstructed graph and all failed branches before the first circuit.",
+              "- Hamiltonian visual uses the graph transcribed from the paper and shows the search prefix through the first circuit.",
               "- NP visual states known inclusions only; it assumes neither P=NP nor P≠NP.",
               "- Green graph edges mark the reported MST/shortest-path tree, not extra graph edges.",
               "- Dijkstra keeps the first predecessor on equal distances; F and C each have tied shortest routes.",
