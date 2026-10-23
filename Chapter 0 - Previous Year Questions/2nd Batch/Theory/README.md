@@ -9,7 +9,7 @@ This guide answers all 24 subquestions in the supplied CSE 2201 final-examinatio
 
 Every subquestion includes a relevant SVG preview with an editable Excalidraw source in the [diagram index](diagrams/README.md).
 
-**Language:** Answers use short explanations and show the working. Necessary course terms are kept and explained in simple words.
+**Language:** Answers use the simplest words possible and show the working. Course terms are kept and explained in simple words. Each answer ends with a short **memory trick**. Answer length follows the marks: about 5 lines for 5 marks, half a page for 10 marks, and a full page for 15 or more marks.
 
 | Question | Topic | (a) marks | (b) marks | (c) marks |
 |----------|-------|-----------|-----------|-----------|
@@ -40,18 +40,21 @@ The roadmap groups questions by section; it is **not a prerequisite chain**. Q1'
 
 **Answer.**
 
-- **Time complexity** describes how the number of steps grows as the input size $n$ grows. One loop over $n$ items takes $\Theta(n)$ time.
-- **Space complexity** describes how memory use grows with $n$. **Total space** includes the input. **Auxiliary space** means the extra memory used, including temporary arrays and the recursion stack. For sorting, array merge sort uses $\Theta(n)$ auxiliary space; iterative insertion sort uses $\Theta(1)$.
+**Question (transcribed):** Define time complexity and space complexity. Provide examples demonstrating when space complexity becomes a critical factor in algorithm design.
 
-We use asymptotic notation to describe this growth (see [Chapter 2](../../../Chapter%202%20-%20Complexity%20Analysis%20and%20Asymptotic%20Notation/README.md)).
+**Answer.**
 
-**Space matters when memory is limited:**
+- **Time complexity**: how the **number of steps** grows as the input size `n` grows. Example: one loop over `n` items is Θ(n).
+- **Space complexity**: how the **memory used** grows as `n` grows. It includes the input, extra arrays, and the recursion stack. The *extra* memory only is called **auxiliary space**.
 
-1. The data is very large. A second copy may not fit in memory.
-2. The device has little memory, such as a phone or sensor.
-3. Many programs share the same memory.
+**When space becomes critical**
 
-For example, if $10^9$ numbers fit in RAM but a second array does not, iterative heap sort can sort them with $\Theta(1)$ auxiliary space. If the input itself does not fit in RAM, use an external-memory method such as external merge sort.
+1. **Very big data.** There is no room for a second copy. Merge sort needs O(n) extra space, but heap sort needs only O(1). So heap sort is better when memory is tight.
+2. **Small devices** such as phones, sensors, and embedded systems have very little memory.
+3. **Deep recursion** can overflow the stack.
+4. **Large DP tables.** The LCS table of two strings of length 10⁵ needs 10¹⁰ cells, so we keep only the last row.
+
+> Memory trick: Time = how many steps. Space = how much memory.
 
 ![Time, total space, and auxiliary space](diagrams/b2-theory-15-time-space.svg)
 
@@ -61,27 +64,34 @@ For example, if $10^9$ numbers fit in RAM but a second array does not, iterative
 
 **Answer.**
 
-An **algorithm design paradigm** is a general strategy for solving problems. Examples are divide and conquer, greedy, dynamic programming, backtracking, and branch and bound (see [Chapter 1](../../../Chapter%201%20-%20Introduction%20and%20Algorithm%20Foundations/README.md)).
+**Question (transcribed):** Define algorithm design paradigm. Briefly describe divide-and-conquer and greedy paradigms with suitable examples.
+
+**Answer.**
+
+An **algorithm design paradigm** is a *general strategy* (a ready-made plan) for designing algorithms. Examples: divide and conquer, greedy, dynamic programming, backtracking, branch and bound.
 
 **Divide and conquer (D&C)**
 
 1. **Divide** the problem into smaller parts.
-2. **Conquer** each part by solving it (recursively, or directly if it is small).
-3. **Combine** the answers into the final answer.
+2. **Conquer**: solve each part recursively. A tiny part is solved directly (**base case**).
+3. **Combine** the part answers into the final answer.
 
-Examples are merge sort and quick sort. Binary search also reduces the problem by half, but solves only one half; this is often called decrease-and-conquer (see [Chapter 6](../../../Chapter%206%20-%20Divide%20and%20Conquer/README.md)).
+Example: **merge sort**. Split the array, sort both halves, merge them. Time Θ(n log n). Quick sort is another example.
 
 **Greedy**
 
-A **greedy algorithm** picks the option that looks best at each step and does not change earlier choices. It works when each such choice can lead to an optimal final answer.
+A greedy algorithm builds the answer step by step. It always picks the choice that looks **best right now** and **never changes it later**.
 
-Example: in **activity selection**, choose the compatible activity that finishes first, then repeat. This gives the largest number of non-overlapping activities on one resource. An activity starting when the previous one finishes is allowed (see [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md)).
+Example: **activity selection**. Always pick the compatible activity that finishes first. Other examples: Kruskal's MST, fractional knapsack.
 
 | | Divide and conquer | Greedy |
 |--|--------------------|--------|
-| Subproblems | Usually independent, solved recursively | One choice at a time, no recursion needed |
-| Going back? | Not needed, since parts are solved fully | Never changes a choice |
-| Example | Merge sort | Activity selection, Kruskal's MST |
+| Idea | Split, solve, combine | Pick the best choice now |
+| Recursion | Usually yes | Usually no |
+| Never changes choice? | Not applicable | Yes |
+| Example | Merge sort | Activity selection |
+
+> Memory trick: D&C = split and merge. Greedy = grab the best now.
 
 ![Divide-and-conquer and greedy design patterns](diagrams/b2-theory-16-design-paradigms.svg)
 
@@ -91,15 +101,13 @@ Example: in **activity selection**, choose the compatible activity that finishes
 
 **Answer.**
 
-Assume $T(n)=\Theta(1)$ for $n\le1$. Use powers of 2 or 3 for the divide recurrences; floors and ceilings do not change the answers.
+Assume $T(n)=\Theta(1)$ for $n\le1$.
 
 The **Master theorem** solves recurrences of the form $T(n)=aT(n/b)+f(n)$, where $a\ge1$ and $b>1$ are constants. Compare the extra work $f(n)$ with $n^{\log_b a}$ (see [Chapter 3](../../../Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md)). Let $p=\log_b a$:
 
-- If $f(n)$ is polynomially smaller than $n^p$, then $T(n)=\Theta(n^p)$.
-- If $f(n)=\Theta(n^p\log^k n)$ for $k\ge0$, then $T(n)=\Theta(n^p\log^{k+1}n)$.
-- If $f(n)$ is polynomially larger than $n^p$ and $af(n/b)\le cf(n)$ for some fixed $c<1$ when $n$ is large, then $T(n)=\Theta(f(n))$. This last inequality is the regularity condition.
-
-For the first and third cases, “polynomially” means there is a fixed power gap.
+- **Case 1:** $f(n)$ is smaller than $n^p$ (by a power of $n$): $T(n)=\Theta(n^p)$.
+- **Case 2:** $f(n)$ is the same as $n^p$ (it may have extra $\log^k n$ factors): $T(n)=\Theta(n^p\log^{k+1}n)$. For $k=0$ this is $\Theta(n^p\log n)$.
+- **Case 3:** $f(n)$ is bigger than $n^p$ (by a power of $n$, and it does not shrink too fast): $T(n)=\Theta(f(n))$.
 
 **(i) $T(n) = 2T(n/2) + n$**
 
@@ -123,7 +131,7 @@ $$T(n) = T(n-1) + 1 = T(n-2) + 2 = \dots = T(1) + (n-1)$$
 
 **(iv) $T(n) = T(n/3) + \log n$**
 
-- Here $a=1$, $b=3$, so $n^{\log_3 1}=1$. The extra work is $\log n$. It is not separated from 1 by a polynomial factor, so use the extended Case 2 form.
+- Here $a=1$, $b=3$, so $n^{\log_3 1}=1$. The extra work is $\log n$. It is not bigger or smaller than $1$ by a power of $n$, so use the extended Case 2 form (with $k=1$).
 - Here $f(n)=\Theta(\log n)$, so the result is $\Theta(\log^2 n)$.
 - Check by expansion: level $i$ costs $\log n-i\log 3$. There are about $\log_3 n$ levels. Their total is about $\frac{(\log n)^2}{2\log 3}$.
 - **Answer: $T(n)=\Theta(\log^2 n)$.**
@@ -134,6 +142,8 @@ $$T(n) = T(n-1) + 1 = T(n-2) + 2 = \dots = T(1) + (n-1)$$
 | $T(n-1) + 1$ | - | Expansion | $\Theta(n)$ |
 | $4T(n/2) + n^2$ | 4, 2 | Master, Case 2 | $\Theta(n^2 \log n)$ |
 | $T(n/3) + \log n$ | 1, 3 | Extended Case 2 | $\Theta(\log^2 n)$ |
+
+> Memory trick: if $f(n)$ matches $n^{\log_b a}$, multiply by $\log n$.
 
 ![Recursion-level costs and tight bounds](diagrams/b2-theory-17-recurrences.svg)
 
@@ -147,14 +157,20 @@ $$T(n) = T(n-1) + 1 = T(n-2) + 2 = \dots = T(1) + (n-1)$$
 
 **Answer.**
 
-Measure input length by the number of symbols used to write the input. A **polynomial-time** algorithm takes at most a polynomial number of steps in that length.
+**Question (transcribed):** Define the complexity classes NP, NP-hard, and NP-complete.
 
-- **P:** yes/no problems that can be solved in polynomial time.
-- **NP:** yes/no problems where every yes-instance has a **polynomial-length certificate** (proof or witness) that can be checked in polynomial time. Every problem in P is also in NP. NP does not mean “no fast solution is known.” For example, a proposed TSP tour can be checked to see whether its cost is at most $k$.
-- **NP-hard:** every problem in NP can be reduced to it in polynomial time. For a decision problem, the reduction keeps the yes/no answer the same. An NP-hard problem does not have to be in NP; it can also be an optimization problem.
-- **NP-complete:** problems that are both in NP and NP-hard. Examples include TSP decision, SAT, Hamiltonian cycle, and subset sum decision. For graph colouring, deciding whether a graph can be coloured with a fixed $k\ge3$ colours is NP-complete; 2-colouring is in P.
+**Answer.**
 
-Whether P equals NP is still an open question (see [Chapter 15](../../../Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md)).
+These classes are about **decision problems** (yes or no answers).
+
+- **P**: problems that can be **solved** in polynomial time. Example: sorting, shortest path.
+- **NP**: problems where a given answer (**certificate**) can be **checked** in polynomial time. Example: for TSP, we can quickly check that a given tour costs at most k. P is inside NP.
+- **NP-hard**: **at least as hard as every problem in NP**. Every NP problem can be reduced to it in polynomial time. It need not be in NP. Example: TSP optimization.
+- **NP-complete**: a problem that is **in NP and also NP-hard**. Examples: SAT, Hamiltonian cycle, TSP decision, subset sum.
+
+**P = NP?** is still an **open question**.
+
+> Memory trick: P = solve fast. NP = check fast. NP-complete = NP + NP-hard.
 
 ![How P, NP, NP-complete, and NP-hard relate](diagrams/b2-theory-01-np-classes-venn.svg)
 
@@ -190,6 +206,8 @@ With adjacency lists, BFS takes $O(V+E)$ time and $O(V)$ extra space. With an ad
 
 Shortest path from $S$ to $E$: follow parents $E \leftarrow C \leftarrow A \leftarrow S$, so **S-A-C-E** (3 edges). S-B-D-E is also 3 edges.
 
+> Memory trick: BFS = queue + levels. The first visit gives the shortest distance.
+
 ![BFS shortest path from S](diagrams/b2-theory-02-bfs-graph.svg)
 
 #### Q2(c)
@@ -222,11 +240,13 @@ This is a **DAG** (directed acyclic graph): the arrows all point forward, so the
 6. Do homework
 7. Sleep
 
-Kahn's algorithm finds this order by repeatedly removing an activity with no incoming arrows. Here, only Wake up has no incoming arrow at first, and each step unlocks the next (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
+**DFS method** (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)): run DFS from Wake up and push each activity onto a stack *after* all the activities it points to are finished. The finish order is Sleep, Do homework, Study in library, Go to class, Take breakfast, Brush teeth, Wake up. Popping the stack gives the order above. (Kahn's algorithm gives the same order: only Wake up has no incoming arrow, and each removal unlocks the next.)
 
 **(iii) Is more than one order possible?** No. The graph is one chain, so each activity must follow the one before it.
 
-**(iv) What if Sleep comes before Homework?** This breaks the given dependency Do homework → Sleep. So it is not a valid order for the given graph.
+**(iv) What if Sleep comes before Homework?** This breaks the given dependency Do homework → Sleep. So it is not a valid order for the given graph. If we also forced the rule "Sleep before Homework", we would get a cycle (Do homework → Sleep → Do homework), and then no topological order would exist.
+
+> Memory trick: a DAG has a topological order. A cycle has none.
 
 ![Activity DAG and the variant with Sleep before Homework](diagrams/b2-theory-03-activity-dag.svg)
 
@@ -281,7 +301,7 @@ Linear search needs **5 comparisons** and finds 511 at index 4.
 | 2 | 4 | 7 | 5 | 613 | $613 > 511$, so $hi = 4$ |
 | 3 | 4 | 4 | 4 | 511 | **Found** |
 
-Binary search needs **3 comparisons**: it checks 409, 613, and 511. If the code checks equality and then less-than separately, binary search uses **5 individual key predicates** (yes/no tests: 2 + 2 + 1). Linear search makes 5 equality tests. State what counts as one comparison.
+Binary search needs **3 comparisons**: it checks 409, 613, and 511. (If you count the equal-to test and the less-than test separately, binary search uses **5 individual key predicates**, that is, 5 yes/no tests. So always say what you count as one comparison.)
 
 **Best, average, and worst cases**
 
@@ -327,6 +347,8 @@ $$C = \begin{bmatrix}18 & 14 \\ 62 & 66\end{bmatrix}$$
 
 **Check** with normal multiplication: row 1 of $A$ times column 1 of $B$ is $1 \cdot 6 + 3 \cdot 4 = 18$. The other three entries also match.
 
+> Memory trick: Strassen uses 7 multiplications instead of 8.
+
 ![Strassen split and results](diagrams/b2-theory-04-strassen-split.svg)
 
 ---
@@ -364,7 +386,9 @@ Bubble sort compares and swaps neighbouring items in repeated passes. A small it
 
 Total: **21 comparisons**, **6 swaps**. The early-exit flag does not help here, because a swap happens in every pass.
 
-**Conclusion:** On this input, insertion sort makes about 11 comparisons, while bubble sort makes about 21. An **inversion** is a pair of items in the wrong order. If there are $I$ inversions, insertion sort takes $\Theta(n+I)$ time; here, $I=6$. Bubble sort still needs 6 passes for this input, even with early exit. An already sorted array takes $\Theta(n)$ time with early exit. These counts include comparisons between values, but not loop checks or the final insertion write.
+**Conclusion:** On this input, insertion sort makes about 11 comparisons, while bubble sort makes about 21. An **inversion** is a pair of items in the wrong order. If there are $I$ inversions, insertion sort takes $\Theta(n+I)$ time, which is almost $\Theta(n)$ when $I$ is small (here, $I=6$). Bubble sort needs many passes, because the small item moves only one place left per pass, even with early exit.
+
+> Memory trick: insertion sort jumps the item straight home. Bubble sort walks it one step per pass.
 
 ![Insertion shifts versus six left-to-right bubble passes](diagrams/b2-theory-20-insertion-bubble.svg)
 
@@ -374,7 +398,9 @@ Total: **21 comparisons**, **6 swaps**. The early-exit flag does not help here, 
 
 **Answer.**
 
-Use the **last element as the pivot**. During partitioning, move values smaller than the pivot to its left. Index $i$ marks the end of that smaller-values part. This is Lomuto partitioning (see [Chapter 5](../../../Chapter%205%20-%20Sorting%20Algorithms/README.md)).
+**(i) How quick sort is applied:** pick a pivot, **partition** the array (smaller items to the left, larger items to the right), then sort the two sides recursively.
+
+**(ii) Pivot selection and partitioning:** use the **last element as the pivot**. During partitioning, move values smaller than the pivot to its left. Index $i$ marks the end of that smaller-values part. This is Lomuto partitioning (see [Chapter 5](../../../Chapter%205%20-%20Sorting%20Algorithms/README.md)).
 
 **Pass 1:** pivot = 1040, $i = -1$
 
@@ -397,6 +423,8 @@ Finally, swap the pivot with $a[i+1]=a[3]$: **1023, 1010, 1005, 1040, 1055**. Pi
 ![Quick sort partition tree](diagrams/b2-theory-05-quicksort-partition.svg)
 
 **Final sorted array: $[1005, 1010, 1023, 1040, 1055]$**
+
+> Memory trick: choose a pivot, put it in its final place, then repeat on each side.
 
 #### Q4(c)
 
@@ -427,6 +455,8 @@ Finally, swap the pivot with $a[i+1]=a[3]$: **1023, 1010, 1005, 1040, 1055**. Pi
 
 Merge sort takes $\Theta(n\log n)$ time (see Q1(c)(i)) and uses an extra $\Theta(n)$ array for merging.
 
+> Memory trick: split down to single items, then merge back up in order.
+
 ---
 
 ## Section B
@@ -439,16 +469,24 @@ Merge sort takes $\Theta(n\log n)$ time (see Q1(c)(i)) and uses an extra $\Theta
 
 **Answer.**
 
-A **greedy algorithm** builds an answer one step at a time. It chooses what looks best now and does not undo earlier choices (see [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md)).
+**Question (transcribed):** What is a greedy algorithm? State the conditions under which a greedy approach produces an optimal solution.
 
-A greedy method gives an optimal answer when both conditions hold:
+**Answer.**
 
-1. **Greedy choice property:** the best-looking next choice can be part of an optimal answer.
-2. **Optimal substructure:** after that choice, an optimal answer to the smaller problem completes an optimal answer to the full problem.
+A **greedy algorithm** builds the answer step by step. At each step it picks the **locally best** choice and **never undoes it**.
 
-An **exchange argument** proves a greedy choice is safe: replace a choice in an optimal answer with the greedy choice and show the answer is no worse.
+**Greedy gives an optimal answer when the problem has both:**
 
-**Example where greedy fails:** with unlimited coins $\{1,3,4\}$, make 6 using as few coins as possible. Taking the largest coin first gives $4+1+1$ (3 coins), but $3+3$ uses only 2. So the choice rule must be proved safe; having optimal substructure alone is not enough.
+1. **Greedy-choice property**: choosing the locally best option first can still lead to a globally optimal answer.
+2. **Optimal substructure**: after the greedy choice, the remaining smaller problem is solved optimally in the same way.
+
+The usual proof is the **exchange argument**: replace a choice in an optimal answer by the greedy choice, and show the answer is not worse.
+
+**Works:** activity selection, fractional knapsack, Kruskal's and Prim's MST, Huffman coding.
+
+**Fails:** 0/1 knapsack, and coin change with coins {1, 3, 4} for amount 6. Greedy gives 4 + 1 + 1 (3 coins), but 3 + 3 (2 coins) is better.
+
+> Memory trick: Greedy works only when the best choice now is also safe for the future.
 
 ![Greedy exchange argument and a coin-change counterexample](diagrams/b2-theory-21-greedy-proof.svg)
 
@@ -460,13 +498,15 @@ An **exchange argument** proves a greedy choice is safe: replace a choice in an 
 
 In the **fractional knapsack**, we may take part of an item. Take items from the highest to lowest **profit-to-weight ratio** (profit earned per unit of weight).
 
+**(i) Profit-to-weight ratio**
+
 | Item | Weight | Profit | Ratio $p/w$ | Rank |
 |------|--------|--------|-------------|------|
 | 1 | 10 | 60 | 6 | 1st |
 | 2 | 20 | 100 | 5 | 2nd |
 | 3 | 30 | 120 | 4 | 3rd |
 
-Take items in that order until the capacity 50 is full:
+**(ii) Items to include.** Take items in that order until the capacity 50 is full:
 
 | Step | Take | Weight used | Profit so far |
 |------|------|-------------|---------------|
@@ -474,7 +514,9 @@ Take items in that order until the capacity 50 is full:
 | 2 | All of item 2 | 30 | 160 |
 | 3 | $\frac{20}{30}$ of item 3 (only 20 weight is left) | 50 | 160 + $\frac{2}{3}$ × 120 = **240** |
 
-**Maximum profit: 240**, by taking fractions $(1,1,2/3)$ of items 1, 2, and 3. This is optimal because replacing lower-ratio weight with the same amount of higher-ratio weight cannot reduce profit. Sorting takes $O(n\log n)$ time; filling the knapsack takes $O(n)$ time. The 0/1 optimum is 220 (items 2 and 3), when items cannot be split.
+**(iii)** **Maximum profit: 240**, by taking fractions $(1,1,2/3)$ of items 1, 2, and 3. This is the best possible because every unit of weight is filled with the highest ratio still available. Sorting takes $O(n\log n)$ time; filling the knapsack takes $O(n)$ time. The 0/1 optimum is 220 (items 2 and 3), when items cannot be split.
+
+> Memory trick: highest profit per unit weight first, and split the last item.
 
 ![Fractional knapsack fill by decreasing profit density](diagrams/b2-theory-22-fractional-knapsack.svg)
 
@@ -521,7 +563,21 @@ These edges connect all six vertices without a cycle. The MST is unique. The dia
 
 **Fibonacci:** $F(0)=0$, $F(1)=1$, and $F(n)=F(n-1)+F(n-2)$ for $n\ge2$. The recursion stops at 0 or 1.
 
-In the simple recursive method for $F(5)$:
+In the simple recursive method, the calls for $F(5)$ look like this:
+
+```text
+F(5)
+├─ F(4)
+│   ├─ F(3)
+│   │   ├─ F(2) -> F(1), F(0)
+│   │   └─ F(1)
+│   └─ F(2) -> F(1), F(0)
+└─ F(3)
+    ├─ F(2) -> F(1), F(0)
+    └─ F(1)
+```
+
+Counting the calls:
 
 - $F(3)$ is called **twice**.
 - $F(2)$ is called **three times**.
@@ -529,6 +585,8 @@ In the simple recursive method for $F(5)$:
 - $F(5)$ and $F(4)$ are each called once.
 
 The naive recursion for $F(5)$ makes **15** calls in total. As $n$ grows, many values are recalculated, so the number of calls grows exponentially. These repeated calculations are the **overlapping subproblems**.
+
+> Memory trick: do not solve the same thing twice. Store the answer.
 
 With DP, each $F(i)$ is computed once and stored:
 
@@ -608,6 +666,8 @@ The graph has edges $1\to2$ (5), $1\to4$ (10), $2\to3$ (3), and $3\to4$ (1) (see
 
 The algorithm takes $\Theta(n^3)$ time and $\Theta(n^2)$ space. The shortest path from 1 to 4 is **1→2→3→4**, with cost 9. If a graph has a negative-weight cycle, some shortest-path distances are not defined.
 
+> Memory trick: for each $k$, ask: "Is going through $k$ shorter?"
+
 #### Q6(c)
 
 **Question (transcribed):** Explain how dynamic programming is used to compute the longest common subsequence (LCS) of two strings. For X = AGGTAB and Y = GXTXAYB, build the full DP table row by row. After completing the table, demonstrate how to trace back through it to find the final LCS, and clearly state both the LCS and its length.
@@ -648,6 +708,8 @@ A **subsequence** keeps letters in their original order but may skip letters. Le
 Reading the taken letters backwards gives **G, T, A, B**.
 
 **LCS = GTAB, length = 4.** At $(3,2)$, moving up or left is tied; choose up to get this traceback. Other tie choices may place the same letters in different positions. Filling the table takes $\Theta(|X||Y|)$ time and space. Tracing back takes $O(|X|+|Y|)$ time.
+
+> Memory trick: a match means diagonal + 1. No match means the larger of above and left.
 
 ![LCS table with traceback](diagrams/b2-theory-09-lcs-table.svg)
 
@@ -691,7 +753,9 @@ colour_vertex(v):
 | 6 | v4 | Green | Backtrack: next colour for v4 | Coloured |
 | 7 | v5 | Red | Neighbours v2 (Green), v3 (Blue), v4 (Green) | **Solution** |
 
-**Final colouring:** v1 Red, v2 Green, v3 Blue, v4 Green, v5 Red. Every edge joins vertices with different colours. The triangle 1–2–3 needs at least three colours. This valid 3-colouring proves that the chromatic number is **3** (the fewest colours needed). With $m$ colours, the search may try $O(m^n)$ assignments ($O(nm^n)$ time if each check scans all vertices) and uses $O(n)$ extra search space.
+**Final colouring:** v1 Red, v2 Green, v3 Blue, v4 Green, v5 Red. Every edge joins vertices with different colours. The triangle 1–2–3 needs at least three colours. This valid 3-colouring proves that the chromatic number is **3** (the fewest colours needed). With $m$ colours and $n$ vertices, the search may try up to $m^n$ assignments.
+
+> Memory trick: colour in order. If stuck, go back and change the previous colour.
 
 ![Graph colouring backtracking tree](diagrams/b2-theory-10-colouring-tree.svg)
 
@@ -736,6 +800,8 @@ Add the take-child before the skip-child. If two nodes have the same bound, expa
 
 **Answer:** take **A and B**. Their total weight is 10 and their profit is 70. No other choice gives a higher profit within capacity 10.
 
+> Memory trick: always expand the most promising node, and kill nodes that cannot beat the best.
+
 ![LC-search state-space tree](diagrams/b2-theory-11-lc-knapsack-tree.svg)
 
 #### Q7(c)
@@ -773,6 +839,8 @@ Q . . . .
 
 The table gives the first solution. The later branch shows how the algorithm backtracks when a row has no safe column. The search can continue to find other solutions.
 
+> Memory trick: one queen per row. A column or diagonal conflict means skip. No safe column means go back.
+
 ![N-Queens backtracking tree and final board](diagrams/b2-theory-12-nqueens-tree.svg)
 
 ---
@@ -792,7 +860,9 @@ The table gives the first solution. The later branch shows how the algorithm bac
 | Example (TSP) | Is there a tour with cost at most $k$? | What is the cheapest tour? |
 | Output | Yes or no | A best value and a solution |
 
-P and NP are classes of **decision problems** (yes-or-no problems). TSP decision is NP-complete; finding the cheapest TSP tour is NP-hard (see [Chapter 15](../../../Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md)).
+P and NP are classes of **decision problems** (yes-or-no problems). TSP decision is NP-complete; finding the cheapest TSP tour is NP-hard (see [Chapter 15](../../../Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md)). The optimization version is at least as hard as the decision version.
+
+> Memory trick: decision = "Can we do it?" Optimization = "What is the best?"
 
 ![Threshold decision versus finding an optimum and witness](diagrams/b2-theory-24-decision-optimization.svg)
 
@@ -804,10 +874,10 @@ P and NP are classes of **decision problems** (yes-or-no problems). TSP decision
 
 **Branch and bound (B&B)** searches a tree of choices. It uses a **bounding function** to skip a branch that cannot beat the best answer found so far (see [Chapter 10](../../../Chapter%2010%20-%20Branch%20and%20Bound/README.md)).
 
-- **Bounding function:** gives a safe limit on how good a branch could be. For maximization, it is an **upper bound** on profit. For minimization, it is a **lower bound** on cost.
-- **Admissible heuristic:** an estimate that cannot rule out the true best answer. For minimization, it never overestimates the remaining cost, so $g+h$ is a lower bound. For maximization, use an upper bound that never underestimates the best possible profit. Prune when $ub\le$ the best profit so far, or when $lb\ge$ the best cost so far. Equal bounds may hide another tied best solution, but not a better one.
+- **Bounding function:** gives a safe limit on how good a branch can be. For maximization it is an **upper bound** on profit. For minimization it is a **lower bound** on cost. If the bound is no better than the best answer so far, **prune** the branch ($ub\le$ best profit, or $lb\ge$ best cost).
+- **Admissible heuristic:** an estimate that never lies in the wrong direction. For minimization it **never overestimates** the remaining cost. For maximization it **never underestimates** the possible profit. So pruning never throws away the best answer.
 
-**Job sequencing with deadlines (maximize profit).** Use one machine. All jobs are ready at time 0. Each job takes one time slot, has a positive integer deadline and positive profit, and cannot be paused. Slot $t$ runs from time $t-1$ to $t$, so a job must finish by its deadline. A set of jobs is feasible if, for every $t\ge1$, at most $t$ selected jobs have deadlines $\le t$. To check, sort jobs by deadline and make sure the $i$th job's deadline is at least $i$.
+**Job sequencing with deadlines (maximize profit).** Use one machine. Every job takes one time slot and earns its profit only if it finishes by its deadline. A set of jobs is **feasible** if all of them can finish on time. To check, sort the jobs by deadline; the $i$-th job's deadline must be at least $i$.
 
 > [!NOTE]
 > **Worked example:** the paper asks for a job-sequencing example but gives no job list. The following four jobs are an example chosen to demonstrate the method.
@@ -829,6 +899,8 @@ P and NP are classes of **decision problems** (yes-or-no problems). TSP decision
 | J1 = 0 | skip J1 | 0 | 52 | **Pruned** (52 ≤ 127) |
 
 **Answer:** take **J1 and J4**. Maximum profit = **127**. Schedule J4 in slot 1 and J1 in slot 2. The bounds are $152=100+27+15+10$, $137=127+10$, $125=100+15+10$, and $52=27+15+10$. The two unvisited branches have bounds 125 and 52, both below 127. The other include branches are infeasible. So no branch can give a larger profit.
+
+> Memory trick: the bound is an optimistic guess. If even the guess cannot win, prune.
 
 ![Branch and bound tree for job sequencing](diagrams/b2-theory-13-bnb-job-tree.svg)
 
@@ -882,6 +954,8 @@ $$g(0,\{1,2,3\})=\min(20+77,\ 42+66,\ 35+62)=\min(97,108,97)=97.$$
 
 **Minimum tour cost: 97.** One optimal tour is $0\to1\to2\to3\to0$, with cost $20+30+12+35=97$. Subset DP takes $O(n^2 2^n)$ time and $O(n2^n)$ space.
 
+> Memory trick: the state is (where I am, which cities are left). Try every next city.
+
 ![Held-Karp DP states for the source matrix, starting at city 0](diagrams/b2-theory-14-tsp-subsets.svg)
 
 ---
@@ -894,15 +968,15 @@ Run `python tools/verify_b2_theory.py` from the repository root to check the num
 
 | Topic | One-line memory |
 |-------|-----------------|
-| Time vs space | Time counts operations; total space includes input, auxiliary space excludes input but includes the stack |
-| Master theorem | Compare with $n^{\log_b a}$; Cases 1/3 need a polynomial gap, Case 3 also needs regularity |
+| Time vs space | Time = number of steps; space = memory used (auxiliary space = extra memory) |
+| Master theorem | Compare $f(n)$ with $n^{\log_b a}$; if they match, multiply by $\log n$ |
 | $T(n/3) + \log n$ | $\Theta(\log^2 n)$ (extended Case 2) |
 | P, NP, NP-hard, NP-complete | P = solve fast; NP = verify fast; NP-complete = NP and NP-hard |
 | BFS shortest path | Level by level with a queue; first visit = shortest distance (unweighted) |
 | Topological order | Every arrow goes forward; remove vertices with no incoming arrows |
-| Linear vs binary search | 5 vs 3 three-way probes for 511; binary needs sorted random access; eight-item worst case is 4 |
+| Linear vs binary search | 5 vs 3 comparisons for 511; binary search needs a sorted array; eight-item worst case is 4 |
 | Strassen | 7 block products instead of 8; $T(n) = 7T(n/2) + \Theta(n^2)$ |
-| Insertion vs bubble | Insertion takes $\Theta(n+I)$ for $I$ inversions; left-to-right bubble can still be quadratic |
+| Insertion vs bubble | Insertion takes $\Theta(n+I)$ for $I$ inversions; bubble sort can still need many passes |
 | Quick sort | Partition around the pivot; last-element pivot gives $[1005, 1010, 1023, 1040, 1055]$ |
 | Merge sort | Split in half, merge sorted halves, $\Theta(n \log n)$, needs extra space |
 | Greedy | Best local choice; needs greedy choice + optimal substructure |
@@ -915,7 +989,7 @@ Run `python tools/verify_b2_theory.py` from the repository root to check the num
 | LC-search | Expand the node with the best bound first; prune when $ub \le$ best |
 | N-Queens | Row by row; check column and diagonals; 10 solutions for $N = 5$ |
 | Decision vs optimization | Yes/no question vs find the best value |
-| Branch and bound | Bounds skip branches; an admissible estimate does not rule out a better answer |
+| Branch and bound | A bound skips branches that cannot win; an admissible estimate never throws away the best answer |
 | TSP DP | $g(i,S) = \min_j [c_{ij} + g(j, S \setminus j)]$; minimum tour 97 |
 
 ---
