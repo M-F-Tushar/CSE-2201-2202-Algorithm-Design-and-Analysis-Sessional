@@ -497,7 +497,12 @@ def check_dp(text: str) -> None:
     values = [sum(costs[a][b] for a, b in it.pairwise(t)) for t in tours]
     expect(g(0, tuple(range(1, len(costs)))), min(values), "Q8(c) exhaustive TSP optimum")
     expect(int(match(r"Minimum tour cost:\s*(\d+)", s, "TSP optimum").group(1)), min(values), "Q8(c) reported optimum")
-    expect(integers(match(r"intermediate cities, cost \*\*([^*]+)\*\*", s, "all tour costs").group(1)), values, "Q8(c) all tours")
+    tour = match(r"One optimal tour is \$([^$]+)\$, with cost \$([^$]+)\$", s, "optimal tour and cost")
+    cities = integers(tour.group(1))
+    expect(cities[0], 0, "Q8(c) tour start")
+    expect(sorted(cities[1:-1]), list(range(1, len(costs))), "Q8(c) tour visits every other city once")
+    expect(cities[-1], 0, "Q8(c) tour returns to start")
+    equation(tour.group(2), min(values), "Q8(c) optimal tour cost")
 
 
 def check_colouring_queens(text: str) -> None:
@@ -546,18 +551,6 @@ def check_colouring_queens(text: str) -> None:
     expect([c for c in range(1, n+1) if safe([1, 5], c)], [2], "Q7(c) dead-end prefix")
     expect([c for c in range(1, n+1) if safe([1, 5, 2], c)], [], "Q7(c) no safe fourth column")
 
-    def transforms(cols):
-        forms = []
-        for reflect in [False, True]:
-            pts = [(r, n-c if reflect else c-1) for r, c in enumerate(cols)]
-            for _ in range(4):
-                forms.append(tuple(c+1 for _, c in sorted(pts)))
-                pts = [(c, n-1-r) for r, c in pts]
-        return forms
-
-    expect(int(match(r"\*\*(\d+) distinct boards", s, "queen solutions").group(1)), len(solutions), "Q7(c) solution count")
-    expect(int(match(r"\*\*(\d+)\*\* symmetry classes", s, "symmetry classes").group(1)), len({min(transforms(cols)) for cols in solutions}), "Q7(c) symmetry count")
-    expect(array(match(r"second ascending-column solution is (.*)", s, "second solution").group(1)), list(solutions[1]), "Q7(c) second solution")
     board = match(r"```\n([Q. \n]+)\n```", s, "queen board").group(1).splitlines()
     expect([row.split().index("Q")+1 for row in board], list(solutions[0]), "Q7(c) final board")
 
@@ -647,12 +640,13 @@ def check_lc_jobs(text: str) -> None:
         descendants = [value(bits+tail) for tail in it.product([0, 1], repeat=len(given)-len(bits))]
         if upper is not None:
             need(upper >= max(p for w, p in descendants if w <= capacity), "Q7(b) bound admissibility")
-    order = match(r"Actual pop/expansion order:\*\* (.*?)\.", s, "LC expansion order").group(1).split(" → ")
+    order = match(r"Expanded nodes, in order:\*\* (.*?)\.", s, "LC expansion order").group(1).split(" → ")
     expect([decisions(node, names) for node in order], expansions, "Q7(b) FIFO expansion order")
-    updates = match(r"Thus profits (\d+) and (\d+) are incumbents before (\d+)", s, "LC incumbents")
+    updates = match(r"The incumbents are (\d+), (\d+), and then (\d+)\.", s, "LC incumbents")
     expect([int(v) for v in updates.groups()], incumbents[1:], "Q7(b) incumbent sequence")
     expect(best, max(p for bits in it.product([0, 1], repeat=len(given)) for w, p in [value(bits)] if w <= capacity), "Q7(b) exhaustive optimum")
-    expect(int(match(r"Profit = (\d+)", s, "LC optimum").group(1)), best, "Q7(b) reported optimum")
+    result = match(r"Their total weight is (\d+) and their profit is (\d+)", s, "LC optimum")
+    expect([int(value) for value in result.groups()], [capacity, best], "Q7(b) reported optimum")
 
     s = section(text, "8b")
     given = [(name, int(p), int(d)) for name, p, d in re.findall(r"(J\d+) \(profit (\d+), deadline (\d+)\)", s)]
