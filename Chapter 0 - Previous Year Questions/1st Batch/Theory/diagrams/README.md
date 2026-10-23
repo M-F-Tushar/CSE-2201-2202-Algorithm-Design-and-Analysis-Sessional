@@ -2,8 +2,8 @@
 
 All **27/27 subquestions** have suitable linked visuals: **23 SVG/source pairs**
 (22 topic visuals plus one full-paper roadmap). Shared visuals are listed against
-every part they genuinely explain. All numerical inputs are reconstructed/illustrative;
-no diagram authenticates the unavailable historical question figures.
+every part they genuinely explain. Printed inputs and the two source-paper graphs were
+checked against the supplied 2023 scan; extra teaching examples are labeled illustrative.
 
 The `.excalidraw` scene is editable in [Excalidraw](https://excalidraw.com).
 After a manual scene edit, re-export its SVG so the Markdown preview stays synchronized.
@@ -18,7 +18,7 @@ Do not regenerate over later manual edits without reconciling them first.
 | Q2(a), Q2(c), Q3(b) | Q2(a,c), Q3(b): balanced recurrence | [SVG](b1-theory-02-recursion-tree.svg) | [Excalidraw](b1-theory-02-recursion-tree.excalidraw) |
 | Q3(d) | Heap Sort: Max-Heap After Build Step | [SVG](b1-theory-03-heap-build-tree.svg) | [Excalidraw](b1-theory-03-heap-build-tree.excalidraw) |
 | Q5(c) | Q5(c): positive-item subset-sum search prefix | [SVG](b1-theory-04-subset-sum-tree.svg) | [Excalidraw](b1-theory-04-subset-sum-tree.excalidraw) |
-| Q5(d) | Q5(d): reconstructed graph and backtracking | [SVG](b1-theory-05-hamiltonian-tree.svg) | [Excalidraw](b1-theory-05-hamiltonian-tree.excalidraw) |
+| Q5(d) | Q5(d): paper graph and backtracking | [SVG](b1-theory-05-hamiltonian-tree.svg) | [Excalidraw](b1-theory-05-hamiltonian-tree.excalidraw) |
 | Q7(b) | Q7(b): Bellman-Ford Shortest Paths from Source A | [SVG](b1-theory-06-bellman-ford-graph.svg) | [Excalidraw](b1-theory-06-bellman-ford-graph.excalidraw) |
 | Q8(a) | Q8(a): known class relations (not a strict Venn) | [SVG](b1-theory-07-classes-venn.svg) | [Excalidraw](b1-theory-07-classes-venn.excalidraw) |
 | Q8(c) | Q8(c): Dijkstra's Shortest Paths from Node A | [SVG](b1-theory-08-dijkstra-graph.svg) | [Excalidraw](b1-theory-08-dijkstra-graph.excalidraw) |
@@ -42,7 +42,7 @@ Do not regenerate over later manual edits without reconciling them first.
 
 - Recurrence tree uses a complete n=8 example, not disconnected symbolic leaves.
 - Subset-sum and queen trees show only the search prefix; they do not claim full enumeration.
-- Hamiltonian visual includes the exact reconstructed graph and all failed branches before the first circuit.
+- Hamiltonian visual uses the graph transcribed from the paper and shows the search prefix through the first circuit.
 - NP visual states known inclusions only; it assumes neither P=NP nor P≠NP.
 - Green graph edges mark the reported MST/shortest-path tree, not extra graph edges.
 - Dijkstra keeps the first predecessor on equal distances; F and C each have tied shortest routes.
