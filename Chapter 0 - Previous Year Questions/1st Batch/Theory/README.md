@@ -40,9 +40,6 @@ Foundations support the later topics; the roadmap groups all eight questions wit
 
 **Answer.**
 
-**Question (transcribed):** What do you mean by the terms Design and Analysis of algorithm? What are the properties of a good algorithm?
-
-**Answer.**
 
 **Design** means choosing the steps (the method or *paradigm*) that solve the problem. Examples: divide and conquer, greedy, dynamic programming.
 
@@ -69,10 +66,6 @@ Foundations support the later topics; the roadmap groups all eight questions wit
 ![Design, correctness, and resource analysis](diagrams/b1-theory-09-design-analysis.svg)
 
 #### Q1(b)
-
-**Question (transcribed):** Distinguish between best-case, worst-case, and average-case analysis for an algorithm. When is each most relevant?
-
-**Answer.**
 
 **Question (transcribed):** Distinguish between best-case, worst-case, and average-case analysis for an algorithm. When is each most relevant?
 
@@ -133,10 +126,6 @@ At $n = 10^6$, Algorithm B does about 50,000 times less work. On a computer doin
 ### Q2. Recurrences and Loop Analysis
 
 #### Q2(a)
-
-**Question (transcribed):** Explain the significance of recurrence relations.
-
-**Answer.**
 
 **Question (transcribed):** Explain the significance of recurrence relations.
 
@@ -277,10 +266,6 @@ Here $a=2$, $b=2$, and $f(n)=n$. Thus $n^{\log_b a}=n^{\log_2 2}=n$. Since $f(n)
 
 **Answer.**
 
-**Question (transcribed):** Analyze the recurrence relation for Merge Sort: T(n) = 2T(n/2) + O(n). What is its time complexity?
-
-**Answer.**
-
 **How merge sort works**
 
 - **Divide**: split the array into 2 halves. Cost O(1).
@@ -306,10 +291,6 @@ a = 2, b = 2, f(n) = n = n^(log₂ 2). This is **Case 2**, so T(n) = Θ(n log n)
 ![Balanced merge-sort recursion and level costs](diagrams/b1-theory-02-recursion-tree.svg)
 
 #### Q3(c)
-
-**Question (transcribed):** What is in-place sorting? Is Quicksort an in-place sorting algorithm? Justify.
-
-**Answer.**
 
 **Question (transcribed):** What is in-place sorting? Is Quicksort an in-place sorting algorithm? Justify.
 
@@ -501,10 +482,6 @@ Both algorithms give this MST. Since all edge weights are different, it is the o
 ### Q5. Backtracking
 
 #### Q5(a)
-
-**Question (transcribed):** Explain the concept of Backtracking.
-
-**Answer.**
 
 **Question (transcribed):** Explain the concept of Backtracking.
 
@@ -703,10 +680,6 @@ Call `EXTEND([a], {a})`. Stop at the first circuit for this trace, or continue t
 
 **Answer.**
 
-**Question (transcribed):** What are the two key properties that a problem must possess for Dynamic Programming to be applicable?
-
-**Answer.**
-
 1. **Optimal substructure**: the best answer of the big problem is built from the best answers of its smaller sub-problems.
 2. **Overlapping sub-problems**: the same small sub-problems appear again and again. DP solves each once, stores it, and reuses it.
 
@@ -717,10 +690,6 @@ Call `EXTEND([a], {a})`. Stop at the first circuit for this trace, or continue t
 ![Overlapping knapsack states and optimal substructure](diagrams/b1-theory-19-dp-properties.svg)
 
 #### Q6(b)
-
-**Question (transcribed):** Define the DP[i][w] state for the 0/1 Knapsack problem. Write down the dynamic programming recurrence relation for the knapsack problem.
-
-**Answer.**
 
 **Question (transcribed):** Define the DP[i][w] state for the 0/1 Knapsack problem. Write down the dynamic programming recurrence relation for the knapsack problem.
 
@@ -900,10 +869,6 @@ Pass 3 makes no changes, so we stop.
 
 **Answer.**
 
-**Question (transcribed):** Define the classes P, NP, NP-hard, and NP-complete. Explain the relationships between these classes.
-
-**Answer.**
-
 These classes are about **decision problems** (the answer is yes or no).
 
 | Class | Simple meaning | Example |
@@ -934,10 +899,6 @@ NP-complete = the overlap of NP and NP-hard
 ![How P, NP, NP-hard, and NP-complete relate](diagrams/b1-theory-07-classes-venn.svg)
 
 #### Q8(b)
-
-**Question (transcribed):** Differentiate between decision problems and optimization problems in the context of NP-completeness.
-
-**Answer.**
 
 **Question (transcribed):** Differentiate between decision problems and optimization problems in the context of NP-completeness.
 
