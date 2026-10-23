@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1110" height="450" viewBox="0 0 1110 450" role="img" aria-label="Ford-Fulkerson / Edmonds-Karp Augmenting Loop">
+<rect width="1110" height="450" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="555.0" y="34.0">Ford-Fulkerson / Edmonds-Karp Augmenting Loop</tspan></text>
+<path d="M219.9 199.5 Q250.0 200.1 280.6 200.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M269.8 204.1 L280.0 200.0 L269.8 195.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M469.8 199.5 Q501.3 201.3 531.0 200.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M519.8 204.1 L530.0 200.0 L519.8 195.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M749.4 199.7 Q789.7 200.3 830.1 199.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M819.8 204.1 L830.0 200.0 L819.8 195.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="771.0" y="188.0" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="790.0" y="200.0">Yes</tspan></text>
+<path d="M640.3 264.2 Q640.9 291.0 640.0 320.6" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M635.9 309.8 L640.0 320.0 L644.1 309.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="625.0" y="280.5" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="640.0" y="292.5">No</tspan></text>
+<path d="M945.8 159.6 Q945.3 125.0 944.7 90.2 M944.6 89.7 Q660.0 89.2 375.2 90.2 M374.7 90.2 Q374.2 126.6 375.2 160.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M370.9 149.8 L375.0 160.0 L379.1 149.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="589.0" y="78.0" width="142" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="660.0" y="90.0">update residuals</tspan></text>
+<rect x="30.0" y="160.0" width="190.0" height="80.0" rx="10" fill="#ffec99"/>
+<path d="M28.9 160.2 Q124.4 160.2 219.5 158.5 M220.2 159.1 Q217.3 200.9 220.1 239.5 M221.2 238.5 Q124.5 241.4 29.0 240.1 M28.5 239.9 Q29.1 197.5 30.8 160.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M28.9 161.3 Q126.1 160.2 221.0 160.9 M220.4 160.6 Q222.2 202.1 218.8 240.4 M218.9 239.0 Q124.4 240.1 29.8 241.4 M31.3 241.1 Q28.9 201.2 30.6 161.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="bold" fill="#1e1e1e"><tspan x="125.0" y="180.2">Start</tspan><tspan x="125.0" y="200.0">flow f = 0</tspan><tspan x="125.0" y="219.8">on every edge</tspan></text>
+<rect x="280.0" y="160.0" width="190.0" height="80.0" rx="10" fill="#a5d8ff"/>
+<path d="M280.1 159.7 Q372.4 159.8 470.8 161.1 M470.1 159.5 Q469.9 197.9 468.6 238.5 M469.9 240.5 Q373.4 238.5 278.4 239.8 M279.2 241.2 Q280.5 200.6 279.2 159.3" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M281.4 159.7 Q377.3 162.0 470.1 161.2 M471.1 159.4 Q471.1 197.2 470.7 238.9 M471.3 241.2 Q376.6 237.4 281.1 240.5 M280.4 239.2 Q278.7 202.8 279.5 160.2" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="375.0" y="189.4">Build residual</tspan><tspan x="375.0" y="210.6">graph Gf</tspan></text>
+<polygon points="640.0,135 750,200.0 640.0,265 530,200.0" fill="#ffec99"/>
+<path d="M639.8 134.1 Q693.5 169.6 749.1 199.9 M749.3 198.8 Q693.2 231.0 638.9 265.2 M641.3 266.0 Q585.2 231.6 530.9 200.6 M531.2 200.4 Q584.6 170.0 638.9 134.0" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M640.5 135.9 Q695.7 166.0 748.6 200.5 M749.8 201.0 Q693.0 231.8 639.7 264.4 M640.8 263.5 Q584.9 230.9 528.7 200.8 M530.8 200.6 Q586.1 167.2 639.3 133.6" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="640.0" y="190.8">Path from s</tspan><tspan x="640.0" y="209.2">to t in Gf?</tspan></text>
+<rect x="830.0" y="160.0" width="230.0" height="80.0" rx="10" fill="#b2f2bb"/>
+<path d="M830.9 161.0 Q943.0 162.3 1060.7 158.5 M1060.9 160.6 Q1060.8 201.0 1060.1 239.5 M1060.4 241.2 Q943.1 238.2 831.2 240.4 M831.4 239.7 Q832.3 202.0 830.1 161.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M829.9 158.5 Q947.0 161.5 1059.1 160.2 M1058.7 160.8 Q1057.7 197.5 1059.9 239.1 M1060.3 238.9 Q943.7 237.5 830.8 240.6 M829.8 238.4 Q832.1 199.2 828.9 159.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="945.0" y="178.9">Push the bottleneck</tspan><tspan x="945.0" y="200.0">residual capacity</tspan><tspan x="945.0" y="221.1">along the path</tspan></text>
+<rect x="535.0" y="320.0" width="210.0" height="70.0" rx="10" fill="#e0d5fa"/>
+<path d="M535.4 318.9 Q642.5 319.4 744.0 319.8 M746.2 321.3 Q747.0 353.9 746.1 390.6 M743.9 390.6 Q642.3 392.2 533.4 390.0 M535.5 390.9 Q535.7 353.5 533.6 320.5" fill="none" stroke="#6741d9" stroke-width="2" stroke-linecap="round"/>
+<path d="M535.6 319.3 Q639.7 317.2 743.6 320.6 M744.6 321.2 Q742.7 357.4 744.6 389.2 M745.6 391.3 Q641.8 391.4 533.9 389.4 M534.7 389.2 Q537.7 352.9 533.6 320.2" fill="none" stroke="#6741d9" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="bold" fill="#1e1e1e"><tspan x="640.0" y="345.1">No path: f is a</tspan><tspan x="640.0" y="364.9">maximum flow</tspan></text>
+<rect x="30.0" y="320.0" width="440.0" height="70.0" rx="10" fill="#e9ecef"/>
+<path d="M30.0 321.3 Q250.8 321.6 471.2 321.1 M470.5 320.4 Q470.4 353.7 469.2 389.5 M468.7 389.8 Q248.9 388.0 31.0 389.7 M29.9 388.5 Q32.0 356.5 29.1 320.2" fill="none" stroke="#343a40" stroke-width="2" stroke-linecap="round"/>
+<path d="M29.4 321.0 Q249.4 318.5 470.8 319.6 M470.2 321.5 Q472.6 354.5 468.8 390.0 M468.8 391.3 Q248.9 390.5 30.5 389.9 M31.1 391.1 Q32.7 354.2 29.3 320.3" fill="none" stroke="#343a40" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="250.0" y="345.8">Path rule: any path (DFS) = Ford-Fulkerson;</tspan><tspan x="250.0" y="364.2">shortest path by edges (BFS) = Edmonds-Karp</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="555.0" y="428.0">Every push raises the flow value; the loop ends when s can no longer reach t in the residual graph</tspan></text>
+</svg>
