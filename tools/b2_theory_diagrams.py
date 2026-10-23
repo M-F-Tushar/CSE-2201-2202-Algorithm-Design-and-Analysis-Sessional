@@ -133,7 +133,7 @@ def missing_diagrams():
     yield D("b2-theory-24-decision-optimization", "Q8(a): TSP thresholds versus an optimal tour", (1040, 650), [
         box("inst", "Same four-city TSP instance\nFeasible tour costs are integers", 300, 80, 440, 85),
         box("dec", "DECISION\nIs there a tour costing at most k?\nk=96: NO; k=97: YES", 40, 265, 440, 130),
-        box("opt", "OPTIMIZATION\nMinimum value: 97\nWitness: 1 → 2 → 3 → 4 → 1", 560, 265, 440, 130, "green"),
+        box("opt", "OPTIMIZATION\nMinimum value: 97\nWitness: 0 → 1 → 2 → 3 → 0", 560, 265, 440, 130, "green"),
         box("oracle", "Integer bounds + decision queries → binary search for the optimum VALUE\nRecovering an actual tour needs additional self-reduction queries.", 40, 485, 960, 110, "yellow", 17),
     ], [E("inst", "dec"), E("inst", "opt"), E("dec", "oracle"), E("opt", "oracle")])
 
@@ -162,6 +162,34 @@ def roadmap_diagram():
     return D("b2-theory-25-paper-roadmap", "Full-paper topic roadmap — grouping, not prerequisites", (1180, 1260), nodes)
 
 
+def kruskal_mst_diagram():
+    """Draw the exact weighted graph and MST shown in the supplied paper."""
+    positions = {"5": (70, 280), "4": (280, 100), "1": (280, 400),
+                 "3": (590, 100), "2": (590, 400), "6": (850, 250)}
+    nodes = [N(v, v, x, y, 60, 60, "blue", "ellipse", 18)
+             for v, (x, y) in positions.items()]
+    selected = {frozenset(edge) for edge in [(5, 1), (4, 1), (1, 2), (3, 2), (2, 6)]}
+    edges_and_labels = [
+        (("5", "4", 9), (165, 160)), (("5", "1", 1), (165, 360)),
+        (("4", "1", 1), (300, 250)), (("4", "3", 5), (435, 75)),
+        (("4", "2", 3), (445, 240)), (("1", "2", 2), (435, 420)),
+        (("3", "2", 3), (610, 250)), (("3", "6", 8), (755, 155)),
+        (("2", "6", 7), (755, 355)),
+    ]
+    edges = []
+    for i, ((u, v, weight), (x, y)) in enumerate(edges_and_labels):
+        color = "#2f9e44" if frozenset((int(u), int(v))) in selected else "#868e96"
+        edges.append(E(u, v, directed=False, color=color, route="straight"))
+        nodes.append(box(f"weight{i}", str(weight), x, y, 34, 28,
+                         "green" if color == "#2f9e44" else "gray", 15))
+    nodes += [
+        box("sorted", "Sort by weight. Take (5,1), (4,1), (1,2); skip (4,2) (cycle).", 35, 500, 970, 55, "yellow", 16),
+        box("steps", "Take (3,2); skip (4,3); take (2,6). Stop after 5 edges.", 35, 570, 970, 55, "teal", 16),
+        box("result", "MST: (5,1), (4,1), (1,2), (3,2), (2,6)     Total weight = 14", 35, 640, 970, 55, "green", 16),
+    ]
+    return D("b2-theory-07-kruskal-mst", "Q5(c): Kruskal MST on the graph shown in the paper", (1040, 730), nodes, edges)
+
+
 def repaired_diagrams():
     nodes = [N(k, f"{k}\nd={dist}", x, y, 90, 80, "green" if k in "SACE" else "blue", "ellipse", 17)
              for k, dist, x, y in [("S",0,40,235),("A",1,280,95),("B",1,280,375),("C",2,530,95),("D",2,530,375),("E",3,780,235)]]
@@ -172,15 +200,15 @@ def repaired_diagrams():
     yield D("b2-theory-02-bfs-graph", "Q2(b): BFS levels and a shortest path from S", (960, 780), nodes, edges)
 
     acts = ["Wake up", "Brush teeth", "Take breakfast", "Go to class", "Study in library", "Do homework", "Sleep"]
-    nodes = [box("left", "Reconstructed six-edge chain", 40, 80, 400, 60, "yellow", 17),
+    nodes = [box("left", "Six dependencies from the paper", 40, 80, 400, 60, "yellow", 17),
              box("right", "REPLACE the last two edges", 540, 80, 400, 60, "yellow", 17)]
     for side, names in [("a",acts),("b",acts[:5]+["Sleep","Do homework"])]:
         nodes += [box(f"{side}{i}", name, 40 if side == "a" else 540, 180 + 95*i, 400, 55, "green" if i >= 5 else "blue") for i,name in enumerate(names)]
     nodes += [box("warning", "Each chain has one topological order. Adding Sleep → Homework without removing\nHomework → Sleep instead creates a 2-cycle: no topological order.", 40, 865, 900, 90, "red", 16)]
-    yield D("b2-theory-03-activity-dag", "Q2(c): Assumed activity dependencies and an explicit replacement", (980, 1000), nodes,
+    yield D("b2-theory-03-activity-dag", "Q2(c): Paper dependencies and the requested variation", (980, 1000), nodes,
             [E(f"{side}{i}",f"{side}{i+1}") for side in "ab" for i in range(6)])
 
-    nodes = [box("given", "Reconstructed instance: W=10; decision order A(4,40), C(3,18), B(6,30), D(5,20)", 30, 70, 1100, 55, "gray", 16),
+    nodes = [box("given", "Example instance: W=10; decision order A(4,40), C(3,18), B(6,30), D(5,20)", 30, 70, 1100, 55, "gray", 16),
              box("root", "#1 Root\nw=0, p=0, ub=73", 400, 165, 350, 85),
              box("a1", "#2 A=1\nw=4, p=40, ub=73", 230, 310, 350, 85),
              box("a0", "A=0\nub=52; pruned after best=70", 770, 310, 350, 85, "gray", 16),
@@ -277,7 +305,7 @@ def main():
     if args.roadmap_only:
         print("Wrote the full-paper roadmap pair; subquestion visuals were not touched.")
         return
-    for d in [*missing_diagrams(), *repaired_diagrams()]:
+    for d in [*missing_diagrams(), kruskal_mst_diagram(), *repaired_diagrams()]:
         emit(d)
     first = "P ⊆ NP; NP-complete = NP ∩ NP-hard."
     second = "NP-hard need not be in NP; TSP optimization is NP-hard."
@@ -293,10 +321,7 @@ def main():
     patch_manual("b2-theory-06-mergesort-tree", [
         ("Black arrows = divide (split in half).   Green arrows = merge (combine two sorted lists).", "Black arrows divide (extra entry left); green arrows merge sorted lists."),
     ])
-    patch_manual("b2-theory-07-kruskal-mst", [
-        ("Q5(c): Kruskal's MST on the Given Graph", "Q5(c): Kruskal's MST on an Unverified Transcription"),
-        ("Weights were read from a low-resolution scan. Confirm them against the paper.", "Unverified weights: original scan unavailable. Cost 14 is conditional on this edge list."),
-    ])
+
     patch_manual("b2-theory-10-colouring-tree", [
         ("Step 4: v4 touches only v3, so v4 = Red is tried first.", "Step 4: only v3 is already coloured next to v4; try Red first."),
         ("Graph (5 vertices)", "Illustrative graph (5 vertices)"),
@@ -305,15 +330,33 @@ def main():
         ("Row 4: no safe column ✗", "Row 4: none safe ✗"),
         ("The search finds all 10 solutions for N = 5. The tree shows the first two and one dead end.", "Enumeration: 10 boards (2 symmetry classes). Only two solutions and a later dead end shown."),
     ])
+    patch_manual("b2-theory-14-tsp-subsets", [
+        ("Q8(c): TSP by DP over Subsets (Held-Karp)", "Q8(c): Held-Karp DP, start at city 0"),
+        ("g(i, S) = cheapest path that starts at i, visits every city in S once, and ends at city 1.", "g(i,S) starts at i, visits S once, then returns to city 0."),
+        ("g(2, ∅) = 20", "g(1, ∅) = 20"),
+        ("g(3, ∅) = 42", "g(2, ∅) = 42"),
+        ("g(4, ∅) = 35", "g(3, ∅) = 35"),
+        ("g(2, {3}) = 72", "g(1, {2}) = 72"),
+        ("g(2, {4}) = 69", "g(1, {3}) = 69"),
+        ("g(3, {2}) = 50", "g(2, {1}) = 50"),
+        ("g(3, {4}) = 47", "g(2, {3}) = 47"),
+        ("g(4, {2}) = 54", "g(3, {1}) = 54"),
+        ("g(4, {3}) = 54", "g(3, {2}) = 54"),
+        ("g(2, {3,4}) = 77", "g(1, {2,3}) = 77"),
+        ("g(3, {2,4}) = 66", "g(2, {1,3}) = 66"),
+        ("g(4, {2,3}) = 62", "g(3, {1,2}) = 62"),
+        ("g(1, {2,3,4}) = min(20+77, 42+66, 35+62) = 97", "g(0, {1,2,3}) = min(20+77, 42+66, 35+62) = 97"),
+        ("Green paths: 1→2→3→4→1 = 20 + 30 + 12 + 35 = 97,   and   1→4→3→2→1 = 35 + 12 + 30 + 20 = 97.", "Green paths: 0→1→2→3→0 = 20 + 30 + 12 + 35 = 97,   and   0→3→2→1→0 = 35 + 12 + 30 + 20 = 97."),
+    ])
     patch_manual("b2-theory-13-bnb-job-tree", [
-        ("Q8(b): Branch and Bound for Job Sequencing (maximize profit)", "Q8(b): Reconstructed Job Sequencing — Depth-First B&B"),
+        ("Q8(b): Branch and Bound for Job Sequencing (maximize profit)", "Q8(b): Example Job Sequencing — Depth-First B&B"),
         ("ub = profit so far + profit of every undecided job (admissible: never below the true best).", "Include first; update best only at feasible leaves. ub = profit + all undecided profits."),
     ])
-    repaired = {d.key for d in repaired_diagrams()}
+    repaired = {d.key for d in repaired_diagrams()} | {kruskal_mst_diagram().key}
     for path in sorted(OUT.glob("b2-theory-*.excalidraw")):
         if int(path.stem.split("-")[2]) <= 14 and path.stem not in repaired:
             synchronize_manual_styles(path.stem)
-    print("Wrote 10 new subquestion pairs and the roadmap, replaced 3 pairs, and repaired retained manual scene content/styles.")
+    print("Wrote 10 new subquestion pairs and the roadmap, corrected the source-graph MST, replaced 3 other pairs, and repaired retained manual scene content/styles.")
 
 
 if __name__ == "__main__":
