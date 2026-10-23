@@ -297,7 +297,7 @@ class VerifyTheory(unittest.TestCase):
         self.assertTrue(all(row.count("Q") == 1 for row in rows))
         self.assertEqual(tuple(row.index("Q") for row in rows), solutions[0])
         text = self.section("Q5(c)")
-        items = integers(re.search(r"A\s*=\s*\\\{([^}]+)\\\}", text)[1])
+        items = integers(re.search(r"A\s*=\s*\{([^}]+)\}", text)[1])
         target = int(re.search(r"d\s*=\s*(\d+)", text)[1])
         answers = [s for s in subsets(items) if sum(s) == target]
         answer = tuple(integers(re.search(r"\*\*Answer: \$\\\{([^}]+)\\\}", text)[1]))
@@ -466,7 +466,7 @@ class VerifyTheory(unittest.TestCase):
 
     def test_dijkstra_actual_trace_and_negative_example(self):
         text = self.section("Q8(c)")
-        edges = [(u, v, int(w)) for u, v, w in re.findall(r"\b([A-Z])-([A-Z]) (\d+)", text)]
+        edges = [(u, v, int(w)) for u, v, w in re.findall(r"\b([A-Z])-([A-Z])\s*\(?([0-9]+)\)?", text)]
         graph = {}
         for u, v, w in edges:
             graph.setdefault(u, {})[v] = w
@@ -525,7 +525,7 @@ class VerifyTheory(unittest.TestCase):
             ("Q8(c)", "b1-theory-08-dijkstra-graph.excalidraw", False),
         ):
             text = self.section(part)
-            pattern = r"([A-Z]) to ([A-Z]) = (-?\d+)" if directed else r"\b([A-Z])-([A-Z]) (\d+)"
+            pattern = r"([A-Z]) to ([A-Z]) = (-?\d+)" if directed else r"\b([A-Z])-([A-Z])\s*\(?([0-9]+)\)?"
             edges = [(u, v, int(w)) for u, v, w in re.findall(pattern, text)]
             vertices = {v for u, v, _ in edges} | {u for u, v, _ in edges}
             elements = json.loads((THEORY / "diagrams" / filename).read_text(encoding="utf-8"))["elements"]
