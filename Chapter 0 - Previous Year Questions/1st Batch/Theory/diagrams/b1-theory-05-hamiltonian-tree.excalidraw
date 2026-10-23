@@ -8,7 +8,7 @@
       "type": "text",
       "x": 24,
       "y": 16,
-      "width": 752,
+      "width": 952,
       "height": 30,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -44,7 +44,7 @@
       "type": "arrow",
       "x": 147.0,
       "y": 126.0,
-      "width": 198.0,
+      "width": 298.0,
       "height": 0.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -73,7 +73,7 @@
           0.0
         ],
         [
-          198.0,
+          298.0,
           0.0
         ]
       ],
@@ -87,10 +87,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e1",
       "type": "arrow",
-      "x": 121,
-      "y": 100,
-      "width": 500,
-      "height": 30,
+      "x": 147.0,
+      "y": 140.86,
+      "width": 123.0,
+      "height": 70.29,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -114,20 +114,12 @@
       "locked": false,
       "points": [
         [
-          0,
-          0
+          0.0,
+          0.0
         ],
         [
-          0,
-          -30
-        ],
-        [
-          500,
-          -30
-        ],
-        [
-          500,
-          0
+          123.0,
+          70.29
         ]
       ],
       "lastCommittedPoint": null,
@@ -185,10 +177,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e3",
       "type": "arrow",
-      "x": 397.0,
-      "y": 126.0,
-      "width": 198.0,
-      "height": 0.0,
+      "x": 445.0,
+      "y": 140.86,
+      "width": 123.0,
+      "height": 70.29,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -216,8 +208,8 @@
           0.0
         ],
         [
-          198.0,
-          0.0
+          -123.0,
+          70.29
         ]
       ],
       "lastCommittedPoint": null,
@@ -230,10 +222,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e4",
       "type": "arrow",
-      "x": 397.0,
-      "y": 146.8,
-      "width": 198.0,
-      "height": 158.4,
+      "x": 497.0,
+      "y": 140.86,
+      "width": 123.0,
+      "height": 70.29,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -261,8 +253,8 @@
           0.0
         ],
         [
-          198.0,
-          158.4
+          123.0,
+          70.29
         ]
       ],
       "lastCommittedPoint": null,
@@ -275,10 +267,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e5",
       "type": "arrow",
-      "x": 647,
-      "y": 126,
-      "width": 594,
-      "height": 264,
+      "x": 270.0,
+      "y": 240.86,
+      "width": 123.0,
+      "height": 70.29,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -302,24 +294,12 @@
       "locked": false,
       "points": [
         [
-          0,
-          0
+          0.0,
+          0.0
         ],
         [
-          68,
-          0
-        ],
-        [
-          68,
-          264
-        ],
-        [
-          -526,
-          264
-        ],
-        [
-          -526,
-          226
+          -123.0,
+          70.29
         ]
       ],
       "lastCommittedPoint": null,
@@ -332,10 +312,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e6",
       "type": "arrow",
-      "x": 595.0,
-      "y": 146.8,
-      "width": 198.0,
-      "height": 158.4,
+      "x": 322.0,
+      "y": 240.86,
+      "width": 123.0,
+      "height": 70.29,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -363,8 +343,8 @@
           0.0
         ],
         [
-          -198.0,
-          158.4
+          123.0,
+          70.29
         ]
       ],
       "lastCommittedPoint": null,
@@ -377,10 +357,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e7",
       "type": "arrow",
-      "x": 621.0,
-      "y": 152.0,
-      "width": 0.0,
-      "height": 148.0,
+      "x": 147.0,
+      "y": 326.0,
+      "width": 298.0,
+      "height": 0.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -408,8 +388,8 @@
           0.0
         ],
         [
-          0.0,
-          148.0
+          298.0,
+          0.0
         ]
       ],
       "lastCommittedPoint": null,
@@ -422,10 +402,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e8",
       "type": "arrow",
-      "x": 147.0,
-      "y": 326.0,
-      "width": 198.0,
-      "height": 0.0,
+      "x": 497.0,
+      "y": 311.14,
+      "width": 123.0,
+      "height": 70.29,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -453,8 +433,8 @@
           0.0
         ],
         [
-          198.0,
-          0.0
+          123.0,
+          -70.29
         ]
       ],
       "lastCommittedPoint": null,
@@ -467,10 +447,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e9",
       "type": "arrow",
-      "x": 397.0,
-      "y": 326.0,
-      "width": 198.0,
-      "height": 0.0,
+      "x": 412.73,
+      "y": 610.0,
+      "width": 65.45,
+      "height": 30.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -498,24 +478,24 @@
           0.0
         ],
         [
-          198.0,
-          0.0
+          -65.45,
+          30.0
         ]
       ],
       "lastCommittedPoint": null,
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null,
+      "endArrowhead": "arrow",
       "elbowed": false
     },
     {
       "id": "b1-theory-05-hamiltonian-tree-e10",
       "type": "arrow",
-      "x": 306.3,
-      "y": 620.0,
-      "width": 77.61,
-      "height": 35.0,
+      "x": 590.91,
+      "y": 610.0,
+      "width": 68.18,
+      "height": 30.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -543,8 +523,8 @@
           0.0
         ],
         [
-          -77.61,
-          35.0
+          68.18,
+          30.0
         ]
       ],
       "lastCommittedPoint": null,
@@ -557,10 +537,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e11",
       "type": "arrow",
-      "x": 395.0,
-      "y": 620.0,
-      "width": 0.0,
-      "height": 35.0,
+      "x": 212.73,
+      "y": 720.0,
+      "width": 35.45,
+      "height": 30.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -588,8 +568,8 @@
           0.0
         ],
         [
-          0.0,
-          35.0
+          -35.45,
+          30.0
         ]
       ],
       "lastCommittedPoint": null,
@@ -602,10 +582,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e12",
       "type": "arrow",
-      "x": 483.7,
-      "y": 620.0,
-      "width": 77.61,
-      "height": 35.0,
+      "x": 307.27,
+      "y": 720.0,
+      "width": 35.45,
+      "height": 30.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -633,8 +613,8 @@
           0.0
         ],
         [
-          77.61,
-          35.0
+          35.45,
+          30.0
         ]
       ],
       "lastCommittedPoint": null,
@@ -647,10 +627,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e13",
       "type": "arrow",
-      "x": 140.0,
-      "y": 735.0,
+      "x": 750.0,
+      "y": 720.0,
       "width": 0.0,
-      "height": 35.0,
+      "height": 30.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -679,7 +659,7 @@
         ],
         [
           0.0,
-          35.0
+          30.0
         ]
       ],
       "lastCommittedPoint": null,
@@ -692,10 +672,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e14",
       "type": "arrow",
-      "x": 386.3,
-      "y": 735.0,
-      "width": 7.61,
-      "height": 35.0,
+      "x": 122.73,
+      "y": 830.0,
+      "width": 5.45,
+      "height": 30.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -723,8 +703,8 @@
           0.0
         ],
         [
-          -7.61,
-          35.0
+          -5.45,
+          30.0
         ]
       ],
       "lastCommittedPoint": null,
@@ -737,10 +717,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e15",
       "type": "arrow",
-      "x": 505,
-      "y": 695,
-      "width": 40,
-      "height": 230,
+      "x": 366.36,
+      "y": 830.0,
+      "width": 17.73,
+      "height": 30.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -764,20 +744,12 @@
       "locked": false,
       "points": [
         [
-          0,
-          0
+          0.0,
+          0.0
         ],
         [
-          15,
-          0
-        ],
-        [
-          15,
-          230
-        ],
-        [
-          -25,
-          230
+          -17.73,
+          30.0
         ]
       ],
       "lastCommittedPoint": null,
@@ -790,10 +762,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-e16",
       "type": "arrow",
-      "x": 650.0,
-      "y": 735.0,
-      "width": 0.0,
-      "height": 35.0,
+      "x": 444.55,
+      "y": 830.0,
+      "width": 40.91,
+      "height": 30.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -821,8 +793,53 @@
           0.0
         ],
         [
+          40.91,
+          30.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "elbowed": false
+    },
+    {
+      "id": "b1-theory-05-hamiltonian-tree-e17",
+      "type": "arrow",
+      "x": 751.82,
+      "y": 830.0,
+      "width": 1.36,
+      "height": 30.0,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1017,
+      "version": 1,
+      "versionNonce": 1018,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
           0.0,
-          35.0
+          0.0
+        ],
+        [
+          1.36,
+          30.0
         ]
       ],
       "lastCommittedPoint": null,
@@ -903,7 +920,7 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-n1",
       "type": "ellipse",
-      "x": 345,
+      "x": 445,
       "y": 100,
       "width": 52,
       "height": 52,
@@ -935,7 +952,7 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-t1",
       "type": "text",
-      "x": 351,
+      "x": 451,
       "y": 114.75,
       "width": 40,
       "height": 22.5,
@@ -971,8 +988,8 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-n2",
       "type": "ellipse",
-      "x": 595,
-      "y": 100,
+      "x": 270,
+      "y": 200,
       "width": 52,
       "height": 52,
       "angle": 0,
@@ -1003,8 +1020,8 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-t2",
       "type": "text",
-      "x": 601,
-      "y": 114.75,
+      "x": 276,
+      "y": 214.75,
       "width": 40,
       "height": 22.5,
       "angle": 0,
@@ -1107,7 +1124,7 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-n4",
       "type": "ellipse",
-      "x": 345,
+      "x": 445,
       "y": 300,
       "width": 52,
       "height": 52,
@@ -1139,7 +1156,7 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-t4",
       "type": "text",
-      "x": 351,
+      "x": 451,
       "y": 314.75,
       "width": 40,
       "height": 22.5,
@@ -1175,8 +1192,8 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-n5",
       "type": "ellipse",
-      "x": 595,
-      "y": 300,
+      "x": 620,
+      "y": 200,
       "width": 52,
       "height": 52,
       "angle": 0,
@@ -1207,8 +1224,8 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-t5",
       "type": "text",
-      "x": 601,
-      "y": 314.75,
+      "x": 626,
+      "y": 214.75,
       "width": 40,
       "height": 22.5,
       "angle": 0,
@@ -1245,7 +1262,7 @@
       "type": "rectangle",
       "x": 50,
       "y": 425,
-      "width": 700,
+      "width": 900,
       "height": 70,
       "angle": 0,
       "strokeColor": "#343a40",
@@ -1279,7 +1296,7 @@
       "type": "text",
       "x": 56,
       "y": 440.0,
-      "width": 688,
+      "width": 888,
       "height": 40.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -1313,8 +1330,8 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-n7",
       "type": "rectangle",
-      "x": 285,
-      "y": 540,
+      "x": 390,
+      "y": 530,
       "width": 220,
       "height": 80,
       "angle": 0,
@@ -1347,8 +1364,8 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-t7",
       "type": "text",
-      "x": 291,
-      "y": 570.0,
+      "x": 396,
+      "y": 560.0,
       "width": 208,
       "height": 20.0,
       "angle": 0,
@@ -1370,8 +1387,8 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "a-b-c",
-      "originalText": "a-b-c",
+      "text": "a-b",
+      "originalText": "a-b",
       "fontSize": 16,
       "fontFamily": 1,
       "textAlign": "center",
@@ -1383,8 +1400,8 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-n8",
       "type": "rectangle",
-      "x": 30,
-      "y": 655,
+      "x": 150,
+      "y": 640,
       "width": 220,
       "height": 80,
       "angle": 0,
@@ -1417,8 +1434,8 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-t8",
       "type": "text",
-      "x": 36,
-      "y": 685.0,
+      "x": 156,
+      "y": 670.0,
       "width": 208,
       "height": 20.0,
       "angle": 0,
@@ -1440,8 +1457,8 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "a-b-c-d",
-      "originalText": "a-b-c-d",
+      "text": "a-b-c",
+      "originalText": "a-b-c",
       "fontSize": 16,
       "fontFamily": 1,
       "textAlign": "center",
@@ -1453,13 +1470,13 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-n9",
       "type": "rectangle",
-      "x": 285,
-      "y": 655,
+      "x": 640,
+      "y": 640,
       "width": 220,
       "height": 80,
       "angle": 0,
-      "strokeColor": "#1971c2",
-      "backgroundColor": "#a5d8ff",
+      "strokeColor": "#2f9e44",
+      "backgroundColor": "#b2f2bb",
       "fillStyle": "solid",
       "strokeWidth": 2,
       "strokeStyle": "solid",
@@ -1487,8 +1504,8 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-t9",
       "type": "text",
-      "x": 291,
-      "y": 685.0,
+      "x": 646,
+      "y": 670.0,
       "width": 208,
       "height": 20.0,
       "angle": 0,
@@ -1510,8 +1527,8 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "a-b-c-e",
-      "originalText": "a-b-c-e",
+      "text": "a-b-f",
+      "originalText": "a-b-f",
       "fontSize": 16,
       "fontFamily": 1,
       "textAlign": "center",
@@ -1523,13 +1540,13 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-n10",
       "type": "rectangle",
-      "x": 540,
-      "y": 655,
+      "x": 20,
+      "y": 750,
       "width": 220,
       "height": 80,
       "angle": 0,
-      "strokeColor": "#2f9e44",
-      "backgroundColor": "#b2f2bb",
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#a5d8ff",
       "fillStyle": "solid",
       "strokeWidth": 2,
       "strokeStyle": "solid",
@@ -1557,8 +1574,8 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-t10",
       "type": "text",
-      "x": 546,
-      "y": 685.0,
+      "x": 26,
+      "y": 780.0,
       "width": 208,
       "height": 20.0,
       "angle": 0,
@@ -1580,8 +1597,8 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "a-b-c-f",
-      "originalText": "a-b-c-f",
+      "text": "a-b-c-d",
+      "originalText": "a-b-c-d",
       "fontSize": 16,
       "fontFamily": 1,
       "textAlign": "center",
@@ -1593,13 +1610,13 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-n11",
       "type": "rectangle",
-      "x": 30,
-      "y": 770,
+      "x": 280,
+      "y": 750,
       "width": 220,
       "height": 80,
       "angle": 0,
-      "strokeColor": "#e03131",
-      "backgroundColor": "#ffc9c9",
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#a5d8ff",
       "fillStyle": "solid",
       "strokeWidth": 2,
       "strokeStyle": "solid",
@@ -1627,10 +1644,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-t11",
       "type": "text",
-      "x": 36,
-      "y": 790.0,
+      "x": 286,
+      "y": 780.0,
       "width": 208,
-      "height": 40.0,
+      "height": 20.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -1650,8 +1667,8 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "a-b-c-d-e-f\nNo f-a: dead end",
-      "originalText": "a-b-c-d-e-f\nNo f-a: dead end",
+      "text": "a-b-c-e",
+      "originalText": "a-b-c-e",
       "fontSize": 16,
       "fontFamily": 1,
       "textAlign": "center",
@@ -1663,13 +1680,13 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-n12",
       "type": "rectangle",
-      "x": 260,
-      "y": 770,
+      "x": 640,
+      "y": 750,
       "width": 220,
       "height": 80,
       "angle": 0,
-      "strokeColor": "#e03131",
-      "backgroundColor": "#ffc9c9",
+      "strokeColor": "#2f9e44",
+      "backgroundColor": "#b2f2bb",
       "fillStyle": "solid",
       "strokeWidth": 2,
       "strokeStyle": "solid",
@@ -1697,10 +1714,10 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-t12",
       "type": "text",
-      "x": 266,
-      "y": 790.0,
+      "x": 646,
+      "y": 780.0,
       "width": 208,
-      "height": 40.0,
+      "height": 20.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -1720,8 +1737,8 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "a-b-c-e-d\nNo d-f: dead end",
-      "originalText": "a-b-c-e-d\nNo d-f: dead end",
+      "text": "a-b-f-e",
+      "originalText": "a-b-f-e",
       "fontSize": 16,
       "fontFamily": 1,
       "textAlign": "center",
@@ -1733,9 +1750,9 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-n13",
       "type": "rectangle",
-      "x": 260,
-      "y": 885,
-      "width": 220,
+      "x": 10,
+      "y": 860,
+      "width": 200,
       "height": 80,
       "angle": 0,
       "strokeColor": "#e03131",
@@ -1767,9 +1784,9 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-t13",
       "type": "text",
-      "x": 266,
-      "y": 905.0,
-      "width": 208,
+      "x": 16,
+      "y": 880.0,
+      "width": 188,
       "height": 40.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -1790,8 +1807,8 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "a-b-c-e-f\nNo f-d: dead end",
-      "originalText": "a-b-c-e-f\nNo f-d: dead end",
+      "text": "a-b-c-d-e-f\nNo f-a: dead end",
+      "originalText": "a-b-c-d-e-f\nNo f-a: dead end",
       "fontSize": 16,
       "fontFamily": 1,
       "textAlign": "center",
@@ -1803,13 +1820,13 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-n14",
       "type": "rectangle",
-      "x": 540,
-      "y": 770,
-      "width": 220,
+      "x": 225,
+      "y": 860,
+      "width": 200,
       "height": 80,
       "angle": 0,
-      "strokeColor": "#2f9e44",
-      "backgroundColor": "#b2f2bb",
+      "strokeColor": "#e03131",
+      "backgroundColor": "#ffc9c9",
       "fillStyle": "solid",
       "strokeWidth": 2,
       "strokeStyle": "solid",
@@ -1837,9 +1854,9 @@
     {
       "id": "b1-theory-05-hamiltonian-tree-t14",
       "type": "text",
-      "x": 546,
-      "y": 790.0,
-      "width": 208,
+      "x": 231,
+      "y": 880.0,
+      "width": 188,
       "height": 40.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -1860,13 +1877,153 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "a-b-c-f-e-d-a\nCircuit closes",
-      "originalText": "a-b-c-f-e-d-a\nCircuit closes",
+      "text": "a-b-c-e-d\nNo d-f: dead end",
+      "originalText": "a-b-c-e-d\nNo d-f: dead end",
       "fontSize": 16,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "b1-theory-05-hamiltonian-tree-n14",
+      "lineHeight": 1.25,
+      "baseline": 16
+    },
+    {
+      "id": "b1-theory-05-hamiltonian-tree-n15",
+      "type": "rectangle",
+      "x": 440,
+      "y": 860,
+      "width": 200,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "#ffc9c9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1515,
+      "version": 1,
+      "versionNonce": 1516,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "b1-theory-05-hamiltonian-tree-t15"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "b1-theory-05-hamiltonian-tree-t15",
+      "type": "text",
+      "x": 446,
+      "y": 880.0,
+      "width": 188,
+      "height": 40.0,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1715,
+      "version": 1,
+      "versionNonce": 1716,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "a-b-c-e-f\nNo f-d: dead end",
+      "originalText": "a-b-c-e-f\nNo f-d: dead end",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "b1-theory-05-hamiltonian-tree-n15",
+      "lineHeight": 1.25,
+      "baseline": 16
+    },
+    {
+      "id": "b1-theory-05-hamiltonian-tree-n16",
+      "type": "rectangle",
+      "x": 655,
+      "y": 860,
+      "width": 200,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#2f9e44",
+      "backgroundColor": "#b2f2bb",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1516,
+      "version": 1,
+      "versionNonce": 1517,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "b1-theory-05-hamiltonian-tree-t16"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "b1-theory-05-hamiltonian-tree-t16",
+      "type": "text",
+      "x": 661,
+      "y": 880.0,
+      "width": 188,
+      "height": 40.0,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1716,
+      "version": 1,
+      "versionNonce": 1717,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "a-b-f-e-c-d-a\nCircuit closes",
+      "originalText": "a-b-f-e-c-d-a\nCircuit closes",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "b1-theory-05-hamiltonian-tree-n16",
       "lineHeight": 1.25,
       "baseline": 16
     }
