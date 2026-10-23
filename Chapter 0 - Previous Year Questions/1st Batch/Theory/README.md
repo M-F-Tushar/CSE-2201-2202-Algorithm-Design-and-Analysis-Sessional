@@ -7,9 +7,9 @@ This guide answers all 27 subquestions in the supplied CSE 2201 final-examinatio
 > [!IMPORTANT]
 > **Source:** the supplied scan identifies the paper as the 2023 CSE 2201 final examination. Question wording, year, marks, instructions, and printed numerical data were checked against that scan. Line breaks and spacing are normalized. Any extra example used to explain a question that gives no data is marked as illustrative.
 
-**Language:** Answers use short explanations and show the working. Necessary course terms are kept and explained in simple words.
+**Language:** Answers use the simplest words possible and show the working. Course terms are kept and explained in simple words. Each answer ends with a short **memory trick**. Answer length follows the marks: about 5 lines for 5 marks, half a page for 10 marks, and a full page for 15 marks.
 
-**Conventions:** $\log$ means $\log_2$ unless stated otherwise. Complexity counts unit-cost operations under the stated model; arbitrary-precision arithmetic can cost more. Graphs are finite, with no unlisted edges. All 27 parts include a suitable SVG with a matching editable source in the [diagram index](diagrams/README.md).
+**Conventions:** $\log$ means $\log_2$. Graphs have no unlisted edges. All 27 parts include a suitable SVG with a matching editable source in the [diagram index](diagrams/README.md).
 
 | Question | Topic | a | b | c | d |
 |----------|-------|---|---|---|---|
@@ -40,20 +40,33 @@ Foundations support the later topics; the roadmap groups all eight questions wit
 
 **Answer.**
 
-- **Design** means choosing the steps or method that will solve the problem.
-- **Analysis** means estimating how an algorithm's running time and memory use grow as the input gets larger.
+**Question (transcribed):** What do you mean by the terms Design and Analysis of algorithm? What are the properties of a good algorithm?
 
-An algorithm needs clear steps that can be carried out and that stop for every valid input. State what input it accepts and what output it must produce. Also check that it gives the right answer before judging its speed or memory use.
+**Answer.**
+
+**Design** means choosing the steps (the method or *paradigm*) that solve the problem. Examples: divide and conquer, greedy, dynamic programming.
+
+**Analysis** means finding how much **time** and **space** the algorithm needs as the input size `n` grows. We write the result with Big-O, Big-Omega, and Theta.
+
+> Memory trick: Design = "How do I solve it?" Analysis = "How costly is it?"
+
+**Properties of a good algorithm**
+
+| Property | Simple meaning |
+|----------|----------------|
+| Input | Takes zero or more clearly defined inputs |
+| Output | Gives at least one output |
+| Definiteness | Every step is clear, with no confusion |
+| Finiteness | Stops after a finite number of steps for every valid input |
+| Effectiveness | Every step is simple enough to actually carry out |
+| Correctness | Gives the right answer for every valid input |
+| Efficiency | Uses little time and little memory |
+| Simplicity | Easy to understand and write |
+| Generality | Works for all valid inputs, such as an empty or one-item array |
+
+> Memory trick: **I-O-D-F-E** (Input, Output, Definiteness, Finiteness, Effectiveness), then **C-E-S-G** (Correct, Efficient, Simple, General).
 
 ![Design, correctness, and resource analysis](diagrams/b1-theory-09-design-analysis.svg)
-
-A good algorithm has these qualities:
-
-1. **Correct**: it gives the right answer for every valid input.
-2. **Fast**: its running time grows slowly as the input size $n$ grows.
-3. **Memory efficient**: it uses little extra memory.
-4. **Simple**: it is easy to understand, write, and check.
-5. **Works on all valid inputs**: it also handles cases such as an empty array or a one-item array.
 
 #### Q1(b)
 
@@ -61,20 +74,33 @@ A good algorithm has these qualities:
 
 **Answer.**
 
-For inputs of the same size $n$:
+**Question (transcribed):** Distinguish between best-case, worst-case, and average-case analysis for an algorithm. When is each most relevant?
 
-- **Best-case time** is the least work on any such input.
-- **Worst-case time** is the most work on any such input.
-- **Average-case time** is the average work, assuming a stated chance for each kind of input. The average depends on that assumption.
+**Answer.**
+
+For inputs of the same size `n`:
+
+- **Best case**: the *least* work the algorithm does.
+- **Worst case**: the *most* work the algorithm does.
+- **Average case**: the *expected* work, when we assume how likely each input is.
+
+**Example: linear search** for a number in an array of `n` items
+
+| Case | When it happens | Comparisons | Time |
+|------|-----------------|-------------|------|
+| Best | Item is the first element | 1 | Θ(1) |
+| Worst | Item is last or not present | n | Θ(n) |
+| Average | Item is equally likely at any position | (n+1)/2 | Θ(n) |
+
+**When each is most relevant**
+
+- **Worst case**: most important. It is a *guarantee* that the algorithm is never slower. Use it for safety-critical and real-time systems.
+- **Average case**: use it when inputs are random or typical. Example: quick sort is Θ(n log n) on average.
+- **Best case**: least useful. It only shows the luckiest situation.
+
+> Memory trick: Best = lucky, Worst = guarantee, Average = typical.
 
 ![Linear-search best, worst, and average comparisons](diagrams/b1-theory-10-case-analysis.svg)
-
-| Algorithm | Best case | Worst case | Average case |
-|-----------|-----------|------------|--------------|
-| Linear search | $\Theta(1)$: the item is the first element | $\Theta(n)$: the item is last or not present | $(n+1)/2$ comparisons, hence $\Theta(n)$, if the target occurs once and each position is equally likely |
-| Insertion sort | $\Theta(n)$: input is already sorted | $\Theta(n^2)$: input is reverse sorted | $\Theta(n^2)$ for a uniformly random order of distinct items |
-
-**When each case is useful:** use the best case to describe the fastest situation, the worst case to give a guarantee for every input, and the average case when you know how likely each kind of input is. State the assumption used for an average case.
 
 #### Q1(c)
 
@@ -82,7 +108,7 @@ For inputs of the same size $n$:
 
 **Answer.**
 
-Assuming the given bounds are the algorithms' actual growth rates, prefer **Algorithm B** for large inputs because $n\log n$ grows more slowly than $n^2$. The table uses coefficient 1 to compare them. Strictly, $O(\cdot)$ gives only an upper bound, so these bounds alone do not prove which algorithm is faster. Fixed costs can also make Algorithm A faster on small inputs.
+**Prefer Algorithm B.** For large $n$, $n\log n$ grows much more slowly than $n^2$. The ratio $n^2 / (n\log n) = n/\log n$ keeps growing as $n$ grows. Compare them with a table:
 
 ![Growth comparison under unit coefficients](diagrams/b1-theory-11-growth.svg)
 
@@ -92,7 +118,15 @@ Assuming the given bounds are the algorithms' actual growth rates, prefer **Algo
 | 1,000 | 1,000,000 | about 9,966 |
 | 1,000,000 | $10^{12}$ | about $2 \times 10^7$ |
 
-At $n = 10^6$, Algorithm B does about 50,000 times less work. For very small inputs, Algorithm A may still be faster because its fixed costs can be smaller. Asymptotic analysis compares growth as $n$ becomes large.
+At $n = 10^6$, Algorithm B does about 50,000 times less work. On a computer doing $10^9$ steps per second, A takes about 1,000 seconds (more than 16 minutes) and B takes about 0.02 seconds.
+
+**Why B is the better choice**
+
+1. Asymptotic analysis compares algorithms when $n$ is large, so only the growth rate matters.
+2. $n\log n$ has a lower growth order than $n^2$, so B wins after some input size $n_0$.
+3. For very small $n$, A can be faster because of smaller constant factors. This does not matter for large inputs.
+
+> Memory trick: $n^2$ explodes; $n\log n$ only crawls.
 
 ---
 
@@ -104,17 +138,34 @@ At $n = 10^6$, Algorithm B does about 50,000 times less work. For very small inp
 
 **Answer.**
 
-A **recurrence** defines a value using values for smaller inputs, along with a base case. In algorithm analysis, it often describes running time $T(n)$ using the running times of smaller problems. This is useful because solving the recurrence tells us how the running time grows.
+**Question (transcribed):** Explain the significance of recurrence relations.
 
-For example, $T(n)=2T(n/2)+n$ for $n\ge2$, with $T(1)=1$. Here $n$ is a power of two. A recurrence must state its base case and how input sizes are handled.
+**Answer.**
+
+A **recurrence relation** defines the value T(n) using smaller values T(n/2), T(n-1), and so on, plus a **base case**.
+
+**Why it is important**
+
+1. A **recursive algorithm calls itself on smaller input**, so its running time is naturally a recurrence.
+2. Solving the recurrence gives the running time in Big-O or Θ form.
+3. It lets us compare two recursive algorithms without running them.
+4. It matches the three parts of divide and conquer: divide cost + conquer cost + combine cost.
+
+| Algorithm | Recurrence | Solution |
+|-----------|------------|----------|
+| Binary search | T(n) = T(n/2) + 1 | Θ(log n) |
+| Merge sort | T(n) = 2T(n/2) + n | Θ(n log n) |
+| Recursive sum | T(n) = T(n-1) + 1 | Θ(n) |
+
+**Three methods to solve a recurrence**
+
+1. **Substitution method**: guess the answer, then prove it by induction.
+2. **Recursion tree method**: draw the calls, add the work of each level, then add all levels.
+3. **Master theorem**: for T(n) = aT(n/b) + f(n), compare f(n) with n^(log_b a).
+
+> Memory trick: Recurrence = the running time of a recursive algorithm, written as an equation.
 
 ![Recurrence and work per level](diagrams/b1-theory-02-recursion-tree.svg)
-
-Three common ways to solve a recurrence are:
-
-1. **Substitution**: guess a bound, then prove it by induction (check a base case, then show the bound follows for larger inputs).
-2. **Recursion tree**: draw the recursive calls, add the work at each level, and total it.
-3. **Master Theorem**: for $T(n)=aT(n/b)+f(n)$, compare $f(n)$ with $n^{\log_b a}$. Use it only when the recurrence meets its conditions.
 
 #### Q2(b)
 
@@ -140,13 +191,15 @@ for (i = 1; i <= n; i = i * 2)
 
 **Answer.**
 
-Assume integer $n\ge1$, no arithmetic overflow, and constant-time arithmetic. Each loop body takes a constant amount of time, so count how many times it runs.
+Each loop body takes constant time, so we only count how many times it runs.
 
 ![Loop iteration counts for n equals 8](diagrams/b1-theory-12-loop-counts.svg)
 
 **(i)** The outer loop doubles $i$: $1,2,4,\dots$ up to $n$. It runs $\lfloor\log_2 n\rfloor+1$ times. The inner loop runs $n$ times each time, for a total of $n(\lfloor\log_2 n\rfloor+1)$ iterations. The time is **$\Theta(n\log n)$**. For $n = 8$: total = 32 iterations.
 
-**(ii)** The outer loop again doubles $i$, and the inner loop runs $i$ times. If $2^K\le n<2^{K+1}$, the total is $1+2+4+\dots+2^K=2^{K+1}-1$. This total is between $n$ and $2n-1$, so the time is **$\Theta(n)$**. For $n = 8$: total = $1+2+4+8 = 15$.
+**(ii)** The outer loop again doubles $i$, and the inner loop runs $i$ times. So the total is $1+2+4+\dots$ up to the last power of 2 that is at most $n$. This is a geometric series, and its sum is between $n$ and $2n-1$, so the time is **$\Theta(n)$**. For $n = 8$: total = $1+2+4+8 = 15$.
+
+> Memory trick: inner loop fixed at $n$ gives $n\log n$. Inner loop growing with $i$ adds up to about $2n$, so just $n$.
 
 #### Q2(c)
 
@@ -160,14 +213,14 @@ $$T(n)=\begin{cases}2T(n/2)+n,&n>1,\\n,&n=1.\end{cases}$$
 
 **Method 1: Substitution**
 
-We prove the bound $T(n)=O(n\log n)$ by guessing $T(n)\le c n\log_2 n$ for all $n\ge2$ and choosing $c=2$.
+**Guess:** $T(n)\le 2\,n\log_2 n$ for all $n\ge2$ (so $c=2$).
 
-- **Base case** ($n=2$): $T(2)=2T(1)+2=4$, and $2\cdot2\cdot\log_2 2=4$. So the bound holds.
-- **Inductive step** ($n\ge4$): assume the bound holds for $n/2$. We check the base case $n=2$ separately because $cn\log n=0$ at $n=1$.
+- **Base case** ($n=2$): $T(2)=2T(1)+2=4$, and $2\cdot2\cdot\log_2 2=4$. So the guess holds. (We start at $n=2$ because $n\log n=0$ at $n=1$.)
+- **Inductive step** ($n\ge4$): assume the guess holds for $n/2$.
 
-$$T(n) = 2T(n/2) + n \le 2 \cdot c\,\frac{n}{2}\log_2\frac{n}{2} + n = cn\log_2 n - cn + n$$
+$$T(n) = 2T(n/2) + n \le 2\cdot 2\,\frac{n}{2}\log_2\frac{n}{2} + n = 2n\log_2 n - 2n + n = 2n\log_2 n - n \le 2n\log_2 n$$
 
-Since $c\ge1$, $-cn+n\le0$. Therefore $T(n)\le c n\log_2 n$, which proves $T(n)=O(n\log n)$.
+So $T(n)\le 2n\log_2 n$, which proves $T(n)=O(n\log n)$.
 
 **Method 2: Recursion tree**
 
@@ -188,6 +241,8 @@ There are $\log_2 n+1$ levels, and each level does $n$ work. The total is $n(\lo
 Here $a=2$, $b=2$, and $f(n)=n$. Thus $n^{\log_b a}=n^{\log_2 2}=n$. Since $f(n)$ has the same growth, this is **Case 2** of the Master Theorem, so $T(n)=\Theta(n\log n)$.
 
 **Final answer:** $T(n)=\Theta(n\log n)$. For powers of 2, the exact solution is $T(n)=n\log_2 n+n$. Check: $T(4)=12$ and $T(8)=32$.
+
+> Memory trick: every level costs $n$, and there are $\log n$ levels.
 
 ---
 
@@ -214,31 +269,41 @@ Here $a=2$, $b=2$, and $f(n)=n$. Thus $n^{\log_b a}=n^{\log_2 2}=n$. Since $f(n)
 [2, 4, 5, 7]          combine (merge)
 ```
 
+> Memory trick: Divide, Conquer, Combine = **D-C-C**.
+
 #### Q3(b)
 
 **Question (transcribed):** Analyze the recurrence relation for Merge Sort: T(n) = 2T(n/2) + O(n). What is its time complexity?
 
 **Answer.**
 
-**Idea:** split the array into two halves, sort each half, then merge the sorted halves.
+**Question (transcribed):** Analyze the recurrence relation for Merge Sort: T(n) = 2T(n/2) + O(n). What is its time complexity?
 
-**Recurrence:**
+**Answer.**
 
-$$T(n) = 2T(n/2) + \Theta(n), \qquad T(1) = \Theta(1)$$
+**How merge sort works**
 
-For powers of two, the two halves have equal size. For other $n$, split into sizes $\lfloor n/2\rfloor$ and $\lceil n/2\rceil$; the time bound stays the same.
+- **Divide**: split the array into 2 halves. Cost O(1).
+- **Conquer**: sort each half recursively. Cost 2T(n/2).
+- **Combine**: merge the two sorted halves. Cost O(n).
+
+So **T(n) = 2T(n/2) + O(n)**, with T(1) = O(1).
+
+**Solve by recursion tree**
+
+- Each level does about n work (the merges).
+- The array is halved each time, so there are log n levels.
+- Total work = n × log n.
+
+**Solve by Master theorem**
+
+a = 2, b = 2, f(n) = n = n^(log₂ 2). This is **Case 2**, so T(n) = Θ(n log n).
+
+**Answer: Θ(n log n)** in the best, average, and worst case. Merge sort needs O(n) extra space for merging, so it is **not in-place**. It is stable.
+
+> Memory trick: Two halves, one merge, and log n levels give n log n.
 
 ![Balanced merge-sort recursion and level costs](diagrams/b1-theory-02-recursion-tree.svg)
-
-- **Divide:** find the middle, which takes $\Theta(1)$ time.
-- **Conquer:** sort two halves recursively.
-- **Combine:** merge the halves by scanning their $n$ items, which takes $\Theta(n)$ time.
-
-**Recursion tree:** each level does $\Theta(n)$ work. There are $\log_2 n+1$ levels, so the total time is $T(n)=\Theta(n\log n)$.
-
-**Master Theorem:** $a=2$, $b=2$, and $f(n)=n=\Theta(n^{\log_2 2})$. This is **Case 2**, so $T(n)=\Theta(n\log n)$.
-
-**Space:** array merge sort uses a $\Theta(n)$ temporary buffer, so it is **not in-place**.
 
 #### Q3(c)
 
@@ -246,14 +311,29 @@ For powers of two, the two halves have equal size. For other $n$, split into siz
 
 **Answer.**
 
-An **in-place sort** rearranges the input using little extra memory. Under the strict definition, it uses $O(1)$ extra memory in total. Some textbooks do not count the recursion stack.
+**Question (transcribed):** What is in-place sorting? Is Quicksort an in-place sorting algorithm? Justify.
 
-Quicksort's **partition** step rearranges items around a pivot using swaps and uses $O(1)$ extra memory. Its recursive calls use $O(\log n)$ stack space on average with random pivots, but can use $O(n)$ in the worst case. So quicksort is usually called in-place when the stack is not counted. Recursing on the smaller part and looping over the larger part limits stack space to $O(\log n)$; worst-case time can still be $\Theta(n^2)$.
+**Answer.**
+
+**In-place sorting** means the algorithm sorts the array inside the array itself, using only a small amount of extra memory: O(1), or at most O(log n).
+
+**Is quicksort in-place? Yes.**
+
+1. Quicksort's **partition** step only swaps elements inside the same array. It uses O(1) extra space.
+2. It needs no second array of size n.
+3. The only extra memory is the **recursion stack**. This is O(log n) on average. It can be O(n) in the worst case, but we can limit it to O(log n) by recursing on the smaller part first.
+
+So quicksort is called an in-place sort.
+
+| | Quick sort | Merge sort |
+|--|-----------|------------|
+| Extra space | O(log n) (stack) | O(n) (extra array) |
+| In-place? | Yes | No |
+| Stable? | No | Yes |
+
+> Memory trick: Quicksort only swaps, so it is in-place. Merge sort copies, so it is not.
 
 ![Quicksort partition workspace versus recursion stack](diagrams/b1-theory-14-quicksort-space.svg)
-
-> [!NOTE]
-> Quick sort is **not stable**: equal elements may change their relative order.
 
 #### Q3(d)
 
@@ -261,7 +341,7 @@ Quicksort's **partition** step rearranges items around a pivot using swaps and u
 
 **Answer.**
 
-**Given input:** $A=[7,2,5,3,4,6,1]$. Indices start at 0. At index $i$, the children are at $2i+1$ and $2i+2$ if they are inside the heap. First build a **max-heap**, where each parent is at least as large as its children. Then move the largest item to the end on each round.
+**Given input:** $A=[7,2,5,3,4,6,1]$. Indices start at 0. At index $i$, the children are at $2i+1$ and $2i+2$. First build a **max-heap** (every parent is at least as large as its children). Then, on each round, move the largest item to the end.
 
 **Step 1: Build the max-heap** (restore heap order, or heapify, from index 2 down to 0)
 
@@ -275,20 +355,22 @@ Heap as a tree:
 
 **Step 2: Sort (repeat until size is 1)**
 
-Each round, swap the root (the largest item) with the last item in the heap. Shorten the heap by one, then restore the heap property from the root.
+Each round: swap the root (the largest item) with the last item in the heap. Make the heap one item shorter, then fix the heap from the root (heapify).
 
-| Round | Swap root with | Array after the round |
-|-------|----------------|-----------------------|
-| 1 | last element | $[6, 4, 5, 3, 2, 1, 7]$ |
-| 2 | last heap element | $[5, 4, 1, 3, 2, 6, 7]$ |
-| 3 | last heap element | $[4, 3, 1, 2, 5, 6, 7]$ |
-| 4 | last heap element | $[3, 2, 1, 4, 5, 6, 7]$ |
-| 5 | last heap element | $[2, 1, 3, 4, 5, 6, 7]$ |
-| 6 | last heap element | $[1, 2, 3, 4, 5, 6, 7]$ |
+| Round | Swap root with last heap item | Array after the round |
+|-------|-------------------------------|-----------------------|
+| 1 | swap 7 and 1, then heapify | $[6, 4, 5, 3, 2, 1, 7]$ |
+| 2 | swap 6 and 1, then heapify | $[5, 4, 1, 3, 2, 6, 7]$ |
+| 3 | swap 5 and 2, then heapify | $[4, 3, 1, 2, 5, 6, 7]$ |
+| 4 | swap 4 and 2, then heapify | $[3, 2, 1, 4, 5, 6, 7]$ |
+| 5 | swap 3 and 1, then heapify | $[2, 1, 3, 4, 5, 6, 7]$ |
+| 6 | swap 2 and 1 | $[1, 2, 3, 4, 5, 6, 7]$ |
 
 **Final sorted array:** $[1, 2, 3, 4, 5, 6, 7]$
 
-**Complexity:** building the heap takes $\Theta(n)$. The next $n-1$ rounds take at most $O(\log n)$ each, so heapsort's worst-case time is $\Theta(n\log n)$. Iterative sift-down uses $O(1)$ extra memory, so heapsort is in-place. It is **not stable**: equal items may change order.
+**Complexity:** building the heap takes $\Theta(n)$. The next $n-1$ rounds take $O(\log n)$ each, so the total time is $\Theta(n\log n)$. It is in-place and **not stable**.
+
+> Memory trick: build a max-heap, then keep moving the biggest item to the back.
 
 ---
 
@@ -309,7 +391,11 @@ A **greedy algorithm** builds a solution one step at a time. It picks the best-l
 - Greedy picks the largest coin first: $4+1+1$, for **3 coins**.
 - The best answer is $3+3$, for **2 coins**.
 
-So a greedy choice does not always give the best full answer. Greedy works when each local choice is safe, meaning it can still be part of a best answer, as in Kruskal's and Prim's MST algorithms.
+Greedy took the big coin 4 first because it looked best, but it forced two more coins. So a locally best choice does not always give the globally best answer.
+
+**When does greedy work?** Only when the problem has the **greedy-choice property** and **optimal substructure**. Examples: Kruskal's and Prim's MST, activity selection, fractional knapsack.
+
+> Memory trick: greedy never looks back, so it can get trapped.
 
 #### Q4(b)
 
@@ -355,7 +441,9 @@ def fib_tab(n):
 | Recursion | Uses the call stack | Does not use recursion |
 | States computed | Only the states the recursion needs | Every state in the chosen table order |
 
-Both Fibonacci versions use $O(n)$ arithmetic operations. Memoization stores $O(n)$ values and uses $O(n)$ stack space. Tabulation stores $O(n)$ values in this code, but can keep only the two previous values and use $O(1)$ memory.
+Both versions take $O(n)$ time (plain recursion takes $O(2^n)$). Tabulation can keep only the last two values and use $O(1)$ memory.
+
+> Memory trick: memoization = recursion + notebook. Tabulation = loop + table.
 
 #### Q4(c)
 
@@ -365,7 +453,7 @@ Both Fibonacci versions use $O(n)$ arithmetic operations. Memoization stores $O(
 
 A **minimum spanning tree (MST)** connects every vertex, has no cycles, and has the smallest possible total edge weight. It has $|V|-1$ edges.
 
-**Given graph:** a connected, simple, undirected graph with $V=\{A,B,C,D,E\}$ and the weighted edges from the question, listed below.
+**Given graph:** 5 vertices $A,B,C,D,E$ and 7 weighted edges, listed below.
 
 | Edge | Weight |
 |------|--------|
@@ -404,6 +492,8 @@ A **minimum spanning tree (MST)** connects every vertex, has no cycles, and has 
 
 Both algorithms give this MST. Since all edge weights are different, it is the only MST. Prim adds the lightest edge from its tree to an outside vertex. Kruskal adds the lightest edge that does not make a cycle.
 
+> Memory trick: Prim = grow one tree. Kruskal = sort the edges and avoid cycles.
+
 ---
 
 ## Section B
@@ -416,9 +506,20 @@ Both algorithms give this MST. Since all edge weights are different, it is the o
 
 **Answer.**
 
-**Backtracking** builds a solution one choice at a time. It checks each partial solution against the rules. If a choice leads to a **dead end**, it undoes that choice and tries another.
+**Question (transcribed):** Explain the concept of Backtracking.
 
-Backtracking explores a **state-space tree** in **depth-first search (DFS)** order: it follows one branch as far as possible, then returns to try another. It uses **pruning** to stop exploring a branch that cannot lead to a valid answer. The number of branches can still grow exponentially.
+**Answer.**
+
+**Backtracking** builds the solution **one choice at a time**. After each choice it checks the constraints.
+
+- If the choice is still **promising**, go deeper.
+- If it is a **dead end**, **undo** (go back) and try the next choice.
+
+It searches the **state-space tree** in **depth-first** order. **Pruning** cuts away branches that cannot give a valid solution, which saves time.
+
+**Examples:** N-Queen, subset sum, Hamiltonian circuit, graph colouring.
+
+> Memory trick: Try, check, undo, try again.
 
 ![Choose, reject, undo, and find a four-queen solution](diagrams/b1-theory-18-queens-backtracking.svg)
 
@@ -437,7 +538,7 @@ Place $N$ queens on an $N\times N$ board so that no two queens share a row, colu
 **Idea:** put one queen in each row. To place the $k$-th queen in row $k$:
 
 1. Try columns $0,1,\dots,N-1$ in order.
-2. A column is safe if no earlier queen is in the same column or diagonal.
+2. A column is safe if no earlier queen is in the same column or diagonal. (Two queens are on the same diagonal when the row difference equals the column difference.)
 3. Put the queen in a safe column and continue to row $k+1$.
 4. If no column is safe, **backtrack**: return to row $k-1$ and try its next column.
 
@@ -491,7 +592,9 @@ Q . . .
 . . Q .
 ```
 
-Call `SOLVE(0)` with a length-$N$ array `board`; each entry stores a queen's column. The search checks only earlier rows, so old values in later rows do not matter after backtracking. For $N=4$, there are exactly two solutions: $[1,3,0,2]$ and $[2,0,3,1]$. The first is shown above.
+Call `SOLVE(0)`. The array `board` stores each queen's column. For $N=4$, there are exactly two solutions: $[1,3,0,2]$ and $[2,0,3,1]$. The first is shown above.
+
+> Memory trick: one queen per row, check column and diagonal, and if no place is safe, go back.
 
 #### Q5(c)
 
@@ -515,9 +618,22 @@ Call `SOLVE(0)` with a length-$N$ array `board`; each entry stores a queen's col
 6. Skip 6: sum = 8.
 7. Take 7: sum = 15. **Solution found.**
 
+The same trace as a tree:
+
+```text
+start (0)
+ └─ take 3 (3)
+     └─ take 5 (8)
+         ├─ take 6 (14)
+         │    ├─ take 7 (21)  X more than 15: PRUNE, backtrack
+         │    └─ skip 7 (14)  X no numbers left: DEAD END, backtrack
+         └─ skip 6 (8)
+              └─ take 7 (15)  OK SOLUTION FOUND
+```
+
 ![Backtracking trace for subset sum with d = 15](diagrams/b1-theory-04-subset-sum-tree.svg)
 
-**Answer: $\{3,5,7\}$**, because $3+5+7=15$. This is the only solution: sums of zero or one number are below 15, every two-number sum is at most 13, the other three-number sums are 14, 16, and 18, and all four numbers sum to 21. Since all numbers are positive, once the sum reaches 15, adding another number cannot give another solution.
+**Answer: $\{3,5,7\}$**, because $3+5+7=15$. It is the only solution: every other subset has a sum different from 15.
 
 ```text
 SUBSETS(i, total, chosen):
@@ -528,6 +644,8 @@ SUBSETS(i, total, chosen):
 ```
 
 Call `SUBSETS(0, 0, [])`. At each number, the algorithm tries **take** and **skip**. It stops a branch when it finds the target, goes over it, or runs out of numbers.
+
+> Memory trick: take or skip. Too big means prune. Nothing left means dead end.
 
 #### Q5(d)
 
@@ -543,23 +661,23 @@ A **Hamiltonian circuit** visits every vertex once, then returns to its starting
 |--------|------------|
 | a | b, c, d |
 | b | a, c, f |
-| c | a, b, d, e, f |
+| c | a, b, d, e |
 | d | a, c, e |
 | e | c, d, f |
-| f | b, c, e |
+| f | b, e |
 
 **Idea:** start at $a$ and try unvisited neighbours in alphabetical order. If the path gets stuck, backtrack and try another neighbour.
 
 **Trace**
 
 1. Try $a \to b \to c \to d \to e \to f$. All 6 vertices are visited, but $f$ is not joined to $a$. **Dead end.**
-2. Return to $c$ and try $e$: $a \to b \to c \to e \to d$. The only unvisited vertex is $f$, but there is no edge from $d$ to $f$. **Dead end.**
-3. Backtrack from $d$ to $e$, then try $f$: $a \to b \to c \to e \to f$. The only unvisited vertex is $d$, but there is no edge from $f$ to $d$. **Dead end.**
-4. Return to $c$ and try $f$: $a \to b \to c \to f \to e \to d$. All 6 vertices are visited, and $d$ is joined to $a$. **Circuit found.**
+2. Return to $c$ and try $e$: $a \to b \to c \to e \to d$. The only unvisited vertex is $f$, but $d$ has no unvisited neighbour. **Dead end.**
+3. Backtrack from $d$ to $e$, then try $f$: $a \to b \to c \to e \to f$. The only unvisited vertex is $d$, but $f$ has no unvisited neighbour. **Dead end.**
+4. Return to $b$ and try $f$: $a \to b \to f \to e \to c \to d$. All 6 vertices are visited, and $d$ is joined to $a$. **Circuit found.**
 
 ![Backtracking search tree using the graph shown in the paper](diagrams/b1-theory-05-hamiltonian-tree.svg)
 
-**Answer:** $a-b-c-f-e-d-a$. Another valid circuit is $a-b-f-e-d-c-a$. Every pair of neighbours in each circuit, including the last vertex and $a$, appears in the adjacency list.
+**Answer:** $a-b-f-e-c-d-a$. Another valid circuit is $a-b-f-e-d-c-a$. Every pair of neighbours in each circuit, including the last vertex and $a$, appears in the adjacency list.
 
 ```text
 EXTEND(path, used):
@@ -573,6 +691,8 @@ EXTEND(path, used):
 
 Call `EXTEND([a], {a})`. Stop at the first circuit for this trace, or continue to find more. Add only unused vertices, and check that the final vertex connects back to $a$.
 
+> Memory trick: visit every vertex once, and the last vertex must connect back to $a$.
+
 ---
 
 ### Q6. Dynamic Programming
@@ -583,8 +703,16 @@ Call `EXTEND([a], {a})`. Stop at the first circuit for this trace, or continue t
 
 **Answer.**
 
-1. **Optimal substructure**: the best answer to a problem can be built from the best answers to smaller problems.
-2. **Overlapping subproblems**: the same smaller problems appear more than once. DP saves each answer and reuses it.
+**Question (transcribed):** What are the two key properties that a problem must possess for Dynamic Programming to be applicable?
+
+**Answer.**
+
+1. **Optimal substructure**: the best answer of the big problem is built from the best answers of its smaller sub-problems.
+2. **Overlapping sub-problems**: the same small sub-problems appear again and again. DP solves each once, stores it, and reuses it.
+
+**Example:** Fibonacci has overlapping sub-problems (F(3) is computed many times when we compute F(5)). Knapsack has both properties.
+
+> Memory trick: **O-O** = Optimal substructure + Overlapping sub-problems.
 
 ![Overlapping knapsack states and optimal substructure](diagrams/b1-theory-19-dp-properties.svg)
 
@@ -594,21 +722,28 @@ Call `EXTEND([a], {a})`. Stop at the first circuit for this trace, or continue t
 
 **Answer.**
 
-**Problem:** There are $n\ge1$ items. Item $i$ has a positive integer weight $w_i$ and a nonnegative profit $p_i$. The capacity $W$ is a nonnegative integer. Take each item whole, at most once, and keep the total weight at most $W$. Taking no items is allowed. Maximize total profit.
+**Question (transcribed):** Define the DP[i][w] state for the 0/1 Knapsack problem. Write down the dynamic programming recurrence relation for the knapsack problem.
+
+**Answer.**
+
+**Problem:** n items. Item i has weight wᵢ and profit pᵢ. The capacity is W. Take each item **whole, at most once**, to get the maximum profit.
+
+**State:** DP[i][w] = the **maximum profit** using the **first i items** with a bag capacity of **w**.
+
+**Recurrence**
+
+- If wᵢ > w (item does not fit): **DP[i][w] = DP[i−1][w]**
+- If wᵢ ≤ w (item fits): **DP[i][w] = max( DP[i−1][w], pᵢ + DP[i−1][w − wᵢ] )**
+
+Meaning: *skip* item i, or *take* item i and add its profit to the best answer for the remaining capacity.
+
+**Base cases:** DP[0][w] = 0 (no items) and DP[i][0] = 0 (no capacity).
+
+**Answer:** DP[n][W]. **Time and space: O(nW).**
+
+> Memory trick: For each item, choose skip or take, and keep the bigger one.
 
 ![Knapsack skip/take dependencies and worked DP table](diagrams/b1-theory-20-knapsack.svg)
-
-**State:** $DP[i][w]$ is the greatest profit using the first $i$ items with capacity $w$.
-
-**Recurrence:**
-
-$$DP[i][w] = \begin{cases} DP[i-1][w] & \text{if } w_i > w \\ \max\big(DP[i-1][w],\; p_i + DP[i-1][w - w_i]\big) & \text{if } w_i \le w \end{cases}$$
-
-If item $i$ does not fit, skip it. Otherwise compare skipping it with taking it and adding the best profit for the remaining capacity.
-
-**Base cases:** $DP[0][w]=0$ for $0\le w\le W$, and $DP[i][0]=0$. Fill the table by rows, using the row above for each calculation.
-
-**Answer:** $DP[n][W]$. For $W\ge1$, the time and full-table space are $O(nW)$. A one-row table uses $O(W)$ space if capacities are updated from high to low. If $W=0$, the answer is 0. To find the chosen items, trace backward through the full table. Q7(c) shows an example.
 
 #### Q6(c)
 
@@ -627,7 +762,7 @@ If item $i$ does not fit, skip it. Otherwise compare skipping it with taking it 
 | row 2 | 1 | 1 | 1 |
 | row 3 | 0 | 0 | 1 |
 
-Set $dp[0][0]=\text{grid}[0][0]$. Each $dp[r][c]$ stores the most coins that can be collected on a path to cell $(r,c)$. Fill the table from top to bottom and left to right using $dp[r][c]=\text{grid}[r][c]+\max(dp[r-1][c],dp[r][c-1])$, using only cells above or to the left that exist. The last move must come from one of those two cells. For an $R\times C$ grid, the time and full-table space are $O(RC)$; storing only values can use $O(C)$ space.
+Set $dp[0][0]=\text{grid}[0][0]$. Each $dp[r][c]$ stores the most coins that can be collected on a path to cell $(r,c)$. Fill the table from top to bottom and left to right using $dp[r][c]=\text{grid}[r][c]+\max(dp[r-1][c],dp[r][c-1])$, using only cells above or to the left that exist. The last move must come from one of those two cells. Time and space are $O(RC)$ for an $R\times C$ grid.
 
 | | col 0 | col 1 | col 2 |
 |---|---|---|---|
@@ -636,7 +771,11 @@ Set $dp[0][0]=\text{grid}[0][0]$. Each $dp[r][c]$ stores the most coins that can
 | row 2 | 2 | 3 | 4 |
 | row 3 | 2 | 3 | **5** |
 
+**Trace back** from $(3,2)$: at each cell, move to the neighbour (above or left) with the larger dp value.
+
 **Answer: 5 coins.** One best path is $(0,0)\to(0,1)\to(1,1)\to(2,1)\to(2,2)\to(3,2)$. It collects $1+0+1+1+1+1=5$ coins. The path $(0,0)\to(1,0)\to(2,0)\to(2,1)\to(2,2)\to(3,2)$ also collects 5 coins.
+
+> Memory trick: best here = my coin + the better of (from above, from left).
 
 #### Q6(d)
 
@@ -654,7 +793,11 @@ Set $dp[0][0]=\text{grid}[0][0]$. Each $dp[r][c]$ stores the most coins that can
 |---|---|---|---|---|---|---|---|
 | $C[x]$ | 0 | 1 | 2 | 1 | 1 | 2 | 2 |
 
-**Answer: 2 coins**, using $3+3$. Traceback goes $6\to3\to0$, subtracting 3 each time. Greedy gives $4+1+1$, or 3 coins, as in Q4(a). For amount $M$, this DP takes $O(|D|M)$ time and $O(M)$ space. These bounds depend on the number $M$, not on the number of bits used to write it; this is called pseudo-polynomial time.
+Example: $C[6]=1+\min(C[5],C[3],C[2])=1+\min(2,1,2)=2$.
+
+**Answer: 2 coins**, using $3+3$. Traceback goes $6\to3\to0$, subtracting 3 each time. Greedy gives $4+1+1$, or 3 coins, as in Q4(a). For amount $M$, time is $O(|D|\cdot M)$ and space is $O(M)$.
+
+> Memory trick: try every coin, take the cheapest option, and add 1.
 
 ---
 
@@ -675,11 +818,15 @@ Dijkstra repeatedly **settles** (finalizes) the unsettled vertex with the smalle
 - Dijkstra settles $B$ first, at distance 1.
 - Then $C$, at distance 4, gives a shorter route to $B$: $4+(-5)=-1$. Dijkstra has already settled $B$, so Dijkstra keeps $B = 1$. The true answer is $-1$.
 
-**Bellman-Ford** starts with distance 0 at the source and $\infty$ at every other vertex. It relaxes every edge up to $|V|-1$ times. To **relax** an edge $(u,v)$, check that $dist[u]\ne\infty$ and see whether $dist[u]+w(u,v)<dist[v]$; if so, lower $dist[v]$.
+**Bellman-Ford** does not settle early. It starts with distance 0 at the source and $\infty$ at every other vertex, then **relaxes every edge $|V|-1$ times**. So a later, shorter route through a negative edge is always found.
 
-If no negative cycle can be reached from the source, a shortest path has no repeated vertices and uses at most $|V|-1$ edges. So $|V|-1$ passes are enough. Stop early if a full pass makes no change. The time is $O(VE)$ and the distance and predecessor arrays use $O(V)$ space.
+**Relaxation:** if $dist[u]+w(u,v)<dist[v]$, then $dist[v]=dist[u]+w(u,v)$.
 
-**Negative-cycle check:** after the passes, if an edge from a reachable vertex can still be relaxed, a negative cycle is reachable from the source. Vertices reachable from that cycle have no finite shortest distance. A negative cycle that cannot be reached from the source does not affect this search.
+Why $|V|-1$ passes? A shortest path has at most $|V|-1$ edges. Stop early if a pass changes nothing. The time is $O(VE)$.
+
+**Negative-cycle check:** if an edge can still be relaxed after the $|V|-1$ passes, a negative cycle is reachable from the source.
+
+> Memory trick: Dijkstra decides once. Bellman-Ford keeps checking all edges again and again.
 
 #### Q7(b)
 
@@ -704,6 +851,8 @@ Pass 3 makes no changes, so we stop.
 
 **Negative cycle:** there is none. Every cycle returns to A. The smallest cycle total is 2, for A to C to B to E to A: $7-3-4+2=2$.
 
+> Memory trick: relax all edges, repeat, and stop when nothing changes.
+
 ![Bellman-Ford directed graph with shortest distances from A](diagrams/b1-theory-06-bellman-ford-graph.svg)
 
 #### Q7(c)
@@ -712,9 +861,9 @@ Pass 3 makes no changes, so we stop.
 
 **Answer.**
 
-**Optimality has two meanings:** a solution is optimal if it is the best valid answer. An algorithm is optimal in resource use if it matches a proven lower bound on time or memory. Finding the best solution does not by itself prove that the algorithm uses the least possible resources.
+**Algorithm optimality:** an algorithm is **optimal** when its running time **matches the lower bound** of the problem, so no other algorithm can be faster (apart from constant factors). Example: every comparison sort needs $\Omega(n\log n)$ comparisons (a decision tree has $n!$ leaves), so merge sort and heap sort, which run in $O(n\log n)$, are optimal comparison sorts. An **optimal solution** is different: it is the best valid answer, such as the maximum profit in knapsack.
 
-**The 0/1 knapsack DP finds an optimal solution.** For each item, either skip it or take it if it fits. In the take case, use the best answer for the earlier items and the remaining capacity. These are all possible choices, so the recurrence gives the best profit. Its time is $O(nW)$; this does not show that the algorithm is best possible in time or memory.
+**The 0/1 knapsack DP finds an optimal solution.** For each item, either skip it, or take it if it fits and add the best profit for the remaining capacity. Both choices are tried, so the best profit is always found. The time is $O(nW)$.
 
 ![Knapsack recurrence, full table, and optimal item choice](diagrams/b1-theory-20-knapsack.svg)
 
@@ -739,6 +888,8 @@ Pass 3 makes no changes, so we stop.
 
 **Traceback:** $DP[4][8]=DP[3][8]=5$, so skip item 4. The value also stays 5 in row 3, so skip item 3. Since $DP[2][8]=5$ but $DP[1][8]=2$, take item 2 and reduce the capacity to $8-4=4$. Since $DP[1][4]=2$ but $DP[0][4]=0$, take item 1.
 
+> Memory trick: optimal algorithm = nobody can be faster. Optimal solution = nobody can have more profit.
+
 ---
 
 ### Q8. P, NP, Decision vs Optimization, and Dijkstra
@@ -749,14 +900,36 @@ Pass 3 makes no changes, so we stop.
 
 **Answer.**
 
-These classes describe **decision problems**, whose answers are yes or no. Running time is measured against the input's bit length (the number of bits needed to write the input). **Polynomial time** means the time is bounded by $n^k$ for some fixed constant $k$, where $n$ is the input length.
+**Question (transcribed):** Define the classes P, NP, NP-hard, and NP-complete. Explain the relationships between these classes.
 
-- **P**: decision problems that can be solved in polynomial time. Example: “Is there a path from $s$ to $t$ with cost at most $K$?” in a graph with nonnegative integer edge weights.
-- **NP**: decision problems where every yes-instance has a **polynomial-length certificate** (a proof or witness) that can be checked in polynomial time. A no-instance has no certificate that passes. For example, a Hamiltonian cycle is a certificate for the Hamiltonian-cycle problem. NP does not mean “not polynomial.”
-- **NP-hard**: every problem in NP can be reduced to this problem in polynomial time. For a decision problem, the reduction preserves yes-or-no answers. An NP-hard problem does not have to be in NP; it may even be an optimization problem.
-- **NP-complete**: a decision problem that is both in NP and NP-hard. Examples are SAT and the Hamiltonian-cycle decision problem.
+**Answer.**
 
-**Known relations:** $P\subseteq NP$, and NP-complete problems are exactly the problems in $NP\cap NP\text{-hard}$. Whether $P=NP$ is **open**. If any NP-complete problem can be solved in polynomial time, then $P=NP$. We do not know that $P$ is strictly smaller than $NP$.
+These classes are about **decision problems** (the answer is yes or no).
+
+| Class | Simple meaning | Example |
+|-------|----------------|---------|
+| **P** | Can be **solved** in polynomial time | Sorting, shortest path, MST |
+| **NP** | A given answer (certificate) can be **checked** in polynomial time | Hamiltonian cycle, TSP (decision), SAT |
+| **NP-hard** | **At least as hard as every problem in NP**. Every NP problem reduces to it in polynomial time. It need not be in NP | TSP (optimization version) |
+| **NP-complete** | In **NP** and also **NP-hard** | SAT, Hamiltonian cycle, TSP (decision), subset sum |
+
+**Relationships**
+
+- P ⊆ NP: anything we can solve fast, we can also check fast.
+- NP-complete = NP ∩ NP-hard.
+- NP-hard is bigger than NP-complete, since it also contains problems outside NP.
+- **P = NP?** is an **open question**. If any one NP-complete problem is solved in polynomial time, then P = NP.
+
+```text
+(assuming P is not equal to NP)
+
+NP      = [ P  |  NP-complete ]
+NP-hard = [ NP-complete  |  harder problems that are not in NP ]
+
+NP-complete = the overlap of NP and NP-hard
+```
+
+> Memory trick: P = solve fast. NP = check fast. NP-complete = NP and NP-hard.
 
 ![How P, NP, NP-hard, and NP-complete relate](diagrams/b1-theory-07-classes-venn.svg)
 
@@ -766,12 +939,24 @@ These classes describe **decision problems**, whose answers are yes or no. Runni
 
 **Answer.**
 
-For the **traveling salesperson problem (TSP)**, a tour visits every vertex once and returns to its start. The tour's cost is the sum of its edge weights.
+**Question (transcribed):** Differentiate between decision problems and optimization problems in the context of NP-completeness.
 
-- A **decision problem** asks a yes-or-no question: “Is there a tour with cost at most $k$?”
-- An **optimization problem** asks for the best answer: “Find the cheapest tour.”
+**Answer.**
 
-NP-completeness is for decision problems. TSP's decision problem is NP-complete; finding the cheapest tour is an NP-hard optimization problem. If costs are integers in a known range whose endpoints are short to write, and each threshold question can be answered in polynomial time, binary search can find the cheapest value. Finding the value does not always give the actual tour.
+| | Decision problem | Optimization problem |
+|--|------------------|----------------------|
+| Question | Yes or no? | What is the best value? |
+| Answer | **Yes / No** | A **minimum or maximum** value and a solution |
+| Example (TSP) | Is there a tour with cost ≤ k? | Find the **cheapest** tour |
+| Example (Knapsack) | Is there a subset with profit ≥ P? | Find the **maximum** profit |
+
+**In NP-completeness**
+
+- P, NP, and NP-complete are defined **only for decision problems**. So to study an optimization problem we first turn it into a decision problem by adding a bound k.
+- The decision version of TSP is **NP-complete**. The optimization version is **NP-hard**.
+- Optimization is **at least as hard as** decision. If we can find the best value, we can answer the yes/no question. If the decision problem is hard, the optimization problem is also hard.
+
+> Memory trick: Decision = "Can we do it with k?" Optimization = "What is the best k?"
 
 ![Threshold decision, value search, and conditional witness recovery](diagrams/b1-theory-23-decision-optimization.svg)
 
@@ -783,7 +968,9 @@ NP-completeness is for decision problems. TSP's decision problem is NP-complete;
 
 **Graph transcribed from the paper's figure:** an undirected graph with nonnegative edge weights, vertices $A,B,C,D,E,F$, and source $A$. Its full edge list is: A-B (2), A-D (8), B-D (5), B-E (6), D-E (3), D-F (2), E-F (1), E-C (9), and F-C (3).
 
-Set $dist[A]=0$ and all other distances to $\infty$. Repeatedly choose the not-yet-finalized vertex with the smallest distance and finalize it. For each neighbour $v$ not yet finalized, use the relaxation formula $dist[v]\leftarrow\min(dist[v],dist[u]+w(u,v))$. If the distance gets smaller, set `pred[v] = u`; this records the previous vertex on the path. Keep the first predecessor when distances tie. Stop when no reachable vertex remains.
+**Relaxation formula:** $dist[v]\leftarrow\min(dist[v],\ dist[u]+w(u,v))$. If the distance gets smaller, set `pred[v] = u` (the previous vertex on the path).
+
+**Method:** set $dist[A]=0$ and all other distances to $\infty$. Repeat: pick the not-yet-finalized vertex with the smallest distance, finalize it, and relax the edges to its neighbours.
 
 | Step | Visit | Distances updated |
 |------|-------|-------------------|
@@ -807,6 +994,8 @@ Set $dist[A]=0$ and all other distances to $\infty$. Repeatedly choose the not-y
 **Shortest path to C:** A to B to D to F to C, with cost $2+5+2+3=12$.
 
 There is a tie for F: A to B to D to F and A to B to E to F both cost 9 ($2+5+2=2+6+1$). So C also has two shortest paths, through D-F or E-F, each with cost 12. The displayed tree uses B←A, D←B, E←B, F←D, and C←F. With a binary heap, Dijkstra takes $O((V+E)\log V)$ time and $O(V+E)$ graph space. A simple array version takes $O(V^2+E)$ time.
+
+> Memory trick: finalize the nearest vertex, then relax its edges.
 
 ![Dijkstra shortest path tree from A](diagrams/b1-theory-08-dijkstra-graph.svg)
 
@@ -837,7 +1026,7 @@ Run `python tools/verify_b1_theory.py` from the repository root to check the num
 | Coin change DP | $C[x]=1+\min C[x-c]$; greedy can fail |
 | Bellman-Ford | Relax every edge up to $V-1$ times; check for a reachable negative cycle |
 | Dijkstra and Bellman-Ford | Dijkstra needs nonnegative edges; Bellman-Ford can handle negative edges |
-| Optimality | Best answer and best possible resource use are different ideas |
+| Optimality | Optimal algorithm = time matches the problem's lower bound; optimal solution = best answer |
 | P, NP, NP-hard, NP-complete | $P\subseteq NP$; NP-complete = NP and NP-hard; whether $P=NP$ is open |
 | Decision and optimization | Decision = yes/no; optimization = find the best answer |
 | Dijkstra | Finalize the nearest not-yet-finalized vertex, then relax its edges |
