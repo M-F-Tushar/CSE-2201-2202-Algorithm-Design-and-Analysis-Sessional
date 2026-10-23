@@ -18,7 +18,11 @@ MODULES = [
     "ch6_diagrams",
     "ch7_diagrams",
     "ch8_diagrams",
+    "ch10_diagrams",
     "ch11_diagrams",
+    "ch12_diagrams",
+    "ch13_diagrams",
+    "ch14_diagrams",
     "ch15_diagrams",
 ]
 
