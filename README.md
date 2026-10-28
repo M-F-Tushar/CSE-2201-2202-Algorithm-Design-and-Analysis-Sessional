@@ -4,7 +4,7 @@
   <a href="https://github.com/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional"><img src="https://img.shields.io/github/stars/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional?style=social" alt="GitHub stars"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/language-Python%20%7C%20C%2B%2B-blue" alt="Languages">
-  <img src="https://img.shields.io/badge/diagrams-178%20Excalidraw%20SVGs-ff69b4" alt="Diagrams">
+  <img src="https://img.shields.io/badge/diagrams-182%20Excalidraw%20SVGs-ff69b4" alt="Diagrams">
   <img src="https://img.shields.io/badge/chapters-16%20%2B%20references-success" alt="Chapters">
   <img src="https://img.shields.io/badge/book-CLRS%204th%20Ed.-orange" alt="Primary reference">
 </p>
@@ -59,10 +59,10 @@
 ## 🎯 Repository Goals
 
 - 📚 **Syllabus-faithful notes** — 16 content chapters (Ch 0 – Ch 15) ordered exactly as the CSE 2201 syllabus, not the textbook order.
-- 🎨 **178 hand-drawn diagrams** — every diagram is an editable `.excalidraw` + exported `.svg` that renders directly in the READMEs.
+- 🎨 **182 hand-drawn diagrams** — every diagram is an editable `.excalidraw` + exported `.svg` that renders directly in the READMEs.
 - 📝 **Plain-words explanations** — definitions, step-by-step algorithms, pseudocode, dry-run tables, and a memory trick per answer.
 - ⏱️ **Complexity done right** — best / average / worst case, Big-O / Ω / Θ, recurrence solving, and master-theorem walkthroughs.
-- 🧪 **Solved previous-year papers** — 1st Batch (2023 final, 27 parts), 2nd Batch, 3rd Batch CT 1–3 (60 marks total) with source-faithful transcription.
+- 🧪 **Solved previous-year papers** — 1st Batch (2023 final, 27 parts), 2nd Batch, 3rd Batch CT 1–4 (80 marks total) with source-faithful transcription.
 - 💻 **Lab-ready code** — `Chapter 6/examples` + `Chapter 0/Lab Practice` (11 C++ programs) plus Python-oriented theory throughout.
 - 🗺️ **CLRS mapping** — every repository chapter links to its exact CLRS chapter(s).
 
@@ -75,7 +75,7 @@
 | Content chapters | **16** (Chapter 0 – Chapter 15) + References |
 | Chapter READMEs | **16** — every chapter has a full README with TOC |
 | Total Markdown files | **~40** (chapter READMEs + batch READMEs + diagram indexes) |
-| Hand-drawn SVGs | **178** (each paired with an `.excalidraw` source → **356** diagram files) |
+| Hand-drawn SVGs | **182** (each paired with an `.excalidraw` source → **364** diagram files) |
 | Largest chapter | **Ch 11 — Graph Algorithms** (35 SVGs, 2 114-line README) |
 | Code examples | **13** `.cpp` files (Ch 6 + Lab Practice) + Python pseudocode throughout |
 | Batch question banks | **3 batches** + Lab Practice |
@@ -125,7 +125,7 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 │   ├── root_diagrams.py               # Root roadmap spec
 │   ├── ch1_diagrams.py … ch15_diagrams.py
 │   ├── b1_theory_diagrams.py / b2_theory_diagrams.py
-│   ├── ct3_diagrams.py / ct_sequence_diagrams.py
+│   ├── ct_sequence_diagrams.py / ct3_diagrams.py / ct4_diagrams.py
 │   ├── audit_layout.py / write_index.py
 │   └── verify_*.py                    # Content-vs-diagram verifiers
 │
@@ -141,8 +141,8 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 │   │   └── Lab Final/README.md
 │   ├── 3rd Batch/
 │   │   └── CT/
-│   │       ├── README.md              # CT1 + CT2 + CT3 complete answers (60 marks)
-│   │       └── diagrams/              # 12 SVGs (ct1-01 … ct3-03)
+│   │       ├── README.md              # CT1–CT4 complete answers (80 marks)
+│   │       └── diagrams/              # 15 SVGs (ct1-01 … ct4-04)
 │   └── Lab Practice/                  # 11 C++ lab programs
 │       ├── 0_1_knapsack.cpp / lcs.cpp / lis.cpp
 │       ├── Fractional Knapsack.cpp / Floyd Warshall.cpp
@@ -237,7 +237,7 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 >
 > - **1st Batch Theory** — 2023 final exam, 8 questions · 27 parts (Sections A & B) with marks and normalized transcription
 > - **2nd Batch Theory & Lab Final** — second sitting with graph & DP focus
-> - **3rd Batch CT 1–3** — three class tests × 20 marks = 60 marks (DP · Graph · Union-Find/Segment Tree/Maximum Subarray)
+> - **3rd Batch CT 1–4** — four class tests × 20 marks = 80 marks (DP · Graph · Union-Find/Segment Tree/Maximum Subarray · Backtracking/N-Queens)
 > - **Lab Practice** — 11 C++ programs covering knapsack, LCS/LIS, Floyd-Warshall, fractional knapsack, connected components, DSU/Kruskal, segment tree & more
 > - **Bridge:** every solved question references its main repository chapter for revision.
 >
@@ -352,15 +352,18 @@ Every chapter has a `diagrams/` folder. Each diagram ships as **two files**:
 | Ch 13 — Approximation | 4 | Vertex cover, TSP, set cover |
 | Ch 14 — Randomized & Parallel | 5 | Rand. quicksort, fork-join |
 | Ch 15 — Lower Bounds & NP | 5 | Decision tree, P/NP Venn |
-| Ch 0 — Batch papers | **59** | B1 (23) + B2 (25) + CT (11) + lab practice codes |
-| **Total** | **178** | **356 files incl. `.excalidraw` sources** |
+| Ch 0 — Batch papers | **63** | B1 (23) + B2 (25) + CT (15) + lab practice codes |
+| **Total** | **182** | **364 files incl. `.excalidraw` sources** |
 
-Rebuild or audit all diagrams:
+Regenerate or audit diagrams:
 
 ```bash
-python tools/build_diagrams.py        # regenerate all SVGs from specs
-python tools/audit_layout.py          # verify layout & index consistency
-python tools/write_index.py           # refresh per-chapter diagram indexes
+python tools/build_diagrams.py         # regenerate core chapter-diagram specs
+python tools/ct_sequence_diagrams.py   # regenerate CT1/CT2 diagrams
+python tools/ct3_diagrams.py           # regenerate CT3 diagrams
+python tools/ct4_diagrams.py           # regenerate CT4 diagrams
+python tools/audit_layout.py           # check core specs and CT4 layout
+python tools/write_index.py            # refresh generated chapter indexes
 ```
 
 ---
@@ -471,7 +474,7 @@ Ch 1  Foundations
 |---|---|---|---|
 | **1st Batch — Theory** | 2023 final exam: Q1 Design & complexity, Q2 Recurrences & loops, Q3 D&C/Merge/Quick/Heap, Q4 Greedy/Memo/MST, Q5 Backtracking, Q6 DP (knapsack/grid/coin), Q7 Bellman-Ford/Optimality/Knapsack, Q8 P/NP/Decision/Dijkstra | 8 questions · 27 parts | 23 SVGs (`b1-theory-01 … b1-theory-23`) |
 | **2nd Batch — Theory** | P/NP Venn, BFS, activity DAG, Strassen split, quicksort partition, mergesort tree, Kruskal MST, Floyd-Warshall, LCS table, graph-colouring tree, LC knapsack tree + extras | — | 25 SVGs (`b2-theory-01 …`) |
-| **3rd Batch — CT 1–3** | CT1: Principle of optimality, Fibonacci DP, LCS (AGGTAB/GXTXAYB), 0/1 knapsack · CT2: Topological sort, Bellman-Ford, Floyd-Warshall · CT3: Union-by-rank, max subarray, segment tree | 3 tests × 20 = **60 marks** | 11 SVGs (`ct1-01 … ct3-03`) |
+| **3rd Batch — CT 1–4** | CT1: Principle of optimality, Fibonacci DP, LCS (AGGTAB/GXTXAYB), 0/1 knapsack · CT2: Topological sort, Bellman-Ford, Floyd-Warshall · CT3: Union-by-rank, max subarray, segment tree · CT4: State-space tree, N-Queens constraints, backtracking applications & algorithm | 4 tests × 20 = **80 marks** | 15 SVGs (`ct1-01 … ct4-04`) |
 | **Lab Practice** | Standalone C++ implementations for viva & sessional | 11 programs | — |
 
 All solved answers state source notes, mark-aware length, plain-words explanation, and a closing memory trick.
@@ -519,8 +522,8 @@ After completing the material in this repository you should be able to:
 All diagram generation lives in [`tools/`](tools/audit_layout.py). The design:
 
 - [`excalidraw_gen.py`](tools/excalidraw_gen.py) — primitives (`D`, `E`, `N`) for declarative Excalidraw scenes.
-- `root_diagrams.py`, `ch1_diagrams.py` … `ch15_diagrams.py`, `b1_theory_diagrams.py`, `b2_theory_diagrams.py`, `ct3_diagrams.py` — one spec file per chapter/batch.
-- [`build_diagrams.py`](tools/build_diagrams.py) — builds every `.excalidraw` + `.svg` in one run.
+- `root_diagrams.py`, `ch1_diagrams.py` … `ch15_diagrams.py`, `b1_theory_diagrams.py`, `b2_theory_diagrams.py`, `ct3_diagrams.py`, `ct4_diagrams.py` — one spec file per chapter/batch.
+- [`build_diagrams.py`](tools/build_diagrams.py) — regenerates the core chapter-diagram specs; batch and class-test diagrams use dedicated scripts.
 - [`audit_layout.py`](tools/audit_layout.py) / [`write_index.py`](tools/write_index.py) — verifies layout and regenerates `diagrams/README.md` indexes.
 - `verify_*.py` — asserts that README content and diagram sets stay consistent.
 
