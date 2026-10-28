@@ -53,6 +53,16 @@ A **state-space tree** represents the possible decisions:
 
 Rejecting a branch early is called **pruning**. Pruning does not change which valid solutions exist; it avoids exploring partial states that cannot possibly become valid solutions.
 
+### Worked Example: Subset-Sum State-Space Tree
+
+For the weights $w_1 = 2,\ w_2 = 4,\ w_3 = 6$ and target $S = 6$, each level $i_k$ decides whether item $k$ is included (**yes**) or not (**no**). The number inside each node is the sum of the items included so far.
+
+![Subset-sum state-space tree for w = 2, 4, 6 and S = 6: each level answers yes or no for one item, and each node stores the sum of the included items](diagrams/ch9-05-subset-sum-state-space-tree.svg)
+
+The eight leaves list every subset (sums 12, 6, 8, 2, 10, 4, 6, 0). Two subsets reach the target 6: {2, 4}, which is the second leaf, and {6}, which is the seventh leaf. Backtracking walks this tree depth-first. Because all weights are positive, it can cut a branch as soon as its sum exceeds $S$; for example, the leaves 12, 8, and 10 are never worth extending, and the node 6 at level $i_2$ already equals $S$.
+
+The editable source is [`ch9-05-subset-sum-state-space-tree.excalidraw`](diagrams/ch9-05-subset-sum-state-space-tree.excalidraw).
+
 For N-Queens, a state at depth r contains placements for rows 0 through r − 1. The promising test checks whether a candidate square in row r conflicts with any queen already placed. The search continues to the next row only when that candidate is safe.
 
 The conceptual sequence is: check whether the solution is complete; otherwise try each possible next choice; keep a choice and continue only when it is promising; restore it when the continuation fails. A search may stop after its first solution or continue to enumerate every solution.
