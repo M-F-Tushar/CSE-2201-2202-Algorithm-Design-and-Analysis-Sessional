@@ -1,14 +1,14 @@
 # 1st Batch Theory — Diagram Index
 
-All **27/27 subquestions** have suitable linked visuals: **23 SVG/source pairs**
-(22 topic visuals plus one full-paper roadmap). Shared visuals are listed against
+All **27/27 subquestions** have suitable linked visuals: **24 SVG/source pairs**
+(23 topic visuals plus one full-paper roadmap). Shared visuals are listed against
 every part they genuinely explain. Printed inputs and the two source-paper graphs were
 checked against the supplied 2023 scan; extra teaching examples are labeled illustrative.
 
 The `.excalidraw` scene is editable in [Excalidraw](https://excalidraw.com).
 After a manual scene edit, re-export its SVG so the Markdown preview stays synchronized.
 The scoped generator `tools/b1_theory_diagrams.py` uses the shared engine without
-changing shared tools. Running it replaces its 20 listed scenes (including five
+changing shared tools. Running it replaces its 21 listed scenes (including five
 corrected old visuals) and this index; it preserves manual scenes 03, 06, 08.
 Do not regenerate over later manual edits without reconciling them first.
 
@@ -17,7 +17,7 @@ Do not regenerate over later manual edits without reconciling them first.
 | Overview: Q1–Q8 | 1st Batch Theory: full-paper roadmap | [SVG](b1-theory-01-question-escalator.svg) | [Excalidraw](b1-theory-01-question-escalator.excalidraw) |
 | Q2(a), Q2(c), Q3(b) | Q2(a,c), Q3(b): balanced recurrence | [SVG](b1-theory-02-recursion-tree.svg) | [Excalidraw](b1-theory-02-recursion-tree.excalidraw) |
 | Q3(d) | Heap Sort: Max-Heap After Build Step | [SVG](b1-theory-03-heap-build-tree.svg) | [Excalidraw](b1-theory-03-heap-build-tree.excalidraw) |
-| Q5(c) | Q5(c): positive-item subset-sum search prefix | [SVG](b1-theory-04-subset-sum-tree.svg) | [Excalidraw](b1-theory-04-subset-sum-tree.excalidraw) |
+| Q5(c) | Q5(c): Subset-Sum State-Space Tree (search prefix) | [SVG](b1-theory-04-subset-sum-tree.svg) | [Excalidraw](b1-theory-04-subset-sum-tree.excalidraw) |
 | Q5(d) | Q5(d): paper graph and backtracking | [SVG](b1-theory-05-hamiltonian-tree.svg) | [Excalidraw](b1-theory-05-hamiltonian-tree.excalidraw) |
 | Q7(b) | Q7(b): Bellman-Ford Shortest Paths from Source A | [SVG](b1-theory-06-bellman-ford-graph.svg) | [Excalidraw](b1-theory-06-bellman-ford-graph.excalidraw) |
 | Q8(a) | Q8(a): known class relations (not a strict Venn) | [SVG](b1-theory-07-classes-venn.svg) | [Excalidraw](b1-theory-07-classes-venn.excalidraw) |
@@ -31,7 +31,8 @@ Do not regenerate over later manual edits without reconciling them first.
 | Q4(a), Q6(d) | Q4(a), Q6(d): unlimited coins {1, 3, 4}, amount 6 | [SVG](b1-theory-15-coin-change.svg) | [Excalidraw](b1-theory-15-coin-change.excalidraw) |
 | Q4(b) | Q4(b): Fibonacci F0 = 0, F1 = 1 | [SVG](b1-theory-16-memo-tab.svg) | [Excalidraw](b1-theory-16-memo-tab.excalidraw) |
 | Q4(c) | Q4(c): Prim and Kruskal on the stated graph | [SVG](b1-theory-17-mst.svg) | [Excalidraw](b1-theory-17-mst.excalidraw) |
-| Q5(a), Q5(b) | Q5(a,b): choose, prune, backtrack | [SVG](b1-theory-18-queens-backtracking.svg) | [Excalidraw](b1-theory-18-queens-backtracking.excalidraw) |
+| Q5(b) | Q5(b): 4-Queens State-Space Tree (search prefix) | [SVG](b1-theory-18-queens-backtracking.svg) | [Excalidraw](b1-theory-18-queens-backtracking.excalidraw) |
+| Q5(a) | Q5(a): Backtracking on a State-Space Tree | [SVG](b1-theory-24-backtracking-concept.svg) | [Excalidraw](b1-theory-24-backtracking-concept.excalidraw) |
 | Q6(a) | Q6(a): valid recurrence and reusable subproblems | [SVG](b1-theory-19-dp-properties.svg) | [Excalidraw](b1-theory-19-dp-properties.excalidraw) |
 | Q6(b), Q7(c) | Q6(b), Q7(c): 0/1 knapsack recurrence and table | [SVG](b1-theory-20-knapsack.svg) | [Excalidraw](b1-theory-20-knapsack.excalidraw) |
 | Q6(c) | Q6(c): coin grid and maximum-collection DP | [SVG](b1-theory-21-grid.svg) | [Excalidraw](b1-theory-21-grid.excalidraw) |
