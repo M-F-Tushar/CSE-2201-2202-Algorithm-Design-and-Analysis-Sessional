@@ -45,7 +45,7 @@
       "x": 540.0,
       "y": 112,
       "width": 0.0,
-      "height": 28,
+      "height": 26,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -74,7 +74,7 @@
         ],
         [
           0.0,
-          28
+          26
         ]
       ],
       "lastCommittedPoint": null,
@@ -88,9 +88,9 @@
       "id": "ch11-18-dfs-finish-time-flow-e1",
       "type": "arrow",
       "x": 540.0,
-      "y": 210,
+      "y": 212,
       "width": 0.0,
-      "height": 30,
+      "height": 28,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -119,7 +119,7 @@
         ],
         [
           0.0,
-          30
+          28
         ]
       ],
       "lastCommittedPoint": null,
@@ -135,7 +135,7 @@
       "x": 540.0,
       "y": 292,
       "width": 0.0,
-      "height": 28,
+      "height": 26,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -164,7 +164,7 @@
         ],
         [
           0.0,
-          28
+          26
         ]
       ],
       "lastCommittedPoint": null,
@@ -178,9 +178,9 @@
       "id": "ch11-18-dfs-finish-time-flow-e3",
       "type": "arrow",
       "x": 540.0,
-      "y": 320,
+      "y": 318,
       "width": 320.0,
-      "height": 62,
+      "height": 64,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -209,15 +209,15 @@
         ],
         [
           0.0,
-          31.0
+          32.0
         ],
         [
           320.0,
-          31.0
+          32.0
         ],
         [
           320.0,
-          62
+          64
         ]
       ],
       "lastCommittedPoint": null,
@@ -233,7 +233,7 @@
       "x": 860.0,
       "y": 382,
       "width": 320.0,
-      "height": 62,
+      "height": 64,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -262,15 +262,15 @@
         ],
         [
           0.0,
-          -31.0
+          -32.0
         ],
         [
           -320.0,
-          -31.0
+          -32.0
         ],
         [
           -320.0,
-          -62
+          -64
         ]
       ],
       "lastCommittedPoint": null,
@@ -284,9 +284,9 @@
       "id": "ch11-18-dfs-finish-time-flow-e5",
       "type": "arrow",
       "x": 540.0,
-      "y": 394,
+      "y": 396,
       "width": 0.0,
-      "height": 36,
+      "height": 34,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -315,7 +315,7 @@
         ],
         [
           0.0,
-          36
+          34
         ]
       ],
       "lastCommittedPoint": null,
@@ -330,7 +330,7 @@
       "type": "arrow",
       "x": 400,
       "y": 457.0,
-      "width": 110,
+      "width": 100,
       "height": 282.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -367,7 +367,7 @@
           -282.0
         ],
         [
-          40,
+          30,
           -282.0
         ]
       ],
@@ -381,9 +381,9 @@
     {
       "id": "ch11-18-dfs-finish-time-flow-e7",
       "type": "arrow",
-      "x": 640,
+      "x": 650,
       "y": 175.0,
-      "width": 390,
+      "width": 380,
       "height": 360.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -412,15 +412,15 @@
           0.0
         ],
         [
-          390,
+          380,
           0.0
         ],
         [
-          390,
+          380,
           360.0
         ],
         [
-          200,
+          190,
           360.0
         ]
       ],
@@ -504,10 +504,10 @@
     {
       "id": "ch11-18-dfs-finish-time-flow-n1",
       "type": "diamond",
-      "x": 440,
-      "y": 140,
-      "width": 200,
-      "height": 70,
+      "x": 430,
+      "y": 138,
+      "width": 220,
+      "height": 74,
       "angle": 0,
       "strokeColor": "#f08c00",
       "backgroundColor": "#ffec99",
@@ -536,9 +536,9 @@
     {
       "id": "ch11-18-dfs-finish-time-flow-t1",
       "type": "text",
-      "x": 446,
+      "x": 436,
       "y": 165.0,
-      "width": 188,
+      "width": 208,
       "height": 20,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -642,10 +642,10 @@
     {
       "id": "ch11-18-dfs-finish-time-flow-n3",
       "type": "diamond",
-      "x": 430,
-      "y": 320,
-      "width": 220,
-      "height": 74,
+      "x": 420,
+      "y": 318,
+      "width": 240,
+      "height": 78,
       "angle": 0,
       "strokeColor": "#f08c00",
       "backgroundColor": "#ffec99",
@@ -674,9 +674,9 @@
     {
       "id": "ch11-18-dfs-finish-time-flow-t3",
       "type": "text",
-      "x": 436,
+      "x": 426,
       "y": 347.0,
-      "width": 208,
+      "width": 228,
       "height": 20,
       "angle": 0,
       "strokeColor": "#1e1e1e",

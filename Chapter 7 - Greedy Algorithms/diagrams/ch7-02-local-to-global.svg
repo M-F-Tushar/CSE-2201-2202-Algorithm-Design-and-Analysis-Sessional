@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1020" height="560" viewBox="0 0 1020 560" role="img" aria-label="From Local Best Choice to Global Optimum">
 <rect width="1020" height="560" fill="#ffffff" rx="10"/>
 <text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="510.0" y="34.0">From Local Best Choice to Global Optimum</tspan></text>
-<path d="M509.9 113.5 Q510.0 129.6 510.6 145.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
-<path d="M505.9 134.8 L510.0 145.0 L514.1 134.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M509.8 144.5 Q511.3 163.8 511.0 180.4 M509.5 181.0 Q348.8 178.4 185.4 180.7 M186.0 180.4 Q183.4 198.0 185.7 215.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M509.9 113.5 Q510.0 128.1 510.6 142.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M505.9 131.8 L510.0 142.0 L514.1 131.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M509.8 141.5 Q511.3 161.5 511.0 178.9 M509.5 179.5 Q348.8 176.9 185.4 179.2 M186.0 178.9 Q183.4 197.2 185.7 215.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M180.9 204.8 L185.0 215.0 L189.1 204.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="332.5" y="168.0" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="347.5" y="180.0">No</tspan></text>
-<path d="M509.4 224.7 Q509.7 242.8 510.1 259.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<rect x="332.5" y="166.5" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="347.5" y="178.5">No</tspan></text>
+<path d="M509.4 227.7 Q509.7 244.3 510.1 259.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M505.9 249.8 L510.0 260.0 L514.1 249.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="491.0" y="230.5" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="510.0" y="242.5">Yes</tspan></text>
+<rect x="491.0" y="232.0" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="510.0" y="244.0">Yes</tspan></text>
 <path d="M510.3 313.2 Q510.9 328.0 510.0 345.6" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M505.9 334.8 L510.0 345.0 L514.1 334.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M660.8 372.6 Q690.3 373.0 719.7 373.2 M719.6 372.7 Q720.0 229.2 720.2 87.2 M719.7 87.2 Q679.2 88.6 640.2 87.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
@@ -25,10 +25,10 @@
 <path d="M378.9 60.2 Q509.4 60.2 639.5 58.5 M640.2 59.1 Q637.3 87.9 640.1 113.5 M641.2 112.5 Q509.5 115.4 379.0 114.1 M378.5 113.9 Q379.1 84.5 380.8 60.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
 <path d="M378.9 61.3 Q511.1 60.2 641.0 60.9 M640.4 60.6 Q642.2 89.1 638.8 114.4 M638.9 113.0 Q509.4 114.1 379.8 115.4 M381.3 115.1 Q378.9 88.2 380.6 61.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
 <text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="510.0" y="87.0">Identify Best Local Choice</tspan></text>
-<polygon points="510.0,145 650,185.0 510.0,225 370,185.0" fill="#ffec99"/>
-<path d="M510.1 144.7 Q577.4 164.8 650.8 186.1 M650.0 183.8 Q580.9 202.2 509.6 224.9 M511.2 224.2 Q440.6 207.7 369.3 185.3 M369.2 185.9 Q437.4 163.0 511.0 145.7" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
-<path d="M511.4 144.7 Q582.3 167.0 650.1 186.2 M650.6 183.4 Q582.2 206.9 510.0 226.3 M509.2 224.5 Q442.8 202.7 370.2 184.3 M369.6 184.9 Q440.3 167.0 508.5 144.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="510.0" y="175.1">Is Local Choice Safe?</tspan><tspan x="510.0" y="194.9">(Greedy Choice Property)</tspan></text>
+<polygon points="510.0,142 660,185.0 510.0,228 360,185.0" fill="#ffec99"/>
+<path d="M510.1 141.7 Q582.4 163.3 660.8 186.1 M660.0 183.8 Q585.9 203.7 509.6 227.9 M511.2 227.2 Q435.6 209.2 359.3 185.3 M359.2 185.9 Q432.4 161.5 511.0 142.7" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M511.4 141.7 Q587.3 165.5 660.1 186.2 M660.6 183.4 Q587.2 208.4 510.0 229.3 M509.2 227.5 Q437.8 204.2 360.2 184.3 M359.6 184.9 Q435.3 165.5 508.5 141.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="510.0" y="175.1">Is Local Choice Safe?</tspan><tspan x="510.0" y="194.9">(Greedy Choice)</tspan></text>
 <rect x="60.0" y="155.0" width="250.0" height="60.0" rx="10" fill="#ffc9c9"/>
 <path d="M59.8 154.1 Q183.5 157.1 309.1 154.9 M309.3 155.3 Q308.7 182.8 310.3 216.5 M310.2 214.0 Q186.7 216.3 59.2 215.9 M58.9 216.3 Q61.1 185.2 61.0 155.9" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
 <path d="M60.5 155.9 Q185.7 153.5 308.6 155.5 M310.2 154.3 Q309.7 186.7 311.6 213.7 M309.4 213.9 Q182.2 213.3 59.6 214.9 M61.1 215.8 Q61.5 184.9 58.5 153.7" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>

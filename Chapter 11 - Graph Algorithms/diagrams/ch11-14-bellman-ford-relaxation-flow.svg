@@ -9,16 +9,16 @@
 <path d="M565.9 304.8 L570.0 315.0 L574.1 304.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M570.3 368.2 Q570.9 380.5 570.0 395.6" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M565.9 384.8 L570.0 395.0 L574.1 384.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M570.8 446.6 Q570.3 461.0 569.7 475.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
-<path d="M565.9 464.8 L570.0 475.0 L574.1 464.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M570.1 548.8 Q569.9 531.2 570.2 516.9 M569.8 517.2 Q410.7 517.8 254.9 516.9 M255.2 516.9 Q255.8 500.4 254.9 484.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M570.8 446.6 Q570.3 459.5 569.7 472.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M565.9 461.8 L570.0 472.0 L574.1 461.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M570.1 551.8 Q569.9 533.5 570.2 518.4 M569.8 518.7 Q410.7 519.3 254.9 518.4 M255.2 518.4 Q255.8 501.1 254.9 484.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M259.1 495.2 L255.0 485.0 L250.9 495.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="393.5" y="505.0" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="412.5" y="517.0">Yes</tspan></text>
-<path d="M570.1 548.8 Q570.4 533.4 570.4 517.5 M569.8 517.4 Q727.9 515.7 885.5 517.2 M885.4 517.5 Q883.7 500.9 885.2 485.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<rect x="393.5" y="506.5" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="412.5" y="518.5">Yes</tspan></text>
+<path d="M570.1 551.8 Q570.4 535.7 570.4 519.0 M569.8 518.9 Q727.9 517.2 885.5 518.7 M885.4 519.0 Q883.7 501.6 885.2 485.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M889.1 495.2 L885.0 485.0 L880.9 495.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="712.5" y="505.0" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="727.5" y="517.0">No</tspan></text>
+<rect x="712.5" y="506.5" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="727.5" y="518.5">No</tspan></text>
 <rect x="430.0" y="60.0" width="280.0" height="52.0" rx="10" fill="#ffec99"/>
 <path d="M428.9 60.2 Q569.4 60.2 709.5 58.5 M710.2 59.1 Q707.3 86.9 710.1 111.5 M711.2 110.5 Q569.5 113.4 429.0 112.1 M428.5 111.9 Q429.1 83.5 430.8 60.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
 <path d="M428.9 61.3 Q571.1 60.2 711.0 60.9 M710.4 60.6 Q712.2 88.1 708.8 112.4 M708.9 111.0 Q569.4 112.1 429.8 113.4 M431.3 113.1 Q428.9 87.2 430.6 61.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
@@ -39,9 +39,9 @@
 <path d="M390.4 393.9 Q572.5 394.4 749.0 394.8 M751.2 396.3 Q752.0 419.9 751.1 447.6 M748.9 447.6 Q572.3 449.2 388.4 447.0 M390.5 447.9 Q390.7 419.5 388.6 395.5" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
 <path d="M390.6 394.3 Q569.7 392.2 748.6 395.6 M749.6 396.2 Q747.7 423.4 749.6 446.2 M750.6 448.3 Q571.8 448.4 388.9 446.4 M389.7 446.2 Q392.7 418.9 388.6 395.2" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
 <text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#1e1e1e"><tspan x="570.0" y="421.0">Run V-th Pass to Detect Negative Cycles</tspan></text>
-<polygon points="570.0,475 680,512.0 570.0,549 460,512.0" fill="#ffec99"/>
-<path d="M570.0 476.3 Q625.8 495.1 681.2 513.1 M680.2 511.3 Q624.7 532.2 571.6 547.7 M568.5 548.1 Q516.5 527.8 460.2 513.1 M458.6 510.5 Q516.5 494.6 570.3 473.9" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
-<path d="M569.4 476.0 Q624.4 492.0 680.8 511.6 M681.4 511.7 Q627.3 531.5 568.6 547.8 M571.1 548.3 Q514.2 529.5 460.3 513.5 M460.6 513.2 Q514.5 491.4 568.8 473.6" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<polygon points="570.0,472 690,512.0 570.0,552 450,512.0" fill="#ffec99"/>
+<path d="M570.0 473.3 Q630.8 493.6 691.2 513.1 M690.2 511.3 Q629.7 533.7 571.6 550.7 M568.5 551.1 Q511.5 529.3 450.2 513.1 M448.6 510.5 Q511.5 493.1 570.3 470.9" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M569.4 473.0 Q629.4 490.5 690.8 511.6 M691.4 511.7 Q632.3 533.0 568.6 550.8 M571.1 551.3 Q509.2 531.0 450.3 513.5 M450.6 513.2 Q509.5 489.9 568.8 470.6" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
 <text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="570.0" y="502.8">Does any edge still</tspan><tspan x="570.0" y="521.2">improve distance?</tspan></text>
 <rect x="110.0" y="485.0" width="290.0" height="60.0" rx="10" fill="#ffc9c9"/>
 <path d="M109.7 484.4 Q254.8 482.2 398.9 484.6 M400.2 486.1 Q397.6 516.5 400.8 543.5 M399.1 543.7 Q255.5 543.0 108.6 543.5 M110.6 544.3 Q109.7 512.2 108.6 485.6" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>

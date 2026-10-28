@@ -174,7 +174,7 @@
       "type": "arrow",
       "x": 290,
       "y": 146.0,
-      "width": 30,
+      "width": 25,
       "height": 0.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -203,7 +203,7 @@
           0.0
         ],
         [
-          30,
+          25,
           0.0
         ]
       ],
@@ -217,9 +217,9 @@
     {
       "id": "ch8-06-top-down-vs-bottom-up-e1",
       "type": "arrow",
-      "x": 500,
+      "x": 505,
       "y": 146.0,
-      "width": 180,
+      "width": 185,
       "height": 100.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -248,15 +248,15 @@
           0.0
         ],
         [
-          -90.0,
+          -92.5,
           0.0
         ],
         [
-          -90.0,
+          -92.5,
           100.0
         ],
         [
-          -180,
+          -185,
           100.0
         ]
       ],
@@ -270,9 +270,9 @@
     {
       "id": "ch8-06-top-down-vs-bottom-up-e2",
       "type": "arrow",
-      "x": 320,
+      "x": 315,
       "y": 146.0,
-      "width": 30,
+      "width": 25,
       "height": 106.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -301,15 +301,15 @@
           0.0
         ],
         [
-          -15.0,
+          -12.5,
           0.0
         ],
         [
-          -15.0,
+          -12.5,
           106.0
         ],
         [
-          -30,
+          -25,
           106.0
         ]
       ],
@@ -589,10 +589,10 @@
     {
       "id": "ch8-06-top-down-vs-bottom-up-n1",
       "type": "diamond",
-      "x": 320,
-      "y": 110,
-      "width": 180,
-      "height": 72,
+      "x": 315,
+      "y": 108,
+      "width": 190,
+      "height": 76,
       "angle": 0,
       "strokeColor": "#f08c00",
       "backgroundColor": "#ffec99",
@@ -621,9 +621,9 @@
     {
       "id": "ch8-06-top-down-vs-bottom-up-t1",
       "type": "text",
-      "x": 326,
+      "x": 321,
       "y": 136.0,
-      "width": 168,
+      "width": 178,
       "height": 20,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -994,8 +994,8 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "Iterate through Table loops",
-      "originalText": "Iterate through Table loops",
+      "text": "Iterate through table loops",
+      "originalText": "Iterate through table loops",
       "fontSize": 14,
       "fontFamily": 1,
       "textAlign": "center",

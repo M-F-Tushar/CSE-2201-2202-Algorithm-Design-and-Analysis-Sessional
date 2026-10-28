@@ -13,7 +13,7 @@
 <rect x="535" y="179" width="170" height="52" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2" />
 <text x="620" y="196.9" text-anchor="middle" font-size="13" fill="#1e1e1e">J1 = 0</text>
 <text x="620" y="213.1" text-anchor="middle" font-size="13" fill="#1e1e1e">ub = 52  ✗ pruned</text>
-<rect x="70" y="279" width="160" height="52" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2" />
+<rect x="65" y="279" width="170" height="52" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2" />
 <text x="150" y="296.9" text-anchor="middle" font-size="13" fill="#1e1e1e">J4 = 1 (take)</text>
 <text x="150" y="313.1" text-anchor="middle" font-size="13" fill="#1e1e1e">profit 127, ub = 152</text>
 <rect x="280" y="279" width="180" height="52" rx="8" fill="#e9ecef" stroke="#1e1e1e" stroke-width="2" />
@@ -22,7 +22,7 @@
 <rect x="15" y="379" width="150" height="52" rx="8" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" />
 <text x="90" y="396.9" text-anchor="middle" font-size="13" fill="#1e1e1e">J3 = 1</text>
 <text x="90" y="413.1" text-anchor="middle" font-size="13" fill="#1e1e1e">infeasible ✗</text>
-<rect x="165" y="379" width="150" height="52" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2" />
+<rect x="155" y="379" width="170" height="52" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2" />
 <text x="240" y="396.9" text-anchor="middle" font-size="13" fill="#1e1e1e">J3 = 0</text>
 <text x="240" y="413.1" text-anchor="middle" font-size="13" fill="#1e1e1e">profit 127, ub = 137</text>
 <rect x="90" y="479" width="150" height="52" rx="8" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" />

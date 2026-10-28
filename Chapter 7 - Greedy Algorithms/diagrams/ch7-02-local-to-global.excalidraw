@@ -45,7 +45,7 @@
       "x": 510.0,
       "y": 114,
       "width": 0.0,
-      "height": 31,
+      "height": 28,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -74,7 +74,7 @@
         ],
         [
           0.0,
-          31
+          28
         ]
       ],
       "lastCommittedPoint": null,
@@ -88,9 +88,9 @@
       "id": "ch7-02-local-to-global-e1",
       "type": "arrow",
       "x": 510.0,
-      "y": 145,
+      "y": 142,
       "width": 325.0,
-      "height": 70,
+      "height": 73,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -119,15 +119,15 @@
         ],
         [
           0.0,
-          35.0
+          36.5
         ],
         [
           -325.0,
-          35.0
+          36.5
         ],
         [
           -325.0,
-          70
+          73
         ]
       ],
       "lastCommittedPoint": null,
@@ -141,9 +141,9 @@
       "id": "ch7-02-local-to-global-e2",
       "type": "arrow",
       "x": 510.0,
-      "y": 225,
+      "y": 228,
       "width": 0.0,
-      "height": 35,
+      "height": 32,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -172,7 +172,7 @@
         ],
         [
           0.0,
-          35
+          32
         ]
       ],
       "lastCommittedPoint": null,
@@ -398,10 +398,10 @@
     {
       "id": "ch7-02-local-to-global-n1",
       "type": "diamond",
-      "x": 370,
-      "y": 145,
-      "width": 280,
-      "height": 80,
+      "x": 360,
+      "y": 142,
+      "width": 300,
+      "height": 86,
       "angle": 0,
       "strokeColor": "#f08c00",
       "backgroundColor": "#ffec99",
@@ -430,9 +430,9 @@
     {
       "id": "ch7-02-local-to-global-t1",
       "type": "text",
-      "x": 376,
+      "x": 366,
       "y": 175.0,
-      "width": 268,
+      "width": 288,
       "height": 20,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -453,8 +453,8 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "Is Local Choice Safe?\n(Greedy Choice Property)",
-      "originalText": "Is Local Choice Safe?\n(Greedy Choice Property)",
+      "text": "Is Local Choice Safe?\n(Greedy Choice)",
+      "originalText": "Is Local Choice Safe?\n(Greedy Choice)",
       "fontSize": 15,
       "fontFamily": 1,
       "textAlign": "center",

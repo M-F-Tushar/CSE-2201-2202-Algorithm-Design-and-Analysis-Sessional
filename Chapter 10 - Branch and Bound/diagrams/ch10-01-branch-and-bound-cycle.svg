@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1340" height="460" viewBox="0 0 1340 460" role="img" aria-label="Branch and Bound: Branch, Bound, Prune">
 <rect width="1340" height="460" fill="#ffffff" rx="10"/>
 <text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="670.0" y="34.0">Branch and Bound: Branch, Bound, Prune</tspan></text>
-<path d="M269.9 189.5 Q290.0 190.1 310.6 190.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M279.9 189.5 Q295.0 190.1 310.6 190.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M299.8 194.1 L310.0 190.0 L299.8 185.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M509.8 189.5 Q531.3 191.3 551.0 190.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M539.8 194.1 L550.0 190.0 L539.8 185.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
@@ -23,9 +23,9 @@
 <path d="M661.5 309.6 L665.0 320.0 L669.7 310.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
 <rect x="612.5" y="263.0" width="110" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
 <text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="667.5" y="275.0">leaf reached</tspan></text>
-<ellipse cx="150.0" cy="190.0" rx="120.0" ry="40.0" fill="#ffec99"/>
-<path d="M270.0 190.0 Q263.1 204.9 234.9 218.3 M234.9 218.3 Q197.5 227.4 150.0 230.0 M150.0 230.0 Q102.2 228.3 65.1 218.3 M65.1 218.3 Q34.3 206.1 30.0 190.0 M30.0 190.0 Q35.5 175.7 65.1 161.7 M65.1 161.7 Q102.8 151.2 150.0 150.0 M150.0 150.0 Q196.0 150.7 234.9 161.7 M234.9 161.7 Q264.4 173.2 270.0 190.0" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
-<path d="M270.0 190.0 Q263.1 205.3 234.9 218.3 M234.9 218.3 Q198.6 228.3 150.0 230.0 M150.0 230.0 Q103.7 227.3 65.1 218.3 M65.1 218.3 Q36.7 207.3 30.0 190.0 M30.0 190.0 Q36.4 173.0 65.1 161.7 M65.1 161.7 Q102.8 151.8 150.0 150.0 M150.0 150.0 Q196.8 152.9 234.9 161.7 M234.9 161.7 Q264.6 173.9 270.0 190.0" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<ellipse cx="150.0" cy="190.0" rx="130.0" ry="40.0" fill="#ffec99"/>
+<path d="M280.0 190.0 Q272.6 204.9 241.9 218.3 M241.9 218.3 Q201.5 227.4 150.0 230.0 M150.0 230.0 Q98.3 228.3 58.1 218.3 M58.1 218.3 Q24.8 206.1 20.0 190.0 M20.0 190.0 Q26.0 175.7 58.1 161.7 M58.1 161.7 Q98.8 151.2 150.0 150.0 M150.0 150.0 Q200.0 150.7 241.9 161.7 M241.9 161.7 Q273.9 173.2 280.0 190.0" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M280.0 190.0 Q272.6 205.3 241.9 218.3 M241.9 218.3 Q202.5 228.3 150.0 230.0 M150.0 230.0 Q99.8 227.3 58.1 218.3 M58.1 218.3 Q27.2 207.3 20.0 190.0 M20.0 190.0 Q26.9 173.0 58.1 161.7 M58.1 161.7 Q98.9 151.8 150.0 150.0 M150.0 150.0 Q200.7 152.9 241.9 161.7 M241.9 161.7 Q274.1 173.9 280.0 190.0" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
 <text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="bold" fill="#1e1e1e"><tspan x="150.0" y="170.2">Optimization</tspan><tspan x="150.0" y="190.0">problem</tspan><tspan x="150.0" y="209.8">(min cost / max profit)</tspan></text>
 <rect x="310.0" y="150.0" width="200.0" height="80.0" rx="10" fill="#a5d8ff"/>
 <path d="M310.1 149.7 Q407.4 149.8 510.8 151.1 M510.1 149.5 Q509.9 187.9 508.6 228.5 M509.9 230.5 Q408.4 228.5 308.4 229.8 M309.2 231.2 Q310.5 190.6 309.2 149.3" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>

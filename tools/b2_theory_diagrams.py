@@ -106,7 +106,7 @@ def missing_diagrams():
 
     yield D("b2-theory-21-greedy-proof", "Q5(a): Prove the choice safe, then solve the residual problem", (1040, 640), [
         box("o", "Take an optimal solution O", 40, 110, 280, 100),
-        box("swap", "Exchange in greedy choice g\nwithout worsening the objective", 380, 110, 280, 100, "yellow", 16),
+        box("swap", "Exchange in greedy choice g\nwithout worsening the objective", 370, 110, 300, 100, "yellow", 15),
         box("safe", "An optimum contains g\nGreedy-choice property", 720, 110, 280, 100, "green", 16),
         box("res", "Solve the residual instance optimally\nOptimal substructure + induction", 380, 320, 450, 100, "green"),
         box("bad", "COUNTEREXAMPLE: unlimited coins {1,3,4}, amount 6\nLargest-first: 4+1+1 (3 coins). Optimum: 3+3 (2 coins).\nOptimal substructure alone does not justify largest-first.", 40, 490, 960, 110, "red", 17),

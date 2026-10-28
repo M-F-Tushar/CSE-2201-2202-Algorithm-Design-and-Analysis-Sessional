@@ -44,7 +44,7 @@ local_to_global = D(
     flow="V",
     nodes=[
         N("local", "Identify Best Local Choice", 380, 60, 260, 54, "yellow"),
-        N("safe", "Is Local Choice Safe?\n(Greedy Choice Property)", 370, 145, 280, 80, "yellow", "diamond", 15),
+        N("safe", "Is Local Choice Safe?\n(Greedy Choice)", 360, 142, 300, 86, "yellow", "diamond", 15),
         N("fail", "Greedy Rule Fails!\nCounterexample exists", 60, 155, 250, 60, "red", bold=True),
         N("part", "Add to Partial Solution", 380, 260, 260, 54, "green"),
         N("reduc", "Reduce to Smaller Problem\n(preserves same structure)", 360, 345, 300, 56, "green", size=14),

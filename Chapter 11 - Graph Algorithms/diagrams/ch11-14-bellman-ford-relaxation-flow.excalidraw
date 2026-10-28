@@ -225,7 +225,7 @@
       "x": 570.0,
       "y": 447,
       "width": 0.0,
-      "height": 28,
+      "height": 25,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -254,7 +254,7 @@
         ],
         [
           0.0,
-          28
+          25
         ]
       ],
       "lastCommittedPoint": null,
@@ -268,9 +268,9 @@
       "id": "ch11-14-bellman-ford-relaxation-flow-e5",
       "type": "arrow",
       "x": 570.0,
-      "y": 549,
+      "y": 552,
       "width": 315.0,
-      "height": 64,
+      "height": 67,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -299,15 +299,15 @@
         ],
         [
           0.0,
-          -32.0
+          -33.5
         ],
         [
           -315.0,
-          -32.0
+          -33.5
         ],
         [
           -315.0,
-          -64
+          -67
         ]
       ],
       "lastCommittedPoint": null,
@@ -321,9 +321,9 @@
       "id": "ch11-14-bellman-ford-relaxation-flow-e6",
       "type": "arrow",
       "x": 570.0,
-      "y": 549,
+      "y": 552,
       "width": 315.0,
-      "height": 64,
+      "height": 67,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -352,15 +352,15 @@
         ],
         [
           0.0,
-          -32.0
+          -33.5
         ],
         [
           315.0,
-          -32.0
+          -33.5
         ],
         [
           315.0,
-          -64
+          -67
         ]
       ],
       "lastCommittedPoint": null,
@@ -723,10 +723,10 @@
     {
       "id": "ch11-14-bellman-ford-relaxation-flow-n5",
       "type": "diamond",
-      "x": 460,
-      "y": 475,
-      "width": 220,
-      "height": 74,
+      "x": 450,
+      "y": 472,
+      "width": 240,
+      "height": 80,
       "angle": 0,
       "strokeColor": "#f08c00",
       "backgroundColor": "#ffec99",
@@ -755,9 +755,9 @@
     {
       "id": "ch11-14-bellman-ford-relaxation-flow-t5",
       "type": "text",
-      "x": 466,
+      "x": 456,
       "y": 502.0,
-      "width": 208,
+      "width": 228,
       "height": 20,
       "angle": 0,
       "strokeColor": "#1e1e1e",

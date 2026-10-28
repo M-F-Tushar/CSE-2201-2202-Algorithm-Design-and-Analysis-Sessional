@@ -42,9 +42,9 @@
     {
       "id": "ch10-01-branch-and-bound-cycle-e0",
       "type": "arrow",
-      "x": 270,
+      "x": 280,
       "y": 190.0,
-      "width": 40,
+      "width": 30,
       "height": 0.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -73,7 +73,7 @@
           0.0
         ],
         [
-          40,
+          30,
           0.0
         ]
       ],
@@ -365,9 +365,9 @@
     {
       "id": "ch10-01-branch-and-bound-cycle-n0",
       "type": "ellipse",
-      "x": 30,
+      "x": 20,
       "y": 150,
-      "width": 240,
+      "width": 260,
       "height": 80,
       "angle": 0,
       "strokeColor": "#f08c00",
@@ -397,9 +397,9 @@
     {
       "id": "ch10-01-branch-and-bound-cycle-t0",
       "type": "text",
-      "x": 36,
+      "x": 26,
       "y": 180.0,
-      "width": 228,
+      "width": 248,
       "height": 20,
       "angle": 0,
       "strokeColor": "#1e1e1e",

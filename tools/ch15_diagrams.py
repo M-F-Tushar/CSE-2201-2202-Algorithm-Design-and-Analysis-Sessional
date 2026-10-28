@@ -91,7 +91,7 @@ np_conditions = D(
         N("every", "Every Problem\nin NP", 40, 80, 200, 64, "blue"),
         N("known", "Known NP-Complete\nProblem L'", 300, 80, 220, 64, "violet", bold=True),
         N("l_cand", "Candidate\nProblem L", 600, 80, 220, 64, "yellow", bold=True),
-        N("np_mem", "Condition 1: L in NP\nCandidate solution verifiable\nin polynomial time", 400, 230, 340, 70, "blue"),
+        N("np_mem", "Condition 1: L in NP\nCandidate solution verifiable\nin polynomial time", 400, 225, 340, 76, "blue"),
         N("npc_res", "L is NP-Complete!\n(Both Condition 1 and\nCondition 2 satisfied)", 860, 150, 240, 80, "green", bold=True),
     ],
     edges=[

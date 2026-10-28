@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="550" viewBox="0 0 800 550" role="img" aria-label="Q6(b): Floyd-Warshall matrices">
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="550" viewBox="0 0 840 550" role="img" aria-label="Q6(b): Floyd-Warshall matrices">
 <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/></marker></defs>
-<rect width="800" height="550" fill="#ffffff" rx="10"/>
+<rect width="840" height="550" fill="#ffffff" rx="10"/>
 <g font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' dominant-baseline="central">
-<text x="400" y="28.0" text-anchor="middle" font-size="19" fill="#1e1e1e" font-weight="bold">Q6(b): Floyd-Warshall on the Given Graph</text>
+<text x="420" y="28.0" text-anchor="middle" font-size="19" fill="#1e1e1e" font-weight="bold">Q6(b): Floyd-Warshall on the Given Graph</text>
 <polyline points="176.0,130.0 374.0,130.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
 <text x="275" y="106.0" text-anchor="middle" font-size="16" fill="#1e1e1e" font-weight="bold">5</text>
 <polyline points="400.0,156.0 400.0,264.0" fill="none" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arrow)"/>
@@ -124,7 +124,7 @@
 <text x="665" y="445.0" text-anchor="middle" font-size="14" fill="#1e1e1e">∞</text>
 <rect x="688" y="430" width="46" height="30" rx="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
 <text x="711" y="445.0" text-anchor="middle" font-size="14" fill="#1e1e1e">0</text>
-<text x="400" y="500.0" text-anchor="middle" font-size="13" fill="#868e96">Green = cell changed in that step. Rows = start vertex, columns = end vertex. (D1 = D0.)</text>
-<text x="400" y="526.0" text-anchor="middle" font-size="14" fill="#1e1e1e">Final: d(1,2)=5, d(1,3)=8, d(1,4)=9, d(2,3)=3, d(2,4)=4, d(3,4)=1</text>
+<text x="420" y="500.0" text-anchor="middle" font-size="13" fill="#868e96">Green = cell changed in that step. Rows = start vertex, columns = end vertex. (D1 = D0.)</text>
+<text x="420" y="526.0" text-anchor="middle" font-size="14" fill="#1e1e1e">Final: d(1,2)=5, d(1,3)=8, d(1,4)=9, d(2,3)=3, d(2,4)=4, d(3,4)=1</text>
 </g>
 </svg>

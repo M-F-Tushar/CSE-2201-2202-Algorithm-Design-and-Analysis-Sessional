@@ -363,7 +363,7 @@
       "x": 610.0,
       "y": 292,
       "width": 100.0,
-      "height": 58,
+      "height": 53,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "transparent",
@@ -392,15 +392,15 @@
         ],
         [
           0.0,
-          29.0
+          26.5
         ],
         [
           -100.0,
-          29.0
+          26.5
         ],
         [
           -100.0,
-          58
+          53
         ]
       ],
       "lastCommittedPoint": null,
@@ -416,7 +416,7 @@
       "x": 810.0,
       "y": 292,
       "width": 300.0,
-      "height": 58,
+      "height": 53,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "transparent",
@@ -445,15 +445,15 @@
         ],
         [
           0.0,
-          29.0
+          26.5
         ],
         [
           -300.0,
-          29.0
+          26.5
         ],
         [
           -300.0,
-          58
+          53
         ]
       ],
       "lastCommittedPoint": null,
@@ -467,9 +467,9 @@
       "id": "ch8-02-repeated-work-removed-e8",
       "type": "arrow",
       "x": 510.0,
-      "y": 420,
+      "y": 421,
       "width": 0.0,
-      "height": 15,
+      "height": 14,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -498,7 +498,7 @@
         ],
         [
           0.0,
-          15
+          14
         ]
       ],
       "lastCommittedPoint": null,
@@ -1002,9 +1002,9 @@
       "id": "ch8-02-repeated-work-removed-n7",
       "type": "rectangle",
       "x": 150,
-      "y": 350,
+      "y": 345,
       "width": 720,
-      "height": 70,
+      "height": 76,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "#ffc9c9",
@@ -1036,7 +1036,7 @@
       "id": "ch8-02-repeated-work-removed-t7",
       "type": "text",
       "x": 156,
-      "y": 375.0,
+      "y": 373.0,
       "width": 708,
       "height": 20,
       "angle": 0,

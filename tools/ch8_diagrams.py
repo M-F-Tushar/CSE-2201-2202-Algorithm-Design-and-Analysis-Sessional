@@ -41,7 +41,7 @@ repeated_work = D(
         N("c2", "Subproblem C\n(Duplicate!)", 520, 240, 180, 52, "red"),
         N("d2", "Subproblem D\n(Duplicate!)", 720, 240, 180, 52, "red"),
         N("waste", "Repeated Computation!\nNaive recursion recomputes identical states\nleading to O(2^n) time complexity",
-          150, 350, 720, 70, "red", bold=True),
+          150, 345, 720, 76, "red", bold=True),
         N("dp_fix", "DP Fix: Store in memo table -> O(1) lookup on return\nGuarantees O(n) total running time!",
           140, 435, 740, 60, "green", size=14, bold=True),
     ],
@@ -157,13 +157,13 @@ topdown_vs_bottomup = D(
     nodes=[
         # Top-down
         N("t_goal", "Request Target State f(n)", 60, 120, 230, 52, "violet", size=14),
-        N("t_hit", "Cached in Memo?", 320, 110, 180, 72, "yellow", "diamond", 15),
+        N("t_hit", "Cached in Memo?", 315, 108, 190, 76, "yellow", "diamond", 15),
         N("t_ret", "Return cached result", 320, 220, 190, 52, "green", size=14),
         N("t_rec", "Recurse on subproblems\nCompute & store in memo", 60, 220, 230, 64, "blue", size=13),
         N("t_sum", "Pros: Solves only needed states\nCons: Recursion stack overhead", 90, 310, 420, 56, "dark", size=13),
         # Bottom-up
         N("b_base", "Fill Base Cases (0, 1)", 600, 120, 220, 52, "green"),
-        N("b_loop", "Iterate through Table loops", 840, 120, 230, 52, "teal", size=14),
+        N("b_loop", "Iterate through table loops", 840, 120, 230, 52, "teal", size=14),
         N("b_next", "Compute larger states\nfrom smaller ready states", 600, 210, 230, 64, "blue", size=13),
         N("b_targ", "Reach Target State cell", 840, 210, 230, 64, "green", size=14, bold=True),
         N("b_sum", "Pros: No recursion overhead, space optimizable\nCons: Computes all states within bounds", 630, 310, 430, 56, "dark", size=12),
@@ -251,7 +251,7 @@ knapsack_decision = D(
         N("k_take", "Option 2 (Take):\nv_i + V[i-1, j - w_i]", 70, 350, 200, 60, "green", size=14),
         N("k_max", "Store Best:\nmax(Skip, Take)", 340, 330, 200, 60, "green", bold=True),
         # Traceback
-        N("t_check", "Compare cell:\nV[i, j] == V[i-1, j]?", 630, 120, 240, 70, "yellow", "diamond", 15),
+        N("t_check", "Compare cell:\nV[i, j] == V[i-1, j]?", 620, 115, 260, 78, "yellow", "diamond", 15),
         N("t_no", "Equal -> Item not taken\nMove to (i-1, j)", 880, 120, 200, 70, "blue", size=13),
         N("t_yes", "Different -> Item taken!\nMove to (i-1, j - w_i)", 630, 260, 280, 74, "green", size=14, bold=True),
         N("t_done", "Continue until i == 0 or j == 0\nFull optimal subset reconstructed", 630, 380, 430, 54, "teal", bold=True),
@@ -276,7 +276,7 @@ rod_cutting = D(
     flow="H",
     nodes=[
         N("rod", "Rod Length j", 40, 150, 160, 60, "blue", bold=True),
-        N("cut", "Try Piece of Length i\n(Cut decision)", 250, 140, 220, 80, "yellow", "diamond", 15),
+        N("cut", "Try Piece of Length i\n(Cut decision)", 230, 138, 260, 84, "yellow", "diamond", 15),
         N("exclude", "Cut length i > j:\nCopy T[i-1, j]", 250, 280, 220, 60, "red"),
         N("split", "Valid Cut (i <= j):\nSplit rod", 530, 150, 180, 60, "green", size=14),
         N("earn", "Sell Piece i: earn p_i\nRemaining length: j - i", 770, 70, 270, 64, "green"),
@@ -310,7 +310,7 @@ lcs_cell = D(
         N("left", "c[i, j-1]\nDrop Y[j]", 80, 230, 170, 60, "blue"),
         N("curr", "Target: c[i, j]", 280, 230, 170, 60, "yellow", bold=True),
         # Logic
-        N("cmp", "Do characters match?\nX[i] == Y[j]", 550, 140, 220, 80, "yellow", "diamond", 15),
+        N("cmp", "Do characters match?\nX[i] == Y[j]", 535, 138, 250, 84, "yellow", "diamond", 15),
         N("match_act", "Match Action:\nc[i, j] = 1 + c[i-1, j-1]\n(Diagonal arrow)", 810, 100, 260, 70, "green", size=13, bold=True),
         N("mismatch_act", "Mismatch Action:\nc[i, j] = max(up, left)\n(Up or Left arrow)", 810, 220, 260, 70, "blue", size=13),
     ],

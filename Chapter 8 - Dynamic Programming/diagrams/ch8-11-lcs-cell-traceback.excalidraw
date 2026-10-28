@@ -323,9 +323,9 @@
     {
       "id": "ch8-11-lcs-cell-traceback-e3",
       "type": "arrow",
-      "x": 770,
+      "x": 785,
       "y": 180.0,
-      "width": 40,
+      "width": 25,
       "height": 45.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -354,15 +354,15 @@
           0.0
         ],
         [
-          20.0,
+          12.5,
           0.0
         ],
         [
-          20.0,
+          12.5,
           -45.0
         ],
         [
-          40,
+          25,
           -45.0
         ]
       ],
@@ -376,9 +376,9 @@
     {
       "id": "ch8-11-lcs-cell-traceback-e4",
       "type": "arrow",
-      "x": 770,
+      "x": 785,
       "y": 180.0,
-      "width": 40,
+      "width": 25,
       "height": 75.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -407,15 +407,15 @@
           0.0
         ],
         [
-          20.0,
+          12.5,
           0.0
         ],
         [
-          20.0,
+          12.5,
           75.0
         ],
         [
-          40,
+          25,
           75.0
         ]
       ],
@@ -709,10 +709,10 @@
     {
       "id": "ch8-11-lcs-cell-traceback-n4",
       "type": "diamond",
-      "x": 550,
-      "y": 140,
-      "width": 220,
-      "height": 80,
+      "x": 535,
+      "y": 138,
+      "width": 250,
+      "height": 84,
       "angle": 0,
       "strokeColor": "#f08c00",
       "backgroundColor": "#ffec99",
@@ -741,9 +741,9 @@
     {
       "id": "ch8-11-lcs-cell-traceback-t4",
       "type": "text",
-      "x": 556,
+      "x": 541,
       "y": 170.0,
-      "width": 208,
+      "width": 238,
       "height": 20,
       "angle": 0,
       "strokeColor": "#1e1e1e",

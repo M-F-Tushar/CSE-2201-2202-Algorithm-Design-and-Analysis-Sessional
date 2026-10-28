@@ -135,7 +135,7 @@
       "x": 600,
       "y": 112.0,
       "width": 140,
-      "height": 153.0,
+      "height": 151.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -168,11 +168,11 @@
         ],
         [
           70.0,
-          153.0
+          151.0
         ],
         [
           140,
-          153.0
+          151.0
         ]
       ],
       "lastCommittedPoint": null,
@@ -186,9 +186,9 @@
       "id": "ch15-04-conditions-np-completeness-e3",
       "type": "arrow",
       "x": 740,
-      "y": 265.0,
+      "y": 263.0,
       "width": 120,
-      "height": 75.0,
+      "height": 73.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -221,11 +221,11 @@
         ],
         [
           60.0,
-          -75.0
+          -73.0
         ],
         [
           120,
-          -75.0
+          -73.0
         ]
       ],
       "lastCommittedPoint": null,
@@ -502,9 +502,9 @@
       "id": "ch15-04-conditions-np-completeness-n3",
       "type": "rectangle",
       "x": 400,
-      "y": 230,
+      "y": 225,
       "width": 340,
-      "height": 70,
+      "height": 76,
       "angle": 0,
       "strokeColor": "#1971c2",
       "backgroundColor": "#a5d8ff",
@@ -536,7 +536,7 @@
       "id": "ch15-04-conditions-np-completeness-t3",
       "type": "text",
       "x": 406,
-      "y": 255.0,
+      "y": 253.0,
       "width": 328,
       "height": 20,
       "angle": 0,

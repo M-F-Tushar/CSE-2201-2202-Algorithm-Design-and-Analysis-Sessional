@@ -381,7 +381,7 @@ bf_relaxation_flow = D(
         N("edge", "For each directed edge (u, v) with weight w:\nCheck if dist[u] + w < dist[v]", 360, 225, 420, 60, "blue", size=13),
         N("relax", "Update: dist[v] = dist[u] + w\nparent[v] = u", 410, 315, 320, 54, "green", size=13),
         N("v_pass", "Run V-th Pass to Detect Negative Cycles", 390, 395, 360, 52, "teal", size=13),
-        N("check_cyc", "Does any edge still\nimprove distance?", 460, 475, 220, 74, "yellow", "diamond", 14),
+        N("check_cyc", "Does any edge still\nimprove distance?", 450, 472, 240, 80, "yellow", "diamond", 14),
         N("cyc_yes", "Negative Cycle Reachable!\nReport error / infinite loop", 110, 485, 290, 60, "red", size=13, bold=True),
         N("cyc_no", "Shortest Distances Confirmed!\nNo negative cycles on paths", 740, 485, 290, 60, "green", size=13, bold=True),
     ],
@@ -439,7 +439,7 @@ fw_four_vertex = D(
     ],
     edges=[
         E("v1", "v2", "1", route="straight"),
-        E("v2", "v1", "4", route="loopl", bend=30),
+        E("v2", "v1", "4", route="loopt", bend=40),
         E("v1", "v3", "-2", route="straight"),
         E("v2", "v3", "3", route="straight"),
         E("v3", "v4", "2", route="straight"),
@@ -481,9 +481,9 @@ dfs_finish_flow = D(
     flow="V",
     nodes=[
         N("start", "Scan Every Vertex in Graph G", 400, 60, 280, 52, "yellow"),
-        N("unvis", "Unvisited Vertex?", 440, 140, 200, 70, "yellow", "diamond", 15),
+        N("unvis", "Unvisited Vertex?", 430, 138, 220, 74, "yellow", "diamond", 15),
         N("visit", "Call DFS(u):\nMark vertex u as VISITED", 400, 240, 280, 52, "blue"),
-        N("neigh", "Unvisited outgoing\nneighbor v exists?", 430, 320, 220, 74, "yellow", "diamond", 15),
+        N("neigh", "Unvisited outgoing\nneighbor v exists?", 420, 318, 240, 78, "yellow", "diamond", 15),
         N("rec", "Recursively call DFS(v)", 740, 330, 240, 52, "blue"),
         N("push", "All neighbors explored!\nPush u onto Finish Stack", 400, 430, 280, 54, "green", bold=True),
         N("pop", "Reverse Finish Stack -> Yields Valid Topological Ordering!", 240, 510, 600, 50, "teal", bold=True),
@@ -536,7 +536,7 @@ component_discovery = D(
     flow="V",
     nodes=[
         N("init", "Mark All Vertices as Unvisited", 380, 60, 300, 52, "yellow"),
-        N("check", "Unvisited Vertices\nRemain?", 430, 140, 200, 74, "yellow", "diamond", 14),
+        N("check", "Unvisited Vertices\nRemain?", 420, 138, 220, 78, "yellow", "diamond", 14),
         N("pick", "Pick Unvisited Vertex u as Root\nStart new component label", 370, 245, 320, 56, "blue", size=13),
         N("traverse", "Run BFS or DFS from Root u\nMark reached vertices with component ID", 340, 330, 380, 56, "green", size=13),
         N("done", "All Connected Components Identified!\nPartition: V = C1 U C2 U ... U Ck", 360, 415, 340, 56, "teal", size=13, bold=True),

@@ -29,14 +29,14 @@
 <path d="M329.8 364.1 L340.0 360.0 L329.8 355.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M270.1 379.8 Q287.9 380.4 305.4 380.5 M304.8 380.4 Q305.4 368.7 305.5 360.2 M305.4 360.5 Q321.2 359.9 340.2 360.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M329.8 364.1 L340.0 360.0 L329.8 355.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M870.3 155.7 Q874.9 154.2 879.7 155.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
-<path d="M869.8 159.1 L880.0 155.0 L869.8 150.9" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="856.0" y="143.0" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="875.0" y="155.0">Yes</tspan></text>
-<path d="M870.5 154.1 Q810.3 155.1 750.3 155.9 M749.1 155.3 Q750.1 226.5 750.9 297.2 M750.3 297.9 Q690.5 297.4 630.2 297.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M880.3 154.7 Q879.9 153.7 879.7 155.7" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M875.9 144.8 L880.0 155.0 L884.1 144.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="861.0" y="142.5" width="38" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="880.0" y="154.5">Yes</tspan></text>
+<path d="M880.5 153.1 Q817.8 154.1 755.3 154.9 M754.1 154.3 Q755.1 226.0 755.9 297.2 M755.3 297.9 Q693.0 297.4 630.2 297.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M640.2 292.9 L630.0 297.0 L640.2 301.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="735.0" y="214.0" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="750.0" y="226.0">No</tspan></text>
+<rect x="740.0" y="213.5" width="30" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="755.0" y="225.5">No</tspan></text>
 <path d="M909.6 296.3 Q840.8 297.4 771.0 297.2 M769.3 298.0 Q770.4 352.9 770.2 407.5 M771.0 407.2 Q700.9 407.3 630.5 407.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M640.2 402.9 L630.0 407.0 L640.2 411.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M879.8 154.6 Q925.2 155.1 969.0 154.0 M969.6 154.0 Q970.1 280.5 969.0 407.1 M969.0 406.0 Q1014.5 406.4 1060.1 407.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
@@ -65,10 +65,10 @@
 <path d="M340.0 331.3 Q440.8 331.6 541.2 331.1 M540.5 330.4 Q540.4 358.7 539.2 389.5 M538.7 389.8 Q438.9 388.0 341.0 389.7 M339.9 388.5 Q342.0 361.5 339.1 330.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
 <path d="M339.4 331.0 Q439.4 328.5 540.8 329.6 M540.2 331.5 Q542.6 359.5 538.8 390.0 M538.8 391.3 Q438.9 390.5 340.5 389.9 M341.1 391.1 Q342.7 359.2 339.3 330.3" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
 <text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="440.0" y="349.4">Store Best:</tspan><tspan x="440.0" y="370.6">max(Skip, Take)</tspan></text>
-<polygon points="750.0,120 870,155.0 750.0,190 630,155.0" fill="#ffec99"/>
-<path d="M749.7 119.4 Q809.8 134.7 868.9 154.6 M868.7 155.8 Q807.7 170.0 749.9 189.1 M749.3 188.6 Q687.2 170.5 630.6 154.8 M631.3 154.9 Q688.0 136.4 750.6 121.3" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
-<path d="M749.9 119.4 Q812.0 139.5 870.3 155.1 M871.3 154.1 Q809.9 173.6 749.3 191.4 M751.0 190.1 Q689.8 173.8 630.2 155.2 M630.0 154.2 Q691.9 138.7 749.4 119.9" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="750.0" y="145.1">Compare cell:</tspan><tspan x="750.0" y="164.9">V[i, j] == V[i-1, j]?</tspan></text>
+<polygon points="750.0,115 880,154.0 750.0,193 620,154.0" fill="#ffec99"/>
+<path d="M749.7 114.4 Q814.8 131.7 878.9 153.6 M878.7 154.8 Q812.7 171.0 749.9 192.1 M749.3 191.6 Q682.2 171.5 620.6 153.8 M621.3 153.9 Q683.0 133.4 750.6 116.3" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M749.9 114.4 Q817.0 136.5 880.3 154.1 M881.3 153.1 Q814.9 174.6 749.3 194.4 M751.0 193.1 Q684.8 174.8 620.2 154.2 M620.0 153.2 Q686.9 135.7 749.4 114.9" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="15" font-weight="normal" fill="#1e1e1e"><tspan x="750.0" y="144.1">Compare cell:</tspan><tspan x="750.0" y="163.9">V[i, j] == V[i-1, j]?</tspan></text>
 <rect x="880.0" y="120.0" width="200.0" height="70.0" rx="10" fill="#a5d8ff"/>
 <path d="M878.5 120.3 Q981.1 118.7 1078.9 120.8 M1080.6 119.8 Q1079.3 157.1 1078.4 188.9 M1079.2 188.7 Q981.1 192.3 881.3 189.9 M879.4 191.0 Q879.4 153.5 880.8 119.6" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
 <path d="M881.2 118.8 Q977.9 121.8 1078.6 119.7 M1080.2 120.2 Q1082.4 154.5 1079.9 190.7 M1078.6 190.1 Q978.9 189.9 880.0 189.2 M880.7 189.9 Q882.6 153.8 881.3 118.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>

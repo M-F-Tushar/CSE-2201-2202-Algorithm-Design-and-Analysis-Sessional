@@ -132,10 +132,10 @@
     {
       "id": "ch4-07-dfs-backtracking-e2",
       "type": "arrow",
-      "x": 320,
-      "y": 117.0,
-      "width": 170,
-      "height": 0.0,
+      "x": 347.0,
+      "y": 90,
+      "width": 130.0,
+      "height": 40,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "transparent",
@@ -159,20 +159,20 @@
       "locked": false,
       "points": [
         [
-          0,
-          0.0
+          0.0,
+          0
         ],
         [
-          -170,
-          0.0
+          0.0,
+          -40
         ],
         [
-          -170,
-          0.0
+          -130.0,
+          -40
         ],
         [
-          -130,
-          0.0
+          -130.0,
+          0
         ]
       ],
       "lastCommittedPoint": null,

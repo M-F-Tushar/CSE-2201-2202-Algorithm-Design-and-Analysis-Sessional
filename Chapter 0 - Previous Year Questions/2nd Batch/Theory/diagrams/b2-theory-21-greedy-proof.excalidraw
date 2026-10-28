@@ -44,7 +44,7 @@
       "type": "arrow",
       "x": 320,
       "y": 160.0,
-      "width": 60,
+      "width": 50,
       "height": 0.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -73,7 +73,7 @@
           0.0
         ],
         [
-          60,
+          50,
           0.0
         ]
       ],
@@ -87,9 +87,9 @@
     {
       "id": "b2-theory-21-greedy-proof-e1",
       "type": "arrow",
-      "x": 660,
+      "x": 670,
       "y": 160.0,
-      "width": 60,
+      "width": 50,
       "height": 0.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -118,7 +118,7 @@
           0.0
         ],
         [
-          60,
+          50,
           0.0
         ]
       ],
@@ -255,9 +255,9 @@
     {
       "id": "b2-theory-21-greedy-proof-n1",
       "type": "rectangle",
-      "x": 380,
+      "x": 370,
       "y": 110,
-      "width": 280,
+      "width": 300,
       "height": 100,
       "angle": 0,
       "strokeColor": "#f08c00",
@@ -289,10 +289,10 @@
     {
       "id": "b2-theory-21-greedy-proof-t1",
       "type": "text",
-      "x": 386,
-      "y": 140.0,
-      "width": 268,
-      "height": 40.0,
+      "x": 376,
+      "y": 141.25,
+      "width": 288,
+      "height": 37.5,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -314,13 +314,13 @@
       "locked": false,
       "text": "Exchange in greedy choice g\nwithout worsening the objective",
       "originalText": "Exchange in greedy choice g\nwithout worsening the objective",
-      "fontSize": 16,
+      "fontSize": 15,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "b2-theory-21-greedy-proof-n1",
       "lineHeight": 1.25,
-      "baseline": 16
+      "baseline": 15
     },
     {
       "id": "b2-theory-21-greedy-proof-n2",

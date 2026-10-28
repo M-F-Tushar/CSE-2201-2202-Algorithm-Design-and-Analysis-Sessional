@@ -683,9 +683,9 @@
     {
       "id": "ch4-01-search-traversal-flow-n0",
       "type": "ellipse",
-      "x": 440,
+      "x": 430,
       "y": 60,
-      "width": 280,
+      "width": 300,
       "height": 52,
       "angle": 0,
       "strokeColor": "#1971c2",
@@ -715,9 +715,9 @@
     {
       "id": "ch4-01-search-traversal-flow-t0",
       "type": "text",
-      "x": 446,
+      "x": 436,
       "y": 76.0,
-      "width": 268,
+      "width": 288,
       "height": 20,
       "angle": 0,
       "strokeColor": "#1e1e1e",

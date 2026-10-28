@@ -87,10 +87,10 @@
     {
       "id": "ch11-16-floyd-warshall-four-vertex-e1",
       "type": "arrow",
-      "x": 360,
-      "y": 128.0,
-      "width": 270,
-      "height": 0.0,
+      "x": 388.0,
+      "y": 100,
+      "width": 240.0,
+      "height": 40,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -114,20 +114,20 @@
       "locked": false,
       "points": [
         [
-          0,
-          0.0
+          0.0,
+          0
         ],
         [
-          -270,
-          0.0
+          0.0,
+          -40
         ],
         [
-          -270,
-          0.0
+          -240.0,
+          -40
         ],
         [
-          -240,
-          0.0
+          -240.0,
+          0
         ]
       ],
       "lastCommittedPoint": null,

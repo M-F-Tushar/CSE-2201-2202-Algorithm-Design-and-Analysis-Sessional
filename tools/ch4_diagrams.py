@@ -23,7 +23,7 @@ search_traversal_flow = D(
     size=(1160, 720),
     flow="V",
     nodes=[
-        N("start", "Start from Data Structure", 440, 60, 280, 52, "blue", "ellipse", bold=True),
+        N("start", "Start from Data Structure", 430, 60, 300, 52, "blue", "ellipse", bold=True),
         N("goal", "Goal?", 490, 140, 180, 68, "yellow", "diamond", 15),
         # Search branch (Left)
         N("search", "Searching\nGoal: find specific item", 100, 240, 260, 60, "yellow", bold=True),
@@ -178,7 +178,7 @@ dfs_movement = D(
     edges=[
         E("a", "b", "1: dive", route="straight", color="#1971c2"),
         E("b", "d", "2: dive", route="straight", color="#1971c2"),
-        E("d", "b", "3: backtrack", route="loopl", bend=40, dashed=True, color="#e03131"),
+        E("d", "b", "3: backtrack", route="loopt", bend=40, dashed=True, color="#e03131"),
         E("b", "e", "4: branch", route="straight", color="#1971c2"),
         E("e", "g", "5: dive", route="straight", color="#1971c2"),
         E("g", "f", "6: dive", route="straight", color="#1971c2"),

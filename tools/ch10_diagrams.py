@@ -11,7 +11,7 @@ bnb_cycle = D(
     size=(1340, 460),
     flow="H",
     nodes=[
-        N("prob", "Optimization\nproblem\n(min cost / max profit)", 30, 150, 240, 80, "yellow", "ellipse", 15, True),
+        N("prob", "Optimization\nproblem\n(min cost / max profit)", 20, 150, 260, 80, "yellow", "ellipse", 15, True),
         N("br", "Branch\nsplit a live node\ninto children", 310, 150, 200, 80, "blue"),
         N("bd", "Bound\nestimate the best value\nthe child can reach", 550, 150, 240, 80, "blue"),
         N("pr", "Bound no better\nthan the\nincumbent?", 850, 130, 220, 120, "yellow", "diamond", 14),
