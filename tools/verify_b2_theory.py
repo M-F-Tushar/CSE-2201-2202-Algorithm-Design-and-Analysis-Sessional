@@ -346,15 +346,19 @@ def check_fractional_mst(text: str) -> None:
         profit += fraction*p
         computed.append((i+1, fraction, used, profit))
     expect(len(selections), len(computed), "Q5(b) selection rows")
+    used_before = Fraction(0)
     for step, (row, (item, fraction, weight, cumulative)) in enumerate(zip(selections, computed), 1):
-        expect(int(row[0]), step, "Q5(b) step")
-        expect(int(match(r"item (\d+)", row[1], "selected item").group(1)), item, "Q5(b) selection order")
+        w, p = items[item-1]
+        expect((int(row[0]), int(row[1])), (step, item), "Q5(b) step and selection order")
         if fraction == 1:
-            need(row[1].startswith("All"), "Q5(b) full selection")
+            expect(row[2], "Full item", "Q5(b) full selection")
         else:
-            expect(arithmetic(match(r"\\frac\{\d+\}\{\d+\}", row[1], "selected fraction").group()), fraction, "Q5(b) fraction")
-        expect(Fraction(row[2]), weight, "Q5(b) cumulative weight")
-        equation(row[3], cumulative, "Q5(b) cumulative profit")
+            numerator, denominator = map(int, match(r"(\d+)/(\d+)\$? fraction", row[2], "selected fraction").groups())
+            expect(Fraction(numerator, denominator), fraction, "Q5(b) fraction")
+        expect(Fraction(row[3]), fraction*w, "Q5(b) capacity used in this step")
+        equation(row[4].replace(r"\times", "*"), fraction*p, "Q5(b) value gained")
+        used_before += fraction*w
+        expect(Fraction(row[5]), capacity-used_before, "Q5(b) remaining capacity")
     expect(int(match(r"Maximum profit: (\d+)", s, "fractional optimum").group(1)), profit, "Q5(b) reported optimum")
     fractions = match(r"fractions \$\((.*?)\)\$", s, "selection vector").group(1)
     expect([Fraction(c) for c in fractions.split(",")], chosen, "Q5(b) selection vector")
@@ -405,7 +409,18 @@ def check_fractional_mst(text: str) -> None:
             need(all(any({u, v} == {x, y} for x, y, _ in selected) for u, v in it.pairwise(path)), "Q5(c) cycle witness uses chosen edges")
         else:
             expect(row[3], "Take" if i < len(computed) else "Take; we now have 5 edges, so stop", "Q5(c) take decision")
-        expect(int(row[4].replace("**", "")), cost, "Q5(c) cumulative cost")
+        if cycle:
+            expect(row[4], "unchanged", "Q5(c) forest after a skipped edge")
+        else:
+            groups = [{v} for v in vertices]
+            for u, v, _ in selected:
+                first = next(g for g in groups if u in g)
+                second = next(g for g in groups if v in g)
+                if first is not second:
+                    first |= second
+                    groups.remove(second)
+            shown = {frozenset(int(c) for c in group.split(",")) for group in re.findall(r"\\\{([\d,]+)\\\}", row[4])}
+            expect(shown, {frozenset(g) for g in groups}, "Q5(c) forest components")
     tree_costs = [sum(w for _, _, w in subset) for subset in it.combinations(edges, len(vertices)-1) if reachable(next(iter(vertices)), subset) == vertices]
     expect(cost, min(tree_costs), "Q5(c) exhaustive spanning-tree optimum")
     expression = match(r"\*\*Minimum cost:\*\*\s*\$([^$]+)\$", s, "MST total").group(1)
@@ -428,21 +443,49 @@ def check_dp(text: str) -> None:
 
     infinity = float("inf")
 
-    def readmatrix(rows: list[list[str]]) -> list[list[int | float]]:
-        return [[infinity if c == "∞" else int(c) for c in row[1:]] for row in rows]
+    def parse_matrix(block: str) -> list[list[int | float]]:
+        return [[infinity if c.strip() == r"\infty" else int(c) for c in row.split("&")]
+                for row in block.strip().split(r"\\")]
 
     s = section(text, "6b")
-    matrices = tables(s)
-    expect(len(matrices), 4, "Q6(b) displayed matrix count")
-    distance = readmatrix(matrices[0])
+    matrices = [parse_matrix(b) for b in re.findall(r"\\begin\{pmatrix\}(.*?)\\end\{pmatrix\}", s, re.S)]
+    expect(len(matrices), 5, "Q6(b) displayed matrix count (D0 through D4)")
+    size = len(matrices[0])
+    distance = matrices[0]
     stages = [distance]
-    for k in range(len(distance)):
-        distance = [[min(distance[i][j], distance[i][k]+distance[k][j]) for j in range(len(distance))] for i in range(len(distance))]
+    for k in range(size):
+        distance = [[min(distance[i][j], distance[i][k]+distance[k][j]) for j in range(size)] for i in range(size)]
         stages.append(distance)
     expect(stages[1], stages[0], "Q6(b) D1=D0")
     expect(stages[4], stages[3], "Q6(b) D4=D3")
-    for rows, k in zip(matrices, [0, 2, 3, 4]):
-        expect(readmatrix(rows), stages[k], f"Q6(b) D{k}")
+    for k, shown in enumerate(matrices):
+        expect(shown, stages[k], f"Q6(b) D{k}")
+    value = lambda token: infinity if token == r"\infty" else int(token)
+    per_k = re.split(r"\*\*\$D\^\{\((\d)\)\}\$", s)
+    expect(len(per_k), 1 + 2*size, "Q6(b) one section per intermediate vertex")
+    for k_text, body in zip(per_k[1::2], per_k[2::2]):
+        k = int(k_text)
+        cells = re.findall(
+            r"D\[(\d),(\d)\]=\\min\((\\infty|\d+),\\ D\[(\d),(\d)\]\+D\[(\d),(\d)\]\)"
+            r"=\\min\((\\infty|\d+),\\ (\\infty|\d+)\+(\\infty|\d+)\)=(\\infty|\d+)", body)
+        expect(len(cells), (size-1)*(size-2), f"Q6(b) per-cell checks for k={k}")
+        for i, j, direct, i2, k1, k2, j2, direct2, left, right, result in cells:
+            i, j = int(i), int(j)
+            expect((int(i2), int(k1), int(k2), int(j2)), (i, k, k, j), f"Q6(b) k={k} detour indices")
+            previous, current = stages[k-1], stages[k]
+            expect((value(direct), value(direct2)), (previous[i-1][j-1],)*2, f"Q6(b) k={k} direct D[{i},{j}]")
+            expect((value(left), value(right)), (previous[i-1][k-1], previous[k-1][j-1]), f"Q6(b) k={k} detour parts")
+            expect(value(result), current[i-1][j-1], f"Q6(b) k={k} stored D[{i},{j}]")
+    for rows in tables(s):
+        if not rows or not rows[0][0].startswith("$D["):
+            continue
+        for row in rows:
+            i, j = map(int, re.findall(r"\d+", row[0]))
+            detour = row[2]
+            k = int(re.search(r"D\[\d,(\d)\]\+D\[\1,\d\]", detour).group(1))
+            expect(int(row[4]), stages[k][i-1][j-1], f"Q6(b) arrow table D[{i},{j}] for k={k}")
+    for i, j, shown in re.findall(r"d\((\d),(\d)\)=(\d+)", s):
+        expect(int(shown), stages[4][int(i)-1][int(j)-1], "Q6(b) stated final distance")
 
     s = section(text, "6c")
     inputs = match(r"\bX\s*=\s*([A-Z]+)\s+and\s+Y\s*=\s*([A-Z]+)", s, "LCS input strings")
@@ -451,21 +494,33 @@ def check_dp(text: str) -> None:
     for i, a in enumerate(x, 1):
         for j, b in enumerate(y, 1):
             lengths[i][j] = lengths[i-1][j-1]+1 if a == b else max(lengths[i-1][j], lengths[i][j-1])
-    expect([[int(c) for c in row[1:]] for row in tables(s)[0]], lengths, "Q6(c) all LCS cells")
+    grid = next(t for t in tables(s) if len(t) == len(x)+1 and len(t[0]) == len(y)+2)
+    expect([[int(re.match(r"-?\d+", c).group()) for c in row[1:]] for row in grid], lengths, "Q6(c) all LCS cells")
+    expected_arrow = {}
+    for i in range(1, len(x)+1):
+        for j in range(1, len(y)+1):
+            if x[i-1] == y[j-1]:
+                expected_arrow[i, j] = r"\nwarrow"
+            else:
+                expected_arrow[i, j] = r"\uparrow" if lengths[i-1][j] >= lengths[i][j-1] else r"\leftarrow"
+    for i, row in enumerate(grid[1:], 1):
+        for j, cell in enumerate(row[2:], 1):
+            need(expected_arrow[i, j] in cell, f"Q6(c) arrow in cell ({i},{j}): {cell}")
     current, letters = (len(x), len(y)), []
     lines = re.findall(r"(?m)^\d+\. .*", s)
     for line in lines:
-        positions = [tuple(map(int, p)) for p in re.findall(r"\$\((\d+),(\d+)\)\$", line)]
+        positions = [tuple(map(int, p)) for p in re.findall(r"\$c\[(\d+),(\d+)\]\$", line)]
         expect(len(positions), 2, "Q6(c) traceback coordinates")
         start, end = positions
         expect(start, current, "Q6(c) traceback continuity")
         i, j = start
+        arrow = {r"\nwarrow": (i-1, j-1), r"\uparrow": (i-1, j), r"\leftarrow": (i, j-1)}
+        expect(end, arrow[expected_arrow[i, j]], "Q6(c) traceback follows the table arrow")
+        need(expected_arrow[i, j] in line, f"Q6(c) traceback arrow named in step {start}")
         if x[i-1] == y[j-1]:
-            expect(end, (i-1, j-1), "Q6(c) matching diagonal")
             letters.append(x[i-1])
             need(f"Take **{x[i-1]}**" in line, "Q6(c) traceback letter")
         else:
-            need(end in [(i-1, j), (i, j-1)], "Q6(c) mismatch move")
             expect(lengths[end[0]][end[1]], lengths[i][j], "Q6(c) traceback preserves length")
         current = end
     need(0 in current, "Q6(c) traceback reaches empty prefix")
@@ -482,17 +537,27 @@ def check_dp(text: str) -> None:
         return min(costs[i][j]+g(j, tuple(k for k in remaining if k != j)) for j in remaining) if remaining else costs[i][0]
 
     states = []
-    for rows in tables(s)[1:]:
-        for row in rows:
-            state = integers(row[0])
-            states.append((state[0], tuple(state[1:])))
-            expect(int(row[2]), g(state[0], tuple(state[1:])), "Q8(c) Held-Karp state")
+    for city, subset, shown in re.findall(r"g\((\d),\\\{([\d,]+)\\\}\)=.*?=\s*(\d+)\s*\$", s):
+        if int(city) == 0:
+            continue
+        state = (int(city), tuple(int(v) for v in subset.split(",")))
+        states.append(state)
+        expect(int(shown), g(*state), f"Q8(c) Held-Karp state {state}")
     required_states = [(i, subset) for size in range(1, len(costs)-1) for i in range(1, len(costs)) for subset in it.combinations([j for j in range(1, len(costs)) if j != i], size)]
-    expect(Counter(states), Counter(required_states), "Q8(c) complete subset-state tables")
-    bases = re.findall(r"g\((\d+),\\varnothing\).*?=\s*(\d+)\$", s)
+    expect(Counter(states), Counter(required_states), "Q8(c) complete subset-state formulas")
+    bases = re.findall(r"(?m)^- \$g\((\d+),\\varnothing\)=C_\{\d+\}=(\d+)\$", s)
     expect([int(city) for city, _ in bases], list(range(1, len(costs))), "Q8(c) complete base states")
     for city, value in bases:
         expect(int(value), g(int(city), ()), "Q8(c) empty-subset state")
+    arrow_table = next(t for t in tables(s) if t and t[0][0].startswith("$g("))
+    expect(len(arrow_table), len(costs)-1 + 1, "Q8(c) arrow-table rows")
+    for row in arrow_table[:-1]:
+        city, *subset = integers(row[0])
+        expect(int(row[3]), g(city, tuple(subset)), "Q8(c) arrow-table stored cost")
+        best = min(costs[city][j]+g(j, tuple(k for k in subset if k != j)) for j in subset)
+        chosen = integers(row[2])
+        expect(costs[city][chosen[1]]+g(chosen[1], tuple(k for k in subset if k != chosen[1])), best, "Q8(c) chosen arrow is a minimum")
+    expect(int(arrow_table[-1][3]), g(0, tuple(range(1, len(costs)))), "Q8(c) final arrow-table cost")
     tours = [(0,)+p+(0,) for p in it.permutations(range(1, len(costs)))]
     values = [sum(costs[a][b] for a, b in it.pairwise(t)) for t in tours]
     expect(g(0, tuple(range(1, len(costs)))), min(values), "Q8(c) exhaustive TSP optimum")

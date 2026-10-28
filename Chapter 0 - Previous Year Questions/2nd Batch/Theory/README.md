@@ -9,6 +9,8 @@ This guide answers all 24 subquestions in the supplied CSE 2201 final-examinatio
 
 Every subquestion includes a relevant SVG preview with an editable Excalidraw source in the [diagram index](diagrams/README.md).
 
+Recurrence, search/traversal, greedy, dynamic programming, and graph answers use the tables, notation, and step order taught in [Chapter 3](../../../Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md), [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md), [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md), [Chapter 8](../../../Chapter%208%20-%20Dynamic%20Programming/README.md), and [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md): the watershed function $n^{\log_b a}$, the queue trace table, $c[i,j]$ with arrows for LCS, $D^{(k)}$ matrices for Floyd-Warshall, $g(i,S)$ for TSP, and `FIND`/`UNION` for Kruskal. The questions say *profit*; the chapters say *value*.
+
 **Language:** Answers use the simplest words possible and show the working. Course terms are kept and explained in simple words. Each answer ends with a short **memory trick**. Answer length follows the marks: about 5 lines for 5 marks, half a page for 10 marks, and a full page for 15 or more marks.
 
 | Question | Topic | (a) marks | (b) marks | (c) marks |
@@ -95,45 +97,64 @@ Example: **activity selection**. Always pick the compatible activity that finish
 
 Assume $T(n)=\Theta(1)$ for $n\le1$.
 
-The **Master theorem** solves recurrences of the form $T(n)=aT(n/b)+f(n)$, where $a\ge1$ and $b>1$ are constants. Compare the extra work $f(n)$ with $n^{\log_b a}$ (see [Chapter 3](../../../Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md)). Let $p=\log_b a$:
+The **Master Theorem** solves $T(n)=aT(n/b)+f(n)$, where $a\ge1$ and $b>1$ are constants. Here $a$ is the number of subproblems, $n/b$ is the size of each, and $f(n)$ is the divide-and-combine cost. It compares $f(n)$ with the **watershed function** $n^{\log_b a}$ (see [Chapter 3](../../../Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md)):
 
-- **Case 1:** $f(n)$ is smaller than $n^p$ (by a power of $n$): $T(n)=\Theta(n^p)$.
-- **Case 2:** $f(n)$ is the same as $n^p$ (it may have extra $\log^k n$ factors): $T(n)=\Theta(n^p\log^{k+1}n)$. For $k=0$ this is $\Theta(n^p\log n)$.
-- **Case 3:** $f(n)$ is bigger than $n^p$ (by a power of $n$, and it does not shrink too fast): $T(n)=\Theta(f(n))$.
+| Case | Condition on $f(n)$ | Result |
+| :---: | :--- | :--- |
+| 1 | $f(n)=O(n^{\log_b a-\epsilon})$ for some $\epsilon>0$ ($f(n)$ grows polynomially **slower**) | $T(n)=\Theta(n^{\log_b a})$ |
+| 2 | $f(n)=\Theta(n^{\log_b a}\log^k n)$ for some $k\ge0$ (**same** rate) | $T(n)=\Theta(n^{\log_b a}\log^{k+1}n)$ |
+| 3 | $f(n)=\Omega(n^{\log_b a+\epsilon})$ for some $\epsilon>0$, and $a\,f(n/b)\le c\,f(n)$ for some $c<1$ (polynomially **faster**) | $T(n)=\Theta(f(n))$ |
 
 **(i) $T(n) = 2T(n/2) + n$**
 
-- $a = 2$, $b = 2$, $n^{\log_2 2} = n$, and $f(n) = n$. They are equal, so this is **Case 2**.
-- **Answer: $T(n) = \Theta(n \log n)$.**
-- Check with a recursion tree: each of the $\log_2 n$ levels does $n$ work.
+Here $a=2$, $b=2$, $f(n)=n$.
+
+$$n^{\log_b a}=n^{\log_2 2}=n$$
+
+$f(n)=n=\Theta(n^1\log^0 n)$ matches the watershed function with $k=0$. This is **Case 2**, so $T(n)=\Theta(n\log n)$.
+
+Check with a recursion tree: each of the $\log_2 n$ levels does $n$ work.
 
 **(ii) $T(n) = T(n-1) + 1$**
 
-- This does not divide the input, so use expansion instead of the Master theorem:
+This does not divide the input by a constant $b>1$, so the Master Theorem does not apply. Use expansion:
 
-$$T(n) = T(n-1) + 1 = T(n-2) + 2 = \dots = T(1) + (n-1)$$
+$$T(n)=T(n-1)+1=T(n-2)+2=T(n-3)+3$$
 
-- **Answer: $T(n) = \Theta(n)$.**
+After $k$ expansions, $T(n)=T(n-k)+k$. The recursion stops when $n-k=1$, so $k=n-1$:
+
+$$T(n)=T(1)+(n-1)=\Theta(n)$$
 
 **(iii) $T(n) = 4T(n/2) + n^2$**
 
-- $a = 4$, $b = 2$, $n^{\log_2 4} = n^2$, and $f(n) = n^2$. They are equal, so this is **Case 2**.
-- **Answer: $T(n) = \Theta(n^2 \log n)$.**
-- Check: level $i$ has $4^i$ nodes, each of size $n/2^i$, so each level does $4^i \cdot (n/2^i)^2 = n^2$ work. There are $\log_2 n$ levels.
+Here $a=4$, $b=2$, $f(n)=n^2$.
+
+$$n^{\log_b a}=n^{\log_2 4}=n^2$$
+
+$f(n)=n^2=\Theta(n^2\log^0 n)$, so this is **Case 2** with $k=0$, and $T(n)=\Theta(n^2\log n)$.
+
+Check: level $i$ has $4^i$ nodes, each of size $n/2^i$, so each level does $4^i\cdot(n/2^i)^2=n^2$ work. There are $\log_2 n$ levels.
 
 **(iv) $T(n) = T(n/3) + \log n$**
 
-- Here $a=1$, $b=3$, so $n^{\log_3 1}=1$. The extra work is $\log n$. It is not bigger or smaller than $1$ by a power of $n$, so use the extended Case 2 form (with $k=1$).
-- Here $f(n)=\Theta(\log n)$, so the result is $\Theta(\log^2 n)$.
-- Check by expansion: level $i$ costs $\log n-i\log 3$. There are about $\log_3 n$ levels. Their total is about $\frac{(\log n)^2}{2\log 3}$.
-- **Answer: $T(n)=\Theta(\log^2 n)$.**
+Here $a=1$, $b=3$, $f(n)=\log n$.
 
-| Recurrence | $a$, $b$ | Method | Result |
-|------------|----------|--------|--------|
-| $2T(n/2) + n$ | 2, 2 | Master, Case 2 | $\Theta(n \log n)$ |
-| $T(n-1) + 1$ | - | Expansion | $\Theta(n)$ |
-| $4T(n/2) + n^2$ | 4, 2 | Master, Case 2 | $\Theta(n^2 \log n)$ |
-| $T(n/3) + \log n$ | 1, 3 | Extended Case 2 | $\Theta(\log^2 n)$ |
+$$n^{\log_b a}=n^{\log_3 1}=n^0=1$$
+
+$f(n)=\log n=\Theta(n^0\log^1 n)$ matches the watershed function with $k=1$. This is **Case 2**, so
+
+$$T(n)=\Theta(n^0\log^{1+1}n)=\Theta(\log^2 n)$$
+
+Check by expansion: level $i$ costs $\log n-i\log 3$. There are about $\log_3 n$ levels, and their total is about $\frac{(\log n)^2}{2\log 3}$.
+
+**Summary**
+
+| Recurrence | $a$ | $b$ | $f(n)$ | $n^{\log_b a}$ | Case | Result |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| $T(n)=2T(n/2)+n$ | 2 | 2 | $n$ | $n$ | Case 2 ($k=0$) | $\Theta(n\log n)$ |
+| $T(n)=T(n-1)+1$ | - | - | $1$ | - | Expansion | $\Theta(n)$ |
+| $T(n)=4T(n/2)+n^2$ | 4 | 2 | $n^2$ | $n^2$ | Case 2 ($k=0$) | $\Theta(n^2\log n)$ |
+| $T(n)=T(n/3)+\log n$ | 1 | 3 | $\log n$ | $1$ | Case 2 ($k=1$) | $\Theta(\log^2 n)$ |
 
 > Memory trick: if $f(n)$ matches $n^{\log_b a}$, multiply by $\log n$.
 
@@ -144,10 +165,6 @@ $$T(n) = T(n-1) + 1 = T(n-2) + 2 = \dots = T(1) + (n-1)$$
 ### Q2. NP Classes, BFS, and Activity Graph
 
 #### Q2(a)
-
-**Question (transcribed):** Define the complexity classes NP, NP-hard, and NP-complete.
-
-**Answer.**
 
 **Question (transcribed):** Define the complexity classes NP, NP-hard, and NP-complete.
 
@@ -172,29 +189,52 @@ These classes are about **decision problems** (yes or no answers).
 
 **Answer.**
 
-In an **unweighted** graph, every edge counts as one step. Breadth-first search (**BFS**) visits vertices level by level, using a queue (a first-in, first-out list). The first time BFS visits a vertex, it has found a shortest path to it.
+In an **unweighted** graph, every edge counts as one step, so distance means the number of edges. Breadth-first search (**BFS**) visits vertices level by level, using a queue (a first-in, first-out list). The first time BFS visits a vertex, it has found a shortest path to it (see [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md) and [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
 
 **Steps**
 
-1. Put source $S$ in the queue. Set $d(S)=0$ and mark it visited.
+1. Set $dist[v]=\infty$ and $parent[v]=\text{NIL}$ for every vertex. Set $dist[S]=0$, mark $S$ visited, and enqueue $S$.
 2. While the queue is not empty:
-   - Remove its first vertex $u$.
-   - For each unvisited neighbour $v$ of $u$, mark it visited, set $d(v)=d(u)+1$, set `parent[v]=u`, and add it to the queue.
+   - Dequeue the front vertex $u$.
+   - For each unvisited neighbour $v$ of $u$ (in alphabetical order), mark it visited **when it is enqueued**, set $dist[v]=dist[u]+1$, set $parent[v]=u$, and enqueue it.
 3. To get a path to a target, follow `parent` links back to $S$, then reverse the list.
 
-With adjacency lists, BFS takes $O(V+E)$ time and $O(V)$ extra space. With an adjacency matrix, it takes $O(V^2)$ time. If the target cannot be reached, its distance stays $\infty$ and it has no parent path (see [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md) and [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
+With adjacency lists, BFS takes $\Theta(V+E)$ time and $\Theta(V)$ extra space. With an adjacency matrix, it takes $\Theta(V^2)$ time. If the target cannot be reached, its distance stays $\infty$ and it has no parent path.
 
-**Illustrative givens.** Undirected graph $V=\{S,A,B,C,D,E\}$ with edges S-A, S-B, A-C, B-C, B-D, C-E, D-E; source $S$, target $E$. Visit each vertex's neighbours alphabetically, marking them **when enqueued**, not when dequeued.
+**Illustrative givens.** Undirected graph $V=\{S,A,B,C,D,E\}$ with edges S-A, S-B, A-C, B-C, B-D, C-E, D-E; source $S$, target $E$.
 
-| Step | Pop from queue | Newly discovered (distance) | Queue after step |
-|------|----------------|-----------------------------|------------------|
-| 0 | - | S (0) | S |
-| 1 | S | A (1), B (1) | A, B |
-| 2 | A | C (2) | B, C |
-| 3 | B | D (2); C is already visited | C, D |
-| 4 | C | E (3) | D, E |
-| 5 | D | E is already visited | E |
-| 6 | E | None | Empty |
+**Adjacency list** (neighbours in alphabetical order):
+
+| Vertex | Neighbours |
+| :---: | :--- |
+| S | A, B |
+| A | C, S |
+| B | C, D, S |
+| C | A, B, E |
+| D | B, E |
+| E | C, D |
+
+**Queue trace.** Start with $Q=[S]$. The table shows all discovered vertices, the queue after the current vertex is processed (front first, in bold), and the vertex whose processing is done:
+
+| Vertices visited | Vertices in queue (front first) | Vertex traversal done |
+| :--- | :--- | :---: |
+| S, A, B | **A**, B | S |
+| S, A, B, C | **B**, C | A |
+| S, A, B, C, D | **C**, D | B |
+| S, A, B, C, D, E | **D**, E | C |
+| — | **E** | D |
+| — | empty | E |
+
+When B is processed, C is already visited, so it is not added again. When D is processed, E is already visited.
+
+BFS traversal order from $S$: S, A, B, C, D, E. Distances and parents, grouped by level:
+
+| Distance from S | Vertices | Parents |
+| :---: | :--- | :--- |
+| 0 | S | - |
+| 1 | A, B | $parent[A]=S$, $parent[B]=S$ |
+| 2 | C, D | $parent[C]=A$, $parent[D]=B$ |
+| 3 | E | $parent[E]=C$ |
 
 Shortest path from $S$ to $E$: follow parents $E \leftarrow C \leftarrow A \leftarrow S$, so **S-A-C-E** (3 edges). S-B-D-E is also 3 edges.
 
@@ -214,15 +254,38 @@ Based on the above situation answer the following questions: (i) Represent the a
 
 **Answer.**
 
-**Givens from the paper.** The activities are Wake up, Brush teeth, Take breakfast, Go to class, Study in library, Do homework, and Sleep. The paper gives the six dependencies listed below. We use them to draw the graph and answer all four parts.
+**Givens from the paper.** The activities are Wake up, Brush teeth, Take breakfast, Go to class, Study in library, Do homework, and Sleep. The paper gives the six dependencies listed below. We use them to draw the graph and answer all four parts (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
 
-**(i) Directed graph.** Each activity is a vertex. Each arrow means "must finish before":
+**(i) Directed graph.** Each activity is a vertex. Each arrow $u\to v$ means "$u$ must finish before $v$":
 
 Wake up → Brush teeth → Take breakfast → Go to class → Study in library → Do homework → Sleep
 
 This is a **DAG** (directed acyclic graph): the arrows all point forward, so there is no cycle.
 
-**(ii) Topological order.** A topological order puts each activity before every activity it points to. The order is:
+| Vertex | Outgoing neighbours |
+| :--- | :--- |
+| Wake up | Brush teeth |
+| Brush teeth | Take breakfast |
+| Take breakfast | Go to class |
+| Go to class | Study in library |
+| Study in library | Do homework |
+| Do homework | Sleep |
+| Sleep | — |
+
+**(ii) Topological order (DFS method).** Run DFS from each unvisited vertex. Push a vertex onto a stack only **after** all of its outgoing neighbours have finished. The left-to-right stack is the finish order; its rightmost item is popped first.
+
+| Step | DFS call / return action | Why it happens | Finish stack |
+| :---: | :--- | :--- | :--- |
+| 1 | `DFS(Wake up) → DFS(Brush teeth) → DFS(Take breakfast) → DFS(Go to class) → DFS(Study in library) → DFS(Do homework) → DFS(Sleep)` | Each vertex has one unvisited outgoing neighbour, so follow it. | empty |
+| 2 | Finish `Sleep`; push `Sleep` | Sleep has no outgoing neighbour. | Sleep |
+| 3 | Return to and finish `Do homework`; push it | Its only neighbour, Sleep, is complete. | Sleep, Do homework |
+| 4 | Finish `Study in library`; push it | Do homework is complete. | Sleep, Do homework, Study in library |
+| 5 | Finish `Go to class`; push it | Study in library is complete. | Sleep, Do homework, Study in library, Go to class |
+| 6 | Finish `Take breakfast`; push it | Go to class is complete. | Sleep, Do homework, Study in library, Go to class, Take breakfast |
+| 7 | Finish `Brush teeth`; push it | Take breakfast is complete. | Sleep, Do homework, Study in library, Go to class, Take breakfast, Brush teeth |
+| 8 | Finish `Wake up`; push it | Brush teeth is complete. | Sleep, Do homework, Study in library, Go to class, Take breakfast, Brush teeth, Wake up |
+
+Now pop from the right of the stack. The valid order is:
 
 1. Wake up
 2. Brush teeth
@@ -232,9 +295,9 @@ This is a **DAG** (directed acyclic graph): the arrows all point forward, so the
 6. Do homework
 7. Sleep
 
-**DFS method** (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)): run DFS from Wake up and push each activity onto a stack *after* all the activities it points to are finished. The finish order is Sleep, Do homework, Study in library, Go to class, Take breakfast, Brush teeth, Wake up. Popping the stack gives the order above. (Kahn's algorithm gives the same order: only Wake up has no incoming arrow, and each removal unlocks the next.)
+Every arrow points left to right in this order. DFS-based topological sort takes $\Theta(V+E)$ time. (Kahn's algorithm, which repeatedly removes a vertex with indegree 0, gives the same order here: only Wake up has indegree 0, and each removal unlocks the next activity.)
 
-**(iii) Is more than one order possible?** No. The graph is one chain, so each activity must follow the one before it.
+**(iii) Is more than one order possible?** No. The graph is one chain, so each activity must follow the one before it. (A topological order is not unique only when two vertices have no dependency path between them.)
 
 **(iv) What if Sleep comes before Homework?** This breaks the given dependency Do homework → Sleep. So it is not a valid order for the given graph. If we also forced the rule "Sleep before Homework", we would get a cycle (Do homework → Sleep → Do homework), and then no topological order would exist.
 
@@ -252,18 +315,27 @@ This is a **DAG** (directed acyclic graph): the arrows all point forward, so the
 
 **Answer.**
 
-| | Searching | Traversing |
-|--|-----------|------------|
-| Purpose | Find whether an item exists, and where it is | Visit every item (or vertex) once, in a systematic order |
-| Main operation | Compare the target with items, stop when found | Visit each item and do some work on it |
-| Stops early? | Yes, when found | Usually no, it visits all items |
-| Examples | Linear search, binary search, search in a BST or hash table | BFS, DFS, in-order traversal of a tree |
+A **search technique** checks elements until it finds the required target or proves that it is not there. A **traversal technique** visits elements in a controlled order. In a graph, this usually means starting from one vertex and visiting every vertex reachable from it (see [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md)).
 
-BFS or DFS can also search for a target by stopping when they find it. From one start vertex, a graph traversal visits only vertices it can reach. To visit a disconnected graph fully, start again at each unvisited vertex. The difference is the goal: find one item or visit them all.
+| Feature | Searching | Traversal |
+| :--- | :--- | :--- |
+| Main goal (purpose) | Find a target or answer | Visit all reachable elements |
+| Typical operation | Compare the target with the current element | Visit the element and process it |
+| Stopping condition | Usually stops when the target is found | Usually stops when all reachable elements are visited |
+| Output | Target position, true/false, path, or value | Visiting order, component, tree, or processed data |
+| Example question | "Is 511 in the list?" or "Is vertex G reachable from A?" | "Visit every vertex reachable from A." |
+| Common tools | Linear search, binary search, BFS, DFS | BFS, DFS, tree traversal (in-order, pre-order, post-order) |
+
+Both use the same four ideas: the **current element**, a **frontier** (the waiting collection of elements to visit next), a **visited set**, and a **processing step**. The frontier controls the order: a queue gives BFS, and a stack or the recursion call stack gives DFS.
+
+- If we use BFS from vertex $A$ and stop when $G$ is found, it is a **search**.
+- If we use BFS from vertex $A$ and continue until no reachable vertex remains, it is a **traversal**.
+
+From one start vertex, a graph traversal visits only the vertices it can reach. To visit a disconnected graph fully, run BFS or DFS again from every unvisited vertex. The difference is the goal: find one item, or visit them all.
+
+> Memory trick: searching asks "Is 511 here?", traversing asks "Show me every item."
 
 ![Searching for a target versus traversing all entries](diagrams/b2-theory-18-search-traverse.svg)
-
-Both are covered in [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md). A simple way to remember it: searching asks "Is 511 here?", traversing asks "Show me every item."
 
 #### Q3(b)
 
@@ -461,22 +533,40 @@ Merge sort takes $\Theta(n\log n)$ time (see Q1(c)(i)) and uses an extra $\Theta
 
 **Answer.**
 
-**Question (transcribed):** What is a greedy algorithm? State the conditions under which a greedy approach produces an optimal solution.
+A **greedy algorithm** builds the answer step by step. At each step it picks the **locally best** choice that keeps the solution valid, and it **never undoes** that choice (see [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md)).
 
-**Answer.**
+**Parts of a greedy algorithm**
 
-A **greedy algorithm** builds the answer step by step. At each step it picks the **locally best** choice and **never undoes it**.
+| Part | Meaning | Example (fractional knapsack) |
+| :--- | :--- | :--- |
+| Candidate set | The available items, edges, coins, or activities | The items |
+| Selection function | Chooses the next most promising candidate | Highest value/weight ratio |
+| Feasibility function | Checks that the choice keeps the partial solution valid | The fraction fits in the remaining capacity |
+| Objective function | What we minimize or maximize | Maximize total value |
+| Solution function | Checks that the solution is complete | Capacity is full or no item remains |
 
 **Greedy gives an optimal answer when the problem has both:**
 
-1. **Greedy-choice property**: choosing the locally best option first can still lead to a globally optimal answer.
-2. **Optimal substructure**: after the greedy choice, the remaining smaller problem is solved optimally in the same way.
+1. **Greedy-choice property**: a globally optimal solution can be reached by first making the locally optimal choice.
+2. **Optimal substructure**: after the greedy choice, the remaining smaller problem is the same kind of problem and is solved optimally in the same way.
 
-The usual proof is the **exchange argument**: replace a choice in an optimal answer by the greedy choice, and show the answer is not worse.
+**Proof ideas**
+
+| Proof idea | Meaning | Common use |
+| :--- | :--- | :--- |
+| Exchange argument | Replace part of an optimal solution with the greedy choice without making it worse | Activity selection, fractional knapsack |
+| Cut property | The lightest edge crossing a cut is safe for an MST | Prim, Kruskal |
+| Stays-ahead argument | The greedy solution is never behind another solution after each step | Activity selection |
+| Induction | Greedy first choice plus an optimal remaining solution is optimal | Many greedy algorithms |
 
 **Works:** activity selection, fractional knapsack, Kruskal's and Prim's MST, Huffman coding.
 
-**Fails:** 0/1 knapsack, and coin change with coins {1, 3, 4} for amount 6. Greedy gives 4 + 1 + 1 (3 coins), but 3 + 3 (2 coins) is better.
+**Fails:** 0/1 knapsack, and coin change for some coin systems. Take denominations $4,3,1$ and amount $A=6$:
+
+| Method | Chosen coins | Number of coins |
+| :--- | :--- | :---: |
+| Greedy | $4+1+1$ | 3 |
+| Optimal | $3+3$ | 2 |
 
 > Memory trick: Greedy works only when the best choice now is also safe for the future.
 
@@ -488,31 +578,45 @@ The usual proof is the **exchange argument**: replace a choice in an optimal ans
 
 **Answer.**
 
-In the **fractional knapsack**, we may take part of an item. Take items from the highest to lowest **profit-to-weight ratio** (profit earned per unit of weight).
+In the **fractional knapsack**, an item may be broken into fractions. The greedy choice is to take items in decreasing order of the ratio $v_i/w_i$ (value, or profit, per unit weight). If an item gives more value per unit weight, taking it earlier cannot reduce the best total, and since fractions are allowed, the last item can fill the remaining capacity exactly (see [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md)).
 
-**(i) Profit-to-weight ratio**
+**(i) Profit-to-weight ratio** (the chapter calls profit *value*):
 
-| Item | Weight | Profit | Ratio $p/w$ | Rank |
-|------|--------|--------|-------------|------|
+| Item | Weight | Value (profit) | Ratio $v/w$ | Rank |
+| :---: | :---: | :---: | :---: | :---: |
 | 1 | 10 | 60 | 6 | 1st |
 | 2 | 20 | 100 | 5 | 2nd |
 | 3 | 30 | 120 | 4 | 3rd |
 
-**(ii) Items to include.** Take items in that order until the capacity 50 is full:
+**(ii) Items to include.** Sorted by ratio: item 1, item 2, item 3. Fill the capacity $W=50$:
 
-| Step | Take | Weight used | Profit so far |
-|------|------|-------------|---------------|
-| 1 | All of item 1 | 10 | 60 |
-| 2 | All of item 2 | 30 | 160 |
-| 3 | $\frac{20}{30}$ of item 3 (only 20 weight is left) | 50 | 160 + $\frac{2}{3}$ × 120 = **240** |
+| Step | Item chosen | Amount taken | Capacity used | Value gained | Remaining capacity |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 1 | 1 | Full item | 10 | 60 | 40 |
+| 2 | 2 | Full item | 20 | 100 | 20 |
+| 3 | 3 | $20/30$ fraction | 20 | $120 \times 20/30 = 80$ | 0 |
 
-**(iii)** **Maximum profit: 240**, by taking fractions $(1,1,2/3)$ of items 1, 2, and 3. This is the best possible because every unit of weight is filled with the highest ratio still available. Sorting takes $O(n\log n)$ time; filling the knapsack takes $O(n)$ time. The 0/1 optimum is 220 (items 2 and 3), when items cannot be split.
+**(iii)** **Maximum profit: 240**, because $60+100+80=240$. The answer is to take fractions $(1,1,2/3)$ of items 1, 2, and 3. This is the best possible because every unit of weight is filled with the highest ratio still available.
+
+```text
+FRACTIONAL-KNAPSACK(items, W)
+1. compute ratio[i] = value[i] / weight[i] for each item
+2. sort items by decreasing ratio
+3. total_value = 0; remaining = W
+4. for each item i in sorted order:
+5.     if weight[i] <= remaining:
+6.         take the full item; total_value += value[i]; remaining -= weight[i]
+7.     else:
+8.         take the fraction remaining / weight[i]
+9.         total_value += value[i] * remaining / weight[i]; remaining = 0; break
+10. return total_value
+```
+
+Sorting takes $\Theta(n\log n)$ time and the greedy scan takes $\Theta(n)$, so the total is $\Theta(n\log n)$. The 0/1 optimum is 220 (items 2 and 3), when items cannot be split.
 
 > Memory trick: highest profit per unit weight first, and split the last item.
 
 ![Fractional knapsack fill by decreasing profit density](diagrams/b2-theory-22-fractional-knapsack.svg)
-
-See [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md) for the proof.
 
 #### Q5(c)
 
@@ -520,28 +624,43 @@ See [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md) for th
 
 **Answer.**
 
-A **minimum spanning tree (MST)** connects every vertex, has no cycle, and has the smallest possible total edge weight. A tree on 6 vertices has 5 edges.
+A **minimum spanning tree (MST)** connects every vertex, has no cycle, and has the smallest possible total edge weight. A tree on 6 vertices has 5 edges (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
 
 **Graph transcribed from the paper:** the undirected graph has $V=\{1,2,3,4,5,6\}$ and these edges, from lowest to highest weight:
 
 $$(5,1)=1,\ (4,1)=1,\ (1,2)=2,\ (4,2)=3,\ (3,2)=3,\ (4,3)=5,\ (2,6)=7,\ (3,6)=8,\ (5,4)=9.$$
 
-Kruskal's algorithm checks edges from lightest to heaviest. Take an edge if it does not make a cycle; otherwise skip it.
+**Adjacency list** (neighbour, weight):
 
-| Step | Edge | Weight | Decision | Total so far |
-|------|------|--------|----------|--------------|
-| 1 | (5,1) | 1 | Take | 1 |
-| 2 | (4,1) | 1 | Take | 2 |
-| 3 | (1,2) | 2 | Take | 4 |
-| 4 | (4,2) | 3 | Skip: path 4–1–2 already connects them | 4 |
-| 5 | (3,2) | 3 | Take | 7 |
-| 6 | (4,3) | 5 | Skip: path 4–1–2–3 already connects them | 7 |
-| 7 | (2,6) | 7 | Take; we now have 5 edges, so stop | **14** |
+```text
+1: 2(2), 4(1), 5(1)
+2: 1(2), 3(3), 4(3), 6(7)
+3: 2(3), 4(5), 6(8)
+4: 1(1), 2(3), 3(5), 5(9)
+5: 1(1), 4(9)
+6: 2(7), 3(8)
+```
+
+**Kruskal's algorithm** begins with a forest of six one-vertex sets. Sort the edges by weight. For each edge, test `FIND(u) != FIND(v)`. If the roots differ, take the edge and `UNION` the two sets. If they are the same, the edge would close a cycle, so skip it. Stop after $V-1=5$ accepted edges. Equal-weight edges may be taken in either order.
+
+| Scan | Edge | Weight | Decision | Selected forest after decision |
+| :---: | :---: | :---: | :--- | :--- |
+| 1 | (5,1) | 1 | Take | $\{1,5\}$, $\{2\}$, $\{3\}$, $\{4\}$, $\{6\}$ |
+| 2 | (4,1) | 1 | Take | $\{1,4,5\}$, $\{2\}$, $\{3\}$, $\{6\}$ |
+| 3 | (1,2) | 2 | Take | $\{1,2,4,5\}$, $\{3\}$, $\{6\}$ |
+| 4 | (4,2) | 3 | Skip: path 4–1–2 already connects them | unchanged |
+| 5 | (3,2) | 3 | Take | $\{1,2,3,4,5\}$, $\{6\}$ |
+| 6 | (4,3) | 5 | Skip: path 4–1–2–3 already connects them | unchanged |
+| 7 | (2,6) | 7 | Take; we now have 5 edges, so stop | $\{1,2,3,4,5,6\}$ |
+
+The remaining edges (3,6) with weight 8 and (5,4) with weight 9 are not needed.
 
 **MST edges:** $(5,1),(4,1),(1,2),(3,2),(2,6)$.
 **Minimum cost:** $1+1+2+3+7=14$.
 
-These edges connect all six vertices without a cycle. The MST is unique. The diagram highlights the selected edges.
+These edges connect all six vertices without a cycle. The MST is unique. Sorting the edges takes $\Theta(E\log E)$ time, and the DSU tests are almost constant per edge. The diagram highlights the selected edges.
+
+> Memory trick: sort the edges, skip any edge that closes a cycle, and stop at $V-1$ edges.
 
 ![Kruskal MST on the graph shown in the paper](diagrams/b2-theory-07-kruskal-mst.svg)
 
@@ -551,11 +670,19 @@ These edges connect all six vertices without a cycle. The MST is unique. The dia
 
 **Answer.**
 
-**Dynamic programming (DP)** solves smaller problems once, stores their answers, and reuses them. It is useful when the same subproblems appear repeatedly (**overlapping subproblems**) and the full answer can be built from smaller answers (**optimal substructure**) (see [Chapter 8](../../../Chapter%208%20-%20Dynamic%20Programming/README.md)).
+**Dynamic programming (DP)** solves each distinct subproblem once, stores its answer, and reuses it whenever the same subproblem appears again. It is useful when the same subproblems repeat (**overlapping subproblems**) and the full answer can be built from optimal answers to smaller ones (**optimal substructure**) (see [Chapter 8](../../../Chapter%208%20-%20Dynamic%20Programming/README.md)).
 
-**Fibonacci:** $F(0)=0$, $F(1)=1$, and $F(n)=F(n-1)+F(n-2)$ for $n\ge2$. The recursion stops at 0 or 1.
+A DP solution has five parts: **state**, **recurrence**, **base case**, **table order**, and **final answer**. For Fibonacci:
 
-In the simple recursive method, the calls for $F(5)$ look like this:
+| DP part | Choice for Fibonacci |
+| :--- | :--- |
+| State | $F(n)$ |
+| Base case | $F(0)=0$ and $F(1)=1$ |
+| Recurrence | $F(n)=F(n-1)+F(n-2)$ for $n\ge2$ |
+| Table order | Fill $n=2,3,\dots$ upward |
+| Final answer | $F(5)=5$ |
+
+**Overlapping subproblems.** In the simple recursive method, the calls for $F(5)$ look like this. Every repeated subtree below is solved again from scratch:
 
 ```text
 F(5)
@@ -563,8 +690,8 @@ F(5)
 │   ├─ F(3)
 │   │   ├─ F(2) -> F(1), F(0)
 │   │   └─ F(1)
-│   └─ F(2) -> F(1), F(0)
-└─ F(3)
+│   └─ F(2) -> F(1), F(0)        <- F(2) repeated
+└─ F(3)                          <- F(3) repeated
     ├─ F(2) -> F(1), F(0)
     └─ F(1)
 ```
@@ -580,15 +707,19 @@ The naive recursion for $F(5)$ makes **15** calls in total. As $n$ grows, many v
 
 > Memory trick: do not solve the same thing twice. Store the answer.
 
-With DP, each $F(i)$ is computed once and stored:
+With DP, each $F(i)$ is computed once and stored. Memoization stores $F(3)=2$ the first time it is found, so the second request returns the cached value. Tabulation fills the table from the base cases upward:
 
-```
+```text
 if n == 0: return 0
 F[0] = 0, F[1] = 1
 for i = 2 to n:
     F[i] = F[i-1] + F[i-2]
 return F[n]
 ```
+
+| $n$ | 0 | 1 | 2 | 3 | 4 | 5 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $F(n)$ | 0 | 1 | 1 | 2 | 3 | **5** |
 
 The table for $F(5)$ is $[0,1,1,2,3,5]$. Counting each addition as one step, tabulation takes $\Theta(n)$ time and $\Theta(n)$ extra space. If we keep only the previous two values, the extra space is $\Theta(1)$.
 
@@ -600,63 +731,126 @@ The table for $F(5)$ is $[0,1,1,2,3,5]$. Counting each addition as one step, tab
 
 **Answer.**
 
-**Givens:** a directed graph with vertices 1–4 and the four weighted edges below. $\infty$ means there is no direct edge; each diagonal 0 is the distance from a vertex to itself. Assume there is no negative-weight cycle. Process intermediate vertices in order 1, 2, 3, 4.
+**Givens:** a directed graph with vertices 1–4 and the four weighted edges $1\to2$ (5), $1\to4$ (10), $2\to3$ (3), and $3\to4$ (1). $\infty$ means there is no direct edge; each diagonal 0 is the distance from a vertex to itself. Assume there is no negative-weight cycle (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
 
-Floyd-Warshall finds shortest distances between **every pair** of vertices. Let $D_k(i,j)$ be the shortest distance from $i$ to $j$ when only vertices $1..k$ may be used in the middle of the path. For each vertex $k$, compare the current path with the path through $k$:
+Floyd-Warshall finds shortest distances between **every pair** of vertices. Let $D^{(k)}[i,j]$ be the shortest distance from $i$ to $j$ using only vertices $1$ through $k$ as intermediate vertices. When vertex $k$ is allowed, either do not use it, or go through it:
 
-$$D_k(i,j)=\min\big(D_{k-1}(i,j),\;D_{k-1}(i,k)+D_{k-1}(k,j)\big)$$
+$$D^{(k)}[i,j]=\min\big(D^{(k-1)}[i,j],\ D^{(k-1)}[i,k]+D^{(k-1)}[k,j]\big)$$
 
-The graph has edges $1\to2$ (5), $1\to4$ (10), $2\to3$ (3), and $3\to4$ (1) (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
+**Initial matrix $D^{(0)}$** (direct edges only):
 
-**$D_0$ (direct edges only)**
+$$
+D^{(0)}=
+\begin{pmatrix}
+0 & 5 & \infty & 10 \\
+\infty & 0 & 3 & \infty \\
+\infty & \infty & 0 & 1 \\
+\infty & \infty & \infty & 0
+\end{pmatrix}
+$$
 
-| | 1 | 2 | 3 | 4 |
-|--|---|---|---|---|
-| 1 | 0 | 5 | ∞ | 10 |
-| 2 | ∞ | 0 | 3 | ∞ |
-| 3 | ∞ | ∞ | 0 | 1 |
-| 4 | ∞ | ∞ | ∞ | 0 |
+**$D^{(1)}$: allow vertex 1 as intermediate.** Row 1 and column 1 do not change. Every other cell is checked against a detour through vertex 1:
 
-**$k = 1$:** no edge comes into vertex 1, so nothing changes. $D_1 = D_0$.
+- $D[2,3]=\min(3,\ D[2,1]+D[1,3])=\min(3,\ \infty+\infty)=3$
+- $D[2,4]=\min(\infty,\ D[2,1]+D[1,4])=\min(\infty,\ \infty+10)=\infty$
+- $D[3,2]=\min(\infty,\ D[3,1]+D[1,2])=\min(\infty,\ \infty+5)=\infty$
+- $D[3,4]=\min(1,\ D[3,1]+D[1,4])=\min(1,\ \infty+10)=1$
+- $D[4,2]=\min(\infty,\ D[4,1]+D[1,2])=\min(\infty,\ \infty+5)=\infty$
+- $D[4,3]=\min(\infty,\ D[4,1]+D[1,3])=\min(\infty,\ \infty+\infty)=\infty$
 
-**$k = 2$:** check $i \to 2 \to j$.
+No edge comes into vertex 1, so nothing improves:
 
-- $d(1,3)$: $\min(\infty, 5 + 3) = 8$. **Changed.**
-- $d(4,\cdot)$ and others: no changes.
+$$
+D^{(1)}=D^{(0)}=
+\begin{pmatrix}
+0 & 5 & \infty & 10 \\
+\infty & 0 & 3 & \infty \\
+\infty & \infty & 0 & 1 \\
+\infty & \infty & \infty & 0
+\end{pmatrix}
+$$
 
-| | 1 | 2 | 3 | 4 |
-|--|---|---|---|---|
-| 1 | 0 | 5 | **8** | 10 |
-| 2 | ∞ | 0 | 3 | ∞ |
-| 3 | ∞ | ∞ | 0 | 1 |
-| 4 | ∞ | ∞ | ∞ | 0 |
+**$D^{(2)}$: allow vertices 1 and 2 as intermediate.** Row 2 and column 2 stay fixed:
 
-**$k = 3$:** check $i \to 3 \to j$.
+- $D[1,3]=\min(\infty,\ D[1,2]+D[2,3])=\min(\infty,\ 5+3)=8$
+- $D[1,4]=\min(10,\ D[1,2]+D[2,4])=\min(10,\ 5+\infty)=10$
+- $D[3,1]=\min(\infty,\ D[3,2]+D[2,1])=\min(\infty,\ \infty+\infty)=\infty$
+- $D[3,4]=\min(1,\ D[3,2]+D[2,4])=\min(1,\ \infty+\infty)=1$
+- $D[4,1]=\min(\infty,\ D[4,2]+D[2,1])=\min(\infty,\ \infty+\infty)=\infty$
+- $D[4,3]=\min(\infty,\ D[4,2]+D[2,3])=\min(\infty,\ \infty+3)=\infty$
 
-- $d(1,4)$: $\min(10, 8 + 1) = 9$. **Changed.**
-- $d(2,4)$: $\min(\infty, 3 + 1) = 4$. **Changed.**
+Only $D[1,3]$ improves, from $\infty$ to **8**, through $1\to2\to3$:
 
-| | 1 | 2 | 3 | 4 |
-|--|---|---|---|---|
-| 1 | 0 | 5 | 8 | **9** |
-| 2 | ∞ | 0 | 3 | **4** |
-| 3 | ∞ | ∞ | 0 | 1 |
-| 4 | ∞ | ∞ | ∞ | 0 |
+$$
+D^{(2)}=
+\begin{pmatrix}
+0 & 5 & 8 & 10 \\
+\infty & 0 & 3 & \infty \\
+\infty & \infty & 0 & 1 \\
+\infty & \infty & \infty & 0
+\end{pmatrix}
+$$
 
-**$k = 4$:** no edge leaves vertex 4, so nothing changes. $D_4 = D_3$.
+Arrow-guided update for intermediate vertex $k=2$ (changed cell only):
 
-**Final matrix $D_4$:**
+| Cell | Keep direct path | Try detour through $2$ | Chosen arrow | Stored value |
+| :---: | :---: | :---: | :---: | :---: |
+| $D[1,3]$ | $\infty$ | $D[1,2]+D[2,3]=5+3=8$ | $1 \rightarrow 2 \rightarrow 3$ | **8** |
 
-| | 1 | 2 | 3 | 4 |
-|--|---|---|---|---|
-| 1 | 0 | 5 | 8 | 9 |
-| 2 | ∞ | 0 | 3 | 4 |
-| 3 | ∞ | ∞ | 0 | 1 |
-| 4 | ∞ | ∞ | ∞ | 0 |
+**$D^{(3)}$: allow vertices 1, 2, and 3 as intermediate.** Row 3 and column 3 stay fixed:
+
+- $D[1,2]=\min(5,\ D[1,3]+D[3,2])=\min(5,\ 8+\infty)=5$
+- $D[1,4]=\min(10,\ D[1,3]+D[3,4])=\min(10,\ 8+1)=9$
+- $D[2,1]=\min(\infty,\ D[2,3]+D[3,1])=\min(\infty,\ 3+\infty)=\infty$
+- $D[2,4]=\min(\infty,\ D[2,3]+D[3,4])=\min(\infty,\ 3+1)=4$
+- $D[4,1]=\min(\infty,\ D[4,3]+D[3,1])=\min(\infty,\ \infty+\infty)=\infty$
+- $D[4,2]=\min(\infty,\ D[4,3]+D[3,2])=\min(\infty,\ \infty+\infty)=\infty$
+
+Two cells improve: $D[1,4]$ drops from 10 to **9** through $1\to2\to3\to4$, and $D[2,4]$ drops from $\infty$ to **4** through $2\to3\to4$:
+
+$$
+D^{(3)}=
+\begin{pmatrix}
+0 & 5 & 8 & 9 \\
+\infty & 0 & 3 & 4 \\
+\infty & \infty & 0 & 1 \\
+\infty & \infty & \infty & 0
+\end{pmatrix}
+$$
+
+Arrow-guided update for intermediate vertex $k=3$ (changed cells):
+
+| Cell | Keep direct path | Try detour through $3$ | Chosen arrow | Stored value |
+| :---: | :---: | :---: | :---: | :---: |
+| $D[1,4]$ | 10 | $D[1,3]+D[3,4]=8+1=9$ | $1 \rightarrow 3 \rightarrow 4$ | **9** |
+| $D[2,4]$ | $\infty$ | $D[2,3]+D[3,4]=3+1=4$ | $2 \rightarrow 3 \rightarrow 4$ | **4** |
+
+**$D^{(4)}$: allow all vertices as intermediate (final matrix).** Row 4 and column 4 stay fixed:
+
+- $D[1,2]=\min(5,\ D[1,4]+D[4,2])=\min(5,\ 9+\infty)=5$
+- $D[1,3]=\min(8,\ D[1,4]+D[4,3])=\min(8,\ 9+\infty)=8$
+- $D[2,1]=\min(\infty,\ D[2,4]+D[4,1])=\min(\infty,\ 4+\infty)=\infty$
+- $D[2,3]=\min(3,\ D[2,4]+D[4,3])=\min(3,\ 4+\infty)=3$
+- $D[3,1]=\min(\infty,\ D[3,4]+D[4,1])=\min(\infty,\ 1+\infty)=\infty$
+- $D[3,2]=\min(\infty,\ D[3,4]+D[4,2])=\min(\infty,\ 1+\infty)=\infty$
+
+No edge leaves vertex 4, so nothing changes:
+
+$$
+D^{(4)}=D^{(3)}=
+\begin{pmatrix}
+0 & 5 & 8 & 9 \\
+\infty & 0 & 3 & 4 \\
+\infty & \infty & 0 & 1 \\
+\infty & \infty & \infty & 0
+\end{pmatrix}
+$$
+
+**Negative-cycle check:** every diagonal entry of $D^{(4)}$ is still 0, so there is no negative cycle and all distances are valid.
 
 ![Floyd-Warshall graph and matrix changes](diagrams/b2-theory-08-floyd-warshall.svg)
 
-The algorithm takes $\Theta(n^3)$ time and $\Theta(n^2)$ space. The shortest path from 1 to 4 is **1→2→3→4**, with cost 9. If a graph has a negative-weight cycle, some shortest-path distances are not defined.
+The final distances include $d(1,3)=8$, $d(1,4)=9$, and $d(2,4)=4$. The shortest path from 1 to 4 is **1→2→3→4**, with cost $5+3+1=9$. The algorithm takes $\Theta(n^3)$ time and $\Theta(n^2)$ space. If a graph has a negative-weight cycle, some shortest-path distances are not defined.
 
 > Memory trick: for each $k$, ask: "Is going through $k$ shorter?"
 
@@ -666,40 +860,60 @@ The algorithm takes $\Theta(n^3)$ time and $\Theta(n^2)$ space. The shortest pat
 
 **Answer.**
 
-A **subsequence** keeps letters in their original order but may skip letters. Let $L[i][j]$ be the length of the longest common subsequence (**LCS**) in the first $i$ letters of $X$ and the first $j$ letters of $Y$.
+A **subsequence** keeps letters in their original order but may skip letters. Let $c[i,j]$ be the length of the longest common subsequence (**LCS**) of the first $i$ letters of $X$ and the first $j$ letters of $Y$ (see [Chapter 8](../../../Chapter%208%20-%20Dynamic%20Programming/README.md)).
 
-- Set $L[0][j]=L[i][0]=0$, because an empty string has no common letters.
-- If $X_i=Y_j$, set $L[i][j]=L[i-1][j-1]+1$.
-- If they differ, set $L[i][j]=\max(L[i-1][j],L[i][j-1])$.
+$$
+c[i,j]=
+\begin{cases}
+0, & i=0 \text{ or } j=0\\
+c[i-1,j-1]+1, & x_i=y_j\\
+\max\big(c[i-1,j],\ c[i,j-1]\big), & x_i\ne y_j
+\end{cases}
+$$
+
+| DP part | Choice for LCS |
+| :--- | :--- |
+| State | $c[i,j]$: LCS length of $X[1..i]$ and $Y[1..j]$ |
+| Base case | $c[0,j]=c[i,0]=0$, because an empty string has no common letters |
+| Recurrence | The three cases above |
+| Table order | Row by row, left to right |
+| Final answer | $c[6,7]$ |
+
+**Arrow legend:** $\nwarrow$ means the letters match, so the value is the diagonal cell plus 1. $\uparrow$ means they do not match and the upper cell is chosen. $\leftarrow$ means they do not match and the left cell is chosen. If the upper and left cells tie, $\uparrow$ is chosen (the rule $c[i-1][j]\ge c[i][j-1]$ in the chapter's algorithm).
 
 **DP table** (row = letter of $X$, column = letter of $Y$):
 
-| | | G | X | T | X | A | Y | B |
-|--|---|---|---|---|---|---|---|---|
-| | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| A | 0 | 0 | 0 | 0 | 0 | **1** | 1 | 1 |
-| G | 0 | **1** | 1 | 1 | 1 | 1 | 1 | 1 |
-| G | 0 | **1** | 1 | 1 | 1 | 1 | 1 | 1 |
-| T | 0 | 1 | 1 | **2** | 2 | 2 | 2 | 2 |
-| A | 0 | 1 | 1 | 2 | 2 | **3** | 3 | 3 |
-| B | 0 | 1 | 1 | 2 | 2 | 3 | 3 | **4** |
+| $i \backslash j$ | - | G | X | T | X | A | Y | B |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| - | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| A | 0 | 0 ($\uparrow$) | 0 ($\uparrow$) | 0 ($\uparrow$) | 0 ($\uparrow$) | 1 ($\nwarrow$) | 1 ($\leftarrow$) | 1 ($\leftarrow$) |
+| G | 0 | 1 ($\nwarrow$) | 1 ($\leftarrow$) | 1 ($\leftarrow$) | 1 ($\leftarrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) |
+| G | 0 | 1 ($\nwarrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) |
+| T | 0 | 1 ($\uparrow$) | 1 ($\uparrow$) | 2 ($\nwarrow$) | 2 ($\leftarrow$) | 2 ($\leftarrow$) | 2 ($\leftarrow$) | 2 ($\leftarrow$) |
+| A | 0 | 1 ($\uparrow$) | 1 ($\uparrow$) | 2 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\nwarrow$) | 3 ($\leftarrow$) | 3 ($\leftarrow$) |
+| B | 0 | 1 ($\uparrow$) | 1 ($\uparrow$) | 2 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) | **4** ($\nwarrow$) |
 
-(Bold cells show matching letters.)
+Key calculations:
 
-**Traceback:** start at the bottom-right cell and follow the table rules backwards.
+- $c[1,5]=c[0,4]+1=1$, because $A=A$.
+- $c[4,3]=c[3,2]+1=2$, because $T=T$.
+- $c[5,5]=c[4,4]+1=3$, because $A=A$.
+- $c[6,7]=c[5,6]+1=4$, because $B=B$.
 
-1. $(6,7)$: $B = B$. Take **B**, move diagonally to $(5,6)$.
-2. $(5,6)$: $A \ne Y$. Value above is 2, value to the left is 3. Move left to $(5,5)$.
-3. $(5,5)$: $A = A$. Take **A**, move diagonally to $(4,4)$.
-4. $(4,4)$: $T \ne X$. Move left to $(4,3)$ (value 2).
-5. $(4,3)$: $T = T$. Take **T**, move diagonally to $(3,2)$.
-6. $(3,2)$: $G \ne X$. Move up to $(2,2)$.
-7. $(2,2)$: $G \ne X$. Move left to $(2,1)$.
-8. $(2,1)$: $G = G$. Take **G**, move diagonally to $(1,0)$. Stop.
+**Traceback** starts at $c[6,7]=4$ and follows the arrows:
+
+1. $c[6,7]$: $B=B$. Take **B** and move $\nwarrow$ to $c[5,6]$.
+2. $c[5,6]$: $A\ne Y$. The upper value is 2 and the left value is 3, so move $\leftarrow$ to $c[5,5]$.
+3. $c[5,5]$: $A=A$. Take **A** and move $\nwarrow$ to $c[4,4]$.
+4. $c[4,4]$: $T\ne X$. The left value (2) is larger, so move $\leftarrow$ to $c[4,3]$.
+5. $c[4,3]$: $T=T$. Take **T** and move $\nwarrow$ to $c[3,2]$.
+6. $c[3,2]$: $G\ne X$. Up and left tie at 1, so move $\uparrow$ to $c[2,2]$.
+7. $c[2,2]$: $G\ne X$. The left value (1) is larger, so move $\leftarrow$ to $c[2,1]$.
+8. $c[2,1]$: $G=G$. Take **G** and move $\nwarrow$ to $c[1,0]$. Stop.
 
 Reading the taken letters backwards gives **G, T, A, B**.
 
-**LCS = GTAB, length = 4.** At $(3,2)$, moving up or left is tied; choose up to get this traceback. Other tie choices may place the same letters in different positions. Filling the table takes $\Theta(|X||Y|)$ time and space. Tracing back takes $O(|X|+|Y|)$ time.
+**LCS = GTAB, length = 4.** At $c[3,2]$, moving up or left is tied; the up-first rule gives this traceback. Other tie choices may place the same letters in different positions. Filling the table takes $\Theta(mn)$ time and space for strings of lengths $m$ and $n$. Tracing back takes $O(m+n)$ time.
 
 > Memory trick: a match means diagonal + 1. No match means the larger of above and left.
 
@@ -902,11 +1116,13 @@ P and NP are classes of **decision problems** (yes-or-no problems). TSP decision
 
 **Answer.**
 
-The travelling salesperson problem (**TSP**) asks for the cheapest tour that visits every city once and returns to the start. Let $g(i,S)$ be the least cost to start at city $i$, visit every city in set $S$, and return to city 0. Try each possible next city $j$:
+The travelling salesperson problem (**TSP**) asks for the cheapest tour that visits every city once and returns to the start (see [Chapter 8](../../../Chapter%208%20-%20Dynamic%20Programming/README.md)). Let $g(i,S)$ be the length of the shortest path that starts at city $i$, visits every city in the set $S$ exactly once, and then returns to start city 0. Try each possible next city $j\in S$:
 
-$$g(i,S)=\min_{j\in S}\big(c_{ij}+g(j,S\setminus\{j\})\big),\qquad g(i,\varnothing)=c_{i0}.$$
+$$g(i,\varnothing)=C_{i0},\qquad g(i,S)=\min_{j\in S}\big\{C_{ij}+g(j,S\setminus\{j\})\big\}$$
 
-The given cost matrix is for cities 0, 1, 2, and 3:
+The final answer is $g(0,\{1,2,3\})=\min_{1\le j\le3}\{C_{0j}+g(j,\{1,2,3\}\setminus\{j\})\}$. (This answer keeps the question's 0-based city numbers, so the start city is 0.)
+
+The given cost matrix $C$ is for cities 0, 1, 2, and 3:
 
 | From/to | 0 | 1 | 2 | 3 |
 |---------|---|---|---|---|
@@ -915,36 +1131,43 @@ The given cost matrix is for cities 0, 1, 2, and 3:
 | 2 | 42 | 30 | 0 | 12 |
 | 3 | 35 | 34 | 12 | 0 |
 
-For an empty set of remaining cities, return directly to city 0. Thus:
+**Subsets of size 0** (return directly to city 0):
 
-- $g(1,\varnothing)=c_{10}=20$
-- $g(2,\varnothing)=c_{20}=42$
-- $g(3,\varnothing)=c_{30}=35$
+- $g(1,\varnothing)=C_{10}=20$
+- $g(2,\varnothing)=C_{20}=42$
+- $g(3,\varnothing)=C_{30}=35$
 
-**Subsets of size 1**
+**Subsets of size 1:**
 
-| State | Calculation | Value |
-|-------|-------------|-------|
-| $g(1,\{2\})$ | $30+42$ | 72 |
-| $g(1,\{3\})$ | $34+35$ | 69 |
-| $g(2,\{1\})$ | $30+20$ | 50 |
-| $g(2,\{3\})$ | $12+35$ | 47 |
-| $g(3,\{1\})$ | $34+20$ | 54 |
-| $g(3,\{2\})$ | $12+42$ | 54 |
+- $g(1,\{2\})=C_{12}+g(2,\varnothing)=30+42=72$
+- $g(1,\{3\})=C_{13}+g(3,\varnothing)=34+35=69$
+- $g(2,\{1\})=C_{21}+g(1,\varnothing)=30+20=50$
+- $g(2,\{3\})=C_{23}+g(3,\varnothing)=12+35=47$
+- $g(3,\{1\})=C_{31}+g(1,\varnothing)=34+20=54$
+- $g(3,\{2\})=C_{32}+g(2,\varnothing)=12+42=54$
 
-**Subsets of size 2**
+**Subsets of size 2:**
 
-| State | Calculation | Value |
-|-------|-------------|-------|
-| $g(1,\{2,3\})$ | $\min(30+47,\ 34+54)$ | **77** |
-| $g(2,\{1,3\})$ | $\min(30+69,\ 12+54)$ | **66** |
-| $g(3,\{1,2\})$ | $\min(34+72,\ 12+50)$ | **62** |
+$$g(1,\{2,3\})=\min(30+47,\ 34+54)=77$$
 
-Finally, choose the first city after 0:
+$$g(2,\{1,3\})=\min(30+69,\ 12+54)=66$$
 
-$$g(0,\{1,2,3\})=\min(20+77,\ 42+66,\ 35+62)=\min(97,108,97)=97.$$
+$$g(3,\{1,2\})=\min(34+72,\ 12+50)=62$$
 
-**Minimum tour cost: 97.** One optimal tour is $0\to1\to2\to3\to0$, with cost $20+30+12+35=97$. Subset DP takes $O(n^2 2^n)$ time and $O(n2^n)$ space.
+**Final calculation** (choose the first city after 0):
+
+$$g(0,\{1,2,3\})=\min(20+77,\ 42+66,\ 35+62)=\min(97,108,97)=97$$
+
+**Arrow-guided subset table:**
+
+| State | Candidate arrows | Chosen arrow | Stored cost |
+| :---: | :--- | :---: | :---: |
+| $g(1,\{2,3\})$ | $1 \rightarrow 2: 30+47=77$, $1 \rightarrow 3: 34+54=88$ | $1 \rightarrow 2$ | 77 |
+| $g(2,\{1,3\})$ | $2 \rightarrow 1: 30+69=99$, $2 \rightarrow 3: 12+54=66$ | $2 \rightarrow 3$ | 66 |
+| $g(3,\{1,2\})$ | $3 \rightarrow 1: 34+72=106$, $3 \rightarrow 2: 12+50=62$ | $3 \rightarrow 2$ | 62 |
+| Final from city 0 | $0 \rightarrow 1: 97$, $0 \rightarrow 2: 108$, $0 \rightarrow 3: 97$ | $0 \rightarrow 1$ (tie with $0 \rightarrow 3$) | **97** |
+
+**Minimum tour cost: 97.** One optimal tour is $0\to1\to2\to3\to0$, with cost $20+30+12+35=97$. Subset DP takes $\Theta(n^2 2^n)$ time and $\Theta(n2^n)$ space.
 
 > Memory trick: the state is (where I am, which cities are left). Try every next city.
 
@@ -961,28 +1184,28 @@ Run `python tools/verify_b2_theory.py` from the repository root to check the num
 | Topic | One-line memory |
 |-------|-----------------|
 | Time vs space | Time = number of steps; space = memory used (auxiliary space = extra memory) |
-| Master theorem | Compare $f(n)$ with $n^{\log_b a}$; if they match, multiply by $\log n$ |
-| $T(n/3) + \log n$ | $\Theta(\log^2 n)$ (extended Case 2) |
+| Master theorem | Compare $f(n)$ with the watershed function $n^{\log_b a}$; if they match, multiply by $\log n$ |
+| $T(n/3) + \log n$ | $\Theta(\log^2 n)$ (Case 2 with $k=1$) |
 | P, NP, NP-hard, NP-complete | P = solve fast; NP = verify fast; NP-complete = NP and NP-hard |
-| BFS shortest path | Level by level with a queue; first visit = shortest distance (unweighted) |
-| Topological order | Every arrow goes forward; remove vertices with no incoming arrows |
+| BFS shortest path | Level by level with a queue; mark visited when enqueued; first visit = shortest distance (unweighted) |
+| Topological order | Every arrow goes forward; DFS finish stack popped from the right, or Kahn's indegree-0 removal |
 | Linear vs binary search | 5 vs 3 comparisons for 511; binary search needs a sorted array; eight-item worst case is 4 |
 | Strassen | 7 block products instead of 8; $T(n) = 7T(n/2) + \Theta(n^2)$ |
 | Insertion vs bubble | Insertion takes $\Theta(n+I)$ for $I$ inversions; bubble sort can still need many passes |
 | Quick sort | Partition around the pivot; last-element pivot gives $[1005, 1010, 1023, 1040, 1055]$ |
 | Merge sort | Split in half, merge sorted halves, $\Theta(n \log n)$, needs extra space |
-| Greedy | Best local choice; needs greedy choice + optimal substructure |
-| Fractional knapsack | Sort by profit/weight; take a fraction of the last item; profit 240 |
-| Kruskal | Sort edges, skip cycles, stop at $V - 1$ edges; total 14 (confirm weights) |
-| DP | Overlapping subproblems + optimal substructure; Fibonacci in $O(n)$ |
-| Floyd-Warshall | Try each vertex as a middle vertex; $O(n^3)$; $d(1,4) = 9$ |
-| LCS | Match: diagonal + 1; else max(up, left); LCS = GTAB, length 4 |
+| Greedy | Candidate, selection, feasibility, objective, solution; needs greedy choice + optimal substructure (coins $4,3,1$ fail) |
+| Fractional knapsack | Sort by value/weight ratio; take a fraction of the last item; value 240 |
+| Kruskal | Sort edges, `FIND`/`UNION` skips cycles, stop at $V - 1$ edges; total 14 (confirm weights) |
+| DP | Five parts: state, recurrence, base case, table order, final answer; Fibonacci in $\Theta(n)$ |
+| Floyd-Warshall | $D^{(k)}[i,j]=\min(D^{(k-1)}[i,j],\ D^{(k-1)}[i,k]+D^{(k-1)}[k,j])$; $\Theta(n^3)$; $d(1,4) = 9$ |
+| LCS | $c[i,j]$: match $\nwarrow$ + 1; else larger of $\uparrow$ and $\leftarrow$ (tie: up); LCS = GTAB, length 4 |
 | Graph colouring | Colour in order, check neighbours, backtrack on dead end |
 | LC-search | Expand the node with the best bound first; prune when $ub \le$ best |
 | N-Queens | Row by row; check column and diagonals; 10 solutions for $N = 5$ |
 | Decision vs optimization | Yes/no question vs find the best value |
 | Branch and bound | A bound skips branches that cannot win; an admissible estimate never throws away the best answer |
-| TSP DP | $g(i,S) = \min_j [c_{ij} + g(j, S \setminus j)]$; minimum tour 97 |
+| TSP DP | $g(i,S) = \min_j [C_{ij} + g(j, S \setminus j)]$; minimum tour 97 |
 
 ---
 

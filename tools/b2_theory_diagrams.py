@@ -109,16 +109,16 @@ def missing_diagrams():
         box("swap", "Exchange in greedy choice g\nwithout worsening the objective", 370, 110, 300, 100, "yellow", 15),
         box("safe", "An optimum contains g\nGreedy-choice property", 720, 110, 280, 100, "green", 16),
         box("res", "Solve the residual instance optimally\nOptimal substructure + induction", 380, 320, 450, 100, "green"),
-        box("bad", "COUNTEREXAMPLE: unlimited coins {1,3,4}, amount 6\nLargest-first: 4+1+1 (3 coins). Optimum: 3+3 (2 coins).\nOptimal substructure alone does not justify largest-first.", 40, 490, 960, 110, "red", 17),
+        box("bad", "COUNTEREXAMPLE: unlimited coins {4,3,1}, amount 6\nLargest-first: 4+1+1 (3 coins). Optimum: 3+3 (2 coins).\nOptimal substructure alone does not justify largest-first.", 40, 490, 960, 110, "red", 17),
     ], [E("o", "swap", route="h"), E("swap", "safe", route="h"), E("safe", "res")])
 
     yield D("b2-theory-22-fractional-knapsack", "Q5(b): Fractional fill, capacity 50", (1040, 620), [
-        box("ratios", "Items (weight, profit): 1=(10,60), 2=(20,100), 3=(30,120)\nProfit densities: 6 > 5 > 4; fill in order 1, 2, 3", 40, 85, 960, 90, "gray"),
-        box("i1", "Item 1: all\n10 weight\n60 profit", 40, 250, 192, 120, "blue"),
-        box("i2", "Item 2: all\n20 weight\n100 profit", 232, 250, 384, 120, "teal"),
-        box("i3", "Item 3: 2/3\n20 weight\n80 profit", 616, 250, 384, 120, "green"),
-        box("sum", "Weight: 10+20+20 = 50\nProfit: 60+100+80 = 240 (optimal)", 250, 440, 540, 95, "green"),
-        box("why", "Exchange lower-density weight for available higher-density weight: profit cannot decrease.", 40, 555, 960, 40, "yellow", 16),
+        box("ratios", "Items (weight, value): 1=(10,60), 2=(20,100), 3=(30,120)\nRatios v/w: 6 > 5 > 4; fill in order 1, 2, 3", 40, 85, 960, 90, "gray"),
+        box("i1", "Item 1: all\n10 weight\n60 value", 40, 250, 192, 120, "blue"),
+        box("i2", "Item 2: all\n20 weight\n100 value", 232, 250, 384, 120, "teal"),
+        box("i3", "Item 3: 2/3\n20 weight\n80 value", 616, 250, 384, 120, "green"),
+        box("sum", "Weight: 10+20+20 = 50\nValue: 60+100+80 = 240 (optimal)", 250, 440, 540, 95, "green"),
+        box("why", "Exchange lower-ratio weight for available higher-ratio weight: value cannot decrease.", 40, 555, 960, 40, "yellow", 16),
     ])
 
     fib = [0, 1, 1, 2, 3, 5]
@@ -278,6 +278,42 @@ def patch_manual(key, changes, footer_positions=None, height=None):
     tree.write(svg_path, encoding="unicode")
 
 
+def patch_lcs_arrows(key, x="AGGTAB", y="GXTXAYB"):
+    """Add the chapter's arrow (diag/up/left, ties up) to every DP cell with i, j >= 1."""
+    c = [[0] * (len(y) + 1) for _ in range(len(x) + 1)]
+    arrows = {}
+    for i, a in enumerate(x, 1):
+        for j, b in enumerate(y, 1):
+            if a == b:
+                c[i][j], arrows[i, j] = c[i-1][j-1] + 1, "\u2196"
+            elif c[i-1][j] >= c[i][j-1]:
+                c[i][j], arrows[i, j] = c[i-1][j], "\u2191"
+            else:
+                c[i][j], arrows[i, j] = c[i][j-1], "\u2190"
+    path = OUT / (key + ".excalidraw")
+    scene = json.loads(path.read_text(encoding="utf-8"))
+    tree = ET.parse(path.with_suffix(".svg"))
+    for e in scene["elements"]:
+        if e["type"] != "text" or not e.get("containerId") or not e["text"].isdigit():
+            continue
+        col, row = round((e["x"] + e["width"] / 2 - 153) / 66), round((e["y"] - 130) / 40)
+        if row >= 1 and col >= 1:
+            assert int(e["text"]) == c[row][col], (key, row, col)
+            center = e["x"] + e["width"] / 2
+            e["text"] = e["originalText"] = f"{c[row][col]} {arrows[row, col]}"
+            e["width"] = 34
+            e["x"] = center - 17
+    for text in tree.getroot().iter(f"{{{NS}}}text"):
+        if not (text.text or "").isdigit() or text.get("x") is None:
+            continue
+        col, row = (float(text.get("x")) - 153) / 66, (float(text.get("y")) - 140) / 40
+        if abs(col - round(col)) < .01 and abs(row - round(row)) < .01 and round(row) >= 1 and round(col) >= 1:
+            assert int(text.text) == c[round(row)][round(col)], (key, row, col)
+            text.text = f"{text.text} {arrows[round(row), round(col)]}"
+    write_manual_scene(path, scene)
+    tree.write(path.with_suffix(".svg"), encoding="unicode")
+
+
 def synchronize_manual_styles(key):
     """Historical SVGs carried colours/dashes missing from their editable scenes."""
     path = OUT / (key + ".excalidraw")
@@ -348,6 +384,17 @@ def main():
         ("g(1, {2,3,4}) = min(20+77, 42+66, 35+62) = 97", "g(0, {1,2,3}) = min(20+77, 42+66, 35+62) = 97"),
         ("Green paths: 1→2→3→4→1 = 20 + 30 + 12 + 35 = 97,   and   1→4→3→2→1 = 35 + 12 + 30 + 20 = 97.", "Green paths: 0→1→2→3→0 = 20 + 30 + 12 + 35 = 97,   and   0→3→2→1→0 = 35 + 12 + 30 + 20 = 97."),
     ])
+    patch_manual("b2-theory-08-floyd-warshall", [
+        ("D0 (start)", "D(0) (start)"),
+        ("D2 (after k = 2)", "D(2) (after k = 2)"),
+        ("D4 = D3 (final)", "D(4) = D(3) (final)"),
+    ])
+    patch_manual("b2-theory-09-lcs-table", [
+        ("Rule: letters match \u2192 diagonal cell + 1.   Letters differ \u2192 larger of the cell above or left.",
+         "c[i,j]: match \u2192 \u2196 c[i-1,j-1] + 1; differ \u2192 larger of \u2191 above and \u2190 left (tie: \u2191)."),
+        ("Traceback from (6,7): B, A, T, G.", "Traceback from c[6,7]: B, A, T, G."),
+    ])
+    patch_lcs_arrows("b2-theory-09-lcs-table")
     patch_manual("b2-theory-13-bnb-job-tree", [
         ("Q8(b): Branch and Bound for Job Sequencing (maximize profit)", "Q8(b): Example Job Sequencing — Depth-First B&B"),
         ("ub = profit so far + profit of every undecided job (admissible: never below the true best).", "Include first; update best only at feasible leaves. ub = profit + all undecided profits."),

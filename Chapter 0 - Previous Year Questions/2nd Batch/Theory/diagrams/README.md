@@ -28,11 +28,11 @@
 | Q4(b) | Lomuto quicksort partition tree | [SVG](b2-theory-05-quicksort-partition.svg) | [Excalidraw](b2-theory-05-quicksort-partition.excalidraw) |
 | Q4(c) | Merge-sort split and merge tree | [SVG](b2-theory-06-mergesort-tree.svg) | [Excalidraw](b2-theory-06-mergesort-tree.excalidraw) |
 | Q5(a) | Greedy exchange proof and coin-change counterexample | [SVG](b2-theory-21-greedy-proof.svg) | [Excalidraw](b2-theory-21-greedy-proof.excalidraw) |
-| Q5(b) | Fractional knapsack fill and profit | [SVG](b2-theory-22-fractional-knapsack.svg) | [Excalidraw](b2-theory-22-fractional-knapsack.excalidraw) |
+| Q5(b) | Fractional knapsack fill and value | [SVG](b2-theory-22-fractional-knapsack.svg) | [Excalidraw](b2-theory-22-fractional-knapsack.excalidraw) |
 | Q5(c) | Kruskal's MST on the graph shown in the paper | [SVG](b2-theory-07-kruskal-mst.svg) | [Excalidraw](b2-theory-07-kruskal-mst.excalidraw) |
 | Q6(a) | Fibonacci overlaps and DP dependencies | [SVG](b2-theory-23-fibonacci-dp.svg) | [Excalidraw](b2-theory-23-fibonacci-dp.excalidraw) |
-| Q6(b) | Floyd–Warshall graph and intermediate matrices | [SVG](b2-theory-08-floyd-warshall.svg) | [Excalidraw](b2-theory-08-floyd-warshall.excalidraw) |
-| Q6(c) | Full LCS table and highlighted traceback | [SVG](b2-theory-09-lcs-table.svg) | [Excalidraw](b2-theory-09-lcs-table.excalidraw) |
+| Q6(b) | Floyd–Warshall graph and D(k) matrices | [SVG](b2-theory-08-floyd-warshall.svg) | [Excalidraw](b2-theory-08-floyd-warshall.excalidraw) |
+| Q6(c) | Full LCS table with arrows and highlighted traceback | [SVG](b2-theory-09-lcs-table.svg) | [Excalidraw](b2-theory-09-lcs-table.excalidraw) |
 | Q7(a) | Illustrative five-vertex colouring graph and backtracking tree | [SVG](b2-theory-10-colouring-tree.svg) | [Excalidraw](b2-theory-10-colouring-tree.excalidraw) |
 | Q7(b) | Best-first knapsack tree with FIFO bound ties | [SVG](b2-theory-11-lc-knapsack-tree.svg) | [Excalidraw](b2-theory-11-lc-knapsack-tree.excalidraw) |
 | Q7(c) | Five-queens tree, two solutions, and a later dead end | [SVG](b2-theory-12-nqueens-tree.svg) | [Excalidraw](b2-theory-12-nqueens-tree.excalidraw) |

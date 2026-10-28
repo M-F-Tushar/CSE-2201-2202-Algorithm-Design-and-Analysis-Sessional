@@ -164,19 +164,19 @@ sequence("14-quicksort-space", "Q3(c): quicksort space conventions", [
     ("Strict in-place means O(1) TOTAL auxiliary space\nCalling quicksort in-place usually excludes its stack", "yellow"),
 ])
 
-add("15-coin-change", "Q4(a), Q6(d): unlimited coins {1, 3, 4}, amount 6", (850, 700), [
-    box("greedy", "Largest-first greedy\n4 + 1 + 1 = 6\n3 coins", 35, 90, 360, 120, "red"),
+add("15-coin-change", "Q4(a), Q6(d): unlimited coins {1, 3, 4}, amount 6", (850, 720), [
+    box("greedy", "Largest-first greedy on {4, 3, 1}\n4 + 1 + 1 = 6\n3 coins", 35, 90, 360, 120, "red"),
     box("opt", "Optimal\n3 + 3 = 6\n2 coins", 455, 90, 360, 120, "green"),
-    box("state", "C[0] = 0\nC[x] = 1 + min C[x-c], c in {1,3,4}, c <= x\nUnreachable / empty minimum = infinity", 45, 280, 760, 110, "blue"),
-    box("table", "Amount x:   0   1   2   3   4   5   6\nMin coins:   0   1   2   1   1   2   2", 45, 445, 760, 85, "teal"),
-    box("trace", "Traceback: 6 -> 3 -> 0 (subtract coin 3 twice)\nNo single available coin has value 6, so two is optimal", 45, 575, 760, 80, "green", 15),
+    box("state", "dp[0] = 0\ndp[x] = 1 + min dp[x-c], c in {1,3,4}, c <= x\nUnreachable / empty minimum = infinity", 45, 280, 760, 110, "blue"),
+    box("table", "Amount x:     0   1   2   3   4   5   6\ndp[x]:          0   1   2   1   1   2   2\nLast coin:    -   1   1   3   4   1   3", 45, 435, 760, 115, "teal"),
+    box("trace", "Traceback: 6 -> 3 -> 0 (last coin 3, then 3)\nNo single available coin has value 6, so two is optimal", 45, 595, 760, 80, "green", 15),
 ])
 
 add("16-memo-tab", "Q4(b): Fibonacci F0 = 0, F1 = 1", (850, 750), [
-    box("memo", "Memoization: request F5", 40, 90, 360, 70),
+    box("memo", "Memoization (top-down)\nRecursion + cache: request F5", 40, 90, 360, 70),
     box("m4", "Compute F4, then F3\nCache each non-base result", 40, 235, 360, 90, "teal"),
     box("m3", "Repeated F3 uses cached result\nF5 = 3 + 2 = 5", 40, 405, 360, 90, "green"),
-    box("tab", "Tabulation: start at F0, F1", 450, 90, 360, 70),
+    box("tab", "Tabulation (bottom-up)\nIteration + table: start at F0, F1", 450, 90, 360, 70),
     box("t2", "Fill F2, F3, F4, F5\n0, 1, 1, 2, 3, 5", 450, 235, 360, 90, "teal"),
     box("t3", "Read table[5] = 5\nNo recursion stack", 450, 405, 360, 90, "green"),
     box("model", "Both visit all needed Fibonacci states: O(n) arithmetic operations\nO(n) stored values here; tabulation can keep two previous values\nUnit-cost arithmetic model; large integers require more bit work", 40, 570, 770, 115, "yellow", 15),
@@ -231,11 +231,11 @@ add_scene(state_space_tree(
 ))
 
 add("19-dp-properties", "Q6(a): valid recurrence and reusable subproblems", (850, 720), [
-    box("root", "Illustrative K(3,3): weights [1,1,1], profits [1,1,1]\nK(i,w) = best profit from first i items at capacity w", 55, 80, 740, 80),
-    box("skip", "Skip item 3: K(2,3)", 35, 270, 360, 75, "blue"),
-    box("take", "Take item 3: 1 + K(2,2)", 455, 270, 360, 75, "teal"),
-    box("repeat", "Shared non-base subproblem K(1,2) = 1\nReached by take from K(2,3), or skip from K(2,2)\nOther branches omitted: cache each identical state once", 45, 440, 760, 110, "yellow", 15),
-    box("concept", "Optimal substructure: best of exhaustive skip/take cases\nOverlap: identical (i,w) states can recur\nFibonacci evaluation has no optimization objective", 45, 590, 760, 90, "green", 15),
+    box("root", "Illustrative V[3,3]: weights [1,1,1], values [1,1,1]\nV[i,j] = best value from first i items at capacity j", 55, 80, 740, 80),
+    box("skip", "Skip item 3: V[2,3]", 35, 270, 360, 75, "blue"),
+    box("take", "Take item 3: 1 + V[2,2]", 455, 270, 360, 75, "teal"),
+    box("repeat", "Shared non-base subproblem V[1,2] = 1\nReached by take from V[2,3], or skip from V[2,2]\nOther branches omitted: cache each identical state once", 45, 440, 760, 110, "yellow", 15),
+    box("concept", "Optimal substructure: best of exhaustive skip/take cases\nOverlap: identical (i,j) states can recur\nFibonacci evaluation has no optimization objective", 45, 590, 760, 90, "green", 15),
 ], [E("root", "skip", "skip", route="straight"), E("root", "take", "take", route="straight"),
     E("skip", "repeat", "take", route="straight"), E("take", "repeat", "skip", route="straight")])
 
@@ -244,31 +244,42 @@ table = [[0] * 9]
 for weight, profit in zip(weights, profits):
     prev = table[-1]
     table.append([max(prev[w], profit + prev[w-weight]) if w >= weight else prev[w] for w in range(9)])
-nodes = [box("rec", "K(i,w) = max(K(i-1,w), p_i + K(i-1,w-w_i))\nTake term only when w_i <= w; bases K(0,w)=K(i,0)=0", 30, 80, 790, 90, "blue", 15),
-         box("input", "Illustrative W=8; weights [3,4,5,6], profits [2,3,1,4]\nEach item once, total weight <= W, empty selection allowed", 30, 210, 790, 85, "yellow", 15)]
+nodes = [box("rec", "V[i,j] = max(V[i-1,j], v_i + V[i-1,j-w_i])\nTake term only when w_i <= j; bases V[0,j]=V[i,0]=0", 30, 80, 790, 90, "blue", 15),
+         box("input", "Illustrative W=8; weights [3,4,5,6], values (profits) [2,3,1,4]\nEach item once, total weight <= W, empty selection allowed", 30, 210, 790, 85, "yellow", 15)]
 # Separate editable cells keep both the SVG and scene table legible.
-for r, values in enumerate([["i / w"] + list(range(9))] + [[i] + row for i, row in enumerate(table)]):
+def arrow(i, j):
+    """Chapter 8 arrows: take (up-left) only when it strictly beats skipping (up)."""
+    takes = j >= weights[i-1] and profits[i-1] + table[i-1][j-weights[i-1]] > table[i-1][j]
+    return " \u2196" if takes else " \u2191"
+
+
+for r, values in enumerate([["i \\ j"] + list(range(9))] + [[i] + row for i, row in enumerate(table)]):
     for c, val in enumerate(values):
-        nodes.append(box(f"cell{r}-{c}", str(val), 45 + 76*c, 345 + 58*r, 68, 48,
+        label = str(val) + (arrow(r - 1, c - 1) if r > 1 and c > 1 else "")
+        nodes.append(box(f"cell{r}-{c}", label, 45 + 76*c, 345 + 58*r, 68, 48,
                          "gray" if r == 0 or c == 0 else "green" if r == 5 and c == 9 else "teal", 15))
-nodes += [box("trace", "Traceback: skip 4, skip 3, take 2, take 1\nItems {1,2}: weight 7 <= 8, profit 5 (optimal)\nO(nW) time is pseudo-polynomial in binary-encoded W", 30, 740, 790, 110, "green", 15)]
-add("20-knapsack", "Q6(b), Q7(c): 0/1 knapsack recurrence and table", (850, 900), nodes)
+nodes += [box("trace", "Arrows: \u2191 skip (copy the row above), \u2196 take (use V[i-1, j-w_i])\nTraceback: skip 4, skip 3, take 2, take 1\nItems {1,2}: weight 7 <= 8, value 5 (optimal)\nTheta(nW) time is pseudo-polynomial in binary-encoded W", 30, 740, 790, 135, "green", 15)]
+add("20-knapsack", "Q6(b), Q7(c): 0/1 knapsack recurrence and table", (850, 925), nodes)
 
 grid = [[1, 0, 1], [0, 1, 0], [1, 1, 1], [0, 0, 1]]
 dp = [[1, 1, 2], [1, 2, 2], [2, 3, 4], [2, 3, 5]]
 path = {(0, 0), (0, 1), (1, 1), (2, 1), (2, 2), (3, 2)}
 nodes = [box("gtitle", "Input coins", 45, 85, 330, 50, "gray"),
-         box("dtitle", "DP: best coin total", 475, 85, 330, 50, "gray")]
+         box("dtitle", "dp[r,c]: best coin total", 475, 85, 330, 50, "gray")]
 for side, values, x in [("g", grid, 50), ("d", dp, 480)]:
     for r in range(4):
         for c in range(3):
-            nodes.append(box(f"{side}{r}{c}", f"({r},{c})\n{values[r][c]}", x+110*c, 180+95*r,
+            mark = ""
+            if side == "d" and (r, c) != (0, 0):
+                up = r > 0 and (c == 0 or dp[r-1][c] >= dp[r][c-1])
+                mark = " \u2191" if up else " \u2190"
+            nodes.append(box(f"{side}{r}{c}", f"({r},{c})\n{values[r][c]}{mark}", x+110*c, 180+95*r,
                              95, 75, "green" if (r,c) in path else "blue", 15))
 
 edges = [E(f"g{r}{c}", f"g{s}{t}", color="#2f9e44", route="straight")
          for (r,c), (s,t) in zip([(0,0),(0,1),(1,1),(2,1),(2,2)], [(0,1),(1,1),(2,1),(2,2),(3,2)])]
-nodes += [box("gridrule", "Illustrative 4 x 3 grid: right/down only; collect both endpoints\nGreen cells/arrows: one optimal route, total 1+0+1+1+1+1 = 5\nBase dp(0,0)=1; each next cell adds max(existing up, left)", 35, 610, 780, 110, "yellow", 15)]
-add("21-grid", "Q6(c): coin grid and maximum-collection DP", (850, 770), nodes, edges)
+nodes += [box("gridrule", "Illustrative 4 x 3 grid: right/down only; collect both endpoints\nGreen cells/arrows: one optimal route, total 1+0+1+1+1+1 = 5\nBase dp[0,0]=1; dp[r,c] = grid + max(dp above, dp left)\n\u2191 from above, \u2190 from left; ties go up", 35, 610, 780, 135, "yellow", 15)]
+add("21-grid", "Q6(c): coin grid and maximum-collection DP", (850, 795), nodes, edges)
 
 add("22-negative-edge", "Q7(a): negative edge defeats label-setting Dijkstra", (800, 710), [
     N("A", "A", 75, 100, 65, 65, "blue", "ellipse", 20),

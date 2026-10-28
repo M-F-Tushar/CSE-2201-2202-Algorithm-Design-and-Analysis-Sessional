@@ -12,7 +12,7 @@
 <rect x="40.0" y="90.0" width="360.0" height="70.0" rx="10" fill="#a5d8ff"/>
 <path d="M38.9 90.2 Q219.4 90.2 399.5 88.5 M400.2 89.1 Q397.3 125.9 400.1 159.5 M401.2 158.5 Q219.5 161.4 39.0 160.1 M38.5 159.9 Q39.1 122.5 40.8 90.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
 <path d="M38.9 91.3 Q221.1 90.2 401.0 90.9 M400.4 90.6 Q402.2 127.1 398.8 160.4 M398.9 159.0 Q219.4 160.1 39.8 161.4 M41.3 161.1 Q38.9 126.2 40.6 91.1" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="220.0" y="125.0">Memoization: request F5</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="220.0" y="114.4">Memoization (top-down)</tspan><tspan x="220.0" y="135.6">Recursion + cache: request F5</tspan></text>
 <rect x="40.0" y="235.0" width="360.0" height="90.0" rx="10" fill="#99e9f2"/>
 <path d="M40.1 234.7 Q217.4 234.8 400.8 236.1 M400.1 234.5 Q399.9 277.9 398.6 323.5 M399.9 325.5 Q218.4 323.5 38.4 324.8 M39.2 326.2 Q40.5 280.6 39.2 234.3" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
 <path d="M41.4 234.7 Q222.3 237.0 400.1 236.2 M401.1 234.4 Q401.1 277.2 400.7 323.9 M401.3 326.2 Q221.6 322.4 41.1 325.5 M40.4 324.2 Q38.7 282.8 39.5 235.2" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
@@ -24,7 +24,7 @@
 <rect x="450.0" y="90.0" width="360.0" height="70.0" rx="10" fill="#a5d8ff"/>
 <path d="M450.9 91.0 Q628.0 92.3 810.7 88.5 M810.9 90.6 Q810.8 126.0 810.1 159.5 M810.4 161.2 Q628.1 158.2 451.2 160.4 M451.4 159.7 Q452.3 127.0 450.1 91.2" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
 <path d="M449.9 88.5 Q632.0 91.5 809.1 90.2 M808.7 90.8 Q807.7 122.5 809.9 159.1 M810.3 158.9 Q628.7 157.5 450.8 160.6 M449.8 158.4 Q452.1 124.2 448.9 89.6" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="630.0" y="125.0">Tabulation: start at F0, F1</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="630.0" y="114.4">Tabulation (bottom-up)</tspan><tspan x="630.0" y="135.6">Iteration + table: start at F0, F1</tspan></text>
 <rect x="450.0" y="235.0" width="360.0" height="90.0" rx="10" fill="#99e9f2"/>
 <path d="M450.4 233.9 Q632.5 234.4 809.0 234.8 M811.2 236.3 Q812.0 278.9 811.1 325.6 M808.9 325.6 Q632.3 327.2 448.4 325.0 M450.5 325.9 Q450.7 278.5 448.6 235.5" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
 <path d="M450.6 234.3 Q629.7 232.2 808.6 235.6 M809.6 236.2 Q807.7 282.4 809.6 324.2 M810.6 326.3 Q631.8 326.4 448.9 324.4 M449.7 324.2 Q452.7 277.9 448.6 235.2" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>

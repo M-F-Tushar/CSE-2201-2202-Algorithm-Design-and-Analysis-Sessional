@@ -41,6 +41,6 @@
 <text x="410" y="440" text-anchor="middle" font-size="15" fill="#1e1e1e">d = 9</text>
 <text x="40" y="500" text-anchor="start" font-size="14" fill="#868e96">Final: A=0, B=2, D=7, E=8, F=9, C=12. Green edges = shortest path tree.</text>
 <text x="40" y="524" text-anchor="start" font-size="14" fill="#868e96">Shortest path to C: A-B-D-F-C = 12. F also equals 9 via A-B-E-F (tie).</text>
-<text x="40" y="548" text-anchor="start" font-size="14" fill="#868e96">Relaxation: if dist[u] + w(u,v) &lt; dist[v], set dist[v] = dist[u] + w(u,v).</text>
+<text x="40" y="548" text-anchor="start" font-size="14" fill="#868e96">Relaxation: if d(u) + c(u,v) &lt; d(v), set d(v) = d(u) + c(u,v).</text>
 </g>
 </svg>

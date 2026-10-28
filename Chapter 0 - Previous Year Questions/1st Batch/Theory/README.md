@@ -9,7 +9,7 @@ This guide answers all 27 subquestions in the supplied CSE 2201 final-examinatio
 
 **Language:** Answers use the simplest words possible and show the working. Course terms are kept and explained in simple words. Each answer ends with a short **memory trick**. Answer length follows the marks: about 5 lines for 5 marks, half a page for 10 marks, and a full page for 15 marks.
 
-**Conventions:** $\log$ means $\log_2$. Graphs have no unlisted edges. All 27 parts include a suitable SVG with a matching editable source in the [diagram index](diagrams/README.md).
+**Conventions:** $\log$ means $\log_2$. Graphs have no unlisted edges. All 27 parts include a suitable SVG with a matching editable source in the [diagram index](diagrams/README.md). Greedy, dynamic programming, and graph answers use the tables, notation, and step order taught in [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md), [Chapter 8](../../../Chapter%208%20-%20Dynamic%20Programming/README.md), and [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md): $V[i,j]$ for knapsack, $dp[x]$ for coin change, $d(v)$ and $c(u,v)$ for Dijkstra, and the selected-vertex table for Bellman-Ford. The questions say *profit*; the chapters say *value*; they mean the same thing.
 
 | Question | Topic | a | b | c | d |
 |----------|-------|---|---|---|---|
@@ -255,7 +255,7 @@ There are $\log_2 n+1$ levels, and each level does $n$ work. The total is $n(\lo
 
 **Method 3: Master Theorem**
 
-Here $a=2$, $b=2$, and $f(n)=n$. Thus $n^{\log_b a}=n^{\log_2 2}=n$. Since $f(n)$ has the same growth, this is **Case 2** of the Master Theorem, so $T(n)=\Theta(n\log n)$.
+Here $a=2$, $b=2$, and $f(n)=n$. The **watershed function** is $n^{\log_b a}=n^{\log_2 2}=n$. Since $f(n)=\Theta(n^{\log_b a}\log^0 n)$ has the same growth, this is **Case 2** ($k=0$) of the Master Theorem, so $T(n)=\Theta(n^{\log_b a}\log^{k+1}n)=\Theta(n\log n)$.
 
 **Final answer:** $T(n)=\Theta(n\log n)$. For powers of 2, the exact solution is $T(n)=n\log_2 n+n$. Check: $T(4)=12$ and $T(8)=32$.
 
@@ -310,7 +310,7 @@ So **T(n) = 2T(n/2) + O(n)**, with T(1) = O(1).
 
 **Solve by Master theorem**
 
-a = 2, b = 2, f(n) = n = n^(log₂ 2). This is **Case 2**, so T(n) = Θ(n log n).
+a = 2, b = 2, f(n) = n, and the watershed function is n^(log₂ 2) = n. Since f(n) matches it (Case 2 with k = 0), T(n) = Θ(n log n).
 
 **Answer: Θ(n log n)** in the best, average, and worst case. Merge sort needs O(n) extra space for merging, so it is **not in-place**. It is stable.
 
@@ -392,18 +392,43 @@ Each round: swap the root (the largest item) with the last item in the heap. Mak
 
 **Answer.**
 
-A **greedy algorithm** builds a solution one step at a time. It picks the best-looking choice at each step and does not change earlier choices.
+A **greedy algorithm** builds a solution by repeatedly choosing the option that looks best at the current moment. Once a choice is made, the algorithm does not go back and change it (see [Chapter 7](../../../Chapter%207%20-%20Greedy%20Algorithms/README.md)).
 
-**Illustrative counterexample: coin change.** Use unlimited coins with denominations $\{1,3,4\}$. Make exactly $6$ using as few coins as possible.
+**Greedy parts for coin change**
+
+| Greedy part | Coin-change choice |
+|-------------|--------------------|
+| Candidate set | Coins of value 4, 3, and 1 (unlimited supply) |
+| Selection function | Largest coin that does not exceed the remaining amount |
+| Feasibility function | The coin must not exceed the remaining amount |
+| Objective function | Use as few coins as possible |
+| Solution function | The remaining amount becomes 0 |
+
+**Illustrative counterexample.** Use unlimited coins with denominations $\{4,3,1\}$. Make the target amount $A=6$ using as few coins as possible.
 
 ![Greedy versus optimal coin change](diagrams/b1-theory-15-coin-change.svg)
 
-- Greedy picks the largest coin first: $4+1+1$, for **3 coins**.
-- The best answer is $3+3$, for **2 coins**.
+| Step | Remaining amount | Largest usable coin | New remaining amount |
+|:----:|:----------------:|:-------------------:|:--------------------:|
+| 1 | 6 | 4 | 2 |
+| 2 | 2 | 1 | 1 |
+| 3 | 1 | 1 | 0 |
 
-Greedy took the big coin 4 first because it looked best, but it forced two more coins. So a locally best choice does not always give the globally best answer.
+| Method | Chosen coins | Number of coins |
+|--------|--------------|:---------------:|
+| Greedy | $4+1+1$ | **3 coins** |
+| Optimal | $3+3$ | 2 coins |
 
-**When does greedy work?** Only when the problem has the **greedy-choice property** and **optimal substructure**. Examples: Kruskal's and Prim's MST, activity selection, fractional knapsack.
+Greedy took the big coin 4 first because it looked best, but the leftover amount 2 then needed two more coins. The locally best choice is not safe here, so the **greedy-choice property** fails for this coin system.
+
+**When does greedy work?** Only when the problem has both properties below, and each must be proved:
+
+| Property or proof idea | Meaning | Example |
+|------------------------|---------|---------|
+| Greedy-choice property | A globally optimal solution can start with the locally best choice | Activity selection, fractional knapsack |
+| Optimal substructure | After the safe choice, the rest is the same kind of smaller problem | MST, Huffman coding |
+| Exchange argument (proof idea) | Swap part of an optimal solution for the greedy choice without making it worse | Fractional knapsack |
+| Cut property (proof idea) | The lightest edge crossing a cut is safe for an MST | Prim, Kruskal |
 
 > Memory trick: greedy never looks back, so it can get trapped.
 
@@ -413,12 +438,44 @@ Greedy took the big coin 4 first because it looked best, but it forced two more 
 
 **Answer.**
 
-Both are **dynamic programming** methods. They save answers to smaller problems so they do not need to solve the same problem again.
+Both are **dynamic programming** methods. They save answers to smaller problems so the same problem is never solved twice (see [Chapter 8](../../../Chapter%208%20-%20Dynamic%20Programming/README.md)).
 
-- **Memoization (top-down)**: use recursion and save each answer in a cache (a store for saved answers) the first time it is found.
-- **Tabulation (bottom-up)**: use a loop to fill a table, starting with the smallest problems and building up to the answer.
+- **Memoization (top-down)**: start from the big problem, use recursion, and save each answer in a cache (a store for saved answers) the first time it is found.
+- **Tabulation (bottom-up)**: start from the smallest problem and use a loop to fill a table in dependency order up to the answer.
 
-**Illustrative example: Fibonacci:** $F_0=0$, $F_1=1$, and $F_n=F_{n-1}+F_{n-2}$ for integers $n\ge2$. Both functions accept nonnegative integers.
+| Feature | Memoization (Top-Down) | Tabulation (Bottom-Up) |
+|---------|------------------------|------------------------|
+| Approach | Start from the big problem | Start from the smallest problem |
+| Technique | Recursion + cache | Iteration + table |
+| Solves | Only needed subproblems | All subproblems in the table |
+| Uses recursion | Yes | No |
+| Stack overflow risk | Yes | No |
+| Easier to write | Usually | Sometimes harder |
+
+Memoization pattern:
+
+```text
+Solve(state):
+    if state is a base case:
+        return base value
+    if state is already stored:
+        return stored value
+    compute answer from smaller states
+    store answer
+    return answer
+```
+
+Tabulation pattern:
+
+```text
+Create the DP table
+Fill base cases
+For each state in dependency order:
+    compute table[state] from already-filled states
+Return the required final state
+```
+
+**Illustrative example: Fibonacci.** The DP parts are: state $F(n)$; base cases $F(0)=0$ and $F(1)=1$; recurrence $F(n)=F(n-1)+F(n-2)$ for integers $n\ge2$; table order $n=2,3,\dots$; final answer $F(n)$. Both functions below accept nonnegative integers.
 
 ![Top-down memoization versus bottom-up tabulation](diagrams/b1-theory-16-memo-tab.svg)
 
@@ -444,12 +501,11 @@ def fib_tab(n):
     return table[n]
 ```
 
-| Point | Memoization | Tabulation |
-|-------|-------------|------------|
-| Direction | Top-down: start with the big problem | Bottom-up: start with small problems |
-| Method | Recursion and a cache | A loop and a table |
-| Recursion | Uses the call stack | Does not use recursion |
-| States computed | Only the states the recursion needs | Every state in the chosen table order |
+For $F(5)$, memoization starts at $F(5)$ and asks for smaller values. After it computes $F(3)=2$, a later request for $F(3)$ returns the cached value. Tabulation fills upward from the base cases:
+
+| $n$ | 0 | 1 | 2 | 3 | 4 | 5 |
+|:---:|:-:|:-:|:-:|:-:|:-:|:-:|
+| $F(n)$ | 0 | 1 | 1 | 2 | 3 | **5** |
 
 Both versions take $O(n)$ time (plain recursion takes $O(2^n)$). Tabulation can keep only the last two values and use $O(1)$ memory.
 
@@ -461,9 +517,9 @@ Both versions take $O(n)$ time (plain recursion takes $O(2^n)$). Tabulation can 
 
 **Answer.**
 
-A **minimum spanning tree (MST)** connects every vertex, has no cycles, and has the smallest possible total edge weight. It has $|V|-1$ edges.
+A **minimum spanning tree (MST)** connects every vertex, has no cycles, and has the smallest possible total edge weight. It has $|V|-1$ edges. Prim and Kruskal are both greedy: each repeatedly takes a locally cheapest safe edge, and the **cut property** makes that choice safe (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
 
-**Given graph:** 5 vertices $A,B,C,D,E$ and 7 weighted edges, listed below.
+**Read the graph.** It is undirected and weighted, with 5 vertices $A,B,C,D,E$ and 7 edges.
 
 | Edge | Weight |
 |------|--------|
@@ -475,32 +531,44 @@ A **minimum spanning tree (MST)** connects every vertex, has no cycles, and has 
 | C-E | 6 |
 | D-E | 7 |
 
+**Adjacency list** (neighbour, weight):
+
+```text
+A: B(2), C(3)
+B: A(2), C(1), D(4)
+C: A(3), B(1), D(5), E(6)
+D: B(4), C(5), E(7)
+E: C(6), D(7)
+```
+
 ![Reconstructed graph and its unique MST](diagrams/b1-theory-17-mst.svg)
 
-**Prim's algorithm (start from A)**
+**(i) Prim's algorithm (start from A).** Grow one tree. At each step, only edges with exactly one end in the tree are eligible.
 
-1. Start with $\{A\}$. The choices are A-B (2) and A-C (3). Pick **A-B (2)**.
-2. The tree is $\{A,B\}$. The choices are A-C (3), B-C (1), and B-D (4). Pick **B-C (1)**.
-3. The tree is $\{A,B,C\}$. The choices are B-D (4), C-D (5), and C-E (6). Pick **B-D (4)**.
-4. The tree is $\{A,B,C,D\}$. The choices are C-E (6) and D-E (7). Pick **C-E (6)**.
+| Step | Tree vertices before selection | Minimum crossing choice | Edge added | Running weight |
+|:----:|:-------------------------------|:------------------------|:----------:|:--------------:|
+| 1 | $\{A\}$ | A-B (2); other crossing edge: A-C (3) | A-B | 2 |
+| 2 | $\{A,B\}$ | B-C (1); others: A-C (3), B-D (4) | B-C | 3 |
+| 3 | $\{A,B,C\}$ | B-D (4); others: C-D (5), C-E (6) | B-D | 7 |
+| 4 | $\{A,B,C,D\}$ | C-E (6); other: D-E (7) | C-E | **13** |
 
-**Kruskal's algorithm (sort edges by weight)**
+**(ii) Kruskal's algorithm.** Start with five one-vertex sets. Sort the edges by weight. Accept an edge only if `FIND` gives different roots for its two ends, then `UNION` the sets. Stop after $|V|-1=4$ accepted edges.
 
-| Edge | Weight | Decision |
-|------|--------|----------|
-| B-C | 1 | Take (no cycle) |
-| A-B | 2 | Take (no cycle) |
-| A-C | 3 | Skip (A, B, C would form a cycle) |
-| B-D | 4 | Take (no cycle) |
-| C-D | 5 | Skip (C and D already connected) |
-| C-E | 6 | Take (no cycle). We now have 4 edges for 5 vertices, so stop. |
-| D-E | 7 | Not needed |
+| Scan | Edge | Weight | Decision | Selected forest after decision |
+|:----:|:----:|:------:|:---------|:-------------------------------|
+| 1 | B-C | 1 | Take | $\{B,C\}$, $\{A\}$, $\{D\}$, $\{E\}$ |
+| 2 | A-B | 2 | Take | $\{A,B,C\}$, $\{D\}$, $\{E\}$ |
+| 3 | A-C | 3 | Skip (same set; cycle A-B-C) | unchanged |
+| 4 | B-D | 4 | Take | $\{A,B,C,D\}$, $\{E\}$ |
+| 5 | C-D | 5 | Skip (same set; cycle) | unchanged |
+| 6 | C-E | 6 | Take; 4 edges, so stop | $\{A,B,C,D,E\}$ |
+| 7 | D-E | 7 | Not needed | MST already complete |
 
 **MST edges:** B-C, A-B, B-D, C-E
 
 **Total MST weight:** $1+2+4+6=13$
 
-Both algorithms give this MST. Since all edge weights are different, it is the only MST. Prim adds the lightest edge from its tree to an outside vertex. Kruskal adds the lightest edge that does not make a cycle.
+Both algorithms give this MST. Since all edge weights are different, it is the only MST. Prim takes $\Theta(V^2)$ time with a matrix, or $\Theta((V+E)\log V)$ with an adjacency list and binary heap. Kruskal takes $\Theta(E\log E)$ time, because sorting the edges dominates.
 
 > Memory trick: Prim = grow one tree. Kruskal = sort the edges and avoid cycles.
 
@@ -713,10 +781,17 @@ Call `EXTEND([a], {a})`. Stop at the first circuit for this trace, or continue t
 
 **Answer.**
 
-1. **Optimal substructure**: the best answer of the big problem is built from the best answers of its smaller sub-problems.
-2. **Overlapping sub-problems**: the same small sub-problems appear again and again. DP solves each once, stores it, and reuses it.
+Dynamic programming stores each distinct subproblem once and reuses it. A problem needs both properties below (see [Chapter 8](../../../Chapter%208%20-%20Dynamic%20Programming/README.md)).
 
-**Example:** Fibonacci has overlapping sub-problems (F(3) is computed many times when we compute F(5)). Knapsack has both properties.
+1. **Optimal substructure**: an optimal answer is built from optimal answers to smaller subproblems, in the form $DP[state]=\mathrm{best}_{choice}\{\text{value of choice}+DP[\text{next state}]\}$.
+
+   *Example:* for amount 6 with coins $1,3,4$, try coin 3 first. The remaining amount is 3, so the candidate is $1+dp[3]=2$ coins. If $dp[3]$ were not optimal, replacing it with a better solution would improve the answer for 6.
+
+2. **Overlapping subproblems**: the same smaller states are needed again and again. DP solves each once, stores it, and reuses it.
+
+   *Example:* $F(5)=F(4)+F(3)$ and $F(4)=F(3)+F(2)$ both need $F(3)$, so calculate and store $F(3)$ once.
+
+A DP solution then has five parts: **state**, **recurrence**, **base case**, **table order**, and **final answer**. 0/1 knapsack has both properties (see Q6(b)).
 
 > Memory trick: **O-O** = Optimal substructure + Overlapping sub-problems.
 
@@ -728,20 +803,34 @@ Call `EXTEND([a], {a})`. Stop at the first circuit for this trace, or continue t
 
 **Answer.**
 
-**Problem:** n items. Item i has weight wᵢ and profit pᵢ. The capacity is W. Take each item **whole, at most once**, to get the maximum profit.
+**Problem:** there are $n$ items. Item $i$ has weight $w_i$ and value $v_i$ (the question calls the value *profit*). The capacity is $W$. Take each item **whole, at most once**, to get the maximum total value without exceeding $W$.
 
-**State:** DP[i][w] = the **maximum profit** using the **first i items** with a bag capacity of **w**.
+**State:** $V[i,j]$ is the maximum value using the **first $i$ items** with capacity $j$. This is the question's $DP[i][w]$, with $j=w$.
 
-**Recurrence**
+For item $i$ there are two choices:
 
-- If wᵢ > w (item does not fit): **DP[i][w] = DP[i−1][w]**
-- If wᵢ ≤ w (item fits): **DP[i][w] = max( DP[i−1][w], pᵢ + DP[i−1][w − wᵢ] )**
+- **Skip item $i$:** the value is $V[i-1,j]$.
+- **Take item $i$** (only if $w_i\le j$): the value is $v_i+V[i-1,j-w_i]$.
 
-Meaning: *skip* item i, or *take* item i and add its profit to the best answer for the remaining capacity.
+$$
+V[i,j]=
+\begin{cases}
+V[i-1,j], & \text{if } w_i>j\\
+\max\big(V[i-1,j],\ v_i+V[i-1,j-w_i]\big), & \text{if } w_i\le j
+\end{cases}
+$$
 
-**Base cases:** DP[0][w] = 0 (no items) and DP[i][0] = 0 (no capacity).
+| DP part | Choice for 0/1 knapsack |
+|---------|-------------------------|
+| State | $V[i,j]$: best value from the first $i$ items at capacity $j$ |
+| Base case | $V[0,j]=0$ (no items) and $V[i,0]=0$ (no capacity) |
+| Recurrence | The two cases above |
+| Table order | Rows $i=1,\dots,n$; in each row, columns $j=1,\dots,W$ |
+| Final answer | $V[n,W]$ |
 
-**Answer:** DP[n][W]. **Time and space: O(nW).**
+**Table arrows:** $\uparrow$ means item $i$ is skipped (value copied from the row above). $\nwarrow$ means item $i$ is taken (value comes from the row above at capacity $j-w_i$). **Traceback:** start at $V[n,W]$; if $V[i,j]\ne V[i-1,j]$, item $i$ is selected and $j$ becomes $j-w_i$.
+
+**Complexity:** $\Theta(nW)$ time and $\Theta(nW)$ space ($\Theta(W)$ if one row is reused).
 
 > Memory trick: For each item, choose skip or take, and keep the bigger one.
 
@@ -764,18 +853,38 @@ Meaning: *skip* item i, or *take* item i and add its profit to the best answer f
 | row 2 | 1 | 1 | 1 |
 | row 3 | 0 | 0 | 1 |
 
-Set $dp[0][0]=\text{grid}[0][0]$. Each $dp[r][c]$ stores the most coins that can be collected on a path to cell $(r,c)$. Fill the table from top to bottom and left to right using $dp[r][c]=\text{grid}[r][c]+\max(dp[r-1][c],dp[r][c-1])$, using only cells above or to the left that exist. The last move must come from one of those two cells. Time and space are $O(RC)$ for an $R\times C$ grid.
+| DP part | Choice for the coin grid |
+|---------|--------------------------|
+| State | $dp[r,c]$: most coins collected on a right/down path from $(0,0)$ to $(r,c)$ |
+| Base case | $dp[0,0]=\text{grid}[0][0]$; first row and first column have only one possible previous cell |
+| Recurrence | $dp[r,c]=\text{grid}[r][c]+\max\big(dp[r-1,c],\ dp[r,c-1]\big)$, using only previous cells that exist |
+| Table order | Row by row, left to right |
+| Final answer | $dp[3,2]$ |
+
+**Arrow legend:** $\uparrow$ means the best previous cell is above. $\leftarrow$ means it is to the left. On a tie, $\uparrow$ is chosen (the same up-first tie rule as the LCS algorithm in Chapter 8). The start cell has no arrow.
 
 | | col 0 | col 1 | col 2 |
 |---|---|---|---|
-| row 0 | 1 | 1 | 2 |
-| row 1 | 1 | 2 | 2 |
-| row 2 | 2 | 3 | 4 |
-| row 3 | 2 | 3 | **5** |
+| row 0 | 1 | 1 ($\leftarrow$) | 2 ($\leftarrow$) |
+| row 1 | 1 ($\uparrow$) | 2 ($\uparrow$) | 2 ($\uparrow$) |
+| row 2 | 2 ($\uparrow$) | 3 ($\uparrow$) | 4 ($\leftarrow$) |
+| row 3 | 2 ($\uparrow$) | 3 ($\uparrow$) | **5** ($\uparrow$) |
 
-**Trace back** from $(3,2)$: at each cell, move to the neighbour (above or left) with the larger dp value.
+Key calculations:
 
-**Answer: 5 coins.** One best path is $(0,0)\to(0,1)\to(1,1)\to(2,1)\to(2,2)\to(3,2)$. It collects $1+0+1+1+1+1=5$ coins. The path $(0,0)\to(1,0)\to(2,0)\to(2,1)\to(2,2)\to(3,2)$ also collects 5 coins.
+- $dp[1,1]=1+\max(dp[0,1],dp[1,0])=1+\max(1,1)=2$ (tie, so $\uparrow$).
+- $dp[2,2]=1+\max(dp[1,2],dp[2,1])=1+\max(2,3)=4$ (from the left).
+- $dp[3,2]=1+\max(dp[2,2],dp[3,1])=1+\max(4,3)=5$.
+
+**Traceback** from $(3,2)$, following the arrows:
+
+1. $(3,2)$: $\uparrow$ to $(2,2)$.
+2. $(2,2)$: $\leftarrow$ to $(2,1)$.
+3. $(2,1)$: $\uparrow$ to $(1,1)$.
+4. $(1,1)$: $\uparrow$ to $(0,1)$.
+5. $(0,1)$: $\leftarrow$ to $(0,0)$. Stop.
+
+**Answer: 5 coins.** The traceback gives the path $(0,0)\to(0,1)\to(1,1)\to(2,1)\to(2,2)\to(3,2)$. It collects $1+0+1+1+1+1=5$ coins. If ties at $(1,1)$ are broken to the left instead, the path $(0,0)\to(1,0)\to(2,0)\to(2,1)\to(2,2)\to(3,2)$ also collects 5 coins. For an $R\times C$ grid, time and space are $\Theta(RC)$.
 
 > Memory trick: best here = my coin + the better of (from above, from left).
 
@@ -785,19 +894,33 @@ Set $dp[0][0]=\text{grid}[0][0]$. Each $dp[r][c]$ stores the most coins that can
 
 **Answer.**
 
-**Given instance:** use any number of coins with denominations $D=\{1,3,4\}$ to make exactly 6.
+**Given instance:** use any number of coins with denominations $D=\{1,3,4\}$ to make exactly 6, using as few coins as possible.
 
-**Recurrence:** $C[x]=1+\min_{c\in D,\ c\le x}C[x-c]$, with $C[0]=0$. If no coin can make an amount, its value is $\infty$ (unreachable). Fill the table from smaller amounts to larger ones. Each choice adds one coin to the best answer for the amount left over.
+| DP part | Choice for this example |
+|---------|-------------------------|
+| State | $dp[x]$: minimum coins needed to make amount $x$ |
+| Base case | $dp[0]=0$ |
+| Recurrence | $dp[x]=1+\min_{c\in D,\ c\le x}dp[x-c]$, i.e. $1+\min(dp[x-1],dp[x-3],dp[x-4])$ for valid previous amounts |
+| Table order | Fill amounts from 1 through 6 |
+| Final answer | $dp[6]=2$, using $3+3$ |
+
+If no coin can make an amount, its value is $\infty$ (unreachable). Each choice adds one coin to the best answer for the amount left over.
 
 ![Minimum-coin DP table and greedy counterexample](diagrams/b1-theory-15-coin-change.svg)
 
 | $x$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|---|
-| $C[x]$ | 0 | 1 | 2 | 1 | 1 | 2 | 2 |
+| $dp[x]$ | 0 | 1 | 2 | 1 | 1 | 2 | 2 |
+| Last coin used | - | 1 | 1 | 3 | 4 | 1 | 3 |
 
-Example: $C[6]=1+\min(C[5],C[3],C[2])=1+\min(2,1,2)=2$.
+Key calculations:
 
-**Answer: 2 coins**, using $3+3$. Traceback goes $6\to3\to0$, subtracting 3 each time. Greedy gives $4+1+1$, or 3 coins, as in Q4(a). For amount $M$, time is $O(|D|\cdot M)$ and space is $O(M)$.
+- $dp[3]=1+\min(dp[2],dp[0])=1+\min(2,0)=1$.
+- $dp[4]=1+\min(dp[3],dp[1],dp[0])=1+\min(1,1,0)=1$.
+- $dp[5]=1+\min(dp[4],dp[2],dp[1])=1+\min(1,2,1)=2$.
+- $dp[6]=1+\min(dp[5],dp[3],dp[2])=1+\min(2,1,2)=2$.
+
+**Answer: 2 coins**, using $3+3$. Traceback with the last-coin row: $6\to3$ (coin 3), then $3\to0$ (coin 3). Greedy gives $4+1+1$, or 3 coins, as in Q4(a). For amount $M$, time is $\Theta(|D|\cdot M)$ and space is $\Theta(M)$.
 
 > Memory trick: try every coin, take the cheapest option, and add 1.
 
@@ -811,22 +934,36 @@ Example: $C[6]=1+\min(C[5],C[3],C[2])=1+\min(2,1,2)=2$.
 
 **Answer.**
 
-Dijkstra repeatedly **settles** (finalizes) the unsettled vertex with the smallest current distance, then does not change it again. This is correct when all edge weights are nonnegative. A negative edge can make a settled distance too large.
+Dijkstra is greedy: it repeatedly **finalizes** the unvisited vertex with the smallest tentative distance, and that distance is never revisited. Every time a vertex $u$ is finalized, each edge $(u,v)$ leaving it is relaxed:
+
+$$\text{if } d(u)+c(u,v)<d(v)\implies d(v)=d(u)+c(u,v)$$
+
+This is correct when all edge weights are nonnegative. With a negative edge, a vertex finalized early can later receive a cheaper path (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
 
 **Illustrative directed counterexample:** $V=\{A,B,C\}$ with exactly these edges: $A\to B=1$, $A\to C=4$, and $C\to B=-5$. The source is $A$.
 
 ![Negative-edge failure of label-setting Dijkstra](diagrams/b1-theory-22-negative-edge.svg)
 
-- Dijkstra settles $B$ first, at distance 1.
-- Then $C$, at distance 4, gives a shorter route to $B$: $4+(-5)=-1$. Dijkstra has already settled $B$, so Dijkstra keeps $B = 1$. The true answer is $-1$.
+**Step 0 - Initialize.** $d(A)=0$, $d(B)=d(C)=\infty$.
 
-**Bellman-Ford** does not settle early. It starts with distance 0 at the source and $\infty$ at every other vertex, then **relaxes every edge $|V|-1$ times**. So a later, shorter route through a negative edge is always found.
+**Step 1 - Finalize $A$ (distance 0).** Relax its edges: $0+1=1<\infty\Rightarrow d(B)=1$, and $0+4=4<\infty\Rightarrow d(C)=4$.
 
-**Relaxation:** if $dist[u]+w(u,v)<dist[v]$, then $dist[v]=dist[u]+w(u,v)$.
+**Step 2 - Smallest tentative distance is $B=1$, so finalize $B$.** Dijkstra keeps $B = 1$.
 
-Why $|V|-1$ passes? A shortest path has at most $|V|-1$ edges. Stop early if a pass changes nothing. The time is $O(VE)$.
+**Step 3 - Finalize $C$ (distance 4).** The edge $C\to B$ would give $4+(-5)=-1<1$, but $B$ is already finalized, so it is not updated. The true answer is $-1$.
 
-**Negative-cycle check:** if an edge can still be relaxed after the $|V|-1$ passes, a negative cycle is reachable from the source.
+**Bellman-Ford** does not finalize early. It starts with $dist[A]=0$ and $\infty$ elsewhere, then relaxes every edge $|V|-1$ times, using $dist[u]+w(u,v)<dist[v]$. In the selected-vertex table (vertices in order $A,B,C$; each row shows the array when that vertex is selected), round 1 is:
+
+| Selected vertex | A | B | C |
+|:---:|:---:|:---:|:---:|
+| A | **0** | $\infty$ | $\infty$ |
+| B | 0 | **1** | 4 |
+| C | 0 | 1 | **4** |
+| C → B (wrap) | 0 | **-1** | 4 |
+
+The wrap row relaxes $C\to B$: $4-5=-1<1$, so $B$ improves to $-1$. Round 2 changes nothing, so the distances are $A=0$, $B=-1$, $C=4$.
+
+Why $|V|-1$ rounds? A shortest simple path has at most $|V|-1$ edges. The time is $\Theta(VE)$. **Negative-cycle check:** one extra pass; if any edge can still be relaxed, a negative cycle is reachable from the source.
 
 > Memory trick: Dijkstra decides once. Bellman-Ford keeps checking all edges again and again.
 
@@ -836,22 +973,68 @@ Why $|V|-1$ passes? A shortest path has at most $|V|-1$ edges. Stop early if a p
 
 **Answer.**
 
-**Given graph:** a directed graph with $V=\{A,B,C,D,E\}$ and source A. The edges, in the question's order, are A to B = 6, A to C = 7, B to D = 5, B to E = -4, C to B = -3, C to D = 8, D to E = -2, and E to A = 2.
+**Read the graph.** It is directed and weighted with $V=\{A,B,C,D,E\}$ and source A. The edges, in the question's order, are A to B = 6, A to C = 7, B to D = 5, B to E = -4, C to B = -3, C to D = 8, D to E = -2, and E to A = 2. The edge $E\to A$ points back to the source.
 
-Use **in-place relaxation**: an updated distance can be used by later edges in the same pass. For example, in pass 1, A to B sets B to 6; then C to B gives $7+(-3)=4$, so B becomes 4.
+**Adjacency list** (neighbour, weight $w(u,v)$):
 
-| Pass | A | B | C | D | E |
-|------|---|---|---|---|---|
-| Start | 0 | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
-| 1 | 0 | 4 | 7 | 11 | 2 |
-| 2 | 0 | 4 | 7 | 9 | 0 |
-| 3 | 0 | 4 | 7 | 9 | 0 |
+```text
+A: B(6), C(7)
+B: D(5), E(-4)
+C: B(-3), D(8)
+D: E(-2)
+E: A(2)
+```
 
-Pass 3 makes no changes, so we stop.
+**Method (selected-vertex relaxation table).** Relax the edges grouped by source vertex, in the fixed order $A,B,C,D,E$. This still relaxes every edge once per round. Each row is labelled by the vertex whose *outgoing* edges are relaxed next, and shows the array $[dist[A],\dots,dist[E]]$ at that moment. The **bold** cell marks the selected vertex. The relaxation test is $dist[u]+w(u,v)<dist[v]$. With $|V|=5$, at most $|V|-1=4$ rounds are needed.
+
+**Round 1** - start from $dist[A]=0$ and $\infty$ elsewhere:
+
+| Selected vertex | A | B | C | D | E |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| A | **0** | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+| B | 0 | **6** | 7 | $\infty$ | $\infty$ |
+| C | 0 | 6 | **7** | 11 | 2 |
+| D | 0 | 4 | 7 | **11** | 2 |
+| E | 0 | 4 | 7 | 11 | **2** |
+| E → A (wrap) | **0** | 4 | 7 | 11 | 2 |
+
+- Row B: relax $A\to B$ ($0+6=6$) and $A\to C$ ($0+7=7$).
+- Row C: relax $B\to D$ ($6+5=11$) and $B\to E$ ($6-4=2$).
+- Row D: relax $C\to B$ ($7-3=4$, improves $B$ from 6) and $C\to D$ ($7+8=15$, no change).
+- Row E: relax $D\to E$ ($11-2=9$), which does **not** improve $E=2$.
+- Wrap row: relax $E\to A$ ($2+2=4$), which does **not** improve $A=0$.
+
+**Round 2** - carried over from $[0,4,7,11,2]$:
+
+| Selected vertex | A | B | C | D | E |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| A | **0** | 4 | 7 | 11 | 2 |
+| B | 0 | **4** | 7 | 11 | 2 |
+| C | 0 | 4 | **7** | 9 | 0 |
+| D | 0 | 4 | 7 | **9** | 0 |
+| E | 0 | 4 | 7 | 9 | **0** |
+| E → A (wrap) | **0** | 4 | 7 | 9 | 0 |
+
+$B\to D$ improves $D$ to 9 ($4+5$), and $B\to E$ improves $E$ to 0 ($4-4$).
+
+**Round 3** - carried over from $[0,4,7,9,0]$:
+
+| Selected vertex | A | B | C | D | E |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| A | **0** | 4 | 7 | 9 | 0 |
+| B | 0 | **4** | 7 | 9 | 0 |
+| C | 0 | 4 | **7** | 9 | 0 |
+| D | 0 | 4 | 7 | **9** | 0 |
+| E | 0 | 4 | 7 | 9 | **0** |
+| E → A (wrap) | **0** | 4 | 7 | 9 | 0 |
+
+Nothing changed in Round 3, so the values have converged. Round 4 and the negative-cycle check pass leave the table unchanged.
 
 **Final distances from A:** A = 0; B = 4 (A to C to B); C = 7 (A to C); D = 9 (A to C to B to D); E = 0 (A to C to B to E).
 
-**Negative cycle:** there is none. Every cycle returns to A. The smallest cycle total is 2, for A to C to B to E to A: $7-3-4+2=2$.
+Walking `parent[v]` backward gives these paths: $parent[C]=A$, $parent[B]=C$, $parent[D]=B$, and $parent[E]=B$.
+
+**Negative cycle:** there is none, because no edge can still be relaxed after the converged round. Every cycle returns to A. The smallest cycle total is 2, for A to C to B to E to A: $7-3-4+2=2$. Bellman-Ford takes $\Theta(VE)$ time and $\Theta(V)$ space.
 
 > Memory trick: relax all edges, repeat, and stop when nothing changes.
 
@@ -865,30 +1048,50 @@ Pass 3 makes no changes, so we stop.
 
 **Algorithm optimality:** an algorithm is **optimal** when its running time **matches the lower bound** of the problem, so no other algorithm can be faster (apart from constant factors). Example: every comparison sort needs $\Omega(n\log n)$ comparisons (a decision tree has $n!$ leaves), so merge sort and heap sort, which run in $O(n\log n)$, are optimal comparison sorts. An **optimal solution** is different: it is the best valid answer, such as the maximum profit in knapsack.
 
-**The 0/1 knapsack DP finds an optimal solution.** For each item, either skip it, or take it if it fits and add the best profit for the remaining capacity. Both choices are tried, so the best profit is always found. The time is $O(nW)$.
+**The 0/1 knapsack DP finds an optimal solution.** Use $V[i,j]$ = the maximum value (profit) from the first $i$ items at capacity $j$ (see [Chapter 8](../../../Chapter%208%20-%20Dynamic%20Programming/README.md)):
+
+$$
+V[i,j]=
+\begin{cases}
+V[i-1,j], & \text{if } w_i>j\\
+\max\big(V[i-1,j],\ v_i+V[i-1,j-w_i]\big), & \text{if } w_i\le j
+\end{cases}
+\qquad V[0,j]=V[i,0]=0
+$$
+
+Both choices (skip and take) are tried, so the best value is always found.
 
 ![Knapsack recurrence, full table, and optimal item choice](diagrams/b1-theory-20-knapsack.svg)
 
-**Given instance:** 0/1 knapsack with capacity $W=8$. The total weight may be at most 8, and taking no items is allowed. The four items are listed below.
+**Given instance:** 0/1 knapsack with capacity $W=8$. The total weight may be at most 8, and taking no items is allowed.
 
-| Item | 1 | 2 | 3 | 4 |
-|------|---|---|---|---|
-| Weight | 3 | 4 | 5 | 6 |
-| Profit | 2 | 3 | 1 | 4 |
+**Arrow legend:** $\uparrow$ means the item is skipped (value copied from the upper row). $\nwarrow$ means the item is taken (value comes from the previous row at reduced capacity). If skipping and taking tie, $\uparrow$ is shown. The base row and base column have no arrows because their values are fixed at 0.
 
-**DP table** (rows: first $i$ items; columns: capacity $w = 0$ to $8$):
+| Item | Weight | Value (profit) | $W=0$ | $W=1$ | $W=2$ | $W=3$ | $W=4$ | $W=5$ | $W=6$ | $W=7$ | $W=8$ |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 0 | - | - | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 1 | 3 | 2 | 0 | 0 ($\uparrow$) | 0 ($\uparrow$) | 2 ($\nwarrow$) | 2 ($\nwarrow$) | 2 ($\nwarrow$) | 2 ($\nwarrow$) | 2 ($\nwarrow$) | 2 ($\nwarrow$) |
+| 2 | 4 | 3 | 0 | 0 ($\uparrow$) | 0 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\nwarrow$) | 3 ($\nwarrow$) | 3 ($\nwarrow$) | 5 ($\nwarrow$) | 5 ($\nwarrow$) |
+| 3 | 5 | 1 | 0 | 0 ($\uparrow$) | 0 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) | 5 ($\uparrow$) | 5 ($\uparrow$) |
+| 4 | 6 | 4 | 0 | 0 ($\uparrow$) | 0 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) | 4 ($\nwarrow$) | 5 ($\uparrow$) | **5** ($\uparrow$) |
 
-| $i$ \ $w$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
-|---|---|---|---|---|---|---|---|---|---|
-| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 1 | 0 | 0 | 0 | 2 | 2 | 2 | 2 | 2 | 2 |
-| 2 | 0 | 0 | 0 | 2 | 3 | 3 | 3 | 5 | 5 |
-| 3 | 0 | 0 | 0 | 2 | 3 | 3 | 3 | 5 | 5 |
-| 4 | 0 | 0 | 0 | 2 | 3 | 3 | 4 | 5 | 5 |
+Key calculations:
+
+- $V[2,7]=\max(V[1,7],\ 3+V[1,3])=\max(2,5)=5$.
+- $V[3,8]=\max(V[2,8],\ 1+V[2,3])=\max(5,3)=5$.
+- $V[4,6]=\max(V[3,6],\ 4+V[3,0])=\max(3,4)=4$.
+- $V[4,8]=\max(V[3,8],\ 4+V[3,2])=\max(5,4)=5$.
 
 **Answer: profit 5**, using items 1 and 2 (weight $3+4=7\le8$, profit $2+3=5$).
 
-**Traceback:** $DP[4][8]=DP[3][8]=5$, so skip item 4. The value also stays 5 in row 3, so skip item 3. Since $DP[2][8]=5$ but $DP[1][8]=2$, take item 2 and reduce the capacity to $8-4=4$. Since $DP[1][4]=2$ but $DP[0][4]=0$, take item 1.
+**Traceback:**
+
+1. Start at $V[4,8]=5$. Since $V[4,8]=V[3,8]$, item 4 is not selected.
+2. At $V[3,8]=5=V[2,8]$, item 3 is not selected.
+3. At $V[2,8]=5\ne V[1,8]=2$, item 2 is selected. The remaining capacity is $8-4=4$.
+4. At $V[1,4]=2\ne V[0,4]=0$, item 1 is selected. The remaining capacity is $4-3=1$.
+
+The time is $\Theta(nW)$.
 
 > Memory trick: optimal algorithm = nobody can be faster. Optimal solution = nobody can have more profit.
 
@@ -960,24 +1163,67 @@ NP-complete = the overlap of NP and NP-hard
 
 **Answer.**
 
-**Graph transcribed from the paper's figure:** an undirected graph with nonnegative edge weights, vertices $A,B,C,D,E,F$, and source $A$. Its full edge list is: A-B (2), A-D (8), B-D (5), B-E (6), D-E (3), D-F (2), E-F (1), E-C (9), and F-C (3).
+**Read the graph.** It is undirected with nonnegative edge weights, vertices $A,B,C,D,E,F$, and source $A$. This is transcribed from the paper's figure. Its full edge list is: A-B (2), A-D (8), B-D (5), B-E (6), D-E (3), D-F (2), E-F (1), E-C (9), and F-C (3).
 
-**Relaxation formula:** $dist[v]\leftarrow\min(dist[v],\ dist[u]+w(u,v))$. If the distance gets smaller, set `pred[v] = u` (the previous vertex on the path).
+**Adjacency list** (neighbour, cost $c(u,v)$):
 
-**Method:** set $dist[A]=0$ and all other distances to $\infty$. Repeat: pick the not-yet-finalized vertex with the smallest distance, finalize it, and relax the edges to its neighbours.
+```text
+A: B(2), D(8)
+B: A(2), D(5), E(6)
+C: E(9), F(3)
+D: A(8), B(5), E(3), F(2)
+E: B(6), C(9), D(3), F(1)
+F: C(3), D(2), E(1)
+```
 
-| Step | Visit | Distances updated |
-|------|-------|-------------------|
-| 1 | A (0) | B = 2, D = 8 |
-| 2 | B (2) | E = 8, D = 7 |
-| 3 | D (7) | F = 9 |
-| 4 | E (8) | C = 17. (F: 8 + 1 = 9, no change) |
-| 5 | F (9) | C = 12 |
-| 6 | C (12) | none |
+**Relaxation formula:** every time a vertex $u$ is finalized, relax each edge $(u,v)$ leaving it:
+
+$$\text{if } \big(d(u)+c(u,v)<d(v)\big)\implies d(v)=d(u)+c(u,v)$$
+
+If the distance gets smaller, also set `parent[v] = u` (the previous vertex on the path). Dijkstra's greedy rule: always finalize the unvisited vertex with the smallest tentative distance (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
+
+**Step 0 - Initialize.** $d(A)=0$; every other vertex starts at $\infty$.
+
+**Step 1 - Finalize $A$ (distance 0).** Relax edges out of $A$:
+
+- $0+2=2<\infty\Rightarrow d(B)=2$
+- $0+8=8<\infty\Rightarrow d(D)=8$
+
+**Step 2 - Smallest tentative distance is $B=2$, so finalize $B$.** Relax edges out of $B$ (to $D$ and $E$):
+
+- $2+5=7<8\Rightarrow d(D)=7$
+- $2+6=8<\infty\Rightarrow d(E)=8$
+
+**Step 3 - Smallest remaining is $D=7$, so finalize $D$.** Relax edges out of $D$ (to $E$ and $F$):
+
+- $7+3=10$, compare with $d(E)=8$. Since $10\not<8$, $E$ stays $8$.
+- $7+2=9<\infty\Rightarrow d(F)=9$
+
+**Step 4 - Smallest remaining is $E=8$, so finalize $E$.** Relax edges out of $E$ (to $C$ and $F$):
+
+- $8+9=17<\infty\Rightarrow d(C)=17$
+- $8+1=9$, compare with $d(F)=9$. Since $9\not<9$, $F$ stays $9$.
+
+**Step 5 - Smallest remaining is $F=9$, so finalize $F$.** Relax the edge out of $F$ (to $C$):
+
+- $9+3=12<17\Rightarrow d(C)=12$
+
+**Step 6 - Only $C=12$ remains, so finalize $C$.** All vertices are now visited.
+
+Distance table, one row per finalized (visited) vertex, in the order they were finalized. Each row shows the distances when that vertex is selected; bold marks the distance finalized in that step, and `-` marks the vertex finalized in the previous step:
+
+| Visited $\downarrow$ | A | B | C | D | E | F |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **A** | **0** | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+| **B** | | **2** | $\infty$ | 8 | $\infty$ | $\infty$ |
+| **D** | | - | $\infty$ | **7** | 8 | $\infty$ |
+| **E** | | | $\infty$ | - | **8** | 9 |
+| **F** | | | 17 | | - | **9** |
+| **C** | | | **12** | | | - |
 
 **Final distances:** A = 0, B = 2, D = 7, E = 8, F = 9, C = 12.
 
-**Shortest paths and costs:**
+**Shortest paths and costs** (walk `parent[v]` backward from each vertex):
 
 - B: A to B, cost $2$.
 - D: A to B to D, cost $2+5=7$.
@@ -987,7 +1233,9 @@ NP-complete = the overlap of NP and NP-hard
 
 **Shortest path to C:** A to B to D to F to C, with cost $2+5+2+3=12$.
 
-There is a tie for F: A to B to D to F and A to B to E to F both cost 9 ($2+5+2=2+6+1$). So C also has two shortest paths, through D-F or E-F, each with cost 12. The displayed tree uses B←A, D←B, E←B, F←D, and C←F. With a binary heap, Dijkstra takes $O((V+E)\log V)$ time and $O(V+E)$ graph space. A simple array version takes $O(V^2+E)$ time.
+There is a tie for F: A to B to D to F and A to B to E to F both cost 9 ($2+5+2=2+6+1$). So C also has two shortest paths, through D-F or E-F, each with cost 12. Because the relaxation uses a strict `<`, the first parent found is kept. The displayed tree uses B←A, D←B, E←B, F←D, and C←F.
+
+**Complexity:** $\Theta(V^2)$ with an adjacency matrix, or $\Theta((V+E)\log V)$ with an adjacency list and binary heap. Space is $\Theta(V+E)$.
 
 > Memory trick: finalize the nearest vertex, then relax its edges.
 
@@ -1008,18 +1256,18 @@ Run `python tools/verify_b1_theory.py` from the repository root to check the num
 | Merge sort | Split, sort, and merge; time $\Theta(n\log n)$; needs $\Theta(n)$ extra memory |
 | Quicksort | Partition in place; usually fast, but worst-case time is $\Theta(n^2)$; not stable |
 | Heapsort | Build a max-heap in $\Theta(n)$; worst-case sorting time is $\Theta(n\log n)$; in-place, not stable |
-| Greedy | Pick the best-looking next choice; it does not always give the best full answer |
-| Memoization and tabulation | Memoization = recursion plus saved answers; tabulation = fill a table from small cases up |
-| MST | Prim grows one tree; Kruskal adds the lightest edge that does not make a cycle |
+| Greedy | Pick the best-looking next choice; it does not always give the best full answer (coins $4,3,1$ for amount 6) |
+| Memoization and tabulation | Memoization = recursion plus cache; tabulation = iteration plus a table filled from small cases up |
+| MST | Prim grows one tree; Kruskal sorts edges and adds the lightest edge that does not make a cycle (`FIND`/`UNION`) |
 | Backtracking | Choose, check, and undo a choice if it leads to a dead end |
 | Subset sum | Try take or skip; if all numbers are positive, prune when the sum exceeds $d$ |
 | Hamiltonian circuit | Visit every vertex once and return to the start |
-| Dynamic programming | Store repeated subproblem answers; optimization DP needs optimal substructure |
-| 0/1 knapsack | Compare skipping an item with taking it if it fits; time $O(n(W+1))$ |
-| Grid coins | Best total = coins in this cell + the larger of the best totals above or left |
-| Coin change DP | $C[x]=1+\min C[x-c]$; greedy can fail |
-| Bellman-Ford | Relax every edge up to $V-1$ times; check for a reachable negative cycle |
-| Dijkstra and Bellman-Ford | Dijkstra needs nonnegative edges; Bellman-Ford can handle negative edges |
+| Dynamic programming | Five parts: state, recurrence, base case, table order, final answer; needs optimal substructure and overlapping subproblems |
+| 0/1 knapsack | $V[i,j]=\max(V[i-1,j],\ v_i+V[i-1,j-w_i])$ if the item fits; $\uparrow$ skip, $\nwarrow$ take; time $\Theta(nW)$ |
+| Grid coins | $dp[r,c]$ = coins in this cell + the larger of $dp$ above or left |
+| Coin change DP | $dp[x]=1+\min dp[x-c]$; greedy can fail |
+| Bellman-Ford | Relax edges vertex by vertex ($A,B,C,\dots$) up to $V-1$ rounds; check for a reachable negative cycle |
+| Dijkstra and Bellman-Ford | Dijkstra ($d(u)+c(u,v)<d(v)$) needs nonnegative edges; Bellman-Ford can handle negative edges |
 | Optimality | Optimal algorithm = time matches the problem's lower bound; optimal solution = best answer |
 | P, NP, NP-hard, NP-complete | $P\subseteq NP$; NP-complete = NP and NP-hard; whether $P=NP$ is open |
 | Decision and optimization | Decision = yes/no; optimization = find the best answer |
