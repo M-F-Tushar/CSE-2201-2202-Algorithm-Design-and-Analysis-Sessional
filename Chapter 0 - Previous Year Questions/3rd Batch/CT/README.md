@@ -399,7 +399,7 @@ The supplied CT4 paper contains four questions worth 20 marks in total. The word
 
 Backtracking explores this tree depth-first. At each node it tests whether the partial solution is still promising. If not, it prunes that whole branch, undoes the last choice, and tries another branch. This organizes the search and avoids completing candidates that already violate the constraints; the worst-case search can still be exponential.
 
-![A 4-Queens state-space tree showing a pruned dead end and a complete solution](diagrams/ct4-01-state-space-tree.svg)
+![A subset-sum state-space tree: each level decides yes or no for one item, and a pruned branch and the solution are highlighted](diagrams/ct4-01-state-space-tree.svg)
 
 > Memory trick: choose, check, recurse; if blocked, undo and try a sibling.
 
