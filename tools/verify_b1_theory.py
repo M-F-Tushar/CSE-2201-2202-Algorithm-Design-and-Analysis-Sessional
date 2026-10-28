@@ -563,7 +563,7 @@ class VerifyTheory(unittest.TestCase):
         diagrams = THEORY / "diagrams"
         svg_files = set(diagrams.glob("*.svg"))
         sources = set(diagrams.glob("*.excalidraw"))
-        self.assertEqual(len(svg_files), 23)
+        self.assertEqual(len(svg_files), 24)
         self.assertEqual({p.stem for p in svg_files}, {p.stem for p in sources})
         for part in PARTS:
             images = re.findall(r"!\[[^\]]*\]\((diagrams/[^)]+\.svg)\)", self.section(part))
@@ -621,6 +621,6 @@ if __name__ == "__main__":
     result = unittest.TextTestRunner(verbosity=2).run(suite)
     if result.wasSuccessful():
         print("Verified actual Markdown numeric tables and stated graph/search results.")
-        print("Coverage: 27/27 subquestions; 23 valid SVG/Excalidraw pairs; local links checked.")
+        print("Coverage: 27/27 subquestions; 24 valid SVG/Excalidraw pairs; local links checked.")
         print("No historical-source authentication or automatic proof of all prose is claimed.")
     sys.exit(0 if result.wasSuccessful() else 1)
