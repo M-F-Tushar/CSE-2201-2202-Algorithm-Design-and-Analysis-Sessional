@@ -133,7 +133,7 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 │   ├── README.md
 │   ├── 1st Batch/
 │   │   ├── Theory/README.md           # 2023 final — 8 questions, 27 parts, 3 sections
-│   │   │   └── diagrams/              # 23 SVGs (b1-theory-01 … b1-theory-23)
+│   │   │   └── diagrams/              # 24 SVGs (b1-theory-01 … b1-theory-24)
 │   │   └── Lab Final/README.md
 │   ├── 2nd Batch/
 │   │   ├── Theory/README.md
@@ -472,7 +472,7 @@ Ch 1  Foundations
 
 | Batch | Content | Marks / Parts | Diagram Set |
 |---|---|---|---|
-| **1st Batch — Theory** | 2023 final exam: Q1 Design & complexity, Q2 Recurrences & loops, Q3 D&C/Merge/Quick/Heap, Q4 Greedy/Memo/MST, Q5 Backtracking, Q6 DP (knapsack/grid/coin), Q7 Bellman-Ford/Optimality/Knapsack, Q8 P/NP/Decision/Dijkstra | 8 questions · 27 parts | 23 SVGs (`b1-theory-01 … b1-theory-23`) |
+| **1st Batch — Theory** | 2023 final exam: Q1 Design & complexity, Q2 Recurrences & loops, Q3 D&C/Merge/Quick/Heap, Q4 Greedy/Memo/MST, Q5 Backtracking, Q6 DP (knapsack/grid/coin), Q7 Bellman-Ford/Optimality/Knapsack, Q8 P/NP/Decision/Dijkstra | 8 questions · 27 parts | 24 SVGs (`b1-theory-01 … b1-theory-24`) |
 | **2nd Batch — Theory** | P/NP Venn, BFS, activity DAG, Strassen split, quicksort partition, mergesort tree, Kruskal MST, Floyd-Warshall, LCS table, graph-colouring tree, LC knapsack tree + extras | — | 25 SVGs (`b2-theory-01 …`) |
 | **3rd Batch — CT 1–4** | CT1: Principle of optimality, Fibonacci DP, LCS (AGGTAB/GXTXAYB), 0/1 knapsack · CT2: Topological sort, Bellman-Ford, Floyd-Warshall · CT3: Union-by-rank, max subarray, segment tree · CT4: State-space tree, N-Queens constraints, backtracking applications & algorithm | 4 tests × 20 = **80 marks** | 15 SVGs (`ct1-01 … ct4-04`) |
 | **Lab Practice** | Standalone C++ implementations for viva & sessional | 11 programs | — |
