@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 
 from excalidraw_gen import D, E, N, write
+from state_space_tree import S, state_space_tree as build_tree
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "Chapter 0 - Previous Year Questions/3rd Batch/CT/diagrams"
@@ -35,31 +36,20 @@ def emit(scene):
 
 
 def state_space_tree():
-    nodes = [
-        box("root", "Start\nitems {2, 3}; target 3", 520, 80, 240, 66, "gray", 15),
-        box("include2", "Include 2\nsum = 2", 230, 205, 220, 64, "blue", 15),
-        box("exclude2", "Exclude 2\nsum = 0", 830, 205, 220, 64, "blue", 15),
-        box("include2_include3", "Include 3\n{2, 3}: sum = 5\nnot target", 65, 340, 220, 76, "red", 14),
-        box("include2_exclude3", "Exclude 3\n{2}: sum = 2\nnot target", 300, 340, 220, 76, "gray", 14),
-        box("exclude2_include3", "Include 3\n{3}: sum = 3\ntarget ✓", 760, 340, 220, 76, "green", 14),
-        box("exclude2_exclude3", "Exclude 3\n{}: sum = 0\nnot target", 995, 340, 220, 76, "gray", 14),
-        box("role", "Each root-to-leaf path is one subset; all four combinations are shown.\n"
-                    "Backtracking explores one path at a time. When a branch cannot lead to a solution,\n"
-                    "it undoes the last choice and returns to a sibling instead of continuing down that branch.",
-            60, 470, 1155, 110, "yellow", 14),
-    ]
-    edges = [
-        E("root", "include2", route="v"), E("root", "exclude2", route="v"),
-        E("include2", "include2_include3", route="v"),
-        E("include2", "include2_exclude3", route="v"),
-        E("exclude2", "exclude2_include3", route="v"),
-        E("exclude2", "exclude2_exclude3", route="v"),
-    ]
-    return D(
+    """Slide-style yes/no tree: circles hold the running sum (see state_space_tree.py)."""
+    root = S("0",
+             yes=S("2",
+                   yes=S("5", color="red", note="5 > 3\nprune"),
+                   no=S("2", note="2 ≠ 3")),
+             no=S("0",
+                  yes=S("3", color="green", note="3 = S\nsolution ✓"),
+                  no=S("0", note="0 ≠ 3")))
+    return build_tree(
         "ct4-01-state-space-tree",
-        "CT4 Q1: Subset-sum choices form a state-space tree",
-        (1280, 650), nodes, edges,
-        caption="Example: subset sum for {2, 3} with target 3; each level decides whether to include the next item.",
+        "CT4 Q1: Subset-Sum State-Space Tree",
+        "items w₁ = 2, w₂ = 3   and   target S = 3",
+        root, ["i₁", "i₂"],
+        "The sum of the included numbers is stored at the node.\nEach root-to-leaf path is one subset.",
     )
 
 
