@@ -17,9 +17,9 @@
 | CT1 Q1 | Principle of Optimality in a shortest-route graph | [SVG](ct1-01-principle-optimality.svg) | [Excalidraw](ct1-01-principle-optimality.excalidraw) |
 | CT1 Q2 | Repeated calls in naive F(5) recursion | [SVG](ct1-02-fib-recursion.svg) | [Excalidraw](ct1-02-fib-recursion.excalidraw) |
 | CT1 Q2 | Bottom-up Fibonacci table | [SVG](ct1-03-fib-table.svg) | [Excalidraw](ct1-03-fib-table.excalidraw) |
-| CT1 Q3 | LCS table for AGGTAB and GXTXAYB | [SVG](ct1-04-lcs.svg) | [Excalidraw](ct1-04-lcs.excalidraw) |
-| CT1 Q4 | Illustrative 0/1 knapsack DP table | [SVG](ct1-05-knapsack.svg) | [Excalidraw](ct1-05-knapsack.excalidraw) |
-| CT2 Q1 | DAG with a valid topological order | [SVG](ct2-01-topological.svg) | [Excalidraw](ct2-01-topological.excalidraw) |
+| CT1 Q3 | LCS table c[i,j] for AGGTAB and GXTXAYB, with arrows | [SVG](ct1-04-lcs.svg) | [Excalidraw](ct1-04-lcs.excalidraw) |
+| CT1 Q4 | Illustrative 0/1 knapsack table V[i,j], with skip/take arrows | [SVG](ct1-05-knapsack.svg) | [Excalidraw](ct1-05-knapsack.excalidraw) |
+| CT2 Q1 | DAG with the DFS-based topological order | [SVG](ct2-01-topological.svg) | [Excalidraw](ct2-01-topological.excalidraw) |
 | CT2 Q2 | Bellman–Ford graph and shortest route from S to T | [SVG](ct2-02-bellman-ford.svg) | [Excalidraw](ct2-02-bellman-ford.excalidraw) |
 | CT2 Q3 | Four-vertex graph used for Floyd–Warshall | [SVG](ct2-03-floyd-warshall.svg) | [Excalidraw](ct2-03-floyd-warshall.excalidraw) |
 | CT3 Q1 | Naive DSU chain compared with union by rank | [SVG](ct3-01-union-by-rank.svg) | [Excalidraw](ct3-01-union-by-rank.excalidraw) |

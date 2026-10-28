@@ -80,7 +80,7 @@ def ct1_fib_tree():
 
 def ct1_fib_table():
     vals = [0, 1, 1, 2, 3, 5]
-    nodes = [box(f"i{i}", f"i = {i}", 45 + 165*i, 100, 125, 42, "gray", 15) for i in range(6)]
+    nodes = [box(f"i{i}", f"n = {i}", 45 + 165*i, 100, 125, 42, "gray", 15) for i in range(6)]
     nodes += [box(f"f{i}", f"F({i}) = {v}", 45 + 165*i, 170, 125, 58,
                   "blue" if i < 2 else "green", 16) for i,v in enumerate(vals)]
     formulas = ["base", "base", "F(1)+F(0)", "F(2)+F(1)", "F(3)+F(2)", "F(4)+F(3)"]
@@ -98,14 +98,21 @@ def ct1_lcs():
         for j, b in enumerate(y,1):
             dp[i][j] = dp[i-1][j-1]+1 if a==b else max(dp[i-1][j],dp[i][j-1])
     selected = {(1,5),(2,1),(3,1),(4,3),(5,5),(6,7)}
+    arrows = {}
+    for i, a in enumerate(x,1):
+        for j, b in enumerate(y,1):
+            if a == b: arrows[i,j] = "\u2196"
+            elif dp[i-1][j] >= dp[i][j-1]: arrows[i,j] = "\u2191"
+            else: arrows[i,j] = "\u2190"
     nodes = [box(f"hy{j}", c, 100+j*66, 72, 60, 42, "light", 16) for j,c in enumerate(y,1)]
     nodes += [box(f"hx{i}", c, 34, 124+i*52, 60, 46, "light", 16) for i,c in enumerate(x,1)]
     for i in range(len(x)+1):
         for j in range(len(y)+1):
             color = "green" if (i,j) in selected else "gray"
-            nodes.append(box(f"c{i}_{j}", str(dp[i][j]), 100+j*66, 124+i*52, 60, 46, color, 15))
-    nodes.append(box("answer", "LCS = GTAB; length = 4", 120, 535, 500, 50, "yellow", 16))
-    return D("ct1-04-lcs", "CT1 Q3: LCS table for AGGTAB and GXTXAYB", (700, 610), nodes)
+            label = f"{dp[i][j]} {arrows[i,j]}" if i and j else str(dp[i][j])
+            nodes.append(box(f"c{i}_{j}", label, 100+j*66, 124+i*52, 60, 46, color, 15))
+    nodes.append(box("answer", "c[i,j]: \u2196 match (diagonal + 1); \u2191 up; \u2190 left (ties go up)\nLCS = GTAB; length = 4", 60, 525, 600, 60, "yellow", 15))
+    return D("ct1-04-lcs", "CT1 Q3: LCS table c[i,j] for AGGTAB and GXTXAYB", (700, 610), nodes)
 
 
 def ct1_knapsack():
@@ -114,21 +121,26 @@ def ct1_knapsack():
     for i,(w,p) in enumerate(zip(weights,profits),1):
         for c in range(cap+1):
             dp[i][c] = max(dp[i-1][c],dp[i-1][c-w]+p) if c>=w else dp[i-1][c]
-    names = ["none"]+[f"item {i} (w={w}, p={p})" for i,(w,p) in enumerate(zip(weights,profits),1)]
+    names = ["i = 0 (no items)"]+[f"item {i} (w={w}, v={p})" for i,(w,p) in enumerate(zip(weights,profits),1)]
     nodes = [box(f"h{c}", str(c), 220+c*66, 70, 62, 40, "light", 15) for c in range(cap+1)]
+    nodes.append(box("corner", "V[i,j]  (j = capacity)", 25, 70, 185, 40, "light", 13))
     for i,name in enumerate(names):
         nodes.append(box(f"r{i}",name,25,70+(i+1)*52,185,46,"light",13))
         for c,v in enumerate(dp[i]):
             color = "green" if (i,c) in {(1,4),(2,8)} else "gray"
-            nodes.append(box(f"c{i}_{c}",str(v),220+c*66,70+(i+1)*52,62,46,color,15))
-    nodes.append(box("answer","Illustrative: W=8; maximum profit 5; take items 1 and 2.",
-                     35,410,760,52,"yellow",15))
-    return D("ct1-05-knapsack", "CT1 Q4: 0/1 knapsack DP table", (820, 470), nodes)
+            label = str(v)
+            if i >= 1 and c >= 1:
+                took = c >= weights[i-1] and dp[i-1][c-weights[i-1]] + profits[i-1] > dp[i-1][c]
+                label += " \u2196" if took else " \u2191"
+            nodes.append(box(f"c{i}_{c}",label,220+c*66,70+(i+1)*52,62,46,color,15))
+    nodes.append(box("answer","Illustrative: W=8; V[4,8] = 5; take items 1 and 2.\n\u2191 skip (copy row above); \u2196 take (V[i-1, j-w_i] + v_i); ties go up",
+                     35,410,760,60,"yellow",15))
+    return D("ct1-05-knapsack", "CT1 Q4: 0/1 knapsack table V[i,j]", (820, 490), nodes)
 
 
 def ct2_topological():
     coords = {"4":(140,120),"5":(450,120),"6":(140,280),"2":(450,280),"3":(450,435),"1":(140,435)}
-    order = {"4":1,"5":2,"6":3,"2":4,"3":5,"1":6}
+    order = {"5":1,"4":2,"6":3,"2":4,"3":5,"1":6}
     nodes = [box(v,f"{v}\nposition {order[v]}",x,y,120,58,"green" if v in "45" else "blue",14)
              for v,(x,y) in coords.items()]
     edges = [E("4","6",route="v"),
@@ -136,15 +148,15 @@ def ct2_topological():
              E("5","2",route="v"),
              E("4","1",pts=[(140,149),(90,149),(90,464),(140,464)]),
              E("2","3",route="v"), E("3","1",route="h")]
-    nodes.append(box("answer","One valid order: 4, 5, 6, 2, 3, 1",590,200,350,65,"green",16))
-    nodes.append(box("note","Edges: 5→6, 4→6, 5→2, 4→1, 2→3, 3→1",590,300,350,70,"gray",14))
+    nodes.append(box("answer","DFS finish stack, popped in reverse:\n5, 4, 6, 2, 3, 1",590,200,350,65,"green",16))
+    nodes.append(box("note","Edges: 5→6, 4→6, 5→2, 4→1, 2→3, 3→1\nKahn's algorithm: 4, 5, 6, 2, 3, 1 is also valid",590,300,350,70,"gray",14))
     return D("ct2-01-topological", "CT2 Q1: Topological order of the DAG", (980, 540), nodes, edges)
 
 
 def ct2_bellman_ford():
     coords = {"S":(90,280),"A":(310,120),"C":(310,430),"B":(550,120),"D":(550,430),"T":(790,280)}
     distances = {"S":0,"A":0,"B":1,"C":-2,"D":0,"T":1}
-    nodes = [box(v,f"{v}\nd={distances[v]}",x-50,y-28,100,56,"green",15) for v,(x,y) in coords.items()]
+    nodes = [box(v,f"{v}\ndist={distances[v]}",x-50,y-28,100,56,"green",15) for v,(x,y) in coords.items()]
     edge_data = [("S","A",5),("S","C",-2),("A","B",1),("C","A",2),("C","B",4),
                  ("C","D",4),("B","D",-1),("B","T",3),("D","T",1)]
     path = {("S","C"),("C","A"),("A","B"),("B","D"),("D","T")}
