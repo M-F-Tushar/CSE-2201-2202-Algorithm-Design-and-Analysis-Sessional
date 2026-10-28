@@ -131,28 +131,56 @@ At $n = 10^6$, Algorithm B does about 50,000 times less work. On a computer doin
 
 **Answer.**
 
-A **recurrence relation** defines the value T(n) using smaller values T(n/2), T(n-1), and so on, plus a **base case**.
+A **recurrence relation** is an equation that describes a problem in terms of smaller versions of the same problem (along with base cases).
 
-**Why it is important**
+In algorithm analysis, recurrence relations are especially important for **recursive algorithms** and **divide-and-conquer algorithms**, where the running time naturally depends on solving smaller instances of the input.
 
-1. A **recursive algorithm calls itself on smaller input**, so its running time is naturally a recurrence.
-2. Solving the recurrence gives the running time in Big-O or Θ form.
-3. It lets us compare two recursive algorithms without running them.
-4. It matches the three parts of divide and conquer: divide cost + conquer cost + combine cost.
+**Simple Example**
+
+Suppose an algorithm solves a problem of size $n$ by:
+- Dividing it into 2 smaller subproblems, each of size $n/2$.
+- Spending $n$ additional operations to divide and combine the results.
+
+We express this as the recurrence:
+
+$$T(n) = 2T(n/2) + n$$
+
+Here:
+- $T(n)$ = time required for problem size $n$
+- $2T(n/2)$ = time for the two smaller subproblems
+- $n$ = additional work (divide + combine)
+
+Solving this recurrence gives $T(n) = \Theta(n\log n)$ (or $O(n\log n)$).
+
+**Why Recurrence Relations are Significant**
+
+1. **They describe recursive algorithms mathematically:**  
+   They formalize how the running time of a large problem depends directly on smaller subproblems.
+2. **They help determine asymptotic time complexity:**  
+   By solving the recurrence, we obtain closed-form bounds such as $O(\log n)$, $O(n)$, $O(n\log n)$, or $O(n^2)$.
+3. **They are essential for divide-and-conquer algorithms:**  
+   Algorithms like Merge Sort and Quick Sort naturally break inputs into parts; recurrences match their structure: $\text{Divide cost} + \text{Conquer cost} + \text{Combine cost}$.
+4. **They help compare algorithms before implementation:**  
+   Once recurrences are solved into asymptotic complexities, we can compare the efficiency of different recursive strategies for large inputs without running benchmarks.
 
 | Algorithm | Recurrence | Solution |
 |-----------|------------|----------|
-| Binary search | T(n) = T(n/2) + 1 | Θ(log n) |
-| Merge sort | T(n) = 2T(n/2) + n | Θ(n log n) |
-| Recursive sum | T(n) = T(n-1) + 1 | Θ(n) |
+| Binary search | $T(n) = T(n/2) + 1$ | $\Theta(\log n)$ |
+| Merge sort | $T(n) = 2T(n/2) + n$ | $\Theta(n \log n)$ |
+| Recursive sum | $T(n) = T(n-1) + 1$ | $\Theta(n)$ |
 
-**Three methods to solve a recurrence**
+**Three Methods to Solve a Recurrence**
 
-1. **Substitution method**: guess the answer, then prove it by induction.
-2. **Recursion tree method**: draw the calls, add the work of each level, then add all levels.
-3. **Master theorem**: for T(n) = aT(n/b) + f(n), compare f(n) with n^(log_b a).
+1. **Substitution method:** Guess the answer, then prove it using mathematical induction.
+2. **Recursion tree method:** Draw the recursive calls as a tree, sum the work at each level, and sum across all levels.
+3. **Master theorem:** For recurrences of the form $T(n) = aT(n/b) + f(n)$, compare $f(n)$ with $n^{\log_b a}$.
 
-> Memory trick: Recurrence = the running time of a recursive algorithm, written as an equation.
+**Exam-Ready Answer**
+
+> Recurrence relations are significant because they express the running time of a recursive algorithm in terms of smaller input sizes. By solving the recurrence, we can determine the algorithm's time complexity and analyze its efficiency, especially for recursive and divide-and-conquer algorithms.
+>
+> **In one line:**  
+> $\text{Recursive algorithm} \longrightarrow \text{Recurrence relation} \longrightarrow \text{Solve it} \longrightarrow \text{Time complexity}$
 
 ![Recurrence and work per level](diagrams/b1-theory-02-recursion-tree.svg)
 
