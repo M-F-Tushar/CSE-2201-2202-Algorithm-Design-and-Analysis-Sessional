@@ -527,7 +527,9 @@ It searches the **state-space tree** in **depth-first** order. **Pruning** cuts 
 
 > Memory trick: Try, check, undo, try again.
 
-![Choose, reject, undo, and find a four-queen solution](diagrams/b1-theory-18-queens-backtracking.svg)
+![Backtracking on a state-space tree: a failed check is pruned, a dead end is undone, and the next choice reaches a solution](diagrams/b1-theory-24-backtracking-concept.svg)
+
+**Exam sketch:** draw a root circle, two edges per node, and number the circles in the order they are visited. Colour or tick the pruned node, the dead end, and the solution.
 
 #### Q5(b)
 
@@ -539,7 +541,9 @@ Place $N$ queens on an $N\times N$ board so that no two queens share a row, colu
 
 **Illustrative instance:** Place 4 queens on a $4\times4$ board. Rows and columns start at 0.
 
-![Four-queen search branches and the first solution board](diagrams/b1-theory-18-queens-backtracking.svg)
+![Four-queen state-space tree: each node stores the columns chosen so far, two branches end in dead ends, and the first solution is 1302](diagrams/b1-theory-18-queens-backtracking.svg)
+
+**Exam sketch:** draw the root, then one level per row. Write the columns chosen so far inside each circle and the column tried on each edge. Mark a dead end with a cross, and stop at the first full row of four.
 
 **Idea:** put one queen in each row. To place the $k$-th queen in row $k$:
 
@@ -993,7 +997,7 @@ There is a tie for F: A to B to D to F and A to B to E to F both cost 9 ($2+5+2=
 
 ## Verification
 
-Run `python tools/verify_b1_theory.py` from the repository root to check the numerical tables, graph/search results, local links, all 27 question diagrams, and all 23 SVG/Excalidraw pairs. These read-only checks supplement the review; they do not prove every prose statement.
+Run `python tools/verify_b1_theory.py` from the repository root to check the numerical tables, graph/search results, local links, all 27 question diagrams, and all 24 SVG/Excalidraw pairs. These read-only checks supplement the review; they do not prove every prose statement.
 
 ## Quick Revision
 
