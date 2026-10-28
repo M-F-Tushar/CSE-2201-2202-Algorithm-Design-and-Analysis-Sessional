@@ -77,6 +77,19 @@ class E:
 
 
 @dataclass
+class T:
+    """Free-floating text (no box), centred on (cx, cy). Used for edge and level labels."""
+
+    id: str
+    text: str
+    cx: float
+    cy: float
+    size: int = 16
+    color: str = "#1e1e1e"
+    bold: bool = False
+
+
+@dataclass
 class D:
     key: str
     title: str
@@ -86,6 +99,7 @@ class D:
     flow: str = "V"  # V = top-to-bottom, H = left-to-right
     caption: str = ""
     containers: list[N] = field(default_factory=list)
+    texts: list[T] = field(default_factory=list)
 
 
 # --------------------------------------------------------------------------
@@ -344,6 +358,10 @@ def render_svg(d: D) -> str:
         clean_lines = n.label.replace("<br/>", "\n").replace("<br>", "\n").split("\n")
         out.append(_text_block(clean_lines, n.cx, n.cy, n.size, INK, weight))
 
+    for t in getattr(d, "texts", []):
+        out.append(_text_block(t.text.split("\n"), t.cx, t.cy, t.size, t.color,
+                               "bold" if t.bold else "normal"))
+
     if d.caption:
         out.append(_text_block([d.caption], w / 2, h - 22, 14, "#868e96", "normal"))
 
@@ -493,6 +511,25 @@ def render_excalidraw(d: D) -> dict:
             }
         )
 
+    for i, t in enumerate(getattr(d, "texts", [])):
+        lines = t.text.split("\n")
+        width = max(len(line) for line in lines) * t.size * 0.6 + 8
+        height = len(lines) * t.size * 1.25
+        elements.append(
+            {
+                **_base(f"{d.key}-x{i}", "text", t.cx - width / 2, t.cy - height / 2,
+                        width, height, t.color, "transparent", seed + 900 + i),
+                "text": t.text,
+                "originalText": t.text,
+                "fontSize": t.size,
+                "fontFamily": 1,
+                "textAlign": "center",
+                "verticalAlign": "middle",
+                "containerId": None,
+                "lineHeight": 1.25,
+                "baseline": t.size,
+            }
+        )
 
     return {
         "type": "excalidraw",
