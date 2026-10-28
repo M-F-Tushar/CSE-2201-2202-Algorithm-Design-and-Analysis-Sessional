@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 
 from excalidraw_gen import D, E, N, _anchor_points, _base, render_excalidraw, render_svg
+from state_space_tree import S, state_space_tree
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "Chapter 0 - Previous Year Questions/1st Batch/Theory/diagrams"
@@ -55,20 +56,26 @@ for level in range(4):
 nodes += [box("sum", "Illustrative n = 8: 3 internal levels + leaves = 32\nFor n = 2^k: T(n) = n log2(n) + n; T(1) = 1", 100, 505, 850, 80, "teal")]
 add("02-recursion-tree", "Q2(a,c), Q3(b): balanced recurrence", (1080, 630), nodes, edges)
 
-add("04-subset-sum-tree", "Q5(c): positive-item subset-sum search prefix", (1000, 760), [
-    box("start", "A = [3,5,6,7], target 15\n{}: sum 0", 330, 80, 340, 75),
-    box("s3", "{3}: sum 3", 370, 215, 260, 60),
-    box("s35", "{3,5}: sum 8", 370, 335, 260, 60),
-    box("s356", "{3,5,6}: sum 14", 170, 455, 280, 65),
-    box("skip6", "{3,5}: sum 8 (skip 6)", 650, 455, 310, 65),
-    box("over", "{3,5,6,7}: sum 21\nPrune: 21 > 15", 25, 590, 280, 80, "red"),
-    box("end", "{3,5,6}: sum 14\nSkip 7: no items left", 335, 590, 280, 80, "red"),
-    box("sol", "{3,5,7}: sum 15\nSolution", 665, 590, 280, 80, "green"),
-    box("note", "All items are positive: pruning above target is safe. Prefix ends at the first solution.", 30, 700, 940, 40, "gray", 15),
-], [E(a,b,label,route="straight") for a,b,label in [
-    ("start","s3","take 3"), ("s3","s35","take 5"),
-    ("s35","s356","take 6"), ("s35","skip6","skip 6"),
-    ("s356","over","take 7"), ("s356","end","skip 7"), ("skip6","sol","take 7")]])
+# Slide-style yes/no state-space tree (yes = take, no = skip); dashed = never reached.
+add_scene = SPECS.append
+add_scene(state_space_tree(
+    "b1-theory-04-subset-sum-tree",
+    "Q5(c): Subset-Sum State-Space Tree (search prefix)",
+    "A = {3, 5, 6, 7},   target d = 15;   yes = take, no = skip",
+    S("0",
+      yes=S("3",
+            yes=S("8",
+                  yes=S("14",
+                        yes=S("21", color="red", note="21 > 15\nprune"),
+                        no=S("14", color="red", note="14 ≠ 15\ndead end")),
+                  no=S("8",
+                       yes=S("15", color="green", note="15 = d\nsolution ✓"),
+                       no=S("…", color="light", stub=True))),
+            no=S("…", color="light", stub=True)),
+      no=S("…", color="light", stub=True)),
+    ["i₁: 3", "i₂: 5", "i₃: 6", "i₄: 7"],
+    "The sum of the taken numbers is stored at the node.\nDashed nodes are not explored: the trace stops at the first solution.",
+))
 
 # Full reconstructed graph above the actual alphabetical DFS prefix.
 positions = {"a": (95, 100), "b": (445, 100), "c": (270, 200),
@@ -185,21 +192,43 @@ nodes += [box("prim", "Prim from A: AB(2), BC(1), BD(4), CE(6)", 40, 505, 720, 6
           box("result", "Reconstructed undirected graph; green = unique MST\nTotal weight = 1 + 2 + 4 + 6 = 13", 40, 725, 720, 80, "green")]
 add("17-mst", "Q4(c): Prim and Kruskal on the stated graph", (800, 850), nodes, edges)
 
-nodes = [box("empty", "Columns per row: []", 250, 85, 300, 65),
-         box("q0", "[0]", 80, 230, 240, 65), box("q1", "[1]", 480, 230, 240, 65, "green"),
-         box("q02", "[0,2]\nNo safe row 2", 25, 375, 230, 80, "red"),
-         box("q03", "[0,3,1]\nNo safe row 3", 275, 375, 230, 80, "red"),
-         box("sol", "[1,3,0,2]\nFirst solution", 535, 375, 230, 80, "green"),
-         box("board", "First solution (rows/columns 0..3)", 170, 560, 460, 65, "green"),
-         box("rule", "Illustrative N = 4; search prefix only\nReject same-column or diagonal conflicts; undo and try next\nSecond solution: [2,0,3,1]", 45, 980, 710, 105, "yellow", 15)]
-for r, col in enumerate([1,3,0,2]):
-    for c in range(4):
-        nodes.append(box(f"queen{r}-{c}", "Q" if c == col else ".", 260+70*c, 660+70*r,
-                         60, 60, "green" if c == col else "gray", 24))
-add("18-queens-backtracking", "Q5(a,b): choose, prune, backtrack", (800, 1130), nodes, [
-    E("empty", "q0", route="straight"), E("empty", "q1", route="straight"),
-    E("q0", "q02", route="straight"), E("q0", "q03", route="straight"),
-    E("q1", "sol", route="straight"), E("sol", "board", route="straight")])
+# Q5(b): 4-Queens search as a state-space tree. A node stores the columns chosen so far
+# (one digit per row); each edge is the column tried in the next row. Search prefix only.
+add_scene(state_space_tree(
+    "b1-theory-18-queens-backtracking",
+    "Q5(b): 4-Queens State-Space Tree (search prefix)",
+    "Rows and columns start at 0; row k tries columns 0, 1, 2, 3",
+    S("start",
+      yes=S("0", edge="col 0",
+            yes=S("02", edge="col 2", color="red", note="row 2:\nno safe col"),
+            no=S("03", edge="col 3",
+                 yes=S("031", edge="col 1", color="red", note="row 3:\nno safe col"))),
+      no=S("1", edge="col 1",
+           yes=S("13", edge="col 3",
+                 yes=S("130", edge="col 0",
+                       yes=S("1302", edge="col 2", color="green", note="solution\n[1,3,0,2]"))))),
+    ["row 0", "row 1", "row 2", "row 3"],
+    "A node stores the columns chosen so far, one digit per row.\n"
+    "Red = dead end: backtrack.  Green = all 4 queens placed.\n"
+    "Columns that clash (same column or diagonal) are not drawn.",
+    level_gap=100, min_width=860,
+))
+
+# Q5(a): the backtracking idea on a tiny abstract tree. Node numbers = depth-first visit order.
+add_scene(state_space_tree(
+    "b1-theory-24-backtracking-concept",
+    "Q5(a): Backtracking on a State-Space Tree",
+    "Numbers = depth-first visit order; 1st / 2nd = order tried",
+    S("start",
+      yes=S("1", edge="1st", color="red", note="fails check:\nprune"),
+      no=S("2", edge="2nd",
+           yes=S("3", edge="1st", color="red", note="dead end:\nundo"),
+           no=S("4", edge="2nd", color="green", note="solution"))),
+    ["step 1", "step 2"],
+    "Each level adds one more choice. Try a choice and check it; go deeper if promising.\n"
+    "If it fails or is a dead end, undo it and try the next choice.",
+    level_gap=100, min_width=900,
+))
 
 add("19-dp-properties", "Q6(a): valid recurrence and reusable subproblems", (850, 720), [
     box("root", "Illustrative K(3,3): weights [1,1,1], profits [1,1,1]\nK(i,w) = best profit from first i items at capacity w", 55, 80, 740, 80),
@@ -309,7 +338,8 @@ COVERAGE = {
     "15-coin-change": "Q4(a), Q6(d)",
     "16-memo-tab": "Q4(b)",
     "17-mst": "Q4(c)",
-    "18-queens-backtracking": "Q5(a), Q5(b)",
+    "18-queens-backtracking": "Q5(b)",
+    "24-backtracking-concept": "Q5(a)",
     "19-dp-properties": "Q6(a)",
     "20-knapsack": "Q6(b), Q7(c)",
     "21-grid": "Q6(c)",
@@ -320,14 +350,14 @@ COVERAGE = {
 
 def write_index():
     lines = ["# 1st Batch Theory — Diagram Index", "",
-             "All **27/27 subquestions** have suitable linked visuals: **23 SVG/source pairs**",
-             "(22 topic visuals plus one full-paper roadmap). Shared visuals are listed against",
+             "All **27/27 subquestions** have suitable linked visuals: **24 SVG/source pairs**",
+             "(23 topic visuals plus one full-paper roadmap). Shared visuals are listed against",
              "every part they genuinely explain. Printed inputs and the two source-paper graphs were",
              "checked against the supplied 2023 scan; extra teaching examples are labeled illustrative.", "",
              "The `.excalidraw` scene is editable in [Excalidraw](https://excalidraw.com).",
              "After a manual scene edit, re-export its SVG so the Markdown preview stays synchronized.",
              "The scoped generator `tools/b1_theory_diagrams.py` uses the shared engine without",
-             "changing shared tools. Running it replaces its 20 listed scenes (including five",
+             "changing shared tools. Running it replaces its 21 listed scenes (including five",
              "corrected old visuals) and this index; it preserves manual scenes 03, 06, 08.",
              "Do not regenerate over later manual edits without reconciling them first.", "",
              "| Parts | Diagram | Preview | Editable source |", "|---|---|---|---|"]
