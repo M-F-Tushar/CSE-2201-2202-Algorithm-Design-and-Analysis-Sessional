@@ -1,11 +1,11 @@
-# CSE 2201 Class Tests 01–03: Complete Answers
+# CSE 2201 Class Tests 01–04 — Complete Answers
 
 [Previous: 2nd Batch Theory](../../2nd%20Batch/Theory/README.md) | [Chapter 0 - Previous Year Questions](../../README.md) | [Home](../../../README.md)
 
-This document restores the three class-test answer sets in sequence: **Class Test 1** (the earlier dynamic-programming paper), **Class Test 2** (`Class Test_02`, graph algorithms), and **Class Test 3** (the attached file `CSE 2201 - CT - 3.pdf`). The CT3 filename identifies it as the third test; its internal header incorrectly says “Class Test: 01.”
+This document presents four class-test answer sets in sequence: **CT1** (dynamic programming), **CT2** (graph algorithms), **CT3** (Union-Find, maximum subarray, and segment trees), and **CT4** (backtracking and N-Queens). CT3 is identified by the filename `CSE 2201 - CT - 3.pdf`; its internal header incorrectly says “Class Test: 01.” CT4 is transcribed from the supplied `CSE 2201 - CT - 4.pdf`.
 
 > [!IMPORTANT]
-> **Source notes and assumptions:** CT1 Q4 did not include item data in the scan, so its knapsack instance is illustrative. CT2 Q3 has two hard-to-read diagonal edge labels; the answer states its reading. CT3 Q2 uses a labelled example array because none is supplied. In CT3 Q3, the code comment says query `[1, 4]`, but task (c) asks for `[2, 6]`; the answer follows the explicit task.
+> **Source notes and assumptions:** CT1 Q4 did not include item data in the scan, so its knapsack instance is illustrative. CT2 Q3 has two hard-to-read diagonal edge labels; the answer states its reading. CT3 Q2 uses a labelled example array because none is supplied. In CT3 Q3, the code comment says query `[1, 4]`, but task (c) asks for `[2, 6]`; the answer follows the explicit task. CT4 gives no particular value of `n`; its 4-Queens diagrams and dry run are illustrative, not paper data.
 
 Every question has a diagram preview and editable Excalidraw scene in the [diagram index](diagrams/README.md). The answers use simple words, show the working, and end with a memory trick.
 
@@ -14,6 +14,9 @@ Every question has a diagram preview and editable Excalidraw scene in the [diagr
 | Class Test 1 | Q1–Q4 | Principle of Optimality, Fibonacci DP, LCS, 0/1 knapsack | 20 |
 | Class Test 2 | Q1–Q3 | Topological sort, Bellman–Ford, Floyd–Warshall | 20 |
 | Class Test 3 | Q1–Q3 | Union by rank, maximum subarray, segment tree | 20 |
+| Class Test 4 | Q1–Q4 | State-space trees, N-Queens constraints, backtracking applications and algorithm | 20 |
+
+**CT1–CT4 total: 80 marks.**
 
 ---
 
@@ -384,9 +387,102 @@ For the `[2,6]` query, the green nodes cover `[2,3]`, `[4,5]`, and `[6,6]`. Thei
 
 ---
 
+## Class Test 4: Backtracking and N-Queens
+
+The supplied CT4 paper contains four questions worth 20 marks in total. The wording below follows the paper; the 4-Queens diagrams and dry run are illustrative examples because the paper does not specify a value of `n`.
+
+### Q1. State-Space Tree
+
+**Question (transcribed):** What is a state space tree? Explain its role in backtracking. (4 marks)
+
+**Answer.** A **state-space tree** is a rooted tree that represents the choices in a search problem. The root is the empty partial solution; each edge adds one choice, and each node records the partial solution reached so far. A leaf is either a complete solution or a partial solution that cannot be extended.
+
+Backtracking explores this tree depth-first. At each node it tests whether the partial solution is still promising. If not, it prunes that whole branch, undoes the last choice, and tries another branch. This organizes the search and avoids completing candidates that already violate the constraints; the worst-case search can still be exponential.
+
+![A 4-Queens state-space tree showing a pruned dead end and a complete solution](diagrams/ct4-01-state-space-tree.svg)
+
+> Memory trick: choose, check, recurse; if blocked, undo and try a sibling.
+
+### Q2. Constraints for the N-Queens Problem
+
+**Question (transcribed):** State the constraints required to ensure that no two queens attack each other. (4 marks)
+
+**Answer.** Number the rows and columns from `1` to `n`, and let `qᵢ` be the column containing the queen in row `i`. Placing exactly one queen in each row is built into this representation. For every pair of different rows `i < j`, the remaining constraints are:
+
+1. **Different columns:** `qᵢ ≠ qⱼ`.
+2. **Different diagonals:** `|qᵢ − qⱼ| ≠ |i − j|`.
+
+The diagonal condition follows because two squares share a diagonal exactly when their row difference equals the absolute column difference. Thus these rules prevent every pair of queens from sharing a row, column, or diagonal.
+
+For the illustrative 4-Queens placement `q = [2, 4, 1, 3]`, every row has one queen, all columns are distinct, and no pair shares a diagonal.
+
+![A valid 4-Queens board illustrating the row, column, and diagonal constraints](diagrams/ct4-02-queen-constraints.svg)
+
+> Memory trick: one queen per row; no repeated column or diagonal.
+
+### Q3. Other Applications of Backtracking
+
+**Question (transcribed):** State two applications of backtracking other than the n-queen problem. (2 marks)
+
+**Answer.** Two applications are:
+
+1. **Graph coloring:** assign a color to each vertex while ensuring adjacent vertices have different colors. If a choice creates a conflict, undo it and try another color.
+2. **Subset sum:** choose whether to include each number, seeking a subset with the target sum. For positive inputs, a branch whose partial sum already exceeds the target can be pruned.
+
+The diagram illustrates a valid two-coloring of a 4-cycle and a subset-sum solution `{4, 5}` for the example set `{3, 4, 5, 7}` with target `9`.
+
+![Graph coloring and subset sum as backtracking applications](diagrams/ct4-03-backtracking-applications.svg)
+
+> Memory trick: backtracking fits problems that build a solution through constrained choices.
+
+### Q4. Backtracking Algorithm for N-Queens
+
+**Question (transcribed):** Write a backtracking algorithm to solve the n-queen problem for a given value of n. (10 marks)
+
+**Answer.** Use an `n × n` board initialized to `0`; a `1` marks a queen. `solve(row)` handles one row at a time, so the one-queen-per-row rule is enforced by recursion and `isSafe` does not need a separate row check.
+
+**Implementation comment:** This mirrors the supplied C++ control flow: `isSafe` checks the same column and both upward diagonals; `solve(row)` places one queen, recurses, and resets `board[row][col]` only after the recursive call fails.
+
+**Algorithm (instruction-style):**
+
+1. Read `n` and create `board[n][n]`, filling every cell with `0`.
+2. Define `isSafe(row, col)`:
+   1. Check column `col` in each earlier row `i = 0..row−1`. If `board[i][col] == 1`, return `false`.
+   2. Scan the upper-right diagonal, starting at `i = row−1`, `j = col+1`. While `i ≥ 0` and `j < n`, check `board[i][j]`; if it is `1`, return `false`. Otherwise move one square up-right (`i ← i−1`, `j ← j+1`).
+   3. Scan the upper-left diagonal, starting at `i = row−1`, `j = col−1`. While `i ≥ 0` and `j ≥ 0`, check `board[i][j]`; if it is `1`, return `false`. Otherwise move one square up-left (`i ← i−1`, `j ← j−1`).
+   4. If all three scans are clear, return `true`.
+3. Define `solve(row)` to place queens from top to bottom:
+   1. If `row == n`, return `true`; all rows have a queen.
+   2. Try each column `col = 0..n−1` in the current row:
+      - If `isSafe(row, col)` is false, continue to the next column.
+      - Otherwise place the queen: `board[row][col] ← 1`.
+      - Call `solve(row + 1)`. If it returns `true`, return `true`.
+      - If it returns `false`, undo the choice: `board[row][col] ← 0`, then try the next column.
+   3. If no column works, return `false`.
+4. Begin the search with `solve(0)`.
+5. If it returns `true`, output the board; otherwise report `"No solution"`.
+
+**Why it works:** when `solve(row)` begins, rows `0..row−1` each contain one queen and those queens do not attack one another. `isSafe` checks every earlier position that could attack the candidate. A safe placement preserves this invariant; if a later row has no valid column, the algorithm clears the choice and tries the next one. Because every column is tried, it finds a solution if one exists.
+
+**Illustrative dry run for `n = 4`** (columns are tested from `0`):
+
+| Placed columns by row | Result |
+|---|---|
+| `[0, 2]` | No safe column in row `2`; backtrack. |
+| `[0, 3, 1]` | No safe column in row `3`; backtrack. |
+| `[1, 3, 0, 2]` | Complete solution; the algorithm returns `true`. |
+
+The paper does not specify `n = 4`; this example only illustrates the algorithm. Each `isSafe` call scans at most `O(n)` cells. The standard worst-case time bound is `O(n · n!)`. The explicit board uses `Θ(n²)` space, and the recursion stack uses `Θ(n)`. The algorithm returns one solution; `n = 2` and `n = 3` have no solution.
+
+![Instruction-style N-Queens backtracking algorithm, search trace, and zero-based 4-Queens solution](diagrams/ct4-04-nqueens-algorithm.svg)
+
+> Memory trick: check upward, place one queen, recurse; on failure, clear it and try the next column.
+
+---
+
 ## Verification
 
-Run `python tools/verify_ct3.py` from the repository root. It checks the CT1 LCS and knapsack tables, Fibonacci call counts, CT2 shortest-path tables and topological order, the CT3 DSU and maximum-subarray examples, the segment tree and query result, and every local link and diagram pair. These checks verify the worked examples; they cannot verify uncertain scan labels or the transcribed wording.
+Run `python tools/verify_ct3.py` and `python tools/verify_ct4.py` from the repository root. The existing verifier checks the CT1–CT3 worked examples plus the combined question/diagram inventory; the CT4 verifier checks the N-Queens solver examples, transcription, diagram pairs, and local links. These checks validate the worked examples and repository links, not the source paper's transcription.
 
 ## Quick Revision
 
@@ -403,3 +499,7 @@ Run `python tools/verify_ct3.py` from the repository root. It checks the CT1 LCS
 | CT3 — Maximum subarray | `max(best-left, best-right, best-crossing)`; example answer 6 at `[3,6]` |
 | CT3 — Segment tree | Parent sum = left child + right child; no-overlap query contributes 0 |
 | CT3 — Range `[2,6]` | Inclusive range sum is 25; task (c) takes precedence over the `[1,4]` comment |
+| CT4 — State-space tree | Each level adds a choice; prune dead ends and backtrack |
+| CT4 — N-Queens constraints | One queen per row; distinct columns and diagonals |
+| CT4 — Backtracking applications | Graph coloring; subset sum |
+| CT4 — N-Queens algorithm | Try safe columns row by row; recurse, undo on failure |
