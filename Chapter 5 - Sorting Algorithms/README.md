@@ -396,69 +396,184 @@ This example uses the last item because it makes the steps easy to follow. A rea
 
 ## 8. Heap Sort
 
-**Core idea:** arrange the values so the largest is easy to reach, move it to the end, and repeat with the values that remain.
+**Core idea:** Transform the unsorted array into a **Max-Heap**, repeatedly extract the maximum element (the root) by swapping it with the last unsorted item, and restore the heap property using the **Heapify method**.
 
-Heap sort first builds a **max-heap**. Picture a tree where each parent is at least as large as its children. The largest item is at the top. The same tree can be stored in the list: for each parent, its children are the next positions assigned to it.
+---
 
-After building the heap, switch the top value with the last value not yet sorted. That puts the largest remaining value at the end. Shrink the heap, then move the new top down until the parent-is-larger rule is restored.
+### 1. Fundamentals: Complete Binary Tree and Heap
+
+Heap sort is built upon the **Binary Heap** data structure, which is conceptually a **Complete Binary Tree** stored inside an ordinary flat array.
+
+- **Complete Binary Tree (CBT):** A binary tree where all levels are completely filled except possibly the last level, and all nodes in the last level are positioned as far left as possible without gaps.
+- **Why an array representation?** Because a CBT has no gaps, it can be mapped directly to an array without storing left/right child pointers:
+  - **0-based indexing** (used in C++, Python, Java):
+    - Parent of index $i$: $\lfloor (i - 1) / 2 \rfloor$
+    - Left child of index $i$: $2i + 1$
+    - Right child of index $i$: $2i + 2$
+  - **1-based indexing** (common in classroom whiteboards):
+    - Parent of index $i$: $\lfloor i / 2 \rfloor$
+    - Left child of index $i$: $2i$
+    - Right child of index $i$: $2i + 1$
+- **Max-Heap Property:** For every node $i$ (except the root), $\text{value}(\text{parent}) \ge \text{value}(\text{child})$. The maximum element is always at the root ($A[0]$).
+  > **Note:** A **Min-Heap** ($\text{parent} \le \text{child}$) is used for sorting in descending order or priority queues, whereas a **Max-Heap** is used for standard ascending sort.
+
+---
+
+### 2. The Heapify Method (and Why It Is Faster)
+
+The **Heapify** operation (also called *sift-down* or *max-heapify*) is the engine of Heap Sort. Given an array and a subtree root index $i$, it assumes that the left and right subtrees are already valid max-heaps, and floats $A[i]$ downward until the heap property is satisfied.
+
+#### Why the Heapify Method is Faster than Repeated Insertion
+
+There are two ways to build a heap from an unordered array of $n$ elements:
+
+1. **Top-Down Insertion (Naive):** Insert elements one by one into an initially empty heap. Each insertion can take up to $O(\log n)$ sift-up operations. Total time:
+   $$\sum_{i=1}^{n} O(\log i) = O(n \log n)$$
+2. **Bottom-Up Heapify Method (Optimized):** Treat the entire input array as a complete binary tree:
+   - **Leaf nodes are already heaps:** Any node without children trivially satisfies the heap property!
+   - In an array of size $n$, leaf nodes occupy indices from $\lfloor n / 2 \rfloor$ to $n - 1$.
+   - The **last non-leaf node** (internal node) is located at index:
+     $$\lfloor n / 2 \rfloor - 1$$
+   - We only need to call `heapify` on internal nodes, working backward from $\lfloor n / 2 \rfloor - 1$ down to the root ($0$).
+
+**Mathematical intuition:** Most nodes in a tree reside near the bottom. Half the nodes are leaves (height $0$), a quarter are at height $1$, and only one node (the root) is at height $\approx \log_2 n$. Summing the work:
+$$\sum_{h=0}^{\lfloor \log_2 n \rfloor} \left\lceil \frac{n}{2^{h+1}} \right\rceil O(h) = O\left(n \sum_{h=0}^{\infty} \frac{h}{2^h}\right) = O(n)$$
+Because $\sum_{h=0}^{\infty} \frac{h}{2^h} = 2$, building a heap via bottom-up Heapify takes **linear time $O(n)$**, saving significant computation before sorting begins.
+
+---
+
+### 3. The Two Phases of Heap Sort
+
+Heap Sort operates in two distinct phases:
+
+1. **Phase 1: Build Max-Heap ($O(n)$ time)**  
+   Apply `heapify` from index $\lfloor n / 2 \rfloor - 1$ down to $0$. The array is now a valid Max-Heap with the global maximum at $A[0]$.
+2. **Phase 2: Extraction and Heap Restoration ($O(n \log n)$ time)**  
+   For $i = n - 1$ down to $1$:
+   - Swap $A[0]$ (current maximum) with $A[i]$ (the last element in the active heap).
+   - The element at $A[i]$ is now permanently placed in its sorted position.
+   - Shrink the active heap size to $i$.
+   - Call `heapify(A, i, 0)` on the new root to restore the Max-Heap property.
+
+---
 
 ### Visual Walkthrough: Build a Heap, Then Shrink It
 
 ![Heap sort moves the largest heap value to the sorted end](diagrams/ch5-09-heap-sort-flow.svg)
 
-For `[5, 2, 4, 6, 1, 3]`, building the max-heap gives `[6, 5, 4, 2, 1, 3]`. The largest value, 6, is now at the top of the heap.
+#### Step 1: Building the Max-Heap on `[5, 2, 4, 6, 1, 3]` ($n = 6$)
+- Leaves: indices $3, 4, 5$ (values $6, 1, 3$).
+- Internal nodes to heapify: indices from $\lfloor 6 / 2 \rfloor - 1 = 2$ down to $0$.
+- `heapify(A, 6, 2)`: Node $2$ (val $4$), left child at $5$ (val $3$). $4 > 3$, no swap needed.
+- `heapify(A, 6, 1)`: Node $1$ (val $2$), children at $3$ (val $6$) and $4$ (val $1$). Largest is $6$. Swap $A[1]$ and $A[3]$. Array: `[5, 6, 4, 2, 1, 3]`.
+- `heapify(A, 6, 0)`: Node $0$ (val $5$), children at $1$ (val $6$) and $2$ (val $4$). Largest is $6$. Swap $A[0]$ and $A[1]$. Sift down into index $1$: children are $2$ and $1$. $5 > 2$ and $5 > 1$, done.
+- **Max-Heap ready:** `[6, 5, 4, 2, 1, 3]`. The largest value, $6$, is at the root.
 
-| Step | List after moving the largest remaining value | Sorted end |
-| :--- | :--- | :--- |
-| Move 6 | `[5, 3, 4, 2, 1, 6]` | `[6]` |
-| Move 5 | `[4, 3, 1, 2, 5, 6]` | `[5, 6]` |
-| Move 4 | `[3, 2, 1, 4, 5, 6]` | `[4, 5, 6]` |
-| Move 3 | `[2, 1, 3, 4, 5, 6]` | `[3, 4, 5, 6]` |
-| Move 2 | `[1, 2, 3, 4, 5, 6]` | `[2, 3, 4, 5, 6]` |
+#### Step 2: Sorting Phase (Extract & Heapify)
 
-The remaining 1 is already in the right place.
+| Step | Action | List after root swap and `heapify` | Sorted end |
+| :--- | :--- | :--- | :--- |
+| Move 6 | Swap $A[0]$ with $A[5]$, `heapify(A, 5, 0)` | `[5, 3, 4, 2, 1, 6]` | `[6]` |
+| Move 5 | Swap $A[0]$ with $A[4]$, `heapify(A, 4, 0)` | `[4, 3, 1, 2, 5, 6]` | `[5, 6]` |
+| Move 4 | Swap $A[0]$ with $A[3]$, `heapify(A, 3, 0)` | `[3, 2, 1, 4, 5, 6]` | `[4, 5, 6]` |
+| Move 3 | Swap $A[0]$ with $A[2]$, `heapify(A, 2, 0)` | `[2, 1, 3, 4, 5, 6]` | `[3, 4, 5, 6]` |
+| Move 2 | Swap $A[0]$ with $A[1]$ | `[1, 2, 3, 4, 5, 6]` | `[2, 3, 4, 5, 6]` |
 
-### Instructions
+The single remaining element $1$ at index $0$ is already in its final position. The array is fully sorted!
 
-1. Store the list as a tree in array order. The root is at index 0; for a parent at index `i`, its left child is at `2 * i + 1` and its right child is at `2 * i + 2`.
-2. Build a max-heap from the bottom upward. Starting at the last parent and moving back to index 0, move each parent down until it is at least as large as its children. The largest item is then at the root, `A[0]`.
-3. Switch `A[0]` with the last item still in the heap. That last item is now in its final sorted position.
-4. Shrink the heap so it excludes that sorted item. Move the new root down: compare it with its existing children and switch it with the larger child until the parent is at least as large as either child, or it has no children.
-5. Repeat the root switch and repair until only one item remains in the heap. The sorted part grows from the right-hand end of the array.
-
-The pseudocode uses `heapSize` as the first index outside the heap. Items from `A[heapSize]` to the end are already in the sorted part.
+---
 
 ### Pseudocode
 
 ```text
-HEAP-SORT(A: array of comparable items) -> array of comparable items
-n: integer = length(A)
-for i: integer = floor(n / 2) - 1 downto 0:
-    SIFT-DOWN(A, i, n)
-for end: integer = n - 1 downto 1:
-    swap(A[0], A[end])
-    SIFT-DOWN(A, 0, end)
-return A
+MAX-HEAPIFY(A: array, n: integer, i: integer) -> void
+    largest = i
+    left = 2 * i + 1
+    right = 2 * i + 2
+    
+    if left < n and A[left] > A[largest]:
+        largest = left
+    if right < n and A[right] > A[largest]:
+        largest = right
+        
+    if largest != i:
+        swap(A[i], A[largest])
+        MAX-HEAPIFY(A, n, largest)
 
-SIFT-DOWN(A: array of comparable items, root: integer, heapSize: integer) -> void
-while 2 * root + 1 < heapSize:
-    left: integer = 2 * root + 1
-    right: integer = 2 * root + 2
-    largerChild: integer = left
-    if right < heapSize && A[right] > A[left]:
-        largerChild = right
-    if A[root] >= A[largerChild]:
-        break
-    swap(A[root], A[largerChild])
-    root = largerChild
+HEAP-SORT(A: array) -> array
+    n = length(A)
+    
+    // Phase 1: Build max-heap (bottom-up heapify)
+    for i = floor(n / 2) - 1 downto 0:
+        MAX-HEAPIFY(A, n, i)
+        
+    // Phase 2: Extract maximum one by one
+    for i = n - 1 downto 1:
+        swap(A[0], A[i])          // Move current max to sorted end
+        MAX-HEAPIFY(A, i, 0)      // Restore heap on reduced size
+        
+    return A
 ```
 
-### How much work does it do?
+### C++ Implementation
 
-- Building the heap takes `Θ(n)` time.
-- Moving each largest item and repairing the heap gives `Θ(n log n)` time overall, in the best, average, and worst cases.
-- Extra memory: `Θ(1)`.
-- Stable: no. The switches can change the order of equal items.
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+// Heapify a subtree rooted at index i in an array of size n
+void heapify(std::vector<int>& arr, int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
+
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+
+    if (largest != i) {
+        std::swap(arr[i], arr[largest]);
+        // Recursively heapify the affected child subtree
+        heapify(arr, n, largest);
+    }
+}
+
+// Main function to perform Heap Sort
+void heapSort(std::vector<int>& arr) {
+    int n = arr.size();
+
+    // Phase 1: Build max heap (rearrange array)
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        heapify(arr, n, i);
+    }
+
+    // Phase 2: One by one extract an element from heap
+    for (int i = n - 1; i > 0; i--) {
+        // Move current root (maximum element) to end
+        std::swap(arr[0], arr[i]);
+
+        // Call max heapify on the reduced heap
+        heapify(arr, i, 0);
+    }
+}
+```
+
+---
+
+### Complexity & Analysis
+
+- **Time Complexity:**
+  - **Building the Max-Heap:** $\Theta(n)$ time using the bottom-up Heapify method.
+  - **Sorting Phase:** $n - 1$ extractions, each requiring $O(\log n)$ heapify $\implies \Theta(n \log n)$.
+  - **Overall Time:** $\Theta(n \log n)$ across **best, average, and worst cases**. Unlike Quick Sort, it never degrades to $O(n^2)$.
+- **Auxiliary Space:** $\Theta(1)$ auxiliary space. It sorts strictly in-place.
+- **Stability:** **Not stable**. Swapping $A[0]$ with $A[i]$ can cause equal keys to cross and alter their relative order.
+- **Comparison:** Unlike Merge Sort, Heap Sort requires no extra $O(n)$ array. Unlike Quick Sort, it has no worst-case $O(n^2)$ behavior. However, Quick Sort is often faster in practice due to better CPU cache locality.
+
+> **Memory Trick:** Max-Heap puts the largest at $A[0]$ $\rightarrow$ swap $A[0]$ to the back $\rightarrow$ ascending sorted array!
 
 ---
 
