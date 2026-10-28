@@ -8,5 +8,6 @@ Each diagram is stored as an editable **Excalidraw** scene and an SVG preview. T
 | 2 | 4-Queens search tree with dead ends and a valid solution | [`ch9-02-four-queens-search.svg`](ch9-02-four-queens-search.svg) | [`ch9-02-four-queens-search.excalidraw`](ch9-02-four-queens-search.excalidraw) |
 | 3 | 4-Queens safety checks: column and upper diagonals | [`ch9-03-nqueens-safety-checks.svg`](ch9-03-nqueens-safety-checks.svg) | [`ch9-03-nqueens-safety-checks.excalidraw`](ch9-03-nqueens-safety-checks.excalidraw) |
 | 4 | Sudoku: row, column, and box constraints with same-row search and backtracking | [`ch9-04-sudoku-backtracking.svg`](ch9-04-sudoku-backtracking.svg) | [`ch9-04-sudoku-backtracking.excalidraw`](ch9-04-sudoku-backtracking.excalidraw) |
+| 5 | Subset-sum state-space tree for 3 items (yes/no choices, sum stored at each node) | [`ch9-05-subset-sum-state-space-tree.svg`](ch9-05-subset-sum-state-space-tree.svg) | [`ch9-05-subset-sum-state-space-tree.excalidraw`](ch9-05-subset-sum-state-space-tree.excalidraw) |
 
 The `.excalidraw` files are the editable source of truth. If you edit one manually, export its matching SVG again so the preview stays current.
