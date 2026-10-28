@@ -1,9 +1,9 @@
-"""Independent checks for the combined CSE 2201 CT1–CT3 answers.
+"""Independent regression checks for the cumulative CSE 2201 CT1–CT4 answers.
 
 Run from the repository root: python tools/verify_ct3.py
-Uses only the Python standard library. Recomputes the DP tables and graph
-answers, exhaustively checks the small maximum-subarray example, rebuilds the
-segment tree, and checks the local links and diagram pairs.
+Uses only the Python standard library. Recomputes CT1–CT3 examples and checks
+all four tests' question and diagram inventory; verify_ct4.py checks the new
+N-Queens solution and CT4 diagram content.
 """
 from __future__ import annotations
 
@@ -256,8 +256,8 @@ class VerifyClassTests(unittest.TestCase):
     def setUpClass(cls):
         cls.text = (CT / "README.md").read_text(encoding="utf-8")
         cls.tests = {}
-        matches = list(re.finditer(r"(?m)^## Class Test ([123]):[^\n]*", cls.text))
-        if [match[1] for match in matches] != ["1", "2", "3"]:
+        matches = list(re.finditer(r"(?m)^## Class Test ([1234]):[^\n]*", cls.text))
+        if [match[1] for match in matches] != ["1", "2", "3", "4"]:
             raise AssertionError(f"Class test sequence differs: {[m[1] for m in matches]}")
         for i, match in enumerate(matches):
             stop = matches[i + 1].start() if i + 1 < len(matches) else len(cls.text)
@@ -267,12 +267,14 @@ class VerifyClassTests(unittest.TestCase):
     def test_sequential_question_inventory(self):
         expected = {"1": ["Q1", "Q2", "Q3", "Q4"],
                     "2": ["Q1", "Q2", "Q3"],
-                    "3": ["Q1", "Q2", "Q3"]}
+                    "3": ["Q1", "Q2", "Q3"],
+                    "4": ["Q1", "Q2", "Q3", "Q4"]}
         for test, labels in expected.items():
             actual = re.findall(r"(?m)^### (Q\d)\.", self.tests[test])
             self.assertEqual(actual, labels)
         self.assertIn("CSE 2201 - CT - 3.pdf", self.text)
         self.assertIn("Class Test: 01", self.tests["3"])
+        self.assertIn("CSE 2201 - CT - 4.pdf", self.text)
 
     def test_ct1_fibonacci(self):
         counts = fib_naive_call_counts(5)
@@ -369,7 +371,7 @@ class VerifyClassTests(unittest.TestCase):
             path = unquote(urlsplit(target).path)
             self.assertTrue((CT / path).resolve().exists(), target)
         embedded = sorted(set(re.findall(r"\]\((diagrams/[^)]+\.svg)\)", self.text)))
-        self.assertEqual(len(embedded), 11)
+        self.assertEqual(len(embedded), 15)
         self.assertEqual([path.name for path in sorted((CT / "diagrams").glob("*.svg"))],
                          sorted(Path(item).name for item in embedded))
         index = (CT / "diagrams/README.md").read_text(encoding="utf-8")
