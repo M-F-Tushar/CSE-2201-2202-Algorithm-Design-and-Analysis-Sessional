@@ -324,23 +324,24 @@ a = 2, b = 2, f(n) = n = n^(log₂ 2). This is **Case 2**, so T(n) = Θ(n log n)
 
 **Answer.**
 
-**In-place sorting** means the algorithm sorts the array inside the array itself, using only a small amount of extra memory: O(1), or at most O(log n).
+**In-place sorting** means the algorithm sorts elements inside the original array itself without allocating another array of size $n$, using only a small amount of additional memory ($O(1)$ auxiliary workspace, or at most $O(\log n)$ stack).
 
-**Is quicksort in-place? Yes.**
+**Is Quicksort in-place? Yes, conventionally.**
 
-1. Quicksort's **partition** step only swaps elements inside the same array. It uses O(1) extra space.
-2. It needs no second array of size n.
-3. The only extra memory is the **recursion stack**. This is O(log n) on average. It can be O(n) in the worst case, but we can limit it to O(log n) by recursing on the smaller part first.
+**Justification:**
 
-So quicksort is called an in-place sort.
+1. **Partitioning needs $O(1)$ auxiliary space:** Quicksort rearranges elements by swapping them within the same array around a pivot. It does not need a second array of size $n$ to hold items.
+2. **Recursion stack:** Because Quicksort is recursive, function calls use stack space—typically $O(\log n)$ (worst-case naive recursion can use $O(n)$, which can be capped at $O(\log n)$ by recursing on the smaller subarray first).
+3. **Conclusion:** Because it sorts by swapping in-place and does not require an additional $O(n)$-sized array, Quicksort is conventionally classified as an **in-place** sorting algorithm.
 
-| | Quick sort | Merge sort |
-|--|-----------|------------|
-| Extra space | O(log n) (stack) | O(n) (extra array) |
-| In-place? | Yes | No |
+| Property | Quick sort | Merge sort |
+|---|---|---|
+| Extra array needed? | No | Yes (size $n$) |
+| Partition / merge space | $O(1)$ | $O(n)$ |
+| In-place? | Yes (conventionally) | No (standard array) |
 | Stable? | No | Yes |
 
-> Memory trick: Quicksort only swaps, so it is in-place. Merge sort copies, so it is not.
+> Memory trick: Quicksort swaps within the array $\rightarrow$ In-place. Merge Sort copies to an extra array $\rightarrow$ Not in-place.
 
 ![Quicksort partition workspace versus recursion stack](diagrams/b1-theory-14-quicksort-space.svg)
 
