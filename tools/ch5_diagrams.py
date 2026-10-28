@@ -278,7 +278,89 @@ quick_walk = array_walkthrough(
     "After a pivot is placed, quick sort works on the parts to its left and right.",
 )
 
-# 9 — heap sort, showing both the max-heap and the changing list
+# 9 — heap sort phase 1: CBT mapping and bottom-up heapify
+build_nodes = [
+    N(
+        "rule-box",
+        "Complete Binary Tree Rules:\n• Left child = 2i + 1, Right = 2i + 2\n• Leaves: floor(n/2)..n-1 (already heaps)\n• Start heapify at floor(n/2) - 1",
+        28,
+        70,
+        360,
+        96,
+        "light",
+        size=12,
+    ),
+    N("raw-arr-label", "Initial unsorted array A (n = 6):", 28, 180, 360, 32, "gray", size=12),
+    N("raw-0", "5\n[i=0]", 28, 222, 54, 48, "yellow", size=12),
+    N("raw-1", "2\n[i=1]", 88, 222, 54, 48, "yellow", size=12),
+    N("raw-2", "4\n[i=2]", 148, 222, 54, 48, "yellow", size=12),
+    N("raw-3", "6\n[i=3]", 208, 222, 54, 48, "light", size=12),
+    N("raw-4", "1\n[i=4]", 268, 222, 54, 48, "light", size=12),
+    N("raw-5", "3\n[i=5]", 328, 222, 54, 48, "light", size=12),
+
+    N("tree-note", "Initial Tree (Leaves in gray; internal nodes in yellow)", 460, 66, 490, 32, "gray", size=12),
+    N("tn-0", "5 (i=0)", 670, 108, 70, 44, "yellow", size=12, bold=True),
+    N("tn-1", "2 (i=1)", 550, 180, 70, 44, "yellow", size=12, bold=True),
+    N("tn-2", "4 (i=2)", 790, 180, 70, 44, "yellow", size=12, bold=True),
+    N("tn-3", "6 (i=3)", 490, 252, 70, 44, "light", size=12),
+    N("tn-4", "1 (i=4)", 610, 252, 70, 44, "light", size=12),
+    N("tn-5", "3 (i=5)", 730, 252, 70, 44, "light", size=12),
+
+    N("step-1-label", "1. Heapify i=2 (val 4):\nchild 3 <= 4 (no swap)", 28, 316, 340, 44, "gray", size=12),
+    N("s1-0", "5", 380, 316, 44, 44, "white", size=16),
+    N("s1-1", "2", 432, 316, 44, 44, "white", size=16),
+    N("s1-2", "4", 484, 316, 44, 44, "yellow", size=16, bold=True),
+    N("s1-3", "6", 536, 316, 44, 44, "white", size=16),
+    N("s1-4", "1", 588, 316, 44, 44, "white", size=16),
+    N("s1-5", "3", 640, 316, 44, 44, "yellow", size=16),
+    N("s1-note", "Subtree at i=2 satisfies max-heap", 700, 316, 270, 44, "light", size=12),
+
+    N("step-2-label", "2. Heapify i=1 (val 2):\nchild 6 > 2 -> swap A[1], A[3]", 28, 376, 340, 44, "gray", size=12),
+    N("s2-0", "5", 380, 376, 44, 44, "white", size=16),
+    N("s2-1", "6", 432, 376, 44, 44, "teal", size=16, bold=True),
+    N("s2-2", "4", 484, 376, 44, 44, "white", size=16),
+    N("s2-3", "2", 536, 376, 44, 44, "teal", size=16, bold=True),
+    N("s2-4", "1", 588, 376, 44, 44, "white", size=16),
+    N("s2-5", "3", 640, 376, 44, 44, "white", size=16),
+    N("s2-note", "Subtree at i=1 satisfies max-heap", 700, 376, 270, 44, "light", size=12),
+
+    N("step-3-label", "3. Heapify i=0 (val 5):\nchild 6 > 5 -> swap A[0], A[1]", 28, 436, 340, 44, "gray", size=12),
+    N("s3-0", "6", 380, 436, 44, 44, "green", size=16, bold=True),
+    N("s3-1", "5", 432, 436, 44, 44, "teal", size=16, bold=True),
+    N("s3-2", "4", 484, 436, 44, 44, "white", size=16),
+    N("s3-3", "2", 536, 436, 44, 44, "white", size=16),
+    N("s3-4", "1", 588, 436, 44, 44, "white", size=16),
+    N("s3-5", "3", 640, 436, 44, 44, "white", size=16),
+    N("s3-note", "5 sifts to i=1; settles (5>2, 5>1)", 700, 436, 270, 44, "light", size=12),
+
+    N("step-4-label", "Final: Valid Max-Heap ready!", 28, 496, 340, 44, "gray", size=12),
+    N("s4-0", "6", 380, 496, 44, 44, "green", size=16, bold=True),
+    N("s4-1", "5", 432, 496, 44, 44, "yellow", size=16),
+    N("s4-2", "4", 484, 496, 44, 44, "yellow", size=16),
+    N("s4-3", "2", 536, 496, 44, 44, "white", size=16),
+    N("s4-4", "1", 588, 496, 44, 44, "white", size=16),
+    N("s4-5", "3", 640, 496, 44, 44, "white", size=16),
+    N("s4-note", "Root 6 is max; O(n) build done", 700, 496, 270, 44, "green", size=12, bold=True),
+]
+
+build_edges = [
+    E("tn-0", "tn-1", route="straight"),
+    E("tn-0", "tn-2", route="straight"),
+    E("tn-1", "tn-3", route="straight"),
+    E("tn-1", "tn-4", route="straight"),
+    E("tn-2", "tn-5", route="straight"),
+]
+
+heap_build = D(
+    key="ch5-09-heap-build-flow",
+    title="Heap Sort Phase 1: Complete Binary Tree and Heapify",
+    size=(1000, 580),
+    nodes=build_nodes,
+    edges=build_edges,
+    caption="Bottom-up heapify builds a valid max-heap in linear O(n) time before sorting begins.",
+)
+
+# 10 — heap sort phase 2: extraction and sorting walkthrough
 heap_nodes = [
     N("heap-note", "A parent is at least\nas large as its children.", 28, 128, 230, 72, "light", size=13),
     N("heap-root", "6", 470, 72, 58, 44, "green", size=18, bold=True),
@@ -320,8 +402,8 @@ for row_index, step in enumerate(heap_rows):
         )
 
 heap_walk = D(
-    key="ch5-09-heap-sort-flow",
-    title="Heap Sort: Build a Max-Heap, Then Shrink It",
+    key="ch5-10-heap-sort-flow",
+    title="Heap Sort Phase 2: Root Extraction and Sorting Walkthrough",
     size=(1000, 660),
     nodes=heap_nodes,
     edges=[
@@ -331,7 +413,7 @@ heap_walk = D(
         E("heap-left", "heap-left-right", route="straight"),
         E("heap-right", "heap-right-left", route="straight"),
     ],
-    caption="The green tail is sorted; the remaining front part is still a heap.",
+    caption="The green tail is sorted; the remaining front part is repeatedly reduced via heapify.",
 )
 
 DIAGRAMS = [
@@ -343,5 +425,6 @@ DIAGRAMS = [
     counting_walk,
     merge_walk,
     quick_walk,
+    heap_build,
     heap_walk,
 ]

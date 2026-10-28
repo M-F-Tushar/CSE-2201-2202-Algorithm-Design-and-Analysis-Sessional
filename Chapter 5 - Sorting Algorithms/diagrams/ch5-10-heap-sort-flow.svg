@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="660" viewBox="0 0 1000 660" role="img" aria-label="Heap Sort: Build a Max-Heap, Then Shrink It">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="660" viewBox="0 0 1000 660" role="img" aria-label="Heap Sort Phase 2: Root Extraction and Sorting Walkthrough">
 <rect width="1000" height="660" fill="#ffffff" rx="10"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="500.0" y="34.0">Heap Sort: Build a Max-Heap, Then Shrink It</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="500.0" y="34.0">Heap Sort Phase 2: Root Extraction and Sorting Walkthrough</tspan></text>
 <path d="M469.9 112.0 Q444.0 129.1 418.6 146.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M424.4 136.6 L418.0 145.5 L428.8 143.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M527.8 111.9 Q555.3 130.3 581.0 146.0" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
@@ -179,5 +179,5 @@
 <path d="M631.2 540.6 Q659.9 538.3 695.2 539.9 M695.3 540.3 Q694.3 559.3 695.6 584.9 M695.5 583.6 Q659.4 583.1 630.3 584.4 M629.2 582.9 Q627.9 563.5 629.3 538.9" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
 <path d="M629.3 541.0 Q662.2 540.1 693.9 540.2 M693.0 540.2 Q693.6 562.1 694.5 583.8 M695.4 584.5 Q664.9 582.2 630.7 584.3 M628.4 584.6 Q631.8 562.3 629.3 538.7" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
 <text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="bold" fill="#1e1e1e"><tspan x="662.0" y="562.0">6</tspan></text>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="500.0" y="638.0">The green tail is sorted; the remaining front part is still a heap.</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="500.0" y="638.0">The green tail is sorted; the remaining front part is repeatedly reduced via heapify.</tspan></text>
 </svg>
