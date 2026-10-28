@@ -21,6 +21,7 @@ import ch12_diagrams  # noqa: E402
 import ch13_diagrams  # noqa: E402
 import ch14_diagrams  # noqa: E402
 import ch15_diagrams  # noqa: E402
+import ct4_diagrams   # noqa: E402
 
 MODULES = [
     root_diagrams,
@@ -37,6 +38,7 @@ MODULES = [
     ch13_diagrams,
     ch14_diagrams,
     ch15_diagrams,
+    ct4_diagrams,
 ]
 
 from excalidraw_gen import _anchor_points  # noqa: E402
