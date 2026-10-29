@@ -148,7 +148,7 @@ class VerifyCT4(unittest.TestCase):
 
     def test_diagram_content_matches_answers(self):
         expected = {
-            DIAGRAM_KEYS[0]: ["state-space tree", "{2, 3}", "sum = 3", "sum = 5"],
+            DIAGRAM_KEYS[0]: ["state-space tree", "items w₁ = 2, w₂ = 3", "target s = 3", "prune"],
             DIAGRAM_KEYS[1]: ["x-axis: column c (0..6)", "upper-right", "upper-left", "board[4][3]"],
             DIAGRAM_KEYS[2]: ["Graph coloring", "Subset sum", "sum = 9 = target", "sum = 12 > 9"],
             DIAGRAM_KEYS[3]: ["Backtracking algorithm", "instruction-style", "Read n", "isSafe(row, col)", "upper-right", "upper-left", "solve(row + 1)", "board[row][col] ← 0", "[1, 3, 0, 2]", "O(n·n!)"],

@@ -804,9 +804,12 @@ Backtracking explores this tree depth-first. At each node it tests whether the p
 
 The diagonal condition follows because two squares share a diagonal exactly when their row difference equals the absolute column difference. Thus these rules prevent every pair of queens from sharing a row, column, or diagonal.
 
-For the illustrative 4-Queens placement `q = [2, 4, 1, 3]`, every row has one queen, all columns are distinct, and no pair shares a diagonal.
+When placing queens row-by-row in a 2D board, candidate cell `board[row][col]` only needs to be verified against previously placed queens in rows above:
+1. **Same column above:** scan `(i, col)` for `i < row`.
+2. **Upper-left diagonal:** scan `(row - d, col - d)` for `d ≥ 1`.
+3. **Upper-right diagonal:** scan `(row - d, col + d)` for `d ≥ 1`.
 
-![A valid 4-Queens board illustrating the row, column, and diagonal constraints](diagrams/ct4-02-queen-constraints.svg)
+![Column and upward-diagonal safety checks for placing a queen](diagrams/ct4-02-queen-constraints.svg)
 
 > Memory trick: one queen per row; no repeated column or diagonal.
 
