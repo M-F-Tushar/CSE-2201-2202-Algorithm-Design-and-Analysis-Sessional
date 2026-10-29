@@ -4,7 +4,7 @@
   <a href="https://github.com/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional"><img src="https://img.shields.io/github/stars/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional?style=social" alt="GitHub stars"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/language-Python%20%7C%20C%2B%2B-blue" alt="Languages">
-  <img src="https://img.shields.io/badge/diagrams-191%20Excalidraw%20SVGs-ff69b4" alt="Diagrams">
+  <img src="https://img.shields.io/badge/diagrams-200%20Excalidraw%20SVGs-ff69b4" alt="Diagrams">
   <img src="https://img.shields.io/badge/chapters-16%20%2B%20references-success" alt="Chapters">
   <img src="https://img.shields.io/badge/book-CLRS%204th%20Ed.-orange" alt="Primary reference">
 </p>
@@ -59,7 +59,7 @@
 ## 🎯 Repository Goals
 
 - 📚 **Syllabus-faithful notes** — 16 content chapters (Ch 0 – Ch 15) ordered exactly as the CSE 2201 syllabus, not the textbook order.
-- 🎨 **182 hand-drawn diagrams** — every diagram is an editable `.excalidraw` + exported `.svg` that renders directly in the READMEs.
+- 🎨 **200 hand-drawn diagrams** — every diagram is an editable `.excalidraw` + exported `.svg` that renders directly in the READMEs.
 - 📝 **Plain-words explanations** — definitions, step-by-step algorithms, pseudocode, dry-run tables, and a memory trick per answer.
 - ⏱️ **Complexity done right** — best / average / worst case, Big-O / Ω / Θ, recurrence solving, and master-theorem walkthroughs.
 - 🧪 **Solved previous-year papers** — 1st Batch (2023 final, 27 parts), 2nd Batch, 3rd Batch CT 1–4 (80 marks total) with source-faithful transcription.
@@ -75,7 +75,7 @@
 | Content chapters | **16** (Chapter 0 – Chapter 15) + References |
 | Chapter READMEs | **16** — every chapter has a full README with TOC |
 | Total Markdown files | **~40** (chapter READMEs + batch READMEs + diagram indexes) |
-| Hand-drawn SVGs | **191** (each paired with an `.excalidraw` source → **382** diagram files) |
+| Hand-drawn SVGs | **200** (each paired with an `.excalidraw` source → **400** diagram files) |
 | Largest chapter | **Ch 11 — Graph Algorithms** (35 SVGs, 2 114-line README) |
 | Code examples | **13** `.cpp` files (Ch 6 + Lab Practice) + Python pseudocode throughout |
 | Batch question banks | **3 batches** + Lab Practice |
@@ -163,7 +163,7 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 │   └── diagrams/  (8 SVGs) — BFS/DFS graphs, queue/stack, walkthroughs
 ├── Chapter 5 - Sorting Algorithms/
 │   ├── README.md  (647 lines)
-│   └── diagrams/  (9 SVGs) — bubble, selection, insertion, merge, quick, heap, counting
+│   └── diagrams/  (16 SVGs) — bubble, selection, insertion, merge, quick, heap, counting
 ├── Chapter 6 - Divide and Conquer/
 │   ├── README.md  (412 lines)
 │   ├── diagrams/  (4 SVGs)
@@ -266,7 +266,7 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 ### Chapter 5 — Sorting Algorithms
 > Plain-words intro (two ways to sort, how to choose) → **Bubble · Selection · Insertion · Merge · Quick (pivot choice & partitions) · Heap · Counting** — each with visual walkthrough, instructions, pseudocode, and tight complexity analysis (best/avg/worst, stability, in-place, lower bound). Ends with a head-to-head comparison table.
 >
-> 📊 9 diagrams · 📄 647 lines · 📂 [`Chapter 5/README.md`](Chapter%205%20-%20Sorting%20Algorithms/README.md)
+> 📊 16 diagrams · 📄 711 lines · 📂 [`Chapter 5/README.md`](Chapter%205%20-%20Sorting%20Algorithms/README.md)
 
 ### Chapter 6 — Divide and Conquer
 > Two applied threads: **(i)** Range sum & point update — Prefix Sums (O(1) query, O(n) update weakness) vs Segment Trees (O(log n) query & update, build/query/update dry runs); **(ii)** Maximum-sum subarray — Brute Force O(n²) → Divide & Conquer O(n log n) → Kadane's O(n) DP recurrence, full traces, edge cases & subarray recovery. Runnable **C++17** in [`examples/`](Chapter%206%20-%20Divide%20and%20Conquer/examples/).
@@ -341,19 +341,19 @@ Every chapter has a `diagrams/` folder. Each diagram ships as **two files**:
 | Ch 2 — Complexity | 4 | Loop growth, cases, bounds, complexity classes |
 | Ch 3 — Recurrences | 2 | Recursion tree, Master Theorem flow |
 | Ch 4 — Searching & Traversal | 8 | BFS/DFS graphs, queue/stack, walkthroughs |
-| Ch 5 — Sorting | 9 | All 7 sorts + selection guides |
+| Ch 5 — Sorting | **16** | All 7 sorts (2-stage traces: micro-steps + macro passes) + selection guides |
 | Ch 6 — Divide & Conquer | 4 | Prefix sum, segment tree, max subarray |
 | Ch 7 — Greedy | 9 | Knapsack, coin change, Huffman, activity |
 | Ch 8 — Dynamic Programming | 17 | 9 DP problems with tables & traces |
-| Ch 9 — Backtracking | 4 | State-space tree, 4-Queens |
+| Ch 9 — Backtracking | 5 | State-space tree, 4-Queens, safe check, Sudoku |
 | Ch 10 — Branch & Bound | 5 | LC-search, bounding, TSP |
 | Ch 11 — Graph Algorithms | **35** | Full graph studio (largest chapter) |
 | Ch 12 — Flow | 14 | Ford-Fulkerson step-by-step trace, min cut, Edmonds-Karp |
 | Ch 13 — Approximation | 4 | Vertex cover, TSP, set cover |
 | Ch 14 — Randomized & Parallel | 5 | Rand. quicksort, fork-join |
 | Ch 15 — Lower Bounds & NP | 5 | Decision tree, P/NP Venn |
-| Ch 0 — Batch papers | **63** | B1 (23) + B2 (25) + CT (15) + lab practice codes |
-| **Total** | **191** | **382 files incl. `.excalidraw` sources** |
+| Ch 0 — Batch papers | **64** | B1 (24) + B2 (25) + CT (15) + lab practice codes |
+| **Total** | **200** | **400 files incl. `.excalidraw` sources** |
 
 Regenerate or audit diagrams:
 

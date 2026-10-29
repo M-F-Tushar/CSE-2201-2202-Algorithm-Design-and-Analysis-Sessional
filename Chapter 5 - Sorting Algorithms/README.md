@@ -77,6 +77,7 @@ A sorting method takes a list and rearranges it into the chosen order. In this c
 ### Visual Map: Two Ways to Sort
 
 ![Sorting methods grouped by how they decide the order](diagrams/ch5-02-sorting-taxonomy.svg)
+*Sorting methods categorized by comparison vs. non-comparison and stability. Editable source: [`ch5-02-sorting-taxonomy.excalidraw`](diagrams/ch5-02-sorting-taxonomy.excalidraw)*
 
 Most methods here are **comparison sorts**: they decide which item comes first by comparing items. Counting sort is different: it counts how often each allowed number appears, so it does not compare items with each other.
 
@@ -95,6 +96,7 @@ No method is best for every situation. The useful question is what matters most:
 ### Visual Map: Choose by What You Need
 
 ![A quick guide to choosing a sorting method](diagrams/ch5-01-sorting-reach-escalator.svg)
+*Decision framework for selecting sorting algorithms based on performance, memory, and stability constraints. Editable source: [`ch5-01-sorting-reach-escalator.excalidraw`](diagrams/ch5-01-sorting-reach-escalator.excalidraw)*
 
 - For a tiny list or one that is nearly sorted, insertion sort is often a good fit.
 - For a guaranteed `O(n log n)` time and stable results, choose merge sort if extra memory is available.
@@ -110,9 +112,19 @@ No method is best for every situation. The useful question is what matters most:
 
 Imagine walking along the list from left to right. At each pair, put the larger value on the right. When you reach the end, the largest value you had not placed yet is in its final position. Repeat on the part that remains.
 
-### Visual Walkthrough: One Pass at a Time
+### Visual Walkthrough: Step-by-Step Execution
 
-![Bubble sort moves large values to the end with each pass](diagrams/ch5-03-bubble-sort-flow.svg)
+#### Stage 1: Pass 1 Microscopic Step-by-Step Adjacent Comparisons
+Every adjacent pair is compared from left to right. When a left item is strictly greater than its right neighbor, they swap. By the end of Pass 1, the largest item ($6$) has bubbled to the final index.
+
+![Pass 1 step-by-step adjacent element comparisons and swaps](diagrams/ch5-03b-bubble-sort-pass1.svg)
+*Pass 1 pairwise trace: adjacent comparisons and swaps bubble the global maximum 6 to the end. Editable source: [`ch5-03b-bubble-sort-pass1.excalidraw`](diagrams/ch5-03b-bubble-sort-pass1.excalidraw)*
+
+#### Stage 2: Macro Pass-by-Pass Progression to Completion
+Each pass bubbles the next largest unsorted element to its final settled position. If a pass makes zero swaps, early termination stops the algorithm immediately.
+
+![Bubble sort macro pass-by-pass progression to completion](diagrams/ch5-03-bubble-sort-flow.svg)
+*Macro pass-by-pass progression: settled suffix grows from right to left across passes 1 to 5. Editable source: [`ch5-03-bubble-sort-flow.excalidraw`](diagrams/ch5-03-bubble-sort-flow.excalidraw)*
 
 Start with `[5, 2, 4, 6, 1, 3]`:
 
@@ -167,9 +179,19 @@ return A
 
 At first, the whole list is waiting to be sorted. Find its smallest value and move that value to the first position. Then look only at the remaining part, find its smallest value, and place it second. The sorted part grows one position at a time.
 
-### Visual Walkthrough: Pick the Next Smallest Item
+### Visual Walkthrough: Step-by-Step Execution
 
-![Selection sort grows a sorted part from left to right](diagrams/ch5-04-selection-sort-flow.svg)
+#### Stage 1: Round 1 Minimum Search in Unsorted Suffix
+The algorithm scans the unsorted suffix to track the index of the minimum element, then performs a single swap placing it into the prefix slot.
+
+![Selection sort round 1 scan for minimum](diagrams/ch5-04b-selection-sort-scan.svg)
+*Round 1 search: scanning through indices 1 to 5 tracks the minimum element (1 at index 4), then executes a single swap. Editable source: [`ch5-04b-selection-sort-scan.excalidraw`](diagrams/ch5-04b-selection-sort-scan.excalidraw)*
+
+#### Stage 2: Macro Round-by-Round Progression to Completion
+Each round finds the next minimum item and places it into the next prefix slot, monotonically expanding the sorted prefix.
+
+![Selection sort round-by-round progression to completion](diagrams/ch5-04-selection-sort-flow.svg)
+*Round-by-round progression: sorted prefix grows from left to right across rounds 1 to 5. Editable source: [`ch5-04-selection-sort-flow.excalidraw`](diagrams/ch5-04-selection-sort-flow.excalidraw)*
 
 Start with `[5, 2, 4, 6, 1, 3]`:
 
@@ -219,9 +241,19 @@ return A
 
 Think of sorting playing cards in your hand. Hold the next card, move any larger cards one place to the right, and put the held card into the gap. The sorted part grows by one item each time.
 
-### Visual Walkthrough: Insert One Item at a Time
+### Visual Walkthrough: Step-by-Step Execution
 
-![Insertion sort puts each new item into the sorted part](diagrams/ch5-05-insertion-sort-flow.svg)
+#### Stage 1: Key Extraction and Cascading Rightward Shift (Iteration 4)
+When inserting key $1$, every element in the sorted prefix that is strictly larger than $1$ ($6, 5, 4, 2$) shifts one position to the right, vacating index $0$ where the key drops in.
+
+![Insertion sort key extraction and cascading shift](diagrams/ch5-05b-insertion-sort-shift.svg)
+*Iteration 4 trace: key 1 is held aside while larger elements shift rightward to open slot 0. Editable source: [`ch5-05b-insertion-sort-shift.excalidraw`](diagrams/ch5-05b-insertion-sort-shift.excalidraw)*
+
+#### Stage 2: Macro Iteration-by-Iteration Progression to Completion
+Beginning with the trivial 1-element prefix `[5]`, each subsequent element is drawn as a key and inserted into its sorted position.
+
+![Insertion sort iteration-by-iteration progression to completion](diagrams/ch5-05-insertion-sort-flow.svg)
+*Iteration-by-iteration progression: prefix grows one item at a time from iteration 1 to 5. Editable source: [`ch5-05-insertion-sort-flow.excalidraw`](diagrams/ch5-05-insertion-sort-flow.excalidraw)*
 
 Start with `[5, 2, 4, 6, 1, 3]`:
 
@@ -275,9 +307,19 @@ return A
 
 A one-item list is already sorted. To join two sorted pieces, compare the first item in each piece and move the smaller one to the result. Keep doing that until one piece is empty, then add the remaining items.
 
-### Visual Walkthrough: Split, Then Join in Order
+### Visual Walkthrough: Step-by-Step Execution
 
-![Merge sort splits the list and joins sorted pieces](diagrams/ch5-07-merge-sort-divide-conquer.svg)
+#### Stage 1: Divide and Conquer Recursion Tree
+The input list is recursively bisected until single-element base cases are reached. Then, adjacent sorted pieces are merged upward level by level.
+
+![Merge sort divide and conquer recursion tree](diagrams/ch5-07-merge-sort-divide-conquer.svg)
+*Divide and conquer tree: top-down recursive partitioning followed by bottom-up ordered merging. Editable source: [`ch5-07-merge-sort-divide-conquer.excalidraw`](diagrams/ch5-07-merge-sort-divide-conquer.excalidraw)*
+
+#### Stage 2: Step-by-Step Two-Pointer Merge Walkthrough
+To combine two sorted halves $L = [2, 4, 5]$ and $R = [1, 3, 6]$, pointers $i$ and $j$ compare current front items, append the smaller element into temporary storage, and flush remaining items.
+
+![Two-pointer merge step-by-step walkthrough](diagrams/ch5-07b-merge-sort-merge-step.svg)
+*Two-pointer merge execution: stepwise comparisons between L[i] and R[j] produce the merged sorted output. Editable source: [`ch5-07b-merge-sort-merge-step.excalidraw`](diagrams/ch5-07b-merge-sort-merge-step.excalidraw)*
 
 For `[5, 2, 4, 6, 1, 3]`, the pieces change like this:
 
@@ -349,9 +391,19 @@ for k: integer = 0 to length(temp) - 1:
 
 After a partition, the pivot is in its final position: everything to its left belongs before it, and everything to its right belongs after it. The same process is then used on each side. In this chapter's example, the last item in each part is the pivot.
 
-### Visual Walkthrough: Place Pivots, Then Sort the Sides
+### Visual Walkthrough: Step-by-Step Execution
 
-![Quick sort puts each pivot in its final position](diagrams/ch5-08-quick-sort-partition.svg)
+#### Stage 1: Lomuto Partitioning Step-by-Step
+Using the last element ($3$) as the pivot, index $j$ scans left to right. When $A[j] \le \text{pivot}$, it swaps with $A[\text{boundary}]$ and boundary advances. Finally, the pivot swaps into boundary position $2$.
+
+![Quick sort Lomuto partitioning trace](diagrams/ch5-08-quick-sort-partition.svg)
+*Lomuto partition trace: scan index j places smaller items to the left of boundary; pivot 3 locks into index 2. Editable source: [`ch5-08-quick-sort-partition.excalidraw`](diagrams/ch5-08-quick-sort-partition.excalidraw)*
+
+#### Stage 2: Subproblem Recursion Flow
+Once pivot $3$ is locked in place, quick sort recursively partitions the left subproblem `[2, 1]` and right subproblem `[6, 5, 4]` until all elements are settled.
+
+![Quick sort subproblem recursion flow](diagrams/ch5-08b-quick-sort-recursion.svg)
+*Subproblem recursion tree: independent partitioning on left and right subproblems completes the sort. Editable source: [`ch5-08b-quick-sort-recursion.excalidraw`](diagrams/ch5-08b-quick-sort-recursion.excalidraw)*
 
 Start with `[5, 2, 4, 6, 1, 3]`:
 
@@ -469,6 +521,7 @@ Heap Sort operates in two clear, sequential phases:
 ### Phase 1: Building the Max-Heap (Heapify Method)
 
 ![Heap sort phase 1 builds a max-heap in linear time using bottom-up heapify](diagrams/ch5-09-heap-build-flow.svg)
+*Complete Binary Tree representation and bottom-up heapify execution at internal nodes i=2, 1, 0 in linear O(n) time. Editable source: [`ch5-09-heap-build-flow.excalidraw`](diagrams/ch5-09-heap-build-flow.excalidraw)*
 
 #### Step-by-Step Heap Construction on `[5, 2, 4, 6, 1, 3]` ($n = 6$)
 
@@ -493,6 +546,7 @@ Heap Sort operates in two clear, sequential phases:
 ### Phase 2: Extracting the Maximum and Sorting
 
 ![Heap sort phase 2 extracts the root and restores the heap](diagrams/ch5-10-heap-sort-flow.svg)
+*Phase 2 repeated root extraction, tail swap, and sift-down restoration across all rounds. Editable source: [`ch5-10-heap-sort-flow.excalidraw`](diagrams/ch5-10-heap-sort-flow.excalidraw)*
 
 | Step | Action | List after root swap and heapify | Settled / Sorted Tail |
 | :--- | :--- | :--- | :--- |
@@ -561,9 +615,19 @@ Instead of dense coding syntax, Heap Sort is best expressed as two direct, Engli
 
 Counting sort does not compare items. It is useful when the items are nonnegative integers in a small known range, such as 0 through 4. If the range is huge, keeping a count for every possible value wastes time and memory.
 
-### Visual Walkthrough: Count, Add, and Place
+### Visual Walkthrough: Step-by-Step Execution
 
-![Counting sort uses counts to place values in order](diagrams/ch5-06-sorting-counts-flow.svg)
+#### Stage 1: Frequency Counts and Prefix Running Totals
+The algorithm tallies the frequency of each key, then computes prefix cumulative totals to determine each key's ending slot in the output array.
+
+![Counting sort frequency tally and prefix running totals](diagrams/ch5-06-sorting-counts-flow.svg)
+*Frequencies and cumulative running totals: running total defines the 1-based end slot for each key. Editable source: [`ch5-06-sorting-counts-flow.excalidraw`](diagrams/ch5-06-sorting-counts-flow.excalidraw)*
+
+#### Stage 2: Right-to-Left Stable Placement into Output Array
+Scanning input from right to left ($i = 5 \text{ downto } 0$), each value is placed into slot $\text{count}[v] - 1$, and its counter decrements. This backward pass ensures stability.
+
+![Counting sort right-to-left stable placement walkthrough](diagrams/ch5-06b-counting-sort-placement.svg)
+*Step-by-step backward placement: placing duplicate items right-to-left preserves their original order (stability). Editable source: [`ch5-06b-counting-sort-placement.excalidraw`](diagrams/ch5-06b-counting-sort-placement.excalidraw)*
 
 Use `[4, 1, 3, 4, 2, 1]`, where the values range from 0 through 4:
 
