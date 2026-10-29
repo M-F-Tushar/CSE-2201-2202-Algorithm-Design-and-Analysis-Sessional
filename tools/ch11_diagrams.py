@@ -992,6 +992,63 @@ union_by_rank = D(
     caption="Rank is a height bound, not a node count; a root's rank increases only when equal ranks merge",
 )
 
+# 36 ---------------------------------------------------- kahn's algorithm trace
+
+kahns_algorithm_trace = D(
+    key="ch11-36-kahns-algorithm-trace",
+    title="Kahn's Algorithm (BFS-Based Topological Sort) Execution Sequence",
+    size=(1340, 680),
+    flow="H",
+    containers=[
+        N("dag_panel", "Directed Acyclic Graph (DAG) & In-degrees", 25, 60, 440, 580, "container"),
+        N("trace_panel", "Step-by-Step Kahn BFS In-degree Execution Sequence", 495, 60, 820, 580, "container"),
+    ],
+    nodes=[
+        # DAG Nodes
+        N("a", "A\nin: 0", 65, 125, 54, 54, "yellow", "circle", bold=True),
+        N("b", "B\nin: 0", 65, 245, 54, 54, "yellow", "circle", bold=True),
+        N("c", "C\nin: 2", 185, 185, 54, 54, "blue", "circle", bold=True),
+        N("d", "D\nin: 1", 300, 125, 54, 54, "blue", "circle", bold=True),
+        N("e", "E\nin: 1", 300, 245, 54, 54, "blue", "circle", bold=True),
+        N("f", "F\nin: 2", 400, 185, 54, 54, "green", "circle", bold=True),
+
+        # DAG notes
+        N("rule_box", "Queue Invariant:\n- Q holds all vertices with in-degree = 0 (ready)\n- Dequeue u: append u to topological order\n- For each (u -> v): decrement in-degree(v)\n- If in-degree(v) == 0: enqueue v into Q",
+          45, 330, 400, 125, "teal", size=13),
+        N("cycle_box", "Cycle Detection Property:\n- DAG: all |V| vertices enter Q and are output\n- Cycle: cycle nodes never reach in-degree 0\n- If length(order) < |V|: cycle detected!",
+          45, 480, 400, 125, "orange", size=13),
+
+        # Trace Rows
+        N("row0", "Init:    in={A:0, B:0, C:2, D:1, E:1, F:2}   |   Q = [A, B]   |   Order = [ ]",
+          515, 105, 780, 44, "yellow", size=13),
+        N("row1", "Step 1:  Pop A -> Order = [A]   |   Decr in(C): 2 -> 1   |   Q = [B]",
+          515, 159, 780, 44, "blue", size=13),
+        N("row2", "Step 2:  Pop B -> Order = [A, B]   |   Decr in(C): 1 -> 0 -> Enqueue C   |   Q = [C]",
+          515, 213, 780, 44, "blue", size=13),
+        N("row3", "Step 3:  Pop C -> Order = [A, B, C]   |   Decr in(D): 1->0, in(E): 1->0 -> Enqueue D, E   |   Q = [D, E]",
+          515, 267, 780, 44, "green", size=13),
+        N("row4", "Step 4:  Pop D -> Order = [A, B, C, D]   |   Decr in(F): 2 -> 1   |   Q = [E]",
+          515, 321, 780, 44, "blue", size=13),
+        N("row5", "Step 5:  Pop E -> Order = [A, B, C, D, E]   |   Decr in(F): 1 -> 0 -> Enqueue F   |   Q = [F]",
+          515, 375, 780, 44, "blue", size=13),
+        N("row6", "Step 6:  Pop F -> Order = [A, B, C, D, E, F]   |   F has no out-edges   |   Q = [ ] (Empty)",
+          515, 429, 780, 44, "green", size=13),
+        N("row_res", "Final Topological Order:  A -> B -> C -> D -> E -> F\n6 of 6 vertices processed (|Order| = |V|)  ==>  Valid DAG Topological Sort confirmed",
+          515, 490, 780, 65, "teal", size=14, bold=True),
+        N("time_box", "Kahn Algorithm Complexity: Time = Theta(V + E),  Auxiliary Space = Theta(V)\nOptimal linear-time queue processing identical to BFS traversal",
+          515, 570, 780, 52, "yellow", size=13),
+    ],
+    edges=[
+        E("a", "c", route="straight"),
+        E("b", "c", route="straight"),
+        E("c", "d", route="straight"),
+        E("c", "e", route="straight"),
+        E("d", "f", route="straight"),
+        E("e", "f", route="straight"),
+    ],
+    caption="Kahn's BFS-based algorithm repeatedly removes in-degree 0 sources, decrements neighbor in-degrees, and appends to topological order",
+)
+
 DIAGRAMS = [
     graph_roadmap,
     tree_vs_graph,
@@ -1028,4 +1085,5 @@ DIAGRAMS = [
     dsu_union_by_size,
     kruskal_lecture_example,
     union_by_rank,
+    kahns_algorithm_trace,
 ]

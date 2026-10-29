@@ -1280,6 +1280,32 @@ Main idea:
 6. If all vertices are output, a topological order exists.
 7. If some vertices remain, the graph has a cycle.
 
+### Visual Map: Kahn's Algorithm Execution Sequence
+
+![Kahn's Algorithm (BFS-Based Topological Sort) Execution Sequence](diagrams/ch11-36-kahns-algorithm-trace.svg)
+
+#### Step-by-Step Kahn BFS Execution Trace
+
+Tracing Kahn's BFS algorithm on the classroom 6-vertex DAG ($V = \{A, B, C, D, E, F\}$):
+
+| Step | Action | In-degree updates | Queue $Q$ | Output order |
+| :---: | :--- | :--- | :--- | :--- |
+| **0 (Init)** | Compute in-degrees: $A:0, B:0, C:2, D:1, E:1, F:2$ | Enqueue all 0-in-degree sources ($A, B$) | `[A, B]` | `[ ]` |
+| **1** | Dequeue $A$, append to order | Decrement $C$: $2 \to 1$ | `[B]` | `[A]` |
+| **2** | Dequeue $B$, append to order | Decrement $C$: $1 \to 0$ $\implies$ Enqueue $C$ | `[C]` | `[A, B]` |
+| **3** | Dequeue $C$, append to order | Decrement $D$: $1 \to 0$, $E$: $1 \to 0$ $\implies$ Enqueue $D, E$ | `[D, E]` | `[A, B, C]` |
+| **4** | Dequeue $D$, append to order | Decrement $F$: $2 \to 1$ | `[E]` | `[A, B, C, D]` |
+| **5** | Dequeue $E$, append to order | Decrement $F$: $1 \to 0$ $\implies$ Enqueue $F$ | `[F]` | `[A, B, C, D, E]` |
+| **6** | Dequeue $F$, append to order | $F$ has no outgoing edges | `[ ]` (empty) | `[A, B, C, D, E, F]` |
+
+Because $\text{length}(order) = 6 = |V|$, the algorithm verifies that graph $G$ is acyclic and outputs valid topological order:
+
+$$
+A, B, C, D, E, F
+$$
+
+#### Algorithm
+
 ```text
 KAHN-TOPOLOGICAL-SORT(G)
 1. compute indegree[v] for every vertex v
