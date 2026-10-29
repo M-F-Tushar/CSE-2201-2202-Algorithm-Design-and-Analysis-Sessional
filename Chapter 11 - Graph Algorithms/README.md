@@ -1681,7 +1681,7 @@ After scan 5, the MST has $V-1=4$ edges, so a correct early-stopping trace ends 
 
 The edge trace shows which choices Kruskal makes. This second view shows what the disjoint sets and parent trees look like behind those choices. A parent list records where each vertex points; a root points to itself. The rank list records the balancing rank of each root. Entries are shown in vertex order $0,1,2,3,4$.
 
-![Parent, rank, and component changes during the lecture's Kruskal run](diagrams/ch11-36-kruskal-dsu-state-trace.svg)
+![Parent, rank, and component changes during the lecture's Kruskal run](diagrams/ch11-37-kruskal-dsu-state-trace.svg)
 
 | State | Parent list | Rank list | Components |
 | :--- | :--- | :--- | :--- |
