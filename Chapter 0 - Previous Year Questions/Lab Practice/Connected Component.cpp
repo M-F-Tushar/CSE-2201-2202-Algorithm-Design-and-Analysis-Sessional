@@ -3,10 +3,7 @@
 
 using namespace std;
 
-vector<int> graph[100]; // Store the neighbors of vertex i. Also called adjacencey list.
-bool visited[100];
-
-void dfs(int node)
+void dfs(int node, const vector<vector<int>>& graph, vector<bool>& visited)
 {
     visited[node] = true;
 
@@ -14,26 +11,32 @@ void dfs(int node)
     {
         if (!visited[next])
         {
-            dfs(next);
+            dfs(next, graph, visited);
         }
     }
 }
 
-
 int main()
 {
     int v, e;
-    cout << "Number of Verticees and Number of Edges: ";
+    cout << "Number of Vertices and Number of Edges: ";
     cin >> v >> e;
 
+    // Dynamically sized adjacency list and visited array (0-based: 0 to v-1)
+    vector<vector<int>> graph(v + 1);
+    vector<bool> visited(v + 1, false);
+
+    cout << "Enter endpoints for " << e << " edges (vertices 0 to " << v - 1 << "):\n";
     for(int i = 0; i < e; i++)
     {
         int u, w;
-        cout << "\nEnter the endpoint of edges: ";
         cin >> u >> w;
 
-        graph[u].push_back(w);
-        graph[w].push_back(u);
+        if (u >= 0 && u <= v && w >= 0 && w <= v)
+        {
+            graph[u].push_back(w);
+            graph[w].push_back(u);
+        }
     }
 
     int components = 0;
@@ -42,7 +45,7 @@ int main()
     {
         if(!visited[i])
         {
-            dfs(i);
+            dfs(i, graph, visited);
             components++;
         }
     }

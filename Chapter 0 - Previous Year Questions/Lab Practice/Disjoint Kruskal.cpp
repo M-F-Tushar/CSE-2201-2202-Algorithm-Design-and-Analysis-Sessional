@@ -59,9 +59,9 @@ int main()
     // Sort edges by increasing weight
     sort(edges.begin(), edges.end(), sortbywt);
 
-    // Initially, every vertex is a separate set
-    parent.assign(v, -1);
-    ranki.assign(v, 0);
+    // Allocate v + 1 to safely handle both 0-based (0..v-1) and 1-based (1..v) vertex indexing
+    parent.assign(v + 1, -1);
+    ranki.assign(v + 1, 0);
 
     // Store MST edges
     vector<tuple<int, int, int>> mst;

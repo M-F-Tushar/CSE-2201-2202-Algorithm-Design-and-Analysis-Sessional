@@ -4,7 +4,9 @@
 
 using namespace std;
 
-int divideConquer(vector<int> a, int b, int e)
+// Divide and Conquer approach for Maximum Subarray Sum: O(n log n) time, O(log n) auxiliary stack space
+// Note: Pass 'a' by const reference to avoid O(n) copy overhead per call (which would degrade runtime to O(n^2))
+int divideConquer(const vector<int>& a, int b, int e)
 {
     // Base Case
     if (b == e)

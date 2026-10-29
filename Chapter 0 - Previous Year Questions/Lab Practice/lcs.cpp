@@ -44,7 +44,8 @@ int main()
             i--;
             j--;
         }
-        else if (dp[i - 1][j] > dp[i][j - 1])
+        // Use >= to break ties upwards (i--), consistent with the standard up-first convention
+        else if (dp[i - 1][j] >= dp[i][j - 1])
         {
             i--;
         }
