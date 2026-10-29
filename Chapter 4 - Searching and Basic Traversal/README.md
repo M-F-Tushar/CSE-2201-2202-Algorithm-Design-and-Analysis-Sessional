@@ -15,9 +15,13 @@ This chapter keeps only the requested Searching and Basic Traversal topics. The 
 1. [Searching and Basic Traversal](#searching-and-basic-traversal)
 2. [Basic Search and Traversal Techniques](#1-basic-search-and-traversal-techniques)
 3. [Searching vs Traversal](#2-searching-vs-traversal)
-4. [Introductory Graph Traversal](#3-introductory-graph-traversal)
+4. [Linear Search and Binary Search](#3-linear-search-and-binary-search)
+   - [Linear Search (Sequential Search)](#linear-search-sequential-search)
+   - [Binary Search (Divide-and-Conquer Search)](#binary-search-divide-and-conquer-search)
+   - [Sequential Search vs Binary Search Comparison](#sequential-vs-binary-search-comparison)
+5. [Introductory Graph Traversal](#4-introductory-graph-traversal)
    - [Classroom Representation Sequence](#classroom-representation-sequence)
-5. [Breadth-First Search (BFS)](#4-breadth-first-search-bfs)
+6. [Breadth-First Search (BFS)](#5-breadth-first-search-bfs)
    - [BFS Traversal Graph](#bfs-traversal-graph)
    - [BFS Idea](#bfs-idea)
    - [BFS Instruction Algorithm](#bfs-instruction-algorithm)
@@ -26,7 +30,7 @@ This chapter keeps only the requested Searching and Basic Traversal topics. The 
    - [BFS Traversal Walkthrough](#bfs-traversal-walkthrough)
    - [BFS Complexity Analysis](#bfs-complexity-analysis)
    - [Basic Applications of BFS](#basic-applications-of-bfs)
-6. [Depth-First Search (DFS)](#5-depth-first-search-dfs)
+7. [Depth-First Search (DFS)](#6-depth-first-search-dfs)
    - [DFS Traversal Graph](#dfs-traversal-graph)
    - [DFS Idea](#dfs-idea)
    - [DFS Instruction Algorithm](#dfs-instruction-algorithm)
@@ -35,10 +39,10 @@ This chapter keeps only the requested Searching and Basic Traversal topics. The 
    - [DFS Traversal Walkthrough](#dfs-traversal-walkthrough)
    - [DFS Complexity Analysis](#dfs-complexity-analysis)
    - [Basic Applications of DFS](#basic-applications-of-dfs)
-7. [BFS vs DFS Quick Comparison](#6-bfs-vs-dfs-quick-comparison)
-8. [Recommended Study Sequence](#7-recommended-study-sequence)
-9. [Analyze Time Complexity of BFS and DFS](#8-analyze-time-complexity-of-bfs-and-dfs)
-10. [Final Notes](#final-notes)
+8. [BFS vs DFS Quick Comparison](#7-bfs-vs-dfs-quick-comparison)
+9. [Recommended Study Sequence](#8-recommended-study-sequence)
+10. [Analyze Time Complexity of BFS and DFS](#9-analyze-time-complexity-of-bfs-and-dfs)
+11. [Final Notes](#final-notes)
 
 ---
 
@@ -128,7 +132,80 @@ Example:
 
 ---
 
-## 3. Introductory Graph Traversal
+## 3. Linear Search and Binary Search
+
+Before traversing structured networks and graphs, searching begins on linear sequences (arrays and lists). The two primary paradigms are sequential inspection and divide-and-conquer elimination.
+
+### Linear Search (Sequential Search)
+
+**Linear search** scans each array element sequentially from beginning to end until either the target element is found or the end of the array is reached.
+
+#### Algorithm
+```text
+LINEAR-SEARCH(A, n, key)
+1. for i = 0 to n - 1:
+2.     if A[i] == key:
+3.         return i        // Target found at index i
+4. return -1               // Target not present
+```
+
+#### Properties
+- **Data requirement:** None. Works on unsorted, sorted, and arbitrary sequences.
+- **Best-case complexity:** $O(1)$ (target located at index 0).
+- **Worst-case complexity:** $O(n)$ (target at the last position or absent).
+- **Average-case complexity:** $O(n)$ ($n/2$ comparisons on average).
+- **Space complexity:** $O(1)$ auxiliary memory.
+
+---
+
+### Binary Search (Divide-and-Conquer Search)
+
+**Binary search** locates a target in a **sorted** array by repeatedly halving the search interval. It compares the target key to the middle element:
+1. If the key equals the middle element, the search terminates successfully.
+2. If the key is smaller than the middle element, the search continues in the left half.
+3. If the key is larger, the search continues in the right half.
+
+#### Iterative Algorithm
+```text
+BINARY-SEARCH(A, n, key)
+1. low = 0
+2. high = n - 1
+3. while low <= high:
+4.     mid = low + (high - low) / 2
+5.     if A[mid] == key:
+6.         return mid
+7.     else if A[mid] < key:
+8.         low = mid + 1
+9.     else:
+10.        high = mid - 1
+11. return -1
+```
+
+#### Recurrence and Complexity
+Each step discards half the remaining candidates with $O(1)$ comparison work:
+$$
+T(n) = T(n/2) + c, \qquad T(1) = 1
+$$
+By Master Theorem (Case 2, $a=1, b=2, k=0$) or expansion (as shown in [Chapter 3](../Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md)):
+$$
+T(n) = \Theta(\log n)
+$$
+
+### Sequential vs Binary Search Comparison
+
+| Dimension | Linear Search | Binary Search |
+| :--- | :--- | :--- |
+| **Input condition** | Unsorted or sorted arrays | **Must be sorted** |
+| **Strategy** | Sequential scan ($1$ by $1$) | Divide and conquer (halves range each step) |
+| **Worst-case time** | $\Theta(n)$ | $\Theta(\log n)$ |
+| **Best-case time** | $\Theta(1)$ | $\Theta(1)$ |
+| **Average-case time** | $\Theta(n)$ | $\Theta(\log n)$ |
+| **Space complexity** | $O(1)$ | $O(1)$ iterative, $O(\log n)$ recursive |
+| **Data structures** | Arrays, Linked Lists | Arrays (needs $O(1)$ random access) |
+
+---
+
+## 4. Introductory Graph Traversal
 
 A **graph** is a collection of vertices and edges.
 
@@ -221,7 +298,7 @@ This outer loop makes sure every connected part of the graph is covered.
 
 ---
 
-## 4. Breadth-First Search (BFS)
+## 5. Breadth-First Search (BFS)
 
 **Breadth-First Search (BFS)** visits vertices level by level. It first visits the starting vertex, then all vertices at distance 1, then all vertices at distance 2, and so on.
 
@@ -368,7 +445,7 @@ BFS is usually preferred when the problem asks for the nearest answer, the small
 
 ---
 
-## 5. Depth-First Search (DFS)
+## 6. Depth-First Search (DFS)
 
 **Depth-First Search (DFS)** explores one path as far as possible before returning to try another path.
 
@@ -401,10 +478,11 @@ DFS is useful when we need to explore complete paths, detect structure, or proce
 
 ### DFS Instruction Algorithm
 
-1. Mark every vertex as unvisited. Mark the starting vertex as visited and put it onto an empty stack.
-2. Remove the vertex from the **top** of the stack and process it.
-3. For every unvisited neighbor, mark it visited and push it onto the stack. This makes DFS continue along the most recently found path.
-4. Repeat steps 2 and 3 until the stack is empty. All reachable vertices have then been traversed.
+DFS can be executed using either a recursive call stack or an explicit stack data structure:
+
+- **Recursive DFS:** Automatically processes the deepest unvisited branch first. When at vertex $u$, DFS immediately makes a recursive call to its first unvisited neighbor $v$ (setting $\text{parent}[v] = u$), only exploring alternative branches after the recursive call returns.
+- **Stack-based DFS (Standard / Mark-on-Pop):** Vertices are pushed onto an explicit stack. A vertex is marked visited when **popped** from the stack, exactly matching recursive DFS traversal paths and parent relationships.
+- **Stack-based DFS (Mark-on-Push Variant):** Neighbors are marked visited immediately upon being pushed to prevent duplicate entries on the stack. Note that marking on push locks in parent pointers at push time rather than exploration time.
 
 ### Recursive Version
 
@@ -434,21 +512,21 @@ DFS-RECURSIVE(G, s)
 
 For the traversal graph above, start at `A` and consider neighbors in alphabetical order. The most recent recursive call is shown first.
 
-| Visited vertices | Recursive call stack (top first) | Current vertex |
+| Visited vertices | Recursive call stack (top first) | Current vertex / Action |
 | :--- | :--- | :--- |
-| A | `DFS(A)` | A |
-| A, B | `DFS(B)`, `DFS(A)` | B |
-| A, B, D | `DFS(D)`, `DFS(B)`, `DFS(A)` | D |
-| A, B, D | `DFS(B)`, `DFS(A)` | return from D |
-| A, B, D, E | `DFS(E)`, `DFS(B)`, `DFS(A)` | E |
-| A, B, D, E, G | `DFS(G)`, `DFS(E)`, `DFS(B)`, `DFS(A)` | G |
-| A, B, D, E, G, F | `DFS(F)`, `DFS(G)`, `DFS(E)`, `DFS(B)`, `DFS(A)` | F |
-| A, B, D, E, G, F | `DFS(G)`, `DFS(E)`, `DFS(B)`, `DFS(A)` | return from F |
-| A, B, D, E, G, F | `DFS(E)`, `DFS(B)`, `DFS(A)` | return from G |
-| A, B, D, E, G, F | `DFS(B)`, `DFS(A)` | return from E |
-| A, B, D, E, G, F | `DFS(A)` | return from B |
-| A, B, D, E, G, F, C | `DFS(C)`, `DFS(A)` | C |
-| A, B, D, E, G, F, C | `DFS(A)` | return from C |
+| A | `DFS(A)` | A (explore neighbor B) |
+| A, B | `DFS(B)`, `DFS(A)` | B (explore neighbor D) |
+| A, B, D | `DFS(D)`, `DFS(B)`, `DFS(A)` | D (dead end, return to B) |
+| A, B, D | `DFS(B)`, `DFS(A)` | return from D; resume B (explore E) |
+| A, B, D, E | `DFS(E)`, `DFS(B)`, `DFS(A)` | E (explore neighbor G) |
+| A, B, D, E, G | `DFS(G)`, `DFS(E)`, `DFS(B)`, `DFS(A)` | G (explore neighbor F) |
+| A, B, D, E, G, F | `DFS(F)`, `DFS(G)`, `DFS(E)`, `DFS(B)`, `DFS(A)` | F (Adj[F]=[C, G]; C is unvisited, call C) |
+| A, B, D, E, G, F, C | `DFS(C)`, `DFS(F)`, `DFS(G)`, `DFS(E)`, `DFS(B)`, `DFS(A)` | C (Adj[C]=[A, F]; both visited, return) |
+| A, B, D, E, G, F, C | `DFS(F)`, `DFS(G)`, `DFS(E)`, `DFS(B)`, `DFS(A)` | return from C; F checks G (visited), return |
+| A, B, D, E, G, F, C | `DFS(G)`, `DFS(E)`, `DFS(B)`, `DFS(A)` | return from F; G finished, return |
+| A, B, D, E, G, F, C | `DFS(E)`, `DFS(B)`, `DFS(A)` | return from G; E finished, return |
+| A, B, D, E, G, F, C | `DFS(B)`, `DFS(A)` | return from E; B finished, return |
+| A, B, D, E, G, F, C | `DFS(A)` | return from B; A checks C (already visited!) |
 | A, B, D, E, G, F, C | empty | DFS finished |
 
 For a disconnected graph, call `DFS-RECURSIVE` for every unvisited vertex.
@@ -496,6 +574,11 @@ DFS-STACK(G, s)
 ```
 
 Mark a vertex as visited when it is pushed, so it cannot be placed on the stack twice. The reverse order is used only to make the stack version produce a similar visiting order to the recursive version when neighbors are listed alphabetically. Different valid DFS orders are possible if neighbors are considered in a different order.
+
+> [!NOTE]
+> **Mark-on-Push vs. Mark-on-Pop:**
+> The iterative algorithm above uses the **mark-on-push** approach, which bounds the stack size to $O(V)$ by preventing any vertex from appearing in the stack more than once. However, because $C$ is pushed and marked by $A$ at step 1, $F$ later cannot explore edge $(F, C)$, which sets $\text{parent}[C] = A$.
+> In contrast, the **standard recursive DFS** (and stack-based mark-on-pop DFS) explores $(F, C)$, setting $\text{parent}[C] = F$. Both visit all reachable vertices in valid DFS depth-first sequences, but produce different tree edges when cross-edges exist.
 
 ### DFS Traversal Walkthrough
 
@@ -553,7 +636,7 @@ DFS is usually preferred when the problem needs deep exploration, backtracking, 
 
 ---
 
-## 6. BFS vs DFS Quick Comparison
+## 7. BFS vs DFS Quick Comparison
 
 | Feature | BFS | DFS |
 | :--- | :--- | :--- |
@@ -572,7 +655,7 @@ DFS is usually preferred when the problem needs deep exploration, backtracking, 
 
 ---
 
-## 7. Recommended Study Sequence
+## 8. Recommended Study Sequence
 
 Study this chapter in the following order:
 
@@ -589,7 +672,7 @@ Study this chapter in the following order:
 
 ---
 
-## 8. Analyze Time Complexity of BFS and DFS
+## 9. Analyze Time Complexity of BFS and DFS
 
 BFS and DFS have the same asymptotic time complexity when the graph is stored using an adjacency list.
 
@@ -619,7 +702,7 @@ Final complexity summary:
 
 ---
 
-## Final Notes
+## 10. Final Notes
 
 BFS and DFS are the foundation of many graph algorithms. For this chapter, the most important points are:
 
