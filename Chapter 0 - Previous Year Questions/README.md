@@ -31,10 +31,10 @@ The previous-year materials are organized across batches and formats:
 
 | Batch / Category | Type | Coverage | Primary Link |
 | :--- | :--- | :--- | :--- |
-| **1st Batch** | Theory Final | 2023 Final Exam (8 questions, 27 parts, 100 marks) | [1st Batch Theory README](1st%20Batch/Theory/README.md) |
+| **1st Batch** | Theory Final | 2023 Final Exam (8 questions, 27 parts, answer 6 of 8 = 210 marks; 280 marks total paper) | [1st Batch Theory README](1st%20Batch/Theory/README.md) |
 | **1st Batch** | Lab Final | 10 classic lab final algorithmic problems with complete C++ implementations | [1st Batch Lab Final README](1st%20Batch/Lab%20Final/README.md) |
 | **2nd Batch** | Theory Final | Complete final examination paper (8 questions, 24 parts) | [2nd Batch Theory README](2nd%20Batch/Theory/README.md) |
-| **2nd Batch** | Lab Final | 3 core lab problems (Distinct elements, Max subarray sum, Binary search) | [2nd Batch Lab Final README](2nd%20Batch/Lab%20Final/README.md) |
+| **2nd Batch** | Lab Final | 3 core lab problems (Distinct elements, Max subarray sum, Linear search) | [2nd Batch Lab Final README](2nd%20Batch/Lab%20Final/README.md) |
 | **3rd Batch** | Class Tests | 4 Class Tests (CT1–CT4, 20 marks each = 80 marks total) | [3rd Batch CT README](3rd%20Batch/CT/README.md) |
 | **Lab Practice** | Source Code | 11 C++ programs for lab final practice & trial problems | [Lab Practice Directory](Lab%20Practice/) |
 
@@ -54,7 +54,7 @@ Comprehensive solutions to the 2023 CSE 2201 Final Examination:
 - **Section B:**
   - **Q5:** Backtracking paradigms: $N$-Queens, Subset Sum, Hamiltonian Circuit.
   - **Q6:** Dynamic programming: 0/1 Knapsack, grid path counting, Coin Change.
-  - **Q7:** Bellman-Ford shortest paths, Principle of Optimality, fractional relaxation.
+  - **Q7:** Shortest paths (Dijkstra negative-edge failure vs Bellman-Ford trace), Algorithm optimality, and 0/1 Knapsack by DP.
   - **Q8:** Complexity classes ($\text{P}, \text{NP}, \text{NPC}, \text{NP-Hard}$), Decision vs. Optimization, Dijkstra's algorithm.
 
 📂 Detailed document: [1st Batch Theory Guide](1st%20Batch/Theory/README.md)
@@ -85,15 +85,15 @@ Step-by-step problem statements, logic breakdowns, and clean C++ implementations
 Complete answers for the second sitting final theory examination:
 
 - **Section A:**
-  - **Q1:** Algorithm design, asymptotic bounds, Best/Average/Worst case comparisons.
+  - **Q1:** Algorithm design foundations (Time vs Space complexity), Divide & Conquer vs Greedy paradigms, and asymptotic bounds for 4 recurrences.
   - **Q2:** Class $\text{P}$ vs $\text{NP}$, BFS unweighted shortest path, Activity DAG scheduling.
   - **Q3:** Searching vs traversing, Binary Search walkthrough, Strassen's matrix multiplication.
-  - **Q4:** Insertion sort vs Bubble sort, Quicksort best/worst case, Merge sort divide-and-conquer.
+  - **Q4:** Insertion sort vs Bubble sort (nearly sorted array), Quicksort (Lomuto partitioning trace on employee IDs), and Merge sort divide-and-conquer.
 - **Section B:**
   - **Q5:** Greedy choice property, Fractional Knapsack, Kruskal's MST algorithm.
   - **Q6:** Dynamic programming foundations, Floyd-Warshall all-pairs shortest paths, LCS.
   - **Q7:** Backtracking: Graph coloring (m-colorability), LC-search state tree, 4-Queens.
-  - **Q8:** Decision vs Optimization, Branch and Bound (FIFO vs LC-search), TSP branch-and-bound.
+  - **Q8:** Decision vs Optimization, Branch and Bound (Admissible heuristic & Job sequencing with deadlines), and TSP via Held-Karp Subset DP.
 
 📂 Detailed document: [2nd Batch Theory Guide](2nd%20Batch/Theory/README.md)
 
@@ -102,8 +102,8 @@ Complete answers for the second sitting final theory examination:
 Structured solutions to the three core programming problems:
 
 1. [Count Distinct Values](2nd%20Batch/Lab%20Final/README.md#1-count-distinct-values) — Sorting and frequency scanning ($O(n \log n)$).
-2. [Maximum Sum Contiguous Subarray](2nd%20Batch/Lab%20Final/README.md#2-maximum-sum-of-a-contiguous-subarray) — Kadane's algorithm ($O(n)$) and prefix sum.
-3. [Search for an Element](2nd%20Batch/Lab%20Final/README.md#3-search-for-an-element) — Binary search with first/last occurrence.
+2. [Maximum Sum Contiguous Subarray](2nd%20Batch/Lab%20Final/README.md#2-maximum-sum-of-a-contiguous-subarray) — Kadane's algorithm ($O(n)$).
+3. [Search for an Element](2nd%20Batch/Lab%20Final/README.md#3-search-for-an-element) — Linear Search ($O(n)$) on an unsorted array printing "Yes" / "No".
 
 📂 Detailed document: [2nd Batch Lab Final Guide](2nd%20Batch/Lab%20Final/README.md)
 
@@ -146,12 +146,12 @@ Standalone, runnable C++ source files for essential algorithms tested during ses
 | [`Backtracking.cpp`](Lab%20Practice/Backtracking.cpp) | $N$-Queens Problem | Backtracking | Exponential |
 | [`Connected Component.cpp`](Lab%20Practice/Connected%20Component.cpp) | Connected Components | BFS / DFS Traversal | $O(V + E)$ |
 | [`Disjoint Kruskal.cpp`](Lab%20Practice/Disjoint%20Kruskal.cpp) | Minimum Spanning Tree | Greedy + DSU | $O(E \log E)$ |
-| [`Disjoint Set Cycle.cpp`](Lab%20Practice/Disjoint%20Set%20Cycle.cpp) | Cycle Detection | Disjoint Set Union | $O(E \alpha(V))$ |
+| [`Disjoint Set Cycle.cpp`](Lab%20Practice/Disjoint%20Set%20Cycle.cpp) | Cycle Detection | Disjoint Set Union (Naive) | $O(EV)$ ($O(E\alpha(V))$ with rank & path compression) |
 | [`Floyd Warshall.cpp`](Lab%20Practice/Floyd%20Warshall.cpp) | All-Pairs Shortest Path | Dynamic Programming | $O(V^3)$ |
 | [`Fractional Knapsack.cpp`](Lab%20Practice/Fractional%20Knapsack.cpp) | Fractional Knapsack | Greedy Method | $O(n \log n)$ |
 | [`lcs.cpp`](Lab%20Practice/lcs.cpp) | Longest Common Subsequence | Dynamic Programming | $O(nm)$ |
 | [`lis.cpp`](Lab%20Practice/lis.cpp) | Longest Increasing Subsequence | Dynamic Programming | $O(n^2)$ |
-| [`Maximum Sum Subarray.cpp`](Lab%20Practice/Maximum%20Sum%20Subarray.cpp) | Maximum Subarray Sum | Kadane's Algorithm | $O(n)$ |
+| [`Maximum Sum Subarray.cpp`](Lab%20Practice/Maximum%20Sum%20Subarray.cpp) | Maximum Subarray Sum | Divide & Conquer | $O(n \log n)$ |
 | [`Segment Tree.cpp`](Lab%20Practice/Segment%20Tree.cpp) | Range Sum Query | Divide & Conquer | $O(\log n)$ query |
 
 ---
@@ -168,9 +168,9 @@ To maximize exam performance, cross-reference solved questions with the theory c
 | **Sorting Algorithms** | [Chapter 5](../Chapter%205%20-%20Sorting%20Algorithms/README.md) | 1st Batch Q3, 2nd Batch Q4 |
 | **Divide and Conquer** | [Chapter 6](../Chapter%206%20-%20Divide%20and%20Conquer/README.md) | 2nd Batch Q3(c) (Strassen), CT3 Q2–Q3 |
 | **Greedy Algorithms** | [Chapter 7](../Chapter%207%20-%20Greedy%20Algorithms/README.md) | 1st Batch Q4, 2nd Batch Q5 |
-| **Dynamic Programming** | [Chapter 8](../Chapter%208%20-%20Dynamic%20Programming/README.md) | 1st Batch Q6, 2nd Batch Q6, CT1 Q1–Q4 |
+| **Dynamic Programming** | [Chapter 8](../Chapter%208%20-%20Dynamic%20Programming/README.md) | 1st Batch Q6, 2nd Batch Q6, 2nd Batch Q8(c), CT1 Q1–Q4 |
 | **Backtracking** | [Chapter 9](../Chapter%209%20-%20Backtracking/README.md) | 1st Batch Q5, 2nd Batch Q7, CT4 Q1–Q4 |
-| **Branch and Bound** | [Chapter 10](../Chapter%2010%20-%20Branch%20and%20Bound/README.md) | 2nd Batch Q7(b), Q8(b), Q8(c) |
+| **Branch and Bound** | [Chapter 10](../Chapter%2010%20-%20Branch%20and%20Bound/README.md) | 2nd Batch Q7(b), Q8(b) |
 | **Graph Algorithms & Shortest Paths** | [Chapter 11](../Chapter%2011%20-%20Graph%20Algorithms/README.md) | 1st Batch Q7, Q8(c), CT2 Q1–Q3 |
 | **Complexity Classes & NP** | [Chapter 15](../Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md) | 1st Batch Q8(a)–(b), 2nd Batch Q2(a), Q8(a) |
 
