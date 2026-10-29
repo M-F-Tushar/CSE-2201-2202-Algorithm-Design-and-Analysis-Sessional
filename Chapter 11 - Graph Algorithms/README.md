@@ -414,7 +414,7 @@ $$
 
 This path uses $3$ edges, so the shortest distance is $3$.
 
-### Mermaid Diagram: BFS Layer Expansion
+### Visual Map: BFS Layer Expansion
 
 ![BFS Layer Expansion and Distance Frontiers](diagrams/ch11-08-bfs-layer-expansion.svg)
 
@@ -598,7 +598,7 @@ Final shortest distances from $A$: $A=0$, $B=2$, $C=5$, $D=7$, $F=11$, $E=15$.
 
 Reconstructing the path to $E$: $E$ was last updated by $B$ ($2+13=15$), and $B$ was reached directly from $A$. Reading backward: $E, B, A$, so forward the path is $A \to B \to E$ with total cost $2 + 13 = 15$.
 
-### Mermaid Diagram: Dijkstra's Greedy Finalization
+### Visual Map: Dijkstra's Greedy Finalization
 
 The diagram below visualizes the finalization order from **Worked Example 1**: $A \to F \to C \to B \to D \to E$.
 
@@ -671,7 +671,7 @@ After those rounds, one more relaxation pass is used to detect a negative cycle.
 
 ### Worked Example: Six-Vertex Graph (Selected-Vertex Relaxation Table)
 
-This walkthrough traces Bellman-Ford the way it is often done by hand: edges are grouped by their source vertex, and vertices are relaxed in a fixed order — $A, B, C, D, E, F$ — instead of scanning a flat edge list. This still relaxes every edge exactly once per round; only the bookkeeping changes. One table is built per round. Inside a table, each row is labeled by the vertex whose *outgoing* edges were just relaxed, and the row shows the whole distance array immediately afterward. The **bold** cell simply marks which vertex was just processed, as a visual anchor — it is not necessarily that vertex's final answer.
+This walkthrough traces Bellman-Ford the way it is often done by hand: edges are grouped by their source vertex, and vertices are relaxed in a fixed order — $A, B, C, D, E, F$ — instead of scanning a flat edge list. This still relaxes every edge exactly once per round; only the bookkeeping changes. One table is built per round. Inside a table, each row is labeled by the vertex whose *outgoing* edges are relaxed next, and the row shows the distance array at that moment (immediately before that vertex's out-edges are relaxed). The **bold** cell marks the selected vertex about to be processed.
 
 Graph and source vertex $A$:
 
@@ -793,7 +793,7 @@ The cycle $B \to C \to D \to B$ has total weight $2 + 2 + (-5) = -1$. With $|V|=
 
 $dist(B)$ keeps falling by exactly 1 every round ($1 \to -1 \to -2 \to -3 \to -4 \to \dots$), matching the cycle weight of $-1$. Because an edge relaxation still succeeds after the required $|V|-1=3$ rounds, Bellman-Ford's check pass (algorithm lines 10–12) reports **a negative cycle is reachable from the source** instead of returning finite distances.
 
-### Mermaid Diagram: Bellman-Ford Relaxation Flow
+### Visual Map: Bellman-Ford Relaxation Flow
 
 ![Bellman-Ford Algorithm Execution & Cycle Detection Flow](diagrams/ch11-14-bellman-ford-relaxation-flow.svg)
 
@@ -915,7 +915,7 @@ Arrow-guided update for intermediate vertex $k=2$:
 
 The shortest path from 1 to 3 is updated from **6** to **4** through vertex 2.
 
-### Mermaid Diagram: Floyd-Warshall Detour Update
+### Visual Map: Floyd-Warshall Detour Update
 
 ![Floyd-Warshall Detour Relaxation Principle](diagrams/ch11-15-floyd-warshall-detour.svg)
 
@@ -1241,7 +1241,7 @@ $$
 
 Every edge points left-to-right in this result: $A$ and $B$ occur before $C$; $C$ occurs before $D$ and $E$; and both $D$ and $E$ occur before $F$. Since $D$ and $E$ are independent after $C$, exchanging them gives another valid order, such as $B,A,C,D,E,F$.
 
-### Mermaid Diagram: DFS Finish-Time Idea
+### Visual Map: DFS Finish-Time Idea
 
 ![DFS Finishing Time Algorithm for Topological Sort & SCC](diagrams/ch11-18-dfs-finish-time-flow.svg)
 
@@ -1405,7 +1405,7 @@ CONNECTED-COMPONENTS-BFS(G)
 14.                    enqueue v
 ```
 
-### Mermaid Diagram: Component Discovery
+### Visual Map: Component Discovery
 
 ![Connected Components Discovery Procedure](diagrams/ch11-20-component-discovery-flow.svg)
 
@@ -1516,7 +1516,7 @@ $$
 \boxed{\{0, 2, 1\},\ \{3\},\ \{4, 6, 5\},\ \{7\}}
 $$
 
-### Mermaid Diagram: Kosaraju Three-Step Flow
+### Visual Map: Kosaraju Three-Step Flow
 
 ![Kosaraju's Two-Pass Algorithm Flowchart](diagrams/ch11-23-kosaraju-three-step-flow.svg)
 
@@ -1753,7 +1753,7 @@ T=\{V_1V_5,V_4V_7,V_3V_6,V_1V_2,V_4V_5,V_7V_8,V_8V_6\}
 $$
 
 $$
-w(T)=2+2+2+3+3+4+6=\\boxed{22}
+w(T)=2+2+2+3+3+4+6=\boxed{22}
 $$
 
 #### Lecture worked example: sort, test, and accept
@@ -2023,15 +2023,15 @@ The rejected edge A-C has the highest weight among the cycle's edges, so skippin
 
 #### DSU and Kruskal complexity
 
-With path compression and union by size/rank, a sequence of operations has near-constant **amortized** cost per operation, conventionally written using the inverse Ackermann function $\\alpha(V)$:
+With path compression and union by size/rank, a sequence of operations has near-constant **amortized** cost per operation, conventionally written using the inverse Ackermann function $\alpha(V)$:
 
 | Operation / workload | Complexity |
 | :--- | :---: |
-| `MAKE-SET` per element | $\\Theta(1)$ |
-| `FIND`, `UNION` | $O(\\alpha(V))$ amortized |
+| `MAKE-SET` per element | $\Theta(1)$ |
+| `FIND`, `UNION` | $O(\alpha(V))$ amortized |
 | Basic cycle detection without balancing/compression | $O(EV)$ worst case |
-| Cycle detection with optimized DSU | $O((V+E)\\alpha(V))$ |
-| Kruskal, including edge sorting | $O(E\\log E + E\\alpha(V)) = O(E\\log E)$ |
+| Cycle detection with optimized DSU | $O((V+E)\alpha(V))$ |
+| Kruskal, including edge sorting | $O(E\log E + E\alpha(V)) = O(E\log E)$ |
 
 Here $V$ and $E$ are the graph's vertex and edge counts. The inverse Ackermann function grows so slowly that it is at most a small constant for all practical input sizes; the complexity remains amortized rather than a strict constant bound for every individual operation.
 
