@@ -8,7 +8,7 @@
 - **Weekly Class Hours:** 3 hours + 3 hours
 - **Course Type:** Theory + Sessional
 - **Primary Reference:** Introduction to Algorithms, 4th Edition by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
-- **Primary Implementation Language:** Python
+- **Primary Implementation Language:** C / C++ (C++17 for Sessional Lab) and Python
 
 ---
 
@@ -31,7 +31,7 @@ The objectives of this course are to help students:
 3. Solve recurrence relations.
 4. Prove algorithm correctness using loop invariants and induction.
 5. Apply major algorithm design paradigms.
-6. Implement common algorithms using Python.
+6. Implement common algorithms using C++ and Python.
 7. Solve searching, sorting, graph, and optimization problems.
 8. Understand lower bound theory and computational complexity.
 9. Identify NP-hard and NP-complete problems.
@@ -510,7 +510,7 @@ Each lab solution should include:
 1. Problem statement
 2. Theory
 3. Algorithm or recurrence relation
-4. C implementation
+4. C / C++ implementation
 5. Sample input
 6. Sample output
 7. Dry run
@@ -530,7 +530,7 @@ After completing this course, students should be able to:
 - Solve recurrence relations.
 - Prove algorithm correctness using loop invariants.
 - Apply divide-and-conquer, greedy, dynamic programming, backtracking, and branch-and-bound techniques.
-- Implement core algorithms using C.
+- Implement core algorithms using C / C++ (C++17).
 - Solve graph traversal, shortest path, spanning tree, and flow problems.
 - Understand randomized, parallel, and approximation algorithms.
 - Explain lower bound theory.

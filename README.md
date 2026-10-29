@@ -4,7 +4,7 @@
   <a href="https://github.com/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional"><img src="https://img.shields.io/github/stars/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional?style=social" alt="GitHub stars"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/language-Python%20%7C%20C%2B%2B-blue" alt="Languages">
-  <img src="https://img.shields.io/badge/diagrams-200%20Excalidraw%20SVGs-ff69b4" alt="Diagrams">
+  <img src="https://img.shields.io/badge/diagrams-204%20Excalidraw%20SVGs-ff69b4" alt="Diagrams">
   <img src="https://img.shields.io/badge/chapters-16%20%2B%20references-success" alt="Chapters">
   <img src="https://img.shields.io/badge/book-CLRS%204th%20Ed.-orange" alt="Primary reference">
 </p>
@@ -59,7 +59,7 @@
 ## 🎯 Repository Goals
 
 - 📚 **Syllabus-faithful notes** — 16 content chapters (Ch 0 – Ch 15) ordered exactly as the CSE 2201 syllabus, not the textbook order.
-- 🎨 **200 hand-drawn diagrams** — every diagram is an editable `.excalidraw` + exported `.svg` that renders directly in the READMEs.
+- 🎨 **204 hand-drawn diagrams** — every diagram is an editable `.excalidraw` + exported `.svg` that renders directly in the READMEs.
 - 📝 **Plain-words explanations** — definitions, step-by-step algorithms, pseudocode, dry-run tables, and a memory trick per answer.
 - ⏱️ **Complexity done right** — best / average / worst case, Big-O / Ω / Θ, recurrence solving, and master-theorem walkthroughs.
 - 🧪 **Solved previous-year papers** — 1st Batch (2023 final, 27 parts), 2nd Batch, 3rd Batch CT 1–4 (80 marks total) with source-faithful transcription.
@@ -75,7 +75,7 @@
 | Content chapters | **16** (Chapter 0 – Chapter 15) + References |
 | Chapter READMEs | **16** — every chapter has a full README with TOC |
 | Total Markdown files | **~40** (chapter READMEs + batch READMEs + diagram indexes) |
-| Hand-drawn SVGs | **200** (each paired with an `.excalidraw` source → **400** diagram files) |
+| Hand-drawn SVGs | **204** (each paired with an `.excalidraw` source → **408** diagram files) |
 | Largest chapter | **Ch 11 — Graph Algorithms** (35 SVGs, 2 114-line README) |
 | Code examples | **13** `.cpp` files (Ch 6 + Lab Practice) + Python pseudocode throughout |
 | Batch question banks | **3 batches** + Lab Practice |
@@ -137,7 +137,7 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 │   │   └── Lab Final/README.md
 │   ├── 2nd Batch/
 │   │   ├── Theory/README.md
-│   │   │   └── diagrams/              # 11+ SVGs (b2-theory-01 …)
+│   │   │   └── diagrams/              # 25 SVGs (b2-theory-01 … b2-theory-25)
 │   │   └── Lab Final/README.md
 │   ├── 3rd Batch/
 │   │   └── CT/
@@ -163,7 +163,7 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 │   └── diagrams/  (8 SVGs) — BFS/DFS graphs, queue/stack, walkthroughs
 ├── Chapter 5 - Sorting Algorithms/
 │   ├── README.md  (647 lines)
-│   └── diagrams/  (16 SVGs) — bubble, selection, insertion, merge, quick, heap, counting
+│   └── diagrams/  (18 SVGs) — bubble, selection, insertion, merge, quick, heap, counting
 ├── Chapter 6 - Divide and Conquer/
 │   ├── README.md  (412 lines)
 │   ├── diagrams/  (4 SVGs)
@@ -178,7 +178,7 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 │   └── diagrams/  (17 SVGs) — climbing stairs, knapsack, rod cutting, LCS, MCM, OBST, multistage, TSP, reliability
 ├── Chapter 9 - Backtracking/
 │   ├── README.md  (261 lines)
-│   └── diagrams/  (4 SVGs) — state-space tree, 4-Queens, safe check
+│   └── diagrams/  (5 SVGs) — state-space tree, 4-Queens, safe check, graph colouring
 ├── Chapter 10 - Branch and Bound/
 │   ├── README.md  (335 lines)
 │   └── diagrams/  (5 SVGs) — LC-search, knapsack, job sequencing, TSP
