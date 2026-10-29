@@ -4,7 +4,7 @@
   "source": "https://excalidraw.com",
   "elements": [
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-title",
+      "id": "ch11-37-kruskal-dsu-state-trace-title",
       "type": "text",
       "x": 24,
       "y": 16,
@@ -40,7 +40,7 @@
       "baseline": 20
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-c0",
+      "id": "ch11-37-kruskal-dsu-state-trace-c0",
       "type": "rectangle",
       "x": 35,
       "y": 75,
@@ -69,7 +69,7 @@
       "locked": false
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-ct0",
+      "id": "ch11-37-kruskal-dsu-state-trace-ct0",
       "type": "text",
       "x": 47,
       "y": 83,
@@ -100,12 +100,12 @@
       "fontFamily": 1,
       "textAlign": "left",
       "verticalAlign": "top",
-      "containerId": "ch11-36-kruskal-dsu-state-trace-c0",
+      "containerId": "ch11-37-kruskal-dsu-state-trace-c0",
       "lineHeight": 1.25,
       "baseline": 14
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-n0",
+      "id": "ch11-37-kruskal-dsu-state-trace-n0",
       "type": "rectangle",
       "x": 55,
       "y": 88,
@@ -131,7 +131,7 @@
       "boundElements": [
         {
           "type": "text",
-          "id": "ch11-36-kruskal-dsu-state-trace-t0"
+          "id": "ch11-37-kruskal-dsu-state-trace-t0"
         }
       ],
       "updated": 1,
@@ -139,7 +139,7 @@
       "locked": false
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-t0",
+      "id": "ch11-37-kruskal-dsu-state-trace-t0",
       "type": "text",
       "x": 61,
       "y": 104.0,
@@ -170,12 +170,12 @@
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
-      "containerId": "ch11-36-kruskal-dsu-state-trace-n0",
+      "containerId": "ch11-37-kruskal-dsu-state-trace-n0",
       "lineHeight": 1.25,
       "baseline": 13
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-n1",
+      "id": "ch11-37-kruskal-dsu-state-trace-n1",
       "type": "rectangle",
       "x": 60,
       "y": 175,
@@ -201,7 +201,7 @@
       "boundElements": [
         {
           "type": "text",
-          "id": "ch11-36-kruskal-dsu-state-trace-t1"
+          "id": "ch11-37-kruskal-dsu-state-trace-t1"
         }
       ],
       "updated": 1,
@@ -209,7 +209,7 @@
       "locked": false
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-t1",
+      "id": "ch11-37-kruskal-dsu-state-trace-t1",
       "type": "text",
       "x": 66,
       "y": 219.0,
@@ -240,12 +240,12 @@
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
-      "containerId": "ch11-36-kruskal-dsu-state-trace-n1",
+      "containerId": "ch11-37-kruskal-dsu-state-trace-n1",
       "lineHeight": 1.25,
       "baseline": 12
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-n2",
+      "id": "ch11-37-kruskal-dsu-state-trace-n2",
       "type": "rectangle",
       "x": 60,
       "y": 295,
@@ -271,7 +271,7 @@
       "boundElements": [
         {
           "type": "text",
-          "id": "ch11-36-kruskal-dsu-state-trace-t2"
+          "id": "ch11-37-kruskal-dsu-state-trace-t2"
         }
       ],
       "updated": 1,
@@ -279,7 +279,7 @@
       "locked": false
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-t2",
+      "id": "ch11-37-kruskal-dsu-state-trace-t2",
       "type": "text",
       "x": 66,
       "y": 339.0,
@@ -310,12 +310,12 @@
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
-      "containerId": "ch11-36-kruskal-dsu-state-trace-n2",
+      "containerId": "ch11-37-kruskal-dsu-state-trace-n2",
       "lineHeight": 1.25,
       "baseline": 12
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-n3",
+      "id": "ch11-37-kruskal-dsu-state-trace-n3",
       "type": "rectangle",
       "x": 60,
       "y": 415,
@@ -341,7 +341,7 @@
       "boundElements": [
         {
           "type": "text",
-          "id": "ch11-36-kruskal-dsu-state-trace-t3"
+          "id": "ch11-37-kruskal-dsu-state-trace-t3"
         }
       ],
       "updated": 1,
@@ -349,7 +349,7 @@
       "locked": false
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-t3",
+      "id": "ch11-37-kruskal-dsu-state-trace-t3",
       "type": "text",
       "x": 66,
       "y": 459.0,
@@ -380,12 +380,12 @@
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
-      "containerId": "ch11-36-kruskal-dsu-state-trace-n3",
+      "containerId": "ch11-37-kruskal-dsu-state-trace-n3",
       "lineHeight": 1.25,
       "baseline": 12
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-n4",
+      "id": "ch11-37-kruskal-dsu-state-trace-n4",
       "type": "rectangle",
       "x": 60,
       "y": 535,
@@ -411,7 +411,7 @@
       "boundElements": [
         {
           "type": "text",
-          "id": "ch11-36-kruskal-dsu-state-trace-t4"
+          "id": "ch11-37-kruskal-dsu-state-trace-t4"
         }
       ],
       "updated": 1,
@@ -419,7 +419,7 @@
       "locked": false
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-t4",
+      "id": "ch11-37-kruskal-dsu-state-trace-t4",
       "type": "text",
       "x": 66,
       "y": 579.0,
@@ -450,12 +450,12 @@
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
-      "containerId": "ch11-36-kruskal-dsu-state-trace-n4",
+      "containerId": "ch11-37-kruskal-dsu-state-trace-n4",
       "lineHeight": 1.25,
       "baseline": 12
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-n5",
+      "id": "ch11-37-kruskal-dsu-state-trace-n5",
       "type": "rectangle",
       "x": 60,
       "y": 655,
@@ -481,7 +481,7 @@
       "boundElements": [
         {
           "type": "text",
-          "id": "ch11-36-kruskal-dsu-state-trace-t5"
+          "id": "ch11-37-kruskal-dsu-state-trace-t5"
         }
       ],
       "updated": 1,
@@ -489,7 +489,7 @@
       "locked": false
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-t5",
+      "id": "ch11-37-kruskal-dsu-state-trace-t5",
       "type": "text",
       "x": 66,
       "y": 699.0,
@@ -520,12 +520,12 @@
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
-      "containerId": "ch11-36-kruskal-dsu-state-trace-n5",
+      "containerId": "ch11-37-kruskal-dsu-state-trace-n5",
       "lineHeight": 1.25,
       "baseline": 12
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-n6",
+      "id": "ch11-37-kruskal-dsu-state-trace-n6",
       "type": "rectangle",
       "x": 280,
       "y": 785,
@@ -551,7 +551,7 @@
       "boundElements": [
         {
           "type": "text",
-          "id": "ch11-36-kruskal-dsu-state-trace-t6"
+          "id": "ch11-37-kruskal-dsu-state-trace-t6"
         }
       ],
       "updated": 1,
@@ -559,7 +559,7 @@
       "locked": false
     },
     {
-      "id": "ch11-36-kruskal-dsu-state-trace-t6",
+      "id": "ch11-37-kruskal-dsu-state-trace-t6",
       "type": "text",
       "x": 286,
       "y": 811.0,
@@ -590,7 +590,7 @@
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
-      "containerId": "ch11-36-kruskal-dsu-state-trace-n6",
+      "containerId": "ch11-37-kruskal-dsu-state-trace-n6",
       "lineHeight": 1.25,
       "baseline": 14
     }
