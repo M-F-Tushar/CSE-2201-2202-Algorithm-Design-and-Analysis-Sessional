@@ -158,16 +158,14 @@ Problems in class P are considered **tractable** (efficiently solvable) because 
 - Considered computationally feasible.
 - Every problem in $P$ is also in $NP$: $P \subseteq NP$.
 
-| Problem | Best Known Time Complexity |
-| :--- | :---: |
-| Binary Search | $O(\log n)$ |
-| Merge Sort | $O(n\log n)$ |
-| Heap Sort | $O(n\log n)$ |
-| Breadth First Search (BFS) | $O(V+E)$ |
-| Depth First Search (DFS) | $O(V+E)$ |
-| Dijkstra's Algorithm | $O((V+E)\log V)$ |
-| Minimum Spanning Tree (Kruskal/Prim) | Polynomial |
-| Matrix Multiplication | Polynomial |
+| Decision Problem in $\text{P}$ | Decision Question (YES / NO) | Deciding Algorithm | Time Complexity |
+| :--- | :--- | :--- | :---: |
+| **Element Membership** | Does element $x$ exist in sorted array $A$? | Binary Search | $O(\log n)$ |
+| **Relative Order / Sorting** | Is element $A[i]$ in sorted position $\le k$? | Merge Sort / Heap Sort | $O(n\log n)$ |
+| **$s\text{–}t$ Reachability** | Is vertex $t$ reachable from vertex $s$ in graph $G$? | BFS / DFS | $O(V+E)$ |
+| **Shortest-Path Bound** | Is the shortest-path distance from $s$ to $t \le k$? | Dijkstra's Algorithm | $O((V+E)\log V)$ |
+| **MST Weight Bound** | Does graph $G$ have a spanning tree of total weight $\le k$? | Kruskal's / Prim's Algorithm | $O(E\log V)$ |
+| **Bipartiteness (2-Colorability)** | Can graph $G$ be 2-colored without adjacent conflicts? | BFS 2-coloring | $O(V+E)$ |
 
 This is the standard definition used in textbooks such as Sipser's *Introduction to the Theory of Computation* and Garey & Johnson's *Computers and Intractability*.
 
