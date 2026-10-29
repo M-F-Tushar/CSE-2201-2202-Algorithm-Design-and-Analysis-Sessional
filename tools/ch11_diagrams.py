@@ -921,7 +921,7 @@ kruskal_lecture_example = D(
     size=(1320, 560),
     flow="H",
     containers=[
-        N("graph_panel", "Five-vertex input graph: green edges are selected", 25, 95, 470, 390, "container"),
+        N("graph_panel", "Green = selected; red = cycle; gray = not scanned", 25, 95, 470, 390, "container"),
         N("trace_panel", "Process edge tuples in nondecreasing weight order", 535, 95, 760, 390, "container"),
     ],
     nodes=[
@@ -935,7 +935,7 @@ kruskal_lecture_example = D(
         N("row3", "3   (3, 4, 2)    ACCEPT", 570, 225, 690, 42, "green", size=14),
         N("row4", "4   (1, 3, 2)    SKIP: cycle", 570, 275, 690, 42, "red", size=14),
         N("row5", "5   (2, 3, 3)    ACCEPT", 570, 325, 690, 42, "green", size=14),
-        N("row6", "6   (0, 2, 5)    SKIP: cycle", 570, 375, 690, 42, "red", size=14),
+        N("row6", "6   (0, 2, 5)    NOT CHECKED: MST complete", 570, 375, 690, 42, "gray", size=14),
         N("mst_result", "MST: 4 edges; total weight = 7", 650, 435, 530, 40, "teal", size=15, bold=True),
     ],
     edges=[
@@ -944,9 +944,9 @@ kruskal_lecture_example = D(
         E("v3", "v4", "2", route="straight", color="#2f9e44"),
         E("v1", "v3", "2", route="straight", color="#e03131", dashed=True),
         E("v2", "v3", "3", route="straight", color="#2f9e44"),
-        E("v0", "v2", "5", route="straight", color="#e03131", dashed=True),
+        E("v0", "v2", "5", route="straight", color="#868e96", dashed=True),
     ],
-    caption="The same-root test rejects edges 4 and 6; accepted edges form a minimum spanning tree",
+    caption="Reject edge 4 as a cycle, then stop after four edges connect all five vertices",
 )
 
 # 35 ---------------------------------------------------- union by rank
@@ -1049,6 +1049,35 @@ kahns_algorithm_trace = D(
     caption="Kahn's BFS-based algorithm repeatedly removes in-degree 0 sources, decrements neighbor in-degrees, and appends to topological order",
 )
 
+# 37 ---------------------------------------------------- lecture DSU state trace
+
+kruskal_dsu_state_trace = D(
+    key="ch11-37-kruskal-dsu-state-trace",
+    title="Kruskal Lecture Example: Disjoint-Set State After Each Edge",
+    size=(1440, 900),
+    flow="V",
+    containers=[
+        N("sorted_panel", "Initialize one set per vertex, then scan by increasing weight", 35, 75, 1370, 76, "container"),
+    ],
+    nodes=[
+        N("sorted", "Vertices: {0,1,2,3,4}; parent [0,1,2,3,4]; rank [0,0,0,0,0]\nSorted edges: (1,4,1), (0,1,1), (3,4,2), (1,3,2), (2,3,3), (0,2,5)",
+          55, 88, 1330, 52, "yellow", size=13),
+        N("state1", "1 | edge (1,4), weight 1 | FIND roots: 1 and 4\nACCEPT: equal ranks; attach 4 below 1; raise rank[1]\nSets: {0} | {1,4} | {2} | {3}\nparent [0,1,2,3,1] | rank [0,1,0,0,0]\nMST so far: 1 edge | total weight: 1",
+          60, 175, 1320, 108, "green", size=12),
+        N("state2", "2 | edge (0,1), weight 1 | FIND roots: 0 and 1\nACCEPT: attach lower-rank root 0 below 1\nSets: {0,1,4} | {2} | {3}\nparent [1,1,2,3,1] | rank [0,1,0,0,0]\nMST so far: 2 edges | total weight: 2",
+          60, 295, 1320, 108, "green", size=12),
+        N("state3", "3 | edge (3,4), weight 2 | FIND roots: 3 and 1\nACCEPT: attach lower-rank root 3 below 1\nSets: {0,1,3,4} | {2}\nparent [1,1,2,1,1] | rank [0,1,0,0,0]\nMST so far: 3 edges | total weight: 4",
+          60, 415, 1320, 108, "green", size=12),
+        N("state4", "4 | edge (1,3), weight 2 | FIND roots: 1 and 1\nSKIP: same root; adding this edge would make a cycle\nSets unchanged: {0,1,3,4} | {2}\nparent [1,1,2,1,1] | rank [0,1,0,0,0]\nMST so far: 3 edges | total weight: 4",
+          60, 535, 1320, 108, "red", size=12),
+        N("state5", "5 | edge (2,3), weight 3 | FIND roots: 2 and 1\nACCEPT: attach lower-rank root 2 below 1; all vertices connect\nSets: {0,1,2,3,4}\nparent [1,1,1,1,1] | rank [0,1,0,0,0]\nMST so far: 4 edges | total weight: 7",
+          60, 655, 1320, 108, "green", size=12),
+        N("stop", "STOP: 4 accepted edges = 5 vertices - 1. Edge (0,2,5) is not checked.\nMST edges: (1,4), (0,1), (3,4), (2,3) | total weight = 7",
+          280, 785, 880, 72, "teal", size=14, bold=True),
+    ],
+    caption="Each accepted edge merges distinct DSU sets; the same-root edge is skipped, then the run stops at V - 1 edges",
+)
+
 DIAGRAMS = [
     graph_roadmap,
     tree_vs_graph,
@@ -1086,4 +1115,5 @@ DIAGRAMS = [
     kruskal_lecture_example,
     union_by_rank,
     kahns_algorithm_trace,
+    kruskal_dsu_state_trace,
 ]
