@@ -273,7 +273,7 @@ Both methods compute the same answer. Memoization follows the needed calls from 
 
 The following sections include only the requested Dynamic Programming problems.
 
-In the tabulation sections, arrows show **where the chosen value came from**. The exact meaning of an arrow depends on the recurrence of that problem, so each table includes its own arrow legend.
+For matrix-form tabulation, use a consistent layout: rows identify how many choices are available and include the current choice's input data; columns identify the target capacity or length; each cell stores the best value for that state. Arrows show the decision that produced a cell, and every table defines its own arrow legend. In 0/1 Knapsack, taking an item moves to the previous row; in Rod Cutting, reusing a piece stays in the same row.
 
 ---
 
@@ -492,13 +492,13 @@ Arrow legend for 0/1 Knapsack tables:
 - $\nwarrow$ means the item is taken and the value comes from the previous row at reduced capacity.
 - Base row and base column have no arrows because their values are fixed at 0.
 
-| Item row | $W=0$ | $W=1$ | $W=2$ | $W=3$ | $W=4$ | $W=5$ |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 1 | 0 | 0 ($\uparrow$) | 12 ($\nwarrow$) | 12 ($\nwarrow$) | 12 ($\nwarrow$) | 12 ($\nwarrow$) |
-| 2 | 0 | 10 ($\nwarrow$) | 12 ($\uparrow$) | 22 ($\nwarrow$) | 22 ($\nwarrow$) | 22 ($\nwarrow$) |
-| 3 | 0 | 10 ($\uparrow$) | 12 ($\uparrow$) | 22 ($\uparrow$) | 30 ($\nwarrow$) | 32 ($\nwarrow$) |
-| 4 | 0 | 10 ($\uparrow$) | 15 ($\nwarrow$) | 25 ($\nwarrow$) | 30 ($\uparrow$) | **37** ($\nwarrow$) |
+| Item $i$ | Weight $w_i$ | Value $v_i$ | $W=0$ | $W=1$ | $W=2$ | $W=3$ | $W=4$ | $W=5$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 0 | - | - | 0 | 0 | 0 | 0 | 0 | 0 |
+| 1 | 2 | 12 | 0 | 0 ($\uparrow$) | 12 ($\nwarrow$) | 12 ($\nwarrow$) | 12 ($\nwarrow$) | 12 ($\nwarrow$) |
+| 2 | 1 | 10 | 0 | 10 ($\nwarrow$) | 12 ($\uparrow$) | 22 ($\nwarrow$) | 22 ($\nwarrow$) | 22 ($\nwarrow$) |
+| 3 | 3 | 20 | 0 | 10 ($\uparrow$) | 12 ($\uparrow$) | 22 ($\uparrow$) | 30 ($\nwarrow$) | 32 ($\nwarrow$) |
+| 4 | 2 | 15 | 0 | 10 ($\uparrow$) | 15 ($\nwarrow$) | 25 ($\nwarrow$) | 30 ($\uparrow$) | **37** ($\nwarrow$) |
 
 Key calculations:
 
@@ -621,7 +621,12 @@ Let $T[i,j]$ be the maximum revenue using cut lengths up to $i$ for a rod of len
 - **Include length $i$:** revenue is $p_i + T[i,j-i]$ if $j \ge i$.
 
 $$
-T[i,j] = \max(T[i-1,j],\ p_i + T[i,j-i]) \quad \text{for } j \ge i
+T[i,j] =
+\begin{cases}
+0, & i=0 \text{ or } j=0 \\
+T[i-1,j], & 0 < j < i \\
+\max(T[i-1,j],\ p_i + T[i,j-i]), & j \ge i
+\end{cases}
 $$
 
 Base cases:
@@ -636,31 +641,28 @@ $$
 
 * **Lengths ($L_i$):** 1, 2, 3, 4, 5
 
-
 * **Prices ($P_i$):** 1, 5, 8, 9, 10
-
 
 * **Total Rod Length ($N$):** 5
 
-
+Rows identify the cut lengths currently allowed and show that length's price; columns are target rod lengths. Ties are assigned to skipping the current length, so traceback is consistent.
 
 ---
 
 ### Tabulation Matrix (Unbounded Knapsack Format)
 
-* **$\uparrow$**: Value taken from the row directly above (length $i$ is not chosen: $dp[i-1][j]$).
+- $\uparrow$ means the current cut length is skipped and the value comes from the row above.
+- $\leftarrow_i$ means cut length $i$ is used and the value comes from the same row at remaining length $L-i$; this permits reusing that length.
+- The base row and length-zero column have no arrows because their values are fixed at 0.
 
-
-* **$\nwarrow$**: Value formed by taking piece of length $i$ with price $P_i$ (points back to the remaining capacity in the same row: $P_i + dp[i][j - L_i]$).
-
-| Cut ($i$) | Length | Price | $L = 0$ | $L = 1$ | $L = 2$ | $L = 3$ | $L = 4$ | $L = 5$ |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **0** | - | - | 0 | 0 | 0 | 0 | 0 | 0 |
-| **1** | 1 | 1 | 0 | 1 ($\nwarrow$) | 2 ($\nwarrow$) | 3 ($\nwarrow$) | 4 ($\nwarrow$) | 5 ($\nwarrow$) |
-| **2** | 2 | 5 | 0 | 1 ($\uparrow$) | 5 ($\nwarrow$) | 6 ($\nwarrow$) | 10 ($\nwarrow$) | 11 ($\nwarrow$) |
-| **3** | 3 | 8 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\nwarrow$) | 10 ($\uparrow$) | 13 ($\nwarrow$) |
-| **4** | 4 | 9 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) | 13 ($\uparrow$) |
-| **5** | 5 | 10 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) | 13 ($\uparrow$) |
+| Cut $i$ | Length $i$ | Price $p_i$ | $L=0$ | $L=1$ | $L=2$ | $L=3$ | $L=4$ | $L=5$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 0 | - | - | 0 | 0 | 0 | 0 | 0 | 0 |
+| 1 | 1 | 1 | 0 | 1 ($\leftarrow_1$) | 2 ($\leftarrow_1$) | 3 ($\leftarrow_1$) | 4 ($\leftarrow_1$) | 5 ($\leftarrow_1$) |
+| 2 | 2 | 5 | 0 | 1 ($\uparrow$) | 5 ($\leftarrow_2$) | 6 ($\leftarrow_2$) | 10 ($\leftarrow_2$) | 11 ($\leftarrow_2$) |
+| 3 | 3 | 8 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\leftarrow_3$) | 10 ($\uparrow$) | **13** ($\leftarrow_3$) |
+| 4 | 4 | 9 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) | 13 ($\uparrow$) |
+| 5 | 5 | 10 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) | 13 ($\uparrow$) |
 
 Key calculations:
 
@@ -731,32 +733,51 @@ $$
 
 This considers every possible first-cut length. By optimal substructure, the remaining rod must be cut for maximum revenue; otherwise replacing its cuts with a better solution would improve the whole solution.
 
-| Rod length $j$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Best revenue $R(j)$ | 0 | 1 | 5 | 8 | 10 | 13 | 17 | 18 | **22** |
-| One first cut | - | 1 | 2 | 3 | 2 | 2 | 6 | 1 | 2 |
+For tabulation, use the same matrix layout as 0/1 Knapsack: each row adds one allowed cut length, each column is a target rod length, and each cell stores the maximum revenue. The matrix recurrence is the $T[i,j]$ recurrence defined above. As in the previous table, ties are assigned to skipping the current length.
 
-For the final entry:
+Arrow legend:
+
+- $\uparrow$ means skip length $i$ and copy the value from the row above.
+- $\leftarrow_i$ means use a piece of length $i$ and continue in the same row at length $j-i$, allowing that piece length to be reused.
+- The base row and length-zero column contain fixed zeros and have no arrows.
+
+| Cut $i$ | Length $i$ | Price $p_i$ | $L=0$ | $L=1$ | $L=2$ | $L=3$ | $L=4$ | $L=5$ | $L=6$ | $L=7$ | $L=8$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 0 | - | - | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 1 | 1 | 1 | 0 | 1 ($\leftarrow_1$) | 2 ($\leftarrow_1$) | 3 ($\leftarrow_1$) | 4 ($\leftarrow_1$) | 5 ($\leftarrow_1$) | 6 ($\leftarrow_1$) | 7 ($\leftarrow_1$) | 8 ($\leftarrow_1$) |
+| 2 | 2 | 5 | 0 | 1 ($\uparrow$) | 5 ($\leftarrow_2$) | 6 ($\leftarrow_2$) | 10 ($\leftarrow_2$) | 11 ($\leftarrow_2$) | 15 ($\leftarrow_2$) | 16 ($\leftarrow_2$) | 20 ($\leftarrow_2$) |
+| 3 | 3 | 8 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\leftarrow_3$) | 10 ($\uparrow$) | 13 ($\leftarrow_3$) | 16 ($\leftarrow_3$) | 18 ($\leftarrow_3$) | 21 ($\leftarrow_3$) |
+| 4 | 4 | 9 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) | 13 ($\uparrow$) | 16 ($\uparrow$) | 18 ($\uparrow$) | 21 ($\uparrow$) |
+| 5 | 5 | 10 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) | 13 ($\uparrow$) | 16 ($\uparrow$) | 18 ($\uparrow$) | 21 ($\uparrow$) |
+| 6 | 6 | 17 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) | 13 ($\uparrow$) | 17 ($\leftarrow_6$) | 18 ($\uparrow$) | **22** ($\leftarrow_6$) |
+| 7 | 7 | 17 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) | 13 ($\uparrow$) | 17 ($\uparrow$) | 18 ($\uparrow$) | 22 ($\uparrow$) |
+| 8 | 8 | 20 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) | 13 ($\uparrow$) | 17 ($\uparrow$) | 18 ($\uparrow$) | 22 ($\uparrow$) |
+
+For the final cell, the first-piece recurrence gives the same check:
 
 $$
 R(8) = \max(1+R(7),\ 5+R(6),\ 8+R(5),\ldots,\ 20+R(0)) = \max(19,22,21,\ldots,20)=22
 $$
 
-The first cut is length 2, leaving length 6. Since $R(6)=17$ is obtained by selling the length-6 piece, one optimal cutting is **2 and 6**, with maximum revenue **22**.
+**Traceback:** Start at $T[8,8]=22$. The arrows move up through rows 8 and 7, so lengths 8 and 7 are skipped. At $T[6,8]$, take a length-6 piece and move to $T[6,2]$. Continue upward at length 2 until $T[2,2]$, where a length-2 piece is taken. Thus one optimal cutting is **6 and 2**, with maximum revenue **22**.
 
 ```text
-ROD-CUTTING-REVENUE(price, n)
-1. create array revenue[0...n]
-2. revenue[0] = 0
-3. for length = 1 to n:
-4.     revenue[length] = 0
-5.     for firstCut = 1 to length:
-6.         revenue[length] = max(revenue[length], price[firstCut] + revenue[length - firstCut])
-7. return revenue[n]
+ROD-CUTTING-TABLE(price, n)
+1. create table T[0...n][0...n]
+2. set T[i][0] = 0 for i = 0 to n
+3. set T[0][L] = 0 for L = 0 to n
+4. for i = 1 to n:
+5.     for L = 1 to n:
+6.         if i <= L:
+7.             T[i][L] = max(T[i - 1][L], price[i] + T[i][L - i])
+8.         else:
+9.             T[i][L] = T[i - 1][L]
+10. return T[n][n]
 ```
 
 - Time Complexity: $\Theta(n^2)$
-- Space Complexity: $\Theta(n)$
+- Space Complexity: $\Theta(n^2)$ for this matrix tabulation
+- One-dimensional version: $\Theta(n)$ space
 
 #### Classroom Problem: Matrix Tabular Format (Unbounded Pieces)
 
@@ -769,16 +790,18 @@ ROD-CUTTING-REVENUE(price, n)
 Since a piece length may be reused any number of times, the recurrence differs from 0/1 Knapsack by reusing the *same* row when a piece is taken (matching the `ROD-CUTTING` algorithm above):
 
 $$
-T[i][j] = \max(T[i-1][j],\ p_i + T[i][j-i]), \qquad j \ge i
+T[i,j] = \max(T[i-1,j],\ p_i + T[i,j-i]), \qquad j \ge i
 $$
 
-| $i \backslash j$ | 0 | 1 | 2 | 3 | 4 | 5 |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 1 ($p_1=2$) | 0 | 2 | 4 | 6 | 8 | 10 |
-| 2 ($p_2=3$) | 0 | 2 | 4 | 6 | 8 | 10 |
-| 3 ($p_3=5$) | 0 | 2 | 4 | 6 | 8 | 10 |
-| 4 ($p_4=9$) | 0 | 2 | 4 | 6 | **9** | **11** |
+Rows identify the allowed cut lengths and include each length and price; columns are target rod lengths. $\uparrow$ means skip the current length and copy from the row above. $\leftarrow_i$ means use length $i$ and continue in the same row at length $j-i$. Ties are assigned to skipping the current length; the base row and length-zero column have no arrows.
+
+| Cut $i$ | Length $i$ | Price $p_i$ | $L=0$ | $L=1$ | $L=2$ | $L=3$ | $L=4$ | $L=5$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 0 | - | - | 0 | 0 | 0 | 0 | 0 | 0 |
+| 1 | 1 | 2 | 0 | 2 ($\leftarrow_1$) | 4 ($\leftarrow_1$) | 6 ($\leftarrow_1$) | 8 ($\leftarrow_1$) | 10 ($\leftarrow_1$) |
+| 2 | 2 | 3 | 0 | 2 ($\uparrow$) | 4 ($\uparrow$) | 6 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) |
+| 3 | 3 | 5 | 0 | 2 ($\uparrow$) | 4 ($\uparrow$) | 6 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) |
+| 4 | 4 | 9 | 0 | 2 ($\uparrow$) | 4 ($\uparrow$) | 6 ($\uparrow$) | **9** ($\leftarrow_4$) | **11** ($\leftarrow_4$) |
 
 Rows 1 through 3 stay identical to row 1: pieces of length 2 (value-per-length $1.5$) and length 3 (value-per-length $\approx 1.67$) are both worse than reusing length-1 pieces (value-per-length $2.0$), so they are never chosen. Only length 4 (value-per-length $2.25$) beats length 1, and it only has room to help once $j \ge 4$:
 
