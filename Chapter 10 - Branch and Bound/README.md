@@ -287,7 +287,7 @@ Expand 1→2 (bound 97). Only city 3 is left, so the tour is forced: 2 → 3 (bo
 
 **Pruning.** The incumbent is now 97. The remaining live nodes have bounds 97 (edge 0→3), 108 (edge 0→2) and 108 (edge 1→3). None is **strictly below** 97, so none can produce a cheaper tour, and all are pruned. (The node with bound 97 could at best tie, for example with the reverse tour $0 \to 3 \to 2 \to 1 \to 0$ of the same cost.)
 
-**Answer:** minimum tour cost **97**, tour $0 \to 1 \to 2 \to 3 \to 0$. This agrees with the dynamic-programming result of Chapter 8 for the same matrix.
+**Answer:** minimum tour cost **97**, tour $0 \to 1 \to 2 \to 3 \to 0$. This agrees with the dynamic-programming result of [2nd Batch Q8(c)](../Chapter%200%20-%20Previous%20Year%20Questions/2nd%20Batch/Theory/README.md#q8c) for the exact same matrix (and matches the general TSP dynamic-programming formulation in [Chapter 8](../Chapter%208%20-%20Dynamic%20Programming/README.md#travelling-salesman-problem-tsp)).
 
 ![TSP branch and bound tree with reduced-matrix lower bounds](diagrams/ch10-05-tsp-branch-and-bound.svg)
 
