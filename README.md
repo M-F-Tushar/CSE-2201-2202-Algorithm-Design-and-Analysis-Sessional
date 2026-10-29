@@ -153,19 +153,19 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 │   ├── README.md  (149 lines)
 │   └── diagrams/  (2 SVGs) — algorithm vs program, 5 properties
 ├── Chapter 2 - Complexity Analysis and Asymptotic Notation/
-│   ├── README.md  (344 lines)
+│   ├── README.md  (596 lines)
 │   └── diagrams/  (4 SVGs) — loop patterns, cases, bounds, complexity classes
 ├── Chapter 3 - Recurrences Correctness and Loop Invariants/
 │   ├── README.md  (184 lines)
 │   └── diagrams/  (2 SVGs) — recursion tree T(n)=T(n/2)+c, master-theorem flow
 ├── Chapter 4 - Searching and Basic Traversal/
-│   ├── README.md  (634 lines)
+│   ├── README.md  (635 lines)
 │   └── diagrams/  (8 SVGs) — BFS/DFS graphs, queue/stack, walkthroughs
 ├── Chapter 5 - Sorting Algorithms/
-│   ├── README.md  (554 lines)
+│   ├── README.md  (647 lines)
 │   └── diagrams/  (9 SVGs) — bubble, selection, insertion, merge, quick, heap, counting
 ├── Chapter 6 - Divide and Conquer/
-│   ├── README.md  (411 lines)
+│   ├── README.md  (412 lines)
 │   ├── diagrams/  (4 SVGs)
 │   └── examples/  (2 C++17 programs)
 │       ├── maximum_sum_subarray.cpp   # brute force / D&C / Kadane
@@ -180,7 +180,7 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 │   ├── README.md  (261 lines)
 │   └── diagrams/  (4 SVGs) — state-space tree, 4-Queens, safe check
 ├── Chapter 10 - Branch and Bound/
-│   ├── README.md  (334 lines)
+│   ├── README.md  (335 lines)
 │   └── diagrams/  (5 SVGs) — LC-search, knapsack, job sequencing, TSP
 ├── Chapter 11 - Graph Algorithms/
 │   ├── README.md  (2 114 lines)
@@ -189,13 +189,13 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 │   ├── README.md  (492 lines)
 │   └── diagrams/  (14 SVGs) — flow network, residual, Ford-Fulkerson foundations + 5-step trace + min cut + worst case, Edmonds-Karp, bipartite matching
 ├── Chapter 13 - Approximation Algorithms/
-│   ├── README.md  (245 lines)
+│   ├── README.md  (246 lines)
 │   └── diagrams/  (4 SVGs) — vertex cover, TSP & set cover approximations
 ├── Chapter 14 - Randomized and Parallel Algorithms/
-│   ├── README.md  (241 lines)
+│   ├── README.md  (243 lines)
 │   └── diagrams/  (5 SVGs) — randomized quicksort, selection, fork-join, parallel merge sort
 ├── Chapter 15 - Lower Bound Theory and NP Completeness/
-│   ├── README.md  (349 lines)
+│   ├── README.md  (350 lines)
 │   └── diagrams/  (5 SVGs) — decision tree, sorting lower bound, P/NP/NP-hard/NP-complete Venn
 │
 └── References/
@@ -249,9 +249,9 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 > 📊 2 diagrams · 📄 149 lines · 📂 [`Chapter 1/README.md`](Chapter%201%20-%20Introduction%20and%20Algorithm%20Foundations/README.md)
 
 ### Chapter 2 — Complexity Analysis and Asymptotic Notation
-> Reads time complexity straight from loop structure — linear, logarithmic, nested independent & dependent loops → input size, running time & space → best / average / worst case → formal Big-O (upper), Big-Omega (lower), Big-Theta (tight) with comparison table → growth of functions & common classes → algebra & summation simplification.
+> Reads time complexity straight from loop structure with 20 C++ exam loop patterns & recognition checklist → input size, running time & space → best / average / worst case → formal Big-O (upper), Big-Omega (lower), Big-Theta (tight) with comparison table → growth of functions & common classes → algebra & summation simplification.
 >
-> 📊 4 diagrams · 📄 344 lines · 📂 [`Chapter 2/README.md`](Chapter%202%20-%20Complexity%20Analysis%20and%20Asymptotic%20Notation/README.md)
+> 📊 4 diagrams · 📄 596 lines · 📂 [`Chapter 2/README.md`](Chapter%202%20-%20Complexity%20Analysis%20and%20Asymptotic%20Notation/README.md)
 
 ### Chapter 3 — Recurrences, Correctness and Loop Invariants
 > Builds recurrences from recursive code, solves **T(n) = T(n/2) + c** (binary search) by expansion / recursion-tree / substitution to **Θ(log n)**, introduces the general **T(n) = aT(n/b) + f(n)** form, states the **Master Theorem** with all three cases + watershed function, and works **T(n)=8T(n/2)+n² → Θ(n³)** and **T(n)=T(n/2)+c → Θ(log n)** end-to-end.
@@ -261,17 +261,17 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 ### Chapter 4 — Searching and Basic Traversal
 > Searching vs traversal → introductory graph traversal → **BFS** (idea, level-order, queue mechanics, walkthrough, complexity **O(V+E)**, applications) → **DFS** (recursive + explicit-stack versions, walkthrough, complexity, applications) → BFS vs DFS comparison table and recommended study sequence.
 >
-> 📊 8 diagrams · 📄 634 lines · 📂 [`Chapter 4/README.md`](Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md)
+> 📊 8 diagrams · 📄 635 lines · 📂 [`Chapter 4/README.md`](Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md)
 
 ### Chapter 5 — Sorting Algorithms
 > Plain-words intro (two ways to sort, how to choose) → **Bubble · Selection · Insertion · Merge · Quick (pivot choice & partitions) · Heap · Counting** — each with visual walkthrough, instructions, pseudocode, and tight complexity analysis (best/avg/worst, stability, in-place, lower bound). Ends with a head-to-head comparison table.
 >
-> 📊 9 diagrams · 📄 554 lines · 📂 [`Chapter 5/README.md`](Chapter%205%20-%20Sorting%20Algorithms/README.md)
+> 📊 9 diagrams · 📄 647 lines · 📂 [`Chapter 5/README.md`](Chapter%205%20-%20Sorting%20Algorithms/README.md)
 
 ### Chapter 6 — Divide and Conquer
 > Two applied threads: **(i)** Range sum & point update — Prefix Sums (O(1) query, O(n) update weakness) vs Segment Trees (O(log n) query & update, build/query/update dry runs); **(ii)** Maximum-sum subarray — Brute Force O(n²) → Divide & Conquer O(n log n) → Kadane's O(n) DP recurrence, full traces, edge cases & subarray recovery. Runnable **C++17** in [`examples/`](Chapter%206%20-%20Divide%20and%20Conquer/examples/).
 >
-> 📊 4 diagrams · 📄 411 lines · 💻 2 C++ programs · 📂 [`Chapter 6/README.md`](Chapter%206%20-%20Divide%20and%20Conquer/README.md)
+> 📊 4 diagrams · 📄 412 lines · 💻 2 C++ programs · 📂 [`Chapter 6/README.md`](Chapter%206%20-%20Divide%20and%20Conquer/README.md)
 
 ### Chapter 7 — Greedy Algorithms
 > Five-element greedy template (candidate, selection, feasibility, objective, solution) + correctness checklist (greedy-choice + optimal substructure) + MST pointer to Ch 11. **Problems:** Fractional Knapsack · Coin Change (with *when greedy fails* warning) · Fibonacci (iterative build, classification note) · Huffman Coding (5-symbol classroom merge → tree → codes → avg bit rate vs fixed-length) · Activity Selection (interval scheduling + correctness idea).
@@ -291,7 +291,7 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 ### Chapter 10 — Branch and Bound
 > Concept & contrast with backtracking → bounding & cost functions → FIFO / LIFO / LC-search → **0/1 Knapsack via LC-search** → Job Sequencing with Deadlines → TSP Branch & Bound — all with state-space trees and bound calculations.
 >
-> 📊 5 diagrams · 📄 334 lines · 📂 [`Chapter 10/README.md`](Chapter%2010%20-%20Branch%20and%20Bound/README.md)
+> 📊 5 diagrams · 📄 335 lines · 📂 [`Chapter 10/README.md`](Chapter%2010%20-%20Branch%20and%20Bound/README.md)
 
 ### Chapter 11 — Graph Algorithms
 > The largest chapter — a complete graph-algorithms studio: tree vs graph · categories (weighted/unweighted, directed/undirected, cyclic/acyclic) · adjacency **matrix vs list** & trade-offs · shortest-path decision map → **BFS** for unweighted **O(V+E)** → **Dijkstra** (relaxation, greedy finalization) on both undirected & directed worked graphs → **Bellman-Ford** (6-vertex graph, negative-cycle detection, relaxation flow) → **Floyd-Warshall** (detour idea, 4-vertex negative-edge classroom problem) → **Topological sort** (DAG, DFS finish-time + Kahn's optional) → **Connected Components** → **SCC** via Kosaraju (original → reversed → 3-step flow, Tarjan optional) → **Spanning trees & MST** (properties, shared worked graph, **Prim** & **Kruskal + DSU/Union-Find**).
@@ -306,17 +306,17 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 ### Chapter 13 — Approximation Algorithms
 > Why exact algorithms fail for NP-hard problems → approximation ratio & performance guarantee → **Vertex Cover (2-approx)** → **TSP approximation (metric, MST-based)** → **Set Cover (greedy log-approx)** and their relation to NP-hardness.
 >
-> 📊 4 diagrams · 📄 245 lines · 📂 [`Chapter 13/README.md`](Chapter%2013%20-%20Approximation%20Algorithms/README.md)
+> 📊 4 diagrams · 📄 246 lines · 📂 [`Chapter 13/README.md`](Chapter%2013%20-%20Approximation%20Algorithms/README.md)
 
 ### Chapter 14 — Randomized and Parallel Algorithms
 > **Randomized:** concept & probabilistic analysis → randomized quicksort (expected **O(n log n)**) → randomized selection (expected linear). **Parallel:** parallelism basics, work & span, fork-join model → parallel merge sort → parallel matrix multiplication overview.
 >
-> 📊 5 diagrams · 📄 241 lines · 📂 [`Chapter 14/README.md`](Chapter%2014%20-%20Randomized%20and%20Parallel%20Algorithms/README.md)
+> 📊 5 diagrams · 📄 243 lines · 📂 [`Chapter 14/README.md`](Chapter%2014%20-%20Randomized%20and%20Parallel%20Algorithms/README.md)
 
 ### Chapter 15 — Lower Bound Theory and NP Completeness
 > Lower-bound concept → **comparison-sorting lower bound Ω(n log n)** via decision-tree model & optimality → complexity classes: **P, NP, NP-hard, NP-complete**, decision vs optimization, polytime verification & reduction → catalog of classic NP-complete problems (SAT, clique, vertex cover, Hamiltonian cycle, TSP, subset-sum …) with relationships.
 >
-> 📊 5 diagrams · 📄 349 lines · 📂 [`Chapter 15/README.md`](Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md)
+> 📊 5 diagrams · 📄 350 lines · 📂 [`Chapter 15/README.md`](Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md)
 
 ---
 

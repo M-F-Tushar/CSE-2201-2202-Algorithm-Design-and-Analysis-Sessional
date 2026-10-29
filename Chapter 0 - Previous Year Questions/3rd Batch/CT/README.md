@@ -22,6 +22,31 @@ Dynamic programming, graph, and divide-and-conquer answers use the tables, notat
 
 ---
 
+## Table of Contents
+
+- [Class Test 1: Dynamic Programming](#class-test-1-dynamic-programming)
+  - [Q1. Principle of Optimality](#q1-principle-of-optimality)
+  - [Q2. Elements of Dynamic Programming: Fibonacci](#q2-elements-of-dynamic-programming-fibonacci)
+  - [Q3. Longest Common Subsequence](#q3-longest-common-subsequence)
+  - [Q4. 0/1 Knapsack by Dynamic Programming](#q4-01-knapsack-by-dynamic-programming)
+- [Class Test 2: Graph Algorithms](#class-test-2-graph-algorithms)
+  - [Q1. Topological Sort](#q1-topological-sort)
+  - [Q2. Bellman-Ford from S to T](#q2-bellman-ford-from-s-to-t)
+  - [Q3. Floyd-Warshall](#q3-floyd-warshall)
+- [Class Test 3: Union-Find, Maximum Subarray, and Segment Tree](#class-test-3-union-find-maximum-subarray-and-segment-tree)
+  - [Q1. Union by Rank](#q1-union-by-rank)
+  - [Q2. Divide-and-Conquer Maximum Subarray Sum](#q2-divide-and-conquer-maximum-subarray-sum)
+  - [Q3. Segment Tree and Range-Sum Query](#q3-segment-tree-and-range-sum-query)
+- [Class Test 4: Backtracking and N-Queens](#class-test-4-backtracking-and-n-queens)
+  - [Q1. State-Space Tree](#q1-state-space-tree)
+  - [Q2. Constraints for the N-Queens Problem](#q2-constraints-for-the-n-queens-problem)
+  - [Q3. Other Applications of Backtracking](#q3-other-applications-of-backtracking)
+  - [Q4. Backtracking Algorithm for N-Queens](#q4-backtracking-algorithm-for-n-queens)
+- [Verification](#verification)
+- [Quick Revision](#quick-revision)
+
+---
+
 ## Class Test 1: Dynamic Programming
 
 ### Q1. Principle of Optimality
@@ -293,7 +318,7 @@ Kahn's order is **4, 5, 0, 2, 3, 1**. All six vertices were output, so there is 
 
 > Memory trick: finish the dependents first, push, and pop in reverse.
 
-### Q2. Bellman–Ford from S to T
+### Q2. Bellman-Ford from S to T
 
 **Question (transcribed):** Use Bellman–Ford to find the shortest path from S to T in the weighted graph. (8 marks)
 
@@ -372,7 +397,7 @@ Walking `parent[v]` backward gives $parent[T]=D$, $parent[D]=B$, $parent[B]=A$, 
 
 > Memory trick: relax every edge V−1 times; then check once more for a negative cycle.
 
-### Q3. Floyd–Warshall
+### Q3. Floyd-Warshall
 
 **Question (transcribed):** Use Floyd–Warshall to find all-pairs shortest paths in the weighted graph. (8 marks)
 
@@ -515,7 +540,7 @@ The final distances include $d(2,1)=8$ (path $2\to3\to4\to1$, cost $3+1+4$), $d(
 
 ---
 
-## Class Test 3: CSE 2201 - CT - 3 PDF
+## Class Test 3: Union-Find, Maximum Subarray, and Segment Tree
 
 The filename identifies this as CT3. The PDF header says “Class Test: 01”; that internal label is treated as a typo, as requested.
 

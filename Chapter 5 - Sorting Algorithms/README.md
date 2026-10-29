@@ -6,16 +6,29 @@ Sorting means putting items into an order, such as smallest to largest. It makes
 
 This chapter introduces several ways to sort. The examples use small lists so you can follow each move by hand.
 
-1. What sorting means and how sorts differ
-2. Choosing a sorting method
-3. Bubble sort
-4. Selection sort
-5. Insertion sort
-6. Merge sort
-7. Quick sort
-8. Heap sort
-9. Counting sort
-10. Comparing the methods
+---
+
+## Table of Contents
+
+- [Start Here: The Idea in Plain Words](#start-here-the-idea-in-plain-words)
+1. [What Sorting Means and How Sorts Differ](#1-what-sorting-means-and-how-sorts-differ)
+2. [Choosing a Sorting Method](#2-choosing-a-sorting-method)
+3. [Bubble Sort](#3-bubble-sort)
+4. [Selection Sort](#4-selection-sort)
+5. [Insertion Sort](#5-insertion-sort)
+6. [Merge Sort](#6-merge-sort)
+7. [Quick Sort](#7-quick-sort)
+8. [Heap Sort](#8-heap-sort)
+   - [Fundamentals: Complete Binary Tree and Heap](#1-fundamentals-complete-binary-tree-and-heap)
+   - [The Heapify Method](#2-the-heapify-method-and-why-it-is-faster)
+   - [The Two Phases of Heap Sort](#3-the-two-phases-of-heap-sort)
+   - [Phase 1: Building the Max-Heap](#phase-1-building-the-max-heap-heapify-method)
+   - [Phase 2: Extracting the Maximum and Sorting](#phase-2-extracting-the-maximum-and-sorting)
+   - [Step-by-Step Algorithm](#instructions-step-by-step-algorithm)
+   - [Complexity & Analysis](#complexity--analysis)
+9. [Counting Sort](#9-counting-sort)
+10. [Comparing the Methods](#10-comparing-the-methods)
+- [Summary](#summary)
 
 ---
 
@@ -453,7 +466,7 @@ Heap Sort operates in two clear, sequential phases:
 
 ---
 
-### Visual Walkthrough: Phase 1 — Building the Max-Heap (Heapify Method)
+### Phase 1: Building the Max-Heap (Heapify Method)
 
 ![Heap sort phase 1 builds a max-heap in linear time using bottom-up heapify](diagrams/ch5-09-heap-build-flow.svg)
 
@@ -477,7 +490,7 @@ Heap Sort operates in two clear, sequential phases:
 
 ---
 
-### Visual Walkthrough: Phase 2 — Extracting the Maximum and Sorting
+### Phase 2: Extracting the Maximum and Sorting
 
 ![Heap sort phase 2 extracts the root and restores the heap](diagrams/ch5-10-heap-sort-flow.svg)
 

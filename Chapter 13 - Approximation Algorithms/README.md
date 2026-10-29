@@ -44,6 +44,7 @@ Would you take it? Most people would. That is an **approximation algorithm**: a 
 
 ## Table of Contents
 
+- [Start Here: The Idea in Plain Words](#start-here-the-idea-in-plain-words)
 1. [Exact vs Approximation Algorithms](#exact-vs-approximation-algorithms)
 2. [Approximation Ratio and Performance Guarantee](#approximation-ratio-and-performance-guarantee)
 3. [Vertex Cover: A 2-Approximation](#vertex-cover-a-2-approximation)

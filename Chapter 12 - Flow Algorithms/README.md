@@ -50,6 +50,7 @@ With many pipes joined together, finding the answer is harder. That is what this
 
 ## Table of Contents
 
+- [Start Here: The Idea in Plain Words](#start-here-the-idea-in-plain-words)
 1. [Flow Networks](#flow-networks)
 2. [Residual Graph](#residual-graph)
 3. [Ford-Fulkerson Algorithm](#ford-fulkerson-algorithm)

@@ -12,6 +12,7 @@ format shown and prints only the requested answer.
 1. [Count Distinct Values](#1-count-distinct-values)
 2. [Maximum Sum of a Contiguous Subarray](#2-maximum-sum-of-a-contiguous-subarray)
 3. [Search for an Element](#3-search-for-an-element)
+- [Quick Revision Table](#quick-revision-table)
 
 ---
 

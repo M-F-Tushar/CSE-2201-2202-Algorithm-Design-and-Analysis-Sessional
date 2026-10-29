@@ -38,6 +38,7 @@ This chapter keeps only the requested Searching and Basic Traversal topics. The 
 7. [BFS vs DFS Quick Comparison](#6-bfs-vs-dfs-quick-comparison)
 8. [Recommended Study Sequence](#7-recommended-study-sequence)
 9. [Analyze Time Complexity of BFS and DFS](#8-analyze-time-complexity-of-bfs-and-dfs)
+10. [Final Notes](#final-notes)
 
 ---
 

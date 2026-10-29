@@ -46,7 +46,7 @@ This chapter keeps only the requested graph theory and graph algorithm topics. E
 13. [Spanning Trees](#12-spanning-trees)
 	- [Definition](#definition-2)
 	- [Properties](#properties)
-	- [Tree vs Graph](#tree-vs-graph-1)
+	- [Tree vs Graph](#tree-vs-graph)
 	- [Minimum Spanning Tree (MST)](#minimum-spanning-tree-mst)
 	- [Prim's Algorithm](#1-prims-algorithm)
 	- [Kruskal's Algorithm](#2-kruskals-algorithm)

@@ -24,6 +24,7 @@ The answers follow the repository's notes on [searching](../../../Chapter%204%20
 8. [Change-Making by Dynamic Programming](#8-change-making-by-dynamic-programming)
 9. [Coin-Collecting Problem by Dynamic Programming](#9-coin-collecting-problem-by-dynamic-programming)
 10. [0/1 Knapsack by Dynamic Programming](#10-01-knapsack-by-dynamic-programming)
+- [Quick Revision Table](#quick-revision-table)
 
 ---
 

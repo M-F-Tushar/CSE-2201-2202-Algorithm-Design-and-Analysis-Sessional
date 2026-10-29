@@ -32,6 +32,24 @@ The roadmap groups questions by section; it is **not a prerequisite chain**. Q1'
 
 ---
 
+## Table of Contents
+
+- [Visual Map: Full-Paper Topic Roadmap](#visual-map-full-paper-topic-roadmap)
+- [Section A](#section-a)
+  - [Q1. Algorithm Design, Complexity, and Asymptotic Bounds](#q1-algorithm-design-complexity-and-asymptotic-bounds)
+  - [Q2. NP Classes, BFS, and Activity Graph](#q2-np-classes-bfs-and-activity-graph)
+  - [Q3. Searching, Traversing, and Matrix Multiplication](#q3-searching-traversing-and-matrix-multiplication)
+  - [Q4. Sorting: Insertion, Bubble, Quick Sort, and Merge Sort](#q4-sorting-insertion-bubble-quick-sort-and-merge-sort)
+- [Section B](#section-b)
+  - [Q5. Greedy Algorithms and Minimum Spanning Tree](#q5-greedy-algorithms-and-minimum-spanning-tree)
+  - [Q6. Dynamic Programming, Floyd-Warshall, and LCS](#q6-dynamic-programming-floyd-warshall-and-lcs)
+  - [Q7. Backtracking: Graph Colouring, LC-Search, and N-Queens](#q7-backtracking-graph-colouring-lc-search-and-n-queens)
+  - [Q8. Decision vs Optimization, Branch and Bound, and TSP](#q8-decision-vs-optimization-branch-and-bound-and-tsp)
+- [Verification](#verification)
+- [Quick Revision](#quick-revision)
+
+---
+
 ## Section A
 
 ### Q1. Algorithm Design, Complexity, and Asymptotic Bounds
@@ -663,6 +681,10 @@ These edges connect all six vertices without a cycle. The MST is unique. Sorting
 > Memory trick: sort the edges, skip any edge that closes a cycle, and stop at $V-1$ edges.
 
 ![Kruskal MST on the graph shown in the paper](diagrams/b2-theory-07-kruskal-mst.svg)
+
+---
+
+### Q6. Dynamic Programming, Floyd-Warshall, and LCS
 
 #### Q6(a)
 

@@ -30,6 +30,24 @@ Foundations support the later topics; the roadmap groups all eight questions wit
 
 ---
 
+## Table of Contents
+
+- [Visual Map: Full-Paper Roadmap](#visual-map-full-paper-roadmap)
+- [Section A](#section-a)
+  - [Q1. Algorithm Design, Analysis, and Complexity](#q1-algorithm-design-analysis-and-complexity)
+  - [Q2. Recurrences and Loop Analysis](#q2-recurrences-and-loop-analysis)
+  - [Q3. Divide and Conquer, Merge Sort, Quick Sort, Heap Sort](#q3-divide-and-conquer-merge-sort-quick-sort-heap-sort)
+  - [Q4. Greedy Algorithms, Memoization vs Tabulation, and MST](#q4-greedy-algorithms-memoization-vs-tabulation-and-mst)
+- [Section B](#section-b)
+  - [Q5. Backtracking](#q5-backtracking)
+  - [Q6. Dynamic Programming](#q6-dynamic-programming)
+  - [Q7. Shortest Paths, Optimality, and Knapsack](#q7-shortest-paths-optimality-and-knapsack)
+  - [Q8. P, NP, Decision vs Optimization, and Dijkstra](#q8-p-np-decision-vs-optimization-and-dijkstra)
+- [Verification](#verification)
+- [Quick Revision](#quick-revision)
+
+---
+
 ## Section A
 
 ### Q1. Algorithm Design, Analysis, and Complexity
@@ -506,6 +524,16 @@ For $F(5)$, memoization starts at $F(5)$ and asks for smaller values. After it c
 | $n$ | 0 | 1 | 2 | 3 | 4 | 5 |
 |:---:|:-:|:-:|:-:|:-:|:-:|:-:|
 | $F(n)$ | 0 | 1 | 1 | 2 | 3 | **5** |
+
+| Feature             | Memoization (Top-Down)     | Tabulation (Bottom-Up)          |
+| ------------------- | -------------------------- | ------------------------------- |
+| Approach            | Start from the big problem | Start from the smallest problem |
+| Technique           | Recursion + cache          | Iteration + table               |
+| Solves              | Only needed subproblems    | All subproblems                 |
+| Uses recursion      | ✅ Yes                     | ❌ No                           |
+| Stack overflow risk | Yes                        | No                              |
+| Easier to write     | Usually                    | Sometimes harder                |
+| Faster in practice  | Sometimes                  | Usually slightly faster         |
 
 Both versions take $O(n)$ time (plain recursion takes $O(2^n)$). Tabulation can keep only the last two values and use $O(1)$ memory.
 

@@ -13,11 +13,11 @@ This chapter covers how to read time complexity directly from loop structure, ho
 ## Table of Contents
 
 1. [Time Complexity of Loops](#1-time-complexity-of-loops)
-   - [Linear Loops](#linear-loops)
-   - [Logarithmic Loops](#logarithmic-loops)
-   - [Nested Independent Loops](#nested-independent-loops)
-   - [Nested Dependent Loops](#nested-dependent-loops)
+   - [Fundamental Growth Intuition](#fundamental-growth-intuition)
    - [Visual Map: Loop Growth Rate](#visual-map-loop-growth-rate)
+   - [20 Common Loop Patterns in C++](#20-common-loop-patterns-in-c)
+   - [Pattern Recognition Summary Table](#pattern-recognition-summary-table)
+   - [Exam Technique: 6-Step Loop Analysis Checklist](#exam-technique-6-step-loop-analysis-checklist)
 2. [Input Size, Running Time, and Space Complexity](#2-input-size-running-time-and-space-complexity)
 3. [Best, Average, and Worst Case](#3-best-average-and-worst-case)
    - [Visual Map: Best, Average, and Worst Case](#visual-map-best-average-and-worst-case)
@@ -37,97 +37,355 @@ This chapter covers how to read time complexity directly from loop structure, ho
 
 ## 1. Time Complexity of Loops
 
-The fastest way to estimate an algorithm's running time is to count how many times its loop body executes as a function of $n$.
+The fastest way to estimate an algorithm's running time is to count how many times its loop body executes as a function of the input size $n$.
 
-### Linear Loops
+### Fundamental Growth Intuition
 
-```c
-for (i = 1; i <= n; i++) {
-    // constant work
-}
-```
-
-The counter $i$ increases by 1 every iteration, so the loop body runs exactly $n$ times.
-
-$$
-T(n) = n \implies T(n) = O(n)
-$$
-
-The same conclusion holds for any loop whose counter moves by a fixed step over a range of size $n$, regardless of the starting index or the comparison operator:
-
-```c
-for (j = 0; j < n; j++) {
-    // constant work
-}
-```
-
-This loop also runs $n$ times, so $T(n) = O(n)$.
-
-### Logarithmic Loops
-
-```c
-for (i = 1; i <= n; i *= 2) {
-    // constant work
-}
-```
-
-Here $i$ does not increase by a fixed amount, it **doubles** every iteration:
-
-$$
-1, 2, 4, 8, 16, \dots, n
-$$
-
-After $k$ iterations, $i = 2^k$. The loop stops once:
-
-$$
-2^k = n \implies k = \log_2 n
-$$
-
-So the loop body runs $\log_2 n$ times:
-
-$$
-T(n) = O(\log n)
-$$
-
-The same idea applies when the counter is divided instead of multiplied each time (for example `i /= 2`): halving or doubling a value down to/up from 1, $n$ times, both take $\log_2 n$ steps.
-
-### Nested Independent Loops
-
-```c
-for (i = 1; i <= n; i++) {
-    for (j = 1; j <= n; j++) {
-        // constant work
-    }
-}
-```
-
-The inner loop runs $n$ times for each of the $n$ outer iterations, so the body runs $n \cdot n$ times:
-
-$$
-T(n) = n \cdot n = n^2 \implies T(n) = O(n^2)
-$$
-
-### Nested Dependent Loops
-
-```c
-for (i = 1; i <= n; i++) {
-    for (j = 1; j <= i; j++) {
-        // constant work
-    }
-}
-```
-
-Now the inner loop depends on $i$: it runs $1, 2, \dots, n$ times. Adding these counts gives an arithmetic series (see [Summations](#summations)):
-
-$$
-T(n) = \sum_{i=1}^{n} i = \frac{n(n+1)}{2} = \Theta(n^2)
-$$
-
-The exact count is about half of $n^2$, but the constant $\tfrac{1}{2}$ is dropped, so the growth is still quadratic.
+- **Additive updates (`i++`, `i += c`, `i--`):** The counter shifts by a constant step each time. Traversing a range of size $n$ takes proportional to $n$ steps $\implies O(n)$.
+- **Multiplicative updates (`i *= c`, `i /= c`):** The counter scales exponentially. Reaching $n$ (or dropping to 1) takes $\log_c n$ steps $\implies O(\log n)$.
+- **Nested loops:** When inner and outer loops are independent, multiply their iteration counts ($n \times n \implies O(n^2)$). When dependent, sum the inner counts across outer iterations ($\sum i \implies \Theta(n^2)$).
+- **Sequential loops:** When loops execute one after another, sum their costs ($O(n) + O(n) \implies O(n)$).
 
 ### Visual Map: Loop Growth Rate
 
 ![Loop Growth Rate - Additive vs Multiplicative Steps](diagrams/ch2-01-loop-growth-rate.svg)
+
+---
+
+### 20 Common Loop Patterns in C++
+
+Here is a reference of the 20 loop patterns frequently encountered in Algorithm Design and Analysis exams, presented with concise C++ snippets, iteration counts, and key takeaways:
+
+#### 1. Single Loop Skipping Elements
+
+```cpp
+for (int i = 0; i < n; i += 2) {
+    cout << i;
+}
+```
+
+- **Counter Sequence:** `0, 2, 4, 6, 8, ...`
+- **Iterations:** Runs approximately $\frac{n}{2}$ times.
+- **Complexity:** $T(n) = \frac{n}{2} \implies O(n)$
+- **Exam Rule:** Incrementing by any fixed constant ($+2, +5, +10$) remains linear $O(n)$.
+
+#### 2. Loop Decreasing by a Fixed Amount
+
+```cpp
+for (int i = n; i > 0; i--) {
+    cout << i;
+}
+```
+
+- **Counter Sequence:** $n, n-1, n-2, \dots, 1$
+- **Iterations:** Runs exactly $n$ times down to 0.
+- **Complexity:** $T(n) = n \implies O(n)$
+- **Exam Rule:** Reversing loop direction (`i--` instead of `i++`) does not alter asymptotic complexity if it still covers $n$ steps.
+
+#### 3. Loop Multiplying Counter
+
+```cpp
+for (int i = 1; i < n; i *= 2) {
+    cout << i;
+}
+```
+
+- **Counter Sequence:** $1, 2, 4, 8, 16, \dots, 2^k$
+- **Iterations:** Stops when $2^k \ge n \implies k \approx \log_2 n$.
+- **Complexity:** $T(n) = \log_2 n \implies O(\log n)$
+- **Exam Rule:** Multiplying the counter by a constant factor greater than 1 yields logarithmic complexity.
+
+#### 4. Loop Dividing Counter
+
+```cpp
+for (int i = n; i > 1; i /= 2) {
+    cout << i;
+}
+```
+
+- **Counter Sequence:** $n, \frac{n}{2}, \frac{n}{4}, \frac{n}{8}, \dots, 2$ (e.g., $32, 16, 8, 4, 2$)
+- **Iterations:** Counter is halved each iteration until reaching $\le 1$.
+- **Complexity:** $T(n) = \log_2 n \implies O(\log n)$
+- **Exam Rule:** Repeatedly dividing down to a constant threshold takes logarithmic steps, identical in growth to multiplying up.
+
+#### 5. Two Independent Nested Loops
+
+```cpp
+for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+        cout << i << j;
+    }
+}
+```
+
+- **Counter Progression:** Outer loop runs $n$ times; inner loop runs $n$ times for each outer step.
+- **Iterations:** Total operations equal $n \times n = n^2$.
+- **Complexity:** $T(n) = n^2 \implies O(n^2)$
+- **Exam Rule:** When nested loops are independent, multiply their iteration bounds.
+
+#### 6. Nested Loops with Different Limits
+
+```cpp
+for (int i = 0; i < n; i++) {
+    for (int j = 0; j < m; j++) {
+        cout << i << j;
+    }
+}
+```
+
+- **Counter Progression:** Outer loop runs $n$ times; inner loop runs $m$ times.
+- **Iterations:** Total operations equal $n \times m$.
+- **Complexity:** $T(n, m) = n \times m \implies O(nm)$
+- **Exam Rule:** Never assume $O(n^2)$ when the two bounds represent distinct input sizes $n$ and $m$.
+
+#### 7. Inner Loop Dependent on Outer Loop (Forward Triangular)
+
+```cpp
+for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= i; j++) {
+        cout << j;
+    }
+}
+```
+
+- **Counter Progression:** Inner loop executes $1, 2, 3, \dots, n$ times.
+- **Iterations:** $T(n) = 1 + 2 + 3 + \dots + n = \frac{n(n+1)}{2}$.
+- **Complexity:** $T(n) = \frac{n^2+n}{2} \implies \Theta(n^2)$
+- **Exam Rule:** Even though the inner loop does not always run $n$ times, the triangular sum still grows quadratically.
+
+#### 8. Triangular Loop Counting Backward
+
+```cpp
+for (int i = n; i > 0; i--) {
+    for (int j = 0; j < i; j++) {
+        cout << j;
+    }
+}
+```
+
+- **Counter Progression:** Inner loop executes $n, n-1, n-2, \dots, 1$ times.
+- **Iterations:** $T(n) = n + (n-1) + \dots + 1 = \frac{n(n+1)}{2}$.
+- **Complexity:** $T(n) = \frac{n(n+1)}{2} \implies \Theta(n^2)$
+- **Exam Rule:** Counting backwards yields the exact same triangular arithmetic series as counting forwards.
+
+#### 9. Nested Loops Where Both Counters Double
+
+```cpp
+for (int i = 1; i < n; i *= 2) {
+    for (int j = 1; j < n; j *= 2) {
+        cout << i << j;
+    }
+}
+```
+
+- **Counter Progression:** Outer runs $\log_2 n$ times; inner runs $\log_2 n$ times for each outer pass.
+- **Iterations:** $\log_2 n \times \log_2 n = (\log_2 n)^2$.
+- **Complexity:** $T(n) = (\log n)^2 \implies O((\log n)^2)$
+- **Exam Rule:** Nested loops do not always produce polynomial time; two nested logarithmic loops yield polylogarithmic time.
+
+#### 10. Linear Loop Containing Logarithmic Loop
+
+```cpp
+for (int i = 0; i < n; i++) {
+    for (int j = 1; j < n; j *= 2) {
+        cout << i << j;
+    }
+}
+```
+
+- **Counter Progression:** Outer loop runs $n$ times; inner loop runs $\log_2 n$ times per outer iteration.
+- **Iterations:** $n \times \log_2 n$.
+- **Complexity:** $T(n) = n \log_2 n \implies O(n \log n)$
+- **Exam Rule:** A linear outer loop combined with a logarithmic inner loop yields linearithmic $O(n \log n)$ time.
+
+#### 11. Three Nested Linear Loops
+
+```cpp
+for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+        for (int k = 0; k < n; k++) {
+            cout << i << j << k;
+        }
+    }
+}
+```
+
+- **Counter Progression:** All three loops run $n$ times independently.
+- **Iterations:** $n \times n \times n = n^3$.
+- **Complexity:** $T(n) = n^3 \implies O(n^3)$
+- **Exam Rule:** Three nested independent linear loops produce cubic complexity (typical of matrix multiplication and Floyd-Warshall).
+
+#### 12. Loop Repeatedly Squaring Counter
+
+```cpp
+for (long long i = 2; i < n; i = i * i) {
+    cout << i;
+}
+```
+
+- **Counter Sequence:** $2, 4, 16, 256, 65536, \dots$ ($2^{2^0}, 2^{2^1}, 2^{2^2}, \dots, 2^{2^k}$).
+- **Iterations:** Stops when $2^{2^k} \ge n \implies 2^k \approx \log_2 n \implies k \approx \log_2(\log_2 n)$.
+- **Complexity:** $T(n) = \log_2(\log_2 n) \implies O(\log \log n)$
+- **Exam Rule:** Squaring the counter at each step grows double-exponentially, resulting in doubly logarithmic time.
+
+#### 13. Loop Multiplying Counter by Base $k > 2$
+
+```cpp
+for (int i = 1; i <= n; i *= 3) {
+    cout << i;
+}
+```
+
+- **Counter Sequence:** $1, 3, 9, 27, 81, \dots, 3^k$
+- **Iterations:** Stops when $3^k \ge n \implies k \approx \log_3 n$.
+- **Complexity:** $T(n) = \log_3 n = \frac{\log_2 n}{\log_2 3} \implies O(\log n)$
+- **Exam Rule:** The base of the logarithm does not matter in asymptotic notation because all bases differ only by a constant multiplier ($\log_a n = \Theta(\log_b n)$).
+
+#### 14. Nested Loop with Constant Inner Bound
+
+```cpp
+for (int i = 0; i < n; i++) {
+    for (int j = 0; j < 5; j++) {
+        cout << j;
+    }
+}
+```
+
+- **Counter Progression:** Outer loop runs $n$ times; inner loop runs a fixed 5 times regardless of $n$.
+- **Iterations:** Total operations equal $5 \times n = 5n$.
+- **Complexity:** $T(n) = 5n \implies O(n)$
+- **Exam Rule:** Inner loops with constant bounds $O(1)$ do not raise polynomial degree; ignore constant factors.
+
+#### 15. Consecutive (Sequential) Loops
+
+```cpp
+for (int i = 0; i < n; i++) {
+    cout << i;
+}
+for (int j = 0; j < n; j++) {
+    cout << j;
+}
+```
+
+- **Counter Progression:** The loops execute sequentially one after the other, not nested inside each other.
+- **Iterations:** Total operations equal $n + n = 2n$.
+- **Complexity:** $T(n) = 2n \implies O(n)$
+- **Exam Rule:** Add runtimes for consecutive blocks ($O(f) + O(g) = O(\max(f, g))$); multiply for nested blocks.
+
+#### 16. Loop with Conditional Inner Loop
+
+```cpp
+for (int i = 0; i < n; i++) {
+    if (i % 2 == 0) {
+        for (int j = 0; j < n; j++) {
+            cout << j;
+        }
+    }
+}
+```
+
+- **Counter Progression:** Inner loop executes only when $i$ is even (triggered for approximately $\frac{n}{2}$ outer steps).
+- **Iterations:** $T(n) \approx \frac{n}{2} \times n = \frac{n^2}{2}$.
+- **Complexity:** $T(n) = \frac{n^2}{2} \implies O(n^2)$
+- **Exam Rule:** Conditions that execute on a constant fraction of iterations reduce steps by a constant factor, leaving Big-O unchanged.
+
+#### 17. Halving Counter via While-Loop
+
+```cpp
+int i = n;
+while (i > 1) {
+    i = i / 2;
+}
+```
+
+- **Counter Sequence:** $n, \frac{n}{2}, \frac{n}{4}, \frac{n}{8}, \dots, 1$
+- **Iterations:** Halves the remaining value each cycle until reaching 1.
+- **Complexity:** $T(n) = \log_2 n \implies O(\log n)$
+- **Exam Rule:** Asymptotic principles apply identically to `while` and `for` loops; only the counter's state progression matters.
+
+#### 18. Non-Constant Counter Increment (`i += i`)
+
+```cpp
+for (int i = 1; i <= n; i += i) {
+    cout << i;
+}
+```
+
+- **Counter Sequence:** Since $i + i = 2i$, the counter doubles each iteration: $1, 2, 4, 8, \dots$
+- **Complexity:** $T(n) \implies O(\log n)$
+- **Exam Trap:** Contrast with `for (int i = 1; i <= n; i += i * 0 + 1)`, which simplifies algebraically to `i += 1` $\implies O(n)$. Always determine the mathematical growth rate rather than trusting visual syntax.
+
+#### 19. Nested Loop with Inner Bound $n / i$ (Harmonic Series)
+
+```cpp
+for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= n / i; j++) {
+        cout << j;
+    }
+}
+```
+
+- **Counter Progression:** Inner loop runs $\frac{n}{1}, \frac{n}{2}, \frac{n}{3}, \dots, \frac{n}{n}$ times.
+- **Iterations:** $T(n) = \sum_{i=1}^n \frac{n}{i} = n \left(1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n}\right) = n \cdot H_n \approx n \ln n$.
+- **Complexity:** $T(n) \implies \Theta(n \log n)$
+- **Exam Rule:** The sum of reciprocals is the harmonic series ($H_n \approx \ln n$); multiplying by $n$ produces $\Theta(n \log n)$.
+
+#### 20. Loop with Square-Root Condition (`i * i <= n`)
+
+```cpp
+for (int i = 1; i * i <= n; i++) {
+    cout << i;
+}
+```
+
+- **Counter Progression:** The loop stops as soon as $i^2 > n \iff i > \sqrt{n}$.
+- **Iterations:** Counter values are $1, 2, 3, \dots, \lfloor\sqrt{n}\rfloor$.
+- **Complexity:** $T(n) = \sqrt{n} \implies O(\sqrt{n})$
+- **Exam Rule:** Standard pattern in primality checking and factor trial division up to $\sqrt{n}$.
+
+---
+
+### Pattern Recognition Summary Table
+
+| # | Loop Pattern | Counter Update / Condition | Iteration Count $T(n)$ | Time Complexity |
+| :-: | :--- | :--- | :---: | :---: |
+| 1 | Single loop skipping elements | `i += 2` (or `i += c`) | $\approx n/c$ | $O(n)$ |
+| 2 | Loop decreasing by fixed step | `i--` (or `i -= c`) | $\approx n/c$ | $O(n)$ |
+| 3 | Loop multiplying counter | `i *= 2` | $\approx \log_2 n$ | $O(\log n)$ |
+| 4 | Loop dividing counter | `i /= 2` | $\approx \log_2 n$ | $O(\log n)$ |
+| 5 | Two independent nested loops | `i < n; j < n` | $n \times n$ | $O(n^2)$ |
+| 6 | Nested loops with different limits | `i < n; j < m` | $n \times m$ | $O(nm)$ |
+| 7 | Forward triangular dependent loop | `i <= n; j <= i` | $\frac{n(n+1)}{2}$ | $\Theta(n^2)$ |
+| 8 | Backward triangular dependent loop | `i = n; i > 0; j < i` | $\frac{n(n+1)}{2}$ | $\Theta(n^2)$ |
+| 9 | Nested loops where both double | `i *= 2; j *= 2` | $\log_2 n \times \log_2 n$ | $O((\log n)^2)$ |
+| 10 | Linear outer, logarithmic inner | `i++; j *= 2` | $n \times \log_2 n$ | $O(n \log n)$ |
+| 11 | Three nested linear loops | `i++; j++; k++` | $n \times n \times n$ | $O(n^3)$ |
+| 12 | Counter repeatedly squared | `i = i * i` | $\approx \log_2(\log_2 n)$ | $O(\log \log n)$ |
+| 13 | Multiplied by arbitrary base $k$ | `i *= 3` (or `i *= k`) | $\approx \log_k n$ | $O(\log n)$ |
+| 14 | Constant inner loop bound | `i < n; j < 5` | $5n$ | $O(n)$ |
+| 15 | Consecutive sequential loops | `for (...)` followed by `for (...)` | $n + n = 2n$ | $O(n)$ |
+| 16 | Conditional inner loop | `if (i % 2 == 0) for (...)` | $\approx \frac{n}{2} \times n$ | $O(n^2)$ |
+| 17 | Halving while-loop | `while (i > 1) i /= 2` | $\approx \log_2 n$ | $O(\log n)$ |
+| 18 | Dynamic doubling increment | `i += i` | $\approx \log_2 n$ | $O(\log n)$ |
+| 19 | Inner limit $n / i$ (harmonic sum) | `i <= n; j <= n / i` | $n \sum_{i=1}^n \frac{1}{i}$ | $\Theta(n \log n)$ |
+| 20 | Square-root boundary condition | `i * i <= n` | $\approx \sqrt{n}$ | $O(\sqrt{n})$ |
+
+---
+
+### Exam Technique: 6-Step Loop Analysis Checklist
+
+When given an unfamiliar loop in an exam, apply these six checks in sequence:
+
+1. **Count Outer Iterations:** Determine how many times the outermost loop executes as a function of the input size $n$.
+2. **Count Inner Iterations:** Determine how many times the inner loop runs for each specific outer iteration.
+3. **Classify Structure:** Are the loops consecutive (add runtimes) or nested (multiply runtimes)?
+4. **Identify Counter Growth:**
+   - Additive step ($+c$ or $-c$) $\implies O(n)$
+   - Multiplicative factor ($\times c$ or $/ c$) $\implies O(\log n)$
+   - Exponential / power update ($i = i^2$) $\implies O(\log \log n)$
+   - Geometric termination condition ($i^2 \le n$) $\implies O(\sqrt{n})$
+5. **Formulate Total Work:** Express the sum of iterations across all passes ($n \cdot m$ or $\sum$).
+6. **Simplify Asymptotically:** Drop constant coefficients and lower-order terms to obtain the dominant term (e.g., $3n^2 + 5n + 10 \implies O(n^2)$).
 
 ---
 
@@ -323,21 +581,15 @@ The first gives a linear loop, the second gives a nested dependent loop, and the
 
 ## 8. Analyze Time Complexity of Above Loop Patterns
 
-| Loop Pattern | Counter Update | Iterations | Time Complexity |
-| :--- | :--- | :---: | :---: |
-| `for (i = 1; i <= n; i++)` | additive (+1) | $n$ | $O(n)$ |
-| `for (j = 0; j < n; j++)` | additive (+1) | $n$ | $O(n)$ |
-| `for (i = 1; i <= n; i *= 2)` | multiplicative (×2) | $\log_2 n$ | $O(\log n)$ |
-| Nested: `i <= n`, `j <= n` | additive (+1) inside additive | $n \cdot n$ | $O(n^2)$ |
-| Nested: `i <= n`, `j <= i` | additive (+1) inside additive | $\frac{n(n+1)}{2}$ | $\Theta(n^2)$ |
+For a comprehensive breakdown and quick-reference lookup of all 20 standard loop patterns, refer to the [Pattern Recognition Summary Table](#pattern-recognition-summary-table) and [6-Step Loop Analysis Checklist](#exam-technique-6-step-loop-analysis-checklist) in Section 1.
 
-For a search algorithm, the count depends on the input case rather than the loop shape alone:
+While static loop boundaries determine execution counts for deterministic loops, algorithms whose control flow depends on the specific arrangement or presence of input data (such as searching) require input case distinction:
 
-| Algorithm | Best | Average | Worst |
+| Algorithm | Best Case | Average Case | Worst Case |
 | :--- | :---: | :---: | :---: |
 | Linear search | $\Theta(1)$ | $\Theta(n)$ | $\Theta(n)$ |
 
-The recurrence-based way of proving the logarithmic result for divide-style recursive algorithms (rather than loops) is covered next, in [Chapter 3 - Recurrences Correctness and Loop Invariants](../Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md).
+The recurrence-based way of proving logarithmic and divide-and-conquer bounds for recursive algorithms (rather than iterative loops) is covered next, in [Chapter 3 - Recurrences Correctness and Loop Invariants](../Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md).
 
 ---
 

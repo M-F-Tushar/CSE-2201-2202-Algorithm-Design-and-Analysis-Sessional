@@ -22,6 +22,7 @@ Lower bound theory asks how many operations *any* algorithm must perform to solv
    - [NP-Complete (NPC)](#np-complete-npc)
    - [NP-Hard](#np-hard)
 3. [Analyze Time Complexity of Above Topics](#analyze-time-complexity-of-above-topics)
+   - [Final Revision Checklist](#final-revision-checklist)
 
 ---
 

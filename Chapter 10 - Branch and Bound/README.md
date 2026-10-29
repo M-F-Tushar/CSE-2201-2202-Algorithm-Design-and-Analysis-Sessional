@@ -43,6 +43,7 @@ Branch and bound is just this idea, done carefully:
 
 ## Table of Contents
 
+- [Start Here: The Idea in Plain Words](#start-here-the-idea-in-plain-words)
 1. [Branch and Bound](#branch-and-bound)
 2. [Backtracking vs Branch and Bound](#backtracking-vs-branch-and-bound)
 3. [Bounding Function and Cost Function](#bounding-function-and-cost-function)

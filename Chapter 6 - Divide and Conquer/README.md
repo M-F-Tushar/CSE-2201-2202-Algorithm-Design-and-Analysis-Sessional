@@ -10,11 +10,12 @@ This chapter develops divide-and-conquer through two applications: maximum-sum s
 
 1. [Problem: Range Sum and Point Update](#1-problem-range-sum-and-point-update)
 2. [Part 1: Prefix Sum](#2-part-1-prefix-sum)
+   - [Core Idea](#core-idea)
    - [Build and Query](#build-and-query)
    - [Dry Run](#prefix-sum-dry-run)
    - [The Update Weakness](#the-update-weakness)
 3. [Part 2: Segment Tree](#3-part-2-segment-tree)
-   - [Tree Structure](#tree-structure)
+   - [Tree Structure and Core Idea](#tree-structure-and-core-idea)
    - [Build, Query, and Update](#build-query-and-update)
    - [Dry Run](#segment-tree-dry-run)
 4. [Runnable C++17 Implementation](#4-runnable-c17-implementation)
@@ -110,7 +111,7 @@ updates are mixed with queries: `m` updates can require `O(nm)` update work.
 
 ## 3. Part 2: Segment Tree
 
-### Core idea
+### Tree Structure and Core Idea
 
 A segment tree stores a summary for each interval in a binary hierarchy:
 

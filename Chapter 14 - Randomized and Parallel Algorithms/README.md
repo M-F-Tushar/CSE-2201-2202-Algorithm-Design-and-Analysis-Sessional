@@ -51,6 +51,8 @@ Imagine making a meal with 4 friends. Chopping vegetables, washing rice and sett
 
 ## Table of Contents
 
+- [Start Here: The Idea in Plain Words](#start-here-the-idea-in-plain-words)
+
 **Part 1: Randomized Algorithms**
 
 1. [Randomized Algorithm Concept](#randomized-algorithm-concept)

@@ -18,7 +18,7 @@ A recurrence relation expresses the running time of a recursive algorithm in ter
 5. [Worked Examples Using the Master Theorem](#5-worked-examples-using-the-master-theorem)
    - [Example 1: T(n) = 8T(n/2) + n^2](#example-1-tn--8tn2--n2)
    - [Example 2: T(n) = T(n/2) + c](#example-2-tn--tn2--c)
-6. [Analyze Time Complexity of Above Recurrences](#analyze-time-complexity-of-above-recurrences)
+6. [Analyze Time Complexity of Above Recurrences](#6-analyze-time-complexity-of-above-recurrences)
 
 ---
 
@@ -172,7 +172,7 @@ This confirms the same result found earlier by direct expansion of the binary se
 
 ---
 
-## Analyze Time Complexity of Above Recurrences
+## 6. Analyze Time Complexity of Above Recurrences
 
 | Recurrence | $a$ | $b$ | $f(n)$ | $n^{\log_b a}$ | Master Theorem Case | Result |
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
