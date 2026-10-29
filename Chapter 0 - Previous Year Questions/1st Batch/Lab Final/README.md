@@ -103,7 +103,13 @@ int main() {
     cin >> key;
 
     cout << "Linear search index: " << linearSearch(a, key) << '\n';
-    cout << "Binary search index: " << binarySearch(a, key) << '\n';
+
+    // Binary search requires a sorted array
+    vector<int> sorted_a = a;
+    if (!is_sorted(sorted_a.begin(), sorted_a.end())) {
+        sort(sorted_a.begin(), sorted_a.end());
+    }
+    cout << "Binary search index: " << binarySearch(sorted_a, key) << '\n';
 }
 ```
 
@@ -674,7 +680,11 @@ int main() {
     int n;
     cin >> n;
     vector<long long> memo(n + 1, -1);
-    cout << "Recursive: " << fibonacciRecursive(n) << '\n';
+    if (n <= 40) {
+        cout << "Recursive: " << fibonacciRecursive(n) << '\n';
+    } else {
+        cout << "Recursive: skipped for n > 40 to prevent O(2^n) timeout\n";
+    }
     cout << "Memoized DP: " << fibonacciMemo(n, memo) << '\n';
     cout << "Bottom-up DP: " << fibonacciDP(n) << '\n';
 }
