@@ -7,21 +7,26 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(Path(__file__).parent))
 
-import root_diagrams  # noqa: E402
-import ch1_diagrams   # noqa: E402
-import ch2_diagrams   # noqa: E402
-import ch3_diagrams   # noqa: E402
-import ch4_diagrams   # noqa: E402
-import ch5_diagrams   # noqa: E402
-import ch7_diagrams   # noqa: E402
-import ch8_diagrams   # noqa: E402
-import ch10_diagrams  # noqa: E402
-import ch11_diagrams  # noqa: E402
-import ch12_diagrams  # noqa: E402
-import ch13_diagrams  # noqa: E402
-import ch14_diagrams  # noqa: E402
-import ch15_diagrams  # noqa: E402
-import ct4_diagrams   # noqa: E402
+import root_diagrams        # noqa: E402
+import ch1_diagrams         # noqa: E402
+import ch2_diagrams         # noqa: E402
+import ch3_diagrams         # noqa: E402
+import ch4_diagrams         # noqa: E402
+import ch5_diagrams         # noqa: E402
+import ch6_diagrams         # noqa: E402
+import ch7_diagrams         # noqa: E402
+import ch8_diagrams         # noqa: E402
+import ch9_state_space_tree # noqa: E402
+import ch10_diagrams        # noqa: E402
+import ch11_diagrams        # noqa: E402
+import ch12_diagrams        # noqa: E402
+import ch13_diagrams        # noqa: E402
+import ch14_diagrams        # noqa: E402
+import ch15_diagrams        # noqa: E402
+import b1_theory_diagrams   # noqa: E402
+import b2_theory_diagrams   # noqa: E402
+import ct3_diagrams         # noqa: E402
+import ct4_diagrams         # noqa: E402
 
 MODULES = [
     root_diagrams,
@@ -30,14 +35,19 @@ MODULES = [
     ch3_diagrams,
     ch4_diagrams,
     ch5_diagrams,
+    ch6_diagrams,
     ch7_diagrams,
     ch8_diagrams,
+    ch9_state_space_tree,
     ch10_diagrams,
     ch11_diagrams,
     ch12_diagrams,
     ch13_diagrams,
     ch14_diagrams,
     ch15_diagrams,
+    b1_theory_diagrams,
+    b2_theory_diagrams,
+    ct3_diagrams,
     ct4_diagrams,
 ]
 
@@ -90,11 +100,26 @@ def seg_box_intersect(p1, p2, box, margin=4):
     return u1 <= u2
 
 
+def _extract_diagrams(mod):
+    if hasattr(mod, "DIAGRAMS"):
+        return mod.DIAGRAMS
+    if hasattr(mod, "SPECS"):
+        return mod.SPECS
+    if getattr(mod, "__name__", "") == "b2_theory_diagrams":
+        return list(mod.missing_diagrams()) + list(mod.repaired_diagrams())
+    if getattr(mod, "__name__", "") == "ct3_diagrams":
+        return [mod.union_by_rank(), mod.maximum_subarray(), mod.segment_tree()]
+    if getattr(mod, "__name__", "") == "ch9_state_space_tree":
+        return [mod.subset_sum_slide()]
+    return []
+
+
 def main():
     problems = 0
     total_diagrams = 0
     for module in MODULES:
-        for d in module.DIAGRAMS:
+        diags = _extract_diagrams(module)
+        for d in diags:
             total_diagrams += 1
             w, h = d.size
             for n in d.nodes:
