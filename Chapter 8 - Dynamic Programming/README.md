@@ -632,27 +632,35 @@ $$
 
 #### Tabulation Walkthrough
 
-Given rod length $n=5$ and prices:
+### Given:
 
-| Length | 1 | 2 | 3 | 4 | 5 |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-| Price | 1 | 5 | 8 | 9 | 10 |
+* **Lengths ($L_i$):** 1, 2, 3, 4, 5
 
-The DP table is:
 
-Arrow legend for Rod Cutting:
+* **Prices ($P_i$):** 1, 5, 8, 9, 10
 
-- $\uparrow$ means the current cut length is skipped and the value comes from the row above.
-- $\leftarrow_i$ means cut length $i$ is used and the value comes from the same row at remaining length $j-i$.
 
-| Allowed pieces | 0 | 1 | 2 | 3 | 4 | 5 |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| None | 0 | 0 | 0 | 0 | 0 | 0 |
-| {1} | 0 | 1 ($\leftarrow_1$) | 2 ($\leftarrow_1$) | 3 ($\leftarrow_1$) | 4 ($\leftarrow_1$) | 5 ($\leftarrow_1$) |
-| {1,2} | 0 | 1 ($\uparrow$) | 5 ($\leftarrow_2$) | 6 ($\leftarrow_2$) | 10 ($\leftarrow_2$) | 11 ($\leftarrow_2$) |
-| {1,2,3} | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\leftarrow_3$) | 10 ($\uparrow$) | **13** ($\leftarrow_3$) |
-| {1,2,3,4} | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) | 13 ($\uparrow$) |
-| {1,2,3,4,5} | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) | 13 ($\uparrow$) |
+* **Total Rod Length ($N$):** 5
+
+
+
+---
+
+### Tabulation Matrix (Unbounded Knapsack Format)
+
+* **$\uparrow$**: Value taken from the row directly above (length $i$ is not chosen: $dp[i-1][j]$).
+
+
+* **$\nwarrow$**: Value formed by taking piece of length $i$ with price $P_i$ (points back to the remaining capacity in the same row: $P_i + dp[i][j - L_i]$).
+
+| Cut ($i$) | Length | Price | $L = 0$ | $L = 1$ | $L = 2$ | $L = 3$ | $L = 4$ | $L = 5$ |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **0** | - | - | 0 | 0 | 0 | 0 | 0 | 0 |
+| **1** | 1 | 1 | 0 | 1 ($\nwarrow$) | 2 ($\nwarrow$) | 3 ($\nwarrow$) | 4 ($\nwarrow$) | 5 ($\nwarrow$) |
+| **2** | 2 | 5 | 0 | 1 ($\uparrow$) | 5 ($\nwarrow$) | 6 ($\nwarrow$) | 10 ($\nwarrow$) | 11 ($\nwarrow$) |
+| **3** | 3 | 8 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\nwarrow$) | 10 ($\uparrow$) | 13 ($\nwarrow$) |
+| **4** | 4 | 9 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) | 13 ($\uparrow$) |
+| **5** | 5 | 10 | 0 | 1 ($\uparrow$) | 5 ($\uparrow$) | 8 ($\uparrow$) | 10 ($\uparrow$) | 13 ($\uparrow$) |
 
 Key calculations:
 
