@@ -33,6 +33,11 @@ This chapter develops divide-and-conquer through two applications: maximum-sum s
     - [Worked Trace](#worked-trace)
     - [Edge Cases and Recovering the Subarray](#edge-cases-and-recovering-the-subarray)
     - [Complexity, Applications, and Practice](#complexity-applications-and-practice)
+12. [General Divide-and-Conquer Paradigm](#12-general-divide-and-conquer-paradigm)
+13. [Strassen's Matrix Multiplication](#13-strassens-matrix-multiplication)
+    - [Standard Block Multiplication Recurrence](#standard-block-multiplication-recurrence)
+    - [Strassen's 7-Multiplication Method](#strassens-7-multiplication-method)
+    - [Complexity and Comparison](#complexity-and-comparison)
 
 ---
 
@@ -408,5 +413,98 @@ Maximum-subarray reasoning can identify the best contiguous period of gains/loss
 3. Draw the recursion tree for a short array and classify its winning subarray as left, right, or crossing at each merge.
 4. Extend brute force and Kadane to return the winning inclusive indices, then test ties and all-negative input.
 5. Compile and run the supplied C++ example; all three methods should report `11` and the index-aware version should report `[3, 6]`.
+
+---
+
+## 12. General Divide-and-Conquer Paradigm
+
+The **Divide-and-Conquer** paradigm solves a problem by applying three recursive steps:
+
+1. **Divide:** Partition the problem instance $S$ into $a \ge 1$ smaller subproblem instances of the same problem, each of reduced size $n/b$ (where $b > 1$).
+2. **Conquer:** Solve each subproblem recursively. When subproblems are sufficiently small ($n \le \text{threshold}$), solve them directly via brute force or base cases.
+3. **Combine:** Merge the solutions of the subproblems into a comprehensive solution for the original instance.
+
+### General Recurrence Form
+$$
+T(n) = \begin{cases} \Theta(1) & \text{if } n \le c \\ a T(n/b) + D(n) + C(n) & \text{if } n > c \end{cases}
+$$
+where $D(n)$ is the division cost and $C(n)$ is the combination cost.
+
+---
+
+## 13. Strassen's Matrix Multiplication
+
+Multiplying two $n \times n$ matrices $A$ and $B$ by definition requires $n^3$ scalar multiplications:
+$$
+C_{ij} = \sum_{k=1}^n A_{ik} B_{kj} \implies \Theta(n^3) \text{ operations}
+$$
+
+### Standard Block Multiplication Recurrence
+Assume $n$ is a power of 2. Partition $A$, $B$, and $C$ into four $(n/2) \times (n/2)$ submatrices:
+$$
+\begin{pmatrix} C_{11} & C_{12} \\ C_{21} & C_{22} \end{pmatrix} = 
+\begin{pmatrix} A_{11} & A_{12} \\ A_{21} & A_{22} \end{pmatrix}
+\begin{pmatrix} B_{11} & B_{12} \\ B_{21} & B_{22} \end{pmatrix}
+$$
+Standard expansion computes 8 matrix products of size $(n/2) \times (n/2)$:
+$$
+\begin{aligned}
+C_{11} &= A_{11}B_{11} + A_{12}B_{21} \\
+C_{12} &= A_{11}B_{12} + A_{12}B_{22} \\
+C_{21} &= A_{21}B_{11} + A_{22}B_{21} \\
+C_{22} &= A_{21}B_{12} + A_{22}B_{22}
+\end{aligned}
+$$
+- **Recurrence:** $T(n) = 8T(n/2) + \Theta(n^2)$ (8 multiplications, 4 matrix additions of size $(n/2)^2$).
+- **By Master Theorem:** $a = 8, b = 2 \implies n^{\log_2 8} = n^3$. Since $f(n) = \Theta(n^2) = O(n^{3 - \epsilon})$, Case 1 yields $T(n) = \Theta(n^3)$ — **no asymptotic improvement over naive multiplication**.
+
+### Strassen's 7-Multiplication Method
+In 1969, Volker Strassen discovered that the 4 submatrix blocks can be computed using only **7 matrix multiplications** ($M_1 \dots M_7$) instead of 8, paired with 18 matrix additions/subtractions:
+
+$$
+\begin{aligned}
+M_1 &= (A_{11} + A_{22})(B_{11} + B_{22}) \\
+M_2 &= (A_{21} + A_{22})B_{11} \\
+M_3 &= A_{11}(B_{12} - B_{22}) \\
+M_4 &= A_{22}(B_{21} - B_{11}) \\
+M_5 &= (A_{11} + A_{12})B_{22} \\
+M_6 &= (A_{21} - A_{11})(B_{11} + B_{12}) \\
+M_7 &= (A_{12} - A_{22})(B_{21} + B_{22})
+\end{aligned}
+$$
+
+The four blocks of product matrix $C$ are assembled from $M_1 \dots M_7$:
+$$
+\begin{aligned}
+C_{11} &= M_1 + M_4 - M_5 + M_7 \\
+C_{12} &= M_3 + M_5 \\
+C_{21} &= M_2 + M_4 \\
+C_{22} &= M_1 - M_2 + M_3 + M_6
+\end{aligned}
+$$
+
+### Complexity and Comparison
+Strassen reduces the number of recursive multiplications from 8 to 7:
+$$
+T(n) = 7T(n/2) + \Theta(n^2)
+$$
+By Master Theorem (Case 1):
+$$
+n^{\log_b a} = n^{\log_2 7} \approx n^{2.8074}
+$$
+Since $f(n) = \Theta(n^2) = O(n^{\log_2 7 - \epsilon})$ for $\epsilon \approx 0.8074$:
+$$
+T(n) = \Theta(n^{\log_2 7}) \approx O(n^{2.81})
+$$
+
+| Property | Standard Matrix Multiplication | Strassen's Algorithm |
+| :--- | :--- | :--- |
+| **Number of Sub-multiplications** | 8 | **7** |
+| **Number of Additions/Subtractions**| 4 | 18 |
+| **Recurrence** | $T(n) = 8T(n/2) + \Theta(n^2)$ | $T(n) = 7T(n/2) + \Theta(n^2)$ |
+| **Asymptotic Complexity** | $\Theta(n^3)$ | $\Theta(n^{\log_2 7}) \approx O(n^{2.81})$ |
+| **Practical Crossover Point** | Faster for small matrices ($n < 64$) | Faster for large matrices ($n \ge 64$ to $128$) |
+
+---
 
 [Chapter 6 diagram index](diagrams/README.md)
