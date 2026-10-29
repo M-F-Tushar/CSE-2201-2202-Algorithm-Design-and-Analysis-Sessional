@@ -16,7 +16,7 @@
 <rect x="200.0" y="255.0" width="290.0" height="100.0" rx="10" fill="#e0d5fa"/>
 <path d="M200.9 256.0 Q343.0 257.3 490.7 253.5 M490.9 255.6 Q490.8 306.0 490.1 354.5 M490.4 356.2 Q343.1 353.2 201.2 355.4 M201.4 354.7 Q202.3 307.0 200.1 256.2" fill="none" stroke="#6741d9" stroke-width="2" stroke-linecap="round"/>
 <path d="M199.9 253.5 Q347.0 256.5 489.1 255.2 M488.7 255.8 Q487.7 302.5 489.9 354.1 M490.3 353.9 Q343.7 352.5 200.8 355.6 M199.8 353.4 Q202.1 304.2 198.9 254.6" fill="none" stroke="#6741d9" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="bold" fill="#1e1e1e"><tspan x="345.0" y="295.8">Heap sort</tspan><tspan x="345.0" y="314.2">Reliable time; little extra memory</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="345.0" y="296.4">Heap sort</tspan><tspan x="345.0" y="313.6">Reliable time; little extra memory</tspan></text>
 <rect x="530.0" y="255.0" width="290.0" height="100.0" rx="10" fill="#b2f2bb"/>
 <path d="M530.4 253.9 Q677.5 254.4 819.0 254.8 M821.2 256.3 Q822.0 303.9 821.1 355.6 M818.9 355.6 Q677.3 357.2 528.4 355.0 M530.5 355.9 Q530.7 303.5 528.6 255.5" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
 <path d="M530.6 254.3 Q674.7 252.2 818.6 255.6 M819.6 256.2 Q817.7 307.4 819.6 354.2 M820.6 356.3 Q676.8 356.4 528.9 354.4 M529.7 354.2 Q532.7 302.9 528.6 255.2" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>

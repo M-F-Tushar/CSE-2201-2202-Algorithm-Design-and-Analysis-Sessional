@@ -311,13 +311,13 @@
       "locked": false,
       "text": "Heap sort\nReliable time; little extra memory",
       "originalText": "Heap sort\nReliable time; little extra memory",
-      "fontSize": 14,
+      "fontSize": 13,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "ch5-01-sorting-reach-escalator-n3",
       "lineHeight": 1.25,
-      "baseline": 14
+      "baseline": 13
     },
     {
       "id": "ch5-01-sorting-reach-escalator-n4",
