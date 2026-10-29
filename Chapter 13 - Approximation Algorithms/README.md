@@ -87,9 +87,7 @@ $$\max\left(\frac{C}{C^*},\ \frac{C^*}{C}\right) \le \rho(n)$$
 
 An algorithm with ratio $\rho(n)$ is called a **$\rho(n)$-approximation algorithm**, and $\rho(n)$ is its **performance guarantee**. It is a worst-case promise: the answer is never worse than this factor, though on many inputs it is much better.
 
-**How to prove a ratio.** We usually cannot compute $C^*$, which is the whole difficulty. The standard method is to find an easily computed quantity $L$ with $L \le C^*$ (a lower bound on the optimum for minimization), and show $C \le \rho \cdot L$. Then $C \le \rho\, C^*$ follows.
-
-Stronger families exist: a **PTAS** achieves ratio $1 + \varepsilon$ for any fixed $\varepsilon > 0$, and a **FPTAS** does so in time polynomial in $1/\varepsilon$ too. The 0/1 knapsack problem has a FPTAS; these are beyond the syllabus.
+**How to prove a ratio.** We usually cannot compute $C^*$, which is the whole difficulty. The standard method is to find an easily computed baseline $L$ with $L \le C^*$ (a lower bound on the optimum for minimization), and show $C \le \rho \cdot L$. Then $C \le \rho\, C^*$ follows directly. We never need to know the exact optimum to guarantee that our answer is close to it.
 
 ---
 
@@ -197,7 +195,7 @@ Greedy uses **3** sets $\{G, X, Y\}$. The optimum is **2** sets, $\{X, Y\}$, whi
 
 **Guarantee.** Greedy returns a cover of size at most $H(d)\cdot |C^*|$, where $d$ is the size of the largest set and $H(d) = 1 + \tfrac12 + \dots + \tfrac1d$ is the $d$-th harmonic number. Since $H(d) \le \ln d + 1 \le \ln n + 1$, the ratio is $O(\log n)$. In the example, $H(4) = 2.08 \ge 1.5$.
 
-**Intuition for the proof.** Give each element a *price*: when a chosen set covers $k$ new elements, each of those elements pays $1/k$. The total price equals the number of sets chosen. For any set $S$ in an optimal cover, the elements of $S$ are covered one by one, and when the $j$-th-from-last of them is covered, greedy could still have chosen $S$ itself with at least $j$ uncovered elements, so that element pays at most $1/j$. Hence the elements of $S$ pay at most $H(|S|)$ in total; summing over the sets of an optimal cover gives $|C| \le H(d)\,|C^*|$.
+**Intuition for the proof (cost-sharing).** Think of each chosen set as costing $1$. When a set covers $k$ newly covered elements, each of those elements pays an equal share of $1/k$. As elements get covered round by round, each remaining element pays at most $1, 1/2, 1/3, \dots, 1/d$. Adding these up gives $H(d) = 1 + \tfrac12 + \dots + \tfrac1d \approx \ln d$, proving that greedy picks at most $H(d)$ times the optimal number of sets.
 
 **Cost.** Polynomial: there are at most $m$ rounds (every round picks a new set), and each round scans all sets to count their uncovered elements. Better data structures make it near-linear in the total size of the sets. It is also known that, unless $\text{P} = \text{NP}$, no polynomial algorithm does substantially better than $\ln n$.
 

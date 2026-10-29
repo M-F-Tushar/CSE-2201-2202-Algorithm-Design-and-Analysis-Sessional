@@ -93,7 +93,7 @@ The key difference from average-case analysis: average-case analysis assumes the
 
 **Expected value** of a random variable $X$ is $E[X] = \sum_x x \cdot \Pr[X = x]$. Expectation is linear: $E[X + Y] = E[X] + E[Y]$, even when $X$ and $Y$ are dependent.
 
-An **indicator random variable** $X_A$ equals 1 if event $A$ happens and 0 otherwise, so $E[X_A] = \Pr[A]$. To count something, write it as a sum of indicators and add the probabilities.
+An **indicator random variable** $X_A$ equals 1 if event $A$ happens and 0 otherwise, so $E[X_A] = \Pr[A]$. Think of it as a simple tally mark: it counts 1 when the event occurs and 0 when it does not. To count total occurrences, simply sum the probabilities of the individual tally marks.
 
 **Hiring problem.** Interview $n$ candidates in random order; hire whenever the current candidate is the best so far. Let $X_i = 1$ if candidate $i$ is hired. Candidate $i$ is the best of the first $i$ with probability $1/i$, so
 
@@ -116,6 +116,8 @@ Ordinary quicksort picks a fixed pivot (for example the last element) and takes 
 $$E[\text{comparisons}] = \sum_{i<j} \frac{2}{j-i+1} < 2n \sum_{k=1}^{n} \frac{1}{k} = O(n \log n).$$
 
 The exact figure is about $2n \ln n \approx 1.39\, n \log_2 n$.
+
+**Plain explanation:** Two numbers are compared only if one is picked as a pivot before any number lying between them in sorted order is picked. Numbers close together in sorted order have a high chance of comparison, while numbers far apart are almost never compared because another pivot between them separates them early. Summing this over all pairs gives $O(n \log n)$.
 
 | Case | Time |
 | :--- | :--- |
@@ -144,6 +146,8 @@ Unlike quicksort, only **one** side is searched.
 **Expected time.** A good pivot (probability 1/2) needs about 2 tries and shrinks the range to at most $3n/4$. Partitioning costs $cn$, so
 
 $$E[T(n)] \le 2cn\left(1 + \tfrac34 + \left(\tfrac34\right)^2 + \cdots\right) = 8cn = O(n).$$
+
+**Why is it $O(n)$ instead of $O(n \log n)$?** Quicksort must recursively sort **both** sides of the pivot (work: $n + n + n + \dots$). But Selection only needs to find one item, so it discards the other side completely! The work shrinks geometrically: $n + \frac{3}{4}n + (\frac{3}{4})^2 n + \dots \le 4n = O(n)$.
 
 ![Selection shrinks the problem geometrically, so the total work is linear](diagrams/ch14-05-randomized-select-shrink.svg)
 
