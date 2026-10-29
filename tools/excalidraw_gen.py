@@ -74,6 +74,7 @@ class E:
     bend: float = 0.5  # where along the gap the elbow turns
     directed: bool = True
     pts: list[tuple[float, float]] = None
+    width: float = 0  # stroke width; 0 = default
 
 
 @dataclass
@@ -310,15 +311,15 @@ def render_svg(d: D) -> str:
             _sketch_line(pts[j][0], pts[j][1], pts[j + 1][0], pts[j + 1][1], seed + i * 13 + j, 1.0)
             for j in range(len(pts) - 1)
         )
+        sw = getattr(e, "width", 0) or 1.9
         out.append(
-            f'<path d="{segs}" fill="none" stroke="{e.color}" stroke-width="1.9" '
+            f'<path d="{segs}" fill="none" stroke="{e.color}" stroke-width="{sw}" '
             f'stroke-linecap="round"{dash} opacity="0.85"/>'
         )
         if getattr(e, "directed", True):
             out.append(_arrow_head(pts[-2], pts[-1], e.color))
         if e.label:
-            mx = (pts[len(pts) // 2 - 1][0] + pts[len(pts) // 2][0]) / 2
-            my = (pts[len(pts) // 2 - 1][1] + pts[len(pts) // 2][1]) / 2
+            mx, my = _label_point(pts)
             tw = len(e.label) * 8 + 14
             out.append(
                 f'<rect x="{mx - tw / 2:.1f}" y="{my - 12:.1f}" width="{tw}" height="24" '
@@ -367,6 +368,12 @@ def render_svg(d: D) -> str:
 
     out.append("</svg>")
     return "\n".join(out)
+
+
+def _label_point(pts):
+    """Edge labels sit at the midpoint of the middle segment of the polyline."""
+    k = len(pts) // 2
+    return (pts[k - 1][0] + pts[k][0]) / 2, (pts[k - 1][1] + pts[k][1]) / 2
 
 
 def _arrow_head(p0, p1, color):
@@ -485,7 +492,31 @@ def render_excalidraw(d: D) -> dict:
                 "elbowed": False,
             }
         )
+        if getattr(e, "width", 0):
+            el["strokeWidth"] = e.width
         elements.append(el)
+        if e.label:
+            # Same placement as the SVG: a white chip masking the line, text on top.
+            mx, my = _label_point(pts)
+            tw = len(e.label) * 8 + 14
+            chip = _base(f"{d.key}-el{i}", "rectangle", mx - tw / 2, my - 12, tw, 24,
+                         "transparent", BG, seed + 1500 + i)
+            elements.append(chip)
+            elements.append(
+                {
+                    **_base(f"{d.key}-elt{i}", "text", mx - tw / 2, my - 8.5, tw, 17,
+                            "#495057", "transparent", seed + 1700 + i),
+                    "text": e.label,
+                    "originalText": e.label,
+                    "fontSize": 13,
+                    "fontFamily": 1,
+                    "textAlign": "center",
+                    "verticalAlign": "middle",
+                    "containerId": None,
+                    "lineHeight": 1.25,
+                    "baseline": 13,
+                }
+            )
 
     for i, n in enumerate(d.nodes):
         stroke, fill = PALETTE.get(n.color, PALETTE["blue"])

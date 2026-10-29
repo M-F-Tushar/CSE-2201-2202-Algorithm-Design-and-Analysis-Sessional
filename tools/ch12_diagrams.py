@@ -1,6 +1,7 @@
 """Chapter 12 (Flow Algorithms) diagram specs."""
 
 from tools.excalidraw_gen import D, E, N
+from tools.ch12_ff_diagrams import FF_DIAGRAMS
 
 OUT = "Chapter 12 - Flow Algorithms/diagrams"
 
@@ -134,4 +135,4 @@ matching = D(
     caption="Green edges carry flow: matching A-Y, B-X, C-Z. Maximum flow 3 = maximum matching size 3",
 )
 
-DIAGRAMS = [flow_network, residual, loop, mincut, matching]
+DIAGRAMS = [flow_network, residual, loop, mincut, matching, *FF_DIAGRAMS]

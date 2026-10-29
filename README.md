@@ -4,7 +4,7 @@
   <a href="https://github.com/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional"><img src="https://img.shields.io/github/stars/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional?style=social" alt="GitHub stars"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/language-Python%20%7C%20C%2B%2B-blue" alt="Languages">
-  <img src="https://img.shields.io/badge/diagrams-182%20Excalidraw%20SVGs-ff69b4" alt="Diagrams">
+  <img src="https://img.shields.io/badge/diagrams-191%20Excalidraw%20SVGs-ff69b4" alt="Diagrams">
   <img src="https://img.shields.io/badge/chapters-16%20%2B%20references-success" alt="Chapters">
   <img src="https://img.shields.io/badge/book-CLRS%204th%20Ed.-orange" alt="Primary reference">
 </p>
@@ -75,7 +75,7 @@
 | Content chapters | **16** (Chapter 0 – Chapter 15) + References |
 | Chapter READMEs | **16** — every chapter has a full README with TOC |
 | Total Markdown files | **~40** (chapter READMEs + batch READMEs + diagram indexes) |
-| Hand-drawn SVGs | **182** (each paired with an `.excalidraw` source → **364** diagram files) |
+| Hand-drawn SVGs | **191** (each paired with an `.excalidraw` source → **382** diagram files) |
 | Largest chapter | **Ch 11 — Graph Algorithms** (35 SVGs, 2 114-line README) |
 | Code examples | **13** `.cpp` files (Ch 6 + Lab Practice) + Python pseudocode throughout |
 | Batch question banks | **3 batches** + Lab Practice |
@@ -186,8 +186,8 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 │   ├── README.md  (2 114 lines)
 │   └── diagrams/  (35 SVGs) — tree vs graph, representation, BFS, Dijkstra×2, Bellman-Ford×3, Floyd-Warshall×2, topo, SCC, MST/Kruskal/DSU …
 ├── Chapter 12 - Flow Algorithms/
-│   ├── README.md  (246 lines)
-│   └── diagrams/  (5 SVGs) — flow network, residual, Ford-Fulkerson, Edmonds-Karp, bipartite matching
+│   ├── README.md  (492 lines)
+│   └── diagrams/  (14 SVGs) — flow network, residual, Ford-Fulkerson foundations + 5-step trace + min cut + worst case, Edmonds-Karp, bipartite matching
 ├── Chapter 13 - Approximation Algorithms/
 │   ├── README.md  (245 lines)
 │   └── diagrams/  (4 SVGs) — vertex cover, TSP & set cover approximations
@@ -299,9 +299,9 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 > 📊 35 diagrams · 📄 2 114 lines · 📂 [`Chapter 11/README.md`](Chapter%2011%20-%20Graph%20Algorithms/README.md)
 
 ### Chapter 12 — Flow Algorithms
-> Flow network (source/sink/capacity/flow) → residual graph & augmenting path → max-flow / min-cut idea → **Ford-Fulkerson** → **Edmonds-Karp (BFS augmentations)** → bipartite matching (reduction to max flow), with worked flows and complexity.
+> Flow network (source/sink/capacity/flow) → residual graph & augmenting path → **Ford-Fulkerson** (plain-words foundations, a 5-step `f/c` trace of a 7-vertex network reaching max flow 22, final residual graph & min cut, **O(E · |f*|)** analysis with worst case) → **Edmonds-Karp (BFS augmentations)** → max-flow / min-cut → bipartite matching (reduction to max flow).
 >
-> 📊 5 diagrams · 📄 246 lines · 📂 [`Chapter 12/README.md`](Chapter%2012%20-%20Flow%20Algorithms/README.md)
+> 📊 14 diagrams · 📄 492 lines · 📂 [`Chapter 12/README.md`](Chapter%2012%20-%20Flow%20Algorithms/README.md)
 
 ### Chapter 13 — Approximation Algorithms
 > Why exact algorithms fail for NP-hard problems → approximation ratio & performance guarantee → **Vertex Cover (2-approx)** → **TSP approximation (metric, MST-based)** → **Set Cover (greedy log-approx)** and their relation to NP-hardness.
@@ -348,12 +348,12 @@ Every chapter has a `diagrams/` folder. Each diagram ships as **two files**:
 | Ch 9 — Backtracking | 4 | State-space tree, 4-Queens |
 | Ch 10 — Branch & Bound | 5 | LC-search, bounding, TSP |
 | Ch 11 — Graph Algorithms | **35** | Full graph studio (largest chapter) |
-| Ch 12 — Flow | 5 | Residual, Ford-Fulkerson, Edmonds-Karp |
+| Ch 12 — Flow | 14 | Ford-Fulkerson step-by-step trace, min cut, Edmonds-Karp |
 | Ch 13 — Approximation | 4 | Vertex cover, TSP, set cover |
 | Ch 14 — Randomized & Parallel | 5 | Rand. quicksort, fork-join |
 | Ch 15 — Lower Bounds & NP | 5 | Decision tree, P/NP Venn |
 | Ch 0 — Batch papers | **63** | B1 (23) + B2 (25) + CT (15) + lab practice codes |
-| **Total** | **182** | **364 files incl. `.excalidraw` sources** |
+| **Total** | **191** | **382 files incl. `.excalidraw` sources** |
 
 Regenerate or audit diagrams:
 
