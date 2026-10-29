@@ -981,18 +981,18 @@ For matrices $A_1,A_2,\dots,A_n$, if $A_i$ has dimension $p_{i-1} \times p_i$, t
 
 #### Subproblem Decomposition
 
-Let $M[i,j]$ be the minimum multiplication cost for matrices $A_i \dots A_j$.
+Let $M[i,j]$ be the minimum multiplication cost for matrices $A_i \dots A_j$, and let $S[i,j]$ store the split point that achieves that minimum.
 
-If the final split is after $A_k$, then:
+If the final split is after $A_k$, the two subchains are $A_i\dots A_k$ and $A_{k+1}\dots A_j$. Their results have dimensions $p_{i-1}\times p_k$ and $p_k\times p_j$, so combining them costs $p_{i-1}p_kp_j$ scalar multiplications.
 
-$$
-M[i,j] = M[i,k] + M[k+1,j] + p_{i-1}p_kp_j
-$$
-
-Try all split points:
+For every interval with $i<j$:
 
 $$
 M[i,j] = \min_{i \le k < j}\{M[i,k] + M[k+1,j] + p_{i-1}p_kp_j\}
+$$
+
+$$
+S[i,j] = \underset{i \le k < j}{\arg\min}\{M[i,k] + M[k+1,j] + p_{i-1}p_kp_j\}
 $$
 
 Base case:
@@ -1003,65 +1003,55 @@ $$
 
 #### Tabulation Walkthrough
 
-Given four matrices with dimensions:
+Given four matrices:
 
-- $A_1: 5 \times 10$
-- $A_2: 10 \times 3$
-- $A_3: 3 \times 12$
-- $A_4: 12 \times 5$
+| Matrix | $A_1$ | $A_2$ | $A_3$ | $A_4$ |
+| :---: | :---: | :---: | :---: | :---: |
+| Dimension | $5\times10$ | $10\times3$ | $3\times12$ | $12\times5$ |
 
-So $p = [5,10,3,12,5]$.
+Therefore, $p=[5,10,3,12,5]$.
 
-Length 2 intervals:
+**How this tabulation is structured:** a matrix-chain state is an interval, not a prefix of items. Rows identify the starting matrix $i$, columns identify the ending matrix $j$, and only cells with $i\le j$ are valid. Fill the table by increasing chain length $\ell=j-i+1$: each candidate for $M[i,j]$ refers only to shorter intervals that have already been filled. Record the winning split in $S[i,j]$ alongside the cost in $M[i,j]$.
 
-- $M[1,2] = 5 \cdot 10 \cdot 3 = 150$
-- $M[2,3] = 10 \cdot 3 \cdot 12 = 360$
-- $M[3,4] = 3 \cdot 12 \cdot 5 = 180$
+| Chain length $\ell$ | Interval filled | Candidate costs by split $k$ | Stored cost $M[i,j]$ | Split $S[i,j]$ |
+| :---: | :---: | :--- | :---: | :---: |
+| 1 | $[1,1],[2,2],[3,3],[4,4]$ | Base cases | 0 for each | - |
+| 2 | $[1,2]$ | $k=1: 5\cdot10\cdot3=150$ | 150 | 1 |
+| 2 | $[2,3]$ | $k=2: 10\cdot3\cdot12=360$ | 360 | 2 |
+| 2 | $[3,4]$ | $k=3: 3\cdot12\cdot5=180$ | 180 | 3 |
+| 3 | $[1,3]$ | $k=1: 960;\ k=2: 330$ | 330 | 2 |
+| 3 | $[2,4]$ | $k=2: 330;\ k=3: 960$ | 330 | 2 |
+| 4 | $[1,4]$ | $k=1: 580;\ k=2: 405;\ k=3: 630$ | **405** | **2** |
 
-Length 3 intervals:
-
-$$
-M[1,3] = \min(0+360+5\cdot10\cdot12,\ 150+0+5\cdot3\cdot12)=\min(960,330)=330
-$$
-
-$$
-M[2,4] = \min(0+180+10\cdot3\cdot5,\ 360+0+10\cdot12\cdot5)=\min(330,960)=330
-$$
-
-Length 4 interval:
+For example, when filling $M[1,3]$, the two candidates are:
 
 $$
 \begin{aligned}
-M[1,4] = \min(&0+330+5\cdot10\cdot5,\\
-&150+180+5\cdot3\cdot5,\\
-&330+0+5\cdot12\cdot5) \\
-= \min(580,405,630)=405
+k=1 &: M[1,1]+M[2,3]+5\cdot10\cdot12 = 0+360+600=960,\\
+k=2 &: M[1,2]+M[3,3]+5\cdot3\cdot12 = 150+0+180=330.
 \end{aligned}
 $$
 
-Complete cost table:
+The smaller candidate is stored, so $M[1,3]=330$ and $S[1,3]=2$. The same process is applied to every interval in the fill-order table.
 
-Arrow legend for Matrix Chain Multiplication:
+**Minimum-cost table** (each off-diagonal entry is `cost (chosen split k)`):
 
-- $\downarrow k$ marks the split point that produced the minimum value in that interval.
-- After choosing $k$, traceback recursively follows the left interval $M[i,k]$ and right interval $M[k+1,j]$.
-
-| $M[i,j]$ | 1 | 2 | 3 | 4 |
+| $M[i,j]$ | End $j=1$ | End $j=2$ | End $j=3$ | End $j=4$ |
 | :---: | :---: | :---: | :---: | :---: |
-| 1 | 0 | 150 ($\downarrow k=1$) | 330 ($\downarrow k=2$) | **405** ($\downarrow k=2$) |
-| 2 | - | 0 | 360 ($\downarrow k=2$) | 330 ($\downarrow k=2$) |
-| 3 | - | - | 0 | 180 ($\downarrow k=3$) |
-| 4 | - | - | - | 0 |
+| Start $i=1$ | 0 | 150 ($k=1$) | 330 ($k=2$) | **405** ($k=2$) |
+| Start $i=2$ | - | 0 | 360 ($k=2$) | 330 ($k=2$) |
+| Start $i=3$ | - | - | 0 | 180 ($k=3$) |
+| Start $i=4$ | - | - | - | 0 |
 
-Arrow-guided traceback for the final cell:
+The cost matrix stores the optimum; the selected $k$ values form the split table $S$. To reconstruct the parenthesization, follow the recorded split recursively:
 
-| Current cell | Follow split arrow | Subproblems created |
-| :---: | :---: | :--- |
-| $M[1,4]=405$ | $\downarrow k=2$ | $M[1,2]$ and $M[3,4]$ |
-| $M[1,2]=150$ | $\downarrow k=1$ | $A_1$ and $A_2$ |
-| $M[3,4]=180$ | $\downarrow k=3$ | $A_3$ and $A_4$ |
+| Current interval | Cost | Split | Smaller intervals |
+| :---: | :---: | :---: | :--- |
+| $[1,4]$ | 405 | $k=2$ | $[1,2]$ and $[3,4]$ |
+| $[1,2]$ | 150 | $k=1$ | $A_1$ and $A_2$ |
+| $[3,4]$ | 180 | $k=3$ | $A_3$ and $A_4$ |
 
-The minimum cost is **405**, obtained by splitting at $k=2$: $(A_1A_2)(A_3A_4)$.
+The minimum cost is **405** scalar multiplications, with optimal parenthesization **$(A_1A_2)(A_3A_4)$**.
 
 #### Mermaid Diagram: Matrix Chain Interval Splits
 
