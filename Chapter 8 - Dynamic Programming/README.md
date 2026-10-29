@@ -273,7 +273,7 @@ Both methods compute the same answer. Memoization follows the needed calls from 
 
 The following sections include only the requested Dynamic Programming problems.
 
-For matrix-form tabulation, use a consistent layout: rows identify how many choices are available and include the current choice's input data; columns identify the target capacity or length; each cell stores the best value for that state. Arrows show the decision that produced a cell, and every table defines its own arrow legend. In 0/1 Knapsack, taking an item moves to the previous row; in Rod Cutting, reusing a piece stays in the same row.
+Use this reusable tabulation pattern across DP problems: define the state and value to store, initialize base states, fill in dependency order, store the optimal decision (in the value table or a parallel decision table), then trace those decisions to recover a solution. Table axes depend on the state: item and capacity for Knapsack, interval endpoints for Matrix Chain Multiplication and Optimal BST, nodes for Multistage Graph, current city and subset for TSP, and stages and budget for Reliability Design. In 0/1 Knapsack, taking an item uses the previous row; in Rod Cutting, reusing a piece stays in the same row.
 
 ---
 
@@ -1096,35 +1096,48 @@ Given sorted keys and their search probabilities, construct a binary search tree
 
 #### Subproblem Decomposition
 
-Let $E[i,j]$ be the minimum expected cost for keys $i$ through $j$.
+Let $E[i,j]$ be the minimum expected cost for keys $i$ through $j$, $W[i,j]$ the total probability weight in that interval, and $Root[i,j]$ the selected root index.
 
-Let $W[i,j]$ be the total probability weight in that interval.
-
-If key $r$ is chosen as root, then keys $i$ through $r-1$ form the left subtree and keys $r+1$ through $j$ form the right subtree.
+The interval weight is
 
 $$
-E[i,j] = \min_{i \le r \le j}\{E[i,r-1] + E[r+1,j] + W[i,j]\}
+\begin{aligned}
+W[i,j] &= \sum_{t=i}^{j}p_t+\sum_{t=i-1}^{j}q_t,\\
+W[i,j] &= W[i,j-1]+p_j+q_j \quad (j\ge i)
+\end{aligned}
 $$
 
-Base case:
+If key $k_r$ is chosen as root, keys $i$ through $r-1$ form the left subtree and keys $r+1$ through $j$ form the right subtree. Try each possible root and store the minimum and its root:
 
 $$
-E[i,i-1] = q_{i-1}
+E[i,j] = \min_{i \le r \le j}\{E[i,r-1] + E[r+1,j] + W[i,j]\},
+\qquad
+Root[i,j] = \underset{i \le r \le j}{\arg\min}\{E[i,r-1] + E[r+1,j] + W[i,j]\}
+$$
+
+Base case for an empty key interval:
+
+$$
+E[i,i-1] = W[i,i-1] = q_{i-1}
 $$
 
 #### Tabulation Walkthrough
 
-Given three sorted keys with probabilities:
+Given three sorted keys with relative successful-search weights:
 
 | Key | $k_1$ | $k_2$ | $k_3$ |
 | :---: | :---: | :---: | :---: |
 | $p_i$ | 0.15 | 0.10 | 0.05 |
 
-Unsuccessful probabilities:
+Relative unsuccessful-search weights:
 
 | Gap | $q_0$ | $q_1$ | $q_2$ | $q_3$ |
 | :---: | :---: | :---: | :---: | :---: |
 | Probability | 0.05 | 0.10 | 0.05 | 0.05 |
+
+**Probability check:** the listed $p_i$ and $q_i$ sum to $0.55$, not $1$. Treat them as relative weights for the tabulation below; dividing them all by $0.55$ gives normalized probabilities. This scales every cost by $1/0.55$ without changing any root choice, so the final normalized expected cost is $1.25/0.55\approx2.2727$.
+
+The table is filled by increasing interval length $\ell=j-i+1$. First initialize the empty intervals from the unsuccessful-search probabilities, then compute length-1 intervals, length-2 intervals, and so on. Each candidate uses only shorter intervals that are already available.
 
 Initialization:
 
@@ -1132,55 +1145,58 @@ $$
 E[1,0]=0.05,\ E[2,1]=0.10,\ E[3,2]=0.05,\ E[4,3]=0.05
 $$
 
-Length 1:
+The interval weights for this example are:
 
-- $E[1,1]=0.05+0.10+0.30=0.45$
-- $E[2,2]=0.10+0.05+0.25=0.40$
-- $E[3,3]=0.05+0.05+0.15=0.25$
+| Interval | $W[i,j]$ |
+| :---: | :---: |
+| $[1,1]$, $[2,2]$, $[3,3]$ | 0.30, 0.25, 0.15 |
+| $[1,2]$, $[2,3]$ | 0.45, 0.35 |
+| $[1,3]$ | 0.55 |
 
-Length 2:
+**Fill by interval length:**
+
+- Length 1: $E[1,1]=0.05+0.10+0.30=0.45$ (root $k_1$); $E[2,2]=0.10+0.05+0.25=0.40$ (root $k_2$); $E[3,3]=0.05+0.05+0.15=0.25$ (root $k_3$).
+- Length 2:
 
 $$
 E[1,2]=\min(0.05+0.40+0.45,\ 0.45+0.05+0.45)=\min(0.90,0.95)=0.90
 $$
 
+The minimizing root is $k_1$. Similarly,
+
 $$
 E[2,3]=\min(0.10+0.25+0.35,\ 0.40+0.05+0.35)=\min(0.70,0.80)=0.70
 $$
 
-Length 3:
+with minimizing root $k_2$.
+
+- Length 3:
 
 $$
 E[1,3]=\min(0.05+0.70+0.55,\ 0.45+0.25+0.55,\ 0.90+0.05+0.55)
+=\min(1.30,1.25,1.50)=1.25
 $$
 
-$$
-E[1,3]=\min(1.30,1.25,1.50)=1.25
-$$
+The minimizing root is $k_2$.
 
-Expected cost table:
+**Weighted-cost table** (before probability normalization; rows are starting key $i$, columns are ending key $j$; base-gap cells use $j=i-1$):
 
-Arrow legend for Optimal BST:
-
-- $\downarrow r=k_i$ means key $k_i$ is chosen as the root of that interval.
-- Traceback follows the selected root, then recursively solves the left and right key intervals.
-
-| $E[i,j]$ | 0 | 1 | 2 | 3 |
+| $E[i,j]$ | End $j=0$ | End $j=1$ | End $j=2$ | End $j=3$ |
 | :---: | :---: | :---: | :---: | :---: |
-| 1 | 0.05 | 0.45 ($\downarrow r=k_1$) | 0.90 ($\downarrow r=k_1$) | **1.25** ($\downarrow r=k_2$) |
-| 2 | - | 0.10 | 0.40 ($\downarrow r=k_2$) | 0.70 ($\downarrow r=k_2$) |
-| 3 | - | - | 0.05 | 0.25 ($\downarrow r=k_3$) |
-| 4 | - | - | - | 0.05 |
+| Start $i=1$ | 0.05 | 0.45 | 0.90 | **1.25** |
+| Start $i=2$ | - | 0.10 | 0.40 | 0.70 |
+| Start $i=3$ | - | - | 0.05 | 0.25 |
+| Start $i=4$ | - | - | - | 0.05 |
 
-Arrow-guided root reconstruction:
+The separate root table records the decision stored for each nonempty interval:
 
-| Interval | Root arrow | Left subtree | Right subtree |
+| $Root[i,j]$ | End $j=1$ | End $j=2$ | End $j=3$ |
 | :---: | :---: | :---: | :---: |
-| $E[1,3]$ | $\downarrow r=k_2$ | $E[1,1]$ | $E[3,3]$ |
-| $E[1,1]$ | $\downarrow r=k_1$ | empty | empty |
-| $E[3,3]$ | $\downarrow r=k_3$ | empty | empty |
+| Start $i=1$ | 1 | 1 | **2** |
+| Start $i=2$ | - | 2 | 2 |
+| Start $i=3$ | - | - | 3 |
 
-The optimal root for keys 1 through 3 is $k_2$, because the minimum value for $E[1,3]$ occurs at $r=2$.
+**Traceback:** $Root[1,3]=2$ makes $k_2$ the root. The remaining intervals are $[1,1]$ and $[3,3]$, whose roots are $k_1$ and $k_3$. Thus the optimal root for keys 1 through 3 is **$k_2$**. Its weighted cost is **1.25**, corresponding to normalized expected cost approximately **2.2727**.
 
 #### Mermaid Diagram: Optimal BST Root Choices
 
@@ -1248,10 +1264,12 @@ Use this 5-stage graph:
 
 #### Subproblem Decomposition
 
-Let $Cost(X)$ be the minimum cost from node $X$ to destination $K$.
+Let $Cost(X)$ be the minimum cost from node $X$ to destination $K$, and let $Next(X)$ store a successor that achieves that cost.
 
 $$
-Cost(X) = \min_{(X,Y) \in E}\{w(X,Y) + Cost(Y)\}
+Cost(X) = \min_{(X,Y) \in E}\{w(X,Y) + Cost(Y)\},
+\qquad
+Next(X)=\underset{(X,Y)\in E}{\arg\min}\{w(X,Y)+Cost(Y)\}
 $$
 
 Base case:
@@ -1262,66 +1280,23 @@ $$
 
 #### Tabulation Walkthrough: Backward Solution
 
-Stage 5:
+A graph does not have a rectangular capacity axis, so use one row per node state, grouped by stage. Fill the table from the destination stage backward: each row's candidates use costs already stored for the next stage. Store both the minimum cost and its successor.
 
-$$
-Cost(K)=0
-$$
+| Stage | Node $X$ | Candidate costs $w(X,Y)+Cost(Y)$ | Stored $Cost(X)$ | Chosen $Next(X)$ |
+| :---: | :---: | :--- | :---: | :---: |
+| 5 | $K$ | Destination base case | 0 | - |
+| 4 | $H$ | $K: 4+0=4$ | 4 | $K$ |
+| 4 | $I$ | $K: 2+0=2$ | 2 | $K$ |
+| 4 | $J$ | $K: 5+0=5$ | 5 | $K$ |
+| 3 | $E$ | $H: 11+4=15$; $I: 8+2=10$; $J: 5+5=10$ | 10 | $I$ or $J$ |
+| 3 | $F$ | $H: 4+4=8$; $I: 3+2=5$; $J: 7+5=12$ | 5 | $I$ |
+| 3 | $G$ | $H: 5+4=9$; $I: 6+2=8$; $J: 2+5=7$ | 7 | $J$ |
+| 2 | $B$ | $E: 4+10=14$; $F: 2+5=7$; $G: 1+7=8$ | 7 | $F$ |
+| 2 | $C$ | $E: 2+10=12$; $F: 7+5=12$; $G: 11+7=18$ | 12 | $E$ or $F$ |
+| 2 | $D$ | $E: 5+10=15$; $F: 11+5=16$; $G: 8+7=15$ | 15 | $E$ or $G$ |
+| 1 | $A$ | $B: 9+7=16$; $C: 7+12=19$; $D: 3+15=18$ | **16** | $B$ |
 
-Stage 4:
-
-- $Cost(H)=4+0=4$
-- $Cost(I)=2+0=2$
-- $Cost(J)=5+0=5$
-
-Stage 3:
-
-$$
-Cost(E)=\min(11+4,8+2,5+5)=\min(15,10,10)=10
-$$
-
-$$
-Cost(F)=\min(4+4,3+2,7+5)=\min(8,5,12)=5
-$$
-
-$$
-Cost(G)=\min(5+4,6+2,2+5)=\min(9,8,7)=7
-$$
-
-Stage 2:
-
-$$
-Cost(B)=\min(4+10,2+5,1+7)=\min(14,7,8)=7
-$$
-
-$$
-Cost(C)=\min(2+10,7+5,11+7)=\min(12,12,18)=12
-$$
-
-$$
-Cost(D)=\min(5+10,11+5,8+7)=\min(15,16,15)=15
-$$
-
-Stage 1:
-
-$$
-Cost(A)=\min(9+7,7+12,3+15)=\min(16,19,18)=16
-$$
-
-Arrow-guided backward table:
-
-| Node | Candidate arrows | Chosen arrow | Stored cost |
-| :---: | :--- | :---: | :---: |
-| $H$ | $H \rightarrow K: 4+0$ | $H \rightarrow K$ | 4 |
-| $I$ | $I \rightarrow K: 2+0$ | $I \rightarrow K$ | 2 |
-| $J$ | $J \rightarrow K: 5+0$ | $J \rightarrow K$ | 5 |
-| $E$ | $E \rightarrow H:15$, $E \rightarrow I:10$, $E \rightarrow J:10$ | $E \rightarrow I$ or $E \rightarrow J$ | 10 |
-| $F$ | $F \rightarrow H:8$, $F \rightarrow I:5$, $F \rightarrow J:12$ | $F \rightarrow I$ | 5 |
-| $G$ | $G \rightarrow H:9$, $G \rightarrow I:8$, $G \rightarrow J:7$ | $G \rightarrow J$ | 7 |
-| $B$ | $B \rightarrow E:14$, $B \rightarrow F:7$, $B \rightarrow G:8$ | $B \rightarrow F$ | 7 |
-| $C$ | $C \rightarrow E:12$, $C \rightarrow F:12$, $C \rightarrow G:18$ | $C \rightarrow E$ or $C \rightarrow F$ | 12 |
-| $D$ | $D \rightarrow E:15$, $D \rightarrow F:16$, $D \rightarrow G:15$ | $D \rightarrow E$ or $D \rightarrow G$ | 15 |
-| $A$ | $A \rightarrow B:16$, $A \rightarrow C:19$, $A \rightarrow D:18$ | $A \rightarrow B$ | **16** |
+When candidates tie, all listed successors are optimal; any one can be stored for traceback. The source state's minimum cost is $Cost(A)=16$.
 
 Path reconstruction:
 
@@ -1383,25 +1358,29 @@ A salesperson starts from city 1, visits every other city exactly once, and retu
 
 #### Subproblem Decomposition
 
-Let $g(i,S)$ be the length of the shortest path starting at city $i$, visiting every city in subset $S$ exactly once, and then returning to city 1.
+Let $U=\{2,3,\dots,n\}$ be the non-starting cities. Let $g(i,S)$ be the minimum cost of starting at city $i$, visiting every city in subset $S\subseteq U$ exactly once, and then returning to city 1. Let $Next[i,S]$ record the next city on an optimal route.
 
 Base case:
 
 $$
-g(i,\emptyset)=C_{i1}
+g(i,\emptyset)=C_{i1}, \qquad Next[i,\emptyset]=1
 $$
 
-Recursive case:
+For nonempty $S$ (with $i\notin S$):
 
 $$
-g(i,S)=\min_{j \in S}\{C_{ij}+g(j,S-\{j\})\}
+g(i,S)=\min_{j \in S}\{C_{ij}+g(j,S-\{j\})\},
+\qquad
+Next[i,S]=\underset{j\in S}{\arg\min}\{C_{ij}+g(j,S-\{j\})\}
 $$
 
-Final answer:
+The first city after the start is selected by:
 
 $$
-\min_{2 \le j \le n}\{C_{1j}+g(j,V-\{1,j\})\}
+FirstCity=\underset{j\in U}{\arg\min}\{C_{1j}+g(j,U-\{j\})\}
 $$
+
+The minimum tour cost is the corresponding minimum candidate.
 
 #### Tabulation Walkthrough
 
@@ -1417,51 +1396,43 @@ C =
 \end{pmatrix}
 $$
 
-Subsets of size 0:
+Let $U=\{2,3,4\}$. This subset DP has one table row per current city and one column per remaining-city subset. Fill columns in increasing $|S|$: the empty-subset base cases first, then subsets of size 1, then size 2. A state is valid only when the current city $i$ is not in $S$; invalid combinations are marked `-`.
 
-- $g(2,\emptyset)=C_{21}=1$
-- $g(3,\emptyset)=C_{31}=15$
-- $g(4,\emptyset)=C_{41}=6$
+**Cost table** (cell values are $g(i,S)$):
 
-Subsets of size 1:
+| $g(i,S)$ | $\emptyset$ | $\{2\}$ | $\{3\}$ | $\{4\}$ | $\{2,3\}$ | $\{2,4\}$ | $\{3,4\}$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Current city $i=2$ | 1 | - | 21 | 10 | - | - | 20 |
+| Current city $i=3$ | 15 | 8 | - | 14 | - | 12 | - |
+| Current city $i=4$ | 6 | 4 | 27 | - | 20 | - | - |
 
-- $g(2,\{3\})=C_{23}+g(3,\emptyset)=6+15=21$
-- $g(2,\{4\})=C_{24}+g(4,\emptyset)=4+6=10$
-- $g(3,\{2\})=C_{32}+g(2,\emptyset)=7+1=8$
-- $g(3,\{4\})=C_{34}+g(4,\emptyset)=8+6=14$
-- $g(4,\{2\})=C_{42}+g(2,\emptyset)=3+1=4$
-- $g(4,\{3\})=C_{43}+g(3,\emptyset)=12+15=27$
+**Decision table** (cell values are $Next[i,S]$):
 
-Subsets of size 2:
+| $Next[i,S]$ | $\emptyset$ | $\{2\}$ | $\{3\}$ | $\{4\}$ | $\{2,3\}$ | $\{2,4\}$ | $\{3,4\}$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Current city $i=2$ | Return to 1 | - | 3 | 4 | - | - | 3 |
+| Current city $i=3$ | Return to 1 | 2 | - | 4 | - | 4 | - |
+| Current city $i=4$ | Return to 1 | 2 | 3 | - | 3 | - | - |
 
-$$
-g(2,\{3,4\})=\min(6+14,4+27)=20
-$$
-
-$$
-g(3,\{2,4\})=\min(7+10,8+4)=12
-$$
+For a size-1 state, $g(2,\{3\})=C_{23}+g(3,\emptyset)=6+15=21$, so $Next[2,\{3\}]=3$. The size-2 states compare all possible next cities:
 
 $$
-g(4,\{2,3\})=\min(3+21,12+8)=20
+\begin{aligned}
+g(2,\{3,4\}) &= \min(6+14,\ 4+27)=\min(20,31)=20, & Next[2,\{3,4\}]&=3,\\
+g(3,\{2,4\}) &= \min(7+10,\ 8+4)=\min(17,12)=12, & Next[3,\{2,4\}]&=4,\\
+g(4,\{2,3\}) &= \min(3+21,\ 12+8)=\min(24,20)=20, & Next[4,\{2,3\}]&=3.
+\end{aligned}
 $$
 
-Final calculation:
+The final choice from city 1 is:
 
-$$
-\min(2+20,9+12,10+20)=\min(22,21,30)=21
-$$
+| First city $j$ | Candidate tour cost $C_{1j}+g(j,U-\{j\})$ |
+| :---: | :---: |
+| 2 | $2+20=22$ |
+| 3 | $9+12=21$ |
+| 4 | $10+20=30$ |
 
-Arrow-guided subset table:
-
-| State | Candidate arrows | Chosen arrow | Stored cost |
-| :---: | :--- | :---: | :---: |
-| $g(2,\{3,4\})$ | $2 \rightarrow 3: 6+14=20$, $2 \rightarrow 4: 4+27=31$ | $2 \rightarrow 3$ | 20 |
-| $g(3,\{2,4\})$ | $3 \rightarrow 2: 7+10=17$, $3 \rightarrow 4: 8+4=12$ | $3 \rightarrow 4$ | 12 |
-| $g(4,\{2,3\})$ | $4 \rightarrow 2: 3+21=24$, $4 \rightarrow 3: 12+8=20$ | $4 \rightarrow 3$ | 20 |
-| Final from city 1 | $1 \rightarrow 2: 22$, $1 \rightarrow 3: 21$, $1 \rightarrow 4: 30$ | $1 \rightarrow 3$ | **21** |
-
-Minimum tour cost: **21**. One optimal tour is **$1 \to 3 \to 4 \to 2 \to 1$**.
+The minimum is **21**, so $FirstCity=3$. Trace decisions: $1\to3$, then $Next[3,\{2,4\}]=4$, then $Next[4,\{2\}]=2$, then return to 1. One optimal tour is **$1 \to 3 \to 4 \to 2 \to 1$**, with cost **21**.
 
 #### Mermaid Diagram: TSP Subset DP Expansion
 
@@ -1471,18 +1442,35 @@ Minimum tour cost: **21**. One optimal tour is **$1 \to 3 \to 4 \to 2 \to 1$**.
 
 ```text
 TSP-HELD-KARP(C, n)
-1. for i = 2 to n:
-2.     g[i][empty set] = C[i][1]
-3. for subset_size = 1 to n - 2:
-4.     for each subset S of {2, 3, ..., n} with size subset_size:
-5.         for each city i not in S and i != 1:
-6.             g[i][S] = infinity
-7.             for each city j in S:
-8.                 g[i][S] = min(g[i][S], C[i][j] + g[j][S - {j}])
-9. answer = infinity
-10. for j = 2 to n:
-11.     answer = min(answer, C[1][j] + g[j][{2, ..., n} - {j}])
-12. return answer
+1. U = {2, 3, ..., n}
+2. for i = 2 to n:
+3.     g[i][empty set] = C[i][1]
+4.     Next[i][empty set] = 1
+5. for subset_size = 1 to n - 2:
+6.     for each subset S of U with size subset_size:
+7.         for each city i in U not in S:
+8.             g[i][S] = infinity
+9.             for each city j in S:
+10.                candidate = C[i][j] + g[j][S - {j}]
+11.                if candidate < g[i][S]:
+12.                    g[i][S] = candidate
+13.                    Next[i][S] = j
+14. answer = infinity
+15. for j = 2 to n:
+16.     candidate = C[1][j] + g[j][U - {j}]
+17.     if candidate < answer:
+18.         answer = candidate
+19.         FirstCity = j
+20. tour = [1, FirstCity]
+21. current = FirstCity
+22. S = U - {current}
+23. while S is not empty:
+24.     j = Next[current][S]
+25.     append j to tour
+26.     S = S - {j}
+27.     current = j
+28. append 1 to tour
+29. return answer and tour
 ```
 
 #### Complexity Analysis
@@ -1513,12 +1501,16 @@ For stages in series, total reliability is the product of stage reliabilities.
 
 #### Subproblem Decomposition
 
-Let $DP[i,b]$ be the maximum reliability using the first $i$ stages with budget at most $b$.
+Let $DP[i,b]$ be the maximum reliability using the first $i$ stages with budget at most $b$, and let $Copies[i,b]$ store the number of copies chosen for stage $i$ in that optimum. If one copy costs $c_i$, then $cost_i(x)=x c_i$.
 
-For each valid number of copies $x$ in stage $i$:
+For each valid copy count $x\in X_i$ such that $cost_i(x)=x c_i\le b$:
 
 $$
 DP[i,b] = \max_x\{DP[i-1,b-cost_i(x)] \times R_i(x)\}
+$$
+
+$$
+Copies[i,b] = \underset{x}{\arg\max}\{DP[i-1,b-cost_i(x)] \times R_i(x)\}
 $$
 
 Base case:
@@ -1527,7 +1519,7 @@ $$
 DP[0,b]=1
 $$
 
-The empty system has reliability 1 because it does not reduce the product.
+The empty system has reliability 1 because it does not reduce the product. If no valid allocation exists for a nonempty prefix of stages, its table value is 0.
 
 #### Tabulation Walkthrough
 
@@ -1541,34 +1533,31 @@ Suppose there are 3 stages and total budget $B=5$.
 
 At least one copy is required for each stage. Parallel reliability values:
 
-- Stage 1: $R_1(1)=0.80$, $R_1(2)=0.96$, $R_1(3)=0.992$.
+- Stage 1: $R_1(1)=0.80$, $R_1(2)=0.96$, $R_1(3)=0.992$, $R_1(4)=0.9984$, $R_1(5)=0.99968$.
 - Stage 2: $R_2(1)=0.70$, $R_2(2)=0.91$.
 - Stage 3: $R_3(1)=0.60$, $R_3(2)=0.84$.
 
-DP table for budgets 0 through 5. A value of 0 means infeasible.
+Fill the table by increasing number of stages considered; each state uses only values from the previous-stage row. A value of 0 for a nonempty prefix means no feasible allocation fits the budget.
 
-Arrow legend for Reliability Design:
+**Reliability table** (state values $DP[i,b]$):
 
-- $\nwarrow x$ means the current stage chooses $x$ copies and points back to the previous stage with the remaining budget.
-- A blank or 0 cell means the design is infeasible for that budget.
-
-| Stages considered | $B=0$ | $B=1$ | $B=2$ | $B=3$ | $B=4$ | $B=5$ |
+| Stages $i$ | $B=0$ | $B=1$ | $B=2$ | $B=3$ | $B=4$ | $B=5$ |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | 0 | 1 | 1 | 1 | 1 | 1 | 1 |
 | 1 | 0 | 0.8000 | 0.9600 | 0.9920 | 0.9984 | 0.9997 |
 | 2 | 0 | 0 | 0 | 0.5600 | 0.6720 | 0.7280 |
 | 3 | 0 | 0 | 0 | 0 | 0.3360 | **0.4704** |
 
-Arrow-guided predecessor table:
+**Decision table** (state values $Copies[i,b]$; `-` means infeasible or base case):
 
-| Stages considered | $B=0$ | $B=1$ | $B=2$ | $B=3$ | $B=4$ | $B=5$ |
+| Stages $i$ | $B=0$ | $B=1$ | $B=2$ | $B=3$ | $B=4$ | $B=5$ |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 0 | 1 | 1 | 1 | 1 | 1 | 1 |
-| 1 | 0 | 0.8000 ($\nwarrow x=1$) | 0.9600 ($\nwarrow x=2$) | 0.9920 ($\nwarrow x=3$) | 0.9984 ($\nwarrow x=4$) | 0.9997 ($\nwarrow x=5$) |
-| 2 | 0 | 0 | 0 | 0.5600 ($\nwarrow x=1$) | 0.6720 ($\nwarrow x=1$) | 0.7280 ($\nwarrow x=2$) |
-| 3 | 0 | 0 | 0 | 0 | 0.3360 ($\nwarrow x=1$) | **0.4704** ($\nwarrow x=2$) |
+| 0 | - | - | - | - | - | - |
+| 1 | - | 1 | 2 | 3 | 4 | 5 |
+| 2 | - | - | - | 1 | 1 | 2 |
+| 3 | - | - | - | - | 1 | 2 |
 
-Key calculation for final cell:
+Key calculation for the final cell:
 
 $$
 DP[3,5] = \max(DP[2,4]\times R_3(1),\ DP[2,3]\times R_3(2))
@@ -1578,13 +1567,7 @@ $$
 DP[3,5] = \max(0.6720\times 0.60,\ 0.5600\times 0.84)=\max(0.4032,0.4704)=0.4704
 $$
 
-The best design uses:
-
-- Stage 1: 1 copy
-- Stage 2: 1 copy
-- Stage 3: 2 copies
-
-Maximum reliability: **0.4704**.
+**Traceback:** $Copies[3,5]=2$, so stage 3 uses 2 copies and leaves budget $5-2(1)=3$. Then $Copies[2,3]=1$, so stage 2 uses 1 copy and leaves budget $3-1(2)=1$. Finally, $Copies[1,1]=1$. The best design uses 1, 1, and 2 copies for stages 1, 2, and 3, respectively. Maximum reliability: **0.4704**.
 
 #### Mermaid Diagram: Reliability Design Budget Choices
 
@@ -1594,17 +1577,20 @@ Maximum reliability: **0.4704**.
 
 ```text
 RELIABILITY-DESIGN(stages, budget)
-1. create table DP[0...m][0...budget]
+1. create tables DP[0...m][0...budget] and Copies[1...m][0...budget]
 2. for b = 0 to budget:
 3.     DP[0][b] = 1
 4. for i = 1 to m:
 5.     for b = 0 to budget:
 6.         DP[i][b] = 0
-7.         for each valid copy count x for stage i:
-8.             if cost_i(x) <= b:
-9.                 candidate = DP[i - 1][b - cost_i(x)] * reliability_i(x)
-10.                DP[i][b] = max(DP[i][b], candidate)
-11. return DP[m][budget]
+7.         Copies[i][b] = -
+8.         for each valid copy count x for stage i:
+9.             if x * cost_per_copy[i] <= b:
+10.                candidate = DP[i - 1][b - x * cost_per_copy[i]] * reliability_i(x)
+11.                if candidate > DP[i][b]:
+12.                    DP[i][b] = candidate
+13.                    Copies[i][b] = x
+14. return DP[m][budget] and Copies
 ```
 
 #### Complexity Analysis
