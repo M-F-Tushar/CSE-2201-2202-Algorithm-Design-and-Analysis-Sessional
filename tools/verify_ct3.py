@@ -22,8 +22,8 @@ MAX_ARRAY = [-2, 1, -3, 4, -1, 2, 1, -5]
 SEGMENT_ARRAY = [2, 1, 5, 3, 4, 7, 6, 8]
 LCS_X, LCS_Y = "AGGTAB", "GXTXAYB"
 KNAP_W, KNAP_P, KNAP_CAP = [3, 4, 5, 6], [2, 3, 1, 4], 8
-TOPO_VERTICES = [1, 2, 3, 4, 5, 6]
-TOPO_EDGES = [(5, 6), (4, 6), (5, 2), (4, 1), (2, 3), (3, 1)]
+TOPO_VERTICES = [0, 1, 2, 3, 4, 5]
+TOPO_EDGES = [(5, 0), (4, 0), (5, 2), (4, 1), (2, 3), (3, 1)]
 BF_VERTICES = ["S", "A", "B", "C", "D", "T"]
 BF_EDGES = [("S", "A", 5), ("S", "C", -2), ("A", "B", 1), ("C", "A", 2), ("C", "B", 4),
             ("C", "D", 4), ("B", "D", -1), ("B", "T", 3), ("D", "T", 1)]
@@ -400,23 +400,34 @@ class VerifyClassTests(unittest.TestCase):
     def test_ct2_topological_order(self):
         section = question_block(self.tests["2"], "Q1")
         stack = dfs_finish_stack(TOPO_VERTICES, TOPO_EDGES)
-        self.assertEqual(stack, [1, 3, 2, 6, 4, 5])
+        self.assertEqual(stack, [0, 1, 3, 2, 4, 5])
         order = list(reversed(stack))
-        self.assertEqual(order, [5, 4, 6, 2, 3, 1])
+        self.assertEqual(order, [5, 4, 2, 3, 1, 0])
         positions = {vertex: i for i, vertex in enumerate(order)}
         self.assertTrue(all(positions[u] < positions[v] for u, v in TOPO_EDGES))
-        adjacency, steps = tables(section)
+        grids = tables(section)
+        adjacency = next(g for g in grids if g[0][1] == "Outgoing neighbours")
+        matrix = next(g for g in grids if g[0][0] == "From / To")
+        steps = next(g for g in grids if g[0][-1] == "Finish stack")
+        queue_trace = next(g for g in grids if g[0][-1] == "In-degree updates")
+        indegree = {v: sum(1 for _, b in TOPO_EDGES if b == v) for v in TOPO_VERTICES}
         for row in adjacency[1:]:
             expected = sorted(b for a, b in TOPO_EDGES if a == int(row[0]))
             self.assertEqual([] if row[1] == "-" else [int(x) for x in row[1].split(",")], expected)
+            self.assertEqual(int(row[2]), indegree[int(row[0])])
+        for row in matrix[1:]:
+            u = int(row[0])
+            self.assertEqual([int(c) for c in row[1:]],
+                             [1 if (u, v) in TOPO_EDGES else 0 for v in TOPO_VERTICES])
         finish_stacks = [[int(x) for x in row[-1].split(",")] for row in steps[1:]]
         self.assertEqual(finish_stacks, [stack[:i] for i in (1, 2, 3, 4, 5, 6)])
-        self.assertIn("5,\\ 4,\\ 6,\\ 2,\\ 3,\\ 1", section.replace("$", ""))
+        self.assertIn("5,\\ 4,\\ 2,\\ 3,\\ 1,\\ 0", section.replace("$", ""))
         kahn_order = kahn(TOPO_VERTICES, TOPO_EDGES)
-        self.assertEqual(kahn_order, [4, 5, 6, 2, 3, 1])
+        self.assertEqual(kahn_order, [4, 5, 0, 2, 3, 1])
+        self.assertEqual([int(row[2]) for row in queue_trace[1:]], kahn_order)
         kahn_positions = {vertex: i for i, vertex in enumerate(kahn_order)}
         self.assertTrue(all(kahn_positions[u] < kahn_positions[v] for u, v in TOPO_EDGES))
-        self.assertIn("4, 5, 6, 2, 3, 1", section)
+        self.assertIn("4, 5, 0, 2, 3, 1", section)
 
     def test_ct2_bellman_ford_passes(self):
         snapshots, parent, negative = bellman_ford(BF_VERTICES, BF_EDGES, "S")

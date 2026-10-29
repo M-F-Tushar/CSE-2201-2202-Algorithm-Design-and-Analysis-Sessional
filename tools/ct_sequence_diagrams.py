@@ -139,18 +139,18 @@ def ct1_knapsack():
 
 
 def ct2_topological():
-    coords = {"4":(140,120),"5":(450,120),"6":(140,280),"2":(450,280),"3":(450,435),"1":(140,435)}
-    order = {"5":1,"4":2,"6":3,"2":4,"3":5,"1":6}
-    nodes = [box(v,f"{v}\nposition {order[v]}",x,y,120,58,"green" if v in "45" else "blue",14)
-             for v,(x,y) in coords.items()]
-    edges = [E("4","6",route="v"),
-             E("5","6",pts=[(510,178),(510,225),(200,225),(200,280)]),
-             E("5","2",route="v"),
-             E("4","1",pts=[(140,149),(90,149),(90,464),(140,464)]),
-             E("2","3",route="v"), E("3","1",route="h")]
-    nodes.append(box("answer","DFS finish stack, popped in reverse:\n5, 4, 6, 2, 3, 1",590,200,350,65,"green",16))
-    nodes.append(box("note","Edges: 5→6, 4→6, 5→2, 4→1, 2→3, 3→1\nKahn's algorithm: 4, 5, 6, 2, 3, 1 is also valid",590,300,350,70,"gray",14))
-    return D("ct2-01-topological", "CT2 Q1: Topological order of the DAG", (980, 540), nodes, edges)
+    # Exam layout (same as skeletons/ct2-01-topological-skeleton); vertices 0-5.
+    coords = {"5": (240, 120), "4": (580, 120), "0": (410, 260),
+              "2": (110, 330), "1": (710, 330), "3": (410, 460)}
+    order = {"5": 1, "4": 2, "2": 3, "3": 4, "1": 5, "0": 6}
+    nodes = [N(v, f"{v}\n#{order[v]}", x - 38, y - 38, 76, 76,
+               "green" if v in "45" else "blue", "ellipse", 15)
+             for v, (x, y) in coords.items()]
+    edges = [E(u, v, route="straight")
+             for u, v in [("5", "2"), ("5", "0"), ("4", "0"), ("4", "1"), ("2", "3"), ("3", "1")]]
+    nodes.append(box("answer", "DFS finish stack 0, 1, 3, 2, 4, 5 popped in reverse:\n5, 4, 2, 3, 1, 0   (#k = position in this order)",
+                     110, 535, 600, 62, "yellow", 15))
+    return D("ct2-01-topological", "CT2 Q1: Topological order of the DAG", (820, 620), nodes, edges)
 
 
 def ct2_bellman_ford():

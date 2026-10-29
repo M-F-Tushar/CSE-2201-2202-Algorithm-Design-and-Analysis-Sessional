@@ -8,7 +8,7 @@
       "type": "text",
       "x": 24,
       "y": 16,
-      "width": 932,
+      "width": 772,
       "height": 30,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -42,10 +42,10 @@
     {
       "id": "ct2-01-topological-e0",
       "type": "arrow",
-      "x": 200.0,
-      "y": 178,
-      "width": 0.0,
-      "height": 102,
+      "x": 216.48,
+      "y": 158.0,
+      "width": 82.95,
+      "height": 134.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -70,11 +70,11 @@
       "points": [
         [
           0.0,
-          0
+          0.0
         ],
         [
-          0.0,
-          102
+          -82.95,
+          134.0
         ]
       ],
       "lastCommittedPoint": null,
@@ -87,10 +87,10 @@
     {
       "id": "ct2-01-topological-e1",
       "type": "arrow",
-      "x": 510,
-      "y": 178,
-      "width": 310,
-      "height": 102,
+      "x": 278.0,
+      "y": 151.29,
+      "width": 94.0,
+      "height": 77.41,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -114,20 +114,12 @@
       "locked": false,
       "points": [
         [
-          0,
-          0
+          0.0,
+          0.0
         ],
         [
-          0,
-          47
-        ],
-        [
-          -310,
-          47
-        ],
-        [
-          -310,
-          102
+          94.0,
+          77.41
         ]
       ],
       "lastCommittedPoint": null,
@@ -140,10 +132,10 @@
     {
       "id": "ct2-01-topological-e2",
       "type": "arrow",
-      "x": 510.0,
-      "y": 178,
-      "width": 0.0,
-      "height": 102,
+      "x": 542.0,
+      "y": 151.29,
+      "width": 94.0,
+      "height": 77.41,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -168,11 +160,11 @@
       "points": [
         [
           0.0,
-          0
+          0.0
         ],
         [
-          0.0,
-          102
+          -94.0,
+          77.41
         ]
       ],
       "lastCommittedPoint": null,
@@ -185,10 +177,10 @@
     {
       "id": "ct2-01-topological-e3",
       "type": "arrow",
-      "x": 140,
-      "y": 149,
-      "width": 50,
-      "height": 315,
+      "x": 603.52,
+      "y": 158.0,
+      "width": 82.95,
+      "height": 134.0,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -212,20 +204,12 @@
       "locked": false,
       "points": [
         [
-          0,
-          0
+          0.0,
+          0.0
         ],
         [
-          -50,
-          0
-        ],
-        [
-          -50,
-          315
-        ],
-        [
-          0,
-          315
+          82.95,
+          134.0
         ]
       ],
       "lastCommittedPoint": null,
@@ -238,10 +222,10 @@
     {
       "id": "ct2-01-topological-e4",
       "type": "arrow",
-      "x": 510.0,
-      "y": 338,
-      "width": 0.0,
-      "height": 97,
+      "x": 148.0,
+      "y": 346.47,
+      "width": 224.0,
+      "height": 97.07,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -266,11 +250,11 @@
       "points": [
         [
           0.0,
-          0
+          0.0
         ],
         [
-          0.0,
-          97
+          224.0,
+          97.07
         ]
       ],
       "lastCommittedPoint": null,
@@ -283,10 +267,10 @@
     {
       "id": "ct2-01-topological-e5",
       "type": "arrow",
-      "x": 450,
-      "y": 464.0,
-      "width": 190,
-      "height": 0.0,
+      "x": 448.0,
+      "y": 443.53,
+      "width": 224.0,
+      "height": 97.07,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -310,12 +294,12 @@
       "locked": false,
       "points": [
         [
-          0,
+          0.0,
           0.0
         ],
         [
-          -190,
-          0.0
+          224.0,
+          -97.07
         ]
       ],
       "lastCommittedPoint": null,
@@ -327,11 +311,11 @@
     },
     {
       "id": "ct2-01-topological-n0",
-      "type": "rectangle",
-      "x": 140,
-      "y": 120,
-      "width": 120,
-      "height": 58,
+      "type": "ellipse",
+      "x": 202,
+      "y": 82,
+      "width": 76,
+      "height": 76,
       "angle": 0,
       "strokeColor": "#2f9e44",
       "backgroundColor": "#b2f2bb",
@@ -342,9 +326,7 @@
       "opacity": 100,
       "groupIds": [],
       "frameId": null,
-      "roundness": {
-        "type": 3
-      },
+      "roundness": null,
       "seed": 1500,
       "version": 1,
       "versionNonce": 1501,
@@ -362,10 +344,10 @@
     {
       "id": "ct2-01-topological-t0",
       "type": "text",
-      "x": 146,
-      "y": 131.5,
-      "width": 108,
-      "height": 35.0,
+      "x": 208,
+      "y": 101.25,
+      "width": 64,
+      "height": 37.5,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -385,23 +367,23 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "4\nposition 2",
-      "originalText": "4\nposition 2",
-      "fontSize": 14,
+      "text": "5\n#1",
+      "originalText": "5\n#1",
+      "fontSize": 15,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "ct2-01-topological-n0",
       "lineHeight": 1.25,
-      "baseline": 14
+      "baseline": 15
     },
     {
       "id": "ct2-01-topological-n1",
-      "type": "rectangle",
-      "x": 450,
-      "y": 120,
-      "width": 120,
-      "height": 58,
+      "type": "ellipse",
+      "x": 542,
+      "y": 82,
+      "width": 76,
+      "height": 76,
       "angle": 0,
       "strokeColor": "#2f9e44",
       "backgroundColor": "#b2f2bb",
@@ -412,9 +394,7 @@
       "opacity": 100,
       "groupIds": [],
       "frameId": null,
-      "roundness": {
-        "type": 3
-      },
+      "roundness": null,
       "seed": 1501,
       "version": 1,
       "versionNonce": 1502,
@@ -432,10 +412,10 @@
     {
       "id": "ct2-01-topological-t1",
       "type": "text",
-      "x": 456,
-      "y": 131.5,
-      "width": 108,
-      "height": 35.0,
+      "x": 548,
+      "y": 101.25,
+      "width": 64,
+      "height": 37.5,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -455,23 +435,23 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "5\nposition 1",
-      "originalText": "5\nposition 1",
-      "fontSize": 14,
+      "text": "4\n#2",
+      "originalText": "4\n#2",
+      "fontSize": 15,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "ct2-01-topological-n1",
       "lineHeight": 1.25,
-      "baseline": 14
+      "baseline": 15
     },
     {
       "id": "ct2-01-topological-n2",
-      "type": "rectangle",
-      "x": 140,
-      "y": 280,
-      "width": 120,
-      "height": 58,
+      "type": "ellipse",
+      "x": 372,
+      "y": 222,
+      "width": 76,
+      "height": 76,
       "angle": 0,
       "strokeColor": "#1971c2",
       "backgroundColor": "#a5d8ff",
@@ -482,9 +462,7 @@
       "opacity": 100,
       "groupIds": [],
       "frameId": null,
-      "roundness": {
-        "type": 3
-      },
+      "roundness": null,
       "seed": 1502,
       "version": 1,
       "versionNonce": 1503,
@@ -502,10 +480,10 @@
     {
       "id": "ct2-01-topological-t2",
       "type": "text",
-      "x": 146,
-      "y": 291.5,
-      "width": 108,
-      "height": 35.0,
+      "x": 378,
+      "y": 241.25,
+      "width": 64,
+      "height": 37.5,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -525,23 +503,23 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "6\nposition 3",
-      "originalText": "6\nposition 3",
-      "fontSize": 14,
+      "text": "0\n#6",
+      "originalText": "0\n#6",
+      "fontSize": 15,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "ct2-01-topological-n2",
       "lineHeight": 1.25,
-      "baseline": 14
+      "baseline": 15
     },
     {
       "id": "ct2-01-topological-n3",
-      "type": "rectangle",
-      "x": 450,
-      "y": 280,
-      "width": 120,
-      "height": 58,
+      "type": "ellipse",
+      "x": 72,
+      "y": 292,
+      "width": 76,
+      "height": 76,
       "angle": 0,
       "strokeColor": "#1971c2",
       "backgroundColor": "#a5d8ff",
@@ -552,9 +530,7 @@
       "opacity": 100,
       "groupIds": [],
       "frameId": null,
-      "roundness": {
-        "type": 3
-      },
+      "roundness": null,
       "seed": 1503,
       "version": 1,
       "versionNonce": 1504,
@@ -572,10 +548,10 @@
     {
       "id": "ct2-01-topological-t3",
       "type": "text",
-      "x": 456,
-      "y": 291.5,
-      "width": 108,
-      "height": 35.0,
+      "x": 78,
+      "y": 311.25,
+      "width": 64,
+      "height": 37.5,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -595,23 +571,23 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "2\nposition 4",
-      "originalText": "2\nposition 4",
-      "fontSize": 14,
+      "text": "2\n#3",
+      "originalText": "2\n#3",
+      "fontSize": 15,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "ct2-01-topological-n3",
       "lineHeight": 1.25,
-      "baseline": 14
+      "baseline": 15
     },
     {
       "id": "ct2-01-topological-n4",
-      "type": "rectangle",
-      "x": 450,
-      "y": 435,
-      "width": 120,
-      "height": 58,
+      "type": "ellipse",
+      "x": 672,
+      "y": 292,
+      "width": 76,
+      "height": 76,
       "angle": 0,
       "strokeColor": "#1971c2",
       "backgroundColor": "#a5d8ff",
@@ -622,9 +598,7 @@
       "opacity": 100,
       "groupIds": [],
       "frameId": null,
-      "roundness": {
-        "type": 3
-      },
+      "roundness": null,
       "seed": 1504,
       "version": 1,
       "versionNonce": 1505,
@@ -642,10 +616,10 @@
     {
       "id": "ct2-01-topological-t4",
       "type": "text",
-      "x": 456,
-      "y": 446.5,
-      "width": 108,
-      "height": 35.0,
+      "x": 678,
+      "y": 311.25,
+      "width": 64,
+      "height": 37.5,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -665,23 +639,23 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "3\nposition 5",
-      "originalText": "3\nposition 5",
-      "fontSize": 14,
+      "text": "1\n#5",
+      "originalText": "1\n#5",
+      "fontSize": 15,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "ct2-01-topological-n4",
       "lineHeight": 1.25,
-      "baseline": 14
+      "baseline": 15
     },
     {
       "id": "ct2-01-topological-n5",
-      "type": "rectangle",
-      "x": 140,
-      "y": 435,
-      "width": 120,
-      "height": 58,
+      "type": "ellipse",
+      "x": 372,
+      "y": 422,
+      "width": 76,
+      "height": 76,
       "angle": 0,
       "strokeColor": "#1971c2",
       "backgroundColor": "#a5d8ff",
@@ -692,9 +666,7 @@
       "opacity": 100,
       "groupIds": [],
       "frameId": null,
-      "roundness": {
-        "type": 3
-      },
+      "roundness": null,
       "seed": 1505,
       "version": 1,
       "versionNonce": 1506,
@@ -712,10 +684,10 @@
     {
       "id": "ct2-01-topological-t5",
       "type": "text",
-      "x": 146,
-      "y": 446.5,
-      "width": 108,
-      "height": 35.0,
+      "x": 378,
+      "y": 441.25,
+      "width": 64,
+      "height": 37.5,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -735,26 +707,26 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "1\nposition 6",
-      "originalText": "1\nposition 6",
-      "fontSize": 14,
+      "text": "3\n#4",
+      "originalText": "3\n#4",
+      "fontSize": 15,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "ct2-01-topological-n5",
       "lineHeight": 1.25,
-      "baseline": 14
+      "baseline": 15
     },
     {
       "id": "ct2-01-topological-n6",
       "type": "rectangle",
-      "x": 590,
-      "y": 200,
-      "width": 350,
-      "height": 65,
+      "x": 110,
+      "y": 535,
+      "width": 600,
+      "height": 62,
       "angle": 0,
-      "strokeColor": "#2f9e44",
-      "backgroundColor": "#b2f2bb",
+      "strokeColor": "#f08c00",
+      "backgroundColor": "#ffec99",
       "fillStyle": "solid",
       "strokeWidth": 2,
       "strokeStyle": "solid",
@@ -782,10 +754,10 @@
     {
       "id": "ct2-01-topological-t6",
       "type": "text",
-      "x": 596,
-      "y": 212.5,
-      "width": 338,
-      "height": 40.0,
+      "x": 116,
+      "y": 547.25,
+      "width": 588,
+      "height": 37.5,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -805,85 +777,15 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "DFS finish stack, popped in reverse:\n5, 4, 6, 2, 3, 1",
-      "originalText": "DFS finish stack, popped in reverse:\n5, 4, 6, 2, 3, 1",
-      "fontSize": 16,
+      "text": "DFS finish stack 0, 1, 3, 2, 4, 5 popped in reverse:\n5, 4, 2, 3, 1, 0   (#k = position in this order)",
+      "originalText": "DFS finish stack 0, 1, 3, 2, 4, 5 popped in reverse:\n5, 4, 2, 3, 1, 0   (#k = position in this order)",
+      "fontSize": 15,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "ct2-01-topological-n6",
       "lineHeight": 1.25,
-      "baseline": 16
-    },
-    {
-      "id": "ct2-01-topological-n7",
-      "type": "rectangle",
-      "x": 590,
-      "y": 300,
-      "width": 350,
-      "height": 70,
-      "angle": 0,
-      "strokeColor": "#343a40",
-      "backgroundColor": "#e9ecef",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": null,
-      "roundness": {
-        "type": 3
-      },
-      "seed": 1507,
-      "version": 1,
-      "versionNonce": 1508,
-      "isDeleted": false,
-      "boundElements": [
-        {
-          "type": "text",
-          "id": "ct2-01-topological-t7"
-        }
-      ],
-      "updated": 1,
-      "link": null,
-      "locked": false
-    },
-    {
-      "id": "ct2-01-topological-t7",
-      "type": "text",
-      "x": 596,
-      "y": 317.5,
-      "width": 338,
-      "height": 35.0,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": null,
-      "roundness": null,
-      "seed": 1707,
-      "version": 1,
-      "versionNonce": 1708,
-      "isDeleted": false,
-      "boundElements": [],
-      "updated": 1,
-      "link": null,
-      "locked": false,
-      "text": "Edges: 5→6, 4→6, 5→2, 4→1, 2→3, 3→1\nKahn's algorithm: 4, 5, 6, 2, 3, 1 is also valid",
-      "originalText": "Edges: 5→6, 4→6, 5→2, 4→1, 2→3, 3→1\nKahn's algorithm: 4, 5, 6, 2, 3, 1 is also valid",
-      "fontSize": 14,
-      "fontFamily": 1,
-      "textAlign": "center",
-      "verticalAlign": "middle",
-      "containerId": "ct2-01-topological-n7",
-      "lineHeight": 1.25,
-      "baseline": 14
+      "baseline": 15
     }
   ],
   "appState": {

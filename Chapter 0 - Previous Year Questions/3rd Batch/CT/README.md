@@ -221,39 +221,65 @@ Key calculations:
 **Question (transcribed):** Perform a topological sort of the given DAG. (4 marks)
 
 <p align="center"><img src="diagrams/skeletons/ct2-01-topological-skeleton.svg" alt="Exam figure for CT2 Q1: the given DAG" width="560"></p>
-<p align="center"><em>Figure given in the question (centre vertex read as 0).</em></p>
+<p align="center"><em>Figure given in the question.</em></p>
 
-**Answer.** A **topological ordering** places every vertex $u$ before every vertex $v$ for each directed edge $u\to v$. It exists only for a DAG (a directed acyclic graph). The edges read from the scan are 5→6, 4→6, 5→2, 4→1, 2→3, and 3→1 (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
+**Answer.** A **topological ordering** places every vertex $u$ before every vertex $v$ for each directed edge $u\to v$. It exists only for a DAG (a directed acyclic graph). The edges read from the figure are 5→2, 5→0, 4→0, 4→1, 2→3, and 3→1 (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
 
-**Method (DFS finish stack).** Scan the start vertices in order $1,2,\dots,6$ and each adjacency list in increasing order. Run DFS and push a vertex onto a stack only **after** all of its outgoing neighbours have finished. The left-to-right stack is the finish order; its rightmost item is popped first.
+**Step 1: classify the graph** (as in [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md)). The graph is **directed**, **unweighted**, and has **no directed cycle** (every edge goes "downward" in the figure), so it is a DAG and a topological order exists. It has $V=6$ vertices and $E=6$ edges.
 
-| Vertex | Outgoing neighbours |
-| :---: | :--- |
-| 1 | - |
-| 2 | 3 |
-| 3 | 1 |
-| 4 | 1, 6 |
-| 5 | 2, 6 |
-| 6 | - |
+**Step 2: adjacency list and matrix.** Fix the vertex order $0,1,2,3,4,5$ and list each vertex's outgoing neighbours in increasing order. The in-degree is the number of edges arriving at the vertex.
+
+| Vertex | Outgoing neighbours | In-degree |
+| :---: | :--- | :---: |
+| 0 | - | 2 |
+| 1 | - | 2 |
+| 2 | 3 | 1 |
+| 3 | 1 | 1 |
+| 4 | 0, 1 | 0 |
+| 5 | 0, 2 | 0 |
+
+Adjacency matrix (row = from, column = to; `1` means an edge exists):
+
+| From / To | 0 | 1 | 2 | 3 | 4 | 5 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 1 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 2 | 0 | 0 | 0 | 1 | 0 | 0 |
+| 3 | 0 | 1 | 0 | 0 | 0 | 0 |
+| 4 | 1 | 1 | 0 | 0 | 0 | 0 |
+| 5 | 1 | 0 | 1 | 0 | 0 | 0 |
+
+**Step 3: DFS finish stack** (the method of [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)). Scan the start vertices in order $0,1,\dots,5$ and each adjacency list in increasing order. Run DFS and push a vertex onto a stack only **after** all of its outgoing neighbours have finished. The left-to-right stack is the finish order; its rightmost item is popped first.
 
 | Step | DFS call / return action | Why it happens | Finish stack |
 | :---: | :--- | :--- | :--- |
-| 1 | `DFS(1)`; finish `1`; push `1` | Vertex 1 has no outgoing neighbour. | 1 |
-| 2 | `DFS(2) → DFS(3)`; finish `3`; push `3` | $3\to1$, but 1 is already finished. | 1, 3 |
-| 3 | Return to and finish `2`; push `2` | Its only neighbour, 3, is complete. | 1, 3, 2 |
-| 4 | `DFS(4) → DFS(6)`; finish `6`; push `6` | $4\to1$ is already finished; 6 has no outgoing neighbour. | 1, 3, 2, 6 |
-| 5 | Return to and finish `4`; push `4` | Both neighbours, 1 and 6, are complete. | 1, 3, 2, 6, 4 |
-| 6 | `DFS(5)`; finish `5`; push `5` | $5\to2$ and $5\to6$ are already finished. | 1, 3, 2, 6, 4, 5 |
+| 1 | `DFS(0)`; finish `0`; push `0` | Vertex 0 has no outgoing neighbour. | 0 |
+| 2 | `DFS(1)`; finish `1`; push `1` | Vertex 1 has no outgoing neighbour. | 0, 1 |
+| 3 | `DFS(2) → DFS(3)`; finish `3`; push `3` | $3\to1$, but 1 is already finished. | 0, 1, 3 |
+| 4 | Return to and finish `2`; push `2` | Its only neighbour, 3, is complete. | 0, 1, 3, 2 |
+| 5 | `DFS(4)`; finish `4`; push `4` | $4\to0$ and $4\to1$ are already finished. | 0, 1, 3, 2, 4 |
+| 6 | `DFS(5)`; finish `5`; push `5` | $5\to0$ and $5\to2$ are already finished. | 0, 1, 3, 2, 4, 5 |
 
 Pop from the right of the stack:
 
 $$
-5,\ 4,\ 6,\ 2,\ 3,\ 1
+5,\ 4,\ 2,\ 3,\ 1,\ 0
 $$
 
-**Check each edge** (source before destination): 5→6, 4→6, 5→2, 4→1, 2→3, and 3→1 all point left to right. DFS-based topological sort takes $\Theta(V+E)$ time and $\Theta(V)$ space.
+**Check each edge** (source before destination): 5→2, 5→0, 4→0, 4→1, 2→3, and 3→1 all point left to right. DFS-based topological sort takes $\Theta(V+E)$ time and $\Theta(V)$ space.
 
-The order is not unique. Kahn's algorithm (repeatedly remove a vertex whose in-degree is 0, starting with 4 and 5) gives another valid order, **4, 5, 6, 2, 3, 1**.
+**Step 4: second method, Kahn's algorithm (queue trace).** Repeatedly remove a vertex whose in-degree is 0, append it to the answer, and lower the in-degree of its neighbours; a neighbour that reaches 0 joins the queue. Start with `Q = [4, 5]`, the in-degree 0 vertices. The table uses the BFS queue-trace format of [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md): the queue is shown after the current vertex is processed, front first, with the front in bold.
+
+| Vertices visited | Vertices in queue (front first) | Vertex traversal done | In-degree updates |
+| :--- | :--- | :---: | :--- |
+| 4, 5 | **5** | 4 | 0: 2→1, 1: 2→1 |
+| 4, 5, 0, 2 | **0**, 2 | 5 | 0: 1→0, 2: 1→0 |
+| — | **2** | 0 | none |
+| 4, 5, 0, 2, 3 | **3** | 2 | 3: 1→0 |
+| 4, 5, 0, 2, 3, 1 | **1** | 3 | 1: 1→0 |
+| — | empty | 1 | none |
+
+Kahn's order is **4, 5, 0, 2, 3, 1**. All six vertices were output, so there is no cycle. Both orders are valid because the order is not unique: 4 and 5 have no path between them, so either may come first.
 
 ![DAG with one valid topological order](diagrams/ct2-01-topological.svg)
 
@@ -823,7 +849,7 @@ Run `python tools/verify_ct3.py` and `python tools/verify_ct4.py` from the repos
 | CT1 — Fibonacci DP | Optimal substructure + overlapping subproblems; state $F(n)$, store each state once |
 | CT1 — LCS | $c[i,j]$: match $\nwarrow$ + 1; else larger of $\uparrow$ and $\leftarrow$ (tie: up); LCS = GTAB, length 4 |
 | CT1 — 0/1 knapsack | $V[i,j]$: skip $\uparrow$ or take $\nwarrow$; for the illustrative data, items 1 and 2 give profit 5 |
-| CT2 — Topological sort | DFS finish stack, popped in reverse: 5, 4, 6, 2, 3, 1 (Kahn's 4, 5, 6, 2, 3, 1 is also valid) |
+| CT2 — Topological sort | DFS finish stack, popped in reverse: 5, 4, 2, 3, 1, 0 (Kahn's 4, 5, 0, 2, 3, 1 is also valid) |
 | CT2 — Bellman–Ford | Selected-vertex relaxation table, $V-1$ rounds; shortest S-to-T distance is 1 |
 | CT2 — Floyd–Warshall | $D^{(k)}[i,j]=\min(D^{(k-1)}[i,j],\ D^{(k-1)}[i,k]+D^{(k-1)}[k,j])$; final matrix $D^{(4)}$ |
 | CT3 — Union by rank | Attach smaller rank below larger; raise the rank only on a tie |

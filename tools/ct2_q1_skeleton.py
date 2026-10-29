@@ -19,8 +19,8 @@ OUT = ROOT / "Chapter 0 - Previous Year Questions/3rd Batch/CT/diagrams/skeleton
 
 R = 32  # vertex radius
 
-# Label of the small centre vertex. The photo reads as "0" (the usual 0-5 DAG);
-# the existing CT2 Q1 answer calls it "6". Change this one constant to relabel.
+# Label of the small centre vertex, read from the exam photo as "0" (vertices 0-5).
+# Change this one constant to relabel it.
 CENTRE = "0"
 
 CENTERS = {"5": (240, 110), "4": (580, 110), CENTRE: (410, 250),
