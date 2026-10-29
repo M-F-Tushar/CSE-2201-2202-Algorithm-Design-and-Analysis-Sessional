@@ -50,6 +50,8 @@ This chapter keeps only the requested graph theory and graph algorithm topics. E
 	- [Minimum Spanning Tree (MST)](#minimum-spanning-tree-mst)
 	- [Prim's Algorithm](#1-prims-algorithm)
 	- [Kruskal's Algorithm](#2-kruskals-algorithm)
+		- [Lecture worked example: sort, test, and accept](#lecture-worked-example-sort-test-and-accept)
+		- [DSU state trace for the lecture example](#dsu-state-trace-for-the-lecture-example)
 	- [Disjoint Set Union (Union-Find)](#3-disjoint-set-union-union-find)
 	- [Time Complexity](#4-time-complexity)
 	- [Applications](#applications-1)
@@ -284,14 +286,14 @@ For the same undirected graph:
 
 For a weighted graph, each neighbor can be stored with its edge weight.
 
-Example:
+Example weighted adjacency list:
 
-```text
-A: (B, 4), (C, 2)
-B: (D, 5)
-C: (D, 1)
-D: empty
-```
+| Vertex | Neighbors and edge weights |
+| :---: | :--- |
+| A | B (4), C (2) |
+| B | D (5) |
+| C | D (1) |
+| D | None |
 
 **Advantages:**
 
@@ -420,23 +422,11 @@ This path uses $3$ edges, so the shortest distance is $3$.
 
 ### Algorithm
 
-```text
-BFS-SHORTEST-PATH(G, s)
-1. for each vertex v in G.V:
-2.     dist[v] = infinity
-3.     parent[v] = NIL
-4. dist[s] = 0
-5. create an empty queue Q
-6. enqueue s into Q
-7. while Q is not empty:
-8.     u = dequeue Q
-9.     for each neighbor v of u:
-10.        if dist[v] == infinity:
-11.            dist[v] = dist[u] + 1
-12.            parent[v] = u
-13.            enqueue v into Q
-14. return dist, parent
-```
+1. Give every vertex an unknown distance and no predecessor; give the source distance zero.
+2. Place the source in a queue.
+3. Repeatedly remove the front vertex and inspect each neighbor.
+4. The first time a neighbor is found, record its distance as one more than the current vertex's distance, record the current vertex as its predecessor, and add the neighbor to the back of the queue.
+5. Continue until the queue is empty. The recorded distances and predecessors describe shortest paths by number of edges.
 
 ### Complexity Analysis
 
@@ -462,9 +452,7 @@ Given a weighted graph (directed or undirected) with **nonnegative** edge weight
 
 ### Greedy Rule
 
-```text
-Always finalize the unvisited vertex with the smallest tentative distance.
-```
+**At every turn, finalize the unvisited vertex with the smallest tentative distance.**
 
 The algorithm is correct because with nonnegative edge weights, no later path can make a finalized vertex cheaper.
 
@@ -606,22 +594,11 @@ The diagram below visualizes the finalization order from **Worked Example 1**: $
 
 ### Algorithm
 
-```text
-DIJKSTRA(G, source)
-1. for each vertex v in G:
-2.     dist[v] = infinity
-3.     parent[v] = NIL
-4. dist[source] = 0
-5. put all vertices in a min-priority queue by dist value
-6. while the queue is not empty:
-7.     u = extract vertex with minimum dist
-8.     for each edge (u, v):
-9.         if dist[u] + weight(u, v) < dist[v]:
-10.            dist[v] = dist[u] + weight(u, v)
-11.            parent[v] = u
-12.            update v in the priority queue
-13. return dist and parent
-```
+1. Start every vertex at infinite distance with no predecessor; set the source distance to zero.
+2. Keep the vertices ordered by their current tentative distances.
+3. Repeatedly choose and finalize the unvisited vertex with the smallest tentative distance.
+4. Inspect each outgoing edge from that vertex. If travelling across the edge gives a neighbor a shorter distance, replace that neighbor's distance and predecessor.
+5. Continue until every reachable vertex is finalized. The distance and predecessor records give the shortest paths.
 
 ### Complexity Analysis
 
@@ -791,7 +768,7 @@ The cycle $B \to C \to D \to B$ has total weight $2 + 2 + (-5) = -1$. With $|V|=
 | D | 0 | -3 | -1 | **1** |
 | D → B (wrap) | 0 | **-4** | -1 | 1 |
 
-$dist(B)$ keeps falling by exactly 1 every round ($1 \to -1 \to -2 \to -3 \to -4 \to \dots$), matching the cycle weight of $-1$. Because an edge relaxation still succeeds after the required $|V|-1=3$ rounds, Bellman-Ford's check pass (algorithm lines 10–12) reports **a negative cycle is reachable from the source** instead of returning finite distances.
+$dist(B)$ keeps falling by exactly 1 every round ($1 \to -1 \to -2 \to -3 \to -4 \to \dots$), matching the cycle weight of $-1$. Because an edge relaxation still succeeds after the required $|V|-1=3$ rounds, Bellman-Ford's final check pass reports **a negative cycle is reachable from the source** instead of returning finite distances.
 
 ### Visual Map: Bellman-Ford Relaxation Flow
 
@@ -799,25 +776,10 @@ $dist(B)$ keeps falling by exactly 1 every round ($1 \to -1 \to -2 \to -3 \to -4
 
 ### Algorithm
 
-```text
-BELLMAN-FORD(G, w, s)
-1. for each vertex v in G.V:
-2.     dist[v] = infinity
-3.     parent[v] = NIL
-4. dist[s] = 0
-
-5. for i = 1 to |V| - 1:
-6.     for each edge (u, v) in G.E:
-7.         if dist[u] != infinity and dist[u] + w(u, v) < dist[v]:
-8.             dist[v] = dist[u] + w(u, v)
-9.             parent[v] = u
-
-10. for each edge (u, v) in G.E:
-11.     if dist[u] != infinity and dist[u] + w(u, v) < dist[v]:
-12.         return "negative cycle exists"
-
-13. return dist, parent
-```
+1. Give each vertex infinite distance and no predecessor; set the source distance to zero.
+2. Make $|V|-1$ complete passes over the edges. Whenever an edge can improve the distance to its destination, record the shorter distance and its predecessor.
+3. Make one extra pass over the edges. If a reachable edge can still improve a distance, a negative-weight cycle is reachable from the source.
+4. If the extra pass finds no such edge, report the final distances and predecessors.
 
 ### Complexity Analysis
 
@@ -921,16 +883,10 @@ The shortest path from 1 to 3 is updated from **6** to **4** through vertex 2.
 
 ### Algorithm
 
-```text
-FLOYD-WARSHALL(W, n)
-1. D = W
-2. for k = 1 to n:
-3.     for i = 1 to n:
-4.         for j = 1 to n:
-5.             if D[i][k] + D[k][j] < D[i][j]:
-6.                 D[i][j] = D[i][k] + D[k][j]
-7. return D
-```
+1. Begin with the matrix of direct edge weights, using infinity where no direct edge exists.
+2. Consider each vertex in turn as a possible intermediate stop.
+3. For every pair of vertices, compare the current distance with the distance of travelling through that intermediate vertex; keep the smaller value.
+4. After every vertex has been considered, the matrix contains the shortest distances between all pairs.
 
 ### Complexity Analysis
 
@@ -1247,22 +1203,10 @@ Every edge points left-to-right in this result: $A$ and $B$ occur before $C$; $C
 
 #### Algorithm
 
-```text
-TOPOLOGICAL-SORT-DFS(G)
-1. create empty stack S
-2. mark every vertex as unvisited
-3. for each vertex u in G.V:
-4.     if u is unvisited:
-5.         DFS-VISIT(u)
-6. return vertices popped from S
-
-DFS-VISIT(u)
-1. mark u as visited
-2. for each vertex v in Adj[u]:
-3.     if v is unvisited:
-4.         DFS-VISIT(v)
-5. push u onto S     // push only after all neighbours finish
-```
+1. Start with every vertex unvisited and an empty stack.
+2. Visit each still-unvisited vertex using depth-first search.
+3. During a search, first finish all of a vertex's unvisited neighbors; only then place that vertex on the stack.
+4. When all searches finish, read the stack from top to bottom. This reverse finishing order is a topological ordering.
 
 ### Kahn's Algorithm - Optional/Self-Study
 
@@ -1279,6 +1223,7 @@ Main idea:
 5. If a neighbor's indegree becomes $0$, put it into the queue.
 6. If all vertices are output, a topological order exists.
 7. If some vertices remain, the graph has a cycle.
+
 
 ### Visual Map: Kahn's Algorithm Execution Sequence
 
@@ -1304,24 +1249,10 @@ $$
 A, B, C, D, E, F
 $$
 
-#### Algorithm
+#### Plain-language procedure
 
-```text
-KAHN-TOPOLOGICAL-SORT(G)
-1. compute indegree[v] for every vertex v
-2. create queue Q with all vertices having indegree 0
-3. create empty list order
-4. while Q is not empty:
-5.     u = dequeue Q
-6.     append u to order
-7.     for each v in Adj[u]:
-8.         indegree[v] = indegree[v] - 1
-9.         if indegree[v] == 0:
-10.            enqueue v into Q
-11. if length(order) != |V|:
-12.     return "cycle exists, no topological order"
-13. return order
-```
+The seven steps above give the complete procedure: repeatedly output a zero-indegree vertex and remove its outgoing edges from the remaining graph. If every vertex is output, the result is a topological order; if some vertices remain, the graph contains a cycle.
+
 
 ### Time Complexity
 
@@ -1394,42 +1325,17 @@ Scan the vertices in order. Each time an unvisited vertex is encountered, run on
 
 ### Algorithm Using DFS
 
-```text
-CONNECTED-COMPONENTS(G)
-1. mark every vertex as unvisited
-2. component_id = 0
-3. for each vertex u in G.V:
-4.     if u is unvisited:
-5.         component_id = component_id + 1
-6.         DFS-COMPONENT(u, component_id)
-
-DFS-COMPONENT(u, component_id)
-1. mark u as visited
-2. assign u to component_id
-3. for each neighbor v in Adj[u]:
-4.     if v is unvisited:
-5.         DFS-COMPONENT(v, component_id)
-```
+1. Mark every vertex unvisited and prepare a component label.
+2. Scan the vertices. Whenever an unvisited vertex is found, give it a new label and run a full depth-first search from it.
+3. Give the same label to every vertex reached in that search.
+4. Each completed search identifies one connected component.
 
 ### Algorithm Using BFS
 
-```text
-CONNECTED-COMPONENTS-BFS(G)
-1. mark every vertex as unvisited
-2. component_id = 0
-3. for each vertex u in G.V:
-4.     if u is unvisited:
-5.         component_id = component_id + 1
-6.         create queue Q
-7.         mark u as visited and enqueue u
-8.         while Q is not empty:
-9.             x = dequeue Q
-10.            assign x to component_id
-11.            for each neighbor v in Adj[x]:
-12.                if v is unvisited:
-13.                    mark v as visited
-14.                    enqueue v
-```
+1. Mark every vertex unvisited.
+2. Scan the vertices. When an unvisited vertex is found, give it a new component label and put it in a queue.
+3. Repeatedly remove a vertex from the queue, label it, and add each unvisited neighbor to the queue after marking that neighbor visited.
+4. When the queue empties, that component is complete. Continue scanning for another unvisited vertex.
 
 ### Visual Map: Component Discovery
 
@@ -1548,37 +1454,10 @@ $$
 
 ### Algorithm
 
-```text
-KOSARAJU-SCC(G)
-1. create empty stack S
-2. mark every vertex as unvisited
-3. for each vertex u in G.V:
-4.     if u is unvisited:
-5.         DFS-FINISH(u, S)
-
-6. create transpose graph GT by reversing every edge of G
-7. mark every vertex as unvisited again
-8. while S is not empty:
-9.     u = pop S
-10.    if u is unvisited:
-11.        start a new SCC
-12.        DFS-COLLECT(GT, u)
-13.        output the SCC
-
-DFS-FINISH(u, S)
-1. mark u as visited
-2. for each v in Adj[u]:
-3.     if v is unvisited:
-4.         DFS-FINISH(v, S)
-5. push u onto S
-
-DFS-COLLECT(GT, u)
-1. mark u as visited
-2. add u to the current SCC
-3. for each v in AdjT[u]:
-4.     if v is unvisited:
-5.         DFS-COLLECT(GT, v)
-```
+1. Run depth-first search on the original graph and place each vertex on a stack only after all of its reachable neighbors finish.
+2. Reverse every edge to form the transpose graph, then mark every vertex unvisited again.
+3. Remove vertices from the stack in order. For each still-unvisited vertex, run depth-first search on the transpose graph; all vertices reached in that search form one strongly connected component.
+4. Repeat until the stack is empty.
 
 ### Complexity Analysis
 
@@ -1661,7 +1540,7 @@ $$
 w(T)=\sum_{e\in T}w(e)
 $$
 
-An MST has $V-1$ edges, contains no cycle, and may have more than one valid solution when edge weights tie.
+An MST has $V-1$ edges, contains no cycle, and may have more than one valid solution when edge weights tie. The weight may represent road distance or construction cost, but the MST objective is the **sum of the selected edge weights**. It is not the shortest route from one chosen starting vertex; shortest-path algorithms answer that different question.
 
 #### Safe-Edge Properties
 
@@ -1682,21 +1561,10 @@ Both algorithms below use the supplied weighted graph:
 
 Prim's Algorithm grows one connected tree. Start at any vertex and repeatedly select the cheapest edge with exactly one endpoint in the current tree.
 
-```text
-PRIM(G, start)
-1. for each vertex v in G:
-2.     key[v] = infinity
-3.     parent[v] = NIL
-4. key[start] = 0
-5. put all vertices in a min-priority queue using key values
-6. while the queue is not empty:
-7.     u = extract vertex with minimum key
-8.     for each edge (u, v):
-9.         if v is still in the queue and weight(u, v) < key[v]:
-10.            key[v] = weight(u, v)
-11.            parent[v] = u
-12. return parent edges as the MST
-```
+1. Choose a starting vertex and treat it as the first vertex in the tree.
+2. Among all edges with one endpoint in the current tree and one endpoint outside it, choose a lightest edge.
+3. Add that edge and its outside endpoint to the tree.
+4. Repeat until every vertex is included. The chosen edges form the MST.
 
 Start from $V_1$. At each step, only crossing edges from the current tree to an outside vertex are eligible.
 
@@ -1724,29 +1592,17 @@ Each label below gives `selection step: edge weight`. Edges numbered $1$ through
 
 Kruskal's Algorithm begins with a forest of one-vertex trees. Sort every edge by nondecreasing weight and accept an edge only when it joins two different components. It is a **greedy** algorithm: at each step it takes the cheapest remaining edge that is safe to add. The selected edges stay acyclic, and the process ends when they connect all vertices.
 
-Represent each weighted edge as a record or tuple with three fields: source, destination, and weight. Store the records in an edge list. The sorting rule must compare **weights**, not the first tuple field (source): a default lexicographic tuple sort compares fields from left to right and therefore does not implement Kruskal's ordering rule. The language-neutral ordering key is:
-
-```text
-SORT edges by weight(edge), in nondecreasing order
-```
+Write each weighted edge as its two endpoints and its weight, and place all edges in a list. Sort that list from smallest weight to largest. Compare the **weight**, not the endpoint labels; endpoint order does not decide which edge is considered first.
 
 Equal-weight edges may appear in either order. A different tie order can select a different edge set, but all resulting MSTs have the same minimum total weight.
 
-```text
-KRUSKAL(G)
-1. MST = empty set
-2. sort all edges by nondecreasing weight
-3. create one disjoint set for every vertex
-4. for each edge (u, v) in sorted order:
-5.     if FIND(u) != FIND(v):
-6.         add (u, v) to MST
-7.         UNION(u, v)
-8.     if MST has V - 1 edges:
-9.         break
-10. return MST
-```
+1. Begin with no selected edges and make one separate DSU set for every vertex.
+2. Sort all edges from lightest to heaviest.
+3. For each edge in that order, find the set representative of each endpoint.
+4. If the representatives differ, add the edge to the answer and merge the two sets. If they match, skip the edge because it would make a cycle.
+5. Stop immediately after accepting $V-1$ edges. If the list runs out first, the graph is disconnected and the accepted edges form a minimum spanning forest, not a spanning tree.
 
-The DSU test is applied to the roots of both endpoints: same root means skip the edge; distinct roots means merge their sets and record the edge. Always link representatives, not arbitrary vertices: linking non-roots can still combine two distinct components, but it may add unnecessary depth and violates the root-only precondition used by balancing rules such as union by rank or size. The `UNION` operation in the complete pseudocode calls `FIND` internally, so callers can pass the original endpoints safely. Stop as soon as $V-1$ edges have been accepted. If the edge list ends first, the input graph is disconnected and no spanning tree exists; the accepted edges form a minimum spanning forest instead.
+Finding a representative tells Kruskal which component contains a vertex; it does not give a path or a distance. DSU only tracks which vertices are already connected. The selected MST edges and their total weight are kept separately.
 
 Equal-weight edges may be processed in any order. This table follows the supplied visual sequence.
 
@@ -1784,27 +1640,29 @@ $$
 
 #### Lecture worked example: sort, test, and accept
 
-The lecture uses this zero-indexed input for five vertices and six weighted edges:
+The lecture example has five zero-indexed vertices, $\{0,1,2,3,4\}$, and six undirected weighted edges. Each record gives the two endpoints followed by the weight:
 
-```text
-5 6
-3 4 2
-1 4 1
-1 3 2
-2 3 3
-0 2 5
-0 1 1
-```
+| Endpoints | Weight |
+| :---: | :---: |
+| 3--4 | 2 |
+| 1--4 | 1 |
+| 1--3 | 2 |
+| 2--3 | 3 |
+| 0--2 | 5 |
+| 0--1 | 1 |
 
-Stored as edge tuples, those entries are `(3, 4, 2), (1, 4, 1), (1, 3, 2), (2, 3, 3), (0, 2, 5), (0, 1, 1)`.
+Sort by weight, keeping the lecture's input order within equal-weight ties. Another tie order is also valid:
 
-Sort by the weight field. The displayed order retains the input order among equal-weight edges; any ordering within an equal-weight group is valid:
+| Order | Edge | Weight |
+| :---: | :---: | :---: |
+| 1 | 1--4 | 1 |
+| 2 | 0--1 | 1 |
+| 3 | 3--4 | 2 |
+| 4 | 1--3 | 2 |
+| 5 | 2--3 | 3 |
+| 6 | 0--2 | 5 |
 
-```text
-(1, 4, 1), (0, 1, 1), (3, 4, 2), (1, 3, 2), (2, 3, 3), (0, 2, 5)
-```
-
-Using union by rank with the tie rule in the implementation below, the trace is:
+Use union by rank for the DSU. When two roots have equal rank, keep the first endpoint's root and increase that root's rank by one. The edge-by-edge trace is:
 
 | Scan | Edge | Weight | Roots before decision | Decision | Accepted MST so far |
 | :---: | :---: | :---: | :---: | :--- | :--- |
@@ -1813,60 +1671,59 @@ Using union by rank with the tie rule in the implementation below, the trace is:
 | 3 | `(3,4)` | 2 | `3`, `1` | Accept; merge | add `(3,4,2)` |
 | 4 | `(1,3)` | 2 | `1`, `1` | Skip; cycle | unchanged |
 | 5 | `(2,3)` | 3 | `2`, `1` | Accept; merge | add `(2,3,3)` |
-| 6 | `(0,2)` | 5 | `1`, `1` | Skip; cycle | unchanged |
+| 6 | `(0,2)` | 5 | — | Not checked; the MST is already complete | unchanged |
 
-The final MST has $V-1=4$ edges and total weight $1+1+2+3=7$. The two skipped edges close cycles among vertices already connected by cheaper choices.
+After scan 5, the MST has $V-1=4$ edges, so a correct early-stopping trace ends there. Edge 6 is not examined. If the scan were deliberately continued for practice, its endpoints would have the same representative and it would be rejected as a cycle. The MST weight is $1+1+2+3=7$.
 
 ![Kruskal sorted edge trace and five-vertex lecture example](diagrams/ch11-34-kruskal-lecture-example.svg)
 
-#### Complete Kruskal pseudocode with union by rank
+#### DSU state trace for the lecture example
 
-This language-neutral outline combines weight-based sorting, path-compressed `FIND`, and union by rank. `UNION` finds the endpoint representatives and reports whether it merged two sets. If the graph is disconnected, the accepted edges form a minimum spanning forest; only a result with $V-1$ edges is a spanning tree.
+The edge trace shows which choices Kruskal makes. This second view shows what the disjoint sets and parent trees look like behind those choices. A parent list records where each vertex points; a root points to itself. The rank list records the balancing rank of each root. Entries are shown in vertex order $0,1,2,3,4$.
 
-```text
-MAKE-SET(x)
-1. parent[x] <- x
-2. rank[x] <- 0
+![Parent, rank, and component changes during the lecture's Kruskal run](diagrams/ch11-36-kruskal-dsu-state-trace.svg)
 
-FIND(x)
-1. while parent[x] != x:
-2.     parent[x] <- parent[parent[x]]
-3.     x <- parent[x]
-4. return x
+| State | Parent list | Rank list | Components |
+| :--- | :--- | :--- | :--- |
+| Start | $[0,1,2,3,4]$ | $[0,0,0,0,0]$ | $\{0\},\{1\},\{2\},\{3\},\{4\}$ |
+| After edge 1--4 | $[0,1,2,3,1]$ | $[0,1,0,0,0]$ | $\{0\},\{1,4\},\{2\},\{3\}$ |
+| After edge 0--1 | $[1,1,2,3,1]$ | $[0,1,0,0,0]$ | $\{0,1,4\},\{2\},\{3\}$ |
+| After edge 3--4 | $[1,1,2,1,1]$ | $[0,1,0,0,0]$ | $\{0,1,3,4\},\{2\}$ |
+| After edge 1--3 | $[1,1,2,1,1]$ | $[0,1,0,0,0]$ | $\{0,1,3,4\},\{2\}$ |
+| After edge 2--3 | $[1,1,1,1,1]$ | $[0,1,0,0,0]$ | $\{0,1,2,3,4\}$ |
 
-UNION(x, y)
-1. rootX <- FIND(x)
-2. rootY <- FIND(y)
-3. if rootX = rootY: return FALSE
-4. if rank[rootX] < rank[rootY]: swap rootX and rootY
-5. parent[rootY] <- rootX
-6. if rank[rootX] = rank[rootY]: rank[rootX] <- rank[rootX] + 1
-7. return TRUE
+Read the trace slowly:
 
-KRUSKAL(V, E)
-1. create one singleton set for every vertex
-2. sort E by nondecreasing edge weight
-3. MST <- empty list; totalWeight <- 0
-4. for each edge (u, v, w) in sorted E:
-5.     if UNION(u, v):
-6.         append (u, v, w) to MST
-7.         totalWeight <- totalWeight + w
-8.         if |MST| = |V| - 1: break
-9. return MST, totalWeight
-```
+1. For 1--4, the roots differ and have equal rank. Accept the edge, attach 4 below 1, and raise the rank of 1.
+2. For 0--1, the roots are 0 and 1. Root 1 has the higher rank, so attach 0 below 1 and accept the edge.
+3. For 3--4, the roots are 3 and 1. Attach 3 below 1 and accept the edge.
+4. For 1--3, both endpoints already have root 1. Skip the edge: it would close a cycle.
+5. For 2--3, the roots are 2 and 1. Attach 2 below 1 and accept the edge. Four edges now connect all five vertices, so stop. Do not scan 0--2 in the actual Kruskal run.
 
-For the lecture input, the output is:
+#### Kruskal algorithm in plain steps
 
-```text
-Minimum spanning tree:
-1 4 1
-0 1 1
-3 4 2
-2 3 3
-Total weight: 7
-```
+1. List every vertex as its own component; start with no chosen edges and a total weight of zero.
+2. Sort the edges from smallest weight to largest.
+3. Look at the next edge and find the current component representative of each endpoint.
+4. If the representatives match, leave the edge out because the endpoints are already connected.
+5. If the representatives differ, add the edge, add its weight to the total, and merge the two components. For union by rank, attach the lower-rank root below the higher-rank root; on a tie, choose one root and raise its rank.
+6. Stop as soon as the chosen edges number one less than the number of vertices. Those edges form the MST.
 
-Union by rank changes only the shape of the DSU forest; it does not change Kruskal's sorted-edge decisions or the MST weight. To complete an implementation, read the vertex and edge counts, read each source-destination-weight record, call `KRUSKAL`, and print each returned edge and the total weight. If fewer than $V-1$ edges were returned, report that the graph is disconnected and the result is a forest, not a spanning tree.
+#### DSU actions used by Kruskal
+
+Create a singleton set by making a vertex its own representative and giving it rank zero. To find a vertex's representative, follow parent links until reaching a root; path halving can shorten the route as it is followed. To unite two vertices, first find both roots. If the roots are the same, report that no merge happened. Otherwise, link the lower-rank root below the higher-rank root. When ranks tie, link one root below the other and increase the surviving root's rank. The union operation reports whether it merged two previously separate sets.
+
+For the lecture input, the selected edges and weights are:
+
+| Edge | Weight |
+| :---: | :---: |
+| 1--4 | 1 |
+| 0--1 | 1 |
+| 3--4 | 2 |
+| 2--3 | 3 |
+| **Total** | **7** |
+
+Union by rank changes only the parent-tree shape; it does not change the sorted edge choices or the MST weight. If the graph is disconnected, edge processing ends before $V-1$ edges are accepted, and the result is a minimum spanning forest rather than an MST.
 
 ### 3. Disjoint Set Union (Union-Find)
 
@@ -1890,7 +1747,7 @@ For a new undirected edge, equal roots mean a path already connects its endpoint
 
 A set is represented as a rooted tree. Every non-root node points to its parent; repeatedly following parent links reaches the set's **root**, the representative shared by all members. A parent array stores these links. Initially every vertex is its own one-element set.
 
-There are two valid root conventions. The basic version below marks roots with a null parent; the optimized version uses a self-parent. **Do not mix a convention's initialization and root test.** A null-parent initialization paired with a self-parent root test is incorrect and prevents the search from reaching its base case.
+There are two valid root conventions. In the basic version, a root has no parent; in the optimized version, a root points to itself. **Do not mix the initialization rule and its matching root test.**
 
 | Version | Initialization | Root test |
 | :--- | :--- | :--- |
@@ -1899,20 +1756,7 @@ There are two valid root conventions. The basic version below marks roots with a
 
 #### Build the basic version
 
-The basic `FIND` climbs the parent chain. `UNION` links one **root** under the other root; always find roots first, rather than linking arbitrary input nodes.
-
-```text
-MAKE-SET-ALL(V)
-1. for each vertex x in V: parent[x] <- NIL
-
-FIND-BASIC(x)
-1. if parent[x] = NIL: return x
-2. return FIND-BASIC(parent[x])
-
-UNION-ROOTS-BASIC(rootX, rootY)
-1. require rootX and rootY are distinct roots
-2. parent[rootY] <- rootX
-```
+Create one singleton set for each vertex by leaving its parent empty. The basic find operation checks whether the current vertex has no parent; if it does, that vertex is the representative. Otherwise, follow its parent and repeat the check. To merge two different sets, first find their roots and then make one root point to the other. Always link roots, not arbitrary vertices.
 
 For `n` vertices, initialize one singleton set per vertex. For example, with vertices `0..4`, initially the sets are `{0}, {1}, {2}, {3}, {4}`. After processing `(0,1)`, `(0,2)`, and `(2,3)`, the sets are `{0,1,2,3}` and `{4}`. The parent-tree shape can vary with the order of unions, but the represented partition must be the same.
 
@@ -1920,16 +1764,6 @@ For `n` vertices, initialize one singleton set per vertex. For example, with ver
 
 For each edge `(u, v)`, find both representatives. If they match, a prior path already joins the endpoints and this edge creates a cycle. Otherwise, merge the two sets and continue. If every edge joins distinct sets, the graph has no cycle. The rule assumes an **undirected** graph; directed cycle detection requires a different method.
 
-```text
-HAS-CYCLE-BASIC(V, E)
-1. initialize one singleton set for every vertex
-2. for each undirected edge (u, v) in E:
-3.     rootU <- FIND-BASIC(u)
-4.     rootV <- FIND-BASIC(v)
-5.     if rootU = rootV: return TRUE
-6.     UNION-ROOTS-BASIC(rootU, rootV)
-7. return FALSE
-```
 
 The PDF's five-vertex example makes the decision trace explicit:
 
@@ -1948,26 +1782,13 @@ So these edges contain a cycle, detected at `(3,4)`. Conversely, when processing
 
 #### Why the basic version needs optimization
 
-A basic `FIND` may visit every node in a chain, taking $O(V)$ time in the worst case. Blindly attaching roots can create a chain of height $V$. Cycle detection then takes $O(EV)$ in the worst case. A recursive `FIND` can also exhaust the call stack on a sufficiently deep chain. Replacing recursion with a loop avoids that stack failure, but alone it still has the same $O(V)$ worst-case time:
-
-```text
-FIND-ITERATIVE-BASIC(x)
-1. while parent[x] != NIL: x <- parent[x]
-2. return x
-```
+A basic find operation may visit every node in a chain, taking $O(V)$ time in the worst case. Blindly attaching roots can create a chain of height $V$. Cycle detection then takes $O(EV)$ in the worst case. Replacing recursive search with a loop avoids call-stack growth, but still follows every parent link and has the same $O(V)$ worst-case time.
 
 #### Optimize `FIND`: path compression
 
-With **path compression**, after finding a root, make nodes visited on the search path point directly to it. The recursive definition is:
+With **path compression**, after finding a root, make every node visited on the search path point directly to that root. Later searches through those nodes then take fewer steps.
 
-```text
-FIND-WITH-COMPRESSION(x)
-1. if parent[x] != x:
-2.     parent[x] <- FIND-WITH-COMPRESSION(parent[x])
-3. return parent[x]
-```
-
-A single `FIND(4)` on the chain `4 → 3 → 2 → 1 → 0` changes each visited node's parent to `0`; subsequent finds on those nodes are much shorter. For very deep inputs, an iterative `FIND` avoids recursion-stack limits; the optimized pseudocode below uses path halving.
+A single `FIND(4)` on the chain `4 → 3 → 2 → 1 → 0` changes each visited node's parent to `0`; subsequent finds on those nodes are much shorter. For very deep inputs, an iterative `FIND` avoids recursion-stack limits. The optimized DSU procedure later in this section uses path halving.
 
 #### Optimize `UNION`: union by size
 
@@ -1977,15 +1798,8 @@ Maintain `size[root]`, the number of elements in the root's set. When merging di
 
 Union by **rank** is another way to keep DSU trees shallow. Initialize `rank[root] = 0`. Compare ranks only after finding the roots; attach the lower-rank root below the higher-rank root. If the ranks tie, choose either root and increment only the new root's rank. Rank is **not** the number of children or the set's size: without path compression it tracks tree height, and with path compression it remains an upper bound on height. Values stored for non-roots are no longer used.
 
-```text
-UNION-BY-RANK(rootX, rootY)
-1. require rootX and rootY are distinct roots
-2. if rank[rootX] < rank[rootY]: swap rootX and rootY
-3. parent[rootY] <- rootX
-4. if rank[rootX] = rank[rootY]: rank[rootX] <- rank[rootX] + 1
-```
 
-In Kruskal's implementation above, this balancing rule is combined with path compression. Union by size, used in the DSU implementation immediately below, is a different heuristic with a similar balancing goal; do not mix up the meaning or update rules of `rank` and `size`.
+In Kruskal's algorithm, this balancing rule can be combined with path compression. Union by size is a different balancing rule with a similar goal; rank and size have different meanings and update rules.
 
 ![Union by rank keeps a higher-rank root and increments rank only on ties](diagrams/ch11-35-union-by-rank.svg)
 
@@ -1993,35 +1807,14 @@ In Kruskal's implementation above, this balancing rule is combined with path com
 
 ![Union by size keeps the larger tree as the root](diagrams/ch11-33-dsu-union-by-size.svg)
 
-#### Complete optimized DSU pseudocode
+#### Optimized DSU operations in plain steps
 
-This version uses the self-parent root convention, iterative path halving, and union by size. `UNION` returns `FALSE` when the endpoints are already connected, which makes the cycle test direct.
+This version uses the self-parent root convention, path halving, and union by size:
 
-```text
-MAKE-SET(x)
-1. parent[x] <- x
-2. size[x] <- 1
-
-FIND(x)
-1. while parent[x] != x:
-2.     parent[x] <- parent[parent[x]]
-3.     x <- parent[x]
-4. return x
-
-UNION(x, y)
-1. rootX <- FIND(x); rootY <- FIND(y)
-2. if rootX = rootY: return FALSE
-3. if size[rootX] < size[rootY]: swap rootX and rootY
-4. parent[rootY] <- rootX
-5. size[rootX] <- size[rootX] + size[rootY]
-6. return TRUE
-
-HAS-CYCLE(V, E)
-1. initialize one singleton set for every vertex
-2. for each undirected edge (u, v) in E:
-3.     if UNION(u, v) = FALSE: return TRUE
-4. return FALSE
-```
+1. **Create a set:** make the vertex its own parent and set the size of its set to one.
+2. **Find a representative:** follow parent links until a vertex points to itself. While moving upward, path halving may point a visited vertex to its grandparent.
+3. **Merge two sets:** find both roots. If they match, the vertices are already connected and no merge happens. Otherwise, make the smaller set's root point to the larger set's root, then add the two sizes.
+4. **Detect an undirected cycle:** start with singleton sets and process the edges. If any merge fails because both endpoints already have the same root, a cycle exists. If all edges are processed successfully, no cycle exists.
 
 For instance, the five-vertex edge sequence in the cycle-detection example returns `TRUE`. The same structure answers dynamic-connectivity queries by comparing `FIND(u)` and `FIND(v)` after the unions processed so far.
 
