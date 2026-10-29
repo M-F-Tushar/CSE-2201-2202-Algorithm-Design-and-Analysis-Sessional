@@ -220,6 +220,9 @@ Key calculations:
 
 **Question (transcribed):** Perform a topological sort of the given DAG. (4 marks)
 
+<p align="center"><img src="diagrams/skeletons/ct2-01-topological-skeleton.svg" alt="Exam figure for CT2 Q1: the given DAG" width="560"></p>
+<p align="center"><em>Figure given in the question (centre vertex read as 0).</em></p>
+
 **Answer.** A **topological ordering** places every vertex $u$ before every vertex $v$ for each directed edge $u\to v$. It exists only for a DAG (a directed acyclic graph). The edges read from the scan are 5→6, 4→6, 5→2, 4→1, 2→3, and 3→1 (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
 
 **Method (DFS finish stack).** Scan the start vertices in order $1,2,\dots,6$ and each adjacency list in increasing order. Run DFS and push a vertex onto a stack only **after** all of its outgoing neighbours have finished. The left-to-right stack is the finish order; its rightmost item is popped first.
@@ -259,6 +262,9 @@ The order is not unique. Kahn's algorithm (repeatedly remove a vertex whose in-d
 ### Q2. Bellman–Ford from S to T
 
 **Question (transcribed):** Use Bellman–Ford to find the shortest path from S to T in the weighted graph. (8 marks)
+
+<p align="center"><img src="diagrams/skeletons/ct2-02-bellman-ford-skeleton.svg" alt="Exam figure for CT2 Q2: the given weighted directed graph" width="640"></p>
+<p align="center"><em>Figure given in the question.</em></p>
 
 **Answer.** The edges read from the scan are S→A=5, S→C=−2, A→B=1, C→A=2, C→B=4, C→D=4, B→D=−1, B→T=3, and D→T=1. Bellman–Ford handles negative edge weights (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)). To **relax** an edge $(u,v)$ means: if $dist[u]+w(u,v)<dist[v]$, set $dist[v]=dist[u]+w(u,v)$.
 
