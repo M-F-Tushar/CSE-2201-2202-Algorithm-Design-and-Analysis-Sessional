@@ -253,7 +253,6 @@ For a fixed 9 × 9 board, one safety test examines at most nine row cells, nine 
 The same choose, check, continue, and undo structure applies to other problems:
 
 - **Graph coloring:** assign a color to a vertex only when it differs from the colors of already-colored neighbors; undo it if later vertices cannot be assigned.
-- **Graph coloring:** assign a color to a vertex only when it differs from the colors of already-colored neighbors; undo it if later vertices cannot be assigned.
 - **Subset sum:** include or exclude each number and prune when the partial sum cannot meet the target, subject to the assumptions on the input values.
 - **Hamiltonian circuit:** extend a path by an unvisited adjacent vertex and backtrack if no extension can complete a cycle through all vertices.
 
