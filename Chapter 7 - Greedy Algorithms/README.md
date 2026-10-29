@@ -217,7 +217,7 @@ Each problem is organized as:
 - Problem statement
 - Greedy choice
 - Worked example or selection table
-- Mermaid diagram
+- Visual map
 - Algorithm
 - Complexity analysis
 
@@ -274,7 +274,7 @@ $$
 60+100+80=240
 $$
 
-#### Mermaid Diagram: Fractional Knapsack Greedy Fill
+#### Visual Map: Fractional Knapsack Greedy Fill
 
 ![Fractional Knapsack Greedy Strategy (Sort by Value/Weight Ratio)](diagrams/ch7-04-fractional-knapsack.svg)
 
@@ -384,7 +384,7 @@ $$
 
 So the greedy rule must be used only when the coin system supports it, or when the problem specifically asks for the greedy method.
 
-#### Mermaid Diagram: Coin Change Greedy Loop
+#### Visual Map: Coin Change Greedy Loop
 
 ![Coin Change Greedy Loop (Standard vs Canonical Systems)](diagrams/ch7-05-coin-change-loop.svg)
 
@@ -474,7 +474,7 @@ $$
 F(7)=13
 $$
 
-#### Mermaid Diagram: Fibonacci Iterative Flow
+#### Visual Map: Fibonacci Iterative Flow
 
 ![Fibonacci Number Generation - Iterative Bottom-Up Build](diagrams/ch7-06-fibonacci-iterative.svg)
 
@@ -562,7 +562,7 @@ One valid Huffman code assignment:
 
 The exact 0/1 labels may differ, but the total encoded length remains optimal.
 
-#### Mermaid Diagram: Huffman Merge Tree
+#### Visual Map: Huffman Merge Tree
 
 ![Huffman Coding Tree Construction (Total Weight 100)](diagrams/ch7-07-huffman-merge-tree.svg)
 
@@ -694,7 +694,7 @@ $$
 
 Maximum number of selected activities: **4**.
 
-#### Mermaid Diagram: Activity Selection Timeline
+#### Visual Map: Activity Selection Timeline
 
 ![Activity Selection Problem - Timeline by Earliest Finish Time](diagrams/ch7-09-activity-selection-timeline.svg)
 
