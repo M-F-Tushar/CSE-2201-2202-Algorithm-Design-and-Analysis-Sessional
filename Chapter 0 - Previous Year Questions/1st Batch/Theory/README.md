@@ -525,16 +525,6 @@ For $F(5)$, memoization starts at $F(5)$ and asks for smaller values. After it c
 |:---:|:-:|:-:|:-:|:-:|:-:|:-:|
 | $F(n)$ | 0 | 1 | 1 | 2 | 3 | **5** |
 
-| Feature             | Memoization (Top-Down)     | Tabulation (Bottom-Up)          |
-| ------------------- | -------------------------- | ------------------------------- |
-| Approach            | Start from the big problem | Start from the smallest problem |
-| Technique           | Recursion + cache          | Iteration + table               |
-| Solves              | Only needed subproblems    | All subproblems                 |
-| Uses recursion      | ✅ Yes                     | ❌ No                           |
-| Stack overflow risk | Yes                        | No                              |
-| Easier to write     | Usually                    | Sometimes harder                |
-| Faster in practice  | Sometimes                  | Usually slightly faster         |
-
 Both versions take $O(n)$ time (plain recursion takes $O(2^n)$). Tabulation can keep only the last two values and use $O(1)$ memory.
 
 > Memory trick: memoization = recursion + notebook. Tabulation = loop + table.
