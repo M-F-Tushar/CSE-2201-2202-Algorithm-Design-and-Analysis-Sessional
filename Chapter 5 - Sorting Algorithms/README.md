@@ -18,6 +18,16 @@ This chapter introduces several ways to sort. The examples use small lists so yo
 5. [Insertion Sort](#5-insertion-sort)
 6. [Merge Sort](#6-merge-sort)
 7. [Quick Sort](#7-quick-sort)
+   - [The Core Idea: Divide and Conquer in 3 Steps](#1-the-core-idea-divide-and-conquer-in-3-steps)
+   - [Strategy Escalator: 3 Core Steps](#2-strategy-escalator-the-3-core-steps)
+   - [The Partitioning Engine Explained](#3-the-partitioning-engine-explained-in-plain-terms)
+   - [Visual State Machine: What Changes at Each Step](#4-visual-state-machine-what-changes-at-each-step)
+   - [Step-by-Step Lomuto Partitioning Trace](#5-step-by-step-lomuto-partitioning-trace)
+   - [Subproblem Recursion Flow: From Subarrays to Full Sort](#6-subproblem-recursion-flow-from-subarrays-to-full-sort)
+   - [Step-by-Step Algorithm](#7-step-by-step-algorithm)
+   - [Code Implementation: Python & Pseudocode](#8-code-implementation-python--pseudocode)
+   - [Choosing the Pivot: Why Pivot Quality Matters](#9-choosing-the-pivot-why-pivot-quality-matters)
+   - [Complexity & Performance Analysis](#10-complexity--performance-analysis)
 8. [Heap Sort](#8-heap-sort)
    - [Fundamentals: Complete Binary Tree and Heap](#1-fundamentals-complete-binary-tree-and-heap)
    - [The Heapify Method](#2-the-heapify-method-and-why-it-is-faster)
@@ -91,18 +101,19 @@ There is an important limit: any comparison sort needs at least about `n log n` 
 
 ## 2. Choosing a Sorting Method
 
-No method is best for every situation. The useful question is what matters most: a simple approach, stable ordering, a reliable time guarantee, or a small range of integer values.
+No single method is best for every situation. Instead of guessing, think of your decision as an **escalator**: start at the bottom step with the simplest conditions, and ride upward step by step as your data size, memory limits, or performance constraints grow.
 
-### Visual Map: Choose by What You Need
+### Visual Map: The Sorting Decision Escalator
 
-![A quick guide to choosing a sorting method](diagrams/ch5-01-sorting-reach-escalator.svg)
-*Decision framework for selecting sorting algorithms based on performance, memory, and stability constraints. Editable source: [`ch5-01-sorting-reach-escalator.excalidraw`](diagrams/ch5-01-sorting-reach-escalator.excalidraw)*
+![Sorting Algorithm Decision Escalator](diagrams/ch5-01-sorting-reach-escalator.svg)
+*The 5-step sorting decision escalator: match your input size, memory limit, and stability requirements to the right algorithm. Editable source: [`ch5-01-sorting-reach-escalator.excalidraw`](diagrams/ch5-01-sorting-reach-escalator.excalidraw)*
 
-- For a tiny list or one that is nearly sorted, insertion sort is often a good fit.
-- For a guaranteed `O(n log n)` time and stable results, choose merge sort if extra memory is available.
-- For `O(n log n)` time with little extra memory, heap sort is an option when stability is not needed.
-- Quick sort is often fast in practice, but a poor pivot can make it much slower.
-- Counting sort is useful when the list contains small, nonnegative integers.
+#### How to Ride the Escalator:
+1. **Step 1 (Base Step — Tiny or Pre-sorted):** If $n \le 30$ or the list is already almost in order, choose **Insertion Sort**. It runs in lightning-fast $O(n)$ best-case time with zero algorithmic overhead, uses $O(1)$ extra memory, and preserves relative order (stable).
+2. **Step 2 (Specialized Integer Range):** If all elements are integers from a known small range ($0 \dots k$), choose **Counting Sort**. It avoids item-to-item comparisons entirely, breaking the comparison lower bound to achieve linear $O(n + k)$ time.
+3. **Step 3 (Predictable Speed & Stability):** If you have large general data and MUST guarantee both stable ordering and worst-case $O(n \log n)$ time, choose **Merge Sort** (trade-off: requires $O(n)$ extra buffer memory).
+4. **Step 4 (Maximum Real-World Speed In-Place):** If you need the fastest practical sorting speed without allocating extra arrays, choose **Quick Sort**. Its divide-and-conquer partition gives superior CPU cache locality and $O(n \log n)$ average time (trade-off: not stable; pivot choice matters to avoid $O(n^2)$ worst-case).
+5. **Step 5 (Peak Guarantee In-Place Shield):** If you need guaranteed $O(n \log n)$ worst-case time with strictly zero auxiliary memory ($O(1)$ space) and no risk of recursive stack overflow, choose **Heap Sort** (trade-off: not stable).
 
 ---
 
@@ -387,47 +398,196 @@ for k: integer = 0 to length(temp) - 1:
 
 ## 7. Quick Sort
 
-**Core idea:** choose one item as a pivot, move smaller items to one side and larger items to the other, then sort the two sides.
+> **Video Tutorial Reference:** This section is modeled directly on the visual, intuitive explanation provided in [Michael Sambol's "Quick sort in 4 minutes"](https://youtu.be/Hoixgm4-P4M?si=Z6T1OgoDTZUTaox_).
 
-After a partition, the pivot is in its final position: everything to its left belongs before it, and everything to its right belongs after it. The same process is then used on each side. In this chapter's example, the last item in each part is the pivot.
+---
 
-### Visual Walkthrough: Step-by-Step Execution
+### 1. The Core Idea: Divide and Conquer in 3 Steps
 
-#### Stage 1: Lomuto Partitioning Step-by-Step
-Using the last element ($3$) as the pivot, index $j$ scans left to right. When $A[j] \le \text{pivot}$, it swaps with $A[\text{boundary}]$ and boundary advances. Finally, the pivot swaps into boundary position $2$.
+Quick Sort is one of the fastest and most celebrated sorting algorithms in computer science. Instead of sorting elements one by one, it uses a **Divide and Conquer** strategy to break a large sorting task down into simple, independent mini-tasks.
 
-![Quick sort Lomuto partitioning trace](diagrams/ch5-08-quick-sort-partition.svg)
-*Lomuto partition trace: scan index j places smaller items to the left of boundary; pivot 3 locks into index 2. Editable source: [`ch5-08-quick-sort-partition.excalidraw`](diagrams/ch5-08-quick-sort-partition.excalidraw)*
+The entire algorithm operates in **3 intuitive steps**:
 
-#### Stage 2: Subproblem Recursion Flow
-Once pivot $3$ is locked in place, quick sort recursively partitions the left subproblem `[2, 1]` and right subproblem `[6, 5, 4]` until all elements are settled.
+1. **Pick a Pivot:** Choose one number from the array to act as the benchmark (called the **pivot**). In textbook and visual presentations, we pick the **last number** of the current section (`A[high]`).
+2. **Partition the Array:** Compare every number against the pivot and rearrange them in place:
+   - Numbers **smaller than or equal to** the pivot move to the **left**.
+   - Numbers **greater than** the pivot stay to the **right**.
+   - Finally, swap the pivot right into the boundary between them!
+   > **The Magic Moment:** The pivot is now locked in its **final, permanent sorted position**. It will never need to move again!
+3. **Recursively Repeat on Both Halves:** Treat the numbers to the left of the pivot (smaller numbers) and the numbers to the right of the pivot (larger numbers) as two separate, smaller sub-arrays. Run the exact same 3 steps on both sides!
+- **Base Case:** Whenever a sub-array has **0 or 1 element**, it is already sorted by definition. We simply stop and return!
 
-![Quick sort subproblem recursion flow](diagrams/ch5-08b-quick-sort-recursion.svg)
-*Subproblem recursion tree: independent partitioning on left and right subproblems completes the sort. Editable source: [`ch5-08b-quick-sort-recursion.excalidraw`](diagrams/ch5-08b-quick-sort-recursion.excalidraw)*
+---
 
-Start with `[5, 2, 4, 6, 1, 3]`:
+### 2. Strategy Escalator: The 3 Core Steps
 
-| Step | Pivot or part being sorted | List after the step |
-| :--- | :--- | :--- |
-| Start | — | `[5, 2, 4, 6, 1, 3]` |
-| 1 | Pivot 3 | `[2, 1, 3, 6, 5, 4]` |
-| 2 | Sort `[2, 1]`, using 1 as pivot | `[1, 2, 3, 6, 5, 4]` |
-| 3 | Sort `[6, 5, 4]`, using 4 as pivot | `[1, 2, 3, 4, 5, 6]` |
-| 4 | The last pair `[5, 6]` is already in order | `[1, 2, 3, 4, 5, 6]` |
+![Quick Sort: 3-Step Strategy Escalator](diagrams/ch5-08a-quick-sort-strategy.svg)
+*The 3-step Divide and Conquer strategy escalator: Pick Pivot $\to$ Partition Array in-place $\to$ Recurse on Left and Right Subarrays. Editable source: [`ch5-08a-quick-sort-strategy.excalidraw`](diagrams/ch5-08a-quick-sort-strategy.excalidraw)*
 
-### Instructions
+---
 
-1. Work on the section from `low` through `high`. If `low >= high`, it has at most one item and needs no more work.
-2. Use the last item, `A[high]`, as the pivot. Set `boundary = low`; this marks where the next value no larger than the pivot belongs.
-3. Scan positions `low` through `high - 1`. Whenever `A[j] <= pivot`, switch it with `A[boundary]` and move `boundary` one position right. Larger values stay to the right for now.
-4. After the scan, switch the pivot with `A[boundary]`. The pivot is now in its final position: values no larger than it are to the left, and larger values are to the right.
-5. Repeat the same steps on the sections before and after the pivot. Stop a section when it has at most one item.
+### 3. The Partitioning Engine Explained in Plain Terms
 
-### Pseudocode
+The **partition step** does all the heavy lifting in Quick Sort. How does it rearrange the array without creating any extra lists? It uses **two pointers** (or index markers) that walk through the array:
+
+1. **Boundary Marker $i$ (The "Wall"):**
+   - Starts at `low`.
+   - Think of $i$ as a dividing wall: everything to the *left* of $i$ is guaranteed to be $\le \text{pivot}$.
+   - It marks where the *next* small number should be placed.
+2. **Scanner Marker $j$ (The "Scout"):**
+   - Starts at `low` and walks one-by-one up to `high - 1`.
+   - It inspects each number and asks: *"Is this number $\le \text{pivot}$?"*
+
+#### The Simple Swap Rule:
+- **If $A[j] \le \text{pivot}$ (Found a small item):**
+  - Swap $A[i]$ with $A[j]$ (tucking the small item behind the wall).
+  - Move the wall one step right: `i += 1`.
+- **If $A[j] > \text{pivot}$ (Found a large item):**
+  - Do nothing! The item stays on the right side of the wall. Just move the scanner $j$ forward.
+
+#### The Grand Finale:
+Once the scanner $j$ reaches the end of the range, swap the wall element $A[i]$ with the pivot $A[\text{high}]$!
+Now:
+- Everything before index $i$ is $\le \text{pivot}$.
+- Index $i$ contains the **pivot**.
+- Everything after index $i$ is $> \text{pivot}$.
+- Return index $i$ as the partition boundary!
+
+---
+
+### 4. Visual State Machine: What Changes at Each Step
+
+To see exactly what happens inside memory during partitioning, follow the state progression below on array `[5, 2, 4, 6, 1, 3]` with **Pivot = 3**:
+
+![Quick Sort Partitioning Visual State Machine](diagrams/ch5-08c-quick-sort-states.svg)
+*State snapshots during partitioning: tracking pointer movements, element swaps, and permanent pivot placement. Editable source: [`ch5-08c-quick-sort-states.excalidraw`](diagrams/ch5-08c-quick-sort-states.excalidraw)*
+
+#### State-by-State Breakdown:
+- **State 0 (Initial Setup):** Pivot is $A[5] = 3$. Wall pointer $i = 0$, scanner $j = 0$. No elements categorized yet.
+- **State 1 (Scan $j = 0$):** $A[0] = 5$. Compare $5 \le 3$? False ($5 > 3$). Too large! No swap. Wall $i$ stays at 0; scanner $j$ moves to 1.
+- **State 2 (First Swap at $j = 1$):** $A[1] = 2$. Compare $2 \le 3$? True! Swap $A[i=0]$ (value 5) and $A[j=1]$ (value 2). The array becomes `[2, 5, 4, 6, 1, 3]`. Advance wall $i \to 1$.
+- **State 3 (Scan $j = 2$ and $j = 3$):** Elements $4$ and $6$ are both $> 3$. Neither is swapped. Wall $i$ remains at 1 while scanner $j$ marches forward.
+- **State 4 (Second Swap at $j = 4$):** $A[4] = 1$. Compare $1 \le 3$? True! Swap $A[i=1]$ (value 5) and $A[j=4]$ (value 1). The array becomes `[2, 1, 4, 6, 5, 3]`. Advance wall $i \to 2$. Scanner has completed its pass!
+- **State 5 (Final Pivot Swap):** Swap wall element $A[i=2]$ (value 4) with pivot $A[5]$ (value 3). The array becomes `[2, 1, 3, 6, 5, 4]`.
+- **State 6 (Partition Complete):** Pivot **3** is permanently locked at index 2! Left compartment `[2, 1]` contains all items $\le 3$; Right compartment `[6, 5, 4]` contains all items $> 3$.
+
+---
+
+### 5. Step-by-Step Lomuto Partitioning Trace
+
+![Quick Sort Step-by-Step Lomuto Partitioning Trace](diagrams/ch5-08-quick-sort-partition.svg)
+*Every single micro-step of Lomuto partitioning traced on array [5, 2, 4, 6, 1, 3] with Pivot 3. Editable source: [`ch5-08-quick-sort-partition.excalidraw`](diagrams/ch5-08-quick-sort-partition.excalidraw)*
+
+| State | Action / Comparison | Array State | Boundary $i$ | Scanner $j$ | What Changed? |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| **0** | **Start** | `[5, 2, 4, 6, 1, 3]` | `0` | `0` | Pivot chosen as $A[5] = 3$. Wall $i$ starts at index 0. |
+| **1** | Compare $A[0]=5 \le 3 \implies \text{False}$ | `[5, 2, 4, 6, 1, 3]` | `0` | `0` | 5 is larger than 3; no swap. Wall stays at 0. |
+| **2** | Compare $A[1]=2 \le 3 \implies \text{True}$ | `[2, 5, 4, 6, 1, 3]` | `1` | `1` | **Swap $A[0]$ and $A[1]$!** 2 enters left compartment; $i$ advances to 1. |
+| **3** | Compare $A[2]=4 \le 3 \implies \text{False}$ | `[2, 5, 4, 6, 1, 3]` | `1` | `2` | 4 is larger than 3; no swap. Wall stays at 1. |
+| **4** | Compare $A[3]=6 \le 3 \implies \text{False}$ | `[2, 5, 4, 6, 1, 3]` | `1` | `3` | 6 is larger than 3; no swap. Wall stays at 1. |
+| **5** | Compare $A[4]=1 \le 3 \implies \text{True}$ | `[2, 1, 4, 6, 5, 3]` | `2` | `4` | **Swap $A[1]$ and $A[4]$!** 1 enters left compartment; $i$ advances to 2. |
+| **6** | Scan ends ($j = \text{high}$) | `[2, 1, 3, 6, 5, 4]` | `2` | — | **Swap $A[i=2]$ with Pivot $A[5]$!** Value 3 moves to index 2. |
+| **7** | **Partition Complete** | `[2, 1, 3, 6, 5, 4]` | `2` | — | **Pivot 3 is LOCKED at index 2.** Left is $\le 3$, Right is $> 3$. |
+
+---
+
+### 6. Subproblem Recursion Flow: From Subarrays to Full Sort
+
+Once Pivot 3 is locked at index 2, the original array splits into two independent subproblems:
+1. **Left Subproblem:** Indices $0 \dots 1$ with elements `[2, 1]`.
+2. **Right Subproblem:** Indices $3 \dots 5$ with elements `[6, 5, 4]`.
+
+Quick Sort now calls itself recursively on both sides!
+
+![Quick Sort Subproblem Recursion Flow](diagrams/ch5-08b-quick-sort-recursion.svg)
+*Recursion divides subproblems around each locked pivot until all elements are in place. Editable source: [`ch5-08b-quick-sort-recursion.excalidraw`](diagrams/ch5-08b-quick-sort-recursion.excalidraw)*
+
+#### Tracing the Recursive Calls:
+1. **Left Side: `[2, 1]` (indices 0..1):**
+   - Pick last element as pivot: $\text{Pivot} = 1$.
+   - Scan $j=0$: $A[0] = 2 > 1$, no swap.
+   - Scan ends: Swap $A[i=0]$ (value 2) with Pivot (value 1) $\implies$ subarray becomes `[1, 2]`.
+   - Pivot **1** locks into index 0!
+   - Base case: Subarray to the left is empty; subarray to the right is single element `[2]` at index 1, which auto-settles!
+   - Result: Left half `[1, 2]` is completely sorted!
+2. **Right Side: `[6, 5, 4]` (indices 3..5):**
+   - Pick last element as pivot: $\text{Pivot} = 4$.
+   - Scan $j=3$: $A[3] = 6 > 4$, no swap.
+   - Scan $j=4$: $A[4] = 5 > 4$, no swap.
+   - Scan ends: Swap $A[i=3]$ (value 6) with Pivot (value 4) $\implies$ subarray becomes `[4, 6, 5]`.
+   - Pivot **4** locks into index 3!
+   - Leaves subproblem `[6, 5]` on indices 4..5.
+3. **Subproblem: `[6, 5]` (indices 4..5):**
+   - Pick last element as pivot: $\text{Pivot} = 5$.
+   - Scan $j=4$: $A[4] = 6 > 5$, no swap.
+   - Scan ends: Swap $A[i=4]$ (value 6) with Pivot (value 5) $\implies$ subarray becomes `[5, 6]`.
+   - Pivot **5** locks into index 4, leaving single element **6** at index 5.
+4. **All Subproblems Resolved:**
+   - Every single element has been chosen as a pivot or reached a 1-element base case.
+   - The entire array is sorted: `[1, 2, 3, 4, 5, 6]`!
+
+---
+
+### 7. Step-by-Step Algorithm
+
+Instead of confusing academic notation, Quick Sort is described by two clean, modular procedures:
+
+#### Procedure 1: `PARTITION(A, low, high)` (The Rearranger)
+1. **Set pivot:** Let `pivot = A[high]`.
+2. **Initialize boundary:** Set wall index `i = low`.
+3. **Scan loop:** For scanner `j` from `low` up to `high - 1`:
+   - If `A[j] <= pivot`:
+     - Swap `A[i]` with `A[j]`.
+     - Advance wall: `i = i + 1`.
+4. **Lock pivot:** Swap `A[i]` with `A[high]`.
+5. **Return:** Return index `i` (the permanent position of the pivot).
+
+#### Procedure 2: `QUICK-SORT(A, low, high)` (The Coordinator)
+1. **Check base case:** If `low >= high`, the sub-array has 0 or 1 element. Stop and return (`return`).
+2. **Partition:** Run `p = PARTITION(A, low, high)` to lock the pivot at index `p`.
+3. **Recurse left:** Call `QUICK-SORT(A, low, p - 1)` to sort everything to the left of the pivot.
+4. **Recurse right:** Call `QUICK-SORT(A, p + 1, high)` to sort everything to the right of the pivot.
+
+---
+
+### 8. Code Implementation: Python & Pseudocode
+
+#### Python Implementation (Matching Michael Sambol's Repository)
+
+```python
+def partition(arr, low, high):
+    """Lomuto partition scheme: places pivot at its sorted position."""
+    i = low
+    pivot = arr[high]
+
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            arr[i], arr[j] = arr[j], arr[i]
+            i += 1
+
+    arr[i], arr[high] = arr[high], arr[i]
+    return i
+
+
+def quick_sort(arr, low, high):
+    """Recursively sorts sub-arrays around the partition index."""
+    if low < high:
+        p = partition(arr, low, high)
+        quick_sort(arr, low, p - 1)   # Sort left of pivot
+        quick_sort(arr, p + 1, high)  # Sort right of pivot
+
+
+# Example walkthrough matching the chapter diagram:
+if __name__ == "__main__":
+    nums = [5, 2, 4, 6, 1, 3]
+    print("Initial array: ", nums)
+    quick_sort(nums, 0, len(nums) - 1)
+    print("Sorted array:  ", nums)
+```
+
+#### Language-Agnostic Pseudocode
 
 ```text
-Call QUICK-SORT(A, 0, length(A) - 1) to sort the whole array.
-
 QUICK-SORT(A: array of comparable items, low: integer, high: integer) -> void
 if low >= high:
     return
@@ -437,25 +597,49 @@ QUICK-SORT(A, p + 1, high)
 
 PARTITION(A: array of comparable items, low: integer, high: integer) -> integer
 pivot: item = A[high]
-boundary: integer = low
+i: integer = low
 for j: integer = low to high - 1:
     if A[j] <= pivot:
-        swap(A[boundary], A[j])
-        boundary += 1
-swap(A[boundary], A[high])
-return boundary
+        swap(A[i], A[j])
+        i += 1
+swap(A[i], A[high])
+return i
 ```
 
-### Choosing a pivot
+---
 
-This example uses the last item because it makes the steps easy to follow. A real implementation can choose a first item, a random item, or a middle-of-three choice. A better choice makes it more likely that the pivot divides the list into two similar-sized parts.
+### 9. Choosing the Pivot: Why Pivot Quality Matters
 
-### How much work does it do?
+In our walkthrough, we always picked the last element `A[high]` because it is the simplest to visualize. However, how you choose the pivot directly controls Quick Sort's performance:
 
-- Best and average case: `Θ(n log n)` when the divisions are reasonably balanced.
-- Worst case: `Θ(n²)` when the divisions are very uneven, such as repeatedly leaving one large part and one tiny part.
-- Extra memory: the in-place partition needs little extra space; recursive calls use `Θ(log n)` space on average and can use `Θ(n)` in the worst case.
-- Stable: no. Items can cross each other during partitioning.
+1. **Last Element (Textbook / Lomuto):**
+   - *Pros:* Simple to code and trace.
+   - *Cons:* If the array is already sorted or reverse-sorted, picking the last element results in unbalanced partitions of sizes $0$ and $n - 1$, causing $O(n^2)$ worst-case time!
+2. **First Element:**
+   - *Pros:* Simple to code.
+   - *Cons:* Suffers from the exact same worst-case vulnerability on already-sorted data as the last element.
+3. **Random Element (Recommended for General Production):**
+   - *Pros:* Swap a randomly selected index with `A[high]` before partitioning. This prevents adversaries from feeding a worst-case input and guarantees expected $O(n \log n)$ time on any dataset.
+4. **Median-of-Three:**
+   - *Pros:* Look at the first, middle, and last elements, find their median, and swap it into `A[high]`. This guarantees balanced partitions on sorted or reverse-sorted arrays with almost no overhead.
+
+---
+
+### 10. Complexity & Performance Analysis
+
+| Metric | Complexity | Explanation |
+| :--- | :---: | :--- |
+| **Best-Case Time** | $\Omega(n \log n)$ | Occurs when the pivot divides the array into two roughly equal halves at every step ($\approx n/2$ elements each). |
+| **Average-Case Time** | $\Theta(n \log n)$ | Typical real-world behavior across randomly ordered arrays. |
+| **Worst-Case Time** | $O(n^2)$ | Occurs when the pivot is consistently the absolute minimum or maximum element (unbalanced $0$ vs $n-1$ splits). |
+| **Auxiliary Memory** | $O(\log n)$ avg / $O(n)$ worst | Space is required only for recursive call stack frames. No extra arrays are allocated. |
+| **In-Place Sort?** | **Yes** | Partitioning rearranges elements strictly within the existing array. |
+| **Stable Sort?** | **No** | Long-distance swaps can move equal keys across each other, disrupting their original relative order. |
+
+#### Why Quick Sort is Often Faster Than Merge Sort and Heap Sort in Practice:
+Even though Merge Sort, Heap Sort, and Quick Sort all share an $O(n \log n)$ average runtime, Quick Sort is almost universally preferred in production standard libraries (such as C's `qsort` or C++'s `std::sort` introsort) because:
+- **CPU Cache Locality:** Quick Sort reads and writes elements sequentially during partitioning. Modern CPU caches prefetch contiguous memory lines, making cache hits exceptionally high.
+- **Minimal Data Movement:** Unlike Merge Sort, which must allocate a secondary $O(n)$ buffer and copy elements back and forth, Quick Sort operates strictly in place with very small constant factors.
 
 ---
 

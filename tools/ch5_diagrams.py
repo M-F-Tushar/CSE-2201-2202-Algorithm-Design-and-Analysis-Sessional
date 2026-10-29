@@ -11,20 +11,29 @@ OUT = "Chapter 5 - Sorting Algorithms/diagrams"
 
 
 # -----------------------------------------------------------------------------
-# 1 — Practical decision guide
+# 1 — Practical decision guide (Escalator Diagram)
 # -----------------------------------------------------------------------------
 choose_sort = D(
     key="ch5-01-sorting-reach-escalator",
     title="Choose a Sort by What the Situation Needs",
-    size=(1020, 470),
+    size=(1270, 560),
     nodes=[
-        N("small", "Insertion sort\nSmall or nearly sorted lists", 35, 100, 290, 100, "yellow", size=14, bold=True),
-        N("stable", "Merge sort\nStable results\nExtra memory is okay", 365, 100, 290, 100, "teal", size=14, bold=True),
-        N("general", "Quick sort\nOften fast; pivot choice matters", 695, 100, 290, 100, "blue", size=14, bold=True),
-        N("memory", "Heap sort\nReliable time; little extra memory", 200, 255, 290, 100, "violet", size=13, bold=True),
-        N("range", "Counting sort\nSmall, known integer range", 530, 255, 290, 100, "green", size=14, bold=True),
+        N("esc-h", "Sorting Decision Escalator: Which Algorithm Fits Your Constraints?", 30, 16, 960, 36, "blue", size=13, bold=True),
+        N("s1", "STEP 1: Small / Pre-sorted?\nInsertion Sort\n- Input: n <= 30 or near-sorted\n- Best: O(n) | Space: O(1)\n- Stable | Near-zero overhead", 30, 310, 226, 140, "yellow", size=11, bold=True),
+        N("s2", "STEP 2: Small Integer Keys?\nCounting Sort\n- Input: Integer range [0..k]\n- Time: O(n + k) linear!\n- Stable | Non-comparison", 276, 250, 226, 140, "green", size=11, bold=True),
+        N("s3", "STEP 3: Guaranteed & Stable?\nMerge Sort\n- Input: Arbitrary data, stable\n- Time: Theta(n log n) always\n- Stable | Uses O(n) RAM", 522, 190, 226, 140, "teal", size=11, bold=True),
+        N("s4", "STEP 4: Max Speed In-Place?\nQuick Sort\n- Input: Large data, in-place\n- Time: O(n log n) average\n- Non-stable | Pivot matters", 768, 130, 226, 140, "blue", size=11, bold=True),
+        N("s5", "STEP 5: Worst-Case Shield?\nHeap Sort\n- Input: Memory-critical tasks\n- Time: Theta(n log n) always\n- Strictly O(1) RAM | Non-stable", 1014, 70, 226, 140, "violet", size=11, bold=True),
+        N("esc-sum", "Escalator Rule: Scale up from Step 1. Match your input size, memory limit, and stability requirement to the right step.", 30, 480, 1210, 46, "light", size=11, bold=True),
     ],
-    caption="Choose for the input and the trade-off you care about; no single method fits every case.",
+    edges=[
+        E("s1", "s2"),
+        E("s2", "s3"),
+        E("s3", "s4"),
+        E("s4", "s5"),
+    ],
+    flow="H",
+    caption="Escalate from simplest requirements at Step 1 up to guaranteed worst-case bounds at Step 5.",
 )
 
 # -----------------------------------------------------------------------------
@@ -486,78 +495,146 @@ def build_merge_step():
 
 
 # -----------------------------------------------------------------------------
-# 8A — Quick Sort: Lomuto Partitioning Trace
+# 8A — Quick Sort: 3-Step Strategy Escalator (Michael Sambol Method)
+# -----------------------------------------------------------------------------
+def build_quick_strategy():
+    nodes = [
+        N("qs-h", "Quick Sort Strategy Escalator: The 3 Core Steps (Michael Sambol Method)", 28, 20, 1024, 38, "blue", size=13, bold=True),
+        N("step1", "Step 1: Pick a Pivot\nSelect a benchmark item.\nUsually last item A[high].\nEverything compares to it!", 28, 80, 310, 110, "yellow", size=12, bold=True),
+        N("step2", "Step 2: Partition Array\nTwo markers (i bound, j scan).\nSwap items <= pivot to left!\nFinally, swap pivot into i.\nPivot locks in final spot!", 384, 80, 310, 110, "teal", size=12, bold=True),
+        N("step3", "Step 3: Recursively Repeat\nDivide and conquer!\nSort left subarray (<= pivot)\nand right subarray (> pivot).\nStop when subarray size <= 1.", 742, 80, 310, 110, "blue", size=12, bold=True),
+        N("qs-base", "Base Case: Any subarray with 0 or 1 item is already sorted -> Return immediately!", 28, 218, 1024, 40, "green", size=11, bold=True),
+        N("qs-takeaway", "Key Insight: No extra merging array needed. The pivot locks permanently into place in-place.", 28, 276, 1024, 40, "light", size=11),
+    ]
+    edges = [
+        E("step1", "step2"),
+        E("step2", "step3"),
+    ]
+    return D(
+        key="ch5-08a-quick-sort-strategy",
+        title="Quick Sort: 3-Step Strategy Escalator",
+        size=(1080, 340),
+        nodes=nodes,
+        edges=edges,
+        flow="H",
+        caption="Quick Sort divide-and-conquer strategy: Pick Pivot, Partition array in-place, and Recurse on both sides.",
+    )
+
+
+# -----------------------------------------------------------------------------
+# 8B — Quick Sort: Lomuto Partitioning Step-by-Step Trace
 # -----------------------------------------------------------------------------
 def build_quick_partition():
     nodes = [
-        N("qp-h", "Quick Sort: Step-by-Step Lomuto Partitioning on Array (Pivot = 3)", 28, 60, 944, 34, "blue", size=13, bold=True),
+        N("qp-h", "Quick Sort: Step-by-Step Lomuto Partitioning Trace (Pivot = 3 at A[5])", 28, 20, 1044, 34, "blue", size=13, bold=True),
     ]
 
     p_steps = [
-        ("qp-0", "Start: pivot 3 at A[5], bnd=0", ["5", "2", "4", "6", "1", "3"], ["white", "white", "white", "white", "white", "yellow"], "bnd marks boundary for <= pivot"),
-        ("qp-1", "j=0: A[0]=5 > 3 -> no swap", ["5", "2", "4", "6", "1", "3"], ["white", "white", "white", "white", "white", "yellow"], "5 > 3: boundary stays at 0"),
-        ("qp-2", "j=1: A[1]=2 <= 3 -> swap A[0],A[1]", ["2", "5", "4", "6", "1", "3"], ["teal", "teal", "white", "white", "white", "yellow"], "2 <= 3: swap with bnd 0; bnd becomes 1"),
-        ("qp-3", "j=2,3: 4, 6 > 3 -> no swap", ["2", "5", "4", "6", "1", "3"], ["teal", "white", "white", "white", "white", "yellow"], "4, 6 > 3: boundary stays at 1"),
-        ("qp-4", "j=4: A[4]=1 <= 3 -> swap A[1],A[4]", ["2", "1", "4", "6", "5", "3"], ["teal", "teal", "white", "white", "white", "yellow"], "1 <= 3: swap with bnd 1; bnd becomes 2"),
-        ("qp-5", "Scan done: swap A[bnd=2] & pivot 3", ["2", "1", "3", "6", "5", "4"], ["teal", "teal", "green", "white", "white", "white"], "Pivot 3 locks at index 2! Left<=3, Right>3"),
+        ("qp-0", "State 0: Start: pivot=3 at A[5], i=0, j=0", ["5", "2", "4", "6", "1", "3"], ["white", "white", "white", "white", "white", "yellow"], "i marks boundary where items <= 3 go; j begins scan"),
+        ("qp-1", "State 1 (j=0): A[0]=5 > 3 -> No swap", ["5", "2", "4", "6", "1", "3"], ["orange", "white", "white", "white", "white", "yellow"], "5 > 3: too big! Boundary i remains at 0; advance j"),
+        ("qp-2", "State 2 (j=1): A[1]=2 <= 3 -> SWAP A[0], A[1]", ["2", "5", "4", "6", "1", "3"], ["teal", "orange", "white", "white", "white", "yellow"], "2 <= 3: swap A[i=0] & A[j=1]; boundary i advances to 1"),
+        ("qp-3", "State 3 (j=2): A[2]=4 > 3 -> No swap", ["2", "5", "4", "6", "1", "3"], ["teal", "orange", "orange", "white", "white", "yellow"], "4 > 3: too big! Boundary i remains at 1; advance j"),
+        ("qp-4", "State 4 (j=3): A[3]=6 > 3 -> No swap", ["2", "5", "4", "6", "1", "3"], ["teal", "orange", "orange", "orange", "white", "yellow"], "6 > 3: too big! Boundary i remains at 1; advance j"),
+        ("qp-5", "State 5 (j=4): A[4]=1 <= 3 -> SWAP A[1], A[4]", ["2", "1", "4", "6", "5", "3"], ["teal", "teal", "orange", "orange", "orange", "yellow"], "1 <= 3: swap A[i=1] & A[j=4]; boundary i advances to 2"),
+        ("qp-6", "State 6: Scan finished! Swap A[i=2] & Pivot A[5]", ["2", "1", "3", "6", "5", "4"], ["teal", "teal", "green", "orange", "orange", "orange"], "Swap boundary A[2] (value 4) with pivot A[5] (value 3)"),
+        ("qp-7", "State 7: Partition complete! Pivot locked", ["2", "1", "3", "6", "5", "4"], ["teal", "teal", "green", "white", "white", "white"], "Pivot 3 locked at idx 2! Left [2, 1] <= 3, Right [6, 5, 4] > 3"),
     ]
 
     for idx, (sid, lbl, vals, cols, note) in enumerate(p_steps):
-        y = 104 + idx * 46
-        nodes.append(N(f"{sid}-lbl", lbl, 28, y, 290, 36, "gray", size=10))
+        y = 66 + idx * 46
+        nodes.append(N(f"{sid}-lbl", lbl, 28, y, 320, 36, "gray", size=10))
         for cidx, (val, col) in enumerate(zip(vals, cols)):
-            nodes.append(N(f"{sid}-c{cidx}", str(val), 332 + cidx * 48, y, 42, 36, col, size=15, bold=(col in ("teal", "green", "yellow"))))
-        nodes.append(N(f"{sid}-note", note, 636, y, 336, 36, "green" if "locks" in note else "light", size=10, bold=("locks" in note)))
+            nodes.append(N(f"{sid}-c{cidx}", str(val), 360 + cidx * 48, y, 42, 36, col, size=14, bold=(col in ("teal", "green", "yellow"))))
+        nodes.append(N(f"{sid}-note", note, 660, y, 412, 36, "green" if "locked" in note else "light", size=10, bold=("locked" in note)))
 
     nodes.append(N(
         "qp-sum",
-        "Lomuto partition places pivot 3 in its permanent index 2.\nAll elements to the left [2, 1] are <= 3; all elements to the right [6, 5, 4] are > 3.",
-        28, 390, 944, 44, "light", size=11,
+        "Lomuto partition takes linear Theta(n) time and 0 extra memory. Pivot 3 is now permanently sorted at index 2.\nNext: recursively partition the left sub-array [2, 1] and the right sub-array [6, 5, 4].",
+        28, 442, 1044, 44, "green", size=11, bold=True,
     ))
 
     return D(
         key="ch5-08-quick-sort-partition",
         title="Quick Sort: Step-by-Step Lomuto Partitioning",
-        size=(1000, 470),
+        size=(1100, 510),
         nodes=nodes,
         caption="Lomuto partitioning scans array, gathers items <= pivot to the left, and locks the pivot in place.",
     )
 
 
 # -----------------------------------------------------------------------------
-# 8B — Quick Sort: Recursive Subproblem Flow to Full Sorted Array
+# 8C — Quick Sort: Visual State Machine Across Every Swap
+# -----------------------------------------------------------------------------
+def build_quick_states():
+    nodes = [
+        N("qss-h", "Quick Sort Partitioning: Visual State Machine Across Every Swap", 28, 20, 1064, 34, "blue", size=13, bold=True),
+    ]
+
+    states = [
+        ("st0", "State 0: Start\ni=0, j=0, Pivot=3 at A[5]", ["5", "2", "4", "6", "1", "3"], ["white", "white", "white", "white", "white", "yellow"], "Pointers: i points to A[0]; j points to A[0]. No items categorized yet."),
+        ("st1", "State 1: Swap 1 (j=1)\n2 <= 3 -> Swap A[0] (5) & A[1] (2)", ["2", "5", "4", "6", "1", "3"], ["teal", "orange", "white", "white", "white", "yellow"], "2 moves into left partition! i increments from 0 to 1; j increments to 2."),
+        ("st2", "State 2: Scan (j=2, 3)\n4 > 3 and 6 > 3 (no swaps)", ["2", "5", "4", "6", "1", "3"], ["teal", "orange", "orange", "orange", "white", "yellow"], "Both 4 and 6 stay in right section. Boundary i remains unchanged at 1."),
+        ("st3", "State 3: Swap 2 (j=4)\n1 <= 3 -> Swap A[1] (5) & A[4] (1)", ["2", "1", "4", "6", "5", "3"], ["teal", "teal", "orange", "orange", "orange", "yellow"], "1 moves into left partition! i increments from 1 to 2; scan finishes."),
+        ("st4", "State 4: Final Pivot Swap\nSwap A[i=2] (4) & Pivot A[5] (3)", ["2", "1", "3", "6", "5", "4"], ["teal", "teal", "green", "orange", "orange", "orange"], "Pivot 3 swaps into index 2. All <= 3 on left; all > 3 on right!"),
+        ("st5", "State 5: Subproblems Emerge\nLeft Part | Pivot | Right Part", ["2", "1", "3", "6", "5", "4"], ["teal", "teal", "green", "violet", "violet", "violet"], "Pivot 3 is LOCKED in final spot.\nRecurse on [2, 1] and [6, 5, 4] independently!"),
+    ]
+
+    for idx, (sid, lbl, vals, cols, note) in enumerate(states):
+        y = 66 + idx * 56
+        nodes.append(N(f"{sid}-lbl", lbl, 28, y, 290, 48, "gray", size=10, bold=True))
+        for cidx, (val, col) in enumerate(zip(vals, cols)):
+            nodes.append(N(f"{sid}-c{cidx}", str(val), 330 + cidx * 50, y + 4, 44, 40, col, size=15, bold=True))
+        nodes.append(N(f"{sid}-note", note, 646, y, 446, 48, "green" if idx >= 4 else "light", size=10, bold=(idx >= 4)))
+
+    nodes.append(N(
+        "qss-sum",
+        "Summary: The boundary pointer i acts as a wall. Every item <= pivot is swapped behind the wall (left side).\nAt the end, swapping the pivot with the wall places the pivot exactly where it belongs for eternity.",
+        28, 412, 1064, 44, "green", size=11, bold=True,
+    ))
+
+    return D(
+        key="ch5-08c-quick-sort-states",
+        title="Quick Sort: Visual State Machine",
+        size=(1120, 480),
+        nodes=nodes,
+        caption="Visual state snapshots during partitioning showing pointer updates, cell relocations, and pivot locking.",
+    )
+
+
+# -----------------------------------------------------------------------------
+# 8D — Quick Sort: Recursive Subproblem Flow to Full Sorted Array
 # -----------------------------------------------------------------------------
 def build_quick_recursion():
     nodes = [
-        N("qr-h", "Quick Sort: Subproblem Recursion Flow to Full Sorted Array", 28, 60, 944, 34, "blue", size=13, bold=True),
+        N("qr-h", "Quick Sort: Subproblem Recursion Flow to Full Sorted Array", 28, 20, 1044, 34, "blue", size=13, bold=True),
     ]
 
     sub_steps = [
-        ("qr-0", "Start: unsorted array", ["5", "2", "4", "6", "1", "3"], ["white"] * 6, "Initial array; pivot chosen at A[5] = 3"),
-        ("qr-1", "Partition 1: pivot 3 locks at idx 2", ["2", "1", "3", "6", "5", "4"], ["white", "white", "green", "white", "white", "white"], "Subproblems formed: [2, 1] and [6, 5, 4]"),
-        ("qr-2", "Left subproblem [2, 1]: pivot 1 locks", ["1", "2", "3", "6", "5", "4"], ["green", "green", "green", "white", "white", "white"], "1 locks at idx 0; 2 auto-settles at idx 1"),
-        ("qr-3", "Right subproblem [6, 5, 4]: pivot 4 locks", ["1", "2", "3", "4", "5", "6"], ["green", "green", "green", "green", "white", "white"], "4 locks at idx 3; leaves subproblem [5, 6]"),
-        ("qr-4", "Subproblem [5, 6]: in order -> locks", ["1", "2", "3", "4", "5", "6"], ["green"] * 6, "5 <= 6 already sorted; 5 and 6 lock in place"),
-        ("qr-fin", "Sorted Output Array", ["1", "2", "3", "4", "5", "6"], ["green"] * 6, "All pivots locked; full array is sorted!"),
+        ("qr-0", "Start: unsorted array [5, 2, 4, 6, 1, 3]", ["5", "2", "4", "6", "1", "3"], ["white"] * 6, "Initial array; pivot chosen at A[5] = 3"),
+        ("qr-1", "Partition 1: pivot 3 locks at idx 2", ["2", "1", "3", "6", "5", "4"], ["white", "white", "green", "white", "white", "white"], "Subproblems formed: [2, 1] on left and [6, 5, 4] on right"),
+        ("qr-2", "Left subproblem [2, 1]: pivot 1 locks", ["1", "2", "3", "6", "5", "4"], ["green", "green", "green", "white", "white", "white"], "1 locks at idx 0; 2 auto-settles at idx 1 (base case)"),
+        ("qr-3", "Right subproblem [6, 5, 4]: pivot 4 locks", ["1", "2", "3", "4", "6", "5"], ["green", "green", "green", "green", "white", "white"], "4 locks at idx 3; leaves subproblem [6, 5] on indices 4..5"),
+        ("qr-4", "Subproblem [6, 5]: pivot 5 locks", ["1", "2", "3", "4", "5", "6"], ["green"] * 6, "5 locks at idx 4; 6 auto-settles at idx 5 (base case)"),
+        ("qr-fin", "Fully Sorted Array: [1, 2, 3, 4, 5, 6]", ["1", "2", "3", "4", "5", "6"], ["green"] * 6, "All pivots locked in final positions; entire array is sorted!"),
     ]
 
     for idx, (sid, lbl, vals, cols, note) in enumerate(sub_steps):
-        y = 104 + idx * 46
-        nodes.append(N(f"{sid}-lbl", lbl, 28, y, 290, 36, "gray", size=10))
+        y = 66 + idx * 46
+        nodes.append(N(f"{sid}-lbl", lbl, 28, y, 320, 36, "gray", size=10))
         for cidx, (val, col) in enumerate(zip(vals, cols)):
-            nodes.append(N(f"{sid}-c{cidx}", str(val), 332 + cidx * 48, y, 42, 36, col, size=15, bold=(col == "green")))
-        nodes.append(N(f"{sid}-note", note, 636, y, 336, 36, "green" if "sorted" in note.lower() else "light", size=10, bold=("sorted" in note.lower())))
+            nodes.append(N(f"{sid}-c{cidx}", str(val), 360 + cidx * 48, y, 42, 36, col, size=14, bold=(col == "green")))
+        nodes.append(N(f"{sid}-note", note, 660, y, 412, 36, "green" if "sorted" in note.lower() else "light", size=10, bold=("sorted" in note.lower())))
 
     nodes.append(N(
         "qr-sum",
         "Quick sort recurses on the subproblems to the left and right of each locked pivot.\nTheta(n log n) average time; Theta(n^2) worst case if pivot is unbalanced. In-place, non-stable.",
-        28, 390, 944, 44, "green", size=11, bold=True,
+        28, 350, 1044, 44, "green", size=11, bold=True,
     ))
 
     return D(
         key="ch5-08b-quick-sort-recursion",
         title="Quick Sort: Subproblem Recursion Flow",
-        size=(1000, 470),
+        size=(1100, 420),
         nodes=nodes,
         caption="Recursion divides subproblems around each locked pivot until all elements are in place.",
     )
@@ -682,7 +759,9 @@ DIAGRAMS = [
     build_counting_placement(),
     build_merge_tree(),
     build_merge_step(),
+    build_quick_strategy(),
     build_quick_partition(),
+    build_quick_states(),
     build_quick_recursion(),
     build_heap_build(),
     build_heap_sort(),
