@@ -1,4 +1,4 @@
-﻿# Chapter 8: Dynamic Programming
+# Chapter 8: Dynamic Programming
 
 [Previous: Chapter 7 - Greedy Algorithms](../Chapter%207%20-%20Greedy%20Algorithms/README.md) | [Home](../README.md) | [Next: Chapter 9 - Backtracking](../Chapter%209%20-%20Backtracking/README.md)
 
@@ -22,6 +22,8 @@ This chapter keeps only the requested Dynamic Programming topics and the request
 6. [Memoization vs Tabulation (Top-Down vs Bottom-Up)](#5-memoization-vs-tabulation-top-down-vs-bottom-up)
 7. [Problems](#problems)
    - [Climbing Stairs](#climbing-stairs)
+   - [Coin-Row Problem](#coin-row-problem)
+   - [Coin-Collecting Problem](#coin-collecting-problem)
    - [0/1 Knapsack](#01-knapsack)
    - [Rod Cutting](#rod-cutting)
    - [Longest Common Subsequence (LCS)](#longest-common-subsequence-lcs)
@@ -222,7 +224,7 @@ Dynamic Programming can be implemented using memoization or tabulation.
 | Approach            | Start from the big problem | Start from the smallest problem |
 | Technique           | Recursion + cache          | Iteration + table               |
 | Solves              | Only needed subproblems    | All subproblems                 |
-| Uses recursion      | âœ… Yes                      | âŒ No                            |
+| Uses recursion      | ✅ Yes                      | ❌ No                            |
 | Stack overflow risk | Yes                        | No                              |
 | Easier to write     | Usually                    | Sometimes harder                |
 | Faster in practice  | Sometimes                  | Usually slightly faster         |
@@ -331,7 +333,7 @@ Arrow-guided fill order:
 
 Therefore, there are **13** distinct ways to climb 5 stairs.
 
-#### Mermaid Diagram: Climbing Stairs State Dependencies
+#### Visual Map: Climbing Stairs State Dependencies
 
 ![Climbing Stairs State Dependencies (1, 2, or 3 Steps)](diagrams/ch8-07-climbing-stairs-dependencies.svg)
 
@@ -421,7 +423,7 @@ Directly translating the recurrence $C(n) = C(n-1) + C(n-2)$ into recursive call
 
 ![Climbing Stairs Recursion Tree (1 or 2 Steps for n = 4)](diagrams/ch8-08-climbing-stairs-tree.svg)
 
-Notice $C(2)$ is computed twice and $C(1)$ three times â€” the same overlapping-subproblems pattern seen in Fibonacci. Each call spawns two more calls until a base case is hit, so the call tree has roughly $2^n$ nodes in the worst case:
+Notice $C(2)$ is computed twice and $C(1)$ three times — the same overlapping-subproblems pattern seen in Fibonacci. Each call spawns two more calls until a base case is hit, so the call tree has roughly $2^n$ nodes in the worst case:
 
 $$
 T_{\text{naive}}(n) = O(2^n)
@@ -434,6 +436,129 @@ For $n=4$, the $C(4) = 5$ valid climbing sequences (using only 1-step and 2-step
 $$
 1{+}1{+}1{+}1, \quad 1{+}1{+}2, \quad 1{+}2{+}1, \quad 2{+}1{+}1, \quad 2{+}2
 $$
+
+---
+
+### Coin-Row Problem
+
+#### Problem Statement
+
+Given a row of $n$ coins with positive integer values $c_1, c_2, \dots, c_n$, select a subset of coins to maximize their total value, subject to the constraint that **no two selected coins can be adjacent** in the row.
+
+#### Inputs and Output
+
+- **Input:** an array of coin values $C[1 \dots n]$.
+- **Output:** the maximum sum of non-adjacent coins.
+
+#### Subproblem Decomposition
+
+Let $F(i)$ be the maximum value that can be picked from the first $i$ coins ($c_1, \dots, c_i$). For the $i$-th coin, there are two mutually exclusive choices:
+1. **Include coin $i$:** The coin contributes $c_i$. Since adjacent coins are forbidden, coin $i - 1$ cannot be picked, leaving the subproblem on the first $i - 2$ coins: $c_i + F(i - 2)$.
+2. **Exclude coin $i$:** The maximum value is simply the optimal value from the first $i - 1$ coins: $F(i - 1)$.
+
+#### Recurrence Relation
+
+$$
+F(i) = \begin{cases} 0 & \text{if } i = 0 \\ c_1 & \text{if } i = 1 \\ \max\big(c_i + F(i - 2), F(i - 1)\big) & \text{if } i \ge 2 \end{cases}
+$$
+
+#### Worked Example: Coins $[5, 1, 2, 10, 6, 2]$
+
+| $i$ | Coin $c_i$ | Include ($c_i + F(i-2)$) | Exclude ($F(i-1)$) | $F(i)$ | Selected coins so far |
+| :---: | :---: | :---: | :---: | :---: | :--- |
+| 0 | — | — | — | 0 | none |
+| 1 | 5 | $5 + 0 = 5$ | 0 | **5** | $\{c_1\}$ |
+| 2 | 1 | $1 + 0 = 1$ | 5 | **5** | $\{c_1\}$ |
+| 3 | 2 | $2 + 5 = 7$ | 5 | **7** | $\{c_1, c_3\}$ |
+| 4 | 10 | $10 + 5 = 15$ | 7 | **15** | $\{c_1, c_4\}$ |
+| 5 | 6 | $6 + 7 = 13$ | 15 | **15** | $\{c_1, c_4\}$ |
+| 6 | 2 | $2 + 15 = 17$ | 15 | **17** | $\{c_1, c_4, c_6\}$ |
+
+Maximum total value: **17** (from coins with values $5, 10, 2$).
+
+#### Algorithm
+
+```text
+COIN-ROW(C, n)
+1. if n == 0: return 0
+2. if n == 1: return C[1]
+3. create array F[0...n]
+4. F[0] = 0
+5. F[1] = C[1]
+6. for i = 2 to n:
+7.     F[i] = max(C[i] + F[i - 2], F[i - 1])
+8. return F[n]
+```
+
+#### Complexity Analysis
+- **Time Complexity:** $\Theta(n)$ — a single loop fills $n$ states with $O(1)$ work per state.
+- **Space Complexity:** $\Theta(n)$ for the table, reducible to $\Theta(1)$ by keeping only the two most recent values.
+
+---
+
+### Coin-Collecting Problem
+
+#### Problem Statement
+
+Several coins are placed on an $n \times m$ grid, where each cell $(i, j)$ holds either a coin of value $C[i, j]$ (or $0$ if empty). A robot starts at top-left cell $(1, 1)$ and must reach bottom-right cell $(n, m)$, moving only **one cell to the right** or **one cell downward** at each step. Find the maximum total coin value the robot can collect along any valid path.
+
+#### Inputs and Output
+
+- **Input:** an $n \times m$ grid of coin values $C[1 \dots n, 1 \dots m]$.
+- **Output:** the maximum coins collected from $(1, 1)$ to $(n, m)$.
+
+#### Subproblem Decomposition
+
+Let $F(i, j)$ be the maximum number of coins collected upon reaching cell $(i, j)$. To arrive at $(i, j)$, the robot must come from either:
+1. The cell directly above: $(i - 1, j)$.
+2. The cell directly to the left: $(i, j - 1)$.
+
+#### Recurrence Relation
+
+$$
+F(i, j) = \begin{cases}
+C[1, 1] & \text{if } i = 1, j = 1 \\
+F(1, j - 1) + C[1, j] & \text{if } i = 1, j > 1 \\
+F(i - 1, 1) + C[i, 1] & \text{if } i > 1, j = 1 \\
+\max\big(F(i - 1, j), F(i, j - 1)\big) + C[i, j] & \text{if } i > 1, j > 1
+\end{cases}
+$$
+
+#### Worked Example: $3 \times 4$ Grid
+
+Given grid $C$:
+```text
+0  0  0  1
+0  1  0  0
+1  0  1  0
+```
+
+Computed DP table $F$:
+| $i \backslash j$ | 1 | 2 | 3 | 4 |
+| :---: | :---: | :---: | :---: | :---: |
+| **1** | 0 | 0 | 0 | 1 |
+| **2** | 0 | 1 | 1 | 2 |
+| **3** | 1 | 1 | 2 | **2** |
+
+Path: $(1,1) \to (1,2) \to (2,2) \to (2,3) \to (2,4) \to (3,4)$ (or $(1,1) \to (1,2) \to (2,2) \to (3,2) \to (3,3) \to (3,4)$), yielding **2 coins**.
+
+#### Algorithm
+
+```text
+COIN-COLLECTING(C, n, m)
+1. F[1, 1] = C[1, 1]
+2. for j = 2 to m:
+3.     F[1, j] = F[1, j - 1] + C[1, j]
+4. for i = 2 to n:
+5.     F[i, 1] = F[i - 1, 1] + C[i, 1]
+6.     for j = 2 to m:
+7.         F[i, j] = max(F[i - 1, j], F[i, j - 1]) + C[i, j]
+8. return F[n, m]
+```
+
+#### Complexity Analysis
+- **Time Complexity:** $\Theta(nm)$ — every cell in the $n \times m$ table is computed in $\Theta(1)$ time.
+- **Space Complexity:** $\Theta(nm)$ for full table (traceback), or $\Theta(m)$ auxiliary space if only the maximum value is required.
 
 ---
 
@@ -570,7 +695,7 @@ $$
 
 Traceback gives item 4 and item 1. Maximum value: **12**.
 
-#### Mermaid Diagram: 0/1 Knapsack Decision and Traceback
+#### Visual Map: 0/1 Knapsack Decision and Traceback
 
 ![0/1 Knapsack Cell Decision Rule and Traceback Path](diagrams/ch8-09-knapsack-decision-traceback.svg)
 
@@ -681,7 +806,7 @@ Traceback:
 
 Optimal cuts: **2 and 3**. Maximum revenue: **13**.
 
-#### Mermaid Diagram: Rod Cutting as Unbounded Choices
+#### Visual Map: Rod Cutting as Unbounded Choices
 
 ![Rod Cutting - Unbounded Knapsack Recurrence](diagrams/ch8-10-rod-cutting-unbounded.svg)
 
@@ -913,7 +1038,7 @@ $Y = \langle a,\text{space},a,b,\text{space},d,b \rangle$, length 7.
 | e | 0 | 1 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) | 4 ($\uparrow$) | 5 ($\uparrow$) | 5 ($\uparrow$) |
 | b | 0 | 1 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\uparrow$) | 4 ($\nwarrow$) | 4 ($\uparrow$) | 5 ($\uparrow$) | **6** ($\nwarrow$) |
 
-Traceback gives the LCS **a adb** with length **6**.
+Traceback gives the LCS **"a a db"** (with spaces counted) with length **6**.
 
 ##### Case B: Spaces Ignored
 
@@ -930,9 +1055,9 @@ $X = \text{abacdeb}$ and $Y = \text{aabdb}$.
 | e | 0 | 1 ($\uparrow$) | 2 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\uparrow$) | 3 ($\uparrow$) |
 | b | 0 | 1 ($\uparrow$) | 2 ($\uparrow$) | 3 ($\nwarrow$) | 3 ($\uparrow$) | **4** ($\nwarrow$) |
 
-Traceback gives the LCS **aadb** with length **4**.
+Traceback gives the LCS **"abdb"** with length **4**.
 
-#### Mermaid Diagram: LCS Match, Mismatch, and Traceback
+#### Visual Map: LCS Match, Mismatch, and Traceback
 
 ![Longest Common Subsequence (LCS) State Transitions](diagrams/ch8-11-lcs-cell-traceback.svg)
 
@@ -1053,7 +1178,7 @@ The cost matrix stores the optimum; the selected $k$ values form the split table
 
 The minimum cost is **405** scalar multiplications, with optimal parenthesization **$(A_1A_2)(A_3A_4)$**.
 
-#### Mermaid Diagram: Matrix Chain Interval Splits
+#### Visual Map: Matrix Chain Interval Splits
 
 ![Matrix Chain Multiplication - Evaluating Interval Splits M(1, 4)](diagrams/ch8-12-matrix-chain-splits.svg)
 
@@ -1198,7 +1323,7 @@ The separate root table records the decision stored for each nonempty interval:
 
 **Traceback:** $Root[1,3]=2$ makes $k_2$ the root. The remaining intervals are $[1,1]$ and $[3,3]$, whose roots are $k_1$ and $k_3$. Thus the optimal root for keys 1 through 3 is **$k_2$**. Its weighted cost is **1.25**, corresponding to normalized expected cost approximately **2.2727**.
 
-#### Mermaid Diagram: Optimal BST Root Choices
+#### Visual Map: Optimal BST Root Choices
 
 ![Optimal Binary Search Tree - Root Selection for Keys {k1, k2, k3}](diagrams/ch8-13-optimal-bst-root-choices.svg)
 
@@ -1258,7 +1383,7 @@ Use this 5-stage graph:
 | I | K:2 |
 | J | K:5 |
 
-#### Mermaid Diagram: Multistage Graph Layout
+#### Visual Map: Multistage Graph Layout
 
 ![Multistage Graph Shortest Path Layout (5 Stages)](diagrams/ch8-14-multistage-graph-layout.svg)
 
@@ -1319,7 +1444,7 @@ Let $Dist(X)$ be the minimum cost from source $A$ to node $X$.
 
 This confirms the same minimum cost: **16**.
 
-#### Mermaid Diagram: Backward DP Cost Flow
+#### Visual Map: Backward DP Cost Flow
 
 ![Backward Dynamic Programming Cost Evaluation (Target K to Source A)](diagrams/ch8-15-backward-dp-cost-flow.svg)
 
@@ -1434,7 +1559,7 @@ The final choice from city 1 is:
 
 The minimum is **21**, so $FirstCity=3$. Trace decisions: $1\to3$, then $Next[3,\{2,4\}]=4$, then $Next[4,\{2\}]=2$, then return to 1. One optimal tour is **$1 \to 3 \to 4 \to 2 \to 1$**, with cost **21**.
 
-#### Mermaid Diagram: TSP Subset DP Expansion
+#### Visual Map: TSP Subset DP Expansion
 
 ![Traveling Salesperson Problem (TSP) Held-Karp Subset State Expansion](diagrams/ch8-16-tsp-subset-expansion.svg)
 
@@ -1569,7 +1694,7 @@ $$
 
 **Traceback:** $Copies[3,5]=2$, so stage 3 uses 2 copies and leaves budget $5-2(1)=3$. Then $Copies[2,3]=1$, so stage 2 uses 1 copy and leaves budget $3-1(2)=1$. Finally, $Copies[1,1]=1$. The best design uses 1, 1, and 2 copies for stages 1, 2, and 3, respectively. Maximum reliability: **0.4704**.
 
-#### Mermaid Diagram: Reliability Design Budget Choices
+#### Visual Map: Reliability Design Budget Choices
 
 ![Reliability Design Optimization under Cost Constraint (Budget B = 5)](diagrams/ch8-17-reliability-design-budget.svg)
 
@@ -1607,6 +1732,8 @@ RELIABILITY-DESIGN(stages, budget)
 | Problem | Main state count | Work per state | Time Complexity | Space Complexity |
 | :--- | :--- | :--- | :--- | :--- |
 | Climbing Stairs | $n$ | $\Theta(1)$ | $\Theta(n)$ | $\Theta(n)$, optimized to $\Theta(1)$ |
+| Coin-Row Problem | $n$ | $\Theta(1)$ | $\Theta(n)$ | $\Theta(n)$, optimized to $\Theta(1)$ |
+| Coin-Collecting Problem | $nm$ | $\Theta(1)$ | $\Theta(nm)$ | $\Theta(nm)$, optimized to $\Theta(m)$ |
 | 0/1 Knapsack | $nW$ | $\Theta(1)$ | $\Theta(nW)$ | $\Theta(nW)$, optimized to $\Theta(W)$ |
 | Rod Cutting | $n^2$ in 2D form | $\Theta(1)$ | $\Theta(n^2)$ | $\Theta(n^2)$, optimized to $\Theta(n)$ |
 | Longest Common Subsequence (LCS) | $mn$ | $\Theta(1)$ | $\Theta(mn)$ | $\Theta(mn)$ |
