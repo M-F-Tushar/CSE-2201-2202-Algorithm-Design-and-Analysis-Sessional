@@ -419,8 +419,11 @@ class VerifyClassTests(unittest.TestCase):
             u = int(row[0])
             self.assertEqual([int(c) for c in row[1:]],
                              [1 if (u, v) in TOPO_EDGES else 0 for v in TOPO_VERTICES])
-        finish_stacks = [[int(x) for x in row[-1].split(",")] for row in steps[1:]]
-        self.assertEqual(finish_stacks, [stack[:i] for i in (1, 2, 3, 4, 5, 6)])
+        returns = [row for row in steps[1:] if row[2].startswith("return from")]
+        self.assertEqual([int(row[2].split()[-1]) for row in returns], stack)
+        self.assertEqual([[int(x) for x in row[-1].split(",")] for row in returns],
+                         [stack[:i] for i in (1, 2, 3, 4, 5, 6)])
+        self.assertEqual(steps[1][-1], "empty")
         self.assertIn("5,\\ 4,\\ 2,\\ 3,\\ 1,\\ 0", section.replace("$", ""))
         kahn_order = kahn(TOPO_VERTICES, TOPO_EDGES)
         self.assertEqual(kahn_order, [4, 5, 0, 2, 3, 1])

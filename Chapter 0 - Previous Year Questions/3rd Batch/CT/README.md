@@ -249,16 +249,24 @@ Adjacency matrix (row = from, column = to; `1` means an edge exists):
 | 4 | 1 | 1 | 0 | 0 | 0 | 0 |
 | 5 | 1 | 0 | 1 | 0 | 0 | 0 |
 
-**Step 3: DFS finish stack** (the method of [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)). Scan the start vertices in order $0,1,\dots,5$ and each adjacency list in increasing order. Run DFS and push a vertex onto a stack only **after** all of its outgoing neighbours have finished. The left-to-right stack is the finish order; its rightmost item is popped first.
+**Step 3: DFS finish stack** (the recursive call-stack trace of [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md) with the finish stack of [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)). Scan the start vertices in order $0,1,\dots,5$ and each adjacency list in increasing order. The most recent recursive call is shown first. A vertex is pushed onto the **finish stack** only when its call returns, that is, after all of its outgoing neighbours have finished. The left-to-right finish stack has its rightmost item popped first.
 
-| Step | DFS call / return action | Why it happens | Finish stack |
-| :---: | :--- | :--- | :--- |
-| 1 | `DFS(0)`; finish `0`; push `0` | Vertex 0 has no outgoing neighbour. | 0 |
-| 2 | `DFS(1)`; finish `1`; push `1` | Vertex 1 has no outgoing neighbour. | 0, 1 |
-| 3 | `DFS(2) → DFS(3)`; finish `3`; push `3` | $3\to1$, but 1 is already finished. | 0, 1, 3 |
-| 4 | Return to and finish `2`; push `2` | Its only neighbour, 3, is complete. | 0, 1, 3, 2 |
-| 5 | `DFS(4)`; finish `4`; push `4` | $4\to0$ and $4\to1$ are already finished. | 0, 1, 3, 2, 4 |
-| 6 | `DFS(5)`; finish `5`; push `5` | $5\to0$ and $5\to2$ are already finished. | 0, 1, 3, 2, 4, 5 |
+| Visited vertices | Recursive call stack (top first) | Current vertex | Finish stack |
+| :--- | :--- | :--- | :--- |
+| 0 | `DFS(0)` | 0 | empty |
+| 0 | empty | return from 0 | 0 |
+| 0, 1 | `DFS(1)` | 1 | 0 |
+| 0, 1 | empty | return from 1 | 0, 1 |
+| 0, 1, 2 | `DFS(2)` | 2 | 0, 1 |
+| 0, 1, 2, 3 | `DFS(3)`, `DFS(2)` | 3 | 0, 1 |
+| 0, 1, 2, 3 | `DFS(2)` | return from 3 | 0, 1, 3 |
+| 0, 1, 2, 3 | empty | return from 2 | 0, 1, 3, 2 |
+| 0, 1, 2, 3, 4 | `DFS(4)` | 4 | 0, 1, 3, 2 |
+| 0, 1, 2, 3, 4 | empty | return from 4 | 0, 1, 3, 2, 4 |
+| 0, 1, 2, 3, 4, 5 | `DFS(5)` | 5 | 0, 1, 3, 2, 4 |
+| 0, 1, 2, 3, 4, 5 | empty | return from 5 | 0, 1, 3, 2, 4, 5 |
+
+Edges to already-visited vertices start no new call: $3\to1$, $4\to0$, $4\to1$, $5\to0$, and $5\to2$ all lead to vertices that have already finished.
 
 Pop from the right of the stack:
 
