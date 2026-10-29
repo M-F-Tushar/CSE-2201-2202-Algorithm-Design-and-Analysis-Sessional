@@ -25,7 +25,7 @@ This chapter introduces several ways to sort. The examples use small lists so yo
    - [Step-by-Step Lomuto Partitioning Trace](#5-step-by-step-lomuto-partitioning-trace)
    - [Subproblem Recursion Flow: From Subarrays to Full Sort](#6-subproblem-recursion-flow-from-subarrays-to-full-sort)
    - [Step-by-Step Algorithm](#7-step-by-step-algorithm)
-   - [Code Implementation: Python & Pseudocode](#8-code-implementation-python--pseudocode)
+   - [Pseudocode](#8-pseudocode)
    - [Choosing the Pivot: Why Pivot Quality Matters](#9-choosing-the-pivot-why-pivot-quality-matters)
    - [Complexity & Performance Analysis](#10-complexity--performance-analysis)
 8. [Heap Sort](#8-heap-sort)
@@ -550,44 +550,11 @@ Instead of confusing academic notation, Quick Sort is described by two clean, mo
 
 ---
 
-### 8. Code Implementation: Python & Pseudocode
-
-#### Python Implementation (Matching Michael Sambol's Repository)
-
-```python
-def partition(arr, low, high):
-    """Lomuto partition scheme: places pivot at its sorted position."""
-    i = low
-    pivot = arr[high]
-
-    for j in range(low, high):
-        if arr[j] <= pivot:
-            arr[i], arr[j] = arr[j], arr[i]
-            i += 1
-
-    arr[i], arr[high] = arr[high], arr[i]
-    return i
-
-
-def quick_sort(arr, low, high):
-    """Recursively sorts sub-arrays around the partition index."""
-    if low < high:
-        p = partition(arr, low, high)
-        quick_sort(arr, low, p - 1)   # Sort left of pivot
-        quick_sort(arr, p + 1, high)  # Sort right of pivot
-
-
-# Example walkthrough matching the chapter diagram:
-if __name__ == "__main__":
-    nums = [5, 2, 4, 6, 1, 3]
-    print("Initial array: ", nums)
-    quick_sort(nums, 0, len(nums) - 1)
-    print("Sorted array:  ", nums)
-```
-
-#### Language-Agnostic Pseudocode
+### 8. Pseudocode
 
 ```text
+Call QUICK-SORT(A, 0, length(A) - 1) to sort the whole array.
+
 QUICK-SORT(A: array of comparable items, low: integer, high: integer) -> void
 if low >= high:
     return
