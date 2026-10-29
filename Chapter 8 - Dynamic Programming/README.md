@@ -1148,7 +1148,7 @@ Therefore, $p=[5,10,3,12,5]$.
 | 3 | $[2,4]$ | $k=2: 330;\ k=3: 960$ | 330 | 2 |
 | 4 | $[1,4]$ | $k=1: 580;\ k=2: 405;\ k=3: 630$ | **405** | **2** |
 
-For example, when filling $M[1,3]$, the two candidates are:
+When filling $M[1,3]$, the two candidates are:
 
 $$
 \begin{aligned}
@@ -1157,7 +1157,30 @@ k=2 &: M[1,2]+M[3,3]+5\cdot3\cdot12 = 150+0+180=330.
 \end{aligned}
 $$
 
-The smaller candidate is stored, so $M[1,3]=330$ and $S[1,3]=2$. The same process is applied to every interval in the fill-order table.
+The smaller candidate is stored, so $M[1,3]=330$ and $S[1,3]=2$.
+
+When filling $M[2,4]$, the two candidates are:
+
+$$
+\begin{aligned}
+k=2 &: M[2,2]+M[3,4]+10\cdot3\cdot5 = 0+180+150=330,\\
+k=3 &: M[2,3]+M[4,4]+10\cdot12\cdot5 = 360+0+600=960.
+\end{aligned}
+$$
+
+The smaller candidate is stored, so $M[2,4]=330$ and $S[2,4]=2$.
+
+When filling $M[1,4]$, the three candidates are:
+
+$$
+\begin{aligned}
+k=1 &: M[1,1]+M[2,4]+5\cdot10\cdot5 = 0+330+250=580,\\
+k=2 &: M[1,2]+M[3,4]+5\cdot3\cdot5 = 150+180+75=405,\\
+k=3 &: M[1,3]+M[4,4]+5\cdot12\cdot5 = 330+0+300=630.
+\end{aligned}
+$$
+
+The smaller candidate is stored, so $M[1,4]=405$ and $S[1,4]=2$.
 
 **Minimum-cost table** (each off-diagonal entry is `cost (chosen split k)`):
 
