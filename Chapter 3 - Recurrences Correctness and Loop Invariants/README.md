@@ -4,7 +4,7 @@
 
 ---
 
-A recurrence relation expresses the running time of a recursive algorithm in terms of the running time on smaller inputs, plus a base case. This chapter shows how to build a recurrence directly from a recursive algorithm, how to solve it by manual expansion (the recursion-tree/substitution idea), and how to solve general divide-and-conquer recurrences quickly using the Master Theorem.
+A recurrence relation expresses the running time of a recursive algorithm in terms of the running time on smaller inputs, plus a base case. This chapter shows how to build a recurrence directly from a recursive algorithm, use expansion and recursion trees to discover a likely bound, prove that bound with the substitution method (induction), and solve standard divide-and-conquer recurrences with the Master Theorem.
 
 ---
 
@@ -12,13 +12,17 @@ A recurrence relation expresses the running time of a recursive algorithm in ter
 
 1. [What Is a Recurrence Relation?](#1-what-is-a-recurrence-relation)
 2. [Case Study: Binary Search Recurrence](#2-case-study-binary-search-recurrence)
-   - [Solving by Expansion (Unrolling)](#solving-by-expansion-recursion-treesubstitution)
+   - [Solving by Expansion (Unrolling)](#solving-by-expansion-recursion-tree)
 3. [The Substitution Method (Inductive Proof)](#3-the-substitution-method-inductive-proof)
+   - [A Repeatable Proof Checklist](#a-repeatable-proof-checklist)
+   - [Five Step-by-Step Substitution Examples](#five-step-by-step-substitution-examples)
 4. [General Divide-and-Conquer Recurrence](#4-general-divide-and-conquer-recurrence)
 5. [Master Theorem](#5-master-theorem)
-6. [Worked Examples Using the Master Theorem](#6-worked-examples-using-the-master-theorem)
-   - [Example 1: T(n) = 8T(n/2) + n^2](#example-1-tn--8tn2--n2)
-   - [Example 2: T(n) = T(n/2) + c](#example-2-tn--tn2--c)
+6. [Master Theorem: Worked Examples by Case](#6-master-theorem-worked-examples-by-case)
+   - [Case 1: Recursive Work Dominates](#case-1-recursive-work-dominates)
+   - [Case 2: Balanced Work and Where k Comes From](#case-2-balanced-work-and-where-k-comes-from)
+   - [Case 3: Non-Recursive Work Dominates](#case-3-non-recursive-work-dominates)
+   - [When the Master Theorem Does Not Apply](#when-the-master-theorem-does-not-apply)
 7. [Analyze Time Complexity of Above Recurrences](#7-analyze-time-complexity-of-above-recurrences)
 8. [Algorithm Correctness and Loop Invariants](#8-algorithm-correctness-and-loop-invariants)
    - [Loop Invariant Framework](#the-three-loop-invariant-properties)
@@ -53,7 +57,7 @@ $$
 T(n) = \begin{cases} T(n/2) + c & \text{if } n > 1 \\ 1 & \text{if } n = 1 \end{cases}
 $$
 
-### Solving by Expansion (Recursion-Tree/Substitution)
+### Solving by Expansion (Recursion Tree)
 
 Expand the recurrence one level at a time:
 
@@ -105,37 +109,171 @@ So **binary search runs in $O(\log n)$ time**, matching the iterative analysis i
 
 ## 3. The Substitution Method (Inductive Proof)
 
-While expansion (unrolling) is intuitive for discovering candidate bounds, the formal **Substitution Method** (as presented in CLRS Chapter 4) consists of two rigorous steps:
-1. **Guess** the mathematical form of the solution (guided by recursion trees or pattern inspection).
-2. **Prove by mathematical induction** that the bound holds for all $n$, finding specific constants $c > 0$ and $n_0 \ge 1$ that satisfy the base and recursive cases.
+Expansion helps us **guess** a recurrence's growth. The formal **substitution method** then proves that guess by induction: assume a bound for smaller inputs, substitute that assumption into the recurrence, and choose constants that make the inequality work. To prove a tight bound $\Theta(g(n))$, prove both $T(n)=O(g(n))$ and $T(n)=\Omega(g(n))$.
 
-### Worked Example: Proving $T(n) = 2T(\lfloor n/2 \rfloor) + n = O(n \log n)$
+For examples with repeated halving, we assume $n$ is a power of two so each half is exact. Replacing exact halves with floors or ceilings changes small details of the induction, not the asymptotic result.
 
-Consider the divide-and-conquer recurrence:
+### A Repeatable Proof Checklist
+
+1. **Write the recurrence and base case.** Be clear about the input sizes for which the recursive rule applies.
+2. **Guess a bound.** Use a short expansion, a recursion tree, or a known sum to predict $g(n)$.
+3. **Prove the upper bound.** Assume $T(m) \le Cg(m)$ for the smaller input(s) $m$, substitute, and choose $C$ so the result is at most $Cg(n)$.
+4. **Prove the lower bound.** Assume $T(m) \ge cg(m)$, substitute, and choose $c$ so the result is at least $cg(n)$.
+5. **Check the base case(s).** Constants must make the claim true there too. Then state the combined $\Theta$ result.
+
+The inductive hypothesis is about **smaller** inputs; it is not the answer itself. The algebra after substitution is the part that confirms (or rejects) the guess.
+
+### Five Step-by-Step Substitution Examples
+
+#### Example 1: $T(n)=2T(n/2)+n$ — the bound $\Theta(n\log n)$
+
+Let $T(1)=1$ and assume $n$ is a power of two. A recursion tree suggests that each level costs $n$ and there are $\log_2 n$ levels, so guess $T(n)=\Theta(n\log n)$.
+
+**Upper bound:** Claim $T(n)\le Cn\log_2 n$ for $n\ge2$.
+
+- **Base case:** $T(2)=2T(1)+2=4$. The claim holds if $C\ge2$.
+- **Inductive hypothesis:** Assume $T(n/2)\le C(n/2)\log_2(n/2)$.
+- **Substitute and simplify:**
+
+  $$
+  \begin{aligned}
+  T(n) &\le 2C\frac n2\log_2\frac n2+n \\
+       &= Cn(\log_2 n-1)+n \\
+       &\le Cn\log_2 n \qquad (C\ge1).
+  \end{aligned}
+  $$
+
+So the upper bound holds, for example, with $C=2$.
+
+**Lower bound:** Claim $T(n)\ge cn\log_2 n$ for $n\ge2$.
+
+- **Base case:** At $n=2$, $T(2)=4\ge2c$ when $c\le2$.
+- **Inductive hypothesis:** Assume $T(n/2)\ge c(n/2)\log_2(n/2)$.
+- **Substitute and simplify:**
+
+  $$
+  T(n)\ge cn(\log_2 n-1)+n
+       =cn\log_2 n+(1-c)n
+       \ge cn\log_2 n \quad (c\le1).
+  $$
+
+Taking $c=1$ satisfies the lower proof. Therefore,
 
 $$
-T(n) = 2T(\lfloor n/2 \rfloor) + n, \qquad T(1) = 1
+\boxed{T(n)=\Theta(n\log n)}.
 $$
 
-We guess that $T(n) \le c n \log_2 n$ for some constant $c > 0$.
+#### Example 2: $T(n)=T(n/2)+1$ — the bound $\Theta(\log n)$
 
-1. **Inductive Hypothesis:** Assume $T(k) \le c k \log_2 k$ holds for all $k < n$, specifically for $k = \lfloor n/2 \rfloor$.
-2. **Inductive Step:** Substitute the hypothesis into the recurrence:
+Let $T(1)=1$ and let $n$ be a power of two. Each call does constant work and halves the input. Guess $T(n)=\Theta(\log n)$.
 
-   $$
-   \begin{aligned}
-   T(n) &\le 2\left(c \lfloor n/2 \rfloor \log_2 \lfloor n/2 \rfloor\right) + n \\
-   &\le 2 c \left(\frac{n}{2}\right) \log_2\left(\frac{n}{2}\right) + n \\
-   &= c n (\log_2 n - \log_2 2) + n \\
-   &= c n \log_2 n - c n + n \\
-   &= c n \log_2 n - (c - 1) n
-   \end{aligned}
-   $$
+**Upper bound:** Claim $T(n)\le C\log_2 n$ for $n\ge2$.
 
-   To establish $T(n) \le c n \log_2 n$, we require $-(c - 1)n \le 0$, which holds whenever $c \ge 1$.
-3. **Base Case:** For $n = 2$ and $n = 3$, $c \cdot 2 \log_2 2 = 2c \ge T(2)$. Choosing $c \ge \max(1, T(2)/2)$ satisfies the base conditions.
+- **Base case:** $T(2)=2$, so choose $C\ge2$.
+- **Inductive hypothesis:** Assume $T(n/2)\le C\log_2(n/2)$.
+- **Substitute:**
 
-Hence, by mathematical induction, $T(n) = O(n \log n)$.
+  $$
+  T(n)\le C(\log_2 n-1)+1\le C\log_2 n \quad (C\ge1).
+  $$
+
+**Lower bound:** Claim $T(n)\ge c\log_2 n$ for $n\ge2$.
+
+- **Base case:** At $n=2$, $T(2)=2\ge c$ for $c\le2$.
+- **Inductive hypothesis and substitution:**
+
+  $$
+  T(n)\ge c\log_2(n/2)+1
+       =c\log_2 n+(1-c)\ge c\log_2 n \quad (c\le1).
+  $$
+
+For instance, $C=2$ and $c=1$ work, so
+
+$$
+\boxed{T(n)=\Theta(\log n)}.
+$$
+
+#### Example 3: $T(n)=2T(n/2)+1$ — the bound $\Theta(n)$
+
+Let $T(1)=1$ and let $n$ be a power of two. Guess a linear bound because the total work grows geometrically toward the leaves.
+
+**Upper bound:** Claim $T(n)\le Cn-1$.
+
+- **Base case:** At $n=1$, $T(1)=1\le C-1$ if $C\ge2$.
+- **Inductive hypothesis:** Assume $T(n/2)\le C(n/2)-1$.
+- **Substitute:**
+
+  $$
+  T(n)\le 2\left(C\frac n2-1\right)+1=Cn-1.
+  $$
+
+**Lower bound:** Claim $T(n)\ge cn$.
+
+- **Base case:** $T(1)=1\ge c$ when $c\le1$.
+- **Inductive hypothesis and substitution:**
+
+  $$
+  T(n)\ge2c\frac n2+1=cn+1\ge cn.
+  $$
+
+Choosing $C=2$ and $c=1$ proves
+
+$$
+\boxed{T(n)=\Theta(n)}.
+$$
+
+In fact, this recurrence solves exactly to $T(n)=2n-1$ when $n$ is a power of two.
+
+#### Example 4: $T(n)=T(n-1)+1$ — the bound $\Theta(n)$
+
+Let $T(1)=1$. This recurrence decreases by one rather than dividing the input. Guess a linear bound.
+
+**Upper bound:** Claim $T(n)\le Cn$. For the base case, $T(1)=1\le C$ if $C\ge1$. Assuming $T(n-1)\le C(n-1)$,
+
+$$
+T(n)\le C(n-1)+1\le Cn \quad (C\ge1).
+$$
+
+**Lower bound:** Claim $T(n)\ge cn$. The base case holds for $c\le1$. Assuming $T(n-1)\ge c(n-1)$,
+
+$$
+T(n)\ge c(n-1)+1\ge cn \quad (c\le1).
+$$
+
+Taking $c=C=1$ gives the exact solution $T(n)=n$, and hence
+
+$$
+\boxed{T(n)=\Theta(n)}.
+$$
+
+#### Example 5: $T(n)=T(n-1)+n$ — the bound $\Theta(n^2)$
+
+Let $T(1)=1$. Since the recurrence adds work proportional to the current input at each of about $n$ calls, guess a quadratic bound.
+
+**Upper bound:** Claim $T(n)\le Cn^2$. The base case holds for $C\ge1$. Assuming $T(n-1)\le C(n-1)^2$,
+
+$$
+\begin{aligned}
+T(n) &\le C(n-1)^2+n \\
+     &\le Cn^2,
+\end{aligned}
+$$
+
+because $Cn^2-C(n-1)^2=C(2n-1)\ge n$ for $C\ge1$ and $n\ge2$.
+
+**Lower bound:** Claim $T(n)\ge cn^2$. The base case holds for $c\le1$. Assuming $T(n-1)\ge c(n-1)^2$,
+
+$$
+T(n)\ge c(n-1)^2+n\ge cn^2,
+$$
+
+because $n\ge c(2n-1)$ for $c=1/2$ and $n\ge2$. Thus $c=1/2$ and $C=1$ are valid choices, and
+
+$$
+\boxed{T(n)=\Theta(n^2)}.
+$$
+
+The last two examples also show the basic pattern for $T(n)=T(n-1)+f(n)$: the work from successive calls accumulates, so the recurrence is naturally solved by expansion or induction rather than the Master Theorem.
 
 ---
 
@@ -157,13 +295,30 @@ $$
 
 ## 5. Master Theorem
 
-The Master Theorem gives the asymptotic solution to $T(n) = aT(n/b) + f(n)$ directly, by comparing $f(n)$ against the **watershed function** $n^{\log_b a}$.
+The Master Theorem solves recurrences of the form
 
-| Case | Condition on $f(n)$ | Result |
+$$
+T(n)=aT(n/b)+f(n), \qquad a\ge1,\ b>1,
+$$
+
+by comparing the extra work $f(n)$ with the **critical function** $n^{\log_b a}$. (Some texts call this the watershed function.) The theorem assumes the recurrence has the standard divide-by-a-constant form and that $f(n)$ is asymptotically nonnegative.
+
+Let $d=\log_b a$. Then the three cases are:
+
+| Case | Compare $f(n)$ with $n^d$ | Result |
 | :---: | :--- | :--- |
-| 1 | $f(n) = O(n^{\log_b a - \epsilon})$ for some $\epsilon > 0$ ($f(n)$ grows polynomially **slower**) | $T(n) = \Theta(n^{\log_b a})$ |
-| 2 | $f(n) = \Theta(n^{\log_b a} \log^k n)$ for some $k \ge 0$ ($f(n)$ grows at the **same** rate) | $T(n) = \Theta(n^{\log_b a} \log^{k+1} n)$ |
-| 3 | $f(n) = \Omega(n^{\log_b a + \epsilon})$ for some $\epsilon > 0$, and the regularity condition $a \cdot f(n/b) \le c \cdot f(n)$ holds for some $c < 1$ and all large $n$ ($f(n)$ grows polynomially **faster**) | $T(n) = \Theta(f(n))$ |
+| 1 | $f(n)=O(n^{d-\epsilon})$ for some $\epsilon>0$; polynomially smaller | $T(n)=\Theta(n^d)$ |
+| 2 | $f(n)=\Theta(n^d\log^k n)$ for some $k\ge0$; same polynomial power, possibly with logarithms | $T(n)=\Theta(n^d\log^{k+1}n)$ |
+| 3 | $f(n)=\Omega(n^{d+\epsilon})$ for some $\epsilon>0$, and $a f(n/b)\le c f(n)$ for a constant $c<1$ and all sufficiently large $n$ | $T(n)=\Theta(f(n))$ |
+
+### A Four-Step Routine
+
+1. Match the recurrence to $T(n)=aT(n/b)+f(n)$ and identify $a$, $b$, and $f(n)$.
+2. Calculate $d=\log_b a$ and the critical function $n^d$.
+3. Compare $f(n)$ with $n^d$. For Case 3, also verify the regularity condition.
+4. Apply only the case whose full condition is satisfied, then write the answer in $\Theta$ notation.
+
+Do not decide the case by looking only at the largest-looking term. The comparison with $n^d$ is the key step.
 
 ### Visual Map: Choosing the Right Case
 
@@ -171,54 +326,315 @@ The Master Theorem gives the asymptotic solution to $T(n) = aT(n/b) + f(n)$ dire
 
 ---
 
-## 6. Worked Examples Using the Master Theorem
+## 6. Master Theorem: Worked Examples by Case
 
-### Example 1: T(n) = 8T(n/2) + n^2
+Each example uses the same order: identify $a$, $b$, and $f(n)$; calculate the critical function; compare growth; then conclude. There are five examples in each case so you can practice the process rather than memorize isolated answers.
 
-Here $a = 8$, $b = 2$, $f(n) = n^2$.
+### Case 1: Recursive Work Dominates
+
+In Case 1, the extra work is **polynomially smaller** than the critical function: $f(n)=O(n^{d-\epsilon})$ for some positive $\epsilon$. The recursive calls therefore determine the asymptotic answer, $\Theta(n^d)$.
+
+#### Example 1: $T(n)=8T(n/2)+n^2$
+
+1. **Identify:** $a=8$, $b=2$, and $f(n)=n^2$.
+2. **Critical function:** $n^{\log_2 8}=n^3$.
+3. **Compare:** $n^2=O(n^{3-1})$, so Case 1 applies with $\epsilon=1$.
+4. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n^3)}.
+   $$
+
+#### Example 2: $T(n)=4T(n/2)+n$
+
+1. **Identify:** $a=4$, $b=2$, and $f(n)=n$.
+2. **Critical function:** $n^{\log_2 4}=n^2$.
+3. **Compare:** $n=O(n^{2-1})$, so Case 1 applies with $\epsilon=1$.
+4. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n^2)}.
+   $$
+
+#### Example 3: $T(n)=9T(n/3)+n$
+
+1. **Identify:** $a=9$, $b=3$, and $f(n)=n$.
+2. **Critical function:** $n^{\log_3 9}=n^2$.
+3. **Compare:** $n=O(n^{2-1})$, so Case 1 applies with $\epsilon=1$.
+4. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n^2)}.
+   $$
+
+#### Example 4: $T(n)=16T(n/4)+n\log n$
+
+1. **Identify:** $a=16$, $b=4$, and $f(n)=n\log n$.
+2. **Critical function:** $n^{\log_4 16}=n^2$.
+3. **Compare:** Since $\log n=O(n^{1/2})$, $n\log n=O(n^{3/2})=O(n^{2-1/2})$. Case 1 applies with $\epsilon=1/2$.
+4. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n^2)}.
+   $$
+
+#### Example 5: $T(n)=5T(n/2)+n^2$
+
+1. **Identify:** $a=5$, $b=2$, and $f(n)=n^2$.
+2. **Critical function:** $n^{\log_2 5}$, where $\log_2 5\approx2.322$.
+3. **Compare:** Let $\epsilon=\log_2 5-2>0$. Then $f(n)=n^2=n^{\log_2 5-\epsilon}$, so Case 1 applies.
+4. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n^{\log_2 5})}.
+   $$
+
+### Case 2: Balanced Work and Where $k$ Comes From
+
+Case 2 applies when the polynomial part of $f(n)$ matches the critical function:
 
 $$
-n^{\log_b a} = n^{\log_2 8} = n^3
+f(n)=\Theta\bigl(n^{\log_b a}\log^k n\bigr).
 $$
 
-Compare $f(n) = n^2$ with $n^{\log_b a} = n^3$:
+Here **$k$ is the exponent on the logarithm in $f(n)$**. It is not the exponent on $n$, and it is not a value found by a separate calculation. First calculate the critical function; then compare the remaining logarithmic factor. For example, $n=n\log^0 n$ because $\log^0 n=1$, so plain $n$ corresponds to $k=0$.
+
+The answer is
 
 $$
-n^2 = O(n^{3 - \epsilon}) \quad \text{for } \epsilon = 1
+T(n)=\Theta\bigl(n^{\log_b a}\log^{k+1}n\bigr).
 $$
 
-This satisfies **Case 1**, so:
+**Why does the exponent increase by one?** Suppose $a=b^d$ so the critical function is $n^d$. At recursion-tree level $i$, there are $a^i$ subproblems of size $n/b^i$. If each subproblem contributes $(n/b^i)^d\log^k(n/b^i)$ extra work, the total work at that level is
 
 $$
-T(n) = \Theta(n^3)
+a^i\left(\frac{n}{b^i}\right)^d\log^k\left(\frac{n}{b^i}\right)
+=n^d\log^k\left(\frac{n}{b^i}\right),
 $$
 
-### Example 2: T(n) = T(n/2) + c
+because $a=b^d$ cancels the powers of $b$. Let $L=\Theta(\log n)$ be the number of levels. The level costs, from the bottom upward, are proportional to $1^k,2^k,\ldots,L^k$ (for $k=0$, each level costs a constant). Their sum is $\Theta(L^{k+1})=\Theta(\log^{k+1}n)$. This is why the answer has one more power of the logarithm than $f(n)$.
 
-Here $a = 1$, $b = 2$, $f(n) = c$ (a constant, i.e., $\Theta(1)$).
+#### Example 1: $T(n)=T(n/2)+1$ — $k=0$
+
+1. **Identify:** $a=1$, $b=2$, and $f(n)=1=\Theta(1)$.
+2. **Critical function:** $n^{\log_2 1}=n^0=1$.
+3. **Find $k$:** $f(n)=\Theta(1\cdot\log^0 n)$, so $k=0$.
+4. **Apply Case 2:** $T(n)=\Theta(1\cdot\log^{0+1}n)$.
+5. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(\log n)}.
+   $$
+
+#### Example 2: $T(n)=2T(n/2)+n$ — $k=0$
+
+1. **Identify:** $a=2$, $b=2$, and $f(n)=n$.
+2. **Critical function:** $n^{\log_2 2}=n$.
+3. **Find $k$:** $n=n\log^0n$, so $k=0$.
+4. **Apply Case 2:** $T(n)=\Theta(n\log^{0+1}n)$.
+5. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n\log n)}.
+   $$
+
+#### Example 3: $T(n)=2T(n/2)+n\log n$ — $k=1$
+
+1. **Identify:** $a=2$, $b=2$, and $f(n)=n\log n$.
+2. **Critical function:** $n^{\log_2 2}=n$.
+3. **Find $k$:** $f(n)=n\log^1 n$, so $k=1$.
+4. **Apply Case 2:** $T(n)=\Theta(n\log^{1+1}n)$.
+5. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n\log^2 n)}.
+   $$
+
+#### Example 4: $T(n)=4T(n/2)+n^2\log^2 n$ — $k=2$
+
+1. **Identify:** $a=4$, $b=2$, and $f(n)=n^2\log^2 n$.
+2. **Critical function:** $n^{\log_2 4}=n^2$.
+3. **Find $k$:** $f(n)=n^2\log^2 n$, so $k=2$.
+4. **Apply Case 2:** $T(n)=\Theta(n^2\log^{2+1}n)$.
+5. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n^2\log^3 n)}.
+   $$
+
+#### Example 5: $T(n)=9T(n/3)+n^2\log^3 n$ — $k=3$
+
+1. **Identify:** $a=9$, $b=3$, and $f(n)=n^2\log^3 n$.
+2. **Critical function:** $n^{\log_3 9}=n^2$.
+3. **Find $k$:** $f(n)=n^2\log^3 n$, so $k=3$.
+4. **Apply Case 2:** $T(n)=\Theta(n^2\log^{3+1}n)$.
+5. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n^2\log^4 n)}.
+   $$
+
+**Case 2 quick check:** match the power of $n$ in $f(n)$ to $n^{\log_b a}$ first. Only the power on the remaining $\log n$ is $k$. Then add one to that power in the final answer.
+
+### Case 3: Non-Recursive Work Dominates
+
+In Case 3, $f(n)$ is polynomially larger than the critical function, and the regularity condition must hold:
 
 $$
-n^{\log_b a} = n^{\log_2 1} = n^0 = 1
+a f(n/b)\le c f(n) \quad \text{for some constant }c<1.
 $$
 
-Compare $f(n) = c = \Theta(n^0 \log^0 n)$ with $n^{\log_b a} = n^0$: they match with $k = 0$.
+The condition verifies that the recursive work shrinks geometrically relative to the work at the current problem size. Do not skip this check.
 
-This satisfies **Case 2**, so:
+#### Example 1: $T(n)=2T(n/2)+n^2$
+
+1. **Identify:** $a=2$, $b=2$, and $f(n)=n^2$.
+2. **Critical function:** $n^{\log_2 2}=n$.
+3. **Compare:** $n^2=\Omega(n^{1+1})$, so $f(n)$ is polynomially larger.
+4. **Check regularity:**
+
+   $$
+   2f(n/2)=2(n/2)^2=\frac12n^2=\frac12f(n).
+   $$
+
+   Thus $c=1/2<1$.
+5. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n^2)}.
+   $$
+
+#### Example 2: $T(n)=2T(n/2)+n^3$
+
+1. **Identify:** $a=2$, $b=2$, and $f(n)=n^3$.
+2. **Critical function:** $n^{\log_2 2}=n$.
+3. **Compare:** $n^3=\Omega(n^{1+2})$.
+4. **Check regularity:**
+
+   $$
+   2f(n/2)=2(n/2)^3=\frac14n^3=\frac14f(n),
+   $$
+
+   so $c=1/4<1$.
+5. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n^3)}.
+   $$
+
+#### Example 3: $T(n)=4T(n/2)+n^3$
+
+1. **Identify:** $a=4$, $b=2$, and $f(n)=n^3$.
+2. **Critical function:** $n^{\log_2 4}=n^2$.
+3. **Compare:** $n^3=\Omega(n^{2+1})$.
+4. **Check regularity:**
+
+   $$
+   4f(n/2)=4(n/2)^3=\frac12n^3=\frac12f(n),
+   $$
+
+   so $c=1/2<1$.
+5. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n^3)}.
+   $$
+
+#### Example 4: $T(n)=3T(n/2)+n^2$
+
+1. **Identify:** $a=3$, $b=2$, and $f(n)=n^2$.
+2. **Critical function:** $n^{\log_2 3}\approx n^{1.585}$.
+3. **Compare:** Let $\epsilon=2-\log_2 3>0$. Then $n^2=n^{\log_2 3+\epsilon}$.
+4. **Check regularity:**
+
+   $$
+   3f(n/2)=3(n/2)^2=\frac34n^2=\frac34f(n),
+   $$
+
+   so $c=3/4<1$.
+5. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n^2)}.
+   $$
+
+#### Example 5: $T(n)=9T(n/3)+n^3$
+
+1. **Identify:** $a=9$, $b=3$, and $f(n)=n^3$.
+2. **Critical function:** $n^{\log_3 9}=n^2$.
+3. **Compare:** $n^3=\Omega(n^{2+1})$.
+4. **Check regularity:**
+
+   $$
+   9f(n/3)=9(n/3)^3=\frac13n^3=\frac13f(n),
+   $$
+
+   so $c=1/3<1$.
+5. **Answer:**
+
+   $$
+   \boxed{T(n)=\Theta(n^3)}.
+   $$
+
+### When the Master Theorem Does Not Apply
+
+The theorem requires recursive input sizes of the form $n/b$, where $b$ is a fixed constant greater than 1. It does not directly apply to $T(n)=T(n-1)+1$, because the input decreases by one rather than by a constant factor.
+
+Use expansion instead:
 
 $$
-T(n) = \Theta(n^0 \log^{0+1} n) = \Theta(\log n)
+\begin{aligned}
+T(n) &= T(n-1)+1 \\
+     &= T(n-2)+2 \\
+     &= T(n-3)+3 \\
+     &\ \vdots \\
+     &= T(1)+(n-1).
+\end{aligned}
 $$
 
-This confirms the same result found earlier by direct expansion of the binary search recurrence.
+With $T(1)=1$, this gives $T(n)=n$, so
+
+$$
+\boxed{T(n)=\Theta(n)}.
+$$
+
+Similarly, $T(n)=T(n-1)+n$ expands to $T(1)+2+3+\cdots+n=\Theta(n^2)$; both decrease-by-one recurrences were also proved by substitution in Section 3.
 
 ---
 
 ## 7. Analyze Time Complexity of Above Recurrences
 
-| Recurrence | $a$ | $b$ | $f(n)$ | $n^{\log_b a}$ | Master Theorem Case | Result |
-| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| $T(n) = T(n/2) + c$ (Binary Search) | 1 | 2 | $\Theta(1)$ | $1$ | Case 2 ($k=0$) | $\Theta(\log n)$ |
-| $T(n) = 8T(n/2) + n^2$ | 8 | 2 | $n^2$ | $n^3$ | Case 1 | $\Theta(n^3)$ |
+The first table collects the five substitution examples. The second is a quick-reference list of all fifteen Master Theorem examples; use Sections 3 and 6 for their full proofs and comparisons.
+
+### Substitution Method Summary
+
+| Recurrence | Guess / key result | Complexity |
+| :--- | :--- | :--- |
+| $T(n)=2T(n/2)+n$ | $n\log n$ | $\Theta(n\log n)$ |
+| $T(n)=T(n/2)+1$ | $\log n$ | $\Theta(\log n)$ |
+| $T(n)=2T(n/2)+1$ | $n$ | $\Theta(n)$ |
+| $T(n)=T(n-1)+1$ | $n$ | $\Theta(n)$ |
+| $T(n)=T(n-1)+n$ | $n^2$ | $\Theta(n^2)$ |
+
+### Master Theorem Summary
+
+| Recurrence | Critical function $n^{\log_b a}$ | Case | Complexity |
+| :--- | :---: | :---: | :--- |
+| $T(n)=8T(n/2)+n^2$ | $n^3$ | 1 | $\Theta(n^3)$ |
+| $T(n)=4T(n/2)+n$ | $n^2$ | 1 | $\Theta(n^2)$ |
+| $T(n)=9T(n/3)+n$ | $n^2$ | 1 | $\Theta(n^2)$ |
+| $T(n)=16T(n/4)+n\log n$ | $n^2$ | 1 | $\Theta(n^2)$ |
+| $T(n)=5T(n/2)+n^2$ | $n^{\log_2 5}$ | 1 | $\Theta(n^{\log_2 5})$ |
+| $T(n)=T(n/2)+1$ | $1$ | 2 ($k=0$) | $\Theta(\log n)$ |
+| $T(n)=2T(n/2)+n$ | $n$ | 2 ($k=0$) | $\Theta(n\log n)$ |
+| $T(n)=2T(n/2)+n\log n$ | $n$ | 2 ($k=1$) | $\Theta(n\log^2 n)$ |
+| $T(n)=4T(n/2)+n^2\log^2 n$ | $n^2$ | 2 ($k=2$) | $\Theta(n^2\log^3 n)$ |
+| $T(n)=9T(n/3)+n^2\log^3 n$ | $n^2$ | 2 ($k=3$) | $\Theta(n^2\log^4 n)$ |
+| $T(n)=2T(n/2)+n^2$ | $n$ | 3 | $\Theta(n^2)$ |
+| $T(n)=2T(n/2)+n^3$ | $n$ | 3 | $\Theta(n^3)$ |
+| $T(n)=4T(n/2)+n^3$ | $n^2$ | 3 | $\Theta(n^3)$ |
+| $T(n)=3T(n/2)+n^2$ | $n^{\log_2 3}$ | 3 | $\Theta(n^2)$ |
+| $T(n)=9T(n/3)+n^3$ | $n^2$ | 3 | $\Theta(n^3)$ |
 
 ---
 

@@ -589,7 +589,7 @@ While static loop boundaries determine execution counts for deterministic loops,
 | :--- | :---: | :---: | :---: |
 | Linear search | $\Theta(1)$ | $\Theta(n)$ | $\Theta(n)$ |
 
-The recurrence-based way of proving logarithmic and divide-and-conquer bounds for recursive algorithms (rather than iterative loops) is covered next, in [Chapter 3 - Recurrences Correctness and Loop Invariants](../Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md).
+The recurrence-based way of proving logarithmic and divide-and-conquer bounds for recursive algorithms (rather than iterative loops) is covered next in [Chapter 3 - Recurrences Correctness and Loop Invariants](../Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md). Chapter 3 builds on the asymptotic notation introduced here, with step-by-step substitution proofs and worked Master Theorem examples for all three cases.
 
 ---
 
