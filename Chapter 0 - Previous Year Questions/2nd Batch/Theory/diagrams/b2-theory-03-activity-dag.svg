@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="980" height="1000" viewBox="0 0 980 1000" role="img" aria-label="Q2(c): Paper dependencies and the requested variation">
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="1000" viewBox="0 0 980 1000" role="img" aria-label="Q2(c): Given activity DAG and the added reverse dependency">
 <rect width="980" height="1000" fill="#ffffff" rx="10"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="490.0" y="34.0">Q2(c): Paper dependencies and the requested variation</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="490.0" y="34.0">Q2(c): Given activity DAG and the added reverse dependency</tspan></text>
 <path d="M239.9 234.5 Q240.0 255.1 240.6 275.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M235.9 264.8 L240.0 275.0 L244.1 264.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M239.8 329.5 Q241.3 351.3 241.0 370.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
@@ -25,14 +25,16 @@
 <path d="M735.9 644.8 L740.0 655.0 L744.1 644.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M740.1 710.0 Q739.6 731.5 739.7 749.2" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
 <path d="M735.9 739.8 L740.0 750.0 L744.1 739.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M939.1 777.5 Q953.5 776.4 964.7 776.8 M965.0 777.2 Q963.9 730.1 964.3 683.1 M964.7 681.8 Q952.6 683.9 940.6 681.9" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M950.2 678.4 L940.0 682.5 L950.2 686.6" fill="none" stroke="#e03131" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
 <rect x="40.0" y="80.0" width="400.0" height="60.0" rx="10" fill="#ffec99"/>
 <path d="M38.9 80.2 Q239.4 80.2 439.5 78.5 M440.2 79.1 Q437.3 110.9 440.1 139.5 M441.2 138.5 Q239.5 141.4 39.0 140.1 M38.5 139.9 Q39.1 107.5 40.8 80.1" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
 <path d="M38.9 81.3 Q241.1 80.2 441.0 80.9 M440.4 80.6 Q442.2 112.1 438.8 140.4 M438.9 139.0 Q239.4 140.1 39.8 141.4 M41.3 141.1 Q38.9 111.2 40.6 81.1" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="240.0" y="110.0">Six dependencies from the paper</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="240.0" y="110.0">Part (i): given directed graph</tspan></text>
 <rect x="540.0" y="80.0" width="400.0" height="60.0" rx="10" fill="#ffec99"/>
 <path d="M540.1 79.7 Q737.4 79.8 940.8 81.1 M940.1 79.5 Q939.9 107.9 938.6 138.5 M939.9 140.5 Q738.4 138.5 538.4 139.8 M539.2 141.2 Q540.5 110.6 539.2 79.3" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
 <path d="M541.4 79.7 Q742.3 82.0 940.1 81.2 M941.1 79.4 Q941.1 107.2 940.7 138.9 M941.3 141.2 Q741.6 137.4 541.1 140.5 M540.4 139.2 Q538.7 112.8 539.5 80.2" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="110.0">REPLACE the last two edges</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="110.0">Part (iv): add Sleep → Do homework</tspan></text>
 <rect x="40.0" y="180.0" width="400.0" height="55.0" rx="10" fill="#a5d8ff"/>
 <path d="M39.8 179.1 Q238.5 182.1 439.1 179.9 M439.3 180.3 Q438.7 205.3 440.3 236.5 M440.2 234.0 Q241.7 236.3 39.2 235.9 M38.9 236.3 Q41.1 207.7 41.0 180.9" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
 <path d="M40.5 180.9 Q240.7 178.5 438.6 180.5 M440.2 179.3 Q439.7 209.2 441.6 233.7 M439.4 233.9 Q237.2 233.3 39.6 234.9 M41.1 235.8 Q41.5 207.4 38.5 178.7" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
@@ -84,13 +86,13 @@
 <rect x="540.0" y="655.0" width="400.0" height="55.0" rx="10" fill="#b2f2bb"/>
 <path d="M540.9 654.3 Q740.7 653.9 939.2 655.6 M938.9 656.2 Q938.2 684.0 941.3 711.3 M941.0 710.7 Q737.5 707.1 539.0 709.9 M539.3 708.9 Q540.5 682.4 539.6 654.3" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
 <path d="M541.0 653.6 Q740.6 656.7 940.9 655.4 M939.7 654.2 Q939.9 680.1 941.1 711.2 M939.4 709.9 Q740.6 712.6 540.5 711.0 M539.1 710.8 Q540.7 683.1 540.8 654.5" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="682.5">Sleep</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="682.5">Do homework</tspan></text>
 <rect x="540.0" y="750.0" width="400.0" height="55.0" rx="10" fill="#b2f2bb"/>
 <path d="M539.9 748.6 Q738.8 748.0 938.4 748.6 M939.3 750.3 Q940.6 778.1 939.9 806.4 M940.5 805.4 Q738.5 805.7 538.8 803.7 M540.5 804.6 Q540.1 779.6 539.7 751.1" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
 <path d="M541.0 750.3 Q738.4 751.4 941.5 751.2 M939.5 750.4 Q937.9 777.5 940.3 806.0 M940.4 805.1 Q740.7 804.8 540.2 804.7 M540.7 804.0 Q542.4 775.1 539.4 749.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="777.5">Do homework</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="17" font-weight="normal" fill="#1e1e1e"><tspan x="740.0" y="777.5">Sleep</tspan></text>
 <rect x="40.0" y="865.0" width="900.0" height="90.0" rx="10" fill="#ffc9c9"/>
 <path d="M38.7 864.1 Q491.0 864.4 940.4 865.6 M941.1 865.1 Q939.8 908.1 941.2 956.6 M940.7 954.8 Q492.2 954.8 39.3 953.7 M41.0 953.6 Q40.6 911.7 40.9 865.4" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
 <path d="M39.7 865.4 Q491.3 863.2 939.9 864.6 M939.6 866.4 Q940.2 911.5 938.7 954.3 M938.9 953.8 Q491.6 952.5 39.9 953.4 M40.7 956.1 Q41.6 907.2 40.1 866.2" fill="none" stroke="#e03131" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="490.0" y="899.4">Each chain has one topological order. Adding Sleep → Homework without removing</tspan><tspan x="490.0" y="920.6">Homework → Sleep instead creates a 2-cycle: no topological order.</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="16" font-weight="normal" fill="#1e1e1e"><tspan x="490.0" y="899.4">Red arrow adds Sleep → Do homework while Do homework → Sleep remains.</tspan><tspan x="490.0" y="920.6">The opposite edges form a 2-cycle, so no topological order exists.</tspan></text>
 </svg>
