@@ -1727,132 +1727,206 @@ Union by rank changes only the parent-tree shape; it does not change the sorted 
 
 ### 3. Disjoint Set Union (Union-Find)
 
-A **Disjoint Set** data structure—also called **Union-Find** or **Disjoint Set Union (DSU)**—maintains a collection of non-overlapping sets. Each element belongs to exactly one set. As relationships are added, DSU efficiently answers whether two elements are already in the same group and merges groups when needed.
+A **Disjoint Set Union** data structure, also called **Union-Find**, maintains a collection of mutually disjoint sets. Each element belongs to exactly one set. DSU supports two essential tasks: determining whether two elements belong to the same set and merging two sets when a new relationship joins them.
 
-For graph algorithms, imagine processing an undirected graph's edges one at a time. DSU records the connected components formed by the edges processed so far; it does **not** store the graph or its adjacency structure. Its central rule is:
+A set is represented by a rooted tree, and its root is the set's **representative**. A parent array stores the tree links. This section consistently uses the self-parent convention: a root points to itself. DSU records component membership; it does **not** store the graph's adjacency structure or paths between vertices.
 
 > **Different roots → merge the sets. Same root → already connected.**
+>
+> For an edge in an undirected graph, same roots mean that a prior path already connects its endpoints, so adding the edge creates a cycle.
 
-For a new undirected edge, equal roots mean a path already connects its endpoints, so adding the edge closes a cycle. This is the same test used by Kruskal's algorithm to reject a cycle-forming edge. DSU is also useful for incremental connectivity and grouping problems; it is not a general replacement for DFS/BFS when the whole graph must be traversed, and ordinary DSU does not support deleting edges.
+The most useful exam patterns are a cycle-detection trace, the `MAKE-SET`/`FIND`/`UNION` operations, optimized DSU pseudocode, and DSU's role in Kruskal's algorithm. Path compression, union by size or rank, and complexity support these core patterns.
 
 ![Disjoint sets as parent trees and component merges](diagrams/ch11-31-dsu-sets-and-union.svg)
 
-#### Core operations and parent representation
+#### 1. Definition, representation, and core operations
 
-| Operation | Meaning |
+The three primary operations are:
+
+| Operation | Purpose |
 | :--- | :--- |
-| `MAKE-SET(x)` | Create a singleton set containing `x` |
-| `FIND(x)` | Return the representative/root of the set containing `x` |
-| `UNION(x, y)` | Merge the sets containing `x` and `y` (if distinct) |
+| `MAKE-SET(x)` | Create a singleton set containing `x`. |
+| `FIND(x)` | Return the representative/root of the set containing `x`. |
+| `UNION(x, y)` | Merge the sets containing `x` and `y`, if they are different. |
 
-A set is represented as a rooted tree. Every non-root node points to its parent; repeatedly following parent links reaches the set's **root**, the representative shared by all members. A parent array stores these links. Initially every vertex is its own one-element set.
+With the self-parent convention, initialize each element as its own root. For example, vertices `0..4` begin as `{0}, {1}, {2}, {3}, {4}` and `parent = [0,1,2,3,4]`. When using union by size, each singleton initially has size one.
 
-There are two valid root conventions. In the basic version, a root has no parent; in the optimized version, a root points to itself. **Do not mix the initialization rule and its matching root test.**
+`FIND(x)` follows parent links until it reaches a vertex whose parent is itself. Two elements belong to the same set exactly when their representatives are equal. `UNION(x,y)` first finds both representatives. It links one root below the other only when the roots differ; linking roots, rather than arbitrary vertices, preserves the set-tree representation.
 
-| Version | Initialization | Root test |
-| :--- | :--- | :--- |
-| Basic | Initialize each parent to `NIL` | A node is a root when `parent[x] = NIL` |
-| Optimized | Initialize each node as its own parent | A node is a root when `parent[x] = x` |
+#### 2. Optimized operations: path compression and union by size
 
-#### Build the basic version
+**Path compression** shortens the search paths used by `FIND`. After a root is found, each visited node is made to point directly to it. The recursive form below uses the same self-parent root convention:
 
-Create one singleton set for each vertex by leaving its parent empty. The basic find operation checks whether the current vertex has no parent; if it does, that vertex is the representative. Otherwise, follow its parent and repeat the check. To merge two different sets, first find their roots and then make one root point to the other. Always link roots, not arbitrary vertices.
+```text
+MAKE-SET(x)
+    parent[x] ← x
+    size[x] ← 1
 
-For `n` vertices, initialize one singleton set per vertex. For example, with vertices `0..4`, initially the sets are `{0}, {1}, {2}, {3}, {4}`. After processing `(0,1)`, `(0,2)`, and `(2,3)`, the sets are `{0,1,2,3}` and `{4}`. The parent-tree shape can vary with the order of unions, but the represented partition must be the same.
+FIND(x)
+    if parent[x] ≠ x
+        parent[x] ← FIND(parent[x])
+    return parent[x]
+```
 
-#### Cycle detection in an undirected graph
-
-For each edge `(u, v)`, find both representatives. If they match, a prior path already joins the endpoints and this edge creates a cycle. Otherwise, merge the two sets and continue. If every edge joins distinct sets, the graph has no cycle. The rule assumes an **undirected** graph; directed cycle detection requires a different method.
-
-
-The PDF's five-vertex example makes the decision trace explicit:
-
-| Edge | Representatives before decision | Decision | Components afterward |
-| :---: | :---: | :--- | :--- |
-| Initial | — | — | `{0}, {1}, {2}, {3}, {4}` |
-| `(0,1)` | `0`, `1` | Merge | `{0,1}, {2}, {3}, {4}` |
-| `(0,2)` | `0`, `2` | Merge | `{0,1,2}, {3}, {4}` |
-| `(1,3)` | `0`, `3` | Merge | `{0,1,2,3}, {4}` |
-| `(2,4)` | `0`, `4` | Merge | `{0,1,2,3,4}` |
-| `(3,4)` | `0`, `0` | Cycle; stop | unchanged |
-
-So these edges contain a cycle, detected at `(3,4)`. Conversely, when processing a forest, every edge is accepted and the final result is `False`—the explicit final return matters.
-
-![DSU cycle detection decision in Kruskal's algorithm](diagrams/ch11-30-dsu-cycle-check.svg)
-
-#### Why the basic version needs optimization
-
-A basic find operation may visit every node in a chain, taking $O(V)$ time in the worst case. Blindly attaching roots can create a chain of height $V$. Cycle detection then takes $O(EV)$ in the worst case. Replacing recursive search with a loop avoids call-stack growth, but still follows every parent link and has the same $O(V)$ worst-case time.
-
-#### Optimize `FIND`: path compression
-
-With **path compression**, after finding a root, make every node visited on the search path point directly to that root. Later searches through those nodes then take fewer steps.
-
-A single `FIND(4)` on the chain `4 → 3 → 2 → 1 → 0` changes each visited node's parent to `0`; subsequent finds on those nodes are much shorter. For very deep inputs, an iterative `FIND` avoids recursion-stack limits. The optimized DSU procedure later in this section uses path halving.
-
-#### Optimize `UNION`: union by size
-
-Maintain `size[root]`, the number of elements in the root's set. When merging distinct roots, make the smaller tree's root a child of the larger tree's root, then add the sizes. If sizes tie, either root may become the parent. This complements path compression: union by size limits tree growth, while path compression flattens paths encountered by queries.
-
-#### Alternative balancing rule: union by rank
-
-Union by **rank** is another way to keep DSU trees shallow. Initialize `rank[root] = 0`. Compare ranks only after finding the roots; attach the lower-rank root below the higher-rank root. If the ranks tie, choose either root and increment only the new root's rank. Rank is **not** the number of children or the set's size: without path compression it tracks tree height, and with path compression it remains an upper bound on height. Values stored for non-roots are no longer used.
-
-
-In Kruskal's algorithm, this balancing rule can be combined with path compression. Union by size is a different balancing rule with a similar goal; rank and size have different meanings and update rules.
-
-![Union by rank keeps a higher-rank root and increments rank only on ties](diagrams/ch11-35-union-by-rank.svg)
+For example, before `FIND(4)`, suppose the chain is `4 → 3 → 2 → 1 → 0`, with `parent = [0,0,1,2,3]`. The find returns `0` and compresses the visited path so that `parent = [0,0,0,0,0]`. Future finds on those elements take fewer parent-link steps.
 
 ![Path compression flattens the find path](diagrams/ch11-32-dsu-path-compression.svg)
 
+**Union by size** stores the number of members at each root. When two different sets are merged, attach the smaller set's root below the larger set's root and update the surviving root's size. If the sizes tie, either root may become the parent. Size values at non-roots are not used.
+
+```text
+UNION(x, y)
+    rootX ← FIND(x)
+    rootY ← FIND(y)
+
+    if rootX = rootY
+        return FALSE
+
+    if size[rootX] < size[rootY]
+        swap(rootX, rootY)
+
+    parent[rootY] ← rootX
+    size[rootX] ← size[rootX] + size[rootY]
+    return TRUE
+```
+
+`TRUE` means two sets were merged; `FALSE` means both elements were already in the same set. Path compression flattens paths found by queries, while union by size limits tree growth during merges.
+
 ![Union by size keeps the larger tree as the root](diagrams/ch11-33-dsu-union-by-size.svg)
 
-#### Optimized DSU operations in plain steps
+**Union by rank** is an alternative balancing rule. Rank is a height estimate, not the number of elements or children. Initialize each rank to zero, attach a lower-rank root below a higher-rank root, and increase the surviving root's rank only when the two root ranks are equal:
 
-This version uses the self-parent root convention, path halving, and union by size:
+```text
+UNION-BY-RANK(x, y)
+    rootX ← FIND(x)
+    rootY ← FIND(y)
 
-1. **Create a set:** make the vertex its own parent and set the size of its set to one.
-2. **Find a representative:** follow parent links until a vertex points to itself. While moving upward, path halving may point a visited vertex to its grandparent.
-3. **Merge two sets:** find both roots. If they match, the vertices are already connected and no merge happens. Otherwise, make the smaller set's root point to the larger set's root, then add the two sizes.
-4. **Detect an undirected cycle:** start with singleton sets and process the edges. If any merge fails because both endpoints already have the same root, a cycle exists. If all edges are processed successfully, no cycle exists.
+    if rootX = rootY
+        return FALSE
 
-For instance, the five-vertex edge sequence in the cycle-detection example returns `TRUE`. The same structure answers dynamic-connectivity queries by comparing `FIND(u)` and `FIND(v)` after the unions processed so far.
+    if rank[rootX] < rank[rootY]
+        parent[rootX] ← rootY
+    else if rank[rootX] > rank[rootY]
+        parent[rootY] ← rootX
+    else
+        parent[rootY] ← rootX
+        rank[rootX] ← rank[rootX] + 1
 
-#### DSU applications and connection to Kruskal
+    return TRUE
+```
 
-- **Undirected cycle detection:** same root means the new edge closes a cycle.
-- **Kruskal's MST:** after sorting edges by nondecreasing weight, accept an edge only if `union(u, v)` succeeds. A failed union means the endpoints are already connected, so skip that edge.
-- **Dynamic connectivity / network components:** answer whether two objects are in the same group as links are added.
-- **Grouping tasks:** for example, friend circles, connected image regions, and percolation components.
+Do not add the two ranks together: rank increases by one only when equal-rank roots are joined. Rank and size have different meanings and update rules, but either can be combined with path compression to keep DSU efficient.
 
-The structure is especially effective when the workload consists mostly of **merges and connectivity queries**. It does not preserve paths or edge details, and standard DSU cannot efficiently undo arbitrary merges or handle edge deletions.
+![Union by rank keeps a higher-rank root and increments rank only on ties](diagrams/ch11-35-union-by-rank.svg)
 
-For Kruskal, process edges in nondecreasing weight order and use DSU only to decide whether each candidate joins distinct components:
+#### 3. Cycle detection in an undirected graph
 
-| Order | Edge | Weight | Decision | Components afterward |
+Process undirected edges one at a time. For each edge `(u,v)`, compare `FIND(u)` and `FIND(v)`. Different roots mean the edge joins two components, so merge them. Equal roots mean the endpoints are already connected by a path; the new edge closes a cycle. This ordinary DSU test is for **undirected** graphs, not directed-cycle detection.
+
+Consider `V = {0,1,2,3,4}` and edges `(0,1), (0,2), (1,3), (2,4), (3,4)`. Initially every vertex is a separate set. Using union by size with the first root retained on equal sizes, the complete trace is:
+
+| Edge | `FIND(u)` | `FIND(v)` | Decision | Components afterward |
 | :---: | :---: | :---: | :--- | :--- |
-| Initial | — | — | — | `{A}, {B}, {C}, {D}, {E}` |
-| 1 | A-B | 1 | Accept; union | `{A,B}, {C}, {D}, {E}` |
-| 2 | C-D | 2 | Accept; union | `{A,B}, {C,D}, {E}` |
-| 3 | B-C | 3 | Accept; union | `{A,B,C,D}, {E}` |
-| 4 | A-C | 4 | Reject; same root | unchanged |
-| 5 | D-E | 5 | Accept; union | `{A,B,C,D,E}` |
+| Initial | — | — | — | `{0}, {1}, {2}, {3}, {4}` |
+| `(0,1)` | `0` | `1` | Union | `{0,1}, {2}, {3}, {4}` |
+| `(0,2)` | `0` | `2` | Union | `{0,1,2}, {3}, {4}` |
+| `(1,3)` | `0` | `3` | Union | `{0,1,2,3}, {4}` |
+| `(2,4)` | `0` | `4` | Union | `{0,1,2,3,4}` |
+| `(3,4)` | `0` | `0` | Cycle; stop | unchanged |
 
-The rejected edge A-C has the highest weight among the cycle's edges, so skipping it preserves the cheaper connections already selected.
+At `(1,3)`, for example, find the root of `1` rather than reading only its parent: `FIND(1) = 0`, while `FIND(3) = 3`. The roots differ, so the sets merge. At `(3,4)`, both finds return `0`; a previously processed path connects the endpoints, and `(3,4)` closes a cycle. Therefore, the graph contains a cycle, detected at edge `(3,4)`.
 
-#### DSU and Kruskal complexity
+The same logic gives the general algorithm. Here `UNION` returns `FALSE` when its arguments already have the same root:
 
-With path compression and union by size/rank, a sequence of operations has near-constant **amortized** cost per operation, conventionally written using the inverse Ackermann function $\alpha(V)$:
+```text
+HAS-CYCLE(V, edges)
+    for each vertex v in V
+        MAKE-SET(v)
 
-| Operation / workload | Complexity |
+    for each edge (u, v) in edges
+        if UNION(u, v) = FALSE
+            return TRUE
+
+    return FALSE
+```
+
+If all edges are processed without a failed union, the graph has no cycle. The explicit final `FALSE` is required. The represented component partition and root comparisons must be correct; the exact parent-tree shape may vary with union tie-breaking.
+
+![DSU cycle detection decision in Kruskal's algorithm](diagrams/ch11-30-dsu-cycle-check.svg)
+
+#### 4. DSU in Kruskal's minimum spanning tree algorithm
+
+Kruskal sorts weighted edges in nondecreasing order and uses DSU to determine whether each candidate edge joins two different components. Accept an edge and union its endpoints when their roots differ. Reject an edge when their roots are the same, because it would create a cycle. For a connected graph with `V` vertices, stop after selecting `V-1` edges.
+
+For the sorted edges `(A,B,1), (C,D,2), (B,C,3), (A,C,4), (D,E,5)`, begin with `{A}, {B}, {C}, {D}, {E}`:
+
+| Order | Edge | Weight | Root comparison | Decision |
+| :---: | :---: | :---: | :--- | :--- |
+| 1 | A-B | 1 | Different | Accept and union |
+| 2 | C-D | 2 | Different | Accept and union |
+| 3 | B-C | 3 | Different | Accept and union |
+| 4 | A-C | 4 | Same | Reject; cycle would form |
+| 5 | D-E | 5 | Different | Accept and union |
+
+The selected MST edges are `{A-B, C-D, B-C, D-E}` and the total cost is `1 + 2 + 3 + 5 = 11`. Four edges have been accepted, which is `V-1` for five vertices. If the input graph is disconnected, Kruskal cannot select `V-1` edges and instead returns a minimum spanning forest.
+
+> **Kruskal rule:** `FIND(u) ≠ FIND(v)` means accept the edge and union; `FIND(u) = FIND(v)` means reject the edge.
+
+#### 5. Complexity
+
+Without balancing or path compression, a parent tree can become a chain of height `V`. A basic `FIND` can then take $O(V)$ time, and processing `E` edges for cycle detection can take $O(EV)$ in the worst case.
+
+With path compression and union by size or rank, `FIND` and `UNION` take $O(\alpha(V))$ amortized time, where $\alpha(V)$ is the inverse Ackermann function and grows extremely slowly. This is an amortized bound over a sequence of operations, not a strict constant bound for every individual call.
+
+| Operation or workload | Complexity |
 | :--- | :---: |
 | `MAKE-SET` per element | $\Theta(1)$ |
-| `FIND`, `UNION` | $O(\alpha(V))$ amortized |
-| Basic cycle detection without balancing/compression | $O(EV)$ worst case |
-| Cycle detection with optimized DSU | $O((V+E)\alpha(V))$ |
+| Basic `FIND` / `UNION` without balancing | $O(V)$ worst case |
+| Optimized `FIND` / `UNION` | $O(\alpha(V))$ amortized |
+| Basic cycle detection | $O(EV)$ worst case |
+| Optimized cycle detection | $O((V+E)\alpha(V))$ |
 | Kruskal, including edge sorting | $O(E\log E + E\alpha(V)) = O(E\log E)$ |
+| DSU storage | $O(V)$ |
 
-Here $V$ and $E$ are the graph's vertex and edge counts. The inverse Ackermann function grows so slowly that it is at most a small constant for all practical input sizes; the complexity remains amortized rather than a strict constant bound for every individual operation.
+#### 6. Applications and limitations
+
+Common DSU applications include:
+
+- detecting cycles in undirected graphs;
+- supporting Kruskal's minimum spanning tree algorithm;
+- answering dynamic-connectivity queries as links are added;
+- maintaining connected components or friend-circle/group membership; and
+- grouping connected image regions or percolation components.
+
+DSU is best suited to **merge operations and connectivity queries**. It can tell whether two vertices are in the same component, but it does not retain the complete adjacency structure, an actual path, traversal order, or distances. Ordinary DSU also does not efficiently support deleting an edge, splitting a set, or undoing arbitrary unions. It is therefore not a general replacement for DFS or BFS.
+
+#### 7. Exam trace format and revision checklist
+
+For a DSU trace, show the set partition or parent representation after each edge; there is no need to redraw the original graph repeatedly. A trace table is usually the clearest presentation:
+
+| Edge | Root of first endpoint | Root of second endpoint | Decision | Components afterward |
+| :--- | :--- | :--- | :--- | :--- |
+| Initial | — | — | — | `{...}, {...}` |
+| `(u,v)` | `FIND(u)` | `FIND(v)` | Union or cycle | Updated sets |
+
+A complete numerical answer follows this sequence:
+
+1. Initialize `parent[v] = v`; for union by size, initialize `size[v] = 1`.
+2. For each edge, find both endpoint roots.
+3. If roots differ, union the sets and record the updated components.
+4. If roots match, report a cycle at that edge and stop.
+5. State the final conclusion and the relevant complexity when requested.
+
+The key facts to retain are:
+
+- **Different roots → union; same root → already connected / cycle** for an undirected edge.
+- **Path compression:** make visited nodes point directly to the root.
+- **Union by size:** attach the smaller set's root below the larger set's root.
+- **Union by rank:** rank is a height estimate and increases only on an equal-rank merge.
+- **Optimized operations:** $O(\alpha(V))$ amortized; DSU storage is $O(V)$.
+- **Optimized cycle detection:** $O((V+E)\alpha(V))$; **Kruskal:** $O(E\log E)$ including sorting.
+
+For revision, prioritize a cycle-detection trace, the three core operations, path compression, one balancing rule, and the DSU decision made by Kruskal. Draw a parent tree only when it clarifies a find path or a merge; a trace table plus the final conclusion is normally sufficient.
 
 ### 4. Time Complexity
 
