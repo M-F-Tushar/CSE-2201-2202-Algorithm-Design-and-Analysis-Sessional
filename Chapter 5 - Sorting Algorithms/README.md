@@ -343,48 +343,139 @@ For `[5, 2, 4, 6, 1, 3]`, the pieces change like this:
 
 For the final join, compare the front items of `[2, 4, 5]` and `[1, 3, 6]`. Take 1, then 2, then 3, then 4, then 5. The left piece is empty, so add the remaining 6.
 
-### Instructions
+### Merge Sort Algorithm: The Idea
 
-1. Work on a section of the array from `left` through `right`. If `left >= right`, that section has at most one item, so it is already sorted.
-2. Find the middle position and split the section into `left..mid` and `mid + 1..right`.
-3. Use merge sort on each half. Keep splitting until each small section has one item.
-4. To join two sorted halves, compare the first unused item in each half. Copy the smaller one into a temporary array, then advance the position in the half it came from. If the values are equal, take the left value first.
-5. When one half is empty, copy all remaining items from the other half. Copy the temporary result back into the same section of the original array.
+Start with the given array `A`.
+
+1. If `A` has only one element, stop: it is already sorted.
+2. Find the middle of the array and divide it into a left half `L` and a right half `R`.
+3. Apply merge sort to `L`, then apply merge sort to `R`. Keep dividing until each half contains only one element.
+4. Merge the sorted halves:
+   - Compare the first elements that have not yet been copied from `L` and `R`.
+   - Place the smaller element into the next position in `A`, then move forward in the half it came from.
+   - Repeat until one half is empty.
+   - Copy every remaining element from the non-empty half into `A`.
+5. The array `A` is now sorted.
+
+### Algorithm: `MERGE-SORT(A, left, right)`
+
+The range `left` through `right` is inclusive. To sort the entire array, call `MERGE-SORT(A, 0, length(A) - 1)`. If `left >= right`, the range has zero or one element and is already sorted.
+
+1. Check the base case. If `left >= right`, return.
+2. Find the middle position:
+
+   ```text
+   mid = floor((left + right) / 2)
+   ```
+
+3. Divide the range into `left..mid` and `mid + 1..right`.
+4. Recursively sort the left part:
+
+   ```text
+   MERGE-SORT(A, left, mid)
+   ```
+
+5. Recursively sort the right part:
+
+   ```text
+   MERGE-SORT(A, mid + 1, right)
+   ```
+
+6. Merge the two sorted parts:
+
+   ```text
+   MERGE(A, left, mid, right)
+   ```
+
+### Merge Instruction: `MERGE(A, left, mid, right)`
+
+1. Create temporary copies of the two sorted parts:
+
+   ```text
+   L = A[left..mid]
+   R = A[mid + 1..right]
+   ```
+
+2. Set pointers to the beginning of each half and to the next output position in `A`:
+
+   ```text
+   i = 0       // points to the current element in L
+   j = 0       // points to the current element in R
+   k = left    // points to the next position in A
+   ```
+
+3. While both halves still contain elements, compare `L[i]` and `R[j]`:
+
+   ```text
+   while i < size(L) AND j < size(R)
+       if L[i] <= R[j]
+           A[k] = L[i]
+           i += 1
+       else
+           A[k] = R[j]
+           j += 1
+       k += 1
+   ```
+
+   Taking from `L` when the values are equal keeps the sort stable.
+
+4. Copy any remaining elements from `L` into `A`:
+
+   ```text
+   while i < size(L)
+       A[k] = L[i]
+       i += 1
+       k += 1
+   ```
+
+5. Copy any remaining elements from `R` into `A`:
+
+   ```text
+   while j < size(R)
+       A[k] = R[j]
+       j += 1
+       k += 1
+   ```
+
+When both loops finish, the two parts have been completely merged into `A` in sorted order.
 
 ### Pseudocode
 
 ```text
-MERGE-SORT(A: array of comparable items) -> array of comparable items
-MERGE-RANGE(A, 0, length(A) - 1)
-return A
-
-MERGE-RANGE(A: array of items, left: integer, right: integer) -> void
+MERGE-SORT(A: array of comparable items, left: integer, right: integer) -> void
 if left >= right:
     return
+
 mid: integer = floor((left + right) / 2)
-MERGE-RANGE(A, left, mid)
-MERGE-RANGE(A, mid + 1, right)
+MERGE-SORT(A, left, mid)
+MERGE-SORT(A, mid + 1, right)
 MERGE(A, left, mid, right)
 
-MERGE(A: array of items, left: integer, mid: integer, right: integer) -> void
-temp: array of items = []
-i: integer = left
-j: integer = mid + 1
-while i <= mid && j <= right:
-    if A[i] <= A[j]:
-        append(temp, A[i])
+MERGE(A: array of comparable items, left: integer, mid: integer, right: integer) -> void
+L: array of items = copy of A[left..mid]
+R: array of items = copy of A[mid + 1..right]
+i: integer = 0
+j: integer = 0
+k: integer = left
+
+while i < length(L) && j < length(R):
+    if L[i] <= R[j]:
+        A[k] = L[i]
         i += 1
     else:
-        append(temp, A[j])
+        A[k] = R[j]
         j += 1
-while i <= mid:
-    append(temp, A[i])
+    k += 1
+
+while i < length(L):
+    A[k] = L[i]
     i += 1
-while j <= right:
-    append(temp, A[j])
+    k += 1
+
+while j < length(R):
+    A[k] = R[j]
     j += 1
-for k: integer = 0 to length(temp) - 1:
-    A[left + k] = temp[k]
+    k += 1
 ```
 
 ### How much work does it do?
