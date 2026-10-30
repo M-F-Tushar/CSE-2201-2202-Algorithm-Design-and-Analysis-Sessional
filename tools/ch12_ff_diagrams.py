@@ -1,4 +1,4 @@
-"""Chapter 12 Ford-Fulkerson diagrams (06-15): foundations, trace, and analysis."""
+"""Chapter 12 Ford-Fulkerson diagrams (06-16): foundations, trace, and analysis."""
 
 from tools.excalidraw_gen import D, E, N, T
 from tools.ch12_ff_trace import (
@@ -267,4 +267,14 @@ max_flow_min_cut_certificate = D(
     caption="Residual reachability → cut partition → equal values prove optimality; labels on the original network are flow/capacity",
 )
 
-FF_DIAGRAMS = [key_terms, step0, *STEP_DIAGRAMS, final_cut, worst, max_flow_min_cut_certificate]
+exam_network = D(
+    key="ch12-16-exam-flow-network",
+    title="Exam Question: Flow-22 Network with Capacities",
+    size=(760, 520),
+    flow="H",
+    nodes=vertex_nodes("", 80, 90),
+    edges=[arc("", 80, 90, u, v, str(c)) for (u, v), c in CAP.items()],
+    caption="Edge labels are capacities c(u,v); s is the source and t is the sink",
+)
+
+FF_DIAGRAMS = [key_terms, step0, *STEP_DIAGRAMS, final_cut, worst, max_flow_min_cut_certificate, exam_network]

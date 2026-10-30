@@ -65,6 +65,7 @@ With many pipes joined together, finding the answer is harder. That is what this
    - [The Theorem, End to End](#the-theorem-end-to-end)
    - [Standard Procedure: Find and Certify a Maximum Flow](#standard-procedure-find-and-certify-a-maximum-flow)
    - [Worked Certificate: The Flow-22 Network](#worked-certificate-the-flow-22-network)
+   - [Exam-Style Question and Model Answer](#exam-style-question-and-model-answer)
 6. [Bipartite Matching](#bipartite-matching)
 7. [Correctness and Complexity](#correctness-and-complexity)
 8. [Practice and Exam Notes](#practice-and-exam-notes)
@@ -484,6 +485,61 @@ $$|f|=5+3+8+5+1=22=c(S,T)=10+3+9.$$
 
 Every edge crossing into $t$ is full, so there is no residual route from $s$ to $t$. The feasible flow reaches the cut's upper bound: **maximum flow = minimum cut = 22**. This is the general proof applied to the exact final state of Ford-Fulkerson, not just a numerical coincidence.
 
+### Exam-Style Question and Model Answer
+
+The theorem above explains why the method works. The following is the concise, numbered format to use when solving a flow problem in an exam: show each path, its **current residual capacities**, the bottleneck, and the running flow; then finish with a cut certificate.
+
+**Question.** Consider the directed network shown below. Each edge is labelled $0/c$, where $c$ is its capacity. Use Ford-Fulkerson to find the maximum flow from $s$ to $t$, find a minimum $s$-$t$ cut, and verify the Max-Flow Min-Cut Theorem.
+
+![Exam question network with capacities on its directed edges](diagrams/ch12-16-exam-flow-network.svg)
+
+[Open the question network's editable Excalidraw diagram](diagrams/ch12-16-exam-flow-network.excalidraw).
+
+The capacities are:
+
+| Edge | Capacity | Edge | Capacity |
+| :--- | ---: | :--- | ---: |
+| $s \to a$ | 5 | $s \to c$ | 10 |
+| $s \to d$ | 12 | $c \to a$ | 5 |
+| $a \to b$ | 8 | $c \to b$ | 7 |
+| $c \to t$ | 3 | $b \to t$ | 10 |
+| $d \to c$ | 4 | $c \to e$ | 2 |
+| $d \to e$ | 8 | $e \to t$ | 9 |
+
+**Answer.** Initially, $f(e)=0$ for every edge, so $|f|=0$. Using the augmenting-path order below:
+
+1. $P_1=s\to a\to b\to t$. Residual capacities: $5,8,10$. Thus $\Delta_1=\min(5,8,10)=5$ and $|f|=5$.
+2. $P_2=s\to c\to t$. Residual capacities: $10,3$. Thus $\Delta_2=\min(10,3)=3$ and $|f|=8$.
+3. $P_3=s\to d\to e\to t$. Residual capacities: $12,8,9$. Thus $\Delta_3=\min(12,8,9)=8$ and $|f|=16$.
+4. $P_4=s\to c\to b\to t$. Residual capacities: $7,7,5$. Thus $\Delta_4=\min(7,7,5)=5$ and $|f|=21$.
+5. $P_5=s\to d\to c\to e\to t$. Residual capacities: $4,4,2,1$. Thus $\Delta_5=\min(4,4,2,1)=1$ and $|f|=22$.
+
+The residual capacities above are those **at the time each path is chosen**. After the fifth augmentation there is no $s$-$t$ path in the residual graph (all three original edges entering $t$ are saturated), so the algorithm stops. Therefore, $|f|=5+3+8+5+1=22$.
+
+**Minimum cut.** In the final residual graph, the vertices reachable from $s$ are
+
+$$S=\{s,a,b,c,d,e\},\qquad T=V\setminus S=\{t\}.$$
+
+Only count original directed edges from $S$ to $T$:
+
+$$b\to t\ (10),\qquad c\to t\ (3),\qquad e\to t\ (9).$$
+
+Therefore,
+
+$$c(S,T)=c(b,t)+c(c,t)+c(e,t)=10+3+9=22.$$
+
+![Exam answer diagram: final flow/capacity labels, the residual-reachability partition, and the minimum cut](diagrams/ch12-15-max-flow-min-cut-certificate.svg)
+
+[Open the final-flow and minimum-cut certificate's editable Excalidraw diagram](diagrams/ch12-15-max-flow-min-cut-certificate.excalidraw).
+
+Since $|f|=c(S,T)=22$, the flow is maximum and the cut is minimum. By the Max-Flow Min-Cut Theorem,
+
+$$\boxed{\text{Maximum Flow}=\text{Minimum Cut}=22.}$$
+
+**What to draw for full credit.** On the final flow graph, label edges as $f/c$ and mark the cut separating $S$ from $T$ (a dashed line is clear). List the original edges crossing from $S$ to $T$ and add their capacities. The exam sequence to remember is
+
+$$\boxed{\text{PATH}\to\text{BOTTLENECK}\to\text{PUSH}\to\text{REPEAT}\to\text{STOP}\to\text{CUT}\to\text{PROVE}.}$$
+
 ---
 
 ## Bipartite Matching
@@ -538,6 +594,7 @@ The residual graph needs $O(V + E)$ space. A specialized algorithm (Hopcroft-Kar
 - Explain **why backward edges exist**: they let a later path cancel flow that an earlier path should not have used.
 - State the difference between Ford-Fulkerson (any path) and Edmonds-Karp (BFS shortest path) and give both bounds.
 - To certify a maximum flow, take the vertices reachable from $s$ in the final residual graph, set $T=V\setminus S$, and count only original edges from $S$ to $T$. Verify that their capacity equals $|f|$.
+- For a copyable, complete numerical solution, follow the [exam-style question and model answer](#exam-style-question-and-model-answer).
 - For matching, draw the flow network with all capacities 1 and report the matched $L$-$R$ edges.
 - Frequently asked: the max-flow problem, residual graph construction, a Ford-Fulkerson trace on a given network, and bipartite matching.
 
