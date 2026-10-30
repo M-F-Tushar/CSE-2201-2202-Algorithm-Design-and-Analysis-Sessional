@@ -4,7 +4,7 @@
   <a href="https://github.com/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional"><img src="https://img.shields.io/github/stars/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional?style=social" alt="GitHub stars"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/language-Python%20%7C%20C%2B%2B-blue" alt="Languages">
-  <img src="https://img.shields.io/badge/diagrams-205%20Excalidraw%20SVGs-ff69b4" alt="Diagrams">
+  <img src="https://img.shields.io/badge/diagrams-207%20Excalidraw%20SVGs-ff69b4" alt="Diagrams">
   <img src="https://img.shields.io/badge/chapters-16%20%2B%20references-success" alt="Chapters">
   <img src="https://img.shields.io/badge/book-CLRS%204th%20Ed.-orange" alt="Primary reference">
 </p>
@@ -59,7 +59,7 @@
 ## 🎯 Repository Goals
 
 - 📚 **Syllabus-faithful notes** — 16 content chapters (Ch 0 – Ch 15) ordered exactly as the CSE 2201 syllabus, not the textbook order.
-- 🎨 **205 hand-drawn diagrams** — every diagram is an editable `.excalidraw` + exported `.svg` that renders directly in the READMEs.
+- 🎨 **207 hand-drawn diagrams** — every diagram is an editable `.excalidraw` + exported `.svg` that renders directly in the READMEs.
 - 📝 **Plain-words explanations** — definitions, step-by-step algorithms, pseudocode, dry-run tables, and a memory trick per answer.
 - ⏱️ **Complexity done right** — best / average / worst case, Big-O / Ω / Θ, recurrence solving, and master-theorem walkthroughs.
 - 🧪 **Solved previous-year papers** — 1st Batch (2023 final, 27 parts), 2nd Batch, 3rd Batch CT 1–4 (80 marks total) with source-faithful transcription.
@@ -75,7 +75,7 @@
 | Content chapters | **16** (Chapter 0 – Chapter 15) + References |
 | Chapter READMEs | **16** — every chapter has a full README with TOC |
 | Total Markdown files | **~40** (chapter READMEs + batch READMEs + diagram indexes) |
-| Hand-drawn SVGs | **205** (each paired with an `.excalidraw` source → **410** diagram files) |
+| Hand-drawn SVGs | **207** (each paired with an `.excalidraw` source → **414** diagram files) |
 | Largest chapter | **Ch 11 — Graph Algorithms** (36 SVGs, 2 140-line README) |
 | Code examples | **13** `.cpp` files (Ch 6 + Lab Practice) + Python pseudocode throughout |
 | Batch question banks | **3 batches** + Lab Practice |
@@ -296,12 +296,12 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 ### Chapter 11 — Graph Algorithms
 > The largest chapter — a complete graph-algorithms studio: tree vs graph · categories (weighted/unweighted, directed/undirected, cyclic/acyclic) · adjacency **matrix vs list** & trade-offs · shortest-path decision map → **BFS** for unweighted **O(V+E)** → **Dijkstra** (relaxation, greedy finalization) on both undirected & directed worked graphs → **Bellman-Ford** (6-vertex graph, negative-cycle detection, relaxation flow) → **Floyd-Warshall** (detour idea, 4-vertex negative-edge classroom problem) → **Topological sort** (DAG, DFS finish-time + Kahn's optional) → **Connected Components** → **SCC** via Kosaraju (original → reversed → 3-step flow, Tarjan optional) → **Spanning trees & MST** (properties, shared worked graph, **Prim** & **Kruskal + DSU/Union-Find**).
 >
-> 📊 36 diagrams · 📄 2 140 lines · 📂 [`Chapter 11/README.md`](Chapter%2011%20-%20Graph%20Algorithms/README.md)
+> 📊 37 diagrams · 📄 2 140 lines · 📂 [`Chapter 11/README.md`](Chapter%2011%20-%20Graph%20Algorithms/README.md)
 
 ### Chapter 12 — Flow Algorithms
-> Flow network (source/sink/capacity/flow) → residual graph & augmenting path → **Ford-Fulkerson** (plain-words foundations, a 5-step `f/c` trace of a 7-vertex network reaching max flow 22, final residual graph & min cut, **O(E · |f*|)** analysis with worst case) → **Edmonds-Karp (BFS augmentations)** → max-flow / min-cut → bipartite matching (reduction to max flow).
+> Flow network (source/sink/capacity/flow) → residual graph & augmenting path → **Ford-Fulkerson** (plain-words foundations, a 5-step `f/c` trace of a 7-vertex network reaching max flow 22, final residual graph & min cut, **O(E · |f*|)** analysis with worst case) → **Edmonds-Karp (BFS augmentations)** → **max-flow/min-cut theorem** (cut upper bound, equivalence proof, 22-unit certificate) → bipartite matching (reduction to max flow).
 >
-> 📊 14 diagrams · 📄 492 lines · 📂 [`Chapter 12/README.md`](Chapter%2012%20-%20Flow%20Algorithms/README.md)
+> 📊 15 diagrams · 📄 558 lines · 📂 [`Chapter 12/README.md`](Chapter%2012%20-%20Flow%20Algorithms/README.md)
 
 ### Chapter 13 — Approximation Algorithms
 > Why exact algorithms fail for NP-hard problems → approximation ratio & performance guarantee → **Vertex Cover (2-approx)** → **TSP approximation (metric, MST-based)** → **Set Cover (greedy log-approx)** and their relation to NP-hardness.
@@ -347,13 +347,13 @@ Every chapter has a `diagrams/` folder. Each diagram ships as **two files**:
 | Ch 8 — Dynamic Programming | 17 | 9 DP problems with tables & traces |
 | Ch 9 — Backtracking | 5 | State-space tree, 4-Queens, safe check, Sudoku |
 | Ch 10 — Branch & Bound | 5 | LC-search, bounding, TSP |
-| Ch 11 — Graph Algorithms | **36** | Full graph studio (largest chapter) |
-| Ch 12 — Flow | 14 | Ford-Fulkerson step-by-step trace, min cut, Edmonds-Karp |
+| Ch 11 — Graph Algorithms | **37** | Full graph studio (largest chapter) |
+| Ch 12 — Flow | 15 | Ford-Fulkerson trace, max-flow/min-cut proof certificate, Edmonds-Karp |
 | Ch 13 — Approximation | 4 | Vertex cover, TSP, set cover |
 | Ch 14 — Randomized & Parallel | 5 | Rand. quicksort, fork-join |
 | Ch 15 — Lower Bounds & NP | 5 | Decision tree, P/NP Venn |
 | Ch 0 — Batch papers | **66** | B1 (24) + B2 (25) + CT (17) + lab practice codes |
-| **Total** | **205** | **410 files incl. `.excalidraw` sources** |
+| **Total** | **207** | **414 files incl. `.excalidraw` sources** |
 
 Regenerate or audit diagrams:
 
