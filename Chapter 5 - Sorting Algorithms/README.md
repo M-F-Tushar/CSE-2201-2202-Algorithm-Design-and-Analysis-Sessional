@@ -621,23 +621,24 @@ Quick Sort now calls itself recursively on both sides!
 
 ### 7. Step-by-Step Algorithm
 
-Instead of confusing academic notation, Quick Sort is described by two clean, modular procedures:
+#### Procedure 1: `PARTITION(A, low, high)`
 
-#### Procedure 1: `PARTITION(A, low, high)` (The Rearranger)
-1. **Set pivot:** Let `pivot = A[high]`.
-2. **Initialize boundary:** Set wall index `i = low`.
-3. **Scan loop:** For scanner `j` from `low` up to `high - 1`:
-   - If `A[j] <= pivot`:
-     - Swap `A[i]` with `A[j]`.
-     - Advance wall: `i = i + 1`.
-4. **Lock pivot:** Swap `A[i]` with `A[high]`.
-5. **Return:** Return index `i` (the permanent position of the pivot).
+1. **Choose the pivot:** Take the last element, `A[high]`, as the pivot.
+2. **Start from the left:** Set `i = low`.
+3. **Check each element:** Scan from `low` through `high - 1`, the position before the pivot.
+4. **Place smaller elements on the left:** Whenever `A[j] <= pivot`:
+   - Swap `A[j]` with `A[i]`.
+   - Move `i` one step to the right.
+5. **Put the pivot in its correct place:** Swap the pivot, `A[high]`, with `A[i]`.
+6. **Return:** Return `i`, the pivot's final position.
 
-#### Procedure 2: `QUICK-SORT(A, low, high)` (The Coordinator)
-1. **Check base case:** If `low >= high`, the sub-array has 0 or 1 element. Stop and return (`return`).
-2. **Partition:** Run `p = PARTITION(A, low, high)` to lock the pivot at index `p`.
-3. **Recurse left:** Call `QUICK-SORT(A, low, p - 1)` to sort everything to the left of the pivot.
-4. **Recurse right:** Call `QUICK-SORT(A, p + 1, high)` to sort everything to the right of the pivot.
+#### Procedure 2: `QUICK-SORT(A, low, high)`
+
+1. **Check:** If `low >= high`, stop and return; the range has at most one element.
+2. **Divide:** Call `PARTITION(A, low, high)` to place the pivot in its correct position. Let the returned position be `p`.
+3. **Sort the left side:** Apply Quick Sort to the elements before the pivot: `QUICK-SORT(A, low, p - 1)`.
+4. **Sort the right side:** Apply Quick Sort to the elements after the pivot: `QUICK-SORT(A, p + 1, high)`.
+5. **Done:** The array is sorted.
 
 ---
 
