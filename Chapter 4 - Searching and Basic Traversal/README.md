@@ -183,10 +183,13 @@ BINARY-SEARCH(A, n, key)
 
 #### Recurrence and Complexity
 Each step discards half the remaining candidates with $O(1)$ comparison work:
+
 $$
 T(n) = T(n/2) + c, \qquad T(1) = 1
 $$
+
 By Master Theorem (Case 2, $a=1, b=2, k=0$) or expansion (as shown in [Chapter 3](../Chapter%203%20-%20Recurrences%20Correctness%20and%20Loop%20Invariants/README.md)):
+
 $$
 T(n) = \Theta(\log n)
 $$

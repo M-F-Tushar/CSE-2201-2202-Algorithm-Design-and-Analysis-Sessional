@@ -409,7 +409,9 @@ Walking `parent[v]` backward gives $parent[T]=D$, $parent[D]=B$, $parent[B]=A$, 
 
 Floyd–Warshall finds shortest distances between **every pair** of vertices. Let $D^{(k)}[i,j]$ be the shortest distance from $i$ to $j$ using only vertices $1$ through $k$ as intermediate vertices. When vertex $k$ is allowed, either do not use it, or go through it:
 
-$$D^{(k)}[i,j]=\min\big(D^{(k-1)}[i,j],\ D^{(k-1)}[i,k]+D^{(k-1)}[k,j]\big)$$
+$$
+D^{(k)}[i,j]=\min\big(D^{(k-1)}[i,j],\ D^{(k-1)}[i,k]+D^{(k-1)}[k,j]\big)
+$$
 
 **Initial matrix $D^{(0)}$** (direct edges only):
 

@@ -161,7 +161,9 @@ Suppose an algorithm solves a problem of size $n$ by:
 
 We express this as the recurrence:
 
-$$T(n) = 2T(n/2) + n$$
+$$
+T(n) = 2T(n/2) + n
+$$
 
 Here:
 - $T(n)$ = time required for problem size $n$
@@ -240,7 +242,9 @@ Each loop body takes constant time, so we only count how many times it runs.
 
 **Question (transcribed):** Prove that $T(n)=O(n\log n)$ for the recurrence relation:
 
-$$T(n)=\begin{cases}2T(n/2)+n,&n>1,\\n,&n=1.\end{cases}$$
+$$
+T(n)=\begin{cases}2T(n/2)+n,&n>1,\\n,&n=1.\end{cases}
+$$
 
 **Answer.**
 
@@ -253,7 +257,9 @@ $$T(n)=\begin{cases}2T(n/2)+n,&n>1,\\n,&n=1.\end{cases}$$
 - **Base case** ($n=2$): $T(2)=2T(1)+2=4$, and $2\cdot2\cdot\log_2 2=4$. So the guess holds. (We start at $n=2$ because $n\log n=0$ at $n=1$.)
 - **Inductive step** ($n\ge4$): assume the guess holds for $n/2$.
 
-$$T(n) = 2T(n/2) + n \le 2\cdot 2\,\frac{n}{2}\log_2\frac{n}{2} + n = 2n\log_2 n - 2n + n = 2n\log_2 n - n \le 2n\log_2 n$$
+$$
+T(n) = 2T(n/2) + n \le 2\cdot 2\,\frac{n}{2}\log_2\frac{n}{2} + n = 2n\log_2 n - 2n + n = 2n\log_2 n - n \le 2n\log_2 n
+$$
 
 So $T(n)\le 2n\log_2 n$, which proves $T(n)=O(n\log n)$.
 
@@ -954,7 +960,9 @@ Key calculations:
 
 Dijkstra is greedy: it repeatedly **finalizes** the unvisited vertex with the smallest tentative distance, and that distance is never revisited. Every time a vertex $u$ is finalized, each edge $(u,v)$ leaving it is relaxed:
 
-$$\text{if } d(u)+c(u,v)<d(v)\implies d(v)=d(u)+c(u,v)$$
+$$
+\text{if } d(u)+c(u,v)<d(v)\implies d(v)=d(u)+c(u,v)
+$$
 
 This is correct when all edge weights are nonnegative. With a negative edge, a vertex finalized early can later receive a cheaper path (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
 
@@ -1196,7 +1204,9 @@ F: C(3), D(2), E(1)
 
 **Relaxation formula:** every time a vertex $u$ is finalized, relax each edge $(u,v)$ leaving it:
 
-$$\text{if } \big(d(u)+c(u,v)<d(v)\big)\implies d(v)=d(u)+c(u,v)$$
+$$
+\text{if } \big(d(u)+c(u,v)<d(v)\big)\implies d(v)=d(u)+c(u,v)
+$$
 
 If the distance gets smaller, also set `parent[v] = u` (the previous vertex on the path). Dijkstra's greedy rule: always finalize the unvisited vertex with the smallest tentative distance (see [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
 

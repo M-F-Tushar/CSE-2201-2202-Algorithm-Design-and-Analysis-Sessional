@@ -289,7 +289,9 @@ This is the table the video builds on the right side of the page, with a running
 | 4 | $s \to c \to b \to t$ | 5 | $b \to t$ | 21 |
 | 5 | $s \to d \to c \to e \to t$ | 1 | $e \to t$ | **22** |
 
-$$\text{Maximum flow} = 5 + 3 + 8 + 5 + 1 = \mathbf{22}$$
+$$
+\text{Maximum flow} = 5 + 3 + 8 + 5 + 1 = \mathbf{22}
+$$
 
 Every augmentation fills at least one edge. That is why each step makes the residual graph "smaller" and pushes the search toward the edges that are left.
 
@@ -301,7 +303,9 @@ After Step 5, every edge into $t$ is full: $b \to t$ (10/10), $c \to t$ (3/3), $
 
 The vertices that $s$ can still reach are $S = \{s, a, b, c, d, e\}$, and the rest is $T = \{t\}$. The edges from $S$ to $T$ form a **cut** with capacity
 
-$$c(S,T) = c(b,t) + c(c,t) + c(e,t) = 10 + 3 + 9 = 22 = \lvert f\rvert.$$
+$$
+c(S,T) = c(b,t) + c(c,t) + c(e,t) = 10 + 3 + 9 = 22 = \lvert f\rvert.
+$$
 
 No flow can be larger than any cut, and this flow equals this cut. So 22 is the **maximum flow**, and this cut is a **minimum cut**. It also matches the quick upper bound from Step 0. See [Max-Flow Min-Cut](#max-flow-min-cut) for the general theorem.
 
@@ -364,7 +368,9 @@ Let $V$ be the number of vertices, $E$ the number of edges, and $\lvert f^*\rver
 
 **Total**
 
-$$T(V, E) = O(E) \times O(\lvert f^*\rvert) = O(E \cdot \lvert f^*\rvert), \qquad \text{space} = O(V + E) \text{ for the residual graph.}$$
+$$
+T(V, E) = O(E) \times O(\lvert f^*\rvert) = O(E \cdot \lvert f^*\rvert), \qquad \text{space} = O(V + E) \text{ for the residual graph.}
+$$
 
 **Applied to the video's network:** $V = 7$, $E = 12$, $\lvert f^*\rvert = 22$. The bound allows up to 22 augmentations, each scanning at most $2 \times 12 = 24$ residual edges. The actual run needed only **5** augmentations and one failed search, because the bottlenecks were large ($5, 3, 8, 5, 1$). The bound is a worst case, not a prediction.
 
@@ -418,11 +424,15 @@ Given a finite directed network $G=(V,E)$, nonnegative edge capacities $c$, a so
 
 An **$s$-$t$ cut** $(S,T)$ partitions the vertices so $s\in S$ and $t\in T$. Its capacity counts only original directed edges going **from $S$ to $T$**; edges from $T$ back to $S$ are not included:
 
-$$c(S,T)=\sum_{(u,v)\in E,\ u\in S,\ v\in T} c(u,v).$$
+$$
+c(S,T)=\sum_{(u,v)\in E,\ u\in S,\ v\in T} c(u,v).
+$$
 
 For any flow $f$, write $f(A,B)$ for the total flow on original edges directed from set $A$ to set $B$. Flow conservation at the vertices in $S\setminus\{s\}$ makes all internal flow cancel, leaving
 
-$$|f|=f(S,T)-f(T,S)\le f(S,T)\le c(S,T).$$
+$$
+|f|=f(S,T)-f(T,S)\le f(S,T)\le c(S,T).
+$$
 
 This is the **cut upper bound**: every cut limits every feasible flow. It gives a quick way to bound an answer, but an arbitrary cut need not be the minimum one.
 
@@ -430,7 +440,9 @@ This is the **cut upper bound**: every cut limits every feasible flow. It gives 
 
 **Max-flow min-cut theorem.** For any feasible flow $f$ in a finite network with finite, nonnegative capacities, these statements are equivalent. In optimization notation:
 
-$$\max\{|f|: f\text{ is feasible}\}=\min\{c(S,T):(S,T)\text{ is an }s\text{-}t\text{ cut}\}.$$
+$$
+\max\{|f|: f\text{ is feasible}\}=\min\{c(S,T):(S,T)\text{ is an }s\text{-}t\text{ cut}\}.
+$$
 
 1. $f$ is a **maximum flow**.
 2. The residual graph $G_f$ contains **no path from $s$ to $t**.
@@ -443,7 +455,10 @@ The theorem applies to real as well as integer capacities. Integrality affects w
 1. **Maximum flow implies no augmenting path.** If a residual $s$-$t$ path existed, every edge on it would have positive residual capacity. Pushing the path's positive bottleneck would increase $|f|$, contradicting maximality.
 2. **No augmenting path gives an equal-capacity cut.** Let $S$ be exactly the vertices reachable from $s$ in $G_f$, and let $T=V\setminus S$. Then $t\in T$. Every original edge from $S$ to $T$ is saturated; otherwise its forward residual edge would reach a vertex in $T$. Every original edge from $T$ to $S$ carries zero flow; otherwise its reverse residual edge would leave $S$ and reach $T$. Therefore
 
-   $$|f|=f(S,T)-f(T,S)=c(S,T)-0=c(S,T).$$
+   $$
+   |f|=f(S,T)-f(T,S)=c(S,T)-0=c(S,T).
+   $$
+
 3. **An equal-capacity cut proves optimality.** The cut upper bound says every feasible flow $g$ satisfies $|g|\le c(S,T)=|f|$. Thus $f$ is maximum. No cut can have capacity below $|f|$, so this cut is minimum.
 
 Together, this is a proof and a practical certificate: a feasible flow plus a cut of the same value proves both are optimal.
@@ -481,7 +496,9 @@ Only three original edges cross this cut from $S$ to $T$:
 | $e\to t$ | $9/9$ | 9 |
 | **Cut capacity** |  | **22** |
 
-$$|f|=5+3+8+5+1=22=c(S,T)=10+3+9.$$
+$$
+|f|=5+3+8+5+1=22=c(S,T)=10+3+9.
+$$
 
 Every edge crossing into $t$ is full, so there is no residual route from $s$ to $t$. The feasible flow reaches the cut's upper bound: **maximum flow = minimum cut = 22**. This is the general proof applied to the exact final state of Ford-Fulkerson, not just a numerical coincidence.
 
@@ -518,15 +535,21 @@ The residual capacities above are those **at the time each path is chosen**. Aft
 
 **Minimum cut.** In the final residual graph, the vertices reachable from $s$ are
 
-$$S=\{s,a,b,c,d,e\},\qquad T=V\setminus S=\{t\}.$$
+$$
+S=\{s,a,b,c,d,e\},\qquad T=V\setminus S=\{t\}.
+$$
 
 Only count original directed edges from $S$ to $T$:
 
-$$b\to t\ (10),\qquad c\to t\ (3),\qquad e\to t\ (9).$$
+$$
+b\to t\ (10),\qquad c\to t\ (3),\qquad e\to t\ (9).
+$$
 
 Therefore,
 
-$$c(S,T)=c(b,t)+c(c,t)+c(e,t)=10+3+9=22.$$
+$$
+c(S,T)=c(b,t)+c(c,t)+c(e,t)=10+3+9=22.
+$$
 
 ![Exam answer diagram: final flow/capacity labels, the residual-reachability partition, and the minimum cut](diagrams/ch12-15-max-flow-min-cut-certificate.svg)
 
@@ -534,11 +557,15 @@ $$c(S,T)=c(b,t)+c(c,t)+c(e,t)=10+3+9=22.$$
 
 Since $|f|=c(S,T)=22$, the flow is maximum and the cut is minimum. By the Max-Flow Min-Cut Theorem,
 
-$$\boxed{\text{Maximum Flow}=\text{Minimum Cut}=22.}$$
+$$
+\boxed{\text{Maximum Flow}=\text{Minimum Cut}=22.}
+$$
 
 **What to draw for full credit.** On the final flow graph, label edges as $f/c$ and mark the cut separating $S$ from $T$ (a dashed line is clear). List the original edges crossing from $S$ to $T$ and add their capacities. The exam sequence to remember is
 
-$$\boxed{\text{PATH}\to\text{BOTTLENECK}\to\text{PUSH}\to\text{REPEAT}\to\text{STOP}\to\text{CUT}\to\text{PROVE}.}$$
+$$
+\boxed{\text{PATH}\to\text{BOTTLENECK}\to\text{PUSH}\to\text{REPEAT}\to\text{STOP}\to\text{CUT}\to\text{PROVE}.}
+$$
 
 ---
 

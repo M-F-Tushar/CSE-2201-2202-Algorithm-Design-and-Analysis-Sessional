@@ -97,7 +97,9 @@ An **indicator random variable** $X_A$ equals 1 if event $A$ happens and 0 other
 
 **Hiring problem.** Interview $n$ candidates in random order; hire whenever the current candidate is the best so far. Let $X_i = 1$ if candidate $i$ is hired. Candidate $i$ is the best of the first $i$ with probability $1/i$, so
 
-$$E[\text{hires}] = \sum_{i=1}^{n} \frac{1}{i} = H_n = \ln n + O(1).$$
+$$
+E[\text{hires}] = \sum_{i=1}^{n} \frac{1}{i} = H_n = \ln n + O(1).
+$$
 
 Only about $\ln n$ hires are expected, although the worst case is $n$. This indicator-variable method is exactly what analyzes quicksort below.
 
@@ -113,7 +115,9 @@ Ordinary quicksort picks a fixed pivot (for example the last element) and takes 
 
 **Expected comparisons.** Let $z_1 < z_2 < \dots < z_n$ be the sorted values. Two elements are compared **at most once**, and only if one of them is chosen as pivot while both are still in the same subarray. Elements $z_i$ and $z_j$ are compared exactly when the first pivot chosen from $\{z_i, \dots, z_j\}$ is $z_i$ or $z_j$, which has probability $\frac{2}{j - i + 1}$. Hence
 
-$$E[\text{comparisons}] = \sum_{i<j} \frac{2}{j-i+1} < 2n \sum_{k=1}^{n} \frac{1}{k} = O(n \log n).$$
+$$
+E[\text{comparisons}] = \sum_{i<j} \frac{2}{j-i+1} < 2n \sum_{k=1}^{n} \frac{1}{k} = O(n \log n).
+$$
 
 The exact figure is about $2n \ln n \approx 1.39\, n \log_2 n$.
 
@@ -145,7 +149,9 @@ Unlike quicksort, only **one** side is searched.
 
 **Expected time.** A good pivot (probability 1/2) needs about 2 tries and shrinks the range to at most $3n/4$. Partitioning costs $cn$, so
 
-$$E[T(n)] \le 2cn\left(1 + \tfrac34 + \left(\tfrac34\right)^2 + \cdots\right) = 8cn = O(n).$$
+$$
+E[T(n)] \le 2cn\left(1 + \tfrac34 + \left(\tfrac34\right)^2 + \cdots\right) = 8cn = O(n).
+$$
 
 **Why is it $O(n)$ instead of $O(n \log n)$?** Quicksort must recursively sort **both** sides of the pivot (work: $n + n + n + \dots$). But Selection only needs to find one item, so it discards the other side completely! The work shrinks geometrically: $n + \frac{3}{4}n + (\frac{3}{4})^2 n + \dots \le 4n = O(n)$.
 

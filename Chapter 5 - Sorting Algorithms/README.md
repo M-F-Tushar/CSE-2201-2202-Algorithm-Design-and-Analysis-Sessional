@@ -644,16 +644,28 @@ The **Heapify** operation (also called *sift-down*) is the core engine of Heap S
 There are two distinct ways to construct a heap from an unsorted list of $n$ elements:
 
 1. **Top-Down Insertion (Naive):** Insert elements one by one into an empty heap. Each insertion can take up to $O(\log n)$ sift-up operations. Total time:
-   $$\sum_{i=1}^{n} O(\log i) = O(n \log n)$$
+
+   $$
+   \sum_{i=1}^{n} O(\log i) = O(n \log n)
+   $$
+
 2. **Bottom-Up Heapify Method (Optimized):** Treat the entire input list as a complete binary tree:
    - **Leaf nodes are already heaps:** Any node without children trivially satisfies the heap rule!
    - In a list of size $n$, leaf nodes occupy all positions from $\lfloor n / 2 \rfloor$ to $n - 1$.
    - The **last internal node** (parent with at least one child) is located at position:
-     $$\lfloor n / 2 \rfloor - 1$$
+
+     $$
+     \lfloor n / 2 \rfloor - 1
+     $$
+
    - We only need to run the Heapify operation on internal nodes, moving backward from position $\lfloor n / 2 \rfloor - 1$ down to the root ($0$).
 
 **Mathematical intuition:** Most nodes in a tree reside near the bottom. Half the nodes are leaves (height $0$), a quarter are at height $1$, and only one node (the root) is at maximum height $\approx \log_2 n$. Summing the work done:
-$$\sum_{h=0}^{\lfloor \log_2 n \rfloor} \left\lceil \frac{n}{2^{h+1}} \right\rceil O(h) = O\left(n \sum_{h=0}^{\infty} \frac{h}{2^h}\right) = O(n)$$
+
+$$
+\sum_{h=0}^{\lfloor \log_2 n \rfloor} \left\lceil \frac{n}{2^{h+1}} \right\rceil O(h) = O\left(n \sum_{h=0}^{\infty} \frac{h}{2^h}\right) = O(n)
+$$
+
 Because the series $\sum_{h=0}^{\infty} \frac{h}{2^h}$ converges to $2$, building a heap via bottom-up Heapify takes **linear time $O(n)$**, saving substantial computation before sorting begins.
 
 ---

@@ -425,9 +425,11 @@ The **Divide-and-Conquer** paradigm solves a problem by applying three recursive
 3. **Combine:** Merge the solutions of the subproblems into a comprehensive solution for the original instance.
 
 ### General Recurrence Form
+
 $$
 T(n) = \begin{cases} \Theta(1) & \text{if } n \le c \\ a T(n/b) + D(n) + C(n) & \text{if } n > c \end{cases}
 $$
+
 where $D(n)$ is the division cost and $C(n)$ is the combination cost.
 
 ---
@@ -435,18 +437,22 @@ where $D(n)$ is the division cost and $C(n)$ is the combination cost.
 ## 13. Strassen's Matrix Multiplication
 
 Multiplying two $n \times n$ matrices $A$ and $B$ by definition requires $n^3$ scalar multiplications:
+
 $$
 C_{ij} = \sum_{k=1}^n A_{ik} B_{kj} \implies \Theta(n^3) \text{ operations}
 $$
 
 ### Standard Block Multiplication Recurrence
 Assume $n$ is a power of 2. Partition $A$, $B$, and $C$ into four $(n/2) \times (n/2)$ submatrices:
+
 $$
 \begin{pmatrix} C_{11} & C_{12} \\ C_{21} & C_{22} \end{pmatrix} = 
 \begin{pmatrix} A_{11} & A_{12} \\ A_{21} & A_{22} \end{pmatrix}
 \begin{pmatrix} B_{11} & B_{12} \\ B_{21} & B_{22} \end{pmatrix}
 $$
+
 Standard expansion computes 8 matrix products of size $(n/2) \times (n/2)$:
+
 $$
 \begin{aligned}
 C_{11} &= A_{11}B_{11} + A_{12}B_{21} \\
@@ -455,6 +461,7 @@ C_{21} &= A_{21}B_{11} + A_{22}B_{21} \\
 C_{22} &= A_{21}B_{12} + A_{22}B_{22}
 \end{aligned}
 $$
+
 - **Recurrence:** $T(n) = 8T(n/2) + \Theta(n^2)$ (8 multiplications, 4 matrix additions of size $(n/2)^2$).
 - **By Master Theorem:** $a = 8, b = 2 \implies n^{\log_2 8} = n^3$. Since $f(n) = \Theta(n^2) = O(n^{3 - \epsilon})$, Case 1 yields $T(n) = \Theta(n^3)$ — **no asymptotic improvement over naive multiplication**.
 
@@ -474,6 +481,7 @@ M_7 &= (A_{12} - A_{22})(B_{21} + B_{22})
 $$
 
 The four blocks of product matrix $C$ are assembled from $M_1 \dots M_7$:
+
 $$
 \begin{aligned}
 C_{11} &= M_1 + M_4 - M_5 + M_7 \\
@@ -485,14 +493,19 @@ $$
 
 ### Complexity and Comparison
 Strassen reduces the number of recursive multiplications from 8 to 7:
+
 $$
 T(n) = 7T(n/2) + \Theta(n^2)
 $$
+
 By Master Theorem (Case 1):
+
 $$
 n^{\log_b a} = n^{\log_2 7} \approx n^{2.8074}
 $$
+
 Since $f(n) = \Theta(n^2) = O(n^{\log_2 7 - \epsilon})$ for $\epsilon \approx 0.8074$:
+
 $$
 T(n) = \Theta(n^{\log_2 7}) \approx O(n^{2.81})
 $$

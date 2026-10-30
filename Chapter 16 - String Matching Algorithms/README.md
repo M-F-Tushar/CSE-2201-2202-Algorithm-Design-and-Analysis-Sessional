@@ -48,10 +48,16 @@ Given:
 
 ### Candidate Windows
 A candidate window of length $m$ can start at any index $i$ from $0$ up to $n - m$:
-$$\text{Total Candidate Windows} = n - m + 1$$
+
+$$
+\text{Total Candidate Windows} = n - m + 1
+$$
 
 For classroom text $T = \text{"ababcabab"}$ ($n=9$) and pattern $P = \text{"cab"}$ ($m=3$):
-$$\text{Windows} = 9 - 3 + 1 = 7$$
+
+$$
+\text{Windows} = 9 - 3 + 1 = 7
+$$
 
 | Start Index $i$ | Window Slice $T[i \dots i+2]$ | Target Pattern $P$ | Match? |
 | :---: | :---: | :---: | :---: |
@@ -66,7 +72,10 @@ $$\text{Windows} = 9 - 3 + 1 = 7$$
 ### The Naive Bottleneck
 * **Naive Algorithm:** Slides a window of length $m$ across $T$. At each starting index $i$, it tests up to $m$ characters: $T[i] = P[0], T[i+1] = P[1], \dots$.
 * **Worst-Case Cost:** When text and pattern contain repeated prefixes (such as $T = \text{"AAAAAAAA..."}$ and $P = \text{"AAAAB"}$), every window mismatches only at the final character, costing $m$ comparisons per window:
-$$T_{\text{naive}}(n, m) = (n - m + 1) \times m = O(n \times m)$$
+
+$$
+T_{\text{naive}}(n, m) = (n - m + 1) \times m = O(n \times m)
+$$
 
 ### The Rabin-Karp Paradigm Shift
 > *"We won't compare character-to-character. We will compare hash values — integer with integer in $O(1)$ time."*
@@ -79,7 +88,10 @@ If the hash of every window of length $m$ can be extracted in $O(1)$ time, verif
 
 ### The First Intuition
 The simplest hash function sums the ASCII values of all characters in the window:
-$$\text{hash}_{\text{sum}}(s) = \sum_{k=0}^{m-1} \text{ASCII}(s[k])$$
+
+$$
+\text{hash}_{\text{sum}}(s) = \sum_{k=0}^{m-1} \text{ASCII}(s[k])
+$$
 
 Using standard ASCII values ($a = 97, b = 98, c = 99$):
 
@@ -106,16 +118,27 @@ Using standard ASCII values ($a = 97, b = 98, c = 99$):
 ### Positional Power Weighting
 Instead of adding characters uniformly, each character at index $k$ is multiplied by an increasing power of a base $P$:
 
-$$\text{hash}(s) = \sum_{k=0}^{m-1} \text{val}(s[k]) \cdot P^k \pmod M = \text{val}(s[0]) \cdot P^0 + \text{val}(s[1]) \cdot P^1 + \dots + \text{val}(s[m-1]) \cdot P^{m-1} \pmod M$$
+$$
+\text{hash}(s) = \sum_{k=0}^{m-1} \text{val}(s[k]) \cdot P^k \pmod M = \text{val}(s[0]) \cdot P^0 + \text{val}(s[1]) \cdot P^1 + \dots + \text{val}(s[m-1]) \cdot P^{m-1} \pmod M
+$$
 
 ### Hand Evaluation with Base $P = 10$
 Using base $P = 10$ ($a=1, b=2$):
 * For `"aba"`:
-  $$\text{hash}(\text{"aba"}) = 1 \cdot 10^0 + 2 \cdot 10^1 + 1 \cdot 10^2 = 1 + 20 + 100 = \mathbf{121}$$
-* For `"aab"`:
-  $$\text{hash}(\text{"aab"}) = 1 \cdot 10^0 + 1 \cdot 10^1 + 2 \cdot 10^2 = 1 + 10 + 200 = \mathbf{211}$$
 
-$$121 \neq 211 \implies \text{Order is strictly preserved!}$$
+  $$
+  \text{hash}(\text{"aba"}) = 1 \cdot 10^0 + 2 \cdot 10^1 + 1 \cdot 10^2 = 1 + 20 + 100 = \mathbf{121}
+  $$
+
+* For `"aab"`:
+
+  $$
+  \text{hash}(\text{"aab"}) = 1 \cdot 10^0 + 1 \cdot 10^1 + 2 \cdot 10^2 = 1 + 10 + 200 = \mathbf{211}
+  $$
+
+$$
+121 \neq 211 \implies \text{Order is strictly preserved!}
+$$
 
 Because positional weights differ ($P^0 \neq P^1 \neq P^2$), reordering characters alters the resulting polynomial, eliminating anagram collisions.
 
@@ -125,34 +148,68 @@ Because positional weights differ ($P^0 \neq P^1 \neq P^2$), reordering characte
 
 ### 1. Character Mapping: Why $'a'$ Must Be $1$, Never $0$
 The mapping function maps lowercase letters to 1-based positive integers:
-$$\text{val}(c) = c - \text{'a'} + 1 \quad (a=1, b=2, \dots, z=26)$$
+
+$$
+\text{val}(c) = c - \text{'a'} + 1 \quad (a=1, b=2, \dots, z=26)
+$$
 
 * **The Failure of $0$-based mapping ($a=0$):**
-  $$\text{hash}(\text{"a"}) = 0 \cdot P^0 = 0$$
-  $$\text{hash}(\text{"aa"}) = 0 \cdot P^0 + 0 \cdot P^1 = 0$$
-  $$\text{hash}(\text{"aaa"}) = 0 \cdot P^0 + 0 \cdot P^1 + 0 \cdot P^2 = 0$$
+
+  $$
+  \text{hash}(\text{"a"}) = 0 \cdot P^0 = 0
+  $$
+
+  $$
+  \text{hash}(\text{"aa"}) = 0 \cdot P^0 + 0 \cdot P^1 = 0
+  $$
+
+  $$
+  \text{hash}(\text{"aaa"}) = 0 \cdot P^0 + 0 \cdot P^1 + 0 \cdot P^2 = 0
+  $$
+
   Repeated occurrences of $'a'$ would vanish algebraically!
+
 * **With $1$-based mapping:**
-  $$\text{hash}(\text{"a"}) = 1, \quad \text{hash}(\text{"aa"}) = 1 + 10 = 11, \quad \text{hash}(\text{"aaa"}) = 1 + 10 + 100 = 111$$
+
+  $$
+  \text{hash}(\text{"a"}) = 1, \quad \text{hash}(\text{"aa"}) = 1 + 10 = 11, \quad \text{hash}(\text{"aaa"}) = 1 + 10 + 100 = 111
+  $$
+
   Every prefix and length produces a distinct numerical value.
 
 ### 2. Base Selection: Why Base $P$ Must Be a Prime $> 26$
 * Base $P=10$ is used exclusively for classroom hand calculation because base-10 powers are easy to read.
 * **Why Base 10 fails in practice:** Letter values range from $1$ to $26$. If the base is smaller than the alphabet size, base overflows produce collisions between distinct 2-letter words:
   * For $k = 11, a = 1$:
-    $$\text{hash}(\text{"ka"}) = 11 \cdot 10^0 + 1 \cdot 10^1 = 11 + 10 = 21$$
+
+    $$
+    \text{hash}(\text{"ka"}) = 11 \cdot 10^0 + 1 \cdot 10^1 = 11 + 10 = 21
+    $$
+
   * For $a = 1, b = 2$:
-    $$\text{hash}(\text{"ab"}) = 1 \cdot 10^0 + 2 \cdot 10^1 = 1 + 20 = 21$$
+
+    $$
+    \text{hash}(\text{"ab"}) = 1 \cdot 10^0 + 2 \cdot 10^1 = 1 + 20 = 21
+    $$
+
     **Two completely different strings produce the identical hash 21!**
 * **The Rule:** Base $P$ must be a prime strictly greater than the alphabet size ($26$). Standard selections are $P = 31$ or $P = 37$.
 
 ### 3. Modulus $M$ and Overflow Control
 * As text length grows, powers $P^k$ explode exponentially.
 * All arithmetic is computed modulo a large prime:
-$$M = 10^9 + 7 = 1\,000\,000\,007$$
+
+$$
+M = 10^9 + 7 = 1\,000\,000\,007
+$$
+
 * **64-bit Integer Safety:**
   The product of two values below $M$ is bounded by:
-  $$(M - 1) \times (M - 1) \approx 10^{18} < 9.22 \times 10^{18} \quad (\text{maximum signed 64-bit integer})$$
+
+  $$
+  (M - 1) \times (M - 1) \approx 10^{18} < 9.22 \times 10^{18} \quad (\text{maximum signed 64-bit integer})
+  $$
+
   Applying $\pmod M$ after every addition and multiplication guarantees no arithmetic overflow occurs.
 
 ---
@@ -206,10 +263,16 @@ Here $a=1, b=2, c=3$:
 
 ### Step 3: Hashing the Pattern
 The pattern $P$ of length $m$ is hashed once using the first $m$ powers:
-$$\text{patHash} = \sum_{k=0}^{m-1} (\text{val}(P[k]) \times pw[k]) \pmod M$$
+
+$$
+\text{patHash} = \sum_{k=0}^{m-1} (\text{val}(P[k]) \times pw[k]) \pmod M
+$$
 
 For $P = \text{"cab"}$ ($c=3, a=1, b=2$) in base $P = 10$:
-$$\text{patHash} = 3 \cdot 10^0 + 1 \cdot 10^1 + 2 \cdot 10^2 = 3 + 10 + 200 = \mathbf{213}$$
+
+$$
+\text{patHash} = 3 \cdot 10^0 + 1 \cdot 10^1 + 2 \cdot 10^2 = 3 + 10 + 200 = \mathbf{213}
+$$
 
 *(In base $P = 31$: $\text{patHash} = 3 \cdot 1 + 1 \cdot 31 + 2 \cdot 961 = 1\,956$)*.
 
@@ -219,11 +282,20 @@ For a window spanning from index $l$ to index $r$ ($r = l + m - 1$):
 * $hs[l-1]$ contains weighted terms from index $0$ to $l-1$.
 
 Subtracting removes the unwanted left prefix:
-$$\text{window\_raw} = \begin{cases} hs[r] & \text{if } l = 0 \\ hs[r] - hs[l-1] & \text{if } l > 0 \end{cases}$$
+
+$$
+\text{window\_raw} = \begin{cases} hs[r] & \text{if } l = 0 \\ hs[r] - hs[l-1] & \text{if } l > 0 \end{cases}
+$$
 
 Expanding algebraically:
-$$\text{window\_raw} = T[l] \cdot P^l + T[l+1] \cdot P^{l+1} + \dots + T[r] \cdot P^r$$
-$$\text{window\_raw} = P^l \times \left( T[l] \cdot P^0 + T[l+1] \cdot P^1 + \dots + T[r] \cdot P^{m-1} \right) = P^l \times \text{hash}(T[l \dots r])$$
+
+$$
+\text{window\_raw} = T[l] \cdot P^l + T[l+1] \cdot P^{l+1} + \dots + T[r] \cdot P^r
+$$
+
+$$
+\text{window\_raw} = P^l \times \left( T[l] \cdot P^0 + T[l+1] \cdot P^1 + \dots + T[r] \cdot P^{m-1} \right) = P^l \times \text{hash}(T[l \dots r])
+$$
 
 > The extracted raw window hash equals the true window hash **scaled by $P^l$**.
 
@@ -232,11 +304,17 @@ $$\text{window\_raw} = P^l \times \left( T[l] \cdot P^0 + T[l+1] \cdot P^1 + \do
 2. **Modular Division Overhead:** In modular arithmetic, division requires computing the modular multiplicative inverse via Fermat's Little Theorem ($P^{-l} \equiv (P^l)^{M-2} \pmod M$), costing $O(\log M)$ steps per window.
 3. **Multiplication Is Exact and Fast:**
    Multiplying $\text{patHash}$ by $pw[l]$ takes a single $O(1)$ multiplication:
-   $$\mathbf{winHash == (\text{patHash} \times pw[l]) \pmod M}$$
+
+   $$
+   \mathbf{winHash == (\text{patHash} \times pw[l]) \pmod M}
+   $$
 
 ### Non-Negative Modular Subtraction Rule
 In many programming environments, modular subtraction of two numbers where the second is larger yields a negative remainder. To guarantee non-negative values before applying modulo:
-$$winHash = (hs[r] - hs[l-1] + M) \pmod M$$
+
+$$
+winHash = (hs[r] - hs[l-1] + M) \pmod M
+$$
 
 ---
 
@@ -260,11 +338,22 @@ We iterate starting index $i$ from $0$ to $n - m = 6$:
 ### Detailed Breakdown of the Match at $i = 4$
 1. Boundaries: $l = 4, r = 4 + 3 - 1 = 6$.
 2. Extract window hash:
-   $$winHash = hs[6] - hs[3] = 2\,132\,121 - 2\,121 = 2\,130\,000$$
+
+   $$
+   winHash = hs[6] - hs[3] = 2\,132\,121 - 2\,121 = 2\,130\,000
+   $$
+
 3. Target scaled pattern hash:
-   $$\text{target} = \text{patHash} \times pw[4] = 213 \times 10\,000 = 2\,130\,000$$
+
+   $$
+   \text{target} = \text{patHash} \times pw[4] = 213 \times 10\,000 = 2\,130\,000
+   $$
+
 4. Equality check:
-   $$2\,130\,000 == 2\,130\,000 \implies \mathbf{\text{Report occurrence at index 4}}$$
+
+   $$
+   2\,130\,000 == 2\,130\,000 \implies \mathbf{\text{Report occurrence at index 4}}
+   $$
 
 ---
 
@@ -303,17 +392,29 @@ The complete procedural sequence executes in two distinct phases:
 
 ### What is a Spurious Hit?
 Because modulo arithmetic maps an infinite universe of possible strings into a finite integer range $[0 \dots M-1]$, two distinct strings can evaluate to the exact same hash:
-$$\text{hash}(S_1) \equiv \text{hash}(S_2) \pmod M \quad \text{while} \quad S_1 \neq S_2$$
+
+$$
+\text{hash}(S_1) \equiv \text{hash}(S_2) \pmod M \quad \text{while} \quad S_1 \neq S_2
+$$
+
 This event is termed a **hash collision** or **spurious hit**.
 
 ### Why Zero Collisions Occurred in Our Hand Example
 In our classroom example ($T = \text{"ababcabab"}, P = \text{"cab"}$, base $P = 31, M = 10^9 + 7$):
 * Any window $W$ and pattern $P$ have length $m = 3$.
 * The difference between their hash polynomials is:
-  $$\Delta = \sum_{k=0}^{2} (\text{val}(W[k]) - \text{val}(P[k])) \cdot 31^k$$
+
+  $$
+  \Delta = \sum_{k=0}^{2} (\text{val}(W[k]) - \text{val}(P[k])) \cdot 31^k
+  $$
+
 * Since character values range from $1$ to $26$, each difference term $\text{val}(W[k]) - \text{val}(P[k])$ is strictly bounded between $-25$ and $+25$.
 * Therefore, the maximum possible absolute difference is:
-  $$|\Delta| \le 25 \times (31^0 + 31^1 + 31^2) = 25 \times (1 + 31 + 961) = 25 \times 993 = \mathbf{24\,825}$$
+
+  $$
+  |\Delta| \le 25 \times (31^0 + 31^1 + 31^2) = 25 \times (1 + 31 + 961) = 25 \times 993 = \mathbf{24\,825}
+  $$
+
 * Notice that $24\,825 \ll 10^9 + 7$.
 * Since $M = 10^9 + 7$ is prime and $|\Delta| < M$, $\Delta \pmod M$ can equal $0$ **if and only if $\Delta = 0$ exactly**!
 
@@ -345,7 +446,10 @@ When strings are long ($m$ is large), collisions can occur with probability $\ap
 Two auxiliary arrays of size $n$ are maintained:
 * $pw$: precomputed powers of size $n$.
 * $hs$: prefix polynomial hashes of size $n$.
-$$\text{Space Complexity} = O(n)$$
+
+$$
+\text{Space Complexity} = O(n)
+$$
 
 ### Comparison with Naive Search
 

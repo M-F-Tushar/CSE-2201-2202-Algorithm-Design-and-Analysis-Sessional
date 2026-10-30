@@ -1770,7 +1770,7 @@ Important notes:
 
 - $W$ and $B$ are numeric limits, so 0/1 Knapsack and Reliability Design are pseudo-polynomial in those values.
 - TSP remains exponential even with DP because it stores subset states.
-- The all-pairs shortest path (Floyd-Warshall) and single-source shortest path (Bellman-Ford) algorithms are covered in [Chapter 11 - Graph Algorithms](<../Chapter%2011%20-%20Graph%20Algorithms/README.md>), since they are graph algorithms rather than problems decomposed by array/interval/subset state the way the rest of this chapter is.
+- The all-pairs shortest path (Floyd-Warshall) and single-source shortest path (Bellman-Ford) algorithms are covered in [Chapter 11 - Graph Algorithms](../Chapter%2011%20-%20Graph%20Algorithms/README.md), since they are graph algorithms rather than problems decomposed by array/interval/subset state the way the rest of this chapter is.
 
 ---
 

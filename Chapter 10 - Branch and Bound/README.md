@@ -152,7 +152,9 @@ The three variants differ only in how the list of live nodes is organized.
 
 **Bounding function.** Sort the items by profit per unit weight, largest first. At a node, fill the remaining capacity greedily with the remaining items, allowing a **fraction** of the last item. This is the [fractional knapsack](../Chapter%207%20-%20Greedy%20Algorithms/README.md) solution of the remaining problem. Fractions can only help, so the result is an upper bound:
 
-$$ub = \text{profit so far} + \text{profit of the best fractional fill of the remaining items}$$
+$$
+ub = \text{profit so far} + \text{profit of the best fractional fill of the remaining items}
+$$
 
 **Instance.** Capacity $W = 10$. Items as (weight, profit): A (4, 40), C (3, 18), B (6, 30), D (5, 20). Profit per weight: A = 10, C = 6, B = 5, D = 4, so the sorted order is A, C, B, D.
 
@@ -240,7 +242,7 @@ The bounds are $152 = 100 + 27 + 15 + 10$, $137 = 127 + 10$, $125 = 100 + 15 + 1
 1. Set row $i$ and column $j$ to ∞ (city $i$ has left; city $j$ has been entered).
 2. Set entry $[j][\text{start}]$ to ∞ so that the tour cannot close early.
 3. Reduce the matrix again; let $r$ be the amount subtracted.
-4. $$\hat{c}(\text{child}) = \hat{c}(\text{parent}) + M[i][j] + r$$ where $M[i][j]$ is the entry in the parent's reduced matrix.
+4. $\hat{c}(\text{child}) = \hat{c}(\text{parent}) + M[i][j] + r$ where $M[i][j]$ is the entry in the parent's reduced matrix.
 
 **Instance** (the same matrix as the [DP example](../Chapter%200%20-%20Previous%20Year%20Questions/2nd%20Batch/Theory/README.md) for Q8(c)), start city 0:
 
@@ -264,9 +266,9 @@ The bounds are $152 = 100 + 27 + 15 + 10$, $137 = 127 + 10$, $125 = 100 + 15 + 1
 
 | Edge | $M[i][j]$ | Reduction $r$ | Bound |
 | :--- | :---: | :--- | :---: |
-| 0 → 1 | 0 | rows: 10 (row 1); columns: 23 (column 0); $r = 33$ | $64 + 0 + 33 = $ **97** |
-| 0 → 2 | 22 | rows: 22 (row 3); columns: 0; $r = 22$ | $64 + 22 + 22 = $ **108** |
-| 0 → 3 | 15 | rows: 18 (row 2); columns: 0; $r = 18$ | $64 + 15 + 18 = $ **97** |
+| 0 → 1 | 0 | rows: 10 (row 1); columns: 23 (column 0); $r = 33$ | $64 + 0 + 33 =$ **97** |
+| 0 → 2 | 22 | rows: 22 (row 3); columns: 0; $r = 22$ | $64 + 22 + 22 =$ **108** |
+| 0 → 3 | 15 | rows: 18 (row 2); columns: 0; $r = 18$ | $64 + 15 + 18 =$ **97** |
 
 Expand the cheapest live node. Nodes 0→1 and 0→3 tie at 97; expand 0→1 (generated first). Its reduced matrix is:
 
@@ -280,8 +282,8 @@ Expand the cheapest live node. Nodes 0→1 and 0→3 tie at 97; expand 0→1 (ge
 
 | Edge | $M[i][j]$ | Reduction $r$ | Bound |
 | :--- | :---: | :--- | :---: |
-| 1 → 2 | 0 | 0 | $97 + 0 + 0 = $ **97** |
-| 1 → 3 | 4 | 7 (row 2) | $97 + 4 + 7 = $ **108** |
+| 1 → 2 | 0 | 0 | $97 + 0 + 0 =$ **97** |
+| 1 → 3 | 4 | 7 (row 2) | $97 + 4 + 7 =$ **108** |
 
 Expand 1→2 (bound 97). Only city 3 is left, so the tour is forced: 2 → 3 (bound stays 97), then 3 → 0 (bound stays 97). The complete tour is $0 \to 1 \to 2 \to 3 \to 0$ with cost $20 + 30 + 12 + 35 = 97$.
 

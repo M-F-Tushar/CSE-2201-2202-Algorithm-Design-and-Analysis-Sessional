@@ -79,7 +79,9 @@ Let $C$ be the cost of the algorithm's solution and $C^*$ the cost of an optimal
 
 The algorithm has **approximation ratio** $\rho(n)$ if, for every input of size $n$,
 
-$$\max\left(\frac{C}{C^*},\ \frac{C^*}{C}\right) \le \rho(n)$$
+$$
+\max\left(\frac{C}{C^*},\ \frac{C^*}{C}\right) \le \rho(n)
+$$
 
 - **Minimization** (vertex cover, TSP, set cover): $C \ge C^*$, so the condition is $C \le \rho(n)\, C^*$.
 - **Maximization** (for example maximum clique or knapsack profit): $C \le C^*$, so the condition is $C^* \le \rho(n)\, C$.

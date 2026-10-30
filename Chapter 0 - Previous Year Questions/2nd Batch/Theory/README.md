@@ -127,7 +127,9 @@ The **Master Theorem** solves $T(n)=aT(n/b)+f(n)$, where $a\ge1$ and $b>1$ are c
 
 Here $a=2$, $b=2$, $f(n)=n$.
 
-$$n^{\log_b a}=n^{\log_2 2}=n$$
+$$
+n^{\log_b a}=n^{\log_2 2}=n
+$$
 
 $f(n)=n=\Theta(n^1\log^0 n)$ matches the watershed function with $k=0$. This is **Case 2**, so $T(n)=\Theta(n\log n)$.
 
@@ -137,17 +139,23 @@ Check with a recursion tree: each of the $\log_2 n$ levels does $n$ work.
 
 This does not divide the input by a constant $b>1$, so the Master Theorem does not apply. Use expansion:
 
-$$T(n)=T(n-1)+1=T(n-2)+2=T(n-3)+3$$
+$$
+T(n)=T(n-1)+1=T(n-2)+2=T(n-3)+3
+$$
 
 After $k$ expansions, $T(n)=T(n-k)+k$. The recursion stops when $n-k=1$, so $k=n-1$:
 
-$$T(n)=T(1)+(n-1)=\Theta(n)$$
+$$
+T(n)=T(1)+(n-1)=\Theta(n)
+$$
 
 **(iii) $T(n) = 4T(n/2) + n^2$**
 
 Here $a=4$, $b=2$, $f(n)=n^2$.
 
-$$n^{\log_b a}=n^{\log_2 4}=n^2$$
+$$
+n^{\log_b a}=n^{\log_2 4}=n^2
+$$
 
 $f(n)=n^2=\Theta(n^2\log^0 n)$, so this is **Case 2** with $k=0$, and $T(n)=\Theta(n^2\log n)$.
 
@@ -157,11 +165,15 @@ Check: level $i$ has $4^i$ nodes, each of size $n/2^i$, so each level does $4^i\
 
 Here $a=1$, $b=3$, $f(n)=\log n$.
 
-$$n^{\log_b a}=n^{\log_3 1}=n^0=1$$
+$$
+n^{\log_b a}=n^{\log_3 1}=n^0=1
+$$
 
 $f(n)=\log n=\Theta(n^0\log^1 n)$ matches the watershed function with $k=1$. This is **Case 2**, so
 
-$$T(n)=\Theta(n^0\log^{1+1}n)=\Theta(\log^2 n)$$
+$$
+T(n)=\Theta(n^0\log^{1+1}n)=\Theta(\log^2 n)
+$$
 
 Check by expansion: level $i$ costs $\log n-i\log 3$. There are about $\log_3 n$ levels, and their total is about $\frac{(\log n)^2}{2\log 3}$.
 
@@ -427,7 +439,9 @@ Combine the products:
 - $C_{21} = P_3 + P_4 = 72 - 10 = \mathbf{62}$
 - $C_{22} = P_5 + P_1 - P_3 - P_7 = 48 + 6 - 72 + 84 = \mathbf{66}$
 
-$$C = \begin{bmatrix}18 & 14 \\ 62 & 66\end{bmatrix}$$
+$$
+C = \begin{bmatrix}18 & 14 \\ 62 & 66\end{bmatrix}
+$$
 
 **Check** with normal multiplication: row 1 of $A$ times column 1 of $B$ is $1 \cdot 6 + 3 \cdot 4 = 18$. The other three entries also match.
 
@@ -648,7 +662,9 @@ A **minimum spanning tree (MST)** connects every vertex, has no cycle, and has t
 
 **Graph transcribed from the paper:** the undirected graph has $V=\{1,2,3,4,5,6\}$ and these edges, from lowest to highest weight:
 
-$$(5,1)=1,\ (4,1)=1,\ (1,2)=2,\ (4,2)=3,\ (3,2)=3,\ (4,3)=5,\ (2,6)=7,\ (3,6)=8,\ (5,4)=9.$$
+$$
+(5,1)=1,\ (4,1)=1,\ (1,2)=2,\ (4,2)=3,\ (3,2)=3,\ (4,3)=5,\ (2,6)=7,\ (3,6)=8,\ (5,4)=9.
+$$
 
 **Adjacency list** (neighbour, weight):
 
@@ -759,7 +775,9 @@ The table for $F(5)$ is $[0,1,1,2,3,5]$. Counting each addition as one step, tab
 
 Floyd-Warshall finds shortest distances between **every pair** of vertices. Let $D^{(k)}[i,j]$ be the shortest distance from $i$ to $j$ using only vertices $1$ through $k$ as intermediate vertices. When vertex $k$ is allowed, either do not use it, or go through it:
 
-$$D^{(k)}[i,j]=\min\big(D^{(k-1)}[i,j],\ D^{(k-1)}[i,k]+D^{(k-1)}[k,j]\big)$$
+$$
+D^{(k)}[i,j]=\min\big(D^{(k-1)}[i,j],\ D^{(k-1)}[i,k]+D^{(k-1)}[k,j]\big)
+$$
 
 **Initial matrix $D^{(0)}$** (direct edges only):
 
@@ -1004,7 +1022,9 @@ colour_vertex(v):
 
 The **upper bound** estimates the most profit a node could still reach. Find it by pretending we can take fractions of the remaining items:
 
-$$ub=\text{profit so far}+\text{profit from the best fractional fill of remaining items}$$
+$$
+ub=\text{profit so far}+\text{profit from the best fractional fill of remaining items}
+$$
 
 A **fractional fill** allows part of an item. **Prune** (stop exploring) a node if it is overweight or its upper bound is no greater than the best valid profit found so far. That best profit is called the **incumbent**.
 
@@ -1142,7 +1162,9 @@ P and NP are classes of **decision problems** (yes-or-no problems). TSP decision
 
 The travelling salesperson problem (**TSP**) asks for the cheapest tour that visits every city once and returns to the start (see [Chapter 8](../../../Chapter%208%20-%20Dynamic%20Programming/README.md)). Let $g(i,S)$ be the length of the shortest path that starts at city $i$, visits every city in the set $S$ exactly once, and then returns to start city 0. Try each possible next city $j\in S$:
 
-$$g(i,\varnothing)=C_{i0},\qquad g(i,S)=\min_{j\in S}\big\{C_{ij}+g(j,S\setminus\{j\})\big\}$$
+$$
+g(i,\varnothing)=C_{i0},\qquad g(i,S)=\min_{j\in S}\big\{C_{ij}+g(j,S\setminus\{j\})\big\}
+$$
 
 The final answer is $g(0,\{1,2,3\})=\min_{1\le j\le3}\{C_{0j}+g(j,\{1,2,3\}\setminus\{j\})\}$. (This answer keeps the question's 0-based city numbers, so the start city is 0.)
 
@@ -1172,15 +1194,23 @@ The given cost matrix $C$ is for cities 0, 1, 2, and 3:
 
 **Subsets of size 2:**
 
-$$g(1,\{2,3\})=\min(30+47,\ 34+54)=77$$
+$$
+g(1,\{2,3\})=\min(30+47,\ 34+54)=77
+$$
 
-$$g(2,\{1,3\})=\min(30+69,\ 12+54)=66$$
+$$
+g(2,\{1,3\})=\min(30+69,\ 12+54)=66
+$$
 
-$$g(3,\{1,2\})=\min(34+72,\ 12+50)=62$$
+$$
+g(3,\{1,2\})=\min(34+72,\ 12+50)=62
+$$
 
 **Final calculation** (choose the first city after 0):
 
-$$g(0,\{1,2,3\})=\min(20+77,\ 42+66,\ 35+62)=\min(97,108,97)=97$$
+$$
+g(0,\{1,2,3\})=\min(20+77,\ 42+66,\ 35+62)=\min(97,108,97)=97
+$$
 
 **Arrow-guided subset table:**
 

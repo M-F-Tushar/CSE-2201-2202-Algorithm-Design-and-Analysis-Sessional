@@ -112,13 +112,16 @@ While expansion (unrolling) is intuitive for discovering candidate bounds, the f
 ### Worked Example: Proving $T(n) = 2T(\lfloor n/2 \rfloor) + n = O(n \log n)$
 
 Consider the divide-and-conquer recurrence:
+
 $$
 T(n) = 2T(\lfloor n/2 \rfloor) + n, \qquad T(1) = 1
 $$
+
 We guess that $T(n) \le c n \log_2 n$ for some constant $c > 0$.
 
 1. **Inductive Hypothesis:** Assume $T(k) \le c k \log_2 k$ holds for all $k < n$, specifically for $k = \lfloor n/2 \rfloor$.
 2. **Inductive Step:** Substitute the hypothesis into the recurrence:
+
    $$
    \begin{aligned}
    T(n) &\le 2\left(c \lfloor n/2 \rfloor \log_2 \lfloor n/2 \rfloor\right) + n \\
@@ -128,6 +131,7 @@ We guess that $T(n) \le c n \log_2 n$ for some constant $c > 0$.
    &= c n \log_2 n - (c - 1) n
    \end{aligned}
    $$
+
    To establish $T(n) \le c n \log_2 n$, we require $-(c - 1)n \le 0$, which holds whenever $c \ge 1$.
 3. **Base Case:** For $n = 2$ and $n = 3$, $c \cdot 2 \log_2 2 = 2c \ge T(2)$. Choosing $c \ge \max(1, T(2)/2)$ satisfies the base conditions.
 
