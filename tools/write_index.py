@@ -17,6 +17,7 @@ import ch7_diagrams   # noqa: E402
 import ch8_diagrams   # noqa: E402
 import ch11_diagrams  # noqa: E402
 import ch15_diagrams  # noqa: E402
+import ch16_diagrams  # noqa: E402
 
 HEADER = """# {chapter} — Diagram Index
 
@@ -51,6 +52,7 @@ TARGETS = [
     ("Chapter 8 — Dynamic Programming", ch8_diagrams),
     ("Chapter 11 — Graph Algorithms", ch11_diagrams),
     ("Chapter 15 — Lower Bound Theory and NP Completeness", ch15_diagrams),
+    ("Chapter 16 — String Matching Algorithms", ch16_diagrams),
 ]
 
 

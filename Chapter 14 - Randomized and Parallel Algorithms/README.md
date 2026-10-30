@@ -78,8 +78,8 @@ A randomized algorithm uses a random-number generator to decide some of its step
 
 | Kind | Answer | Running time | Example |
 | :--- | :--- | :--- | :--- |
-| **Las Vegas** | Always correct | Random; we analyze the **expected** time | Randomized quicksort, randomized selection |
-| **Monte Carlo** | Correct with high probability, may be wrong | Fixed | Miller-Rabin primality test |
+| **Las Vegas** | Always correct | Random; we analyze the **expected** time | Randomized quicksort, randomized selection, verified Rabin-Karp |
+| **Monte Carlo** | Correct with high probability, may be wrong | Fixed | Miller-Rabin primality test, hash-only Rabin-Karp ([Chapter 16](../Chapter%2016%20-%20String%20Matching%20Algorithms/README.md)) |
 
 ![Las Vegas algorithms are always correct; Monte Carlo algorithms may err with small probability](diagrams/ch14-01-las-vegas-vs-monte-carlo.svg)
 

@@ -1,6 +1,6 @@
 # Reference Materials and Reading Guide
 
-[Previous: Chapter 15 - Lower Bound Theory and NP Completeness](../Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md) | [Home](../README.md) | [Next: Root README](../README.md)
+[Previous: Chapter 16 - String Matching Algorithms](../Chapter%2016%20-%20String%20Matching%20Algorithms/README.md) | [Home](../README.md) | [Next: Root README](../README.md)
 
 ---
 
@@ -71,6 +71,7 @@ This reference document compiles the recommended textbooks, authoritative litera
 | **Chapter 13** | Approximation Algorithms | Chapter 35 | Chapter 11 |
 | **Chapter 14** | Randomized & Parallel Algorithms | Chapters 5, 26 | Chapters 13, 14 |
 | **Chapter 15** | Lower Bound Theory & NP-Completeness | Chapter 34 | Chapter 8 |
+| **Chapter 16** | String Matching (Rabin-Karp) | Chapter 32 | Selected Topics / Randomized |
 
 ---
 
@@ -90,4 +91,4 @@ This reference document compiles the recommended textbooks, authoritative litera
 
 ---
 
-[Previous: Chapter 15 - Lower Bound Theory and NP Completeness](../Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md) | [Home](../README.md) | [Next: Root README](../README.md)
+[Previous: Chapter 16 - String Matching Algorithms](../Chapter%2016%20-%20String%20Matching%20Algorithms/README.md) | [Home](../README.md) | [Next: Root README](../README.md)

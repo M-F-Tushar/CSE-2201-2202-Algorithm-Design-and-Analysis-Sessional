@@ -484,6 +484,34 @@ Supporting references:
 
 ---
 
+## Chapter 16 - String Matching Algorithms
+
+### Topics
+
+- Exact pattern matching problem
+- Naive string matching vs. hash-based matching
+- Failure of ASCII sum hashing (anagram collisions)
+- Polynomial rolling hash function
+- 1-based character encoding (`val(c) = c - 'a' + 1`)
+- Prime base selection ($P = 31$) and collision prevention
+- Modulo arithmetic and overflow control ($M = 10^9 + 7$)
+- Step 1: Precomputed power array
+- Step 2: Prefix hash array of text
+- Step 3: Pattern hash computation
+- Step 4: Sliding window hash extraction in $O(1)$
+- Multiplying pattern hash vs. dividing window hash
+- Modular subtraction safety in C++
+- Full dry run and trace table
+- First-match vs. all-matches implementation (C++17)
+- Hash collisions, spurious hits, and Las Vegas vs. Monte Carlo verification
+- Time and space complexity analysis ($O(n+m)$ vs. $O(nm)$)
+
+### Book Reference
+
+- CLRS Chapter 32: String Matching (Section 32.2: The Rabin-Karp Algorithm)
+
+---
+
 ## Laboratory and Sessional Focus
 
 The practical and sessional part of this course should focus on implementing and analyzing algorithms such as:
@@ -504,6 +532,7 @@ The practical and sessional part of this course should focus on implementing and
 - Shortest path algorithms
 - Backtracking problems
 - Branch and bound problems
+- Rabin-Karp pattern matching
 
 Each lab solution should include:
 
@@ -555,6 +584,7 @@ After completing this course, students should be able to:
 12. Approximation algorithms
 13. Randomized and parallel algorithms
 14. Lower bound theory and NP-completeness
+15. String matching algorithms (Rabin-Karp)
 
 ---
 

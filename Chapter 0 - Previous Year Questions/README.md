@@ -36,7 +36,7 @@ The previous-year materials are organized across batches and formats:
 | **2nd Batch** | Theory Final | Complete final examination paper (8 questions, 24 parts) | [2nd Batch Theory README](2nd%20Batch/Theory/README.md) |
 | **2nd Batch** | Lab Final | 3 core lab problems (Distinct elements, Max subarray sum, Linear search) | [2nd Batch Lab Final README](2nd%20Batch/Lab%20Final/README.md) |
 | **3rd Batch** | Class Tests | 4 Class Tests (CT1–CT4, 20 marks each = 80 marks total) | [3rd Batch CT README](3rd%20Batch/CT/README.md) |
-| **Lab Practice** | Source Code | 11 C++ programs for lab final practice & trial problems | [Lab Practice Directory](Lab%20Practice/) |
+| **Lab Practice** | Source Code | 12 C++ programs for lab final practice & trial problems | [Lab Practice Directory](Lab%20Practice/) |
 
 ---
 
@@ -152,6 +152,7 @@ Standalone, runnable C++ source files for essential algorithms tested during ses
 | [`lcs.cpp`](Lab%20Practice/lcs.cpp) | Longest Common Subsequence | Dynamic Programming | $O(nm)$ |
 | [`lis.cpp`](Lab%20Practice/lis.cpp) | Longest Increasing Subsequence | Dynamic Programming | $O(n^2)$ |
 | [`Maximum Sum Subarray.cpp`](Lab%20Practice/Maximum%20Sum%20Subarray.cpp) | Maximum Subarray Sum | Divide & Conquer | $O(n \log n)$ |
+| [`rabin_karp.cpp`](Lab%20Practice/rabin_karp.cpp) | Rabin-Karp String Matching | Rolling Hashing | $O(n + m)$ |
 | [`Segment Tree.cpp`](Lab%20Practice/Segment%20Tree.cpp) | Range Sum Query | Divide & Conquer | $O(\log n)$ query |
 
 ---

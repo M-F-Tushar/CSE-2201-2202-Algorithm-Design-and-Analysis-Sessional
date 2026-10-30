@@ -4,8 +4,8 @@
   <a href="https://github.com/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional"><img src="https://img.shields.io/github/stars/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional?style=social" alt="GitHub stars"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/M-F-Tushar/CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/language-Python%20%7C%20C%2B%2B-blue" alt="Languages">
-  <img src="https://img.shields.io/badge/diagrams-207%20Excalidraw%20SVGs-ff69b4" alt="Diagrams">
-  <img src="https://img.shields.io/badge/chapters-16%20%2B%20references-success" alt="Chapters">
+  <img src="https://img.shields.io/badge/diagrams-212%20Excalidraw%20SVGs-ff69b4" alt="Diagrams">
+  <img src="https://img.shields.io/badge/chapters-17%20%2B%20references-success" alt="Chapters">
   <img src="https://img.shields.io/badge/book-CLRS%204th%20Ed.-orange" alt="Primary reference">
 </p>
 
@@ -197,6 +197,9 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 ├── Chapter 15 - Lower Bound Theory and NP Completeness/
 │   ├── README.md  (350 lines)
 │   └── diagrams/  (5 SVGs) — decision tree, sorting lower bound, P/NP/NP-hard/NP-complete Venn
+├── Chapter 16 - String Matching Algorithms/
+│   ├── README.md  (Q&A lecture guide: polynomial rolling hash, power array, sliding window)
+│   └── diagrams/  (4 SVGs) — naive vs RK, ASCII vs polynomial hash, window extraction, dry run trace
 │
 └── References/
     └── README.md                      # Curated reading list & CLRS map
@@ -225,8 +228,9 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 | 12 | [Flow Algorithms](Chapter%2012%20-%20Flow%20Algorithms/README.md) | [Ch 11](Chapter%2011%20-%20Graph%20Algorithms/README.md) | [Ch 13 — Approximation](Chapter%2013%20-%20Approximation%20Algorithms/README.md) |
 | 13 | [Approximation Algorithms](Chapter%2013%20-%20Approximation%20Algorithms/README.md) | [Ch 12](Chapter%2012%20-%20Flow%20Algorithms/README.md) | [Ch 14 — Randomized & Parallel](Chapter%2014%20-%20Randomized%20and%20Parallel%20Algorithms/README.md) |
 | 14 | [Randomized and Parallel Algorithms](Chapter%2014%20-%20Randomized%20and%20Parallel%20Algorithms/README.md) | [Ch 13](Chapter%2013%20-%20Approximation%20Algorithms/README.md) | [Ch 15 — Lower Bounds & NP](Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md) |
-| 15 | [Lower Bound Theory and NP Completeness](Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md) | [Ch 14](Chapter%2014%20-%20Randomized%20and%20Parallel%20Algorithms/README.md) | [References](References/README.md) |
-| — | [References](References/README.md) | [Ch 15](Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md) | [Root README](README.md) |
+| 15 | [Lower Bound Theory and NP Completeness](Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md) | [Ch 14](Chapter%2014%20-%20Randomized%20and%20Parallel%20Algorithms/README.md) | [Ch 16 — String Matching](Chapter%2016%20-%20String%20Matching%20Algorithms/README.md) |
+| 16 | [String Matching Algorithms](Chapter%2016%20-%20String%20Matching%20Algorithms/README.md) | [Ch 15](Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md) | [References](References/README.md) |
+| — | [References](References/README.md) | [Ch 16](Chapter%2016%20-%20String%20Matching%20Algorithms/README.md) | [Root README](README.md) |
 
 ---
 
@@ -318,6 +322,11 @@ CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional/
 >
 > 📊 5 diagrams · 📄 350 lines · 📂 [`Chapter 15/README.md`](Chapter%2015%20-%20Lower%20Bound%20Theory%20and%20NP%20Completeness/README.md)
 
+### Chapter 16 — String Matching Algorithms
+> Structured Q&A exam format: exact pattern matching & candidate windows ($n - m + 1$) → failure of ASCII sum hashing on anagrams (`aba` vs `aab`) → **polynomial rolling hashing** ($H(s) = \sum s[i] \cdot P^i \pmod M$) with 1-based encoding ($a=1$, never $0$) & prime base ($P=31$) → **Step 1: Power array** ($O(n)$) → **Step 2: Prefix hash array** ($O(n)$) → **Step 3: Pattern hash** ($O(m)$) → **Step 4: Sliding window hash extraction in $O(1)$** (multiply pattern hash by $P^l$, never divide window) → full dry run on `ababcabab` with `cab` (match at index 4) → step-by-step procedural workflow (first match + all matches) → hash collision analysis (spurious hits, zero-collision proof for classroom example, Las Vegas vs. Monte Carlo trade-off) → $O(n+m)$ expected time complexity. Purely conceptual; contains no code.
+>
+> 📊 4 diagrams · 📂 [`Chapter 16/README.md`](Chapter%2016%20-%20String%20Matching%20Algorithms/README.md)
+
 ---
 
 ## 🎨 Visualization & Diagrams
@@ -336,7 +345,7 @@ Every chapter has a `diagrams/` folder. Each diagram ships as **two files**:
 
 | Chapter | SVGs | Highlights |
 |---|---:|---|
-| Root roadmap (`diagrams/`) | 1 | Course roadmap (5 phases, 15 chapters) |
+| Root roadmap (`diagrams/`) | 1 | Course roadmap (5 phases, 16 chapters) |
 | Ch 1 — Foundations | 2 | Algorithm vs program, 5 properties |
 | Ch 2 — Complexity | 4 | Loop growth, cases, bounds, complexity classes |
 | Ch 3 — Recurrences | 2 | Recursion tree, Master Theorem flow |
@@ -348,12 +357,13 @@ Every chapter has a `diagrams/` folder. Each diagram ships as **two files**:
 | Ch 9 — Backtracking | 5 | State-space tree, 4-Queens, safe check, Sudoku |
 | Ch 10 — Branch & Bound | 5 | LC-search, bounding, TSP |
 | Ch 11 — Graph Algorithms | **37** | Full graph studio (largest chapter) |
-| Ch 12 — Flow | 15 | Ford-Fulkerson trace, max-flow/min-cut proof certificate, Edmonds-Karp |
+| Ch 12 — Flow | 16 | Ford-Fulkerson trace, max-flow/min-cut proof certificate, Edmonds-Karp |
 | Ch 13 — Approximation | 4 | Vertex cover, TSP, set cover |
 | Ch 14 — Randomized & Parallel | 5 | Rand. quicksort, fork-join |
 | Ch 15 — Lower Bounds & NP | 5 | Decision tree, P/NP Venn |
+| Ch 16 — String Matching | 4 | Naive vs RK, ASCII vs poly hash, window formula, dry run |
 | Ch 0 — Batch papers | **66** | B1 (24) + B2 (25) + CT (17) + lab practice codes |
-| **Total** | **207** | **414 files incl. `.excalidraw` sources** |
+| **Total** | **212** | **424 files incl. `.excalidraw` sources** |
 
 Regenerate or audit diagrams:
 
@@ -389,6 +399,7 @@ Chapter order follows the **CSE 2201 syllabus**; the table shows the correspondi
 | Ch 13 — Approximation | Ch 35 (and Ch 34) | Approximation algorithms, NP-completeness |
 | Ch 14 — Randomized & Parallel | Ch 5, Ch 7.3, Ch 9.2, Ch 26 | Probabilistic & randomized, quicksort, selection, parallel |
 | Ch 15 — Lower Bounds & NP | Ch 8.1, Ch 34, Ch 35 | Sorting lower bounds, NP-completeness, approximation |
+| Ch 16 — String Matching | Ch 32 (Section 32.2) | Rabin-Karp, string matching foundations, rolling hash |
 
 > Some topics (backtracking, branch & bound) have no dedicated CLRS chapter — they follow lecture notes and previous-year questions.
 
@@ -415,7 +426,7 @@ cd CSE-2201-2202-Algorithm-Design-and-Analysis-Sessional
 
 ### Run the Examples
 
-**C++ (Divide & Conquer and Lab Practice):**
+**C++ (Divide & Conquer, String Matching, and Lab Practice):**
 
 ```bash
 # Prefix sum & segment tree
@@ -423,6 +434,9 @@ g++ -std=c++17 "Chapter 6 - Divide and Conquer/examples/prefix_sum_segment_tree.
 
 # Maximum sum subarray (brute force / D&C / Kadane)
 g++ -std=c++17 "Chapter 6 - Divide and Conquer/examples/maximum_sum_subarray.cpp" -o /tmp/max_subarray && /tmp/max_subarray
+
+# Rabin-Karp string matching (polynomial rolling hash in Lab Practice)
+g++ -std=c++17 "Chapter 0 - Previous Year Questions/Lab Practice/rabin_karp.cpp" -o /tmp/rabin_karp && /tmp/rabin_karp
 
 # Any lab practice program (example: LCS)
 g++ -std=c++17 "Chapter 0 - Previous Year Questions/Lab Practice/lcs.cpp" -o /tmp/lcs && /tmp/lcs
@@ -464,6 +478,7 @@ Ch 1  Foundations
             → Ch 13 Approximation
              → Ch 14 Randomized & Parallel
               → Ch 15 Lower Bounds & NP Completeness
+               → Ch 16 String Matching (Rabin-Karp)
 ```
 
 ---
@@ -475,7 +490,7 @@ Ch 1  Foundations
 | **1st Batch — Theory** | 2023 final exam: Q1 Design & complexity, Q2 Recurrences & loops, Q3 D&C/Merge/Quick/Heap, Q4 Greedy/Memo/MST, Q5 Backtracking, Q6 DP (knapsack/grid/coin), Q7 Bellman-Ford/Optimality/Knapsack, Q8 P/NP/Decision/Dijkstra | 8 questions · 27 parts | 24 SVGs (`b1-theory-01 … b1-theory-24`) |
 | **2nd Batch — Theory** | P/NP Venn, BFS, activity DAG, Strassen split, quicksort partition, mergesort tree, Kruskal MST, Floyd-Warshall, LCS table, graph-colouring tree, LC knapsack tree + extras | — | 25 SVGs (`b2-theory-01 …`) |
 | **3rd Batch — CT 1–4** | CT1: Principle of optimality, Fibonacci DP, LCS (AGGTAB/GXTXAYB), 0/1 knapsack · CT2: Topological sort, Bellman-Ford, Floyd-Warshall · CT3: Union-by-rank, max subarray, segment tree · CT4: State-space tree, N-Queens constraints, backtracking applications & algorithm | 4 tests × 20 = **80 marks** | 15 SVGs (`ct1-01 … ct4-04`) |
-| **Lab Practice** | Standalone C++ implementations for viva & sessional | 11 programs | — |
+| **Lab Practice** | Standalone C++ implementations for viva & sessional | 12 programs | — |
 
 All solved answers state source notes, mark-aware length, plain-words explanation, and a closing memory trick.
 
