@@ -200,13 +200,14 @@ def repaired_diagrams():
     yield D("b2-theory-02-bfs-graph", "Q2(b): BFS levels and a shortest path from S", (960, 780), nodes, edges)
 
     acts = ["Wake up", "Brush teeth", "Take breakfast", "Go to class", "Study in library", "Do homework", "Sleep"]
-    nodes = [box("left", "Six dependencies from the paper", 40, 80, 400, 60, "yellow", 17),
-             box("right", "REPLACE the last two edges", 540, 80, 400, 60, "yellow", 17)]
-    for side, names in [("a",acts),("b",acts[:5]+["Sleep","Do homework"])]:
-        nodes += [box(f"{side}{i}", name, 40 if side == "a" else 540, 180 + 95*i, 400, 55, "green" if i >= 5 else "blue") for i,name in enumerate(names)]
-    nodes += [box("warning", "Each chain has one topological order. Adding Sleep → Homework without removing\nHomework → Sleep instead creates a 2-cycle: no topological order.", 40, 865, 900, 90, "red", 16)]
-    yield D("b2-theory-03-activity-dag", "Q2(c): Paper dependencies and the requested variation", (980, 1000), nodes,
-            [E(f"{side}{i}",f"{side}{i+1}") for side in "ab" for i in range(6)])
+    nodes = [box("a-heading", "Part (i): given directed graph", 40, 80, 400, 60, "yellow", 17),
+             box("b-heading", "Part (iv): add Sleep → Do homework", 540, 80, 400, 60, "yellow", 17)]
+    for side in "ab":
+        nodes += [box(f"{side}{i}", name, 40 if side == "a" else 540, 180 + 95*i, 400, 55, "green" if i >= 5 else "blue") for i,name in enumerate(acts)]
+    nodes += [box("warning", "Red arrow adds Sleep → Do homework while Do homework → Sleep remains.\nThe opposite edges form a 2-cycle, so no topological order exists.", 40, 865, 900, 90, "red", 16)]
+    edges = [E(f"{side}{i}", f"{side}{i+1}") for side in "ab" for i in range(6)]
+    edges.append(E("b6", "b5", color="#e03131", route="loopr", bend=25))
+    yield D("b2-theory-03-activity-dag", "Q2(c): Given activity DAG and the added reverse dependency", (980, 1000), nodes, edges)
 
     nodes = [box("given", "Example instance: W=10; decision order A(4,40), C(3,18), B(6,30), D(5,20)", 30, 70, 1100, 55, "gray", 16),
              box("root", "#1 Root\nw=0, p=0, ub=73", 400, 165, 350, 85),
