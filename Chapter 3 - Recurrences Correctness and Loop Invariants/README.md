@@ -133,15 +133,16 @@ Let $T(1)=1$ and assume $n$ is a power of two. A recursion tree suggests that ea
 
 - **Base case:** $T(2)=2T(1)+2=4$. The claim holds if $C\ge2$.
 - **Inductive hypothesis:** Assume $T(n/2)\le C(n/2)\log_2(n/2)$.
-- **Substitute and simplify:**
 
-  $$
-  \begin{aligned}
-  T(n) &\le 2C\frac n2\log_2\frac n2+n \\
-       &= Cn(\log_2 n-1)+n \\
-       &\le Cn\log_2 n \qquad (C\ge1).
-  \end{aligned}
-  $$
+**Substitute and simplify:**
+
+$$
+\begin{aligned}
+T(n) &\le 2C\frac n2\log_2\frac n2+n \\
+     &= Cn(\log_2 n-1)+n \\
+     &\le Cn\log_2 n \qquad (C\ge1).
+\end{aligned}
+$$
 
 So the upper bound holds, for example, with $C=2$.
 
@@ -149,13 +150,14 @@ So the upper bound holds, for example, with $C=2$.
 
 - **Base case:** At $n=2$, $T(2)=4\ge2c$ when $c\le2$.
 - **Inductive hypothesis:** Assume $T(n/2)\ge c(n/2)\log_2(n/2)$.
-- **Substitute and simplify:**
 
-  $$
-  T(n)\ge cn(\log_2 n-1)+n
-       =cn\log_2 n+(1-c)n
-       \ge cn\log_2 n \quad (c\le1).
-  $$
+**Substitute and simplify:**
+
+$$
+T(n)\ge cn(\log_2 n-1)+n
+     =cn\log_2 n+(1-c)n
+     \ge cn\log_2 n \quad (c\le1).
+$$
 
 Taking $c=1$ satisfies the lower proof. Therefore,
 
@@ -171,21 +173,23 @@ Let $T(1)=1$ and let $n$ be a power of two. Each call does constant work and hal
 
 - **Base case:** $T(2)=2$, so choose $C\ge2$.
 - **Inductive hypothesis:** Assume $T(n/2)\le C\log_2(n/2)$.
-- **Substitute:**
 
-  $$
-  T(n)\le C(\log_2 n-1)+1\le C\log_2 n \quad (C\ge1).
-  $$
+**Substitute:**
+
+$$
+T(n)\le C(\log_2 n-1)+1\le C\log_2 n \quad (C\ge1).
+$$
 
 **Lower bound:** Claim $T(n)\ge c\log_2 n$ for $n\ge2$.
 
 - **Base case:** At $n=2$, $T(2)=2\ge c$ for $c\le2$.
-- **Inductive hypothesis and substitution:**
 
-  $$
-  T(n)\ge c\log_2(n/2)+1
-       =c\log_2 n+(1-c)\ge c\log_2 n \quad (c\le1).
-  $$
+**Inductive hypothesis and substitution:**
+
+$$
+T(n)\ge c\log_2(n/2)+1
+     =c\log_2 n+(1-c)\ge c\log_2 n \quad (c\le1).
+$$
 
 For instance, $C=2$ and $c=1$ work, so
 
@@ -201,20 +205,22 @@ Let $T(1)=1$ and let $n$ be a power of two. Guess a linear bound because the tot
 
 - **Base case:** At $n=1$, $T(1)=1\le C-1$ if $C\ge2$.
 - **Inductive hypothesis:** Assume $T(n/2)\le C(n/2)-1$.
-- **Substitute:**
 
-  $$
-  T(n)\le 2\left(C\frac n2-1\right)+1=Cn-1.
-  $$
+**Substitute:**
+
+$$
+T(n)\le 2\left(C\frac n2-1\right)+1=Cn-1.
+$$
 
 **Lower bound:** Claim $T(n)\ge cn$.
 
 - **Base case:** $T(1)=1\ge c$ when $c\le1$.
-- **Inductive hypothesis and substitution:**
 
-  $$
-  T(n)\ge2c\frac n2+1=cn+1\ge cn.
-  $$
+**Inductive hypothesis and substitution:**
+
+$$
+T(n)\ge2c\frac n2+1=cn+1\ge cn.
+$$
 
 Choosing $C=2$ and $c=1$ proves
 
@@ -339,55 +345,35 @@ In Case 1, the extra work is **polynomially smaller** than the critical function
 1. **Identify:** $a=8$, $b=2$, and $f(n)=n^2$.
 2. **Critical function:** $n^{\log_2 8}=n^3$.
 3. **Compare:** $n^2=O(n^{3-1})$, so Case 1 applies with $\epsilon=1$.
-4. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n^3)}.
-   $$
+4. **Answer:** $\boxed{T(n)=\Theta(n^3)}$.
 
 #### Example 2: $T(n)=4T(n/2)+n$
 
 1. **Identify:** $a=4$, $b=2$, and $f(n)=n$.
 2. **Critical function:** $n^{\log_2 4}=n^2$.
 3. **Compare:** $n=O(n^{2-1})$, so Case 1 applies with $\epsilon=1$.
-4. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n^2)}.
-   $$
+4. **Answer:** $\boxed{T(n)=\Theta(n^2)}$.
 
 #### Example 3: $T(n)=9T(n/3)+n$
 
 1. **Identify:** $a=9$, $b=3$, and $f(n)=n$.
 2. **Critical function:** $n^{\log_3 9}=n^2$.
 3. **Compare:** $n=O(n^{2-1})$, so Case 1 applies with $\epsilon=1$.
-4. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n^2)}.
-   $$
+4. **Answer:** $\boxed{T(n)=\Theta(n^2)}$.
 
 #### Example 4: $T(n)=16T(n/4)+n\log n$
 
 1. **Identify:** $a=16$, $b=4$, and $f(n)=n\log n$.
 2. **Critical function:** $n^{\log_4 16}=n^2$.
 3. **Compare:** Since $\log n=O(n^{1/2})$, $n\log n=O(n^{3/2})=O(n^{2-1/2})$. Case 1 applies with $\epsilon=1/2$.
-4. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n^2)}.
-   $$
+4. **Answer:** $\boxed{T(n)=\Theta(n^2)}$.
 
 #### Example 5: $T(n)=5T(n/2)+n^2$
 
 1. **Identify:** $a=5$, $b=2$, and $f(n)=n^2$.
 2. **Critical function:** $n^{\log_2 5}$, where $\log_2 5\approx2.322$.
 3. **Compare:** Let $\epsilon=\log_2 5-2>0$. Then $f(n)=n^2=n^{\log_2 5-\epsilon}$, so Case 1 applies.
-4. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n^{\log_2 5})}.
-   $$
+4. **Answer:** $\boxed{T(n)=\Theta(n^{\log_2 5})}$.
 
 ### Case 2: Balanced Work and Where $k$ Comes From
 
@@ -420,11 +406,7 @@ because $a=b^d$ cancels the powers of $b$. Let $L=\Theta(\log n)$ be the number 
 2. **Critical function:** $n^{\log_2 1}=n^0=1$.
 3. **Find $k$:** $f(n)=\Theta(1\cdot\log^0 n)$, so $k=0$.
 4. **Apply Case 2:** $T(n)=\Theta(1\cdot\log^{0+1}n)$.
-5. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(\log n)}.
-   $$
+5. **Answer:** $\boxed{T(n)=\Theta(\log n)}$.
 
 #### Example 2: $T(n)=2T(n/2)+n$ — $k=0$
 
@@ -432,11 +414,7 @@ because $a=b^d$ cancels the powers of $b$. Let $L=\Theta(\log n)$ be the number 
 2. **Critical function:** $n^{\log_2 2}=n$.
 3. **Find $k$:** $n=n\log^0n$, so $k=0$.
 4. **Apply Case 2:** $T(n)=\Theta(n\log^{0+1}n)$.
-5. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n\log n)}.
-   $$
+5. **Answer:** $\boxed{T(n)=\Theta(n\log n)}$.
 
 #### Example 3: $T(n)=2T(n/2)+n\log n$ — $k=1$
 
@@ -444,11 +422,7 @@ because $a=b^d$ cancels the powers of $b$. Let $L=\Theta(\log n)$ be the number 
 2. **Critical function:** $n^{\log_2 2}=n$.
 3. **Find $k$:** $f(n)=n\log^1 n$, so $k=1$.
 4. **Apply Case 2:** $T(n)=\Theta(n\log^{1+1}n)$.
-5. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n\log^2 n)}.
-   $$
+5. **Answer:** $\boxed{T(n)=\Theta(n\log^2 n)}$.
 
 #### Example 4: $T(n)=4T(n/2)+n^2\log^2 n$ — $k=2$
 
@@ -456,11 +430,7 @@ because $a=b^d$ cancels the powers of $b$. Let $L=\Theta(\log n)$ be the number 
 2. **Critical function:** $n^{\log_2 4}=n^2$.
 3. **Find $k$:** $f(n)=n^2\log^2 n$, so $k=2$.
 4. **Apply Case 2:** $T(n)=\Theta(n^2\log^{2+1}n)$.
-5. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n^2\log^3 n)}.
-   $$
+5. **Answer:** $\boxed{T(n)=\Theta(n^2\log^3 n)}$.
 
 #### Example 5: $T(n)=9T(n/3)+n^2\log^3 n$ — $k=3$
 
@@ -468,11 +438,7 @@ because $a=b^d$ cancels the powers of $b$. Let $L=\Theta(\log n)$ be the number 
 2. **Critical function:** $n^{\log_3 9}=n^2$.
 3. **Find $k$:** $f(n)=n^2\log^3 n$, so $k=3$.
 4. **Apply Case 2:** $T(n)=\Theta(n^2\log^{3+1}n)$.
-5. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n^2\log^4 n)}.
-   $$
+5. **Answer:** $\boxed{T(n)=\Theta(n^2\log^4 n)}$.
 
 **Case 2 quick check:** match the power of $n$ in $f(n)$ to $n^{\log_b a}$ first. Only the power on the remaining $\log n$ is $k$. Then add one to that power in the final answer.
 
@@ -491,90 +457,42 @@ The condition verifies that the recursive work shrinks geometrically relative to
 1. **Identify:** $a=2$, $b=2$, and $f(n)=n^2$.
 2. **Critical function:** $n^{\log_2 2}=n$.
 3. **Compare:** $n^2=\Omega(n^{1+1})$, so $f(n)$ is polynomially larger.
-4. **Check regularity:**
-
-   $$
-   2f(n/2)=2(n/2)^2=\frac12n^2=\frac12f(n).
-   $$
+4. **Check regularity:** $2f(n/2)=2(n/2)^2=\frac12n^2=\frac12f(n)$.
 
    Thus $c=1/2<1$.
-5. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n^2)}.
-   $$
+5. **Answer:** $\boxed{T(n)=\Theta(n^2)}$.
 
 #### Example 2: $T(n)=2T(n/2)+n^3$
 
 1. **Identify:** $a=2$, $b=2$, and $f(n)=n^3$.
 2. **Critical function:** $n^{\log_2 2}=n$.
 3. **Compare:** $n^3=\Omega(n^{1+2})$.
-4. **Check regularity:**
-
-   $$
-   2f(n/2)=2(n/2)^3=\frac14n^3=\frac14f(n),
-   $$
-
-   so $c=1/4<1$.
-5. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n^3)}.
-   $$
+4. **Check regularity:** $2f(n/2)=2(n/2)^3=\frac14n^3=\frac14f(n)$, so $c=1/4<1$.
+5. **Answer:** $\boxed{T(n)=\Theta(n^3)}$.
 
 #### Example 3: $T(n)=4T(n/2)+n^3$
 
 1. **Identify:** $a=4$, $b=2$, and $f(n)=n^3$.
 2. **Critical function:** $n^{\log_2 4}=n^2$.
 3. **Compare:** $n^3=\Omega(n^{2+1})$.
-4. **Check regularity:**
-
-   $$
-   4f(n/2)=4(n/2)^3=\frac12n^3=\frac12f(n),
-   $$
-
-   so $c=1/2<1$.
-5. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n^3)}.
-   $$
+4. **Check regularity:** $4f(n/2)=4(n/2)^3=\frac12n^3=\frac12f(n)$, so $c=1/2<1$.
+5. **Answer:** $\boxed{T(n)=\Theta(n^3)}$.
 
 #### Example 4: $T(n)=3T(n/2)+n^2$
 
 1. **Identify:** $a=3$, $b=2$, and $f(n)=n^2$.
 2. **Critical function:** $n^{\log_2 3}\approx n^{1.585}$.
 3. **Compare:** Let $\epsilon=2-\log_2 3>0$. Then $n^2=n^{\log_2 3+\epsilon}$.
-4. **Check regularity:**
-
-   $$
-   3f(n/2)=3(n/2)^2=\frac34n^2=\frac34f(n),
-   $$
-
-   so $c=3/4<1$.
-5. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n^2)}.
-   $$
+4. **Check regularity:** $3f(n/2)=3(n/2)^2=\frac34n^2=\frac34f(n)$, so $c=3/4<1$.
+5. **Answer:** $\boxed{T(n)=\Theta(n^2)}$.
 
 #### Example 5: $T(n)=9T(n/3)+n^3$
 
 1. **Identify:** $a=9$, $b=3$, and $f(n)=n^3$.
 2. **Critical function:** $n^{\log_3 9}=n^2$.
 3. **Compare:** $n^3=\Omega(n^{2+1})$.
-4. **Check regularity:**
-
-   $$
-   9f(n/3)=9(n/3)^3=\frac13n^3=\frac13f(n),
-   $$
-
-   so $c=1/3<1$.
-5. **Answer:**
-
-   $$
-   \boxed{T(n)=\Theta(n^3)}.
-   $$
+4. **Check regularity:** $9f(n/3)=9(n/3)^3=\frac13n^3=\frac13f(n)$, so $c=1/3<1$.
+5. **Answer:** $\boxed{T(n)=\Theta(n^3)}$.
 
 ### When the Master Theorem Does Not Apply
 
