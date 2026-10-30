@@ -290,6 +290,10 @@ This is a **DAG** (directed acyclic graph): the arrows all point forward, so the
 | Do homework | Sleep |
 | Sleep | — |
 
+![Q2(c)(i): directed graph of the activity dependencies](diagrams/b2-theory-03-activity-dag.svg)
+
+*Editable Excalidraw source: [b2-theory-03-activity-dag.excalidraw](diagrams/b2-theory-03-activity-dag.excalidraw). The left panel is the given DAG; the right panel adds the reverse dependency discussed in part (iv), while keeping the original edges.*
+
 **(ii) Topological order (DFS method).** Run DFS from each unvisited vertex. Push a vertex onto a stack only **after** all of its outgoing neighbours have finished. The left-to-right stack is the finish order; its rightmost item is popped first.
 
 | Step | DFS call / return action | Why it happens | Finish stack |
@@ -320,8 +324,6 @@ Every arrow points left to right in this order. DFS-based topological sort takes
 **(iv) What if Sleep comes before Homework?** This breaks the given dependency Do homework → Sleep. So it is not a valid order for the given graph. If we also forced the rule "Sleep before Homework", we would get a cycle (Do homework → Sleep → Do homework), and then no topological order would exist.
 
 > Memory trick: a DAG has a topological order. A cycle has none.
-
-![Activity DAG and the variant with Sleep before Homework](diagrams/b2-theory-03-activity-dag.svg)
 
 ---
 
