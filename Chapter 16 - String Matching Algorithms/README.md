@@ -4,498 +4,577 @@
 
 ---
 
-String matching is the fundamental algorithmic problem of finding all occurrences of a shorter **pattern** $P$ of length $m$ inside a longer **text** $T$ of length $n$. 
+String matching means finding where a short **pattern** $P$ appears inside a longer **text** $T$. This chapter focuses on the **Rabin-Karp algorithm**, which uses polynomial hashes to check each possible window quickly.
 
-While naive string matching checks characters one-by-one in $O(n \times m)$ worst-case time, the **Rabin-Karp algorithm** converts character sequences into **polynomial rolling hashes**. By comparing integers in $O(1)$ time per sliding window instead of checking character strings, Rabin-Karp achieves an expected running time of $O(n + m)$.
+For exam preparation, do not memorize this chapter as many long answers. Learn the seven question types below and use the same neat order every time. The most important one is the complete numerical trace: write the powers, pattern hash, prefix hash, window comparisons, and final answer.
 
-This chapter follows the complete classroom lecture sheet. It focuses entirely on conceptual understanding, mathematical derivations, worked trace tables, Excalidraw diagrams, and asymptotic complexity. It intentionally contains no implementation code; runnable lab practice programs are maintained in [Chapter 0 — Lab Practice](../Chapter%200%20-%20Previous%20Year%20Questions/Lab%20Practice/).
+> **Main exam focus:** Rabin-Karp dry run, polynomial-hash formulas, window-hash derivation, collisions, and complexity.
 
 ---
 
 ## Table of Contents
 
-1. [Q1: What is the exact string matching problem, and why does naive comparison degrade to $O(n \times m)$?](#q1-what-is-the-exact-string-matching-problem-and-why-does-naive-comparison-degrade-to-on-times-m)
-2. [Q2: Why does ASCII sum hashing fail for pattern matching?](#q2-why-does-ascii-sum-hashing-fail-for-pattern-matching)
-3. [Q3: How does Polynomial Rolling Hashing resolve the anagram collision flaw?](#q3-how-does-polynomial-rolling-hashing-resolve-the-anagram-collision-flaw)
-4. [Q4: What are the three non-negotiable engineering details of polynomial hashing?](#q4-what-are-the-three-non-negotiable-engineering-details-of-polynomial-hashing)
-5. [Q5: Step 1 — Why and how is the Power Array precomputed?](#q5-step-1--why-and-how-is-the-power-array-precomputed)
-6. [Q6: Step 2 — How is the Prefix Hash Array constructed from the text?](#q6-step-2--how-is-the-prefix-hash-array-constructed-from-the-text)
-7. [Q7: Step 3 & 4 — How is the pattern hashed and how is the window hash extracted in $O(1)$?](#q7-step-3--4--how-is-the-pattern-hashed-and-how-is-the-window-hash-extracted-in-o1)
-8. [Q8: Complete Hand Trace — How does Rabin-Karp process `ababcabab` with pattern `cab`?](#q8-complete-hand-trace--how-does-rabin-karp-process-ababcabab-with-pattern-cab)
-9. [Q9: Procedural Workflow — How does the Rabin-Karp algorithm execute step-by-step?](#q9-procedural-workflow--how-does-the-rabin-karp-algorithm-execute-step-by-step)
-10. [Q10: Collisions and False Matches — When do spurious hits happen, and why did zero collisions occur here?](#q10-collisions-and-false-matches--when-do-spurious-hits-happen-and-why-did-zero-collisions-occur-here)
-11. [Q11: Complexity Analysis — How does Rabin-Karp compare asymptotically with naive search?](#q11-complexity-analysis--how-does-rabin-karp-compare-asymptotically-with-naive-search)
-12. [Q12: Self-Practice & One-Page Revision Summary](#q12-self-practice--one-page-revision-summary)
+1. [Question Type 1: Rabin-Karp Numerical / Hand Trace](#question-type-1-rabin-karp-numerical--hand-trace)
+2. [Question Type 2: Write or Explain the Rabin-Karp Algorithm](#question-type-2-write-or-explain-the-rabin-karp-algorithm)
+3. [Question Type 3: Why Simple ASCII-Sum Hashing Fails](#question-type-3-why-simple-ascii-sum-hashing-fails)
+4. [Question Type 4: Collision or Spurious Hit](#question-type-4-collision-or-spurious-hit)
+5. [Question Type 5: Naive Search vs. Rabin-Karp](#question-type-5-naive-search-vs-rabin-karp)
+6. [Question Type 6: Derive the $O(1)$ Window-Hash Formula](#question-type-6-derive-the-o1-window-hash-formula)
+7. [Question Type 7: Derive Time and Space Complexity](#question-type-7-derive-time-and-space-complexity)
+8. [Formulas to Memorize](#formulas-to-memorize)
+9. [Most Important Exam Template](#most-important-exam-template)
+10. [Short Conceptual Questions](#short-conceptual-questions)
+11. [What to Prioritize for the Exam](#what-to-prioritize-for-the-exam)
 
 ---
 
-### Visual Map: String Matching Architecture
+## Question Type 1: Rabin-Karp Numerical / Hand Trace
 
-![Pattern Matching: Naive Character Checking vs. Rabin-Karp Hash Matching](diagrams/ch16-01-pattern-matching-naive-vs-rk.svg)
+### Possible exact question
 
-See the [diagram index](diagrams/README.md) for editable Excalidraw sources and SVG previews.
+Using the Rabin-Karp string matching algorithm, find all occurrences of pattern $P = \text{"cab"}$ in text $T = \text{"ababcabab"}$. Show the hash calculations and state the time complexity.
 
----
-
-## Q1: What is the exact string matching problem, and why does naive comparison degrade to $O(n \times m)$?
-
-### Problem Statement
-Given:
-* A **Text** $T$ of length $n$, indexed $0 \dots n-1$.
-* A **Pattern** $P$ of length $m$, indexed $0 \dots m-1$ ($m \le n$).
-
-**Goal:** Find all starting indices $i$ in $T$ such that the substring $T[i \dots i+m-1]$ equals $P[0 \dots m-1]$.
-
-### Candidate Windows
-A candidate window of length $m$ can start at any index $i$ from $0$ up to $n - m$:
+### Given
 
 $$
-\text{Total Candidate Windows} = n - m + 1
+T = \text{"ababcabab"}, \qquad P = \text{"cab"}
 $$
 
-For classroom text $T = \text{"ababcabab"}$ ($n=9$) and pattern $P = \text{"cab"}$ ($m=3$):
-
 $$
-\text{Windows} = 9 - 3 + 1 = 7
+n = 9, \qquad m = 3
 $$
 
-| Start Index $i$ | Window Slice $T[i \dots i+2]$ | Target Pattern $P$ | Match? |
+For easy hand calculation, use:
+
+$$
+a=1,\quad b=2,\quad c=3,\quad p=10
+$$
+
+Here, $p=10$ is chosen only to make the arithmetic easy to write by hand. In a practical implementation, a larger base and a modulus are used.
+
+### Step 1: Number of candidate windows
+
+$$
+n-m+1=9-3+1=\boxed{7}
+$$
+
+The possible starting indices are:
+
+$$
+0,1,2,3,4,5,6
+$$
+
+### Step 2: Calculate powers
+
+Write $pw[i]=p^i$:
+
+| $i$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $pw[i]$ | 1 | 10 | 100 | 1,000 | 10,000 | 100,000 | $10^6$ | $10^7$ | $10^8$ |
+
+You do not need a paragraph explaining this table.
+
+### Step 3: Calculate the pattern hash
+
+For $P=\text{"cab"}$, the character values are $c=3$, $a=1$, and $b=2$.
+
+$$
+\begin{aligned}
+patHash &= 3(10^0)+1(10^1)+2(10^2) \\
+        &= 3+10+200 \\
+        &= \boxed{213}
+\end{aligned}
+$$
+
+Show this calculation in a numerical question.
+
+### Step 4: Construct the prefix hash
+
+Use:
+
+$$
+hs[i]=hs[i-1]+val(T[i])p^i
+$$
+
+For the first character, $hs[0]=val(T[0])$. No modulus is needed for this small hand calculation.
+
+| $i$ | Character $T[i]$ | $pw[i]$ | $hs[i]$ |
 | :---: | :---: | :---: | :---: |
-| **0** | `aba` | `cab` | No |
-| **1** | `bab` | `cab` | No |
-| **2** | `abc` | `cab` | No |
-| **3** | `bca` | `cab` | No |
-| **4** | `cab` | `cab` | **YES (Match at index 4)** |
-| **5** | `aba` | `cab` | No |
-| **6** | `bab` | `cab` | No |
+| 0 | a | 1 | 1 |
+| 1 | b | 10 | 21 |
+| 2 | a | 100 | 121 |
+| 3 | b | 1,000 | 2,121 |
+| 4 | c | 10,000 | 32,121 |
+| 5 | a | 100,000 | 132,121 |
+| 6 | b | 1,000,000 | 2,132,121 |
+| 7 | a | 10,000,000 | 12,132,121 |
+| 8 | b | 100,000,000 | 212,132,121 |
 
-### The Naive Bottleneck
-* **Naive Algorithm:** Slides a window of length $m$ across $T$. At each starting index $i$, it tests up to $m$ characters: $T[i] = P[0], T[i+1] = P[1], \dots$.
-* **Worst-Case Cost:** When text and pattern contain repeated prefixes (such as $T = \text{"AAAAAAAA..."}$ and $P = \text{"AAAAB"}$), every window mismatches only at the final character, costing $m$ comparisons per window:
+For a handwritten exam, this table is enough; you do not need to explain every row in sentences.
 
-$$
-T_{\text{naive}}(n, m) = (n - m + 1) \times m = O(n \times m)
-$$
+### Step 5: Check each window
 
-### The Rabin-Karp Paradigm Shift
-> *"We won't compare character-to-character. We will compare hash values — integer with integer in $O(1)$ time."*
-
-If the hash of every window of length $m$ can be extracted in $O(1)$ time, verifying each window takes a **single integer equality comparison**, dropping the total running time to $O(n + m)$.
-
----
-
-## Q2: Why does ASCII sum hashing fail for pattern matching?
-
-### The First Intuition
-The simplest hash function sums the ASCII values of all characters in the window:
+For a window beginning at $i$, let:
 
 $$
-\text{hash}_{\text{sum}}(s) = \sum_{k=0}^{m-1} \text{ASCII}(s[k])
+l=i,\qquad r=i+m-1
 $$
 
-Using standard ASCII values ($a = 97, b = 98, c = 99$):
-
-| Candidate String | Character Arithmetic | Hash Value | Collision Outcome |
-| :--- | :--- | :---: | :--- |
-| `"aba"` | $97 + 98 + 97$ | **292** | Base pattern |
-| `"aab"` | $97 + 97 + 98$ | **292** | **False Match! (Identical hash, different string)** |
-| `"abab"` | $97 + 98 + 97 + 98$ | **390** | Base string |
-| `"baba"` | $98 + 97 + 98 + 97$ | **390** | **False Match! (Identical hash, different string)** |
-
-### Why It Fails
-1. **Symmetric Operation:** Addition is commutative ($x + y = y + x$). Sum hashing treats the string as an unordered multiset of characters rather than an ordered sequence.
-2. **Anagram Collisions:** Any anagram or permutation of the pattern produces the exact same integer sum.
-3. **Catastrophic False Positives:** Every anagram window reports a false positive match.
-
-> **Conclusion:** Plain ASCII addition is order-blind. We require a hash function where character position directly determines the resulting value.
-
----
-
-## Q3: How does Polynomial Rolling Hashing resolve the anagram collision flaw?
-
-![Hash Functions: Why ASCII Sum Fails vs. Why Polynomial Hash Succeeds](diagrams/ch16-02-ascii-vs-polynomial-hash.svg)
-
-### Positional Power Weighting
-Instead of adding characters uniformly, each character at index $k$ is multiplied by an increasing power of a base $P$:
+Its hash and the aligned pattern hash are:
 
 $$
-\text{hash}(s) = \sum_{k=0}^{m-1} \text{val}(s[k]) \cdot P^k \pmod M = \text{val}(s[0]) \cdot P^0 + \text{val}(s[1]) \cdot P^1 + \dots + \text{val}(s[m-1]) \cdot P^{m-1} \pmod M
+winHash =
+\begin{cases}
+hs[r], & i=0 \\
+hs[r]-hs[i-1], & i>0
+\end{cases}
+\qquad\qquad
+ target=patHash\times pw[i]
 $$
 
-### Hand Evaluation with Base $P = 10$
-Using base $P = 10$ ($a=1, b=2$):
-* For `"aba"`:
+Compare the two values:
 
-  $$
-  \text{hash}(\text{"aba"}) = 1 \cdot 10^0 + 2 \cdot 10^1 + 1 \cdot 10^2 = 1 + 20 + 100 = \mathbf{121}
-  $$
+| $i$ | Window | $winHash$ | $patHash\times pw[i]$ | Result |
+| :---: | :---: | ---: | ---: | :---: |
+| 0 | `aba` | 121 | 213 | No |
+| 1 | `bab` | 2,120 | 2,130 | No |
+| 2 | `abc` | 32,100 | 21,300 | No |
+| 3 | `bca` | 132,000 | 213,000 | No |
+| 4 | `cab` | 2,130,000 | 2,130,000 | **MATCH** |
+| 5 | `aba` | 12,100,000 | 21,300,000 | No |
+| 6 | `bab` | 212,000,000 | 213,000,000 | No |
 
-* For `"aab"`:
+![Rabin-Karp sliding-window trace for text `ababcabab` and pattern `cab`](diagrams/ch16-04-sliding-window-dry-run.svg)
 
-  $$
-  \text{hash}(\text{"aab"}) = 1 \cdot 10^0 + 1 \cdot 10^1 + 2 \cdot 10^2 = 1 + 10 + 200 = \mathbf{211}
-  $$
-
-$$
-121 \neq 211 \implies \text{Order is strictly preserved!}
-$$
-
-Because positional weights differ ($P^0 \neq P^1 \neq P^2$), reordering characters alters the resulting polynomial, eliminating anagram collisions.
-
----
-
-## Q4: What are the three non-negotiable engineering details of polynomial hashing?
-
-### 1. Character Mapping: Why $'a'$ Must Be $1$, Never $0$
-The mapping function maps lowercase letters to 1-based positive integers:
+Therefore:
 
 $$
-\text{val}(c) = c - \text{'a'} + 1 \quad (a=1, b=2, \dots, z=26)
+\boxed{\text{Pattern occurs at index }4}
 $$
 
-* **The Failure of $0$-based mapping ($a=0$):**
+### What should appear on your exam paper?
 
-  $$
-  \text{hash}(\text{"a"}) = 0 \cdot P^0 = 0
-  $$
-
-  $$
-  \text{hash}(\text{"aa"}) = 0 \cdot P^0 + 0 \cdot P^1 = 0
-  $$
-
-  $$
-  \text{hash}(\text{"aaa"}) = 0 \cdot P^0 + 0 \cdot P^1 + 0 \cdot P^2 = 0
-  $$
-
-  Repeated occurrences of $'a'$ would vanish algebraically!
-
-* **With $1$-based mapping:**
-
-  $$
-  \text{hash}(\text{"a"}) = 1, \quad \text{hash}(\text{"aa"}) = 1 + 10 = 11, \quad \text{hash}(\text{"aaa"}) = 1 + 10 + 100 = 111
-  $$
-
-  Every prefix and length produces a distinct numerical value.
-
-### 2. Base Selection: Why Base $P$ Must Be a Prime $> 26$
-* Base $P=10$ is used exclusively for classroom hand calculation because base-10 powers are easy to read.
-* **Why Base 10 fails in practice:** Letter values range from $1$ to $26$. If the base is smaller than the alphabet size, base overflows produce collisions between distinct 2-letter words:
-  * For $k = 11, a = 1$:
-
-    $$
-    \text{hash}(\text{"ka"}) = 11 \cdot 10^0 + 1 \cdot 10^1 = 11 + 10 = 21
-    $$
-
-  * For $a = 1, b = 2$:
-
-    $$
-    \text{hash}(\text{"ab"}) = 1 \cdot 10^0 + 2 \cdot 10^1 = 1 + 20 = 21
-    $$
-
-    **Two completely different strings produce the identical hash 21!**
-* **The Rule:** Base $P$ must be a prime strictly greater than the alphabet size ($26$). Standard selections are $P = 31$ or $P = 37$.
-
-### 3. Modulus $M$ and Overflow Control
-* As text length grows, powers $P^k$ explode exponentially.
-* All arithmetic is computed modulo a large prime:
+Remember this order:
 
 $$
-M = 10^9 + 7 = 1\,000\,000\,007
-$$
-
-* **64-bit Integer Safety:**
-  The product of two values below $M$ is bounded by:
-
-  $$
-  (M - 1) \times (M - 1) \approx 10^{18} < 9.22 \times 10^{18} \quad (\text{maximum signed 64-bit integer})
-  $$
-
-  Applying $\pmod M$ after every addition and multiplication guarantees no arithmetic overflow occurs.
-
----
-
-## Q5: Step 1 — Why and how is the Power Array precomputed?
-
-### Eliminating Function Call Overhead
-Each window query requires powers of the base: $P^0, P^1, P^2, \dots, P^{n-1}$.
-Computing powers inside sliding loops introduces repeated $O(\log i)$ exponentiation overhead and floating-point precision risks.
-
-### Linear Precomputation Recurrence
-Powers are precalculated once into an array $pw$ of length $n$ in $\Theta(n)$ time:
-* **Base Case:** $pw[0] = 1$
-* **Recurrence:** $pw[i] = (pw[i-1] \times P) \pmod M \quad \text{for } 1 \le i < n$
-
-### Precomputed Power Table (Base $P = 10$)
-| Index $i$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **$pw[i] = 10^i$** | $1$ | $10$ | $100$ | $1\,000$ | $10\,000$ | $100\,000$ | $1\,000\,000$ | $10\,000\,000$ | $100\,000\,000$ |
-
----
-
-## Q6: Step 2 — How is the Prefix Hash Array constructed from the text?
-
-### Connection to Prefix Sums
-Just as standard prefix sums allow $O(1)$ range sums, the **prefix hash array** $hs[i]$ stores the cumulative weighted polynomial hash from index $0$ to index $i$:
-
-* **Base Case:** $hs[0] = \text{val}(T[0])$
-* **Recurrence:** $hs[i] = (hs[i-1] + \text{val}(T[i]) \times pw[i]) \pmod M \quad \text{for } 1 \le i < n$
-
-### Step-by-Step Prefix Hash Table on $T = \text{"ababcabab"}$ (Base $P = 10$)
-Here $a=1, b=2, c=3$:
-
-| Index $i$ | Character $T[i]$ | $\text{val}(T[i])$ | $pw[i]$ | Added Term $\text{val} \times pw[i]$ | Cumulative Prefix Hash $hs[i]$ |
-| :---: | :---: | :---: | :---: | :---: | :--- |
-| **0** | `a` | 1 | $1$ | $1$ | **1** |
-| **1** | `b` | 2 | $10$ | $20$ | $1 + 20 =$ **21** |
-| **2** | `a` | 1 | $100$ | $100$ | $21 + 100 =$ **121** |
-| **3** | `b` | 2 | $1\,000$ | $2\,000$ | $121 + 2\,000 =$ **2,121** |
-| **4** | `c` | 3 | $10\,000$ | $30\,000$ | $2\,121 + 30\,000 =$ **32,121** |
-| **5** | `a` | 1 | $100\,000$ | $100\,000$ | $32\,121 + 100\,000 =$ **132,121** |
-| **6** | `b` | 2 | $1\,000\,000$ | $2\,000\,000$ | $132\,121 + 2\,000\,000 =$ **2,132,121** |
-| **7** | `a` | 1 | $10\,000\,000$ | $10\,000\,000$ | $2\,132\,121 + 10\,000\,000 =$ **12,132,121** |
-| **8** | `b` | 2 | $100\,000\,000$ | $200\,000\,000$ | $12\,132\,121 + 200\,000\,000 =$ **212,132,121** |
-
----
-
-## Q7: Step 3 & 4 — How is the pattern hashed and how is the window hash extracted in $O(1)$?
-
-![Prefix Hash Array: O(1) Window Hash Extraction Formula](diagrams/ch16-03-prefix-hash-window-extraction.svg)
-
-### Step 3: Hashing the Pattern
-The pattern $P$ of length $m$ is hashed once using the first $m$ powers:
-
-$$
-\text{patHash} = \sum_{k=0}^{m-1} (\text{val}(P[k]) \times pw[k]) \pmod M
-$$
-
-For $P = \text{"cab"}$ ($c=3, a=1, b=2$) in base $P = 10$:
-
-$$
-\text{patHash} = 3 \cdot 10^0 + 1 \cdot 10^1 + 2 \cdot 10^2 = 3 + 10 + 200 = \mathbf{213}
-$$
-
-*(In base $P = 31$: $\text{patHash} = 3 \cdot 1 + 1 \cdot 31 + 2 \cdot 961 = 1\,956$)*.
-
-### Step 4: Window Hash Extraction Formula
-For a window spanning from index $l$ to index $r$ ($r = l + m - 1$):
-* $hs[r]$ contains weighted terms from index $0$ to $r$.
-* $hs[l-1]$ contains weighted terms from index $0$ to $l-1$.
-
-Subtracting removes the unwanted left prefix:
-
-$$
-\text{window\_raw} = \begin{cases} hs[r] & \text{if } l = 0 \\ hs[r] - hs[l-1] & \text{if } l > 0 \end{cases}
-$$
-
-Expanding algebraically:
-
-$$
-\text{window\_raw} = T[l] \cdot P^l + T[l+1] \cdot P^{l+1} + \dots + T[r] \cdot P^r
-$$
-
-$$
-\text{window\_raw} = P^l \times \left( T[l] \cdot P^0 + T[l+1] \cdot P^1 + \dots + T[r] \cdot P^{m-1} \right) = P^l \times \text{hash}(T[l \dots r])
-$$
-
-> The extracted raw window hash equals the true window hash **scaled by $P^l$**.
-
-### Why Multiply the Pattern Instead of Dividing the Window?
-1. **Division Loses Precision:** Integer division discards fractional remainders.
-2. **Modular Division Overhead:** In modular arithmetic, division requires computing the modular multiplicative inverse via Fermat's Little Theorem ($P^{-l} \equiv (P^l)^{M-2} \pmod M$), costing $O(\log M)$ steps per window.
-3. **Multiplication Is Exact and Fast:**
-   Multiplying $\text{patHash}$ by $pw[l]$ takes a single $O(1)$ multiplication:
-
-   $$
-   \mathbf{winHash == (\text{patHash} \times pw[l]) \pmod M}
-   $$
-
-### Non-Negative Modular Subtraction Rule
-In many programming environments, modular subtraction of two numbers where the second is larger yields a negative remainder. To guarantee non-negative values before applying modulo:
-
-$$
-winHash = (hs[r] - hs[l-1] + M) \pmod M
+\boxed{\text{Given}\rightarrow\text{Powers}\rightarrow\text{Pattern Hash}\rightarrow\text{Prefix Hash}\rightarrow\text{Window Comparison}\rightarrow\text{Answer}}
 $$
 
 ---
 
-## Q8: Complete Hand Trace — How does Rabin-Karp process `ababcabab` with pattern `cab`?
+## Question Type 2: Write or Explain the Rabin-Karp Algorithm
 
-![Rabin-Karp Sliding Window Trace: Text 'ababcabab' with Pattern 'cab'](diagrams/ch16-04-sliding-window-dry-run.svg)
+### Possible exact question
 
-### Full Trace Across All 7 Windows (Base $P = 10, \text{patHash} = 213$)
-We iterate starting index $i$ from $0$ to $n - m = 6$:
+Describe the Rabin-Karp string matching algorithm using polynomial rolling hashing. Analyze its time and space complexity.
 
-| Window $i$ | Substring $T[i \dots i+2]$ | Range $[l \dots r]$ | Subtraction $hs[r] - hs[l-1]$ | Window Value $winHash$ | Target $\text{patHash} \times 10^i$ | Decision |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **0** | `aba` | $[0 \dots 2]$ | $hs[2] = 121$ | $121$ | $213 \times 10^0 = \mathbf{213}$ | $121 \neq 213 \implies$ **Mismatch** |
-| **1** | `bab` | $[1 \dots 3]$ | $hs[3] - hs[0] = 2\,121 - 1$ | $2\,120$ | $213 \times 10^1 = \mathbf{2\,130}$ | $2\,120 \neq 2\,130 \implies$ **Mismatch** |
-| **2** | `abc` | $[2 \dots 4]$ | $hs[4] - hs[1] = 32\,121 - 21$ | $32\,100$ | $213 \times 10^2 = \mathbf{21\,300}$ | $32\,100 \neq 21\,300 \implies$ **Mismatch** |
-| **3** | `bca` | $[3 \dots 5]$ | $hs[5] - hs[2] = 132\,121 - 121$ | $132\,000$ | $213 \times 10^3 = \mathbf{213\,000}$ | $132\,000 \neq 213\,000 \implies$ **Mismatch** |
-| **4** | `cab` | $[4 \dots 6]$ | $hs[6] - hs[3] = 2\,132\,121 - 2\,121$ | **2,130,000** | $213 \times 10^4 = \mathbf{2\,130\,000}$ | **2,130,000 == 2,130,000 $\implies$ MATCH!** |
-| **5** | `aba` | $[5 \dots 7]$ | $hs[7] - hs[4] = 12\,132\,121 - 32\,121$ | $12\,100\,000$ | $213 \times 10^5 = \mathbf{21\,300\,000}$ | $12.1\text{M} \neq 21.3\text{M} \implies$ **Mismatch** |
-| **6** | `bab` | $[6 \dots 8]$ | $hs[8] - hs[5] = 212\,132\,121 - 132\,121$ | $212\,000\,000$ | $213 \times 10^6 = \mathbf{213\,000\,000}$ | $212\text{M} \neq 213\text{M} \implies$ **Mismatch** |
+### Exam-ready answer
 
-### Detailed Breakdown of the Match at $i = 4$
-1. Boundaries: $l = 4, r = 4 + 3 - 1 = 6$.
-2. Extract window hash:
+**Rabin-Karp algorithm:** Rabin-Karp searches for a pattern $P$ of length $m$ in a text $T$ of length $n$ by comparing hash values. It calculates the pattern hash once, then compares it with the hash of each text window of length $m$.
 
-   $$
-   winHash = hs[6] - hs[3] = 2\,132\,121 - 2\,121 = 2\,130\,000
-   $$
+#### Step 1: Map characters to numbers
 
-3. Target scaled pattern hash:
+For lowercase English letters, use:
 
-   $$
-   \text{target} = \text{patHash} \times pw[4] = 213 \times 10\,000 = 2\,130\,000
-   $$
+$$
+val(c)=c-'a'+1
+$$
 
-4. Equality check:
+Thus $a=1,b=2,\ldots,z=26$.
 
-   $$
-   2\,130\,000 == 2\,130\,000 \implies \mathbf{\text{Report occurrence at index 4}}
-   $$
+#### Step 2: Precompute powers
+
+Choose a base $p$ and a modulus $M$:
+
+$$
+pw[0]=1,\qquad pw[i]=(pw[i-1]\times p)\bmod M
+$$
+
+A common practical choice is a base such as $31$ and a large modulus such as $10^9+7$. The small base $10$ above is only for easy hand calculation.
+
+#### Step 3: Construct the text prefix hash
+
+Set $hs[0]=val(T[0])$. For $i>0$:
+
+$$
+hs[i]=(hs[i-1]+val(T[i])\times pw[i])\bmod M
+$$
+
+#### Step 4: Calculate the pattern hash
+
+$$
+patHash=\sum_{k=0}^{m-1}val(P[k])\times pw[k]\pmod M
+$$
+
+#### Step 5: Check every text window
+
+For a window from $l=i$ to $r=i+m-1$:
+
+$$
+winHash=
+\begin{cases}
+hs[r], & l=0 \\
+(hs[r]-hs[l-1]+M)\bmod M, & l>0
+\end{cases}
+$$
+
+Compare it with the pattern hash aligned to the same powers:
+
+$$
+\boxed{winHash=(patHash\times pw[l])\bmod M}
+$$
+
+If the hashes are equal, a possible match has been found. Because different strings can have the same hash, compare the actual characters to confirm the match when exact correctness is required.
+
+### Complexity
+
+With prefix hashing, power calculation, prefix-hash construction, pattern hashing, and checking all windows take $O(n+m)$ time. The power and prefix-hash arrays use $O(n)$ auxiliary space.
+
+With character verification after hash matches, the expected time is $O(n+m)$ when collisions are rare. If many windows collide and each requires checking up to $m$ characters, the worst case is $O(nm)$.
 
 ---
 
-## Q9: Procedural Workflow — How does the Rabin-Karp algorithm execute step-by-step?
+## Question Type 3: Why Simple ASCII-Sum Hashing Fails
 
-The complete procedural sequence executes in two distinct phases:
+### Possible exact question
 
-### Phase 1: Precomputation & Hashing ($\Theta(n + m)$)
-1. **Length Verification:** Check if pattern length $m$ exceeds text length $n$. If $m > n$, terminate with no match.
-2. **Power Array Generation:**
-   * Set $pw[0] \leftarrow 1$.
-   * For $i = 1$ to $n-1$, compute $pw[i] \leftarrow (pw[i-1] \times P) \pmod M$.
-3. **Prefix Hash Array Generation:**
-   * Set $hs[0] \leftarrow \text{val}(T[0])$.
-   * For $i = 1$ to $n-1$, compute $hs[i] \leftarrow (hs[i-1] + \text{val}(T[i]) \times pw[i]) \pmod M$.
-4. **Pattern Hash Computation:**
-   * Set $patHash \leftarrow \sum_{k=0}^{m-1} (\text{val}(P[k]) \times pw[k]) \pmod M$.
+Why is simple ASCII-sum hashing unsuitable for string matching? How does polynomial hashing improve it?
 
-### Phase 2: Sliding Window Search ($\Theta(n - m + 1)$)
-1. **Iterate Candidate Starts:** Loop $i$ from $0$ up to $n - m$:
-   * Set window end: $r \leftarrow i + m - 1$.
-   * If $i = 0$, set $winHash \leftarrow hs[r]$.
-   * If $i > 0$, set $winHash \leftarrow (hs[r] - hs[i-1] + M) \pmod M$.
-   * Set target: $\text{target} \leftarrow (patHash \times pw[i]) \pmod M$.
-   * **Comparison:**
-     * If $winHash == \text{target}$:
-       * In **First-Match Search**: Output index $i$ and halt immediately.
-       * In **All-Matches Search**: Append index $i$ to match list and continue scanning.
-2. **Termination:** If the loop terminates with no match discovered, report pattern absent.
+### Exam-ready answer
 
-> *Note for Sessional Laboratory:* A runnable implementation of this exact procedure is maintained in [`Chapter 0/Lab Practice/rabin_karp.cpp`](../Chapter%200%20-%20Previous%20Year%20Questions/Lab%20Practice/rabin_karp.cpp).
+A simple sum hash adds the character values without considering their positions:
+
+$$
+H(s)=\sum_i ASCII(s[i])
+$$
+
+For example:
+
+$$
+H(\text{"aba"})=97+98+97=292
+$$
+
+and:
+
+$$
+H(\text{"aab"})=97+97+98=292
+$$
+
+But $\text{"aba"}\ne\text{"aab"}$. The hashes are equal because addition is commutative, so this method does not preserve character order.
+
+Polynomial hashing gives each position a different power:
+
+$$
+H(s)=\sum_{i=0}^{m-1}val(s[i])p^i\pmod M
+$$
+
+For $a=1$, $b=2$, and $p=10$:
+
+$$
+H(\text{"aba"})=1(10^0)+2(10^1)+1(10^2)=121
+$$
+
+$$
+H(\text{"aab"})=1(10^0)+1(10^1)+2(10^2)=211
+$$
+
+Thus the positional powers preserve order better and avoid this particular anagram collision. Hash collisions are still possible in general, especially after taking a modulus.
+
+![Simple ASCII-sum hashing ignores character order; polynomial hashing assigns positional weights](diagrams/ch16-02-ascii-vs-polynomial-hash.svg)
 
 ---
 
-## Q10: Collisions and False Matches — When do spurious hits happen, and why did zero collisions occur here?
+## Question Type 4: Collision or Spurious Hit
 
-### What is a Spurious Hit?
-Because modulo arithmetic maps an infinite universe of possible strings into a finite integer range $[0 \dots M-1]$, two distinct strings can evaluate to the exact same hash:
+### Possible exact question
+
+What is a spurious hit in Rabin-Karp? How can it be handled?
+
+### Exam-ready answer
+
+A **hash collision** occurs when two different strings have equal hash values:
 
 $$
-\text{hash}(S_1) \equiv \text{hash}(S_2) \pmod M \quad \text{while} \quad S_1 \neq S_2
+H(S_1)=H(S_2)\qquad\text{but}\qquad S_1\ne S_2
 $$
 
-This event is termed a **hash collision** or **spurious hit**.
+A **spurious hit** occurs when the pattern hash equals a text-window hash even though the window is not the pattern.
 
-### Why Zero Collisions Occurred in Our Hand Example
-In our classroom example ($T = \text{"ababcabab"}, P = \text{"cab"}$, base $P = 31, M = 10^9 + 7$):
-* Any window $W$ and pattern $P$ have length $m = 3$.
-* The difference between their hash polynomials is:
+Therefore, when:
 
-  $$
-  \Delta = \sum_{k=0}^{2} (\text{val}(W[k]) - \text{val}(P[k])) \cdot 31^k
-  $$
+$$
+H(T[i\ldots i+m-1])=H(P)
+$$
 
-* Since character values range from $1$ to $26$, each difference term $\text{val}(W[k]) - \text{val}(P[k])$ is strictly bounded between $-25$ and $+25$.
-* Therefore, the maximum possible absolute difference is:
+compare the characters in the window with the pattern to confirm an actual match.
 
-  $$
-  |\Delta| \le 25 \times (31^0 + 31^1 + 31^2) = 25 \times (1 + 31 + 961) = 25 \times 993 = \mathbf{24\,825}
-  $$
+$$
+\boxed{\text{Hash Match}\rightarrow\text{Character Verification}\rightarrow\text{Confirmed Match}}
+$$
 
-* Notice that $24\,825 \ll 10^9 + 7$.
-* Since $M = 10^9 + 7$ is prime and $|\Delta| < M$, $\Delta \pmod M$ can equal $0$ **if and only if $\Delta = 0$ exactly**!
-
-> **Mathematical Guarantee:** For short patterns where the maximum polynomial value is strictly less than modulus $M$, hash collisions are **mathematically impossible**.
-
-### Las Vegas vs. Monte Carlo Trade-Off
-When strings are long ($m$ is large), collisions can occur with probability $\approx 1/M$:
-
-| Framework | Action on Hash Match | Time Complexity | Correctness |
-| :--- | :--- | :---: | :---: |
-| **Las Vegas (Exact)** | Verify character-by-character: check if $T[i \dots i+m-1] == P$ | Expected $O(n + m)$, Worst-case $O(n \cdot m)$ | $100\%$ Guaranteed |
-| **Monte Carlo (Probabilistic)** | Accept match immediately without character checking | Strictly $O(n + m)$ | Correct with probability $\ge 1 - \frac{n}{M}$ |
+Using a suitable base and modulus reduces collision risk; it does not make collisions impossible. With verification, the answer is always correct, though the worst-case running time can be $O(nm)$.
 
 ---
 
-## Q11: Complexity Analysis — How does Rabin-Karp compare asymptotically with naive search?
+## Question Type 5: Naive Search vs. Rabin-Karp
 
-### Step-by-Step Breakdown
+### Possible exact question
 
-| Step | Work Done | Operation | Time Complexity |
-| :--- | :--- | :--- | :---: |
-| **Step 1: Power Array** | $n$ modular multiplications | $pw[i] = (pw[i-1] \times P) \pmod M$ | $\Theta(n)$ |
-| **Step 2: Prefix Hash Array** | $n$ multiplications & additions | $hs[i] = (hs[i-1] + \text{val} \times pw[i]) \pmod M$ | $\Theta(n)$ |
-| **Step 3: Pattern Hash** | $m$ multiplications & additions | $patHash = \sum \text{val} \times pw[k] \pmod M$ | $\Theta(m)$ |
-| **Step 4: Sliding Window** | $n - m + 1$ window comparisons | 1 subtraction, 1 multiplication, 1 equality check per window | $\Theta(n - m + 1) = \Theta(n)$ |
-| **Total Time** | Sum of precomputation + sliding | $\Theta(n) + \Theta(n) + \Theta(m) + \Theta(n)$ | $\mathbf{O(n + m)}$ |
+Compare the naive string matching algorithm with Rabin-Karp.
 
-### Space Complexity
-Two auxiliary arrays of size $n$ are maintained:
-* $pw$: precomputed powers of size $n$.
-* $hs$: prefix polynomial hashes of size $n$.
-
-$$
-\text{Space Complexity} = O(n)
-$$
-
-### Comparison with Naive Search
-
-| Metric | Naive Character Comparison | Rabin-Karp (Polynomial Hashing) |
-| :--- | :---: | :---: |
-| **Check per Window** | Up to $m$ character comparisons | **1 integer comparison ($O(1)$)** |
-| **Average Time** | $O(n \times m)$ | **$O(n + m)$** |
-| **Best Case Time** | $O(n)$ (first character always mismatches) | $O(n + m)$ |
-| **Worst Case Time** | $O(n \times m)$ | $O(n \times m)$ *(if malicious collisions force full checks in Las Vegas)* |
-| **Auxiliary Space** | $O(1)$ | $O(n)$ *(or $O(1)$ with online rolling hash update)* |
-
----
-
-## Q12: Self-Practice & One-Page Revision Summary
-
-### Multi-Pattern Verification Exercise
-Hand calculation practice on text $T = \text{"ababcabab"}$ ($n=9$) with target patterns:
-
-| Pattern | Length $m$ | Expected Matches | Verification Trace |
-| :--- | :---: | :---: | :--- |
-| `aba` | 3 | **Indices 0 and 5** | $T[0..2] = \text{"aba"}$ and $T[5..7] = \text{"aba"}$ |
-| `bab` | 3 | **Indices 1 and 6** | $T[1..3] = \text{"bab"}$ and $T[6..8] = \text{"bab"}$ |
-| `abc` | 3 | **Index 2** | $T[2..4] = \text{"abc"}$ |
-| `cab` | 3 | **Index 4** | $T[4..6] = \text{"cab"}$ (Classroom lecture example) |
-| `zzz` | 3 | **None** | Character `'z'` does not exist in $T$ |
-
-### Master Revision Summary Matrix
-
-| Concept | Mathematical Rule | Algorithmic Purpose |
+| Feature | Naive Search | Rabin-Karp |
 | :--- | :--- | :--- |
-| **Sum Hash (ASCII)** | $\sum \text{ASCII}(c)$ | **Fails:** Commutative addition causes anagram collisions (`aba` == `aab`). |
-| **Polynomial Hash** | $\sum \text{val}(c) \cdot P^k \pmod M$ | **Fixes order:** Positional powers $P^k$ ensure anagrams yield distinct hashes. |
-| **Letter Mapping** | $\text{val}(c) = c - \text{'a'} + 1$ | **Prevents zero:** Ensures $'a' \neq 0$ so `"a"`, `"aa"`, `"aaa"` remain distinct. |
-| **Prime Base $P$** | $P = 31$ or $37$ ($P > 26$) | **Prevents base overflow collisions:** Eliminates spurious hits like `"ka"` vs `"ab"`. |
-| **Modulus $M$** | $M = 10^9 + 7$ | **Prevents integer overflow:** Keeps intermediate products within signed 64-bit limits. |
-| **Power Array $pw$** | $pw[i] = (pw[i-1] \times P) \pmod M$ | **Precomputes powers in $O(n)$:** Eliminates repeated function call overhead. |
-| **Prefix Hash $hs$** | $hs[i] = (hs[i-1] + \text{val} \times pw[i]) \pmod M$ | **Weighted running total:** Allows any substring hash to be extracted in $O(1)$. |
-| **Window Hash** | $hs[r] - hs[l-1]$ | **Extracts range:** Leaves window hash scaled by $P^l$. |
-| **Comparison** | $winHash == (patHash \times pw[l]) \pmod M$ | **Multiplies pattern:** Preserves exact integers, avoiding division & modular inverse. |
-| **Safety Offset** | $(hs[r] - hs[l-1] + M) \pmod M$ | **Prevents negative remainder:** Ensures result stays non-negative before modulo. |
+| Basic idea | Compare characters at each window | Compare a pattern hash with each window hash |
+| Work per window | Up to $m$ character comparisons | $O(1)$ hash extraction and comparison |
+| General time behavior | Depends on the text and pattern; worst case is $O(nm)$ | Expected $O(n+m)$ when collisions are rare |
+| Worst-case time | $O(nm)$ | $O(nm)$ if many hash matches require character verification |
+| Auxiliary space | $O(1)$ | $O(n)$ for the prefix-hash and power arrays in this version |
+| Main issue | Repeats character comparisons | Hash collisions must be verified |
 
-### Memory Tricks for Exam Success
-1. **"Order needs Powers":** Plain sum treats `"aba"` and `"aab"` as equals; positional powers $P^i$ break symmetry.
-2. **"Never start from zero":** If $a=0$, `"a"`, `"aa"`, and `"aaa"` all equal $0$. Always add $1$ ($a=1$).
-3. **"Multiply, don't divide":** Multiplying the pattern by $P^l$ preserves exact integer arithmetic without modular inverse.
-4. **"Add MOD before modulo":** In modular arithmetic, $(a - b) \pmod M$ can be negative; always write $(a - b + M) \pmod M$.
+**In one sentence:** Rabin-Karp avoids repeatedly comparing every character by representing the pattern and text windows with hash values.
+
+![Naive string matching checks characters; Rabin-Karp compares window hashes](diagrams/ch16-01-pattern-matching-naive-vs-rk.svg)
+
+---
+
+## Question Type 6: Derive the $O(1)$ Window-Hash Formula
+
+### Possible exact question
+
+Show how prefix hashing lets us obtain the hash of any text window $T[l\ldots r]$ in $O(1)$ time.
+
+### Answer
+
+The prefix hash through position $r$ is:
+
+$$
+hs[r]=\sum_{k=0}^{r}val(T[k])p^k
+$$
+
+The prefix hash through position $l-1$ is:
+
+$$
+hs[l-1]=\sum_{k=0}^{l-1}val(T[k])p^k
+$$
+
+Subtracting removes the terms before the window:
+
+$$
+hs[r]-hs[l-1]=\sum_{k=l}^{r}val(T[k])p^k
+$$
+
+Factor out $p^l$:
+
+$$
+\begin{aligned}
+\sum_{k=l}^{r}val(T[k])p^k
+&=p^l\left(val(T[l])p^0+val(T[l+1])p^1+\cdots+val(T[r])p^{r-l}\right)
+\end{aligned}
+$$
+
+The extracted window hash is the normal substring hash multiplied by $p^l$. Instead of dividing the window hash, multiply the pattern hash by the same power:
+
+$$
+\boxed{winHash=(patHash\times pw[l])\bmod M}
+$$
+
+With a modulus, use safe modular subtraction:
+
+$$
+winHash=(hs[r]-hs[l-1]+M)\bmod M
+$$
+
+For $l=0$, simply use $winHash=hs[r]$. A prefix subtraction and one multiplication take constant time, so each window hash is checked in $O(1)$ time.
+
+![Prefix hashes remove the earlier text and align the window hash with the pattern](diagrams/ch16-03-prefix-hash-window-extraction.svg)
+
+---
+
+## Question Type 7: Derive Time and Space Complexity
+
+### Possible exact question
+
+Derive the time and space complexity of Rabin-Karp using prefix polynomial hashing.
+
+### Answer
+
+Break the work into steps:
+
+| Operation | Time |
+| :--- | :---: |
+| Build the power array | $O(n)$ |
+| Build the text prefix-hash array | $O(n)$ |
+| Calculate the pattern hash | $O(m)$ |
+| Check $n-m+1$ windows | $O(n)$ |
+
+Therefore, the hash calculations take:
+
+$$
+T(n,m)=O(n)+O(n)+O(m)+O(n)=\boxed{O(n+m)}
+$$
+
+The arrays $pw[0\ldots n-1]$ and $hs[0\ldots n-1]$ require:
+
+$$
+\boxed{\text{Auxiliary Space}=O(n)}
+$$
+
+If character-by-character verification is performed after hash matches, a collision-heavy worst case can take:
+
+$$
+\boxed{O(nm)}
+$$
+
+The commonly stated expected time $O(n+m)$ assumes that hash collisions are rare.
+
+---
+
+## Formulas to Memorize
+
+Do not memorize every paragraph. Memorize these six formulas.
+
+### 1. Number of windows
+
+$$
+\boxed{n-m+1}
+$$
+
+### 2. Polynomial hash
+
+$$
+\boxed{H(s)=\sum_{i=0}^{m-1}val(s[i])p^i\pmod M}
+$$
+
+### 3. Powers
+
+$$
+\boxed{pw[0]=1,\qquad pw[i]=(pw[i-1]\times p)\bmod M}
+$$
+
+### 4. Prefix hash
+
+$$
+\boxed{hs[i]=(hs[i-1]+val(T[i])\times pw[i])\bmod M}
+$$
+
+### 5. Window hash
+
+For $l>0$:
+
+$$
+\boxed{winHash=(hs[r]-hs[l-1]+M)\bmod M}
+$$
+
+For $l=0$:
+
+$$
+\boxed{winHash=hs[r]}
+$$
+
+### 6. Comparison
+
+$$
+\boxed{winHash=(patHash\times pw[l])\bmod M}
+$$
+
+---
+
+## Most Important Exam Template
+
+If the question gives you a new text and pattern, follow this order.
+
+```text
+Given:
+T = __________
+P = __________
+
+n = ____
+m = ____
+Number of windows = n - m + 1 = ____
+
+Character mapping:
+a = 1, b = 2, ..., z = 26
+
+Base p = ____
+Modulus M = ____
+
+Step 1: Power array
+pw[] = __________________________
+
+Step 2: Pattern hash
+patHash = _______________________
+        = ______
+
+Step 3: Prefix hash
+Construct the hs[] table.
+
+Step 4: Window checking
+
+| i | Window | winHash | patHash × pw[i] | Result |
+|---|--------|---------|-----------------|--------|
+| 0 |        |         |                 |        |
+| 1 |        |         |                 |        |
+| … |        |         |                 |        |
+
+Pattern occurs at index/indices: __________________
+
+Expected time = O(n + m)
+Auxiliary space = O(n)
+```
+
+---
+
+## Short Conceptual Questions
+
+These are useful as short 2- or 3-mark answers.
+
+### Why use $a=1$, not $a=0$?
+
+If $a=0$, strings made only from `a` (such as `a`, `aa`, and `aaa`) all have hash $0$ under this polynomial formula. Mapping $a$ to $1$ avoids making those characters disappear from the hash.
+
+### Why use a modulus?
+
+Powers grow quickly. Taking values modulo a large $M$ keeps the hashes bounded and prevents integer values from growing without limit. A modulus reduces the hash range, so collisions remain possible.
+
+### Why is the base usually greater than 26?
+
+With values $1$ through $26$, a base larger than the alphabet range helps positional weights behave like distinct digit places. Practical Rabin-Karp still uses a modulus, so choosing a good base does not guarantee that collisions cannot happen.
+
+### What is the difference between a hash match and an actual match?
+
+A hash match means the two hash values are equal. An actual match means every character in the text window equals the corresponding pattern character. Verify characters when exact correctness is required.
+
+---
+
+## What to Prioritize for the Exam
+
+### Must know
+
+1. Complete Rabin-Karp numerical / dry run.
+2. Polynomial-hash formula.
+3. Prefix-hash and window-hash formulas.
+4. Collision / spurious hit and character verification.
+5. Expected and worst-case complexity.
+
+### Useful short questions
+
+6. Why simple ASCII-sum hashing fails.
+7. Why $a=1$, not $a=0$.
+8. Why a modulus is used.
+9. Naive search vs. Rabin-Karp.
+10. Why multiply the pattern hash by $pw[l]$ instead of dividing the window hash.
+
+### Do not spend limited revision time memorizing
+
+- Twelve long answers word-for-word.
+- Every explanatory paragraph.
+- A long proof about why the sample happens to have no hash collision.
+
+For a new dry-run question, use the same sequence every time:
+
+$$
+\boxed{\text{Given}\rightarrow\text{Powers}\rightarrow\text{Pattern Hash}\rightarrow\text{Prefix Hash}\rightarrow\text{Window Comparison}\rightarrow\text{Answer}}
+$$
 
 ---
 
