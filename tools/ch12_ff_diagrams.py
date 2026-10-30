@@ -1,4 +1,4 @@
-"""Chapter 12 Ford-Fulkerson diagrams (06-14): key terms, the video's trace, analysis."""
+"""Chapter 12 Ford-Fulkerson diagrams (06-15): foundations, trace, and analysis."""
 
 from tools.excalidraw_gen import D, E, N, T
 from tools.ch12_ff_trace import (
@@ -222,4 +222,49 @@ worst = D(
     caption="Left: the original capacities. Right: the residual graph after round 1. The running time depends on capacity values",
 )
 
-FF_DIAGRAMS = [key_terms, step0, *STEP_DIAGRAMS, final_cut, worst]
+# 15 --------------------------------------------------- max-flow/min-cut certificate
+_min_cut_pairs = sorted((u, v) for (u, v) in CAP if u in S_SIDE and v not in S_SIDE)
+_min_cut_capacity = sum(CAP[edge] for edge in _min_cut_pairs)
+assert _min_cut_capacity == MAX_FLOW
+
+max_flow_min_cut_certificate = D(
+    key="ch12-15-max-flow-min-cut-certificate",
+    title="Max Flow = Min Cut: Turn the Final Residual Graph into a Certificate (22)",
+    size=(1480, 880),
+    flow="H",
+    containers=[
+        N("residual-panel", "1. SEARCH THE FINAL RESIDUAL GRAPH Gf", 20, 70, 700, 530, "violet"),
+        N("flow-panel", "2. DRAW THE ORIGINAL NETWORK AND ITS CUT", 730, 70, 700, 530, "green"),
+    ],
+    nodes=(
+        vertex_nodes("L", 50, 130, {v: "teal" for v in S_SIDE if v != "s"})
+        + vertex_nodes("R", 760, 130, {v: "teal" for v in S_SIDE if v != "s"})
+        + [
+            N("q1", "1. STOP\nNo s→t path in Gf", 32, 660, 260, 90, "violet", "rect", 14, True),
+            N("q2", "2. PARTITION\nS = reached; T = unreached", 326, 660, 260, 90, "blue", "rect", 14, True),
+            N("q3", "3. SATURATION\nS→T full; T→S flow is 0", 620, 660, 260, 90, "yellow", "rect", 14, True),
+            N("q4", "4. EQUALITY\n|f| = c(S,T) = 22", 914, 660, 260, 90, "orange", "rect", 14, True),
+            N("q5", "5. CERTIFICATE\nmax flow = min cut = 22", 1208, 660, 260, 90, "green", "rect", 14, True),
+        ]
+    ),
+    edges=(
+        residual_arcs("L", 50, 130, FINAL)
+        + flow_edges("R", 760, 130, FINAL, _min_cut_pairs)
+        + [
+            E("Ls", "Ls", color=RED, dashed=True, directed=False,
+              pts=[(550, 125), (550, 530)], width=2.6),
+            E("Rs", "Rs", color=RED, dashed=True, directed=False,
+              pts=[(1260, 125), (1260, 530)], width=2.6),
+            E("q1", "q2"), E("q2", "q3"), E("q3", "q4"), E("q4", "q5"),
+        ]
+    ),
+    texts=[
+        T("set-s", "S = {s, a, b, c, d, e}", 1010, 130, 14, GREEN, True),
+        T("set-t", "T = {t}", 1370, 130, 14, RED, True),
+        T("residual-note", "Reachable set S; t is unreachable in Gf", 370, 570, 13, "#495057"),
+        T("cut-note", "Orange S→T edges are saturated; their capacities total 22", 1080, 570, 13, "#495057"),
+    ],
+    caption="Residual reachability → cut partition → equal values prove optimality; labels on the original network are flow/capacity",
+)
+
+FF_DIAGRAMS = [key_terms, step0, *STEP_DIAGRAMS, final_cut, worst, max_flow_min_cut_certificate]
