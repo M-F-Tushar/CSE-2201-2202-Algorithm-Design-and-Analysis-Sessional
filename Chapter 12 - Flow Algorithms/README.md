@@ -6,7 +6,7 @@
 
 A flow network models something that moves through a graph: water through pipes, packets through links, cars through roads. Each edge can carry only a limited amount. The **maximum-flow problem** asks how much can be pushed from a source $s$ to a sink $t$ at the same time. The same machinery also solves matching problems.
 
-This chapter covers the vocabulary of flow networks, residual graphs, the Ford-Fulkerson method (with a full step-by-step trace that follows the video [Ford Fulkerson algorithm step by step example](https://youtu.be/Da-VAtoL2sk)), its time complexity, the Edmonds-Karp algorithm, the max-flow min-cut idea, and bipartite matching. It builds on the graph representations and BFS of [Chapter 11](../Chapter%2011%20-%20Graph%20Algorithms/README.md). It intentionally contains no implementation code.
+This chapter covers the vocabulary of flow networks, residual graphs, the Ford-Fulkerson method (with a full step-by-step trace that follows the video [Ford Fulkerson algorithm step by step example](https://youtu.be/Da-VAtoL2sk)), its time complexity, Edmonds-Karp, a proof and worked certificate for the max-flow min-cut theorem, and bipartite matching. It builds on the graph representations and BFS of [Chapter 11](../Chapter%2011%20-%20Graph%20Algorithms/README.md). It intentionally contains no implementation code.
 
 ---
 
@@ -61,6 +61,10 @@ With many pipes joined together, finding the answer is harder. That is what this
    - [Time Complexity and Analysis](#time-complexity-and-analysis)
 4. [Edmonds-Karp Algorithm](#edmonds-karp-algorithm)
 5. [Max-Flow Min-Cut](#max-flow-min-cut)
+   - [The Question and the Cut Upper Bound](#the-question-and-the-cut-upper-bound)
+   - [The Theorem, End to End](#the-theorem-end-to-end)
+   - [Standard Procedure: Find and Certify a Maximum Flow](#standard-procedure-find-and-certify-a-maximum-flow)
+   - [Worked Certificate: The Flow-22 Network](#worked-certificate-the-flow-22-network)
 6. [Bipartite Matching](#bipartite-matching)
 7. [Correctness and Complexity](#correctness-and-complexity)
 8. [Practice and Exam Notes](#practice-and-exam-notes)
@@ -404,21 +408,81 @@ Here $\lvert f^*\rvert$ is the value of the maximum flow. Ford-Fulkerson depends
 
 ## Max-Flow Min-Cut
 
-An **$s$-$t$ cut** $(S, T)$ splits the vertices into two sets with $s \in S$ and $t \in T$. Its **capacity** is the total capacity of edges going **from $S$ to $T$** (edges in the other direction are not counted):
+### The Question and the Cut Upper Bound
 
-$$c(S, T) = \sum_{u \in S,\ v \in T} c(u, v)$$
+Given a finite directed network $G=(V,E)$, nonnegative edge capacities $c$, a source $s$, and a sink $t$, the **maximum-flow problem** asks for a feasible flow $f$ with the largest possible value $|f|$. A result is most useful when it includes both:
 
-Every unit of flow from $s$ to $t$ must cross every cut, so no flow can exceed any cut's capacity. The converse is the central theorem.
+- a **feasible flow**: every edge respects its capacity and every intermediate vertex conserves flow;
+- an **optimality certificate**: evidence that no other feasible flow can be larger.
 
-**Max-flow min-cut theorem.** For a flow $f$ the following are equivalent:
+An **$s$-$t$ cut** $(S,T)$ partitions the vertices so $s\in S$ and $t\in T$. Its capacity counts only original directed edges going **from $S$ to $T$**; edges from $T$ back to $S$ are not included:
 
-1. $f$ is a maximum flow.
-2. The residual graph $G_f$ has no path from $s$ to $t$.
-3. $|f| = c(S, T)$ for some cut $(S, T)$, which is then a **minimum cut**.
+$$c(S,T)=\sum_{(u,v)\in E,\ u\in S,\ v\in T} c(u,v).$$
 
-**Reading the minimum cut from the answer.** When the algorithm stops, let $S$ be the set of vertices still reachable from $s$ in the residual graph, and $T$ the rest. In the small example, $s$ has no outgoing residual edge, so $S = \{s\}$ and $T = \{a, b, t\}$. The cut capacity is $c(s,a) + c(s,b) = 2 + 2 = 4$, equal to the flow value. So 4 is both the maximum flow and the minimum cut. In the video's example the cut falls on the other side: $S = \{s, a, b, c, d, e\}$, $T = \{t\}$, with capacity $10 + 3 + 9 = 22$ (see [Why It Stops](#why-it-stops-no-augmenting-path-left)).
+For any flow $f$, write $f(A,B)$ for the total flow on original edges directed from set $A$ to set $B$. Flow conservation at the vertices in $S\setminus\{s\}$ makes all internal flow cancel, leaving
+
+$$|f|=f(S,T)-f(T,S)\le f(S,T)\le c(S,T).$$
+
+This is the **cut upper bound**: every cut limits every feasible flow. It gives a quick way to bound an answer, but an arbitrary cut need not be the minimum one.
+
+### The Theorem, End to End
+
+**Max-flow min-cut theorem.** For any feasible flow $f$ in a finite network with finite, nonnegative capacities, these statements are equivalent. In optimization notation:
+
+$$\max\{|f|: f\text{ is feasible}\}=\min\{c(S,T):(S,T)\text{ is an }s\text{-}t\text{ cut}\}.$$
+
+1. $f$ is a **maximum flow**.
+2. The residual graph $G_f$ contains **no path from $s$ to $t**.
+3. There is an $s$-$t$ cut $(S,T)$ with $|f|=c(S,T)$. That cut is a **minimum cut**.
+
+The theorem applies to real as well as integer capacities. Integrality affects whether a particular augmenting-path algorithm is guaranteed to finish, not whether the theorem is true.
+
+**Why the three statements are equivalent.**
+
+1. **Maximum flow implies no augmenting path.** If a residual $s$-$t$ path existed, every edge on it would have positive residual capacity. Pushing the path's positive bottleneck would increase $|f|$, contradicting maximality.
+2. **No augmenting path gives an equal-capacity cut.** Let $S$ be exactly the vertices reachable from $s$ in $G_f$, and let $T=V\setminus S$. Then $t\in T$. Every original edge from $S$ to $T$ is saturated; otherwise its forward residual edge would reach a vertex in $T$. Every original edge from $T$ to $S$ carries zero flow; otherwise its reverse residual edge would leave $S$ and reach $T$. Therefore
+
+   $$|f|=f(S,T)-f(T,S)=c(S,T)-0=c(S,T).$$
+3. **An equal-capacity cut proves optimality.** The cut upper bound says every feasible flow $g$ satisfies $|g|\le c(S,T)=|f|$. Thus $f$ is maximum. No cut can have capacity below $|f|$, so this cut is minimum.
+
+Together, this is a proof and a practical certificate: a feasible flow plus a cut of the same value proves both are optimal.
 
 ![Maximum flow 4 equals the minimum cut capacity 4](diagrams/ch12-04-max-flow-min-cut.svg)
+
+*Warm-up: in this small network, the cut leaving $s$ has capacity $2+2=4$, matching the feasible flow of 4.*
+
+### Standard Procedure: Find and Certify a Maximum Flow
+
+This is the Ford-Fulkerson augmenting-path method, followed by the theorem's cut certificate. Edmonds-Karp uses the same procedure but chooses each path with BFS.
+
+1. **Initialize:** set $f(e)=0$ on every edge.
+2. **Build/search the residual graph $G_f$:** a forward edge has room $c(u,v)-f(u,v)$; a backward edge has room $f(u,v)$ and can undo previous flow.
+3. **Find an augmenting path** $P$ from $s$ to $t$. If none exists, go to Step 6.
+4. **Find the bottleneck:** $\Delta=\min_{e\in P} c_f(e)$, the least residual capacity on the path.
+5. **Augment by $\Delta$:** add $\Delta$ on forward original edges and cancel $\Delta$ on backward edges. Update the residual graph and repeat from Step 3.
+6. **Extract the cut:** reuse the final search's reachable set as $S$ and set $T=V\setminus S$.
+7. **Certify:** add the capacities of original edges from $S$ to $T$. The final residual search guarantees this sum equals $|f|$, proving maximum flow equals minimum cut.
+
+**Guarantee to keep straight:** integer capacities make each Ford-Fulkerson augmentation increase the integer flow value by at least 1, so that version terminates. With arbitrary real capacities, a poor path rule can fail to terminate; the theorem still holds, and Edmonds-Karp's BFS rule has the capacity-independent bound $O(VE^2)$ (see [Edmonds-Karp](#edmonds-karp-algorithm)).
+
+### Worked Certificate: The Flow-22 Network
+
+Use the same seven-vertex network and final flow as the [Ford-Fulkerson trace](#worked-example-from-the-video). Its five augmentations push $5,3,8,5,1$ units, giving $|f|=22$. The final residual search reaches $S=\{s,a,b,c,d,e\}$ but cannot reach $t$, so $T=\{t\}$.
+
+![The final residual reachability, induced cut, and max-flow min-cut certificate for the seven-vertex flow-22 example](diagrams/ch12-15-max-flow-min-cut-certificate.svg)
+
+Only three original edges cross this cut from $S$ to $T$:
+
+| Cut edge | Flow / capacity | Capacity counted |
+| :--- | :---: | :---: |
+| $b\to t$ | $10/10$ | 10 |
+| $c\to t$ | $3/3$ | 3 |
+| $e\to t$ | $9/9$ | 9 |
+| **Cut capacity** |  | **22** |
+
+$$|f|=5+3+8+5+1=22=c(S,T)=10+3+9.$$
+
+Every edge crossing into $t$ is full, so there is no residual route from $s$ to $t$. The feasible flow reaches the cut's upper bound: **maximum flow = minimum cut = 22**. This is the general proof applied to the exact final state of Ford-Fulkerson, not just a numerical coincidence.
 
 ---
 
@@ -473,21 +537,10 @@ The residual graph needs $O(V + E)$ space. A specialized algorithm (Hopcroft-Kar
 - End a trace by proving it is maximum: show that no $s \to t$ path remains in $G_f$, and give the cut $(S, T)$ whose capacity equals the flow.
 - Explain **why backward edges exist**: they let a later path cancel flow that an earlier path should not have used.
 - State the difference between Ford-Fulkerson (any path) and Edmonds-Karp (BFS shortest path) and give both bounds.
-- To find a minimum cut, take the vertices reachable from $s$ in the final residual graph. Count only edges from $S$ to $T$.
+- To certify a maximum flow, take the vertices reachable from $s$ in the final residual graph, set $T=V\setminus S$, and count only original edges from $S$ to $T$. Verify that their capacity equals $|f|$.
 - For matching, draw the flow network with all capacities 1 and report the matched $L$-$R$ edges.
 - Frequently asked: the max-flow problem, residual graph construction, a Ford-Fulkerson trace on a given network, and bipartite matching.
 
-### Final Revision Checklist
 
-- I can check the capacity and conservation rules for a given flow.
-- I can trace Ford-Fulkerson step by step with `f/c` labels and a path/bottleneck table.
-- I can derive $O(E \cdot \lvert f^*\rvert)$ and explain why it depends on capacity values.
-- I can build a residual graph with forward and backward edges.
-- I can find an augmenting path, its bottleneck, and update the flow.
-- I can explain why Edmonds-Karp has a running time independent of capacity values.
-- I can state the max-flow min-cut theorem and read a minimum cut from a final residual graph.
-- I can reduce bipartite matching to maximum flow.
-
----
 
 [Previous: Chapter 11 - Graph Algorithms](../Chapter%2011%20-%20Graph%20Algorithms/README.md) | [Home](../README.md) | [Next: Chapter 13 - Approximation Algorithms](../Chapter%2013%20-%20Approximation%20Algorithms/README.md)
