@@ -464,7 +464,7 @@ $$
 
 #### Worked Example: Coins $[5, 1, 2, 10, 6, 2]$
 
-| $i$ | Coin $c_i$ | Include ($c_i + F(i-2)$) | Exclude ($F(i-1)$) | $F(i)$ | Selected coins so far |
+| $i$ | Coin $c_i$ | Include (cᵢ + F(i − 2)) | Exclude (F(i − 1)) | $F(i)$ | Selected coins so far |
 | :---: | :---: | :---: | :---: | :---: | :--- |
 | 0 | — | — | — | 0 | none |
 | 1 | 5 | $5 + 0 = 5$ | 0 | **5** | $\{c_1\}$ |
