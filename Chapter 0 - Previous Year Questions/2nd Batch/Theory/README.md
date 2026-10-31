@@ -219,7 +219,8 @@ These classes are about **decision problems** (yes or no answers).
 
 **Answer.**
 
-In an **unweighted** graph, every edge counts as one step, so distance means the number of edges. Breadth-first search (**BFS**) visits vertices level by level, using a queue (a first-in, first-out list). The first time BFS visits a vertex, it has found a shortest path to it (see [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md) and [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
+**Breadth-First Search (BFS)** finds the shortest path in an unweighted graph by visiting vertices level by level from the source vertex.
+Since every edge has equal cost, the first time BFS reaches a vertex, it has found a shortest path to that vertex. BFS uses a FIFO queue.(see [Chapter 4](../../../Chapter%204%20-%20Searching%20and%20Basic%20Traversal/README.md) and [Chapter 11](../../../Chapter%2011%20-%20Graph%20Algorithms/README.md)).
 
 **Steps**
 
