@@ -13,9 +13,10 @@ A recurrence relation expresses the running time of a recursive algorithm in ter
 1. [What Is a Recurrence Relation?](#1-what-is-a-recurrence-relation)
 2. [Case Study: Binary Search Recurrence](#2-case-study-binary-search-recurrence)
    - [Solving by Expansion (Unrolling)](#solving-by-expansion-recursion-tree)
-3. [The Substitution Method (Inductive Proof)](#3-the-substitution-method-inductive-proof)
-   - [A Repeatable Proof Checklist](#a-repeatable-proof-checklist)
-   - [Five Step-by-Step Substitution Examples](#five-step-by-step-substitution-examples)
+3. [The Substitution Method (Repeated Expansion)](#3-the-substitution-method-repeated-expansion)
+   - [A Repeatable Expansion Process](#a-repeatable-expansion-process)
+   - [Five Step-by-Step Examples](#five-step-by-step-examples)
+   - [Quick Revision Sheet](#quick-revision-sheet)
 4. [General Divide-and-Conquer Recurrence](#4-general-divide-and-conquer-recurrence)
 5. [Master Theorem](#5-master-theorem)
 6. [Master Theorem: Worked Examples by Case](#6-master-theorem-worked-examples-by-case)
@@ -107,23 +108,96 @@ So **binary search runs in $O(\log n)$ time**, matching the iterative analysis i
 
 ---
 
-## 3. The Substitution Method (Inductive Proof)
+## 3. The Substitution Method (Repeated Expansion)
 
-Expansion helps us **guess** a recurrence's growth. The formal **substitution method** then proves that guess by induction: assume a bound for smaller inputs, substitute that assumption into the recurrence, and choose constants that make the inequality work. To prove a tight bound $\Theta(g(n))$, prove both $T(n)=O(g(n))$ and $T(n)=\Omega(g(n))$.
+Here, **substitution method** means repeatedly substituting the recurrence into itself (also called the **expansion** or **unrolling** method). The goal is to find a pattern, express it after $k$ substitutions, and choose $k$ so the input reaches the base case. This gives a direct, step-by-step way to find the time complexity; it does not require an upper-bound/lower-bound induction proof.
 
-For examples with repeated halving, we assume $n$ is a power of two so each half is exact. Replacing exact halves with floors or ceilings changes small details of the induction, not the asymptotic result.
+For halving recurrences, assume $n$ is a power of two so the divisions are exact. For recurrences that decrease by one, use the stated base case, here $T(1)=1$.
 
-### A Repeatable Proof Checklist
+### A Repeatable Expansion Process
 
-1. **Write the recurrence and base case.** Be clear about the input sizes for which the recursive rule applies.
-2. **Guess a bound.** Use a short expansion, a recursion tree, or a known sum to predict $g(n)$.
-3. **Prove the upper bound.** Assume $T(m) \le Cg(m)$ for the smaller input(s) $m$, substitute, and choose $C$ so the result is at most $Cg(n)$.
-4. **Prove the lower bound.** Assume $T(m) \ge cg(m)$, substitute, and choose $c$ so the result is at least $cg(n)$.
-5. **Check the base case(s).** Constants must make the claim true there too. Then state the combined $\Theta$ result.
+1. Write the recurrence and its base case.
+2. Substitute the recurrence into itself one or more times.
+3. Identify the pattern after $k$ substitutions.
+4. Find $k$ by setting the remaining input equal to the base-case input.
+5. Substitute that value of $k$ into the pattern and state the asymptotic complexity.
 
-The inductive hypothesis is about **smaller** inputs; it is not the answer itself. The algebra after substitution is the part that confirms (or rejects) the guess.
+### Five Step-by-Step Examples
 
-### Five Step-by-Step Substitution Examples
+#### Example 1: $T(n)=2T(n/2)+n$
+
+Let $T(1)=1$ and assume $n$ is a power of two.
+
+$$
+\begin{aligned}
+T(n) &= 2T(n/2)+n \\
+     &= 2[2T(n/4)+n/2]+n \\
+     &= 4T(n/4)+2n \\
+     &= 4[2T(n/8)+n/4]+2n \\
+     &= 8T(n/8)+3n.
+\end{aligned}
+$$
+
+After $k$ substitutions, $T(n)=2^kT(n/2^k)+kn$. Stop when $n/2^k=1$, so $k=\log_2 n$. Therefore $T(n)=nT(1)+n\log_2n=n+n\log_2n$, and
+
+$$\boxed{T(n)=\Theta(n\log n)}.$$
+
+#### Example 2: $T(n)=T(n/2)+1$
+
+Let $T(1)=1$ and assume $n$ is a power of two.
+
+$$
+T(n)=T(n/2)+1=T(n/4)+2=T(n/8)+3=\cdots=T(n/2^k)+k.
+$$
+
+Stop when $n/2^k=1$, giving $k=\log_2 n$. Thus $T(n)=T(1)+\log_2n=1+\log_2n$, and
+
+$$\boxed{T(n)=\Theta(\log n)}.$$
+
+#### Example 3: $T(n)=2T(n/2)+1$
+
+Let $T(1)=1$ and assume $n$ is a power of two.
+
+$$
+T(n)=2T(n/2)+1=4T(n/4)+3=8T(n/8)+7=\cdots=2^kT(n/2^k)+(2^k-1).
+$$
+
+Stop when $n/2^k=1$, giving $k=\log_2n$. Hence $T(n)=nT(1)+(n-1)=2n-1$, and
+
+$$\boxed{T(n)=\Theta(n)}.$$
+
+#### Example 4: $T(n)=T(n-1)+1$
+
+Let $T(1)=1$.
+
+$$
+T(n)=T(n-1)+1=T(n-2)+2=T(n-3)+3=\cdots=T(n-k)+k.
+$$
+
+Stop when $n-k=1$, so $k=n-1$. Then $T(n)=T(1)+n-1=n$, and
+
+$$\boxed{T(n)=\Theta(n)}.$$
+
+#### Example 5: $T(n)=T(n-1)+n$
+
+Let $T(1)=1$.
+
+$$
+\begin{aligned}
+T(n)&=T(n-1)+n \\
+    &=T(n-2)+(n-1)+n \\
+    &=T(n-3)+(n-2)+(n-1)+n \\
+    &=T(n-k)+\sum_{i=0}^{k-1}(n-i).
+\end{aligned}
+$$
+
+Stop when $n-k=1$, so $k=n-1$. Therefore $T(n)=T(1)+2+3+\cdots+n=1+\frac{n(n+1)}2-1=\frac{n(n+1)}2$, and
+
+$$\boxed{T(n)=\Theta(n^2)}.$$
+
+### Optional: Proving Bounds by Induction
+
+The expansion method above finds the pattern directly. A different, more formal use of the name substitution method proves a guessed bound with induction. The following proofs are included as an optional reference.
 
 #### Example 1: $T(n)=2T(n/2)+n$ — the bound $\Theta(n\log n)$
 
@@ -280,6 +354,18 @@ $$
 $$
 
 The last two examples also show the basic pattern for $T(n)=T(n-1)+f(n)$: the work from successive calls accumulates, so the recurrence is naturally solved by expansion or induction rather than the Master Theorem.
+
+### Quick Revision Sheet
+
+| Recurrence | Pattern after $k$ substitutions | $k$ to reach the base case | Complexity |
+| --- | --- | --- | --- |
+| $T(n)=2T(n/2)+n$ | $2^kT(n/2^k)+kn$ | $\log_2 n$ | $\Theta(n\log n)$ |
+| $T(n)=T(n/2)+1$ | $T(n/2^k)+k$ | $\log_2 n$ | $\Theta(\log n)$ |
+| $T(n)=2T(n/2)+1$ | $2^kT(n/2^k)+(2^k-1)$ | $\log_2 n$ | $\Theta(n)$ |
+| $T(n)=T(n-1)+1$ | $T(n-k)+k$ | $n-1$ | $\Theta(n)$ |
+| $T(n)=T(n-1)+n$ | $T(n-k)+\sum_{i=0}^{k-1}(n-i)$ | $n-1$ | $\Theta(n^2)$ |
+
+**Central idea:** when the input is halved, $n,n/2,n/4,\ldots$, so $k=\log_2 n$. When it decreases by one, $n,n-1,n-2,\ldots$, so $k=n-1$.
 
 ---
 
