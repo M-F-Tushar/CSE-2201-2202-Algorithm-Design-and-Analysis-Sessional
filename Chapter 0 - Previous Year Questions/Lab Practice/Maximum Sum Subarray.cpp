@@ -57,6 +57,20 @@ int divideConquer(const vector<int>& a, int b, int e)
 
 }
 
+
+// ---------- Approach 2: Kadane's Algorithm ---------
+int kadane(vector<int> a)
+{
+    int currentSum = a[0];
+    int maxSum = a[0];
+    for (int i = 1; i < a.size(); i++)
+    {
+        currentSum = max(a[i], currentSum + a[i]);
+        maxSum = max(maxSum, currentSum);
+    }
+    return maxSum;
+}
+
 int main()
 {
     vector<int> a = {2, 3, -8, 7, 2, -1, 3};
@@ -71,6 +85,7 @@ int main()
     cout << endl;
 
     cout << "Maximum Sum: "<< divideConquer(a, 0, n - 1);
+    cout << "Maximum Sum : "<< kadane(a) << endl;
 
     return 0;
 }
