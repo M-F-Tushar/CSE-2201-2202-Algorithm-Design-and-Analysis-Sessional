@@ -28,6 +28,7 @@ This chapter keeps only the requested Dynamic Programming topics and the request
    - [Rod Cutting](#rod-cutting)
    - [Longest Common Subsequence (LCS)](#longest-common-subsequence-lcs)
    - [Longest Increasing Subsequence (LIS)](#longest-increasing-subsequence-lis)
+     - [LCS-Style Matrix Example](#classroom-problem-lcs-style-matrix-tabular-format)
    - [Matrix Chain Multiplication](#matrix-chain-multiplication)
    - [Optimal Binary Search Tree (Optimal BST)](#optimal-binary-search-tree-optimal-bst)
    - [Multistage Graph](#multistage-graph)
@@ -1108,7 +1109,7 @@ Given a sequence of numbers, find the length of its longest **strictly increasin
 
 The endpoint-based recurrence below is a bottom-up dynamic-programming solution. It has **optimal substructure**: if a longest increasing subsequence ends at $a_i$ and its previous element is $a_j$, the part ending at $a_j$ must itself be a longest subsequence ending there; otherwise, replacing that part would give a longer subsequence ending at $a_i$. It also reuses states: the value for an earlier position $j$ can be considered by many later positions, so it is computed once and then reused.
 
-This is not a greedy method that commits to one locally attractive next value. It checks every valid earlier endpoint. Unlike LCS, whose state uses two sequence-prefix lengths, LIS has one state per input position, so this version uses a **one-dimensional table**, not an LCS-style matrix.
+This is not a greedy method that commits to one locally attractive next value. It checks every valid earlier endpoint. The direct endpoint-state recurrence has one state per input position, so its native table is **one-dimensional**. The classroom example below also shows an equivalent reduction to LCS, which uses the same prefix-by-prefix matrix procedure as the preceding section.
 
 #### Subproblem Decomposition
 
@@ -1143,22 +1144,88 @@ For $A=\langle 3,10,2,1,20,4\rangle$, fill states from left to right. For each p
 
 The one-dimensional table is $[1,2,1,1,3,2]$, so the LIS length is **$\max_i dp[i]=3$**. One subsequence witnessing this length is $\langle 3,10,20\rangle$, at positions 1, 2, and 5. Since $dp[6]=2$, the answer is not always the last table entry $dp[n]$. The recurrence stores lengths only; reconstructing a subsequence would require also storing a predecessor position for each state.
 
+#### Classroom Problem: LCS-Style Matrix Tabular Format
+
+The one-dimensional table above is the proper DP table for the endpoint recurrence used by the reference. To follow the classroom matrix procedure used for LCS, use an equivalent reduction: keep $A$ in its original order, and form $B$ by sorting and removing duplicate values.
+
+For $A=\langle 3,10,2,1,20,4\rangle$:
+
+$$
+B=\operatorname{sort}(\operatorname{distinct}(A))=\langle 1,2,3,4,10,20\rangle
+$$
+
+Because $B$ is strictly increasing, every common subsequence of $A$ and $B$ is strictly increasing. Conversely, every strictly increasing subsequence of $A$ appears in $B$ in the same order. Therefore, $\operatorname{LIS}(A)=\operatorname{LCS}(A,B)$. Removing duplicates is essential for a **strictly** increasing subsequence; for example, if $A=\langle 2,2\rangle$, use $B=\langle 2\rangle$, not $\langle 2,2\rangle$.
+
+Let $c[i,j]$ be the LCS length of the first $i$ values of $A$ and the first $j$ values of $B$. The recurrence is the same as in the LCS section:
+
+$$
+c[i,j]=
+\begin{cases}
+0, & i=0 \text{ or } j=0 \\
+c[i-1,j-1]+1, & a_i=b_j \\
+\max(c[i-1,j],c[i,j-1]), & a_i\ne b_j
+\end{cases}
+$$
+
+Here, rows follow $A=\langle 3,10,2,1,20,4\rangle$ and columns follow $B=\langle 1,2,3,4,10,20\rangle$. The boundary row and column represent empty prefixes. Arrow legend:
+
+- $\nwarrow$ means the values match, so the value comes from the diagonal cell plus 1.
+- $\uparrow$ means the values do not match and the upper cell is chosen.
+- $\leftarrow$ means the values do not match and the left cell is chosen.
+
+On a mismatch tie, choose $\uparrow$, using the same up-first rule as the LCS example.
+
+| $i \backslash j$ | - | 1 | 2 | 3 | 4 | 10 | 20 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| - | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 3 | 0 | 0 ($\uparrow$) | 0 ($\uparrow$) | 1 ($\nwarrow$) | 1 ($\leftarrow$) | 1 ($\leftarrow$) | 1 ($\leftarrow$) |
+| 10 | 0 | 0 ($\uparrow$) | 0 ($\uparrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) | 2 ($\nwarrow$) | 2 ($\leftarrow$) |
+| 2 | 0 | 0 ($\uparrow$) | 1 ($\nwarrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) | 2 ($\uparrow$) | 2 ($\uparrow$) |
+| 1 | 0 | 1 ($\nwarrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) | 2 ($\uparrow$) | 2 ($\uparrow$) |
+| 20 | 0 | 1 ($\uparrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) | 2 ($\uparrow$) | **3** ($\nwarrow$) |
+| 4 | 0 | 1 ($\uparrow$) | 1 ($\uparrow$) | 1 ($\uparrow$) | 2 ($\nwarrow$) | 2 ($\uparrow$) | 3 ($\uparrow$) |
+
+Traceback starts at $c[6,6]=3$:
+
+1. $4\ne20$, so move up to $c[5,6]$.
+2. $20=20$, so record 20 and move diagonally to $c[4,5]$.
+3. $1\ne10$ and then $2\ne10$; both choose up, reaching $c[2,5]$.
+4. $10=10$, so record 10 and move diagonally to $c[1,4]$.
+5. $3\ne4$, so move left to $c[1,3]$.
+6. $3=3$, so record 3 and move diagonally to the boundary.
+
+Reverse the collected values: the LIS is **$\langle 3,10,20\rangle$**, with length **3**. This is a genuine LCS prefix matrix and supports the same cell-by-cell traceback as the preceding section; it is an equivalent formulation, not the native one-dimensional table of the endpoint recurrence.
+
 #### Visual Map: LIS Endpoint States and Transitions
 
 ![Longest Increasing Subsequence (LIS) Endpoint States and Transitions](diagrams/ch8-18-lis-endpoint-states.svg)
 
-#### Algorithm
+#### Visual Map: LCS-Style Matrix Reduction
+
+![Longest Increasing Subsequence (LIS) as an LCS Prefix Matrix](diagrams/ch8-19-lis-lcs-matrix.svg)
+
+#### Endpoint-State Algorithm
 
 1. If the sequence is empty, report length $0$.
 2. Give every input position an initial table value of $1$, representing the subsequence containing only that element.
 3. Process positions from left to right. For each position $i$, inspect every earlier position $j$; when $a_j<a_i$, compare the current value at $i$ with $dp[j]+1$ and keep the larger value.
 4. After all states are filled, report the largest table value.
 
+#### LCS-Style Matrix Procedure
+
+1. Form $B$ by sorting the distinct values of $A$.
+2. Create the prefix table $c[0...n][0...u]$, where $u$ is the number of distinct values, and initialize the empty-prefix row and column to $0$.
+3. Fill the table from top to bottom and left to right. For a match, add $1$ to the diagonal value; for a mismatch, copy the larger of the upper and left values. Record the chosen direction in each cell.
+4. The value in $c[n,u]$ is the LIS length. Follow the recorded directions backward to recover an LIS.
+
 #### Complexity Analysis
 
-- **Time:** $\Theta(n^2)$, because each position checks all earlier positions.
-- **Auxiliary space:** $\Theta(n)$ for the one-dimensional table.
-- This is the quadratic endpoint-state DP shown here; faster LIS methods use a different formulation.
+| Formulation | Time Complexity | Auxiliary Space | Notes |
+| :--- | :--- | :--- | :--- |
+| Endpoint-state DP | $\Theta(n^2)$ | $\Theta(n)$ | The direct recurrence used by the reference. |
+| LCS-style matrix | $O(n\log n+nu)$ | $\Theta(nu)$ | Sort and deduplicate, then fill an $n\times u$ prefix matrix; $u$ is the number of distinct values. |
+
+When all input values are distinct, $u=n$, so the matrix formulation uses $\Theta(n^2)$ table space. The endpoint-state formulation remains the more space-efficient version.
 
 ---
 
@@ -1831,7 +1898,8 @@ RELIABILITY-DESIGN(stages, budget)
 | 0/1 Knapsack | $nW$ | $\Theta(1)$ | $\Theta(nW)$ | $\Theta(nW)$, optimized to $\Theta(W)$ |
 | Rod Cutting | $n^2$ in 2D form | $\Theta(1)$ | $\Theta(n^2)$ | $\Theta(n^2)$, optimized to $\Theta(n)$ |
 | Longest Common Subsequence (LCS) | $mn$ | $\Theta(1)$ | $\Theta(mn)$ | $\Theta(mn)$ |
-| Longest Increasing Subsequence (LIS) | $n$ endpoint states | Up to $n$ earlier positions | $\Theta(n^2)$ | $\Theta(n)$ |
+| Longest Increasing Subsequence (LIS), endpoint-state DP | $n$ endpoint states | Up to $n$ earlier positions | $\Theta(n^2)$ | $\Theta(n)$ |
+| Longest Increasing Subsequence (LIS), LCS matrix reduction | $nu$ prefix pairs | $\Theta(1)$ | $O(n\log n+nu)$ | $\Theta(nu)$ |
 | Matrix Chain Multiplication | $n^2$ intervals | Up to $n$ split points | $\Theta(n^3)$ | $\Theta(n^2)$ |
 | Optimal Binary Search Tree (Optimal BST) | $n^2$ intervals | Up to $n$ root choices | $\Theta(n^3)$ | $\Theta(n^2)$ |
 | Multistage Graph | $V$ vertices | Outgoing edges scanned once overall | $\Theta(V+E)$ | $\Theta(V)$ |
@@ -1842,6 +1910,7 @@ Important notes:
 
 - $W$ and $B$ are numeric limits, so 0/1 Knapsack and Reliability Design are pseudo-polynomial in those values.
 - TSP remains exponential even with DP because it stores subset states.
+- For the LCS-matrix formulation of LIS, $u$ is the number of distinct values in the input sequence.
 - The all-pairs shortest path (Floyd-Warshall) and single-source shortest path (Bellman-Ford) algorithms are covered in [Chapter 11 - Graph Algorithms](../Chapter%2011%20-%20Graph%20Algorithms/README.md), since they are graph algorithms rather than problems decomposed by array/interval/subset state the way the rest of this chapter is.
 
 ---

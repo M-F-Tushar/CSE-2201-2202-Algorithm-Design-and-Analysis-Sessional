@@ -519,6 +519,30 @@ lis_endpoint_states = D(
     caption="Answer: max_i dp[i] = 3. Since dp[6] = 2, the best subsequence need not end at the last position.",
 )
 
+# 19 ---------------------------------------------------- LIS as an LCS matrix
+lis_lcs_matrix = D(
+    key="ch8-19-lis-lcs-matrix",
+    title="Longest Increasing Subsequence (LIS) as an LCS Prefix Matrix",
+    size=(1200, 520),
+    flow="V",
+    containers=[
+        N("box_conversion", "Create the Strictly Increasing Value Sequence", 40, 76, 360, 360, "container"),
+        N("box_matrix", "Apply the LCS Matrix Recurrence and Traceback", 430, 76, 730, 360, "container"),
+    ],
+    nodes=[
+        N("input", "Input A\n[3, 10, 2, 1, 20, 4]", 70, 140, 300, 70, "blue", size=14, bold=True),
+        N("sorted", "B = sort(unique(A))\n[1, 2, 3, 4, 10, 20]", 70, 280, 300, 76, "teal", size=13, bold=True),
+        N("rule", "Zero boundary row and column\nMatch: c[i,j] = c[i-1,j-1] + 1\nMismatch: max(c[i-1,j], c[i,j-1])", 480, 145, 630, 100, "yellow", size=14),
+        N("trace", "Read c[6,6] = 3\nTraceback gives LIS [3, 10, 20]", 650, 300, 290, 70, "green", size=14, bold=True),
+    ],
+    edges=[
+        E("input", "sorted", "sort and remove duplicates", route="straight"),
+        E("sorted", "rule", route="straight"),
+        E("rule", "trace", "trace back", route="v", color="#2f9e44"),
+    ],
+    caption="LCS(A, sorted(unique(A))) equals LIS(A) for a strictly increasing subsequence.",
+)
+
 DIAGRAMS = [
     dp_design,
     repeated_work,
@@ -538,4 +562,5 @@ DIAGRAMS = [
     tsp_subset,
     reliability_budget,
     lis_endpoint_states,
+    lis_lcs_matrix,
 ]

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-label="Longest Increasing Subsequence (LIS) as an LCS Prefix Matrix">
+<rect width="1200" height="520" fill="#ffffff" rx="10"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="21" font-weight="bold" fill="#1e1e1e"><tspan x="600.0" y="34.0">Longest Increasing Subsequence (LIS) as an LCS Prefix Matrix</tspan></text>
+<rect x="40.0" y="76.0" width="360.0" height="360.0" rx="10" fill="#f8f9fa" opacity="0.4"/>
+<path d="M40.7 74.7 Q220.8 78.4 399.3 77.3 M398.8 74.6 Q400.2 256.3 398.6 435.2 M399.7 437.4 Q221.5 438.8 38.8 437.0 M41.1 436.3 Q39.9 257.4 39.6 76.0" fill="none" stroke="#adb5bd" stroke-width="1.6" stroke-dasharray="6 4" stroke-linecap="round" opacity="0.8"/>
+<rect x="54.0" y="65.0" width="376" height="22" rx="4" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#adb5bd"><tspan x="242.0" y="76.0">Create the Strictly Increasing Value Sequence</tspan></text>
+<rect x="430.0" y="76.0" width="730.0" height="360.0" rx="10" fill="#f8f9fa" opacity="0.4"/>
+<path d="M431.0 76.8 Q797.0 76.5 1161.6 76.9 M1160.0 76.0 Q1160.5 255.4 1160.8 435.1 M1161.0 436.1 Q793.7 436.5 430.8 435.2 M431.3 436.8 Q430.4 254.2 428.7 77.5" fill="none" stroke="#adb5bd" stroke-width="1.6" stroke-dasharray="6 4" stroke-linecap="round" opacity="0.8"/>
+<rect x="444.0" y="65.0" width="376" height="22" rx="4" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#adb5bd"><tspan x="632.0" y="76.0">Apply the LCS Matrix Recurrence and Traceback</tspan></text>
+<path d="M219.9 209.5 Q220.0 245.1 220.6 280.5" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M215.9 269.8 L220.0 280.0 L224.1 269.8" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="109.0" y="233.0" width="222" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="220.0" y="245.0">sort and remove duplicates</tspan></text>
+<path d="M369.8 285.4 Q466.9 266.7 562.2 245.4" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M552.1 251.2 L561.3 245.0 L550.4 243.1" fill="none" stroke="#1e1e1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M794.4 244.7 Q794.7 272.8 795.1 299.7" fill="none" stroke="#2f9e44" stroke-width="1.9" stroke-linecap="round" opacity="0.85"/>
+<path d="M790.9 289.8 L795.0 300.0 L799.1 289.8" fill="none" stroke="#2f9e44" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="748.0" y="260.5" width="94" height="24" rx="6" fill="#ffffff" opacity="0.95"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="normal" fill="#495057"><tspan x="795.0" y="272.5">trace back</tspan></text>
+<rect x="70.0" y="140.0" width="300.0" height="70.0" rx="10" fill="#a5d8ff"/>
+<path d="M68.9 140.2 Q219.4 140.2 369.5 138.5 M370.2 139.1 Q367.3 175.9 370.1 209.5 M371.2 208.5 Q219.5 211.4 69.0 210.1 M68.5 209.9 Q69.1 172.5 70.8 140.1" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
+<path d="M68.9 141.3 Q221.1 140.2 371.0 140.9 M370.4 140.6 Q372.2 177.1 368.8 210.4 M368.9 209.0 Q219.4 210.1 69.8 211.4 M71.3 211.1 Q68.9 176.2 70.6 141.1" fill="none" stroke="#1971c2" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="bold" fill="#1e1e1e"><tspan x="220.0" y="165.8">Input A</tspan><tspan x="220.0" y="184.2">[3, 10, 2, 1, 20, 4]</tspan></text>
+<rect x="70.0" y="280.0" width="300.0" height="76.0" rx="10" fill="#99e9f2"/>
+<path d="M70.1 279.7 Q217.4 279.8 370.8 281.1 M370.1 279.5 Q369.9 315.9 368.6 354.5 M369.9 356.5 Q218.4 354.5 68.4 355.8 M69.2 357.2 Q70.5 318.6 69.2 279.3" fill="none" stroke="#0c8599" stroke-width="2" stroke-linecap="round"/>
+<path d="M71.4 279.7 Q222.3 282.0 370.1 281.2 M371.1 279.4 Q371.1 315.2 370.7 354.9 M371.3 357.2 Q221.6 353.4 71.1 356.5 M70.4 355.2 Q68.7 320.8 69.5 280.2" fill="none" stroke="#0c8599" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="13" font-weight="bold" fill="#1e1e1e"><tspan x="220.0" y="309.4">B = sort(unique(A))</tspan><tspan x="220.0" y="326.6">[1, 2, 3, 4, 10, 20]</tspan></text>
+<rect x="480.0" y="145.0" width="630.0" height="100.0" rx="10" fill="#ffec99"/>
+<path d="M479.8 144.1 Q793.5 147.1 1109.1 144.9 M1109.3 145.3 Q1108.7 192.8 1110.3 246.5 M1110.2 244.0 Q796.7 246.3 479.2 245.9 M478.9 246.3 Q481.1 195.2 481.0 145.9" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
+<path d="M480.5 145.9 Q795.7 143.5 1108.6 145.5 M1110.2 144.3 Q1109.7 196.7 1111.6 243.7 M1109.4 243.9 Q792.2 243.3 479.6 244.9 M481.1 245.8 Q481.5 194.9 478.5 143.7" fill="none" stroke="#f08c00" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#1e1e1e"><tspan x="795.0" y="176.5">Zero boundary row and column</tspan><tspan x="795.0" y="195.0">Match: c[i,j] = c[i-1,j-1] + 1</tspan><tspan x="795.0" y="213.5">Mismatch: max(c[i-1,j], c[i,j-1])</tspan></text>
+<rect x="650.0" y="300.0" width="290.0" height="70.0" rx="10" fill="#b2f2bb"/>
+<path d="M650.9 301.0 Q793.0 302.3 940.7 298.5 M940.9 300.6 Q940.8 336.0 940.1 369.5 M940.4 371.2 Q793.1 368.2 651.2 370.4 M651.4 369.7 Q652.3 337.0 650.1 301.2" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round"/>
+<path d="M649.9 298.5 Q797.0 301.5 939.1 300.2 M938.7 300.8 Q937.7 332.5 939.9 369.1 M940.3 368.9 Q793.7 367.5 650.8 370.6 M649.8 368.4 Q652.1 334.2 648.9 299.6" fill="none" stroke="#2f9e44" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="bold" fill="#1e1e1e"><tspan x="795.0" y="325.8">Read c[6,6] = 3</tspan><tspan x="795.0" y="344.2">Traceback gives LIS [3, 10, 20]</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-family='"Segoe Print", "Bradley Hand", Chilanka, "Comic Sans MS", "Comic Neue", cursive' font-size="14" font-weight="normal" fill="#868e96"><tspan x="600.0" y="498.0">LCS(A, sorted(unique(A))) equals LIS(A) for a strictly increasing subsequence.</tspan></text>
+</svg>
