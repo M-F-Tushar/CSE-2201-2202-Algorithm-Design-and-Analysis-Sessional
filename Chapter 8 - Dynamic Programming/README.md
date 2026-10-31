@@ -1122,7 +1122,7 @@ $$
 The strict comparison means equal values do not extend one another. The overall answer may end at any position, not necessarily at $n$:
 
 $$
-\operatorname{LIS}(A) =
+\mathrm{LIS}(A) =
 \begin{cases}
 0, & n=0 \\
 \max_{1 \le i \le n} dp[i], & n>0
@@ -1151,10 +1151,10 @@ The one-dimensional table above is the proper DP table for the endpoint recurren
 For $A=\langle 3,10,2,1,20,4\rangle$:
 
 $$
-B=\operatorname{sort}(\operatorname{distinct}(A))=\langle 1,2,3,4,10,20\rangle
+B=\mathrm{sort}(\mathrm{distinct}(A))=\langle 1,2,3,4,10,20\rangle
 $$
 
-Because $B$ is strictly increasing, every common subsequence of $A$ and $B$ is strictly increasing. Conversely, every strictly increasing subsequence of $A$ appears in $B$ in the same order. Therefore, $\operatorname{LIS}(A)=\operatorname{LCS}(A,B)$. Removing duplicates is essential for a **strictly** increasing subsequence; for example, if $A=\langle 2,2\rangle$, use $B=\langle 2\rangle$, not $\langle 2,2\rangle$.
+Because $B$ is strictly increasing, every common subsequence of $A$ and $B$ is strictly increasing. Conversely, every strictly increasing subsequence of $A$ appears in $B$ in the same order. Therefore, $\mathrm{LIS}(A)=\mathrm{LCS}(A,B)$. Removing duplicates is essential for a **strictly** increasing subsequence; for example, if $A=\langle 2,2\rangle$, use $B=\langle 2\rangle$, not $\langle 2,2\rangle$.
 
 Let $c[i,j]$ be the LCS length of the first $i$ values of $A$ and the first $j$ values of $B$. The recurrence is the same as in the LCS section:
 
