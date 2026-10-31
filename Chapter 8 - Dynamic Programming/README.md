@@ -27,6 +27,7 @@ This chapter keeps only the requested Dynamic Programming topics and the request
    - [0/1 Knapsack](#01-knapsack)
    - [Rod Cutting](#rod-cutting)
    - [Longest Common Subsequence (LCS)](#longest-common-subsequence-lcs)
+   - [Longest Increasing Subsequence (LIS)](#longest-increasing-subsequence-lis)
    - [Matrix Chain Multiplication](#matrix-chain-multiplication)
    - [Optimal Binary Search Tree (Optimal BST)](#optimal-binary-search-tree-optimal-bst)
    - [Multistage Graph](#multistage-graph)
@@ -1091,6 +1092,76 @@ LCS-LENGTH(X, Y, m, n)
 
 ---
 
+### Longest Increasing Subsequence (LIS)
+
+#### Problem Statement
+
+Given a sequence of numbers, find the length of its longest **strictly increasing subsequence**. A subsequence keeps the original relative order of its elements, but those elements do not have to be adjacent. For example, $\langle 3,10,20\rangle$ is a subsequence of $\langle 3,10,2,1,20,4\rangle$.
+
+#### Inputs and Output
+
+- **Input:** a sequence $A=\langle a_1,\dots,a_n\rangle$ of $n$ numbers.
+- **Output:** the length of a longest strictly increasing subsequence.
+- **Empty input:** the answer is $0$.
+
+#### Why LIS Is a Dynamic Programming Problem
+
+The endpoint-based recurrence below is a bottom-up dynamic-programming solution. It has **optimal substructure**: if a longest increasing subsequence ends at $a_i$ and its previous element is $a_j$, the part ending at $a_j$ must itself be a longest subsequence ending there; otherwise, replacing that part would give a longer subsequence ending at $a_i$. It also reuses states: the value for an earlier position $j$ can be considered by many later positions, so it is computed once and then reused.
+
+This is not a greedy method that commits to one locally attractive next value. It checks every valid earlier endpoint. Unlike LCS, whose state uses two sequence-prefix lengths, LIS has one state per input position, so this version uses a **one-dimensional table**, not an LCS-style matrix.
+
+#### Subproblem Decomposition
+
+Let $dp[i]$ be the length of the longest strictly increasing subsequence that **ends exactly at position $i$**. The element $a_i$ by itself is always a subsequence, so the initial value for every state is $1$. A previous position can extend that subsequence only when it is earlier and its value is strictly smaller:
+
+$$
+dp[i] = \max\left(\{1\} \cup \{dp[j]+1 \mid 1 \le j < i \text{ and } a_j < a_i\}\right), \quad 1 \le i \le n
+$$
+
+The strict comparison means equal values do not extend one another. The overall answer may end at any position, not necessarily at $n$:
+
+$$
+\operatorname{LIS}(A) =
+\begin{cases}
+0, & n=0 \\
+\max_{1 \le i \le n} dp[i], & n>0
+\end{cases}
+$$
+
+#### Tabulation Walkthrough
+
+For $A=\langle 3,10,2,1,20,4\rangle$, fill states from left to right. For each position, consider only earlier positions $j$ for which $a_j<a_i$; each such predecessor offers the candidate length $dp[j]+1$.
+
+| Position $i$ | Value $a_i$ | Candidate lengths from valid earlier positions | $dp[i]$ |
+| :---: | :---: | :--- | :---: |
+| 1 | 3 | No valid predecessor; keep the base value | 1 |
+| 2 | 10 | $dp[1]+1=2$ | 2 |
+| 3 | 2 | No valid predecessor; keep the base value | 1 |
+| 4 | 1 | No valid predecessor; keep the base value | 1 |
+| 5 | 20 | $dp[1]+1=2$, $dp[2]+1=3$, $dp[3]+1=2$, $dp[4]+1=2$ | 3 |
+| 6 | 4 | $dp[1]+1=2$, $dp[3]+1=2$, $dp[4]+1=2$ | 2 |
+
+The one-dimensional table is $[1,2,1,1,3,2]$, so the LIS length is **$\max_i dp[i]=3$**. One subsequence witnessing this length is $\langle 3,10,20\rangle$, at positions 1, 2, and 5. Since $dp[6]=2$, the answer is not always the last table entry $dp[n]$. The recurrence stores lengths only; reconstructing a subsequence would require also storing a predecessor position for each state.
+
+#### Visual Map: LIS Endpoint States and Transitions
+
+![Longest Increasing Subsequence (LIS) Endpoint States and Transitions](diagrams/ch8-18-lis-endpoint-states.svg)
+
+#### Algorithm
+
+1. If the sequence is empty, report length $0$.
+2. Give every input position an initial table value of $1$, representing the subsequence containing only that element.
+3. Process positions from left to right. For each position $i$, inspect every earlier position $j$; when $a_j<a_i$, compare the current value at $i$ with $dp[j]+1$ and keep the larger value.
+4. After all states are filled, report the largest table value.
+
+#### Complexity Analysis
+
+- **Time:** $\Theta(n^2)$, because each position checks all earlier positions.
+- **Auxiliary space:** $\Theta(n)$ for the one-dimensional table.
+- This is the quadratic endpoint-state DP shown here; faster LIS methods use a different formulation.
+
+---
+
 ### Matrix Chain Multiplication
 
 #### Problem Statement
@@ -1760,6 +1831,7 @@ RELIABILITY-DESIGN(stages, budget)
 | 0/1 Knapsack | $nW$ | $\Theta(1)$ | $\Theta(nW)$ | $\Theta(nW)$, optimized to $\Theta(W)$ |
 | Rod Cutting | $n^2$ in 2D form | $\Theta(1)$ | $\Theta(n^2)$ | $\Theta(n^2)$, optimized to $\Theta(n)$ |
 | Longest Common Subsequence (LCS) | $mn$ | $\Theta(1)$ | $\Theta(mn)$ | $\Theta(mn)$ |
+| Longest Increasing Subsequence (LIS) | $n$ endpoint states | Up to $n$ earlier positions | $\Theta(n^2)$ | $\Theta(n)$ |
 | Matrix Chain Multiplication | $n^2$ intervals | Up to $n$ split points | $\Theta(n^3)$ | $\Theta(n^2)$ |
 | Optimal Binary Search Tree (Optimal BST) | $n^2$ intervals | Up to $n$ root choices | $\Theta(n^3)$ | $\Theta(n^2)$ |
 | Multistage Graph | $V$ vertices | Outgoing edges scanned once overall | $\Theta(V+E)$ | $\Theta(V)$ |

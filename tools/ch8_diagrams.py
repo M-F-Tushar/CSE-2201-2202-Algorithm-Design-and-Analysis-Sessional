@@ -489,6 +489,36 @@ reliability_budget = D(
     caption="Reliability DP maximizes product of stage reliabilities subject to total cost <= B",
 )
 
+# 18 ---------------------------------------------------- lis endpoint states
+lis_endpoint_states = D(
+    key="ch8-18-lis-endpoint-states",
+    title="Longest Increasing Subsequence (LIS): Endpoint-State DP",
+    size=(1200, 520),
+    flow="H",
+    containers=[
+        N("box_states", "One-dimensional states for A = [3, 10, 2, 1, 20, 4]", 40, 76, 700, 360, "container"),
+        N("box_update", "Update dp[5] for A[5] = 20", 760, 76, 400, 360, "container"),
+    ],
+    nodes=[
+        N("p1", "i = 1\nA[i] = 3\ndp[i] = 1", 60, 130, 96, 82, "blue", size=12),
+        N("p2", "i = 2\nA[i] = 10\ndp[i] = 2", 164, 130, 96, 82, "blue", size=12),
+        N("p3", "i = 3\nA[i] = 2\ndp[i] = 1", 268, 130, 96, 82, "blue", size=12),
+        N("p4", "i = 4\nA[i] = 1\ndp[i] = 1", 372, 130, 96, 82, "blue", size=12),
+        N("p5", "i = 5\nA[i] = 20\ndp[i] = 3", 476, 130, 96, 82, "green", size=12, bold=True),
+        N("p6", "i = 6\nA[i] = 4\ndp[i] = 2", 580, 130, 96, 82, "blue", size=12),
+        N("dp_row", "dp table: [1, 2, 1, 1, 3, 2]", 90, 245, 600, 54, "teal", size=15, bold=True),
+        N("witness", "One LIS: 3 -> 10 -> 20\npositions 1, 2, 5; length 3", 90, 330, 600, 62, "green", size=14, bold=True),
+        N("state5", "Initialize dp[5] = 1\nA[5] alone is a subsequence", 795, 125, 330, 62, "blue", size=13),
+        N("candidates", "Check j < 5 and A[j] < 20:\nj = 1: dp[1] + 1 = 2\nj = 2: dp[2] + 1 = 3\nj = 3: dp[3] + 1 = 2\nj = 4: dp[4] + 1 = 2", 795, 218, 330, 130, "yellow", size=12),
+        N("best", "dp[5] = max(1, 2, 3, 2, 2) = 3", 795, 365, 330, 54, "green", size=13, bold=True),
+    ],
+    edges=[
+        E("state5", "candidates", route="straight"),
+        E("candidates", "best", route="straight", color="#2f9e44"),
+    ],
+    caption="Answer: max_i dp[i] = 3. Since dp[6] = 2, the best subsequence need not end at the last position.",
+)
+
 DIAGRAMS = [
     dp_design,
     repeated_work,
@@ -507,4 +537,5 @@ DIAGRAMS = [
     backward_flow,
     tsp_subset,
     reliability_budget,
+    lis_endpoint_states,
 ]
